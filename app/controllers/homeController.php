@@ -14,13 +14,14 @@ class homeController extends controller{
 
     public function home(){
         $this->loadModel('homeModel');
+        $this->view->users = $this->model->readTable();
         $this->view->render('homeView');
     }
 
-    // public function test(){
-    //     $this->loadModel('homeModel');
-    //     $this->view->users = $this->model->readTable();
-    //     $this->view->render('testView');
-    // }
+    public function test(){
+        $this->loadModel('homeModel');
+        $this->view->users = $this->model->readTable();
+        $this->view->render('testView');
+    }
     
 }
