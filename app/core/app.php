@@ -1,6 +1,11 @@
 <?php
 
     class app{
+
+        protected $controller = 'homeController';
+        protected $method = 'index';
+        protected $params = [];
+        
         function __construct(){
             
             $url = $this->getUrl();
