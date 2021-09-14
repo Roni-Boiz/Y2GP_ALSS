@@ -1,4 +1,9 @@
 <?php
 
-    echo "Hello"
+    class app{
+        function __construct(){
+            
+            echo "hello";
+        }
+    }
 ?>
