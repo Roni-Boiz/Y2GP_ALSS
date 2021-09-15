@@ -17,6 +17,12 @@ class homeController extends controller{
         $this->view->users = $this->model->readTable();
         $this->view->render('homeView');
     }
+    // view profile
+    public function viewProfile(){
+        $this->loadModel('profileModel');
+        $this->view->users = $this->model->readTable();
+        $this->view->render('ProfileView');
+    }
 
     public function test(){
         $this->loadModel('homeModel');
