@@ -103,6 +103,30 @@
         ?>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
-
+<script>  
+    function funedit() { 
+        document.getElementById("view").style.display = "none"; 
+        document.getElementById("edit").style.display = "block";
+        document.getElementById("pw").style.display = "none";
+    }  
+    function ChangePw() { 
+        document.getElementById("edit").style.display = "none"; 
+        document.getElementById("pw").style.display = "block";
+    } 
+    function confirm(){
+        alert("Are your sure?")
+    }
+    // add new field
+    function newvehicle() {
+        var txtNewInputBox = document.createElement('div');
+        txtNewInputBox.innerHTML = "<input type='text' id='vehicle_no' name='vehicle_no' class='input-field'><br>";
+        document.getElementById("newElement2").appendChild(txtNewInputBox);
+    }
+    function newmember() {
+        var txtNewInputBox = document.createElement('div');
+        txtNewInputBox.innerHTML = "<input type='text' id='fam' name='fam' class='input-field'><br>";
+        document.getElementById("newElement1").appendChild(txtNewInputBox);
+    }
+</script>
 </body>
 </html>
