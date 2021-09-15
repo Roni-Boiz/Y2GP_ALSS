@@ -160,6 +160,18 @@ nav ul .dropdown:hover ul{
 nav i{
   padding: 5px;
 } 
+/* for fixed header and side bar */
+.content {
+    padding: 10px;
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.sticky + .content {
+    padding-top: 102px;
+}
 </style>
 </head>
 <body>
@@ -303,3 +315,38 @@ nav i{
         </nav>
 
     </div>
+<script>
+    /* show sidebar */
+    $('.btn').click(function(){
+    $(this).toggleClass("click");
+    $('.sidebar').toggleClass("show");
+    });
+    /* for fixed header */   
+    window.onscroll = function() {fixedone()};
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function fixedone() {
+        if(window.pageYOffset > sticky){
+            header.classList.add("sticky");
+        }else{
+            header.classList.remove("sticky");
+        }
+    }
+    /* hide the sidenav */
+    function expand(){
+        if(document.getElementById("hh").style.gridColumn=="1 / span 3"){ 
+            document.getElementById("hh").style.gridColumn="2";
+            document.getElementById("hb").style.gridColumn="2"; 
+            document.getElementById("hh").style.marginLeft="20px";
+            document.getElementById("hb").style.marginLeft="20px";
+            document.getElementById("side").style.transform="initial";
+        }else{
+            document.getElementById("hh").style.gridColumn="1 / span 3";
+            document.getElementById("hb").style.gridColumn="1 / span 3"; 
+            document.getElementById("hh").style.marginLeft="50px";
+            document.getElementById("hb").style.marginLeft="50px";
+            document.getElementById("side").style.transform="rotateY(180deg)";/* icon only */ 
+        } 
+    }
+</script>
