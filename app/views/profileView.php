@@ -43,8 +43,45 @@
                                 <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
                                 <?php
                                 }?>
-                                <!-- ------------ -->    
+                                <!-- end view profile part -->    
                             </form>
+                            <!-- edit basic details -->      
+                            <form action="#" class="form1" id="edit" style="display:none">
+                                <label for="fname">First Name</label><br>
+                                <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
+
+                                <label for="lname">Last Name</label><br>
+                                <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
+                                
+                                <label for="fname">NIC</label><br>
+                                <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?>><br>
+
+                                <label for="lname">Contact</label><br>
+                                <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?>><br>
+
+                                <label for="lname">Email</label><br>
+                                <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
+                                <!-- for resident -->
+                                <?php if($type=="re"){?>
+                                <label for="lname">Family Members</label><br>
+                                <input type="text" id="fam" name="fam" class="input-field" value=<?php echo ""?>>
+                                <!-- add new field -->
+                                <span class="fas fa-plus" onclick="newmember();"></span>
+                                <div id="newElement1"></div>
+
+                                <label for="lname">Vehicle NO</label><br>
+                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>>
+                                <!-- add new field -->
+                                <span class="fas fa-plus" onclick="newvehicle();"></span>
+                                <div id="newElement2"></div>
+
+                                <?php
+                                }?>
+                                <!-- end edit basic details part -->  
+                                <input type="submit" onclick = "" value="Save">
+                                <input type="submit" onclick = "ChangePw()" value="Change Password">
+                            </form>
+                           
                             <?php
                 }
         }else{
