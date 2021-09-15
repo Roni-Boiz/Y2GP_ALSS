@@ -43,7 +43,7 @@
                                 <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
                                 <?php
                                 }?>
-                                <!-- end view profile part -->    
+                            <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
                             <form action="#" class="form1" id="edit" style="display:none">
@@ -77,11 +77,24 @@
 
                                 <?php
                                 }?>
-                                <!-- end edit basic details part -->  
+                            <!-- end edit basic details part -->  
                                 <input type="submit" onclick = "" value="Save">
                                 <input type="submit" onclick = "ChangePw()" value="Change Password">
                             </form>
-                           
+                            <!-- change password -->
+                            <form action="#" class="form1" id="pw" style="display:none">
+                                <label for="fname">Old Password</label><br>
+                                <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password"><br>
+
+                                <label for="lname">New Password</label><br>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="Enter your new password"><br>
+                                
+                                <label for="fname">Re-New Password</label><br>
+                                <input type="password" id="rnpw" name="wnpw" class="input-field" placeholder="Enter your new password again"><br>
+
+                                <input type="submit" onclick = "confirm()" value="Save">
+                            </form>
+                            <!-- end change password -->
                             <?php
                 }
         }else{
