@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap');
+/* icon with title part */
+.hawlockhead{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 100px 2fr;
+    align-items: center;
+    background-color: white;
+    margin:10px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.hawlockhead #title{
+    color: #2a225a;
+    font-size: 30px;
+    margin-top: 0px;
+    padding-left: 20px;
+}
+.hawlockhead #logo{
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
+    grid-column: 2;
+    margin: -20px;
+}
+/* body part */
+.hawlockbody{
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 10px;
+    margin:10px;
+    margin-top: 0;
+    margin-left: 20px;
+    align-items: center;
+}
+.hawlockbody i,h4{
+    color: black;
+    grid-column: 1;
+    grid-row: 1;
+    padding: 20px;
+}
+/* form */
+.form1 {
+    position:static;
+    grid-column: 2;
+    font-size:small;
+    background-color: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+.hawlockbody .input-field{ 
+    width: 250px;
+    height:35px;
+    background-color: #f0f0f0;
+    margin: 5px 0px;
+    border-radius: 55px;
+    position: relative;
+    text-align:center;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+input[type=text]{
+    width: 100%;
+    padding: 10px 15px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+input[type=password]{
+    border: 1px solid #ccc;
+
+}
+.hawlockbody input[type=submit] {
+    background-color: #2a225a;
+    color: white;
+    padding: 5px 10px;
+    margin: auto;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    grid-column: 3;
+}
+.hawlockbody  input[type=submit]:hover {
+    background-color: #02000c;
+}
+.hawlockbody  label{
+    margin-left: 5px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;  
+}
+/* table */
+.table1{
+    grid-column: 1/span3;
+}
+table{ 
+	width: 750px; 
+	border-collapse: collapse; 
+	margin:50px auto;
+}
+tr:nth-of-type(odd){ 
+	background: #5747b4; 
+}
+th{ 
+	background: #2a225a; 
+	color: rgb(255, 255, 255); 
+	font-weight: bold; 
+}
+td, th{ 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+}
+/* table responsive */
+@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px) {
+table{ 
+	width: 100%; 
+}
+table, thead, tbody, th, td, tr { 
+	display: block; 
+}
+thead tr { 
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+tr{ 
+    border: 1px solid #ccc; 
+}
+td{ 
+	/* Behave  like a "row" */
+	border: none;
+	border-bottom: 1px solid #eee; 
+	position: relative;
+	padding-left: 50%; 
+}
+td:before{ 
+	/* Now like a table header */
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: 45%; 
+	padding-right: 10px; 
+	white-space: nowrap;
+	content: attr(data-column);
+	color: #000;
+	font-weight: bold;
+}
+/* body responsive */
+}
+@media(max-width:768px) {
+    .hawlockbody{
+        grid-column: 1/span3;
+    }
+    .hawlockhead{
+        grid-column: 1/span3;
+    }
+}
+@media(max-width:920px) {
+    .hawlockbody{
+        grid-template-columns: 1fr;
+    }
+}
