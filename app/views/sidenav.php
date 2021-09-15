@@ -67,6 +67,7 @@ body {
     padding: 10px 20px 0 0;
     background: #110b2e;
 }
+/* expand button */
 .btn{
   position: fixed;
   top: 5px;
@@ -81,13 +82,90 @@ body {
   font-size: 20px;
   line-height: 45px;
 }
-
+/* sidebar style */
+.sidebar{
+  position: fixed;
+  width: 240px;
+  height: 100%;
+  left: 0px;
+  background: #110b2e;
+  transition: left 0.4s ease;
+}
+.sidebar.show{
+  left: -200px;
+}
+.sidebar .text{
+  color: white;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 65px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.sidebar i{
+  padding-right:15px;
+}
+nav ul{
+  background: #110b2e;
+  width: 100%;
+  list-style: none;
+}
+nav ul li{
+  line-height: 50px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+nav ul li a{
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding-left: 5px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+nav ul li a:hover{
+  background: rgb(138, 138, 138);
+}
+nav ul li a:focus{
+  background: rgb(138, 138, 138);
+}
+nav ul ul{
+  display: none;
+  position: absolute;
+  left: 240px;
+  top:0;
+}
+nav ul ul li{
+  line-height: 42px;
+  border-top: none;
+}
+nav ul ul li a{
+  font-size: 15px;
+  color: #e6e6e6;
+  padding-left: 20px;
+  border-left: 1px solid transparent;
+  border-left-color: white;
+}
+nav ul ul li a:hover{
+  background: rgb(138, 138, 138);
+}
+nav ul li.dropdown{
+    position: relative;
+    padding: 0;
+}
+nav ul .dropdown:hover ul{
+    display: initial;
+}
+nav i{
+  padding: 5px;
+} 
 </style>
 </head>
 <body>
     <div id="myheader">
         <div class="header">
-            <div class="btn"><span class="fas fa-bars"></span></div>
+            <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
             <h2>AlSS</h2>
             <div class="head">
                 <ul>
@@ -130,7 +208,97 @@ body {
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
                 <?php
                 }?>
+                <!-- resident end -->
+                <!-- for manager -->
+                <?php if($type=="ma"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>COMPLAINTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note"  ></i>VIEW RESIDENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW REPORTS</a></li>
+        
+                <?php
+                }?>
+                <!-- end manager -->
+                <!-- for admin -->
+                <?php if($type=="ad"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>COMPLAINTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note"  ></i>VIEW RESIDENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW REPORTS</a></li>
+        
+                <?php
+                }?>
+                <!-- end admin -->
+                <!-- for receptionist -->
+                <?php if($type=="rp"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>COMPLAINTS</a></li>
+        
+                <?php
+                }?>
+                <!-- end receptionist -->
+                <!-- for parking officer -->
+                <?php if($type=="pa"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+        
+                <?php
+                }?>
+                <!-- end parking officer -->
+                <!-- for trainer -->
+                <?php if($type=="tr"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+        
+                <?php
+                }?>
+                <!-- end trainer -->
+                <!-- for laundry -->
+                <?php if($type=="la"){?>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <ul>
+                    <li><a href="#">SUB 1</a></li>
+                    <li><a href="#">SUB 2</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
 
+                <?php
+                }?>
+                <!-- end laundry -->
             </ul>
         </nav>
 
