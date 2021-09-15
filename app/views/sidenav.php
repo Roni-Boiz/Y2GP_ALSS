@@ -4,13 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIrst Page</title>
+    <title>ALSS</title>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="../../public/css/body.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 <style>
-
+*{
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  margin: 0;
+}
+/* header style */
+.header{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+.header i{
+  padding: 3px;
+} 
+.header {
+  padding: 15px;
+  background: #110b2e;
+  color: white;
+}
+.header h2{
+  padding-left: 20px;
+}
+.head ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.head ul li {
+  float: right;
+}
+.head ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding-left: 30px;
+  text-decoration: none;
+}
+.head ul li a:hover {
+  background-color: #111;
+}
+.head ul .dropdown:hover ul{
+    display: initial;
+    top:40px;
+    right: 0;
+} 
+.head ul ul{
+    display: none; 
+    position: absolute;
+    width: 130px;
+    padding: 10px 20px 0 0;
+    background: #110b2e;
+}
 
 </style>
 <?php
