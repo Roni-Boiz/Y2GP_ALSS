@@ -78,7 +78,7 @@
                                 <?php
                                 }?>
                             <!-- end edit basic details part -->  
-                                <input type="submit" onclick = "" value="Save">
+                                <input type="submit" onclick = "confirm()" value="Save">
                                 <input type="submit" onclick = "ChangePw()" value="Change Password">
                             </form>
                             <!-- change password -->
