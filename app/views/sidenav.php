@@ -67,12 +67,22 @@ body {
     padding: 10px 20px 0 0;
     background: #110b2e;
 }
+.btn{
+  position: fixed;
+  top: 5px;
+  left: 10px;
+  text-align: center;
+  background:none;
+  cursor: pointer;
+  transition: left 0.4s ease;
+}
+.btn span{
+  color: white;
+  font-size: 20px;
+  line-height: 45px;
+}
 
 </style>
-<?php
-    $type="re";
-    $id="Re10023";
-?> 
 </head>
 <body>
     <div id="myheader">
