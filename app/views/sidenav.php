@@ -13,6 +13,10 @@
 
 
 </style>
+<?php
+    $type="re";
+    $id="Re10023";
+?> 
 </head>
 <body>
     <div id="myheader">
@@ -66,5 +70,3 @@
         </nav>
 
     </div>
-</body>
-</html>
