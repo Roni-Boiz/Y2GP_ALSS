@@ -6,6 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="../../public/css/style.css">
+<style>
+*{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-image: url(../img/bg_3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.box{
+  background-color:rgb(255, 255, 255);
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  border-radius: 5px;
+  border: gray solid 1px;
+  height:100%;
+  width:90%;
+  margin: 5%;
+}
+nav{
+  margin: 0;
+}
+nav ul{
+  float: right;
+}
+.header{
+  grid-column-start: 3;
+  font-weight:5px; 
+  font-size: 20px;
+}
+nav ul li{
+  list-style: none;
+  display: inline-block;
+  padding: 30px 20px ;
+}
+nav ul li a{
+  text-decoration: none;
+  color: black;   
+}
+nav ul li a:hover{
+  font-weight:bold;  
+}
+.box .header nav ul li button{
+  border-radius: 20px;
+  background-color: #211a49;
+  border-style: none;
+  padding:8px 40px ;
+  font-size: 15px;
+  font-weight:5px;  
+}
+.box .header nav ul li button span{
+  color: white;
+}
+#logo{
+  grid-column-start: 1;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  grid-row-start: 2;
+  margin-left: 50px;
+}
+#title{
+  color: #2a225a;
+  font-size: 50px;
+  grid-row-start: 2;
+  margin-top: 70px;
+}
+#city{
+  font-weight: lighter;
+}
+#ALSS{
+  font-size:40px ;
+  grid-column: 1/span 2;
+  margin-left: 100px;
+}
+#mission{
+  font-size:10px;
+  font-weight: bold;
+}
+#apartment{
+  width: 400px;
+  height: 250px;
+  margin:50px;
+  grid-row: 2/span 3;
+}
+#content{
+  font-size: 15px;
+  margin: 100px;
+  margin-top: 0;
+  grid-column: 1/span 2;
+}
+.footer{
+	height: 25px;
+  width:100%;
+  background:linear-gradient(to right,#211a49,#927ffc);
+	text-align: center;
+	font-size: 10px;
+	padding-top: 20px;
+}
+.centre{
+   align-items: center;
+}
+/* responsive */
+@media(max-width:1260px) {
+  .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  
+  #logo{
+    height: 150px;
+    width: 150px;
+    margin:-30px;
+      } 
+  #title{
+    font-size: 40px;
+    margin-top: 0;
+  }
+  #ALSS{
+    margin: 0;
+    font-size: 30px;
+  }
+  nav ul li{
+    padding: 10px 15px ;
+  }
+  .header{
+    font-size: 15px;
+  }
+  #apartment{
+    width: 300px;
+    height: 175px;
+    margin-top:10px;
+  }
+  #content{
+    margin: 10px 50px;
+  }
+  .box .header nav ul li button{
+    border-radius: 20px;
+    padding:8px 30px ;
+    font-size: 15px;
+    font-weight: bold;  
+  }
+}
+</style>
 </head>
 <body>
   <div class="center">
