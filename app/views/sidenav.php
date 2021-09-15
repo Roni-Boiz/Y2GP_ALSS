@@ -128,7 +128,6 @@ body {
                 <li><a href="#"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
                 <li><a href="#"><i class="fa fa-sticky-note"></i>BILLS</a></li>
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
-        
                 <?php
                 }?>
 
