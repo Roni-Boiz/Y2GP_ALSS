@@ -6,9 +6,7 @@
     grid-template-columns: 1fr 100px 2fr;
     align-items: center;
     background-color: white;
-    margin-top: 80px;
-    margin-left: 20px;
-    margin-bottom: 5px;
+    margin: 80px 10px 5px 20px;
     border-radius: 5px;
 }
 .hawlockhead #title{
@@ -32,9 +30,7 @@
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
-    margin:10px;
-    margin-top: 0;
-    margin-left: 20px;
+    margin: 0px 10px 5px 20px;
     align-items: center;
 }
 .hawlockbody i,h4{
