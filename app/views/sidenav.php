@@ -87,7 +87,7 @@ body {
 }
 /* sidebar style */
 .sidebar{
-  top: 50px;
+  top: 65px;
   position: fixed;
   width: 240px;
   height: 100%;
