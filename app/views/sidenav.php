@@ -321,18 +321,6 @@ nav i{
     $(this).toggleClass("click");
     $('.sidebar').toggleClass("show");
     });
-    /* for fixed header */   
-    window.onscroll = function() {fixedone()};
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
-
-    function fixedone() {
-        if(window.pageYOffset > sticky){
-            header.classList.add("sticky");
-        }else{
-            header.classList.remove("sticky");
-        }
-    }
     /* hide the sidenav */
     function expand(){
         if(document.getElementById("hh").style.gridColumn=="1 / span 3"){ 
