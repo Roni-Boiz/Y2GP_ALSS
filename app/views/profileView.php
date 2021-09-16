@@ -111,6 +111,7 @@
     }  
     function ChangePw() { 
         document.getElementById("edit").style.display = "none"; 
+        document.getElementById("view").style.display = "none"; 
         document.getElementById("pw").style.display = "block";
     } 
     function confirm(){

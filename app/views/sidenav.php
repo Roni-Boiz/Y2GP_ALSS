@@ -20,6 +20,7 @@
 body {
   margin: 0;
 }
+/* for fixed header and side bar */
 /* header style */
 .header{
     display: grid;
@@ -29,6 +30,8 @@ body {
   padding: 3px;
 } 
 .header {
+  width: 100%;
+  position: fixed;
   padding: 15px;
   background: #110b2e;
   color: white;
@@ -84,6 +87,7 @@ body {
 }
 /* sidebar style */
 .sidebar{
+  top: 65px;
   position: fixed;
   width: 240px;
   height: 100%;
@@ -160,18 +164,7 @@ nav ul .dropdown:hover ul{
 nav i{
   padding: 5px;
 } 
-/* for fixed header and side bar */
-.content {
-    padding: 10px;
-}
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-.sticky + .content {
-    padding-top: 102px;
-}
+
 </style>
 </head>
 <body>
@@ -192,7 +185,7 @@ nav i{
                 </ul>
             </div>
         </div>
-
+    
         <nav class="sidebar" id="side">
             <ul>
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
@@ -314,25 +307,13 @@ nav i{
             </ul>
         </nav>
 
-    </div>
+    
 <script>
     /* show sidebar */
     $('.btn').click(function(){
     $(this).toggleClass("click");
     $('.sidebar').toggleClass("show");
     });
-    /* for fixed header */   
-    window.onscroll = function() {fixedone()};
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
-
-    function fixedone() {
-        if(window.pageYOffset > sticky){
-            header.classList.add("sticky");
-        }else{
-            header.classList.remove("sticky");
-        }
-    }
     /* hide the sidenav */
     function expand(){
         if(document.getElementById("hh").style.gridColumn=="1 / span 3"){ 
