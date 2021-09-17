@@ -34,5 +34,9 @@ class homeController extends controller{
         $this->view->render('loginView');
     }
 
+    public function register(){
+        
+        $this->view->render('registerResidentView');
+    }
     
 }
