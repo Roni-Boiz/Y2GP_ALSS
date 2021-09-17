@@ -29,5 +29,10 @@ class homeController extends controller{
         $this->view->users = $this->model->readTable();
         $this->view->render('testView');
     }
+
+    public function login(){
+        $this->view->render('loginView');
+    }
+
     
 }
