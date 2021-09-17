@@ -18,10 +18,12 @@ class homeController extends controller{
         $this->view->render('homeView');
     }
     // view profile
-    public function profileView(){
+    public function profile(){
+        
         $this->loadModel('profileModel');
         $this->view->users = $this->model->readTable();
-        $this->view->render('ProfileView');
+        //include_once '../views/include/sidenav.php';
+        $this->view->render('resident/ProfileView');
     }
 
     public function test(){
