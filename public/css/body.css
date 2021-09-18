@@ -1,4 +1,163 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* sidenav */
+*{
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  margin: 0;
+}
+/* for fixed header and side bar */
+/* header style */
+.header{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+.header i{
+  padding: 3px;
+} 
+.header {
+  width: 100%;
+  position: fixed;
+  padding: 15px;
+  background: #110b2e;
+  color: white;
+}
+.header h2{
+  padding-left: 20px;
+}
+.head ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.head ul li {
+  float: right;
+}
+.head ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding-left: 30px;
+  text-decoration: none;
+}
+.head ul li a:hover {
+  background-color: #111;
+}
+.head ul .dropdown:hover ul{
+    display: initial;
+    top:40px;
+    right: 0;
+} 
+.head ul ul{
+    display: none; 
+    position: absolute;
+    width: 130px;
+    padding: 10px 20px 0 0;
+    background: #110b2e;
+}
+/* expand button */
+.btn{
+  position: fixed;
+  top: 5px;
+  left: 10px;
+  text-align: center;
+  background:none;
+  cursor: pointer;
+  transition: left 0.4s ease;
+}
+.btn span{
+  color: white;
+  font-size: 20px;
+  line-height: 45px;
+}
+/* sidebar style */
+.sidebar{
+  top: 65px;
+  position: fixed;
+  width: 240px;
+  height: 100%;
+  left: 0px;
+  background: #110b2e;
+  transition: left 0.4s ease;
+}
+.sidebar.show{
+  left: -200px;
+}
+.sidebar .text{
+  color: white;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 65px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.sidebar i{
+  padding-right:15px;
+}
+nav ul{
+  background: #110b2e;
+  width: 100%;
+  list-style: none;
+}
+nav ul li{
+  line-height: 50px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+nav ul li a{
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding-left: 5px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+nav ul li a:hover{
+  background: rgb(138, 138, 138);
+}
+nav ul li a:focus{
+  background: rgb(138, 138, 138);
+}
+nav ul ul{
+  display: none;
+  position: absolute;
+  left: 240px;
+  top:0;
+}
+nav ul ul li{
+  line-height: 42px;
+  border-top: none;
+}
+nav ul ul li a{
+  font-size: 15px;
+  color: #e6e6e6;
+  padding-left: 20px;
+  border-left: 1px solid transparent;
+  border-left-color: white;
+}
+nav ul ul li a:hover{
+  background: rgb(138, 138, 138);
+}
+nav ul li.dropdown{
+    position: relative;
+    padding: 0;
+}
+nav ul .dropdown:hover ul{
+    display: initial;
+}
+nav i{
+  padding: 5px;
+}
+
+
+
 /* icon with title part */
 .hawlockhead{
     grid-column: 2;
@@ -164,4 +323,71 @@ td:before{
     .hawlockbody{
         grid-template-columns: 1fr;
     }
+}
+
+/* signupform */
+
+.signup_container{
+    grid-column:1/span3;
+}
+.signup_container form {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5rem;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+
+.signup_container.error_form {
+    grid-column: 3;
+    margin-top: 20px;
+    margin-left: 40px;
+    font-family: Arial;
+    font-size: 13px;
+    color: #ff0808;
+    width: 250px;
+}
+
+.signup_container.input-field{
+    margin: 10px;
+    width: 350px;
+    height: 55px;
+    background-color: #f0f0f0;
+    margin: 10px 0px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    position: relative;
+}
+
+.signup_container.input-field i{
+    text-align: center;
+    line-height: 25px;
+    color: #acacac;
+    font-size: 1.5rem;
+}
+
+.signup_container.input-field input{
+    background: none;
+    outline: none;
+    border: solid 0px;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #333; 
+}
+
+.signup_container.input-field input:placeholder-shown{
+    
+    color: rgb(43, 36, 36);
+    font-weight: 500;
+    border: none;
+    background: none;
+    outline: none;
 }
