@@ -34,16 +34,21 @@
             <ul>
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
                 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>USERS </a>
                 <ul>
-                    <li><a href="#">SUB 1</a></li>
-                    <li><a href="#">SUB 2</a></li>
+                    <li><a href="#">ADD USER</a></li>
+                    <li><a href="#">REMOVE USER</a></li>
                 </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>COMPLAINTS</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note"  ></i>VIEW RESIDENT</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW REPORTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>EMPLOYEES</a>
+                <ul>
+                    <li><a href="#">ADD EMPLOYEES</a></li>
+                    <li><a href="#">REMOVE EMPLOYEES</a></li>
+                </ul>
+                </li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>MAKE ANNOUNCEMENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note"  ></i>PAYMENTS RATES</a></li>
+                
             </ul>
         </nav>
 
