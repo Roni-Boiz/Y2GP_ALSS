@@ -1,6 +1,4 @@
 <?php 
-    $type="re";
-    $id="Re10023";
     include_once 'sidenav.php';
 ?>
 </head>
