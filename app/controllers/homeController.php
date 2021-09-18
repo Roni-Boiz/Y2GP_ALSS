@@ -19,7 +19,8 @@ class homeController extends controller{
     }
     // view profile
     public function profile(){
-        
+
+        $type="";
         $this->loadModel('profileModel');
         $this->view->users = $this->model->readTable();
         //include_once '../views/include/sidenav.php';
@@ -43,28 +44,28 @@ class homeController extends controller{
         $this->loadModel('loginModel');
         $result=$this->view->users = $this->model->readLogin($username, $password);
         if($result=='resident'){
-            $this->view->render('residentView');
+            $this->view->render('resident/residentView');
         }
         else if($result=='admin'){
-            $this->view->render('adminView');
+            $this->view->render('admin/adminView');
         }
         else if($result=='manager'){
-            $this->view->render('managerView');
+            $this->view->render('manager/managerView');
         }
         else if($result=='receptionist'){
-            $this->view->render('receptionistView');
+            $this->view->render('receptionist/receptionistView');
         }
         else if($result=='parkingofficer'){
-            $this->view->render('parkingofficerView');
+            $this->view->render('parkingofficer/parkingofficerView');
         }
         else if($result=='trainer'){
-            $this->view->render('trainerView');
+            $this->view->render('trainer/trainerView');
         }
         else if($result=='laundry'){
             $this->view->render('laundryView');
         }
         else{
-            $this->view->render('loginView');
+            $this->view->render('laundry/loginView');
         }
         // $result ? $this->view->render('userView') : $this->view->render('loginView');
     }
@@ -73,5 +74,9 @@ class homeController extends controller{
         
         $this->view->render('registerResidentView');
     }
-    
+    public function announcement(){
+        $this->loadModel('announcementModel');
+        $this->view->ann = $this->model->readTable();
+        $this->view->render('resident/residentView');
+    }
 }

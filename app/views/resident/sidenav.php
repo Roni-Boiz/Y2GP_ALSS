@@ -20,10 +20,10 @@
                 <ul>
                     <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
                         <ul>
-                            <li><a href="#"></li><i class="fa fa-user"></i>Profile</a></li>
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="#"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
-                            <li><a href="#">id</a></li>
+                            <li><a href="#"><?php echo  $_SESSION['userName'];?></a></li>
                             <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
                     </li>
                 </ul>
@@ -32,7 +32,7 @@
     
         <nav class="sidebar" id="side">
             <ul>
-                <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
+                <li><a href="announcement"><i class="fa fa-home" ></i>HOME</a></li>
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus" ></i>RESERVATIONS </a>
                     <ul>
