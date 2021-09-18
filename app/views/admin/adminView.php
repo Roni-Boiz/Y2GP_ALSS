@@ -20,56 +20,6 @@
         </form>
     <br>
 
-    <!-- table structure -->
-    <table class="table1">
-        <thead>
-            <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Fee</th>
-            <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <td data-column="First Name">Chathura</td>
-            <td data-column="Last Name">Manohara</td>
-            <td data-column="Fee">100</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-            <tr>
-            <td data-column="First Name">Nipunar</td>
-            <td data-column="Last Name">Manujaya</td>
-            <td data-column="Fee">200</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-            <tr>
-            <td data-column="First Name">Ronila</td>
-            <td data-column="Last Name">Sanjula</td>
-            <td data-column="Fee">300</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-            <tr>
-            <td data-column="First Name">Nishath</td>
-            <td data-column="Last Name">Yashintha</td>
-            <td data-column="Fee">500</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-            <tr>
-            <td data-column="First Name">Ronila</td>
-            <td data-column="Last Name">Sanjula</td>
-            <td data-column="Fee">300</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-            <tr>
-            <td data-column="First Name">Nishath</td>
-            <td data-column="Last Name">Yashintha</td>
-            <td data-column="Fee">500</td>
-            <td data-column="Description">Lorem ipsum dolor sit</td>
-            </tr>
-        </tbody>
-    </table>
-
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 </body>
