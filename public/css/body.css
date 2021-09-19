@@ -79,7 +79,7 @@ body {
 /* sidebar style */
 .sidebar{
   top: 65px;
-  position: fixed;
+  position:fixed;
   width: 240px;
   height: 100%;
   left: 0px;
@@ -211,7 +211,7 @@ nav i{
 }
 /* form */
 .form1 {
-    position:static;
+    
     grid-column: 2;
     font-size:small;
     background-color: none;
@@ -227,7 +227,8 @@ nav i{
     background-color: #f0f0f0;
     margin: 5px 0px;
     border-radius: 55px;
-    position: relative;
+    position:static;
+    /* position:relative; */
     text-align:center;
 }
 textarea:focus, input:focus{
@@ -263,56 +264,20 @@ input[type=password]{
     font-family: 'Poppins', sans-serif;  
 }
 /* table */
-.table1{
-    grid-column: 1/span3;
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
 }
-table{ 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
+th, td {
+    text-align: left;
+    padding: 8px;
 }
-tr:nth-of-type(odd){ 
-	background: #5747b4; 
-}
-th{ 
-	background: #2a225a; 
-	color: rgb(255, 255, 255); 
-	font-weight: bold; 
-}
-td, th{ 
-	padding: 10px; 
-	border: 1px solid #ccc; 
-	text-align: left; 
-	font-size: 18px;
-}
-/* table responsive */
-@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px) {
-table{ 
-	width: 100%; 
-}
-table, thead, tbody, th, td, tr { 
-	display: block; 
-}
-tr{ 
-    border: 1px solid #ccc; 
-}
-td{ 
-	/* Behave  like a "row" */
-	border: none;
-	border-bottom: 1px solid #eee; 
-	position: relative;
-	padding-left: 50%; 
-}
-td:before{ 
-	/* Now like a table header */
-	top: 6px;
-	left: 6px;
-	width: 45%; 
-	padding-right: 10px; 
-	white-space: nowrap;
-	content: attr(data-column);
-	color: #000;
-	font-weight: bold;
+
+tr:nth-child(even){
+    background-color: #5747b4;
+    color:white;
 }
 /* body responsive */
 @media(max-width:768px) {
