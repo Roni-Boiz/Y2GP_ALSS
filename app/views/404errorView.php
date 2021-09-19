@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         p{
-            font-size:50px;
+            font-size:48px;
             color: #2a225a;
         }
 
