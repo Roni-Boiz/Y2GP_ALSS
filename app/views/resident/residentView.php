@@ -1,21 +1,6 @@
 <?php 
     include_once 'sidenav.php';
 ?>
-<style>
-.announcement{
-    grid-column: 1/span 3;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
-    font-family: arial;
-}
-.announcement .title{
-    color: grey;
-    font-size: 15px;
-}
-</style>
 </head>
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
