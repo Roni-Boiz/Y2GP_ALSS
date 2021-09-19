@@ -42,26 +42,26 @@ class homeController extends controller{
         $password=$_POST ['password'];
 
         $this->loadModel('loginModel');
-        $result=$this->view->users = $this->model->readLogin($username, $password);
-        if($result=='resident'){
+        $this->view->ann = $this->model->readLogin($username, $password);
+        if($_SESSION['type']=='resident'){
             $this->view->render('resident/residentView');
         }
-        else if($result=='admin'){
+        else if($_SESSION['type']=='admin'){
             $this->view->render('admin/adminView');
         }
-        else if($result=='manager'){
+        else if($_SESSION['type']=='manager'){
             $this->view->render('manager/managerView');
         }
-        else if($result=='receptionist'){
+        else if($_SESSION['type']=='receptionist'){
             $this->view->render('receptionist/receptionistView');
         }
-        else if($result=='parkingofficer'){
+        else if($_SESSION['type']=='parkingofficer'){
             $this->view->render('parkingofficer/parkingofficerView');
         }
-        else if($result=='trainer'){
+        else if($_SESSION['type']=='trainer'){
             $this->view->render('trainer/trainerView');
         }
-        else if($result=='laundry'){
+        else if($_SESSION['type']=='laundry'){
             $this->view->render('laundryView');
         }
         // $result ? $this->view->render('userView') : $this->view->render('loginView');
