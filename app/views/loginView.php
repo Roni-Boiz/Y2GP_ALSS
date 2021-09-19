@@ -29,7 +29,7 @@ body{
 .box{
   background-color:rgb(255, 255, 255);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   border-radius: 5px;
   border: gray solid 1px;
   height:100%;
@@ -43,7 +43,7 @@ nav ul{
   float: right;
 }
 .header{
-  grid-column-start: 3;
+  grid-column-start: 2;
   font-weight:5px; 
   font-size: 20px;
 }
@@ -75,9 +75,11 @@ nav ul li a:hover{
 
   width: 400px;
   height: 375px;
-  margin:70px;
-  grid-column: 1 split/2;
+  margin-left:150px;
+  /* border-radius:20%; */
+  /* grid-column: 1 split/2; */
 }
+
 
 .footer{
 	height: 25px;
@@ -93,7 +95,7 @@ nav ul li a:hover{
 
 
 .signin_container{
-    grid-column:3;
+    grid-column:2;
     height: 450px;
 }
 .signin_container form {
@@ -193,7 +195,7 @@ label{
 }
 
 /* responsive */
-@media(max-width:1260px) {
+@media(max-width:1200px) {
   .box{
       
     display: flex;
@@ -243,7 +245,7 @@ nav ul li a:hover{
       position: relative;
       margin:0px;
       opacity: 50%;
-    width: 80%;
+    width: 100%;
     height:100%;
     object-fit: cover;
     
@@ -285,7 +287,7 @@ nav ul li a:hover{
         </nav>
         </div>
         <div>
-            <img src="../../public/img/21.jpg" id="apartment">
+            <center><img src="../../public/img/21.jpg" id="apartment"></center>
         </div>
 
         <div class="signin_container">
