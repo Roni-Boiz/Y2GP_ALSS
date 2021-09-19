@@ -64,9 +64,6 @@ class homeController extends controller{
         else if($result=='laundry'){
             $this->view->render('laundryView');
         }
-        else{
-            $this->view->render('laundry/loginView');
-        }
         // $result ? $this->view->render('userView') : $this->view->render('loginView');
     }
 
