@@ -293,11 +293,6 @@ table{
 table, thead, tbody, th, td, tr { 
 	display: block; 
 }
-thead tr { 
-	position: absolute;
-	top: -9999px;
-	left: -9999px;
-}
 tr{ 
     border: 1px solid #ccc; 
 }
@@ -310,7 +305,6 @@ td{
 }
 td:before{ 
 	/* Now like a table header */
-	position: absolute;
 	top: 6px;
 	left: 6px;
 	width: 45%; 
@@ -321,7 +315,6 @@ td:before{
 	font-weight: bold;
 }
 /* body responsive */
-}
 @media(max-width:768px) {
     .hawlockbody{
         grid-column: 1/span3;

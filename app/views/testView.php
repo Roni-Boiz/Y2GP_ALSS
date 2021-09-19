@@ -29,8 +29,6 @@
             <th>Fee</th>
             <th>Description</th>
             </tr>
-        </thead>
-        <tbody>
             <tr>
             <td data-column="First Name">Chathura</td>
             <td data-column="Last Name">Manohara</td>
@@ -67,7 +65,6 @@
             <td data-column="Fee">500</td>
             <td data-column="Description">Lorem ipsum dolor sit</td>
             </tr>
-        </tbody>
     </table>
 
     </div> <!-- .hawlockbody div closed here -->
