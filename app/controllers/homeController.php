@@ -24,7 +24,6 @@ class homeController extends controller{
         $type="";
         $this->loadModel('profileModel');
         $this->view->users = $this->model->readTable();
-        //include_once '../views/include/sidenav.php';
         $this->view->render('resident/ProfileView');
     }
 
@@ -66,7 +65,9 @@ class homeController extends controller{
         else if($_SESSION['type']=='laundry'){
             $this->view->render('laundryView');
         }
-        // $result ? $this->view->render('userView') : $this->view->render('loginView');
+        else {
+            $this->view->render('loginView');
+        }
     }
 
     public function logout(){
