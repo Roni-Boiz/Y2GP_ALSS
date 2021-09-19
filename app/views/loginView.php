@@ -73,9 +73,9 @@ nav ul li a:hover{
 
 #apartment{
 
-  width: 400px;
-  height: 375px;
-  margin-left:150px;
+  width: 450px;
+  height: 400px;
+  margin-left:120px;
   /* border-radius:20%; */
   /* grid-column: 1 split/2; */
 }
@@ -315,6 +315,7 @@ nav ul li a:hover{
                     <input type="submit" class="btn solid" value="Sign In"/> 
                     
                 </form>
+                <div><center>Forgot Password <a href="#">Reset Password</a></center></div>
             
             </div> 
         

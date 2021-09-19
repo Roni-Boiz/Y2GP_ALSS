@@ -67,6 +67,20 @@ class homeController extends controller{
         // $result ? $this->view->render('userView') : $this->view->render('loginView');
     }
 
+    public function logout(){
+        session_start();
+
+        $_SESSION = array();
+
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '' , time() -86400, '/');
+        }
+
+        session_destroy();
+
+        $this->view->render('homeView');
+    }
+
     public function register(){
         
         $this->view->render('registerResidentView');
