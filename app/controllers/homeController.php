@@ -1,6 +1,7 @@
 <?php
 
 require_once '../app/core/controller.php';
+// require_once 'announcementController.php';
 
 class homeController extends controller{
 
@@ -42,6 +43,7 @@ class homeController extends controller{
         $password=$_POST ['password'];
 
         $this->loadModel('loginModel');
+
         $this->view->ann = $this->model->readLogin($username, $password);
         if($_SESSION['type']=='resident'){
             $this->view->render('resident/residentView');

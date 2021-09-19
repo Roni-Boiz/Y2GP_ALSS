@@ -15,8 +15,8 @@ class AnnouncementModel extends model {
         }else{
             $sql = "SELECT * FROM announcement where category='administration'";
         }
-        $result = $this->conn->query($sql);   
-        return $result;
+        $ann = $this->conn->query($sql);   
+        return $ann;
     }
 }
 ?>

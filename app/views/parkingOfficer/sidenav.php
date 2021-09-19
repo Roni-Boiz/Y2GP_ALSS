@@ -32,7 +32,7 @@
     
         <nav class="sidebar" id="side">
             <ul>
-                <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
+                <li><a href="announcement"><i class="fa fa-home" ></i>HOME</a></li>
                 
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
                 <ul>
