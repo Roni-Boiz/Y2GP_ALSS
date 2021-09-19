@@ -9,7 +9,7 @@ class homeController extends controller{
     }
 
     public function index(){
-        echo 'I am home 123';
+        $this->view->render('404errorView');
     }
 
     public function home(){
