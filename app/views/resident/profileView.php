@@ -1,6 +1,4 @@
 <?php 
-    $type="re";
-    $id="Re10023";
     include_once('sidenav.php');
 ?>
 </head>
@@ -15,7 +13,6 @@
                 while($row = $this->users->fetch_assoc()){
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <!-- for all -->
                             <form action="#" class="form1" id="view">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
@@ -41,8 +38,6 @@
 
                                 <label for="lname">Balance</label><br>
                                 <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
-                                <?php
-                                }?>
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
@@ -75,8 +70,6 @@
                                 <span class="fas fa-plus" onclick="newvehicle();"></span>
                                 <div id="newElement2"></div>
 
-                                <?php
-                                }?>
                             <!-- end edit basic details part -->  
                                 <input type="submit" onclick = "confirm()" value="Save">
                                 <input type="submit" onclick = "ChangePw()" value="Change Password">
