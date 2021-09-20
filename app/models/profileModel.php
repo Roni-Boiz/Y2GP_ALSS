@@ -8,6 +8,7 @@ class profileModel extends model {
     }
 
     public function readTable(){
+        session_start();
         require '../app/core/database.php';
         $sql = "SELECT * FROM resident where resident_id='1'";
         $result = $this->conn->query($sql);   

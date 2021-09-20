@@ -28,8 +28,7 @@
                                 
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
-                                <!-- for resident -->
-                                <?php if($type=="re"){?>
+
                                 <label for="lname">Vehicle NO</label><br>
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
@@ -56,8 +55,7 @@
 
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-                                <!-- for resident -->
-                                <?php if($type=="re"){?>
+
                                 <label for="lname">Family Members</label><br>
                                 <input type="text" id="fam" name="fam" class="input-field" value=<?php echo ""?>>
                                 <!-- add new field -->
