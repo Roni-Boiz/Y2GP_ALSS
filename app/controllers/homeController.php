@@ -20,8 +20,6 @@ class homeController extends controller{
     }
     // view profile
     public function profile(){
-
-        $type="";
         $this->loadModel('profileModel');
         $this->view->users = $this->model->readTable();
         $this->view->render('resident/ProfileView');
