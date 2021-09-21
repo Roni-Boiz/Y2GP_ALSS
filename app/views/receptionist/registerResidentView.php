@@ -31,7 +31,17 @@
                         <span class="error_form" id="email_error_message"></span>
                     </div>
 
-                    <div class="input-field-signup" id ="rpasswordId">
+                    <div class="input-field-signup" id ="apartmentId">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                        <select name="apartmentId" id="form_apartment" placeholder="email">
+                            <option value="#">AP001</option>
+                            <option value="#">fffffs</option>
+                        </select>
+                        <!-- <input id="form_apartment" type="email" placeholder="Apartment Number" name = "apartmentId" required> -->
+                        <span class="error_form" id="apartmentId_error_message"></span>
+                    </div>
+
+                    <!-- <div class="input-field-signup" id ="rpasswordId">
                         <i class="fas fa-lock"></i>
                         <input id="form_rpassword" type="password" placeholder="password" name = "rpassword" required>
                         <span class="error_form" id="rpassword_error_message"></span>
@@ -41,7 +51,7 @@
                         <i class="fas fa-lock"></i>
                         <input id="form_retype_password" type="password" placeholder="Confirm Password" name = "retype_password" required>
                         <span class="error_form" id="retype_password_error_message"></span>
-                    </div>
+                    </div> -->
 
                     <div class="btn-signup"><input type="submit"  value="Sign Up"/></div>
                     

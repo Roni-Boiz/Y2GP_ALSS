@@ -372,6 +372,15 @@ tr:nth-child(even){
   outline: none;
 }
 
+.signup_container .input-field-signup #form_apartment{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
 /* responsive resident signup page */
 @media(max-width:1100px){
   .signup_container .input-field-signup .error_form {
