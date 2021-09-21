@@ -7,9 +7,9 @@ class loginModel extends model {
     }
     public function readLogin($username, $password){
          //hashing the password
-         $hashpassword = $password;
-         $hash2password= $hashpassword;
-         
+         $hashpassword = sha1($password);
+         $hash2password= sha1($hashpassword);
+
         $sql = "SELECT * FROM user_account WHERE user_name='{$username}' AND Password='{$hash2password}' limit 1";
         $resultSet = mysqli_query($this->conn, $sql);
 
