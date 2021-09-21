@@ -18,4 +18,9 @@ class residentController extends controller{
         $this->view->users = $this->model->readTable();
         $this->view->render('resident/profileView');
     }
+    public function announcement(){
+        $this->loadModel('announcementModel');
+        $this->view->ann = $this->model->readTable();
+        $this->view->render('resident/residentView');
+    }
 }
