@@ -9,7 +9,8 @@
         function __construct(){
             
             $url = $this->getUrl();
-            if(file_exists($url[0])){
+            $file = '../app/controllers/'.$url[0].'.php';
+            if(file_exists($file)){
                 $this->controller = $url[0];
                 unset($url[0]);
             }
