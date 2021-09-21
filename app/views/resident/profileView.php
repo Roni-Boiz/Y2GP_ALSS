@@ -13,7 +13,7 @@
                 while($row = $this->users->fetch_assoc()){
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <form action="#" class="form1" id="view">
+                            <form action="#" class="form1" id="view" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
@@ -40,7 +40,7 @@
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
-                            <form action="#" class="form1" id="edit" style="display:none">
+                            <form action="#" class="form1" id="edit" style="display:none" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
