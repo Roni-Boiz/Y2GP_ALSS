@@ -11,7 +11,6 @@ class residentController extends controller{
     public function index(){
         echo 'I am home 123';
     }
-
     // view profile
     public function profile(){
         $this->loadModel('profileModel');
