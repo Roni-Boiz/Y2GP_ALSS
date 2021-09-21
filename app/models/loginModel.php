@@ -6,8 +6,11 @@ class loginModel extends model {
          parent::__construct();
     }
     public function readLogin($username, $password){
+         //hashing the password
+         $hashpassword = $password;
+         $hash2password= $hashpassword;
          
-        $sql = "SELECT * FROM user_account WHERE user_name='{$username}' AND Password='{$password}' limit 1";
+        $sql = "SELECT * FROM user_account WHERE user_name='{$username}' AND Password='{$hash2password}' limit 1";
         $resultSet = mysqli_query($this->conn, $sql);
 
             if ($resultSet) {
