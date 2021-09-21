@@ -6,6 +6,7 @@ class residentController extends controller{
 
     function __construct(){
         parent::__construct();
+        $this->loadModel('residentModel');
     }
 
     public function index(){
@@ -13,13 +14,11 @@ class residentController extends controller{
     }
     // view profile
     public function profile(){
-        $this->loadModel('profileModel');
-        $this->view->users = $this->model->readTable();
+        $this->view->users = $this->model->readResident();
         $this->view->render('resident/profileView');
     }
     public function announcement(){
-        $this->loadModel('announcementModel');
-        $this->view->ann = $this->model->readTable();
+        $this->view->ann = $this->model->readAnnouncement();
         $this->view->render('resident/residentView');
     }
 }
