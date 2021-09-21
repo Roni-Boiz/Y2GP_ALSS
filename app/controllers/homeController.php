@@ -31,34 +31,45 @@ class homeController extends controller{
     public function loginSuccess(){
         $username = $_POST ['name'];
         $password=$_POST ['password'];
-
         $this->loadModel('loginModel');
 
         $this->view->ann = $this->model->readLogin($username, $password);
-        if($_SESSION['type']=='resident'){
-            $this->view->render('resident/residentView');
+
+        if(session_id()){
+            $type = $_SESSION['type'];
+            $this->view->render($type.'/'.$type.'View');
         }
-        else if($_SESSION['type']=='admin'){
-            $this->view->render('admin/adminView');
-        }
-        else if($_SESSION['type']=='manager'){
-            $this->view->render('manager/managerView');
-        }
-        else if($_SESSION['type']=='receptionist'){
-            $this->view->render('receptionist/receptionistView');
-        }
-        else if($_SESSION['type']=='parkingofficer'){
-            $this->view->render('parkingofficer/parkingofficerView');
-        }
-        else if($_SESSION['type']=='trainer'){
-            $this->view->render('trainer/trainerView');
-        }
-        else if($_SESSION['type']=='laundry'){
-            $this->view->render('laundryView');
-        }
-        else {
+        else{
             $this->view->render('loginView');
         }
+
+        // if ( is_session_started() === TRUE ){
+
+        //     if($_SESSION['type']=='resident'){
+        //         $this->view->render('resident/residentView');
+        //     }
+        //     else if($_SESSION['type']=='admin'){
+        //         $this->view->render('admin/adminView');
+        //     }
+        //     else if($_SESSION['type']=='manager'){
+        //         $this->view->render('manager/managerView');
+        //     }
+        //     else if($_SESSION['type']=='receptionist'){
+        //         $this->view->render('receptionist/receptionistView');
+        //     }
+        //     else if($_SESSION['type']=='parkingofficer'){
+        //         $this->view->render('parkingofficer/parkingofficerView');
+        //     }
+        //     else if($_SESSION['type']=='trainer'){
+        //         $this->view->render('trainer/trainerView');
+        //     }
+        //     else if($_SESSION['type']=='laundry'){
+        //         $this->view->render('laundryView');
+        //     }
+        // }
+        // else {
+        //     $this->view->render('loginView');
+        // }
     }
 
     public function logout(){
