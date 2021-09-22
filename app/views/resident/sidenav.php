@@ -36,7 +36,7 @@
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus" ></i>RESERVATIONS </a>
                     <ul>
-                        <li><a href="#">YOUR RESERVATIONS</a></li>
+                        <li><a href="yourReservation">YOUR RESERVATIONS</a></li>
                         <li><a href="#">PARKING SLOT</a></li>
                         <li><a href="#">FITNESS CENTRE</a></li>
                         <li><a href="#">HALL</a></li>
