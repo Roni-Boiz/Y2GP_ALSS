@@ -71,19 +71,7 @@ class homeController extends controller{
         // }
     }
 
-    public function logout(){
-        session_start();
 
-        $_SESSION = array();
-
-        if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '' , time() -86400, '/');
-        }
-
-        session_destroy();
-
-        $this->view->render('homeView');
-    }
 
     public function register(){
         session_start();
