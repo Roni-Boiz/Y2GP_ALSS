@@ -12,10 +12,6 @@ class receptionistModel extends model {
         $sql = "SELECT * FROM user_account";
         $result = $this->conn->query($sql);   
         return $result;
-
-        // $sql = "SELECT * FROM user_account";
-        // $result = $this->db->runQuery($sql);   
-        // return $result;
     }
 
     public function readApartment(){

@@ -8,6 +8,12 @@ class receptionistController extends controller{
         parent::__construct();
         $this->loadModel('receptionistModel');
         session_start();
+        if(!isset($_SESSION['type'])){
+        header('Location:logout');
+        }
+        else if($_SESSION['type']!='receptionist'){
+        header('Location:logout');
+        }
     }
 
     public function index(){
