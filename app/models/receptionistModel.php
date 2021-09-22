@@ -9,7 +9,6 @@ class receptionistModel extends model {
 
     public function readResidentRegistration($firstname, $secondname, $email, $apartmentId){
         $sql = "SELECT resident_id FROM resident where resident_id=(SELECT max(resident_id) FROM resident) LIMIT 1";
-        echo $firstname;
             $result = $this->conn->query($sql);   
             if($result){
                 $lastId = mysqli_fetch_assoc($result);
