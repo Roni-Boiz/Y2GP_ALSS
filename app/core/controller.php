@@ -31,11 +31,12 @@ class controller{
     }
 
         // view profile
-        public function profile(){
-            $type="";
-            $this->loadModel('profileModel');
-            $this->view->users = $this->model->readTable();
-            $this->view->render('resident/ProfileView');
-        }
+        // public function profile(){
+        //     // session_start();
+        //     $type = $_SESSION['type'];
+        //     $this->loadModel($type.'Model');
+        //     $this->view->users = $this->model->readTable();
+        //     $this->view->render($type.'/profileView');
+        // }
 
 }

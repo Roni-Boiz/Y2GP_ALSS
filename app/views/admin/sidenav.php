@@ -17,7 +17,6 @@
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
             <h2>AlSS</h2>
             <div class="head">
-                <?php session_start()?>
                 <ul>
                     <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
                         <ul>
