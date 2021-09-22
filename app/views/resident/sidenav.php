@@ -36,23 +36,23 @@
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus" ></i>RESERVATIONS </a>
                     <ul>
-                        <li><a href="#">YOUR RESERVATIONS</a></li>
-                        <li><a href="#">PARKING SLOT</a></li>
-                        <li><a href="#">FITNESS CENTRE</a></li>
-                        <li><a href="#">HALL</a></li>
-                        <li><a href="#">TREATMENT ROOM</a></li>
+                        <li><a href="yourReservation">YOUR RESERVATIONS</a></li>
+                        <li><a href="parking">PARKING SLOT</a></li>
+                        <li><a href="fitness">FITNESS CENTRE</a></li>
+                        <li><a href="hall">HALL</a></li>
+                        <li><a href="treatment">TREATMENT ROOM</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><i class="fa fa-handshake"></i>REQUESTS</a>
                     <ul>
-                        <li><a href="#">YOUR REQUESTS</a></li>
-                        <li><a href="#">MAINTENANCE</a> </li>
-                        <li><a href="#">LAUNDRY</a></li>
-                        <li><a href="#">VISITOR APPROVAl</a></li>
+                        <li><a href="yourRequest">YOUR REQUESTS</a></li>
+                        <li><a href="maintenence">MAINTENANCE</a> </li>
+                        <li><a href="laundry">LAUNDRY</a></li>
+                        <li><a href="visitor">VISITOR APPROVAl</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note"></i>BILLS</a></li>
+                <li><a href="payment"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
+                <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
             </ul>
         </nav>
 
