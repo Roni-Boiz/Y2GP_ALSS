@@ -10,17 +10,34 @@ class receptionistController extends controller{
     }
 
     public function index(){
-        $this->announcement();
-        $this->view->render('receptionist/receptionistView');
-    }
-
-    public function announcement(){
-        $this->view->ann = $this->model->readTable();
+        echo 'I am home 123';
     }
 
     public function register(){
         session_start();
         $this->view->render('receptionist/registerResidentView');
     }
+
+    public function registerSuccess(){
+        session_start();
+        $firstname = $_POST ['fname'];
+        $secondname=$_POST ['lname'];
+        $email = $_POST ['email'];
+        $apartmentId=$_POST ['apartmentId'];
+        echo $firstname;
+        $this->view->ann = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->view->render('receptionist/registerResidentView');
+    }
+    // view profile
+    // public function profile(){
+    //     $this->loadModel('profileModel');
+    //     $this->view->users = $this->model->readTable();
+    //     $this->view->render('resident/profileView');
+    // }
+    // public function announcement(){
+    //     $this->loadModel('announcementModel');
+    //     $this->view->ann = $this->model->readTable();
+    //     $this->view->render('resident/residentView');
+    // }
 
 }

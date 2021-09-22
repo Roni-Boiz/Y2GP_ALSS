@@ -15,7 +15,6 @@ class model{
         require_once 'database.php';
         return $conn;
     }
-
     public function readAnnouncement(){
         session_start();
         if($_SESSION['type']=="resident"){
@@ -26,5 +25,4 @@ class model{
         $ann = $this->conn->query($sql);   
         return $ann;
     }
-
 }

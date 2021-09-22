@@ -14,7 +14,5 @@ class residentModel extends model {
         return $result;
     }
 
-    
-
 }
 ?>

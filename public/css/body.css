@@ -232,6 +232,7 @@ nav i{
     /* position:relative; */
     text-align:center;
 }
+
 textarea:focus, input:focus{
     outline: none;
 }
@@ -261,6 +262,15 @@ input[type=email]{
     border-radius: 30px;
     cursor: pointer;
     grid-column: 3;
+}
+.purplebutton{
+  background-color: #2a225a;
+  color: white;
+  padding: 5px 10px;
+  margin: auto;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
 }
 .hawlockbody  input[type=submit]:hover {
     background-color: #02000c;

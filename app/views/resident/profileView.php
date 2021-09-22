@@ -6,14 +6,15 @@
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand">
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">Hawlock <span id="city">City</span></h1></div>
     <div class="hawlockbody" id="hb"> 
-    <i class="fa fa-user-circle" style="font-size: 75px; padding:0"></i>
-    <input type="submit" onclick = "funedit()" value="Edit Profile">       
+    <i class="fa fa-user-circle" style="font-size: 40px; padding:0"></i>
+    <button class="purplebutton" onclick = "funedit()" id="editbtn1" style="grid-column:3;">Edit Profile</button> 
+    <button class="purplebutton" onclick = "changePw()" id="editbtn2" style="grid-column:3;">Change Password</button>
         <h4 style="margin-left: 100px;"><?php
         if ($this->users->num_rows > 0){
                 while($row = $this->users->fetch_assoc()){
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <form action="#" class="form1" id="view" method="post">
+                            <form action="#" class="form1" id="view">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
@@ -40,7 +41,7 @@
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
-                            <form action="#" class="form1" id="edit" style="display:none" method="post">
+                            <form action="#" class="form1" id="editview" style="display:none" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
@@ -70,10 +71,10 @@
 
                             <!-- end edit basic details part -->  
                                 <input type="submit" onclick = "confirm()" value="Save">
-                                <input type="submit" onclick = "ChangePw()" value="Change Password">
                             </form>
+                            
                             <!-- change password -->
-                            <form action="#" class="form1" id="pw" style="display:none">
+                            <form action="#" class="form1" id="pw" style="display:none" method="post">
                                 <label for="fname">Old Password</label><br>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password"><br>
 
@@ -96,14 +97,18 @@
 </div> <!-- .expand div closed here -->
 <script>  
     function funedit() { 
-        document.getElementById("view").style.display = "none"; 
-        document.getElementById("edit").style.display = "block";
-        document.getElementById("pw").style.display = "none";
+        $("#editbtn1").hide();
+        $("#editbtn2").show();
+        $("#view").hide();
+        $("#pw").hide();
+        $("#editview").show();
     }  
-    function ChangePw() { 
-        document.getElementById("edit").style.display = "none"; 
-        document.getElementById("view").style.display = "none"; 
-        document.getElementById("pw").style.display = "block";
+    function changePw() {
+        $("#editbtn1").show(); 
+        $("#editbtn2").hide();
+        $("#editview").hide();
+        $("#view").hide();
+        $("#pw").show();
     } 
     function confirm(){
         alert("Are your sure?")
