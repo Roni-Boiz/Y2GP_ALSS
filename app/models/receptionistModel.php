@@ -64,8 +64,7 @@ class receptionistModel extends model {
                             $body = "Username : ".$username." password : ".$password;
                             $sender = "From:hawlockrycn@gmail.com";
 
-                            mail($receiver, $subject, $body, $sender)
-                            
+                            mail($receiver, $subject, $body, $sender);
                             // if(mail($receiver, $subject, $body, $sender)){
                             //     echo "Email sent successfully to $receiver";
                             // }else{
