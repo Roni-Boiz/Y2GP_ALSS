@@ -1,4 +1,6 @@
 <?php
 
+    require '../config/databaseConf.php';
     require 'core/app.php';
-    require 'core/controller.php';
+
+
