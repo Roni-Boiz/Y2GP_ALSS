@@ -1,6 +1,4 @@
 <?php 
-    $type="re";
-    $id="Re10023";
     include_once('sidenav.php');
 ?>
 </head>
@@ -15,8 +13,7 @@
                 while($row = $this->users->fetch_assoc()){
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <!-- for all -->
-                            <form action="#" class="form1" id="view">
+                            <form action="#" class="form1" id="view" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
@@ -31,8 +28,7 @@
                                 
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
-                                <!-- for resident -->
-                                <?php if($type=="re"){?>
+
                                 <label for="lname">Vehicle NO</label><br>
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
@@ -41,12 +37,10 @@
 
                                 <label for="lname">Balance</label><br>
                                 <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
-                                <?php
-                                }?>
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
-                            <form action="#" class="form1" id="edit" style="display:none">
+                            <form action="#" class="form1" id="edit" style="display:none" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
@@ -61,8 +55,7 @@
 
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-                                <!-- for resident -->
-                                <?php if($type=="re"){?>
+
                                 <label for="lname">Family Members</label><br>
                                 <input type="text" id="fam" name="fam" class="input-field" value=<?php echo ""?>>
                                 <!-- add new field -->
@@ -75,8 +68,6 @@
                                 <span class="fas fa-plus" onclick="newvehicle();"></span>
                                 <div id="newElement2"></div>
 
-                                <?php
-                                }?>
                             <!-- end edit basic details part -->  
                                 <input type="submit" onclick = "confirm()" value="Save">
                                 <input type="submit" onclick = "ChangePw()" value="Change Password">

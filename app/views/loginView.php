@@ -291,7 +291,7 @@ nav ul li a:hover{
         </div>
 
         <div class="signin_container">
-            <div class="title"><center>SignIn</center></div>
+            <div class="title"><center>Login</center></div>
             <div class="signup">
                 
                 <form action="loginSuccess" class="sign-in-form" method= "POST">
@@ -312,14 +312,12 @@ nav ul li a:hover{
                         <span class="error_form" id="password_error_message"></span>
                     </div>
 
-                    <input type="submit" class="btn solid" value="Sign In"/> 
+                    <input type="submit" class="btn solid" value="Login"/> 
                     
                 </form>
                 <div><center>Forgot Password <a href="#">Reset Password</a></center></div>
             
             </div> 
-        
-     
         </div>
         
   </div>

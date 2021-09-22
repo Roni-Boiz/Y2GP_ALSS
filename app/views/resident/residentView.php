@@ -13,6 +13,8 @@
                 while($row = $this->ann->fetch_assoc()){?> 
                         <div class="announcement">
                             <h3>By <?php echo ($row["employee_id"] == 1) ? $row["employee_id"] : $row["admin_id"];?></h3>
+                            <p><?php echo $row["date"]; ?> </p>
+                            <p><?php echo $row["time"]; ?> </p>
                             <p class="title"><?php echo $row["topic"]; ?></p>
                             <p><?php echo $row["content"]; ?> </p>
                         </div>

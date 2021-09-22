@@ -14,8 +14,4 @@ class adminController extends controller{
         $this->view->render('admin/adminView');
     }
 
-    public function announcement(){
-        $this->view->ann = $this->model->readTable();
-    }
-
 }
