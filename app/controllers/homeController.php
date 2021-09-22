@@ -7,6 +7,7 @@ class homeController extends controller{
 
     function __construct(){
         parent::__construct();
+        $this->loadModel('homeModel');
     }
 
     public function index(){
@@ -14,40 +15,31 @@ class homeController extends controller{
     }
 
     public function home(){
-        $this->loadModel('homeModel');
-        $this->view->users = $this->model->readTable();
         $this->view->render('homeView');
-    }
-    // view profile
-    public function profile(){
-
-        $type="";
-        $this->loadModel('profileModel');
-        $this->view->users = $this->model->readTable();
-        $this->view->render('resident/ProfileView');
-    }
-
-    public function test(){
-        $this->loadModel('homeModel');
-        $this->view->users = $this->model->readTable();
-        $this->view->render('testView');
     }
 
     public function login(){
         $this->view->render('loginView');
     }
 
+    public function test(){
+        // $this->loadModel('homeModel');
+        // $this->view->users = $this->model->readTable();
+        $this->view->render('testView');
+    }
+
     public function loginSuccess(){
         $username = $_POST ['name'];
         $password=$_POST ['password'];
 
-        $this->loadModel('loginModel');
+        $this->model->readLogin($username, $password);
 
-        $this->view->ann = $this->model->readLogin($username, $password);
+        echo $_SESSION['type'];
         if($_SESSION['type']=='resident'){
             $this->view->render('resident/residentView');
         }
         else if($_SESSION['type']=='admin'){
+            echo "Admin";
             $this->view->render('admin/adminView');
         }
         else if($_SESSION['type']=='manager'){
@@ -88,10 +80,19 @@ class homeController extends controller{
         session_start();
         $this->view->render('receptionist/registerResidentView');
     }
-    
-    public function announcement(){
-        $this->loadModel('announcementModel');
-        $this->view->ann = $this->model->readTable();
-        $this->view->render('resident/residentView');
+
+    // view profile
+    public function profile(){
+        $type="";
+        $this->loadModel('profileModel');
+        $this->view->users = $this->model->readTable();
+        $this->view->render('resident/ProfileView');
     }
+
+    
+    // public function announcement(){
+    //     $this->loadModel('announcementModel');
+    //     $this->view->ann = $this->model->readTable();
+    //     $this->view->render('resident/residentView');
+    // }
 }
