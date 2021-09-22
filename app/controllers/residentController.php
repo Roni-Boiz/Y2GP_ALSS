@@ -12,11 +12,12 @@ class residentController extends controller{
     public function index(){
         echo 'I am home 123';
     }
-    // view profile
+    // view resident profile
     public function profile(){
         $this->view->users = $this->model->readResident();
         $this->view->render('resident/profileView');
     }
+    // view resident announcement
     public function announcement(){
         $this->view->ann = $this->model->readAnnouncement();
         $this->view->render('resident/residentView');
