@@ -43,7 +43,7 @@ class receptionistModel extends model {
                     $hash2Password = sha1($hashPassword);
 
                     // echo 'Register if run';
-                    $query1= "INSERT INTO user_account (user_name, password, type) VALUES ('{$username}', '{$hash2Password}', 'resident') ";
+                    $query1= "INSERT INTO user_account (user_name, password, type, hold) VALUES ('{$username}', '{$hash2Password}', 'resident', '0') ";
                     $resultSet1 = mysqli_query($this->conn, $query1);
                     $query2 = "SELECT user_id FROM user_account where user_name='{$username}' LIMIT 1";
                     $resultSet2=  mysqli_query($this->conn, $query2);
@@ -64,11 +64,13 @@ class receptionistModel extends model {
                             $body = "Username : ".$username." password : ".$password;
                             $sender = "From:hawlockrycn@gmail.com";
 
-                            if(mail($receiver, $subject, $body, $sender)){
-                                echo "Email sent successfully to $receiver";
-                            }else{
-                                echo "Sorry, failed while sending mail!";
-                            }
+                            mail($receiver, $subject, $body, $sender)
+                            
+                            // if(mail($receiver, $subject, $body, $sender)){
+                            //     echo "Email sent successfully to $receiver";
+                            // }else{
+                            //     echo "Sorry, failed while sending mail!";
+                            // }
                             // if(mail($receiver, $subject, $body, $sender)){
                             //     echo "Email sent successfully to $receiver";
                             // }else{
