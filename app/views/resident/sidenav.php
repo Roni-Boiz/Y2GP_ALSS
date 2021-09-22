@@ -20,8 +20,8 @@
                 <ul>
                     <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
                         <ul>
-                            <li><a href="../residentController/profile"></li><i class="fa fa-user"></i>Profile</a></li>
-                            <li><a href="logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
+                            <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
                             <li><a href="#"><?php echo  $_SESSION['userName'];?></a></li>
                             <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
