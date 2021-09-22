@@ -18,4 +18,9 @@ class receptionistController extends controller{
         $this->view->ann = $this->model->readTable();
     }
 
+    public function register(){
+        session_start();
+        $this->view->render('receptionist/registerResidentView');
+    }
+
 }

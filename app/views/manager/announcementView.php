@@ -23,6 +23,7 @@
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">Hawlock <span id="city">City</span></h1></div>
     <div id="hb" class="hawlockbody" > 
     <h2>Announcements</h2>
+
     <?php
         if ($this->ann->num_rows > 0){
                 while($row = $this->ann->fetch_assoc()){?> 
@@ -38,8 +39,7 @@
         }
     ?>
     <br>
-
-
+    
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 </body>
