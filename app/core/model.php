@@ -16,7 +16,6 @@ class model{
         return $conn;
     }
     public function readAnnouncement(){
-        session_start();
         if($_SESSION['type']=="resident"){
             $sql = "SELECT * FROM announcement where category='resident'";
         }else{
