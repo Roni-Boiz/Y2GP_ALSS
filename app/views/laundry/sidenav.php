@@ -34,14 +34,8 @@
             <ul>
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
                
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
-                <ul>
-                    <li><a href="#">SUB 1</a></li>
-                    <li><a href="#">SUB 2</a></li>
-                </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE LAUNDRY </a></li>
+                
             </ul>
         </nav>
 

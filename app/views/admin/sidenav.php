@@ -46,7 +46,7 @@
                     <li><a href="#">REMOVE EMPLOYEES</a></li>
                 </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>MAKE ANNOUNCEMENT</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENTS</a></li>
                 <li><a href="#"><i class="fa fa-sticky-note"  ></i>PAYMENTS RATES</a></li>
                 
             </ul>
