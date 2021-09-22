@@ -33,12 +33,21 @@
 
                     <div class="input-field-signup" id ="apartmentId">
                         <i class="fa fa-address-card" aria-hidden="true"></i>
+                        
                         <select name="apartmentId" id="form_apartment">
-                            <option value="AP001">AP001</option>
-                            <option value="AP002">AP002</option>
-                            <option value="AP003">AP003</option>
-                            <option value="AP004">AP004</option>
-                            <option value="#">fffffs</option>
+                        <?php
+                        
+                        //     <option value="AP001">AP001</option>
+                        //     <option value="AP002">AP002</option>
+                        //     <option value="AP003">AP003</option>
+                        //     <option value="AP004">AP004</option>
+                        //     <option value="#">fffffs</option>
+
+                        while ($row = $this->apartments->fetch_assoc()) {
+                            $apartment= $row['apartment_no'];
+                        echo "<option value='$apartment'>$apartment</option>";
+                        }
+                        ?>
                         </select>
                         <!-- <input id="form_apartment" type="email" placeholder="Apartment Number" name = "apartmentId" required> -->
                         <span class="error_form" id="apartmentId_error_message"></span>
