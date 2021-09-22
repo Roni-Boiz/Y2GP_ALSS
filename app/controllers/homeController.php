@@ -55,7 +55,7 @@ class homeController extends controller{
             $this->view->render('trainer/trainerView');
         }
         else if($_SESSION['type']=='laundry'){
-            $this->view->render('laundryView');
+            $this->view->render('laundry/laundryView');
         }
         else {
             $this->view->render('loginView');

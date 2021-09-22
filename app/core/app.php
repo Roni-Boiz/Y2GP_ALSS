@@ -16,9 +16,9 @@
             //     if(isset($_SESSION['type']) && !empty($_SESSION['type'])){
             //         echo $_SESSION['type'];
             //         $url[0]="adminController";
-            //     }
-                
+            //     }   
             // }
+
             // old code
             $file = '../app/controllers/'.$url[0].'.php';
             if(file_exists($file)){
@@ -42,7 +42,7 @@
                 }
             }
 
-            // $this->params = $url ? array_values($url) : [];
+            $this->params = $url ? array_values($url) : [];
 
             call_user_func_array([$cont,$this->method],$this->params);
         }
