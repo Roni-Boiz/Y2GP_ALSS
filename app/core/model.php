@@ -15,8 +15,7 @@ class model{
         require_once 'database.php';
         return $conn;
     }
-    public function readAnnouncement(){
-        session_start();
+    public function getAnnouncement(){
         if($_SESSION['type']=="resident"){
             $sql = "SELECT * FROM announcement where category='resident'";
         }else{
