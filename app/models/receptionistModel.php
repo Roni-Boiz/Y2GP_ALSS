@@ -7,9 +7,25 @@ class receptionistModel extends model {
          parent::__construct();
     }
 
+    public function readTable(){
+        require '../app/core/database.php';
+        $sql = "SELECT * FROM user_account";
+        $result = $this->conn->query($sql);   
+        return $result;
+
+        // $sql = "SELECT * FROM user_account";
+        // $result = $this->db->runQuery($sql);   
+        // return $result;
+    }
+
+    public function readApartment(){
+        $sql = "SELECT apartment_no FROM apartment WHERE status = '0' ";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
+
     public function readResidentRegistration($firstname, $secondname, $email, $apartmentId){
         $sql = "SELECT resident_id FROM resident where resident_id=(SELECT max(resident_id) FROM resident) LIMIT 1";
-        echo $firstname;
             $result = $this->conn->query($sql);   
             if($result){
                 $lastId = mysqli_fetch_assoc($result);
@@ -22,7 +38,7 @@ class receptionistModel extends model {
                     if($thisId<10){
                         $username = 'RA000'.$thisId;
                         $password = 'Hawlock@000'.$thisId;
-                        echo $username;
+                        // echo $username;
                     }
                     else if($thisId<100){
                         $username = 'RA00'.$thisId;
@@ -51,13 +67,15 @@ class receptionistModel extends model {
                         $user= mysqli_fetch_assoc($resultSet2);
                         $userId = $user['user_id'];
                     }
+                    $query3 = "UPDATE apartment SET status = '1' WHERE apartment_no = '{$apartmentId}' ";
+                    $resultSet3=  mysqli_query($this->conn, $query3);
                     echo $apartmentId;
-                    $query3 = "INSERT INTO resident (fname, lname, email, apartment_no, user_id) VALUES ('{$firstname}', '{$secondname}', '{$email}', '{$apartmentId}' , '{$userId}') ";
+                    $query4 = "INSERT INTO resident (fname, lname, email, apartment_no, user_id) VALUES ('{$firstname}', '{$secondname}', '{$email}', '{$apartmentId}' , '{$userId}') ";
                     // echo 'Register if run2';
-                    $resultSet3 = mysqli_query($this->conn, $query3);
+                    $resultSet4 = mysqli_query($this->conn, $query4);
                     if ($resultSet1){
                         // echo 'Register if run query1';
-                        if($resultSet3){
+                        if($resultSet4){
                             echo 'Register successfuly';
                             $receiver = "chathus.m1999@gmail.com";
                             $subject = "Hawlock RYCN details";
@@ -70,11 +88,7 @@ class receptionistModel extends model {
                             // }else{
                             //     echo "Sorry, failed while sending mail!";
                             // }
-                            // if(mail($receiver, $subject, $body, $sender)){
-                            //     echo "Email sent successfully to $receiver";
-                            // }else{
-                            //     echo "Sorry, failed while sending mail!";
-                            // }
+                            
                         }
                         
                     }

@@ -7,25 +7,27 @@ class receptionistController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('receptionistModel');
+        session_start();
     }
 
     public function index(){
-        echo 'I am home 123';
+        // $this->announcement();
+        $this->view->render('receptionist/receptionistView');
     }
 
+
     public function register(){
-        session_start();
+        $this->view->apartments = $this->model->readApartment();
         $this->view->render('receptionist/registerResidentView');
     }
 
     public function registerSuccess(){
-        session_start();
+
         $firstname = $_POST ['fname'];
         $secondname=$_POST ['lname'];
         $email = $_POST ['email'];
         $apartmentId=$_POST ['apartmentId'];
-        echo $firstname;
-        $this->view->ann = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
         $this->view->render('receptionist/registerResidentView');
     }
     // view profile
