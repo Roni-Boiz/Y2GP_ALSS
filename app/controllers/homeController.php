@@ -76,6 +76,7 @@ class homeController extends controller{
 
 
     
+    
     // public function announcement(){
     //     $this->loadModel('announcementModel');
     //     $this->view->ann = $this->model->readTable();

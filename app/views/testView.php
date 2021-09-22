@@ -94,7 +94,7 @@
 </html>
 
 <?php
-$receiver = "chathura.madura11@gmail.com";
+$receiver = "chathus.m1999@gmail.com";
 $subject = "Email Test via PHP using Localhost";
 $body = "Hi, there...This is a test email send from Localhost.";
 $sender = "From:hawlockrycn@gmail.com";
