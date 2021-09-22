@@ -2,17 +2,17 @@
 
 require '../app/core/model.php';
 
-class profileModel extends model {
+class residentModel extends model {
     function __construct(){
          parent::__construct();
     }
 
-    public function readTable(){
+    public function readResident(){
         session_start();
-        require '../app/core/database.php';
         $sql = "SELECT * FROM resident where resident_id='1'";
         $result = $this->conn->query($sql);   
         return $result;
     }
+
 }
 ?>

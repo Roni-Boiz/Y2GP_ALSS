@@ -88,13 +88,21 @@
         </table>
     </div>
 
+    <div id="aa" style='opacity:0'>
+    Test opacity
+    </div>
+
+
+<button onclick="$('#aa').fadeTo(500,1);">Show</button>
+<button onclick="$('#aa').fadeTo(500,0);">Hide</button>
+
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 </body>
 </html>
 
 <?php
-$receiver = "chathus.m1999@gmail.com";
+$receiver = "chathus.1999@gmail.com";
 $subject = "Email Test via PHP using Localhost";
 $body = "Hi, there...This is a test email send from Localhost.";
 $sender = "From:hawlockrycn@gmail.com";
@@ -105,3 +113,4 @@ if(mail($receiver, $subject, $body, $sender)){
     echo "Sorry, failed while sending mail!";
 }
 ?>
+
