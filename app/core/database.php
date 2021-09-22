@@ -25,3 +25,19 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if($conn->connect_error){
     die("Connection Failed ".$conn->connect_error);
 }
+
+
+// <?php
+// $id = $_GET['id'];
+// $db_connection = new PDO('mysql:host=localhost;dbname=sql_injection_example', 'dbuser', 'dbpasswd');
+// //preparing the query
+// $sql = "SELECT username 
+//             FROM users
+//             WHERE id = :id";
+// $query = $db_connection->prepare($sql);
+// $query->bindParam(':id', $id);
+// $query->execute();
+// //getting the result
+// $query->setFetchMode(PDO::FETCH_ASSOC);
+// $result = $query->fetchColumn();
+// print(htmlentities($result));
