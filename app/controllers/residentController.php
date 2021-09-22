@@ -6,6 +6,7 @@ class residentController extends controller{
 
     function __construct(){
         parent::__construct();
+        session_start();
         $this->loadModel('residentModel');
     }
 
@@ -22,5 +23,8 @@ class residentController extends controller{
     public function announcement(){
         $this->view->ann = $this->model->readAnnouncement();
         $this->view->render('resident/residentView');
+    }
+    public function yourReservation(){
+        $this->view->render('resident/yourReservationView');
     }
 }
