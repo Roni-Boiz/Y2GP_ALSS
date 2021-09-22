@@ -36,39 +36,12 @@ class homeController extends controller{
 
         if(session_id()){
             $type = $_SESSION['type'];
-            $this->view->render($type.'/'.$type.'View');
+            header('Location: /Y2GP_ALSS/public'.'/'.$type.'Controller/index');
+            // $this->view->render($type.'/'.$type.'View');
         }
         else{
             $this->view->render('loginView');
         }
-
-        // if ( is_session_started() === TRUE ){
-
-        //     if($_SESSION['type']=='resident'){
-        //         $this->view->render('resident/residentView');
-        //     }
-        //     else if($_SESSION['type']=='admin'){
-        //         $this->view->render('admin/adminView');
-        //     }
-        //     else if($_SESSION['type']=='manager'){
-        //         $this->view->render('manager/managerView');
-        //     }
-        //     else if($_SESSION['type']=='receptionist'){
-        //         $this->view->render('receptionist/receptionistView');
-        //     }
-        //     else if($_SESSION['type']=='parkingofficer'){
-        //         $this->view->render('parkingofficer/parkingofficerView');
-        //     }
-        //     else if($_SESSION['type']=='trainer'){
-        //         $this->view->render('trainer/trainerView');
-        //     }
-        //     else if($_SESSION['type']=='laundry'){
-        //         $this->view->render('laundryView');
-        //     }
-        // }
-        // else {
-        //     $this->view->render('loginView');
-        // }
     }
 
 

@@ -34,21 +34,11 @@ class homeModel extends model {
                {
                    //valid user found
                    $user = mysqli_fetch_assoc($resultSet);
-
                    session_start();
                    $_SESSION['userId'] = $user['user_id'] ;
                    $_SESSION['userName'] = $user['user_name'];
                    $_SESSION['type'] = $user['type'];
-                   // announncement
-                   if($_SESSION['type']=="resident"){
-                       $sql = "SELECT * FROM announcement where category='resident'";
-                   }else{
-                       $sql = "SELECT * FROM announcement where category='administration'";
-                   }
-                   $ann= $this->conn->query($sql);   
-                   return $ann;
-                   // $ret = $_SESSION['type'];
-                   // return $ret;
+
                } else {
                    echo  'Invalid Username Password';
                    return false;
