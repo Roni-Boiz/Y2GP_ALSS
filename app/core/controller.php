@@ -30,4 +30,12 @@ class controller{
         $this->view->render('homeView');
     }
 
+        // view profile
+        public function profile(){
+            $type="";
+            $this->loadModel('profileModel');
+            $this->view->users = $this->model->readTable();
+            $this->view->render('resident/ProfileView');
+        }
+
 }
