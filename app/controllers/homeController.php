@@ -86,10 +86,7 @@ class homeController extends controller{
         $this->view->render('homeView');
     }
 
-    public function register(){
-        session_start();
-        $this->view->render('receptionist/registerResidentView');
-    }
+    
     
     public function announcement(){
         $this->loadModel('announcementModel');

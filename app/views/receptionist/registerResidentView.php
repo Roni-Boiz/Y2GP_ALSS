@@ -33,7 +33,7 @@
 
                     <div class="input-field-signup" id ="apartmentId">
                         <i class="fa fa-address-card" aria-hidden="true"></i>
-                        <select name="apartmentId" id="form_apartment" placeholder="email">
+                        <select name="apartmentId" id="form_apartment">
                             <option value="#">AP001</option>
                             <option value="#">fffffs</option>
                         </select>
