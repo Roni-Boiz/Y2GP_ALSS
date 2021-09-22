@@ -186,6 +186,9 @@ nav i{
     margin-top: 0px;
     padding-left: 20px;
 }
+.hawlockhead #city{
+  color: #3e3381;
+}
 .hawlockhead #logo{
     object-fit: cover;
     height: 150px;
