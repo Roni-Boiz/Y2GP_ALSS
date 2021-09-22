@@ -34,17 +34,12 @@
             <ul>
                 <li><a href="#"><i class="fa fa-home" ></i>HOME</a></li>
                 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
-                <ul>
-                    <li><a href="#">SUB 1</a></li>
-                    <li><a href="#">SUB 2</a></li>
-                </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-credit-card"  ></i>MANAGE RESERVATIONS</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENT</a></li>
+                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>RESERVATIONS</a> </li>
+                <li><a href="#"><i class="fa fa-credit-card"  ></i>REQUESTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>ANNOUNCEMENTS</a></li>
                 <li><a href="#"><i class="fa fa-sticky-note" ></i>COMPLAINTS</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note"  ></i>VIEW RESIDENT</a></li>
-                <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW REPORTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note"  ></i>RESIDENTS</a></li>
+                <li><a href="#"><i class="fa fa-sticky-note" ></i>REPORTS</a></li>
         
                 
             </ul>
