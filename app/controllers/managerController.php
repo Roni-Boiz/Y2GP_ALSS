@@ -6,32 +6,34 @@ class managerController extends controller{
 
     function __construct(){
         parent::__construct();
+        session_start();
         $this->loadModel('managerModel');
     }
 
     public function index(){
-        $this->announcement();
+        // $this->announcement();
         $this->view->render('manager/managerView');
     }
 
     public function request(){
-        $this->view->render('admin/userView');
+        $this->view->render('manager/handleReqView');
     }
 
     public function reservation(){
-        $this->view->render('admin/employeeView');
+        $this->view->render('manager/manageResView');
     }
 
     public function complaint(){
-        $this->view->render('admin/serviceView');
+        $this->view->render('manager/complaintView');
     }
 
     public function announcement(){
-        $this->view->render('admin/announcementView');
+        $this->view->ann = $this->model->getAnnouncement();
+        $this->view->render('manager/announcementView');
     }
 
     public function report(){
-        $this->view->render('admin/reportView');
+        $this->view->render('manager/reportView');
     }
 
 }

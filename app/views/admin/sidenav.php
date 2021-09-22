@@ -20,7 +20,7 @@
                 <ul>
                     <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
                         <ul>
-                            <li><a href="../adminController/profile"></li><i class="fa fa-user"></i>Profile</a></li>
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
                             <li><a href="#"><?php echo  $_SESSION['userName'];?></a></li>
@@ -32,23 +32,23 @@
     
         <nav class="sidebar" id="side">
             <ul>
-                <li><a href="../adminController/index"><i class="fa fa-home" ></i>HOME</a></li>
+                <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
                 
-                <li class="dropdown"><a href="../adminController/user"><i class="fa fa-calendar-plus"></i>USERS </a>
+                <li class="dropdown"><a href="user"><i class="fa fa-calendar-plus"></i>USERS </a>
                 <ul>
                     <li><a href="#">ADD USER</a></li>
                     <li><a href="#">REMOVE USER</a></li>
                 </ul>
                 </li>
-                <li><a href="../adminController/employee"><i class="fa fa-sticky-note" ></i>EMPLOYEES</a>
+                <li><a href="employee"><i class="fa fa-sticky-note" ></i>EMPLOYEES</a>
                 <ul>
                     <li><a href="#">ADD EMPLOYEES</a></li>
                     <li><a href="#">REMOVE EMPLOYEES</a></li>
                 </ul>
                 </li>
-                <li><a href="../adminController/service"><i class="fa fa-sticky-note" ></i>Update Services</a></li>
-                <li><a href="../adminController/announcement"><i class="fa fa-sticky-note" ></i>MAKE ANNOUNCEMENT</a></li>
-                <li><a href="../adminController/report"><i class="fa fa-sticky-note"  ></i>Reports</a></li>
+                <li><a href="service"><i class="fa fa-sticky-note" ></i>Update Services</a></li>
+                <li><a href="announcement"><i class="fa fa-sticky-note" ></i>MAKE ANNOUNCEMENT</a></li>
+                <li><a href="report"><i class="fa fa-sticky-note"  ></i>Reports</a></li>
                 
             </ul>
         </nav>

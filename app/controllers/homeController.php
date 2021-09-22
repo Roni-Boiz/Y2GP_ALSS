@@ -36,7 +36,7 @@ class homeController extends controller{
 
         if(session_id()){
             $type = $_SESSION['type'];
-            header('Location: /Y2GP_ALSS/public'.'/'.$type.'Controller/index');
+            header('Location: /Y2GP_ALSS/public/'.$type.'Controller/index');
             // $this->view->render($type.'/'.$type.'View');
         }
         else{
