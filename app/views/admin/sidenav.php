@@ -17,10 +17,11 @@
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
             <h2>AlSS</h2>
             <div class="head">
+                <?php session_start()?>
                 <ul>
                     <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
                         <ul>
-                            <li><a href="#"></li><i class="fa fa-user"></i>Profile</a></li>
+                            <li><a href="../adminController/profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
                             <li><a href="#"><?php echo  $_SESSION['userName'];?></a></li>
