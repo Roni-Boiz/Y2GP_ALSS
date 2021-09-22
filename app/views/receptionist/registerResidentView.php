@@ -34,7 +34,10 @@
                     <div class="input-field-signup" id ="apartmentId">
                         <i class="fa fa-address-card" aria-hidden="true"></i>
                         <select name="apartmentId" id="form_apartment">
-                            <option value="#">AP001</option>
+                            <option value="AP001">AP001</option>
+                            <option value="AP002">AP002</option>
+                            <option value="AP003">AP003</option>
+                            <option value="AP004">AP004</option>
                             <option value="#">fffffs</option>
                         </select>
                         <!-- <input id="form_apartment" type="email" placeholder="Apartment Number" name = "apartmentId" required> -->
