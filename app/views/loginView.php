@@ -237,6 +237,12 @@ nav ul li a:hover{
 .box .header nav ul li button span{
   color: white;
 }
+
+.signin_container{
+  margin-top: 70px;
+    height: 450px;
+}
+
   .header{
     font-size: 15px;
   }
@@ -258,7 +264,7 @@ nav ul li a:hover{
 }
 
 .title{  
-    margin-top: 140px; 
+    margin-top: 70px; 
     font-family: Arial;
     font-size: 30px;
 }
