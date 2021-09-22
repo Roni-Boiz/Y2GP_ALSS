@@ -73,18 +73,7 @@ class homeController extends controller{
 
 
 
-    public function register(){
-        session_start();
-        $this->view->render('receptionist/registerResidentView');
-    }
 
-    // view profile
-    public function profile(){
-        $type="";
-        $this->loadModel('profileModel');
-        $this->view->users = $this->model->readTable();
-        $this->view->render('resident/ProfileView');
-    }
 
     
     // public function announcement(){
