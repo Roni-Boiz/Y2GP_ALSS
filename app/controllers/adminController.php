@@ -8,6 +8,12 @@ class adminController extends controller{
         parent::__construct();
         session_start();
         $this->loadModel('adminModel');
+        if(!isset($_SESSION['type'])){
+            header('Location:logout');
+            }
+            else if($_SESSION['type']!='admin'){
+            header('Location:logout');
+        }
     }
 
     public function index(){
