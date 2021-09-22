@@ -14,8 +14,24 @@ class managerController extends controller{
         $this->view->render('manager/managerView');
     }
 
+    public function request(){
+        $this->view->render('admin/userView');
+    }
+
+    public function reservation(){
+        $this->view->render('admin/employeeView');
+    }
+
+    public function complaint(){
+        $this->view->render('admin/serviceView');
+    }
+
     public function announcement(){
-        $this->view->ann = $this->model->readTable();
+        $this->view->render('admin/announcementView');
+    }
+
+    public function report(){
+        $this->view->render('admin/reportView');
     }
 
 }
