@@ -13,10 +13,15 @@ class residentModel extends model {
         return $result;
     }
     public function editProfile(){
-        $sql = "";
+        $sql = "update resident set values()";
         $result = $this->conn->query($sql);   
         return $result;
         
+    }
+    public function changePassword(){
+        $sql = "update";
+        $result = $this->conn->query($sql);   
+        return $result;
     }
 
 
