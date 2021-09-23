@@ -23,6 +23,210 @@
   cursor: pointer;
   transition: 0.3s;
 }
+/* card----------------------------------------1 */
+/* .recipe,
+.pizza-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pizza-box {
+  flex: 3 1 30ch;
+  height: calc(282px + 5vw);
+  overflow: hidden;
+}
+.pizza-box img {
+  max-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 50%;
+     object-position: 50% 50%;
+}
+
+.recipe {
+  border: 2px solid #F2F2F2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.recipe-content {
+  padding: 16px 32px;
+  flex: 4 1 40ch;
+}
+.recipe-tags {
+  margin: 0 -8px;
+}
+.recipe-tag {
+  display: inline-block;
+  margin: 8px;
+  font-size: 0.875em;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--primary);
+}
+.recipe-title {
+  margin: 0;
+  font-size: clamp(1.4em, 2.1vw, 2.1em);
+  font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+}
+.recipe-title a {
+  text-decoration: none;
+  color: inherit;
+}
+.recipe-datadata {
+  margin: 0;
+}
+.recipe-rating {
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+.recipe-rating span {
+  color: var(--grey);
+}
+.recipe-votes {
+  font-size: 0.825em;
+  font-style: italic;
+  color: var(--lightgrey);
+}
+.recipe-save {
+  display: flex;
+  align-items: center;
+  padding: 6px 14px 6px 12px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+  color: var(--primary);
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.recipe-save svg {
+  margin-right: 6px;
+} */
+/* card------------------------------------2 */
+.card1 {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 7px -1px #110b2e;
+  background: #fff;
+  line-height: 1.4;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px;
+  width:100%;
+}
+.card1:hover .photo {
+  transform: scale(1.3) rotate(3deg);
+}
+.card1 .data {
+  position: relative;
+  z-index: 0;
+}
+.card1 .photo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.2s;
+}
+.card1 .details ul {
+  margin: auto;
+  padding: 0;
+  list-style: none;
+}
+.card1 .details {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  margin: auto;
+  transition: left 0.2s;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  font-size: 0.9rem;
+}
+.card1 .details:before {
+  margin-right: 10px;
+  content: "";
+}
+.card1 .description {
+  padding: 1rem;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+.card1 .description h1 {
+  line-height: 1;
+  margin: 0;
+  font-size: 1.2rem;
+}
+.card1 .description h2 {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #a2a2a2;
+  margin-top: 5px;
+}
+.card1 .description .read-more {
+  text-align: right;
+}
+.card1 .description .read-more a {
+  color: #110b2e;
+  display: inline-block;
+  position: relative;
+}
+.card1 .description .read-more a:after {
+  content: "...";
+  margin-left: -10px;
+  opacity: 0;
+  vertical-align: middle;
+  transition: margin 0.3s, opacity 0.3s;
+}
+.card1 .description .read-more a:hover:after {
+  margin-left: 5px;
+  opacity: 1;
+}
+.card1 p {
+  position: relative;
+  margin: 1rem 0 0;
+}
+.card1:hover .details {
+  left: 0%;
+}
+@media (min-width: 640px) {
+  .card1 {
+    flex-direction: row;
+    max-width: 700px;
+  }
+  .card1 .data {
+    flex-basis: 40%;
+    height: auto;
+  }
+  .card1 .description {
+    flex-basis: 60%;
+  }
+  .card1 .description:before {
+    transform: skewX(-3deg);
+    content: "";
+    background: #fff;
+    width: 30px;
+    position: absolute;
+    left: -10px;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+}
+/*  */
+
 
 </style>
 </head>
@@ -48,7 +252,7 @@
     </div>
 
     <!-- table structure -->
-    <div style="overflow-x:auto;">
+    <div style="overflow-x:auto;grid-column:1/span2">
         <table>
             <tr>
             <th>First Name</th>
@@ -96,12 +300,34 @@
 <button onclick="$('#aa').fadeTo(500,1);">Show</button>
 <button onclick="$('#aa').fadeTo(500,0);">Hide</button>
 
+<div class="card1" style="grid-column:1/span4">
+	<div class="data">
+		<div class="photo" style="background-image:url(../../public/img/1.jpg);"></div>
+		<ul class="details">
+			<li class="author">12.10</li>
+			<li class="date">Aug. 24, 2015</li>
+		</ul>
+	</div>
+	<div class="description">
+		<h1>Fitness Centre Closed</h1>
+		<h2>BY ADMIN</h2>
+		<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
+		<p class="read-more">
+			<a href="#">Read More</a>
+		</p>
+	</div>
+</div>
+<!--  -->
+
+
+<!--  -->
+
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 </body>
 </html>
 
-<?php
+<!-- <?php
 $receiver = "chathus.1999@gmail.com";
 $subject = "Email Test via PHP using Localhost";
 $body = "Hi, there...This is a test email send from Localhost.";
@@ -112,5 +338,7 @@ if(mail($receiver, $subject, $body, $sender)){
 }else{
     echo "Sorry, failed while sending mail!";
 }
-?>
+?> -->
+
+
 
