@@ -38,8 +38,9 @@
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Family Members</label><br>
-                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo ""?> READONLY><br>
-
+                                <?php while($row = $this->users->fetch_assoc()){?> 
+                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $row["membername"]?> READONLY><br>
+                                <?php }?>
 
                             <!-- end view profile part -->    
                             </form>
@@ -77,7 +78,7 @@
                             </form>
                             
                             <!-- change password -->
-                            <form action="#" class="form1" id="pw" style="display:none" method="post">
+                            <form action="changePassword" class="form1" id="pw" style="display:none" method="post">
                                 <label for="fname">Old Password</label><br>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password"><br>
 
