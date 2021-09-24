@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* sidenav */
+:root {
+  --main-bg-color: #110b2e;
+  --color1:rgb(137, 97, 247);
+  --color2:rgb(146, 145, 150);
+  --color3:rgb(0, 0, 0);
+  --color2:#eab676;
+  ;
+}
 *{
   margin: 0;
   padding: 0;
@@ -25,7 +33,7 @@ body {
   width: 100%;
   position: fixed;
   padding: 15px;
-  background: #110b2e;
+  background: var(--main-bg-color);
   color: white;
 }
 .header h2{
@@ -60,7 +68,7 @@ body {
     position: absolute;
     width: 130px;
     padding: 10px 20px 0 0;
-    background: #110b2e;
+    background: var(--main-bg-color);
 }
 /* expand button */
 .btn{
@@ -84,7 +92,8 @@ body {
   width: 240px;
   height: 100%;
   left: 0px;
-  background: #110b2e;
+  background: var(--main-bg-color);
+  /* background: var(--color2); */
   transition: left 0.4s ease;
 }
 .sidebar.show{
@@ -102,7 +111,7 @@ body {
   padding-right:15px;
 }
 nav ul{
-  background: #110b2e;
+  background: var(--main-bg-color);
   width: 100%;
   list-style: none;
 }
@@ -173,19 +182,19 @@ nav i{
 }
 /* card1 */
 .card {
-  /* grid-column:1/span3; */
-  margin: 10px;
+  grid-column:1/span3;
+  margin: 5px;
   margin-bottom:10px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 95%;
+  /* width: 95%; */
 }
 .card-header img {
   width:100%;
   object-fit: cover;
-  height:120px;
+  height:200px;
 }
 .card-header img:hover {
   opacity:0.8;
@@ -199,7 +208,7 @@ nav i{
   min-height: 250px;
 }
 .tag {
-  background: #110b2e;
+  background: var(--main-bg-color);
   border-radius: 50px;
   font-size: 10px;
   margin: 0;
