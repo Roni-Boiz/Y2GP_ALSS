@@ -8,7 +8,8 @@ class residentModel extends model {
     }
 
     public function readResident(){
-        $sql = "SELECT * FROM {$_SESSION['type']} where user_id={$_SESSION['userId']}";
+        // echo $_SESSION['userId'];
+        $sql = "SELECT resident.*,family.name as membername FROM resident INNER JOIN family ON resident.resident_id=family.resident_id WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);   
         return $result;
     }
