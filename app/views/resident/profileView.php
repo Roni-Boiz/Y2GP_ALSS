@@ -38,7 +38,7 @@
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Family Members</label><br>
-                                <?php while($row = $this->users->fetch_assoc()){?> 
+                                <?php while($row =$this->members->fetch_assoc()){?> 
                                 <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $row["membername"]?> READONLY><br>
                                 <?php }?>
 

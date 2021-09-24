@@ -359,9 +359,14 @@ table {
     width: 100%;
     border: 1px solid #ddd;
 }
-th, td {
-    text-align: left;
+th {
+    text-align:center;
     padding: 8px;
+    border: 1px solid #ddd;
+}
+td {
+  text-align: left;
+  padding: 8px;
 }
 
 tr:nth-child(even){
