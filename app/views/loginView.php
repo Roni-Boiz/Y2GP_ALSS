@@ -194,6 +194,17 @@ label{
     margin-left: 5px;
 }
 
+.red_alert {
+  margin-top: 20px;
+  padding: 20px;
+  width: 50%;
+  max-width:280px;
+  border-radius:50px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
 /* responsive */
 @media(max-width:1200px) {
   .box{
@@ -297,9 +308,26 @@ nav ul li a:hover{
         </div>
 
         <div class="signin_container">
+
             <div class="title"><center>Login</center></div>
             <div class="signup">
+              <?php 
+              if(isset($this->errors) && sizeof($this->errors)>0){ ?>
+                <center>
+                <div class="red_alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <?php 
+                $error = implode("<br>",$this->errors[0]);
+                echo $error;
+                ?>
+                </div>
+              </center>
+
+              <?php 
+              }
+              ?>
                 
+               
                 <form action="loginSuccess" class="sign-in-form" method= "POST">
 
                      <div class="input-field" id ="nameId">

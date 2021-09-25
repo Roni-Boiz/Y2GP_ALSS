@@ -27,12 +27,12 @@ class homeModel extends model {
  
        if(strlen(trim($sqlfreeusername))< 1 )
        {
-           $errors[] = 'Username is invalid';
+           $errors[] = 'Enter a valid Username';
        }
 
-       if(strlen(trim($sqlfreepassword)) < 1 )
+       if(strlen(trim($sqlfreepassword)) < 8 )
        {
-           $errors[] = 'Password is invalid';
+           $errors[] = 'Enter a valid Password';
        }
     //    echo $password;
     //    echo $hash2password;
@@ -61,7 +61,7 @@ class homeModel extends model {
                     $_SESSION['type'] = $user['type'];
 
                 } else {
-                    $errors[] = 'Invalid Username Password';
+                    $errors[] = 'Invalid Username or Password';
                     return $errors;
                 }
             } else {
