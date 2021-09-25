@@ -16,27 +16,5 @@ class controller{
        
     }
 
-    public function logout(){
-        session_start();
-
-        $_SESSION = array();
-
-        if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '' , time() -86400, '/');
-        }
-
-        session_destroy();
-
-        $this->view->render('homeView');
-    }
-
-        // view profile
-        // public function profile(){
-        //     // session_start();
-        //     $type = $_SESSION['type'];
-        //     $this->loadModel($type.'Model');
-        //     $this->view->users = $this->model->readTable();
-        //     $this->view->render($type.'/profileView');
-        // }
 
 }
