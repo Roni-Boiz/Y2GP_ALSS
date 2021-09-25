@@ -38,14 +38,15 @@
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Family Members</label><br>
-                                <?php while($row =$this->members->fetch_assoc()){?> 
-                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $row["membername"]?> READONLY><br>
+                                <?php while($mem =$this->members->fetch_assoc()){?> 
+                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $mem["membername"]?> READONLY><br>
                                 <?php }?>
 
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
                             <form action="editProfile" class="form1" id="editview" style="display:none" method="post">
+                            
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
@@ -60,9 +61,11 @@
 
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-
+                                
                                 <label for="lname">Family Members</label><br>
-                                <input type="text" id="fam" name="fam" class="input-field" value=<?php echo ""?>>
+                                <?php while($row2 =$this->members->fetch_assoc()){?> 
+                                <input type="text" id="fam" name="fam" class="input-field" value=<?php echo $row2["membername"]?>>
+                                <?php }?>
                                 <!-- add new field -->
                                 <span class="fas fa-plus" onclick="newmember();"></span>
                                 <div id="newElement1"></div>
@@ -80,14 +83,17 @@
                             <!-- change password -->
                             <form action="changePassword" class="form1" id="pw" style="display:none" method="post">
                                 <label for="fname">Old Password</label><br>
-                                <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password"><br>
-
+                                <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password" required><br>
+                                <span class="error_form" id="old_password_error_message"></span><br>
+                                
                                 <label for="lname">New Password</label><br>
-                                <input type="password" id="npw" name="npw" class="input-field" placeholder="Enter your new password"><br>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="Enter your new password" required><br>
+                                <span class="error_form" id="new_password_error_message"></span><br>
                                 
                                 <label for="fname">Re-New Password</label><br>
-                                <input type="password" id="rnpw" name="wnpw" class="input-field" placeholder="Enter your new password again"><br>
-
+                                <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="Enter your new password again" required><br>
+                                <span class="error_form" id="renew_password_error_message"></span><br>
+                                
                                 <input type="submit" onclick = "confirm()" value="Save">
                             </form>
                             <!-- end change password -->
@@ -99,35 +105,6 @@
         ?>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
-<script>  
-    function funedit() { 
-        $("#editbtn1").hide();
-        $("#editbtn2").show();
-        $("#view").hide();
-        $("#pw").hide();
-        $("#editview").show();
-    }  
-    function changePw() {
-        $("#editbtn1").show(); 
-        $("#editbtn2").hide();
-        $("#editview").hide();
-        $("#view").hide();
-        $("#pw").show();
-    } 
-    function confirm(){
-        alert("Are your sure?")
-    }
-    // add new field
-    function newvehicle() {
-        var txtNewInputBox = document.createElement('div');
-        txtNewInputBox.innerHTML = "<input type='text' id='vehicle_no' name='vehicle_no' class='input-field'><br>";
-        document.getElementById("newElement2").appendChild(txtNewInputBox);
-    }
-    function newmember() {
-        var txtNewInputBox = document.createElement('div');
-        txtNewInputBox.innerHTML = "<input type='text' id='fam' name='fam' class='input-field'><br>";
-        document.getElementById("newElement1").appendChild(txtNewInputBox);
-    }
-</script>
+<script type="text/javascript" src="../../public/js/profile.js"></script>
 </body>
 </html>
