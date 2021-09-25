@@ -32,7 +32,7 @@ class homeController extends controller{
         $username = $_POST ['name'];
         $password=$_POST ['password'];
 
-        $this->view->errors=$this->model->readLogin($username, $password);
+        $this->view->errors[] = $this->model->readLogin($username, $password);
 
         if(session_id()){
             $type = $_SESSION['type'];
