@@ -18,7 +18,7 @@ class parkingController extends controller{
     }
 
     public function index(){
-        $this->announcement();
+        $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('parking/parkingView');
     }
 
