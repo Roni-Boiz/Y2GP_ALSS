@@ -29,7 +29,7 @@
             <th></th>
             </tr>
             <tr>
-            <td><a href="#"><i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></td>
+            <td><a href="#"><i class="fas fa-trash-alt" style="color:gray;padding:1px 10px"></i></a></td>
             <td>F001</td>
             <td>a</td>
             <td>a</td>
