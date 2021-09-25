@@ -10,6 +10,7 @@
     <h2>Announcements</h2>
     <?php
         if ($this->ann->num_rows > 0){
+            $count=4;
                 while($row = $this->ann->fetch_assoc()){?> 
                         <div class="card" >
            
