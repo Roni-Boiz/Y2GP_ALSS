@@ -7,6 +7,7 @@ class parkingController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('parkingModel');
+        session_start();
         if(!isset($_SESSION['type'])){
             header('Location:logout');
             }
