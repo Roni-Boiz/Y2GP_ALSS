@@ -32,7 +32,10 @@ class residentController extends controller{
         $this->view->a = $this->model->editProfile();
         $this->view->render('resident/profileView');
     }
-    
+    public function changePassword(){
+        $this->model->changePassword();
+        $this->profile();
+    }
     // view resident announcement
     public function announcement(){
         $this->view->ann = $this->model->getAnnouncement();
