@@ -7,6 +7,13 @@ class parkingController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('parkingModel');
+        if(!isset($_SESSION['type'])){
+            header('Location:logout');
+            }
+            else if($_SESSION['type']!='parkingofficer'){
+            header('Location:logout');
+        }
+    
     }
 
     public function index(){

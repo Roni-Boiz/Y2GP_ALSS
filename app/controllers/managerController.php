@@ -8,6 +8,12 @@ class managerController extends controller{
         parent::__construct();
         session_start();
         $this->loadModel('managerModel');
+        if(!isset($_SESSION['type'])){
+            header('Location:logout');
+            }
+            else if($_SESSION['type']!='manager'){
+            header('Location:logout');
+        }
     }
 
     public function index(){

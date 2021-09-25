@@ -7,11 +7,18 @@ class residentController extends controller{
     function __construct(){
         parent::__construct();
         session_start();
+        if(!isset($_SESSION['type'])){
+            header('Location:logout');
+            }
+            else if($_SESSION['type']!='resident'){
+            header('Location:logout');
+        }
+    
         $this->loadModel('residentModel');
     }
 
     public function index(){
-        $this->view->ann = $this->model->readAnnouncement();
+        $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('resident/residentView');
     }
     // view resident profile
@@ -19,9 +26,15 @@ class residentController extends controller{
         $this->view->users = $this->model->readResident();
         $this->view->render('resident/profileView');
     }
+    // edit profile
+    public function editProfile(){
+        $this->view->a = $this->model->editProfile();
+        $this->view->render('resident/profileView');
+    }
+    
     // view resident announcement
     public function announcement(){
-        $this->view->ann = $this->model->readAnnouncement();
+        $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('resident/residentView');
     }
 

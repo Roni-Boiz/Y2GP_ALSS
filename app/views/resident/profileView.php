@@ -11,7 +11,8 @@
     <button class="purplebutton" onclick = "changePw()" id="editbtn2" style="grid-column:3;">Change Password</button>
         <h4 style="margin-left: 100px;"><?php
         if ($this->users->num_rows > 0){
-                while($row = $this->users->fetch_assoc()){
+                //while($row = $this->users->fetch_assoc()){
+                        $row = $this->users->fetch_assoc();
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
                             <form action="#" class="form1" id="view">
@@ -30,18 +31,21 @@
                                 <label for="lname">Email</label><br>
                                 <input type="text" id="email" name="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
 
+                                <label for="lname">Balance</label><br>
+                                <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
+                                
                                 <label for="lname">Vehicle NO</label><br>
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Family Members</label><br>
-                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo ""?> READONLY><br>
+                                <?php while($row = $this->users->fetch_assoc()){?> 
+                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $row["membername"]?> READONLY><br>
+                                <?php }?>
 
-                                <label for="lname">Balance</label><br>
-                                <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
                             <!-- end view profile part -->    
                             </form>
                             <!-- edit basic details -->      
-                            <form action="#" class="form1" id="editview" style="display:none" method="post">
+                            <form action="editProfile" class="form1" id="editview" style="display:none" method="post">
                                 <label for="fname">First Name</label><br>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
@@ -74,7 +78,7 @@
                             </form>
                             
                             <!-- change password -->
-                            <form action="#" class="form1" id="pw" style="display:none" method="post">
+                            <form action="changePassword" class="form1" id="pw" style="display:none" method="post">
                                 <label for="fname">Old Password</label><br>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="Enter your old password"><br>
 
@@ -88,7 +92,7 @@
                             </form>
                             <!-- end change password -->
                             <?php
-                }
+
         }else{
             echo "0 results";
         }

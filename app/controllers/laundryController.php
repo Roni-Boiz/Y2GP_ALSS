@@ -7,6 +7,12 @@ class laundryController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('laundryModel');
+        if(!isset($_SESSION['type'])){
+            header('Location:logout');
+            }
+            else if($_SESSION['type']!='laundry'){
+            header('Location:logout');
+        }
     }
 
     public function index(){

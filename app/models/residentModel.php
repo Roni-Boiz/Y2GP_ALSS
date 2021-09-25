@@ -8,10 +8,25 @@ class residentModel extends model {
     }
 
     public function readResident(){
-        $sql = "SELECT * FROM resident where resident_id='1'";
+        // echo $_SESSION['userId'];
+        $sql = "SELECT resident.*,family.name as membername FROM resident INNER JOIN family ON resident.resident_id=family.resident_id WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);   
         return $result;
     }
+    public function editProfile(){
+        $sql = "update resident set values()";
+        $result = $this->conn->query($sql);   
+        return $result;
+        
+    }
+    public function changePassword(){
+        $sql = "update";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
+
+
+
 
 }
 ?>
