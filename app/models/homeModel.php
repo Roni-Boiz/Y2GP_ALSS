@@ -19,33 +19,59 @@ class homeModel extends model {
     }
 
     public function readLogin($username, $password){
-        //hashing the password
-       $hashpassword = sha1($password);
-       $hash2password= sha1($hashpassword);
+
+       $errors = array();
+               // check for the sql queries
+        $sqlfreeusername = mysqli_real_escape_string($this->conn, $username);
+        $sqlfreepassword = mysqli_real_escape_string($this->conn, $password);
+ 
+       if(strlen(trim($sqlfreeusername))< 1 )
+       {
+           $errors[] = 'Username is invalid';
+       }
+
+       if(strlen(trim($sqlfreepassword)) < 1 )
+       {
+           $errors[] = 'Password is invalid';
+       }
     //    echo $password;
     //    echo $hash2password;
-       $sql = "SELECT * FROM user_account WHERE user_name='{$username}' AND Password='{$hash2password}' limit 1";
-       $resultSet = mysqli_query($this->conn, $sql);
 
-           if ($resultSet) {
-               //query successfull
+    if (empty($errors)){
 
-                if ( mysqli_num_rows ($resultSet) == 1) 
-               {
-                   //valid user found
-                   $user = mysqli_fetch_assoc($resultSet);
-                   session_start();
-                   $_SESSION['userId'] = $user['user_id'] ;
-                   $_SESSION['userName'] = $user['user_name'];
-                   $_SESSION['type'] = $user['type'];
 
-               } else {
-                   echo  'Invalid Username Password';
-                   return false;
-               }
-           } else {
-               echo 'Database query failed';
-           }
+
+        //hashing the password
+        $hashpassword = sha1($sqlfreepassword);
+        $hash2password= sha1($hashpassword);
+
+        $sql = "SELECT * FROM user_account WHERE user_name='{$sqlfreeusername}' AND Password='{$hash2password}' limit 1";
+        $resultSet = mysqli_query($this->conn, $sql);
+
+            if ($resultSet) {
+                //query successfull
+
+                    if ( mysqli_num_rows ($resultSet) == 1) 
+                {
+                    //valid user found
+                    $user = mysqli_fetch_assoc($resultSet);
+                    session_start();
+                    $_SESSION['userId'] = $user['user_id'] ;
+                    $_SESSION['userName'] = $user['user_name'];
+                    $_SESSION['type'] = $user['type'];
+
+                } else {
+                    $errors[] = 'Invalid Username Password';
+                    return $errors;
+                }
+            } else {
+                $errors[] = 'Database query failed';
+                return $errors;
+            }
+        }
+        else{
+            return $errors;
+        }
    }
 }
 ?>
