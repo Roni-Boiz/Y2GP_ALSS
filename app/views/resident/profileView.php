@@ -37,9 +37,11 @@
                                 <label for="lname">Vehicle NO</label>
                                 <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
-                                <label for="lname">Family Members</label>
-                                <?php while($mem =$this->members->fetch_assoc()){?> 
-                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $mem["membername"]?> READONLY><br>
+                                <label for="lname">Family Members</label><br>
+                                <?php $c=1; while($mem =$this->members->fetch_assoc()){?> 
+                                <label for="lname">member<?php echo " ".$c++?></label>
+                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $mem["membername"]?> READONLY>
+                                <span class="fas fa-minus"></span><br>
                                 <?php }?>
 
                             <!-- end view profile part -->    

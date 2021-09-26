@@ -269,7 +269,7 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: repeat(1fr 2fr 2fr);
+    grid-template-columns: repeat(1fr 2fr 1fr);
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
@@ -310,7 +310,9 @@ nav i{
     /* position:relative; */
     /* text-align:center; */
 }
-
+.error_form{
+  color: red;
+}
 textarea:focus, input:focus{
     outline: none;
 }
