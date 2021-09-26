@@ -46,9 +46,9 @@
                     <li><a href="#">REMOVE EMPLOYEES</a></li>
                 </ul>
                 </li>
-                <li><a href="service"><i class="fa fa-sticky-note" ></i>Update Services</a></li>
+                <li><a href="service"><i class="fa fa-sticky-note" ></i>UPDATE SERVICE</a></li>
                 <li><a href="announcement"><i class="fa fa-sticky-note" ></i>MAKE ANNOUNCEMENT</a></li>
-                <li><a href="report"><i class="fa fa-sticky-note"  ></i>Reports</a></li>
+                <li><a href="report"><i class="fa fa-sticky-note"  ></i>REPORTS</a></li>
                 
             </ul>
         </nav>
