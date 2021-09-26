@@ -8,7 +8,7 @@
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">YOUR <span id="city">RESERVATION</span></h1></div>
     <div id="hb" class="hawlockbody" > 
     <div style="overflow-x:auto;grid-column:1/span2">
-        <table>
+        <table class="table1">
             <tr>
             <th>Action</th>
             <th>Reservation ID</th>

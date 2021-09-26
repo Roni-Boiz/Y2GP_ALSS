@@ -269,12 +269,13 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(1fr 2fr 1fr);
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
     align-items: center;
+    min-height: 550px;
 }
 .hawlockbody i,h4{
     color: black;
@@ -294,6 +295,11 @@ nav i{
     margin-bottom: 50px;
 
 }
+.form1 label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}
 .hawlockbody .input-field{ 
     width: 250px;
     height:35px;
@@ -302,9 +308,11 @@ nav i{
     border-radius: 55px;
     position:static;
     /* position:relative; */
-    text-align:center;
+    /* text-align:center; */
 }
-
+.error_form{
+  color: red;
+}
 textarea:focus, input:focus{
     outline: none;
 }
@@ -335,6 +343,7 @@ input[type=email]{
     cursor: pointer;
     grid-column: 3;
 }
+
 .purplebutton{
   background-color: #2a225a;
   color: white;

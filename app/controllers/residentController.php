@@ -37,10 +37,10 @@ class residentController extends controller{
         $this->profile();
     }
     // view resident announcement
-    public function announcement(){
-        $this->view->ann = $this->model->getAnnouncement();
-        $this->view->render('resident/residentView');
-    }
+    // public function announcement(){
+    //     $this->view->ann = $this->model->getAnnouncement();
+    //     $this->view->render('resident/residentView');
+    // }
 
     public function yourReservation(){
         $this->view->render('resident/yourReservationView');
