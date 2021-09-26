@@ -32,7 +32,7 @@
     
         <nav class="sidebar" id="side">
             <ul>
-                <li><a href="../residentController/announcement"><i class="fa fa-home" ></i>HOME</a></li>
+                <li><a href="../residentController/index"><i class="fa fa-home" ></i>HOME</a></li>
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus" ></i>RESERVATIONS </a>
                     <ul>
@@ -55,7 +55,7 @@
                 <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
             </ul>
         </nav>
-
+</body>
     
 <script>
     /* show sidebar */

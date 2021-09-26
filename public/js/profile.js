@@ -6,17 +6,17 @@ $(function() {
     $("#new_password_error_message").hide();
     $("#renew_password_error_message").hide();
 
-    $("#opw").focusout(function(){
+    $("#opw").keyup(function(){
        check_oldpassword();
     });
-    $("#npw").focusout(function() {
+    $("#npw").keyup(function() {
        check_newpassword();
     });
-    $("#rnpw").focusout(function() {
+    $("#rnpw").keyup(function() {
        check_retypepassword();
     });
 
-    setInterval(function check_oldpassword() {
+   function check_oldpassword() {
        var password_length = $("#opw").val().length;
 
        if (password_length == 0) {
@@ -27,7 +27,7 @@ $(function() {
        else if (password_length < 8) {
           $("#old_password_error_message").html("Atleast 8 Characters");
           $("#old_password_error_message").show();
-          $("#rpasswordId").css("border-bottom","2px solid #F90A0A");
+          $("#opw").css("border-bottom","2px solid #F90A0A");
        } 
 
        else {
@@ -35,7 +35,7 @@ $(function() {
           $("#opw").css("border-bottom","2px solid #34F458");
        }
 
-    },1000);
+    }
     function check_newpassword() {
         var password_length = $("#npw").val().length;
  
