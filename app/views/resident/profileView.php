@@ -15,40 +15,38 @@
                         $row = $this->users->fetch_assoc();
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <form action="#" class="form1" id="view">
+                            <form class="form1" id="view">
                                 <label for="fname">First Name</label>
-                                <input type="text" id="fname" name="firstname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
+                                <input type="text" id="fname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
                                 <label for="lname">Last Name</label>
-                                <input type="text" id="lname" name="lastname" class="input-field" placeholder=<?php echo $row["lname"] ?> READONLY><br>
+                                <input type="text" id="lname" class="input-field" placeholder=<?php echo $row["lname"] ?> READONLY><br>
                                 
                                 <label for="fname">NIC</label>
-                                <input type="text" id="nic" name="nic" class="input-field" placeholder=<?php echo $row["nic"] ?> READONLY><br>
+                                <input type="text" id="nic" class="input-field" placeholder=<?php echo $row["nic"] ?> READONLY><br>
                                 
                                 <label for="fname">Contact</label>
-                                <input type="text" id="phone_no" name="phone_no" class="input-field" placeholder=<?php echo $row["phone_no"] ?> READONLY><br>
+                                <input type="text" id="phone_no" class="input-field" placeholder=<?php echo $row["phone_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Email</label>
-                                <input type="text" id="email" name="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
+                                <input type="text" id="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
 
                                 <label for="lname">Balance</label>
-                                <input type="text" id="balance" name="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
+                                <input type="text" id="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
                                 
                                 <label for="lname">Vehicle NO</label>
-                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
+                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY>
                                 
-                                <label for="lname">Family Members</label><br>
-                                <?php $c=1; while($mem =$this->members->fetch_assoc()){?> 
-                                <label for="lname">member<?php echo " ".$c++?></label>
-                                <input type="text" id="fam" name="fam" class="input-field" placeholder=<?php echo $mem["membername"]?> READONLY>
-                                <span class="fas fa-minus"></span><br>
-                                <?php }?>
-
-                            <!-- end view profile part -->    
+                                <label for="lname">Family Members</label>
+                                <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                            
                             </form>
+                            <!-- end view profile part -->  
+
                             <!-- edit basic details -->      
                             <form action="editProfile" class="form1" id="editview" style="display:none" method="post">
-                            
+                                    
+                                <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"]?>>
                                 <label for="fname">First Name</label>
                                 <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
@@ -64,23 +62,45 @@
                                 <label for="lname">Email</label>
                                 <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
                                 
-                                <label for="lname">Family Members</label>
-                                <?php while($row2 =$this->members->fetch_assoc()){?> 
-                                <input type="text" id="fam" name="fam" class="input-field" value=<?php echo $row2["membername"]?>>
-                                <?php }?>
-                                <!-- add new field -->
-                                <span class="fas fa-plus" onclick="newmember();"></span>
-                                <div id="newElement1"></div>
 
-                                <label for="lname">Vehicle NO</label>
-                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>>
+
+                                <label for="lname">New Member</label>
                                 <!-- add new field -->
-                                <span class="fas fa-plus" onclick="newvehicle();"></span>
-                                <div id="newElement2"></div>
+                                <i class="fas fa-plus-circle" style="padding:0" onclick="newMember();"></i><br>
+                                <span id="newmem" style="display:none">
+                                
+                                <label for="lname">new member</label>
+                                <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member"></i>
+                                </span>
+                                <br>  
+                                <label for="lname">Family Members</label>
+                                <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                                <!-- <label for="lname">New Vehicle</label>
+                                add new field
+                                <i class="fas fa-plus-circle" style="padding:0" onclick="newVehicle();"></i><br>
+                                <span id="newveh" style="display:none">
+                                <label for="lname">vehicle<?php echo " ".$v++?></label>
+                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder="add new vehicle">
+                                </span>
+                                <br> -->
 
                             <!-- end edit basic details part -->  
-                                <input type="submit" onclick = "confirm()" value="Save">
+                                <input type="submit" onclick = "confirmSave()" value="Save" style="float:right">
                             </form>
+
+                            <!-- member part -->                         
+                                <!-- view family members on click showmembers() -->
+                                <span id="showmem" style="display:none;grid-column:2">
+                                <?php $m=1; while($mem =$this->members->fetch_assoc()){?>
+                                <form action="removeMember" method="post" class="form1" id="removedmem">   
+                                <label for="lname">member<?php echo " ".$m++?></label>
+                                <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"]?> READONLY>
+                                <button type="submit" onclick = "confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible"></i></button><br>
+                                </form>
+                                <?php }?>
+                                </span> 
+                            <!-- member part -->   
+                            
                             
                             <!-- change password -->
                             <form action="changePassword" class="form1" id="pw" style="display:none" method="post">

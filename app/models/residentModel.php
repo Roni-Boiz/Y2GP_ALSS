@@ -18,10 +18,25 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function removeMember(){
+        $sql = "DELETE from family WHERE name='".$_POST["removedmem"]."' ";
+        $this->conn->query($sql);
+        //echo $_POST["removedmem"];
+    }
     public function editProfile(){
-        $sql = "update resident set values()";
-        $result = $this->conn->query($sql);   
-        return $result;
+        $sql1 = "UPDATE resident  SET fname='".$_POST["firstname"]."',lname='".$_POST["lastname"]."',nic='".$_POST["nic"]."',phone_no='".$_POST["phone_no"]."',email='".$_POST["email"]."' WHERE user_id={$_SESSION['userId']}";
+        $this->conn->query($sql1); 
+        if($_POST["fam"]){
+            $sql2 = "INSERT INTO family(resident_id,name) VALUES(".$_POST["res_id"].",'".$_POST["fam"]."')";
+            //$sql2 = "INSERT INTO family(resident_id,name) VALUES(1,'Sajith')";
+            $this->conn->query($sql2); 
+        }  
+        //if($_POST["vehicle_no"]){
+        //$sql3 = "INSERT vehicle SET vehicle_no='".$_POST["veh"]."' WHERE user_id='".$_POST["resident_id"]."'";
+        //$this->conn->query($sql3); 
+        //} 
+         
+        
         
     }
     public function changePassword(){
@@ -32,7 +47,7 @@ class residentModel extends model {
         $hashPassword = sha1($rnpw);
         $hash2Password = sha1($hashPassword);
         
-        $sql = "SELECT password from user_account WHERE user_id={$_SESSION['userId']}";
+        $sql = "SELECT password from user_account WHERE user_id={$_SESSION['userId']} LIMIT 1";
         $oldpw = mysqli_fetch_assoc($this->conn->query($sql));
         $oldpw = $oldpw["password"];
         $hashPassword = sha1($opw);

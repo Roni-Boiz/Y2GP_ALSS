@@ -29,8 +29,12 @@ class residentController extends controller{
     }
     // edit profile
     public function editProfile(){
-        $this->view->a = $this->model->editProfile();
-        $this->view->render('resident/profileView');
+        $this->model->editProfile();
+        $this->profile();
+    }
+    public function removeMember(){
+        $this->model->removeMember();
+        $this->profile();
     }
     public function changePassword(){
         $this->model->changePassword();
