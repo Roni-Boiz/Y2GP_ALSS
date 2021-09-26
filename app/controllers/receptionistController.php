@@ -34,19 +34,9 @@ class receptionistController extends controller{
         $secondname=$_POST ['lname'];
         $email = $_POST ['email'];
         $apartmentId=$_POST ['apartmentId'];
-        $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->view->errors = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
         $this->view->render('receptionist/registerResidentView');
     }
-    // view profile
-    // public function profile(){
-    //     $this->loadModel('profileModel');
-    //     $this->view->users = $this->model->readTable();
-    //     $this->view->render('resident/profileView');
-    // }
-    // public function announcement(){
-    //     $this->loadModel('announcementModel');
-    //     $this->view->ann = $this->model->readTable();
-    //     $this->view->render('resident/residentView');
-    // }
+    
 
 }

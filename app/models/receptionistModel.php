@@ -21,80 +21,103 @@ class receptionistModel extends model {
     }
 
     public function readResidentRegistration($firstname, $secondname, $email, $apartmentId){
-        $sql = "SELECT resident_id FROM resident where resident_id=(SELECT max(resident_id) FROM resident) LIMIT 1";
-            $result = $this->conn->query($sql);   
-            if($result){
-                $lastId = mysqli_fetch_assoc($result);
-                $thisId= $lastId['resident_id']+1;
-                $username=0;
-                $password=0;
-                $userId=0;
-                // print_r( $lastId);
-                if($lastId>0){
-                    if($thisId<10){
-                        $username = 'RA000'.$thisId;
-                        $password = 'Hawlock@000'.$thisId;
-                        // echo $username;
-                    }
-                    else if($thisId<100){
-                        $username = 'RA00'.$thisId;
-                        $password = 'Hawlock@00'.$thisId;
-                    }
-                    else if($thisId<1000){
-                        $username = 'RA0'.$thisId;
-                        $password = 'Hawlock@0'.$thisId;
-                    }
-                    else if($thisId<10000){
-                        $username = 'RA'.$thisId;
-                        $password = 'Hawlock@'.$thisId;
-                    }
-                    else{
-                        echo 'resident capacity is full';
-                    }
-                    $hashPassword = sha1($password);
-                    $hash2Password = sha1($hashPassword);
 
-                    // echo 'Register if run';
-                    $query1= "INSERT INTO user_account (user_name, password, type, hold) VALUES ('{$username}', '{$hash2Password}', 'resident', '0') ";
-                    $resultSet1 = mysqli_query($this->conn, $query1);
-                    $query2 = "SELECT user_id FROM user_account where user_name='{$username}' LIMIT 1";
-                    $resultSet2=  mysqli_query($this->conn, $query2);
-                    if($resultSet2){
-                        $user= mysqli_fetch_assoc($resultSet2);
-                        $userId = $user['user_id'];
-                    }
-                    $query3 = "UPDATE apartment SET status = '1' WHERE apartment_no = '{$apartmentId}' ";
-                    $resultSet3=  mysqli_query($this->conn, $query3);
-                    echo $apartmentId;
-                    $query4 = "INSERT INTO resident (fname, lname, email, apartment_no, user_id) VALUES ('{$firstname}', '{$secondname}', '{$email}', '{$apartmentId}' , '{$userId}') ";
-                    // echo 'Register if run2';
-                    $resultSet4 = mysqli_query($this->conn, $query4);
-                    if ($resultSet1){
-                        // echo 'Register if run query1';
-                        if($resultSet4){
-                            echo 'Register successfuly';
-                            $receiver = "chathus.m1999@gmail.com";
-                            $subject = "Hawlock RYCN details";
-                            $body = "Username : ".$username." password : ".$password;
-                            $sender = "From:hawlockrycn@gmail.com";
+        $errors = array();
 
-                            mail($receiver, $subject, $body, $sender);
-                            // if(mail($receiver, $subject, $body, $sender)){
-                            //     echo "Email sent successfully to $receiver";
-                            // }else{
-                            //     echo "Sorry, failed while sending mail!";
-                            // }
+        $firstname = mysqli_real_escape_string($this->conn, $firstname);
+        $secondname = mysqli_real_escape_string($this->conn, $secondname);
+        $email = mysqli_real_escape_string($this->conn, $email);
+ 
+       if(strlen(trim($firstname))< 1 )
+       {
+           $errors[] = 'Enter a valid First name';
+       }
+
+       if(strlen(trim($secondname)) < 8 )
+       {
+           $errors[] = 'Enter a valid Second name';
+       }
+
+       if($apartmentId !="#"){
+            $sql = "SELECT resident_id FROM resident where resident_id=(SELECT max(resident_id) FROM resident) LIMIT 1";
+                $result = $this->conn->query($sql);   
+                if($result){
+                    $lastId = mysqli_fetch_assoc($result);
+                    $thisId= $lastId['resident_id']+1;
+                    $username=0;
+                    $password=0;
+                    $userId=0;
+                    // print_r( $lastId);
+                    if($lastId>0 ){
+                        if($thisId<10){
+                            $username = 'RA000'.$thisId;
+                            $password = 'Hawlock@000'.$thisId;
+                            // echo $username;
+                        }
+                        else if($thisId<100){
+                            $username = 'RA00'.$thisId;
+                            $password = 'Hawlock@00'.$thisId;
+                        }
+                        else if($thisId<1000){
+                            $username = 'RA0'.$thisId;
+                            $password = 'Hawlock@0'.$thisId;
+                        }
+                        else if($thisId<10000){
+                            $username = 'RA'.$thisId;
+                            $password = 'Hawlock@'.$thisId;
+                        }
+                        else{
+                            $errors[]= 'resident capacity is full';
+                        }
+                        $hashPassword = sha1($password);
+                        $hash2Password = sha1($hashPassword);
+
+                        // echo 'Register if run';
+                        $query1= "INSERT INTO user_account (user_name, password, type, hold) VALUES ('{$username}', '{$hash2Password}', 'resident', '0') ";
+                        $resultSet1 = mysqli_query($this->conn, $query1);
+                        $query2 = "SELECT user_id FROM user_account where user_name='{$username}' LIMIT 1";
+                        $resultSet2=  mysqli_query($this->conn, $query2);
+                        if($resultSet2){
+                            $user= mysqli_fetch_assoc($resultSet2);
+                            $userId = $user['user_id'];
+                        }
+                        $query3 = "UPDATE apartment SET status = '1' WHERE apartment_no = '{$apartmentId}' ";
+                        $resultSet3=  mysqli_query($this->conn, $query3);
+                        // echo $apartmentId;
+                        $query4 = "INSERT INTO resident (fname, lname, email, apartment_no, user_id) VALUES ('{$firstname}', '{$secondname}', '{$email}', '{$apartmentId}' , '{$userId}') ";
+                        // echo 'Register if run2';
+                        $resultSet4 = mysqli_query($this->conn, $query4);
+                        if ($resultSet1){
+                            // echo 'Register if run query1';
+                            if($resultSet4){
+                                echo 'Register successfuly';
+                                $receiver = "chathus.m1999@gmail.com";
+                                $subject = "Hawlock RYCN details";
+                                $body = "Username : ".$username." password : ".$password;
+                                $sender = "From:hawlockrycn@gmail.com";
+
+                                mail($receiver, $subject, $body, $sender);
+                                // if(mail($receiver, $subject, $body, $sender)){
+                                //     echo "Email sent successfully to $receiver";
+                                // }else{
+                                //     echo "Sorry, failed while sending mail!";
+                                // }
+                                
+                            }
                             
                         }
-                        
                     }
+
+                }
+                else{
+                    $errors[] = 'last Id not found';
                 }
 
             }
             else{
-                echo 'last id not found';
+                $errors[] = 'Select a apartment';
             }
-            return $result;
+            return $errors;
         }
     // public function readTable(){
     //     session_start();
