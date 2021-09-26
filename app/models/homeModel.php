@@ -62,16 +62,14 @@ class homeModel extends model {
 
                 } else {
                     $errors[] = 'Invalid Username or Password';
-                    return $errors;
+                    
                 }
             } else {
                 $errors[] = 'Database query failed';
-                return $errors;
+                
             }
         }
-        else{
-            return $errors;
-        }
+        return $errors;
    }
 }
 ?>

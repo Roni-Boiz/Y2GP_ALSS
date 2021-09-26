@@ -214,6 +214,13 @@ label{
   color: white;
   margin-bottom: 15px;
 }
+.red_alert .closebtn{
+  margin-right:20px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  outline: none;
+}
 
 /* responsive */
 @media(max-width:1200px) {
@@ -307,8 +314,7 @@ nav ul li a:hover{
         <div class="header">     
         <nav>
         <ul>
-            <li><a href="#">Map</a></li>
-            <li><a href="#">Contact Us</a></li>
+          
             <li><button><a href="home"><span>Home</span></a></button></li>
         </ul>
         </nav>
@@ -325,7 +331,7 @@ nav ul li a:hover{
               if(isset($this->errors) && sizeof($this->errors)>0){ ?>
                 <center>
                 <div class="red_alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
                 <?php 
                 $error = implode("<br>",$this->errors[0]);
                 echo $error;

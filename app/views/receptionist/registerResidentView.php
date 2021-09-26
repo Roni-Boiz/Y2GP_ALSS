@@ -11,8 +11,26 @@
     <div class="signup_container">
             <div class="signup">
                 
+
+            <?php 
+              if(isset($this->errors) && sizeof($this->errors)>0){ ?>
+                <center>
+                <div class="red_alert">
+                <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+                <?php 
+                $error = implode("<br>",$this->errors);
+                 echo $error;
+                ?>
+                </div>
+              </center>
+
+              <?php 
+              }
+              ?>
+
                 <form action="registerSuccess" class="sign-up-form" method= "POST">
 
+            
                     <div class="input-field-signup" id ="fnameId">
                         <i class="fas fa-user"></i>
                         <input id="form_fname" class="fname" type="text" placeholder="First Name" name= "fname" autofocus required>
@@ -35,6 +53,7 @@
                         <i class="fa fa-address-card" aria-hidden="true"></i>
                         
                         <select name="apartmentId" id="form_apartment">
+                            <option value="#">Select a apartment</option>
                         <?php
                         
                         //     <option value="AP001">AP001</option>
@@ -65,7 +84,7 @@
                         <span class="error_form" id="retype_password_error_message"></span>
                     </div> -->
 
-                    <div class="btn-signup"><input type="submit"  value="Sign Up"/></div>
+                    <div class="btn-signup"><input type="submit" name ="submit"  value="Sign Up"/></div>
                     
                 </form>
             

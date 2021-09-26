@@ -34,7 +34,7 @@ class receptionistController extends controller{
         $secondname=$_POST ['lname'];
         $email = $_POST ['email'];
         $apartmentId=$_POST ['apartmentId'];
-        $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->view->errors = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
         $this->view->render('receptionist/registerResidentView');
     }
     // view profile
