@@ -14,19 +14,19 @@ $(function() {
     var error_rpassword = false;
     var error_retype_password = false;
 
-    $("#form_fname").focusout(function(){
+    $("#form_fname").keyup(function(){
        check_fname();
     });
-    $("#form_sname").focusout(function() {
+    $("#form_sname").keyup(function() {
        check_sname();
     });
-    $("#form_email").focusout(function() {
+    $("#form_email").keyup(function() {
        check_email();
     });
-    $("#form_rpassword").focusout(function() {
+    $("#form_rpassword").keyup(function() {
        check_rpassword();
     });
-    $("#form_retype_password").focusout(function() {
+    $("#form_retype_password").keyup(function() {
        check_retype_password();
     });
 
