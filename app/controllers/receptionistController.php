@@ -48,5 +48,11 @@ class receptionistController extends controller{
     //     $this->view->ann = $this->model->readTable();
     //     $this->view->render('resident/residentView');
     // }
+    public function parcels(){
+        $this->view->render('receptionist/parcelsView');
+    }
+    public function visitors(){
+        $this->view->render('receptionist/visitorsView');
+    }
 
 }
