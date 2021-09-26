@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="../../public/css/style.css">
+
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="white">
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../../public/img/android/android-launchericon-144-144.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ALSS">
+    <meta name="msapplication-TileImage" content="../../public/img/windows10/SmallTile.scale-400.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
 <style>
 *{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -174,5 +184,6 @@ nav ul li a:hover{
   <div class="footer">
       <p>&COPY;  2021,All rights reserved by Hawlock City</p>
   </div>
+  <script src="../../main.js"></script>
 </body>
 </html>

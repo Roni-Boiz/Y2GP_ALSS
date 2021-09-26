@@ -15,6 +15,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" 
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" 
     crossorigin="anonymous"></script>
+
+    <link rel="manifest" href="../../manifest.json">
+    <meta name="theme-color" content="white">
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="../../public/img/android/android-launchericon-144-144.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ALSS">
+    <meta name="msapplication-TileImage" content="../../public/img/windows10/SmallTile.scale-400.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
 <style>
 *{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -361,5 +371,6 @@ nav ul li a:hover{
   </div>
   
   <script type="text/javascript" src="../../public/js/login.js"></script>
+  <script src="../../main.js"></script>
 </body>
 </html>
