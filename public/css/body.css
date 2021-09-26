@@ -269,13 +269,13 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: repeat(1fr 2fr 1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
     align-items: center;
-    min-height: 550px;
+    /* min-height: 550px; */
 }
 .hawlockbody i,h4{
     color: black;
@@ -285,20 +285,21 @@ nav i{
 }
 /* form */
 .form1 {
-    
     grid-column: 2;
     font-size:small;
     background-color: none;
-    padding: 10px;
-    margin: 10px;
+    padding: 0px;
+    margin: 0 10px;
     border-radius: 5px;
-    margin-bottom: 50px;
-
+}
+form{
+  margin-bottom: 0;
 }
 .form1 label {
   display: inline-block;
   width: 150px;
   text-align: right;
+  padding-right: 10px;
 }
 .hawlockbody .input-field{ 
     width: 250px;
@@ -306,7 +307,7 @@ nav i{
     background-color: #f0f0f0;
     margin: 5px 0px;
     border-radius: 55px;
-    position:static;
+    /* position:static; */
     /* position:relative; */
     /* text-align:center; */
 }
@@ -342,6 +343,9 @@ input[type=email]{
     border-radius: 30px;
     cursor: pointer;
     grid-column: 3;
+}
+.hawlockbody button[type=submit]{
+  cursor: pointer;
 }
 
 .purplebutton{
