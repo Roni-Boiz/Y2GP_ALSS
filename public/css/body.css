@@ -275,6 +275,7 @@ nav i{
     padding: 10px;
     margin: 0px 10px 5px 20px;
     align-items: center;
+    min-height: 550px;
 }
 .hawlockbody i,h4{
     color: black;
