@@ -34,10 +34,7 @@ class residentModel extends model {
         //if($_POST["vehicle_no"]){
         //$sql3 = "INSERT vehicle SET vehicle_no='".$_POST["veh"]."' WHERE user_id='".$_POST["resident_id"]."'";
         //$this->conn->query($sql3); 
-        //} 
-         
-        
-        
+        //}     
     }
     public function changePassword(){
         $opw=$_POST["opw"];
