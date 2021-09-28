@@ -1,80 +1,7 @@
 <?php 
     include_once 'sidenav.php';
 ?>
-/* tab for change*/
-.tabs{
-  width:100%;
-  height:auto;
-  margin:0 auto;
-}
 
-/* tab list item */
-.tabs .tabs-list{
-  list-style:none;
-  margin:10px;
-  padding:10px;
-}
-.tabs .tabs-list li{
-  width:200px;
-  float:left;
-  margin:2px 2px;
-  
-  padding:10px 5px;
-  text-align: center;
-  background-color:#5747b4;
-  border-radius:3px;
-}
-.tabs .tabs-list li:hover{
-  cursor:pointer;
-}
-.tabs .tabs-list li a{
-  text-decoration: none;
-  color:white;
-}
-
-/* Tab section */
-.tabs .tab{
-  display:none;
-  width:96%;
-  min-height:250px;
-  height:auto;
-  border-radius:3px;
-  padding:20px 15px;
-  color:white;
-  clear:both;
-}
-.tabs .tab h3{
-  letter-spacing:1px;
-  font-weight:normal;
-  padding:5px;
-}
-.tabs .tab p{
-  line-height:20px;
-  letter-spacing: 1px;
-}
-
-/*active state */
-.active{
-  display:block !important;
-}
-.tabs .tabs-list li.active{
-  background-color:lavender !important;
-  color:black !important;
-}
-.active a{
-  color:black !important;
-}
-
-/* media query */
-@media screen and (max-width:360px){
-  .tabs{
-      margin:0;
-      width:96%;
-  }
-  .tabs .tabs-list li{
-      width:80px;
-  }
-}
 </head>
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
@@ -107,3 +34,18 @@
 </div> <!-- .expand div closed here -->
 </body>
 </html>
+<script>
+        $(document).ready(function(){
+            $(".tabs-list li a").click(function(e){
+                e.preventDefault();
+            });
+
+            $(".tabs-list li").click(function(){
+                var tabid = $(this).find("a").attr("href");
+                $(".tabs-list li,.tabs div.tab").removeClass("active");   // removing active class from tab and tab content
+                $(".tab").hide();   // hiding open tab
+                $(tabid).show();    // show tab
+                $(this).addClass("active"); //  adding active class to clicked tab
+            });
+        });
+    </script>
