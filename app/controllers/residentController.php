@@ -29,20 +29,25 @@ class residentController extends controller{
     }
     // edit profile
     public function editProfile(){
-        $this->view->a = $this->model->editProfile();
-        $this->view->render('resident/profileView');
+        $this->model->editProfile();
+        $this->profile();
+    }
+    public function removeMember(){
+        $this->model->removeMember();
+        $this->profile();
     }
     public function changePassword(){
         $this->model->changePassword();
         $this->profile();
     }
     // view resident announcement
-    public function announcement(){
-        $this->view->ann = $this->model->getAnnouncement();
-        $this->view->render('resident/residentView');
-    }
+    // public function announcement(){
+    //     $this->view->ann = $this->model->getAnnouncement();
+    //     $this->view->render('resident/residentView');
+    // }
 
     public function yourReservation(){
+        $this->view->reservation=$this->model->yourReservation();
         $this->view->render('resident/yourReservationView');
     }
 

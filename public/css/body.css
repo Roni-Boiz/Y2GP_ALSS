@@ -165,21 +165,6 @@ nav ul .dropdown:hover ul{
 nav i{
     padding: 5px;
 }
-/* Announcement */
-.announcement{
-    /* grid-column: 1/span 3; */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    margin: auto;
-    margin: 10px;
-    padding: 0 10px;
-    text-align: center;
-    font-family: arial;
-}
-.announcement .title{
-    color: grey;
-    font-size: 15px;
-}
 /* card1 */
 .card {
   grid-column:1/span3;
@@ -269,12 +254,13 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr 2fr 100px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
     align-items: center;
+    min-height: 550px;
 }
 .hawlockbody i,h4{
     color: black;
@@ -284,15 +270,21 @@ nav i{
 }
 /* form */
 .form1 {
-    
     grid-column: 2;
     font-size:small;
     background-color: none;
-    padding: 10px;
-    margin: 10px;
+    padding: 0px;
+    margin: 0 10px;
     border-radius: 5px;
-    margin-bottom: 50px;
-
+}
+form{
+  margin-bottom: 0;
+}
+.form1 label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+  padding-right: 10px;
 }
 .hawlockbody .input-field{ 
     width: 250px;
@@ -300,11 +292,13 @@ nav i{
     background-color: #f0f0f0;
     margin: 5px 0px;
     border-radius: 55px;
-    position:static;
+    /* position:static; */
     /* position:relative; */
-    text-align:center;
+    /* text-align:center; */
 }
-
+.error_form{
+  color: red;
+}
 textarea:focus, input:focus{
     outline: none;
 }
@@ -335,43 +329,56 @@ input[type=email]{
     cursor: pointer;
     grid-column: 3;
 }
+.hawlockbody button[type=submit]{
+  cursor: pointer;
+}
+
 .purplebutton{
   background-color: #2a225a;
   color: white;
   padding: 5px 10px;
-  margin: auto;
+  
   border: none;
   border-radius: 30px;
   cursor: pointer;
 }
 .hawlockbody  input[type=submit]:hover {
-    background-color: #02000c;
+  background-color: #02000c;
 }
 .hawlockbody  label{
-    margin-left: 5px;
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;  
+  margin-left: 5px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;  
 }
 /* table */
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid white;
 }
 th {
-    text-align:center;
-    padding: 8px;
-    border: 1px solid #ddd;
+  text-align:center;
+  padding: 8px;
+  border: 1px solid white;
 }
 td {
   text-align: left;
   padding: 8px;
+  /* border-radius: 15px; */
+  border:2px solid white;
+}
+tr{
+  background-color: #8880b6;
 }
 
-tr:nth-child(even){
-    background-color: #5747b4;
-    color:white;
+.footer{
+	height: 25px;
+  width:100%;
+  background:linear-gradient(to right,#211a49,#927ffc);
+	text-align: center;
+	font-size: 10px;
+	padding-top: 20px;
 }
 /* body responsive */
 @media(max-width:768px) {
@@ -381,10 +388,18 @@ tr:nth-child(even){
     .hawlockhead{
         grid-column: 1/span3;
     }
+/* form responsive */
+    .form1 {
+      grid-column: 1/span2;
+      /* margin: auto; */
+    }
+    .hawlockbody .input-field{ 
+      width: 200px;
+  }
 }
 @media(max-width:920px) {
     .hawlockbody{
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
 }
 
@@ -497,5 +512,78 @@ tr:nth-child(even){
       align-items: center;
       color: #ff0808;
       width: 250px;
+  }
+}
+/* tab for change*/
+.tabs{
+  width:100%;
+  height:auto;
+  margin:0 auto;
+}
+
+/* tab list item */
+.tabs .tabs-list{
+  list-style:none;
+  margin:10px;
+  padding:10px;
+}
+.tabs .tabs-list li{
+  width:200px;
+  float:left;
+  margin:2px 2px;
+  padding:10px 5px;
+  text-align: center;
+  background-color:#5747b4;
+  border-radius:3px;
+}
+.tabs .tabs-list li:hover{
+  cursor:pointer;
+}
+.tabs .tabs-list li a{
+  text-decoration: none;
+  color:white;
+}
+
+/* Tab section */
+.tabs .tab{
+  display:none;
+  width:96%;
+  min-height:250px;
+  height:auto;
+  border-radius:3px;
+  padding:20px 15px;
+  color:white;
+  clear:both;
+}
+.tabs .tab h3{
+  letter-spacing:1px;
+  font-weight:normal;
+  padding:5px;
+}
+.tabs .tab p{
+  line-height:20px;
+  letter-spacing: 1px;
+}
+
+/*active state */
+.active{
+  display:block !important;
+}
+.tabs .tabs-list li.active{
+  background-color:lavender !important;
+  color:black !important;
+}
+.active a{
+  color:black !important;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+  .tabs{
+      margin:0;
+      width:96%;
+  }
+  .tabs .tabs-list li{
+      width:80px;
   }
 }
