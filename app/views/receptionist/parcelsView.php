@@ -24,33 +24,31 @@
             <table class="table1">
                             <tr style="background-color:#5747b4">
                             <th>Action</th>
-                            <th>Reservation ID</th>
-                            <th colspan="3">Reservation</th>
-                            <th>Reserved Date</th>
-                            <th>Member</th>
-                            <th>Type</th>
+                            <th>Parcel ID</th>
+                            <th>Apartment ID</th>
+                            <th colspan="4">Received</th>
+                            <th>Sender</th>
                             </tr>
                             <tr style="background-color:#5747b4">
                             <th></th>
                             <th></th>
+                            <th></th>
                             <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
+                            <th>Time</th>
                             <th>
                             <th></th>
                             <th></th>
                             </tr>
                             
             <?php
-                while($row = $this->reservation->fetch_assoc()){?> 
+                while($row = $this->parcel->fetch_assoc()){?> 
                             <tr>
                             <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <td><?php echo $row["reservation_id"]; ?></td>
-                            <td><?php echo $row["date"]; ?></td>
-                            <td><?php echo $row["start_time"]; ?></td>
-                            <td><?php echo $row["end_time"]; ?></td>
-                            <td><?php echo $row["reserved_date"]; ?></td>
-                            <td><?php echo $row["no_of_members"]; ?></td>
+                            <td><?php echo $row["parcel_id"]; ?></td>
+                            <td><?php echo $row["resident_id"]; ?></td>
+                            <td><?php echo $row["receive_date"]; ?></td>
+                            <td><?php echo $row["receive_time"]; ?></td>
+                            <td><?php echo $row["sender"]; ?></td>
                             <td><?php echo "\n".$row["type"]; ?></td>
                             </tr> 
             <?php
