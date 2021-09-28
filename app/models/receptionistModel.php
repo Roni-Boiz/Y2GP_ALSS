@@ -119,6 +119,13 @@ class receptionistModel extends model {
             }
             return $errors;
         }
+
+        public function readVisitor(){
+            $date= date("Y-m-d");
+            $sql = "SELECT * FROM visitor WHERE arrive_date = '{$date}' ";
+            $result = $this->conn->query($sql);   
+            return $result;
+        }
     // public function readTable(){
     //     session_start();
     //     require '../app/core/database.php';
