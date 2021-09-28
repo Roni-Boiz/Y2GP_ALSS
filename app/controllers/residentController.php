@@ -33,11 +33,15 @@ class residentController extends controller{
         $this->profile();
     }
     public function removeMember(){
-        $this->model->removeMember();
+        $id=$_POST["removedmem"];
+        $this->model->removeMember($id);
         $this->profile();
     }
     public function changePassword(){
-        $this->model->changePassword();
+        $opw=$_POST["opw"];
+        $npw=$_POST["npw"];
+        $rnpw=$_POST["rnpw"];
+        $this->model->changePassword($opw,$npw,$rnpw);
         $this->profile();
     }
     // view resident announcement
@@ -47,8 +51,14 @@ class residentController extends controller{
     // }
 
     public function yourReservation(){
-        $this->view->reservation=$this->model->yourReservation();
+        $id=$_SESSION['userId'];
+        $this->view->reservation=$this->model->yourReservation($id);
         $this->view->render('resident/yourReservationView');
+    }
+    public function removeHall(){
+        $id=$_POST["resid"];
+        $this->model->removeHall($id);
+        $this->yourReservation();
     }
 
     public function fitness(){
@@ -64,6 +74,7 @@ class residentController extends controller{
     }
 
     public function parking(){
+        $this->view->slots=$this->model->viewSlots();
         $this->view->render('resident/parkingSlotView');
     }
 
