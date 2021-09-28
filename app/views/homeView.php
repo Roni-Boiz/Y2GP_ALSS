@@ -122,27 +122,27 @@ nav ul li a:hover{
 }
 /* responsive */
 @media(max-width:1260px) {
-  .box{
+.box{
     display: flex;
     flex-direction: column;
     align-items: center;
-  }  
-  #logo{
+}  
+#logo{
     height: 150px;
     width: 150px;
     margin:-30px;
-      } 
-  #title{
-    font-size: 40px;
-    margin-top: 0;
-  }
-  #ALSS{
-    margin: 0;
-    font-size: 30px;
-  }
-  nav ul li{
-    padding: 10px 15px ;
-  }
+} 
+#title{
+  font-size: 40px;
+  margin-top: 0;
+}
+#ALSS{
+  margin: 0;
+  font-size: 30px;
+}
+nav ul li{
+  padding: 10px 15px ;
+}
   .header{
     font-size: 15px;
   }
