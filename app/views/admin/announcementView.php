@@ -1,7 +1,120 @@
 <?php
 include_once 'sidenav.php';
 ?>
+<style>
+    /* new */
+    body {
+        font-family: "Lato", sans-serif;
+        transition: background-color .5s;
+    }
 
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 65px;
+        right: 0;
+        background-color: whitesmoke;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 40px;
+    }
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+    #hb, #hh{
+        transition: margin-right .5s;
+        padding: 16px;
+    }
+
+    .overlay {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow-y: auto;
+        overflow-x: hidden;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1s;
+    }
+
+    .btnAddAnnouncement {
+        grid-column: 3;
+        font-size: 30px;
+        cursor: pointer;
+        width: fit-content;
+    }
+
+    .formAddAnnouncement {
+        grid-column: 2;
+        font-size: small;
+        background-color: none;
+        padding: 10px;
+        margin-bottom: 40px;
+        border-radius: 5px;
+    }
+
+    .formAddAnnouncement >label {
+        font-weight: bold;
+        font-size: large;
+    }
+
+    .formAddAnnouncement .input-field {
+        width: 100%;
+        background-color: white;
+        text-align: left;
+    }
+
+    .formAddAnnouncement>textarea {
+        min-width: 100%;
+        max-width: 100%;
+        background-color: white;
+        text-align: left;
+        border-radius: 5%;
+        padding: 5px;
+    }
+
+    .formAddAnnouncement>input[type="submit"] {
+        margin-bottom: 50px;
+    }
+
+    .visibility {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .visibility >input{
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+        margin-right: 20px;
+    }
+
+</style>
 </head>
 
 <body style="background-color: gray; background-image:none;">
