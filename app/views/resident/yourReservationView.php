@@ -1,6 +1,7 @@
 <?php 
     include_once 'sidenav.php';
 ?>
+
 </head>
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
@@ -14,7 +15,6 @@
             <li ><a href="#tab3">Treatment Room</a></li>
         </ul>
         <div id="tab1" class="tab active">
-            <p>
             <div style="overflow-x:auto;grid-column:1/span2">
     <?php
 
@@ -59,23 +59,22 @@
             ?>
             </table>
             </div>
+        </div>
+                <div id="tab2" class="tab">
+                    <p style="color:black">
+                        Content...
                     </p>
-        </div>
-        <div id="tab2" class="tab">
-                <p style="color:black">
-                    Content...
-                </p>
-        </div>
-        <div id="tab3" class="tab">
-                <p style="color:black">
-                Content...
-                </p>
+                </div>
+                <div id="tab3" class="tab">
+                    <p style="color:black">
+                        Content...
+                    </p>
                 </div>
             </div>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 <script>
-        $(document).ready(function(){
+        $(function(){
             $(".tabs-list li a").click(function(e){
                 e.preventDefault();
             });
