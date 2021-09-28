@@ -58,7 +58,7 @@ nav ul li a{
   color: black;   
 }
 nav ul li a:hover{
-  font-weight:bold;  
+  font-weight:600; 
 }
 .box .header nav ul li button{
   border-radius: 20px;

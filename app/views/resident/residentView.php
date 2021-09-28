@@ -20,7 +20,7 @@
                         <img src="../../public/img/user.png"alt="user" />
                         <div class="detail-info"><h5><?php echo $row["date"]; ?></h5><small><?php echo $row["time"]; ?></small></div>
                     </div>                    
-                <h4><?php echo $row["topic"]; ?></h4>
+                    <h4><?php echo $row["topic"]; ?></h4>
                     <p><?php echo $row["content"]; ?></p>
                 </div> 
                 <div class="card-header">

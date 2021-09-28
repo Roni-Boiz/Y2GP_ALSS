@@ -15,7 +15,7 @@
                         $row = $this->users->fetch_assoc();
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <form class="form1" id="view">
+                            <form class="form1" id="view" style="background-color:purple;padding:20px">
                                 <label for="fname">First Name</label>
                                 <input type="text" id="fname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
@@ -35,7 +35,7 @@
                                 <input type="text" id="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
                                 
                                 <label for="lname">Vehicle NO</label>
-                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY>
+                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
                                 
                                 <label for="lname">Family Members</label>
                                 <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
@@ -62,7 +62,8 @@
                                 <label for="lname">Email</label>
                                 <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
                                 
-
+                                <label for="lname">Vehicle NO</label>
+                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
 
                                 <label for="lname">New Member</label>
                                 <!-- add new field -->
@@ -72,7 +73,8 @@
                                 <label for="lname">new member</label>
                                 <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member"></i>
                                 </span>
-                                <br>  
+                                <br>
+                                <input type="submit" onclick = "confirmSave()" value="Save" style="float:right"><br>
                                 <label for="lname">Family Members</label>
                                 <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
                                 <!-- <label for="lname">New Vehicle</label>
@@ -85,38 +87,44 @@
                                 <br> -->
 
                             <!-- end edit basic details part -->  
-                                <input type="submit" onclick = "confirmSave()" value="Save" style="float:right">
+                                
                             </form>
 
                             <!-- member part -->                         
                                 <!-- view family members on click showmembers() -->
-                                <span id="showmem" style="display:none;grid-column:2">
+                                <div id="showmem" style="display:none;grid-column:2/span3">
                                 <?php $m=1; while($mem =$this->members->fetch_assoc()){?>
                                 <form action="removeMember" method="post" class="form1" id="removedmem">   
                                 <label for="lname">member<?php echo " ".$m++?></label>
                                 <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"]?> READONLY>
-                                <button type="submit" onclick = "confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible"></i></button><br>
+                                <button type="submit" onclick = "confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
                                 </form>
                                 <?php }?>
-                                </span> 
+                                </div> 
                             <!-- member part -->   
-                            
+                            <?php $m=1; while($mem =$this->members->fetch_assoc()){?>
+                                <form action="removeMember" method="post" class="form1" id="removedmem">   
+                                <label for="lname">member<?php echo " ".$m++?></label>
+                                <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"]?> READONLY>
+                                <button type="submit" onclick = "confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
+                                </form>
+                                <?php }?>
                             
                             <!-- change password -->
                             <form action="changePassword" class="form1" id="pw" style="display:none" method="post">
                                 <label for="fname">Old Password</label>
-                                <input type="password" id="opw" name="opw" class="input-field" placeholder="old password" required><br>
+                                <input type="password" id="opw" name="opw" class="input-field" placeholder="old password" ><br>
                                 <span class="error_form" id="old_password_error_message"></span><br>
                                 
                                 <label for="lname">New Password</label>
-                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password" required><br>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password" ><br>
                                 <span class="error_form" id="new_password_error_message"></span><br>
                                 
                                 <label for="fname">Re-New Password</label>
-                                <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again" required><br>
+                                <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again" ><br>
                                 <span class="error_form" id="renew_password_error_message"></span><br>
                                 
-                                <input type="submit" onclick = "confirm()" value="Save">
+                                <input type="submit" onclick = "confirm()" value="Save" style="float:right">
                             </form>
                             <!-- end change password -->
                             <?php
