@@ -20,13 +20,13 @@
         </div>
         <div id="tab2" class="tab">
         <?php    
-        if ($this->reservation->num_rows > 0){?>
+        if ($this->parcel->num_rows > 0){?>
             <table class="table1">
                             <tr style="background-color:#5747b4">
                             <th>Action</th>
                             <th>Parcel ID</th>
                             <th>Apartment ID</th>
-                            <th colspan="4">Received</th>
+                            <th colspan="2">Received</th>
                             <th>Sender</th>
                             </tr>
                             <tr style="background-color:#5747b4">
@@ -35,8 +35,6 @@
                             <th></th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th>
-                            <th></th>
                             <th></th>
                             </tr>
                             
@@ -49,7 +47,6 @@
                             <td><?php echo $row["receive_date"]; ?></td>
                             <td><?php echo $row["receive_time"]; ?></td>
                             <td><?php echo $row["sender"]; ?></td>
-                            <td><?php echo "\n".$row["type"]; ?></td>
                             </tr> 
             <?php
                         }   
