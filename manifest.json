@@ -366,5 +366,6 @@
     "start_url": "public/homeController/home",
     "display": "standalone",
     "background_color": "white",
-    "theme_color": "white"
+    "theme_color": "white",
+    "orientation": "portrait-primary"
 }
