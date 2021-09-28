@@ -15,8 +15,15 @@
             <li ><a href="#tab3">Reached</a></li>
         </ul>
         <div id="tab1" class="tab active">
-            <p style="color:black">content
-            </p>
+        <form action="#" class="form" method="post">
+                <label for="Apartment ID">Apartment Id</label>
+                <input type="text" name="apartmentId" id="apartmentId">
+                <br><br>
+                <label for="Sender">Sender</label>
+                <input type="text" name="sender" id="sender">
+                <br><br>
+                <textarea name="description" id="" cols="30" rows="10">Description</textarea>
+            </form>
         </div>
         <div id="tab2" class="tab">
         <?php    
@@ -57,11 +64,44 @@
             </table>
         </div>
         <div id="tab3" class="tab">
-                <p style="color:black">
-                Content...
-                </p>
-                </div>
-            </div>
+        <?php    
+        if ($this->parcel->num_rows > 0){?>
+            <table class="table1">
+                            <tr style="background-color:#5747b4">
+                            <th>Action</th>
+                            <th>Parcel ID</th>
+                            <th>Apartment ID</th>
+                            <th colspan="2">Received</th>
+                            <th>Sender</th>
+                            </tr>
+                            <tr style="background-color:#5747b4">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th></th>
+                            </tr>
+                            
+            <?php
+                while($row = $this->parcel->fetch_assoc()){?> 
+                            <tr>
+                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                            <td><?php echo $row["parcel_id"]; ?></td>
+                            <td><?php echo $row["resident_id"]; ?></td>
+                            <td><?php echo $row["receive_date"]; ?></td>
+                            <td><?php echo $row["receive_time"]; ?></td>
+                            <td><?php echo $row["sender"]; ?></td>
+                            </tr> 
+            <?php
+                        }   
+                }else{
+                    echo "0 results";
+                }
+            ?>
+            </table>
+        </div>
+    <!-- </div> -->
 
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
