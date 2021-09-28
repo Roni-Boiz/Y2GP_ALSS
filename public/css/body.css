@@ -403,8 +403,6 @@ tr{
     }
 }
 
-/* resident-signup-page */
-
 .signup_container{
   grid-column:1/span3;
 }
