@@ -42,8 +42,9 @@
                             <?php
                 while($row = $this->reservation->fetch_assoc()){?> 
                             <tr>
-                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <td><?php echo $row["reservation_id"]; ?></td>
+                            
+                            <form action="removeHall" method="post"><input type="submit" name="resid" value=<?php echo $row["reservation_id"];?>><td><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></td></input></form>
+                            <td><?php echo $row["reservation_id"];?></td>
                             <td><?php echo $row["date"]; ?></td>
                             <td><?php echo $row["start_time"]; ?></td>
                             <td><?php echo $row["end_time"]; ?></td>

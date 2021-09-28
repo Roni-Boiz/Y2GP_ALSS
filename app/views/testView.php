@@ -254,7 +254,7 @@
     </div>
 
     <!-- table structure -->
-    <div style="overflow-x:auto;grid-column:1/span2">
+    <!-- <div style="overflow-x:auto;grid-column:1/span2">
         <table>
             <tr>
             <th>First Name</th>
@@ -292,7 +292,7 @@
             <td>67</td>
             </tr>
         </table>
-    </div>
+    </div> -->
 
     <div id="aa" style='opacity:0'>
     Test opacity

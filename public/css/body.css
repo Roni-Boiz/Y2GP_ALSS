@@ -398,12 +398,17 @@ tr{
   }
 }
 @media(max-width:920px) {
-    .hawlockbody{
-        /* grid-template-columns: 1fr; */
-    }
+    
 }
-
-/* resident-signup-page */
+/* parking slot */
+.pslots {
+  font-size: 1em;
+  width: 80px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 20px ;
+}
 
 .signup_container{
   grid-column:1/span3;
