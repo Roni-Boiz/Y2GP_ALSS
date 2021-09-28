@@ -353,8 +353,6 @@ nav ul li a:hover{
                         <span class="error_form" id="name_error_message"></span>
                     </div>
 
-                    
-
                     <div class="input-field" id ="passwordId">
                         <i class="fas fa-lock"></i>
                         <input id="form_password" type="password" placeholder="password" name = "password" required>
