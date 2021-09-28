@@ -10,18 +10,56 @@
     <div id="hb" class="hawlockbody" > 
     <div class="tabs" style="grid-column:1/span3">
         <ul class="tabs-list">
-            <li class="active"><a href="#tab1">Hall</a></li>
-            <li ><a href="#tab2">Fitness Centre</a></li>
-            <li ><a href="#tab3">Treatment Room</a></li>
+            <li class="active"><a href="#tab1">New</a></li>
+            <li ><a href="#tab2">In-Locker</a></li>
+            <li ><a href="#tab3">Reached</a></li>
         </ul>
         <div id="tab1" class="tab active">
             <p style="color:black">content
             </p>
         </div>
         <div id="tab2" class="tab">
-                <p style="color:black">
-                    Content...
-                </p>
+        <?php    
+        if ($this->reservation->num_rows > 0){?>
+            <table class="table1">
+                            <tr style="background-color:#5747b4">
+                            <th>Action</th>
+                            <th>Reservation ID</th>
+                            <th colspan="3">Reservation</th>
+                            <th>Reserved Date</th>
+                            <th>Member</th>
+                            <th>Type</th>
+                            </tr>
+                            <tr style="background-color:#5747b4">
+                            <th></th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>
+                            <th></th>
+                            <th></th>
+                            </tr>
+                            
+            <?php
+                while($row = $this->reservation->fetch_assoc()){?> 
+                            <tr>
+                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                            <td><?php echo $row["reservation_id"]; ?></td>
+                            <td><?php echo $row["date"]; ?></td>
+                            <td><?php echo $row["start_time"]; ?></td>
+                            <td><?php echo $row["end_time"]; ?></td>
+                            <td><?php echo $row["reserved_date"]; ?></td>
+                            <td><?php echo $row["no_of_members"]; ?></td>
+                            <td><?php echo "\n".$row["type"]; ?></td>
+                            </tr> 
+            <?php
+                        }   
+                }else{
+                    echo "0 results";
+                }
+            ?>
+            </table>
         </div>
         <div id="tab3" class="tab">
                 <p style="color:black">
