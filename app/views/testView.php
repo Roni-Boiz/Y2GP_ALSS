@@ -118,6 +118,7 @@
   overflow: hidden;
   margin: 10px;
   width:100%;
+  min-height:400px;
 }
 .card1:hover .photo {
   transform: scale(1.3) rotate(3deg);
@@ -163,6 +164,7 @@
   background: #fff;
   position: relative;
   z-index: 1;
+  /* background:linear-gradient(to right,white,#927ffc); */
 }
 .card1 .description h1 {
   line-height: 1;
@@ -300,7 +302,7 @@
 <button onclick="$('#aa').fadeTo(500,1);">Show</button>
 <button onclick="$('#aa').fadeTo(500,0);">Hide</button>
 
-<div class="card1" style="grid-column:1/span4">
+<div class="card1" style="grid-column:2">
 	<div class="data">
 		<div class="photo" style="background-image:url(../../public/img/1.jpg);"></div>
 		<ul class="details">
@@ -309,11 +311,16 @@
 		</ul>
 	</div>
 	<div class="description">
-		<h1>Fitness Centre Closed</h1>
-		<h2>BY ADMIN</h2>
-		<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-		<p class="read-more">
-			<a href="#">Read More</a>
+		<h1 style="color:indigo;font-weight:bold;font-size:3rem;text-align:center">Login</h1>
+    <form action="#" class="form1" id="view" style="margin:20%">
+            <label for="fname">USERNAME</label><br>
+            <input type="text" id="fname" name="firstname" class="input-field" placeholder="ALSS"><br>
+
+            <label for="fname">PASSWORD</label><br>
+            <input type="text" id="fname" name="firstname" class="input-field" placeholder="123456789v"><br>
+            <input type="submit" class="purplebutton" value="login">
+          </form>		<p class="read-more">
+			<a href="#">Forgot password</a>
 		</p>
 	</div>
 </div>

@@ -78,7 +78,7 @@ function check_retypepassword() {
    $("#view").hide();
    $("#pw").hide();
    $("#editview").show();
-   $("#removedmem").show();
+   $("#showmem").show();
    //$("#removeicon").show();
 }  
 function changePw() {
@@ -87,7 +87,7 @@ function changePw() {
    $("#editview").hide();
    $("#view").hide();
    $("#pw").show();
-   $("#removedmem").hide();
+   $("#showmem").hide();
    //$("#removeicon").hide();
 } 
 function confirmSave(){

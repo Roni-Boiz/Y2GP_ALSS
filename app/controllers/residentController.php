@@ -47,6 +47,7 @@ class residentController extends controller{
     // }
 
     public function yourReservation(){
+        $this->view->reservation=$this->model->yourReservation();
         $this->view->render('resident/yourReservationView');
     }
 

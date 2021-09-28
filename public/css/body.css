@@ -269,13 +269,13 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 100px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
     align-items: center;
-    /* min-height: 550px; */
+    min-height: 550px;
 }
 .hawlockbody i,h4{
     color: black;
@@ -352,39 +352,48 @@ input[type=email]{
   background-color: #2a225a;
   color: white;
   padding: 5px 10px;
-  margin: auto;
+  
   border: none;
   border-radius: 30px;
   cursor: pointer;
 }
 .hawlockbody  input[type=submit]:hover {
-    background-color: #02000c;
+  background-color: #02000c;
 }
 .hawlockbody  label{
-    margin-left: 5px;
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;  
+  margin-left: 5px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;  
 }
 /* table */
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid white;
 }
 th {
-    text-align:center;
-    padding: 8px;
-    border: 1px solid #ddd;
+  text-align:center;
+  padding: 8px;
+  border: 1px solid white;
 }
 td {
   text-align: left;
   padding: 8px;
+  /* border-radius: 15px; */
+  border:2px solid white;
+}
+tr{
+  background-color: #8880b6;
 }
 
-tr:nth-child(even){
-    background-color: #5747b4;
-    color:white;
+.footer{
+	height: 25px;
+  width:100%;
+  background:linear-gradient(to right,#211a49,#927ffc);
+	text-align: center;
+	font-size: 10px;
+	padding-top: 20px;
 }
 /* body responsive */
 @media(max-width:768px) {
@@ -394,10 +403,18 @@ tr:nth-child(even){
     .hawlockhead{
         grid-column: 1/span3;
     }
+/* form responsive */
+    .form1 {
+      grid-column: 1/span2;
+      /* margin: auto; */
+    }
+    .hawlockbody .input-field{ 
+      width: 200px;
+  }
 }
 @media(max-width:920px) {
     .hawlockbody{
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
 }
 
