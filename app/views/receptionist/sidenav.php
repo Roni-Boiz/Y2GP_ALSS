@@ -33,7 +33,7 @@
     
         <nav class="sidebar" id="side">
             <ul>
-                <li><a href="announcement"><i class="fa fa-home" ></i>HOME</a></li>
+                <li><a href="../receptionistController/index"><i class="fa fa-home" ></i>HOME</a></li>
                 <li ><a href="register"><i class="fa fa-file-medical"></i>REGISTER RESIDENT</a></li>
                 <li><a href="parcels"><i class="fas fa-box-open"></i>PARCELS</a></li>
                 <li><a href="visitors"><i class="fas fa-users"></i>VISITORS</a></li>
