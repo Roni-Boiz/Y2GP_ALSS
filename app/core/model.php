@@ -17,9 +17,9 @@ class model{
     }
     public function getAnnouncement(){
         if($_SESSION['type']=="resident"){
-            $sql = "SELECT * FROM announcement where category='resident'";
+            $sql = "SELECT * FROM announcement WHERE category='resident' OR category='both' ORDER BY date DESC";
         }else{
-            $sql = "SELECT * FROM announcement where category='administration'";
+            $sql = "SELECT * FROM announcement WHERE category='administration'  OR category='both' ORDER BY date DESC";
         }
         $ann = $this->conn->query($sql);   
         return $ann;
