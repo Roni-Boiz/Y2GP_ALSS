@@ -35,6 +35,7 @@ class receptionistController extends controller{
         $email = $_POST ['email'];
         $apartmentId=$_POST ['apartmentId'];
         $this->view->errors = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->view->apartments = $this->model->readApartment();
         $this->view->render('receptionist/registerResidentView');
     }
     // view profile
@@ -52,7 +53,8 @@ class receptionistController extends controller{
         $this->view->render('receptionist/parcelsView');
     }
     public function visitors(){
+        $this->view->visitors = $this->model->readVisitor();
         $this->view->render('receptionist/visitorsView');
     }
-
+    
 }
