@@ -50,7 +50,12 @@ class receptionistController extends controller{
     //     $this->view->render('resident/residentView');
     // }
     public function parcels(){
+        $this->view->parcel=$this->model->getParcels();
         $this->view->render('receptionist/parcelsView');
+    }
+    public function parcelStatus(){
+
+        $this->parcels();
     }
     public function visitors(){
         $this->view->visitors = $this->model->readVisitor();

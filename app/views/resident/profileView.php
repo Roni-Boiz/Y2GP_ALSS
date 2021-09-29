@@ -15,7 +15,8 @@
                         $row = $this->users->fetch_assoc();
                         echo $row["apartment_no"];?></h4>
                             <!-- view -->
-                            <form class="form1" id="view" style="background-color:purple;padding:20px">
+                            <!-- background:linear-gradient(to left,white,#927ffc) -->
+                            <form class="form1" id="view" style="padding:20px 5px">
                                 <label for="fname">First Name</label>
                                 <input type="text" id="fname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
 
@@ -94,7 +95,7 @@
                                 <!-- view family members on click showmembers() -->
                                 <div id="showmem" style="display:none;grid-column:2/span3">
                                 <?php $m=1; while($mem =$this->members->fetch_assoc()){?>
-                                <form action="removeMember" method="post" class="form1" id="removedmem">   
+                                <form action="removeMember" method="post" class="form1" id="removedmem" >   
                                 <label for="lname">member<?php echo " ".$m++?></label>
                                 <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"]?> READONLY>
                                 <button type="submit" onclick = "confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>

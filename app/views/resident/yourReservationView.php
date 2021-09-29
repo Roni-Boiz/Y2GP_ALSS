@@ -1,6 +1,7 @@
 <?php 
     include_once 'sidenav.php';
 ?>
+
 </head>
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
@@ -14,7 +15,6 @@
             <li ><a href="#tab3">Treatment Room</a></li>
         </ul>
         <div id="tab1" class="tab active">
-            <p>
             <div style="overflow-x:auto;grid-column:1/span2">
     <?php
 
@@ -42,8 +42,9 @@
                             <?php
                 while($row = $this->reservation->fetch_assoc()){?> 
                             <tr>
-                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <td><?php echo $row["reservation_id"]; ?></td>
+                            
+                            <form action="removeHall" method="post"><input type="submit" name="resid" value=<?php echo $row["reservation_id"];?>><td><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></td></input></form>
+                            <td><?php echo $row["reservation_id"];?></td>
                             <td><?php echo $row["date"]; ?></td>
                             <td><?php echo $row["start_time"]; ?></td>
                             <td><?php echo $row["end_time"]; ?></td>
@@ -59,23 +60,22 @@
             ?>
             </table>
             </div>
+        </div>
+                <div id="tab2" class="tab">
+                    <p style="color:black">
+                        Content...
                     </p>
-        </div>
-        <div id="tab2" class="tab">
-                <p style="color:black">
-                    Content...
-                </p>
-        </div>
-        <div id="tab3" class="tab">
-                <p style="color:black">
-                Content...
-                </p>
+                </div>
+                <div id="tab3" class="tab">
+                    <p style="color:black">
+                        Content...
+                    </p>
                 </div>
             </div>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 <script>
-        $(document).ready(function(){
+        $(function(){
             $(".tabs-list li a").click(function(e){
                 e.preventDefault();
             });

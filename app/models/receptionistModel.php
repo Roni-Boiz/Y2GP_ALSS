@@ -133,5 +133,10 @@ class receptionistModel extends model {
     //     $result = $this->conn->query($sql);   
     //     return $result;
     // }
+    public function getParcels(){
+        $sql="SELECT * FROM parcel WHERE status=1";
+        $result= $this->conn->query($sql);
+        return $result;
+    }
 }
 ?>
