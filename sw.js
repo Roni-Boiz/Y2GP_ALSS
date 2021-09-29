@@ -19,7 +19,7 @@ var filesToCache = [
     './public/img/image.png',
     './public/js/login.js',
 
-    './public/css/body.css',
+    //'./public/css/body.css',
     './app/views/homeView.php',
     './app/views/loginView.php'
 ];

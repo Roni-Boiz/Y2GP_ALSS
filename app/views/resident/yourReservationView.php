@@ -1,6 +1,21 @@
 <?php 
     include_once 'sidenav.php';
-?>
+?>    
+<script>
+        $(document).ready(function(){
+            $(".tabs-list li a").click(function(e){
+                e.preventDefault();
+            });
+
+            $(".tabs-list li").click(function(){
+                var tabid = $(this).find("a").attr("href");
+                $(".tabs-list li,.tabs div.tab").removeClass("active");   // removing active class from tab and tab content
+                $(".tab").hide();   // hiding open tab
+                $(tabid).show();    // show tab
+                $(this).addClass("active"); //  adding active class to clicked tab
+            });
+        });
+</script>
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
@@ -14,6 +29,52 @@
         </ul>
         <div id="tab1" class="tab active">
             <div style="overflow-x:auto;grid-column:1/span2">
+            <?php
+                if ($this->reservation->num_rows > 0){?>
+                    <table class="table1">
+                                    <tr style="background-color:#5747b4">
+                                    <th>Action</th>
+                                    <th>Reservation ID</th>
+                                    <th colspan="3">Reservation</th>
+                                    <th>Reserved Date</th>
+                                    <th>Member</th>
+                                    <th>Type</th>
+                                    </tr>
+                                    <tr style="background-color:#5747b4">
+                                    <th></th>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    </tr>
+                                    
+                                    <?php
+                        while($row = $this->reservation->fetch_assoc()){?> 
+                                    <tr>
+                                    <form action="removeHall" method="post"><input type="submit" name="resid" value=<?php echo $row["reservation_id"];?>><td><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></td></input></form>
+                                    <td><?php echo $row["reservation_id"];?></td>
+                                    <td><?php echo $row["date"]; ?></td>
+                                    <td><?php echo $row["start_time"]; ?></td>
+                                    <td><?php echo $row["end_time"]; ?></td>
+                                    <td><?php echo $row["reserved_date"]; ?></td>
+                                    <td><?php echo $row["no_of_members"]; ?></td>
+                                    <td><?php echo "\n".$row["type"]; ?></td>
+                                    </tr> 
+                    <?php
+                                }   
+                        }else{
+                            echo "0 results";
+                        }
+                    ?>
+                    </table>
+            </div>
+        </div>
+                <div id="tab2" class="tab">
+                    <p style="color:black">
+                    <div style="overflow-x:auto;grid-column:1/span2">
     <?php
 
         if ($this->reservation->num_rows > 0){?>
@@ -32,7 +93,7 @@
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
-                            <th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             </tr>
@@ -40,7 +101,6 @@
                             <?php
                 while($row = $this->reservation->fetch_assoc()){?> 
                             <tr>
-                            
                             <form action="removeHall" method="post"><input type="submit" name="resid" value=<?php echo $row["reservation_id"];?>><td><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></td></input></form>
                             <td><?php echo $row["reservation_id"];?></td>
                             <td><?php echo $row["date"]; ?></td>
@@ -58,34 +118,59 @@
             ?>
             </table>
             </div>
-        </div>
-                <div id="tab2" class="tab">
-                    <p style="color:black">
-                        Content...
                     </p>
                 </div>
                 <div id="tab3" class="tab">
                     <p style="color:black">
-                        Content...
+                    <div style="overflow-x:auto;grid-column:1/span2">
+    <?php
+
+        if ($this->reservation->num_rows > 0){?>
+            <table class="table1">
+                            <tr style="background-color:#5747b4">
+                            <th>Action</th>
+                            <th>Reservation ID</th>
+                            <th colspan="3">Reservation</th>
+                            <th>Reserved Date</th>
+                            <th>Member</th>
+                            <th>Type</th>
+                            </tr>
+                            <tr style="background-color:#5747b4">
+                            <th></th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            </tr>
+                            
+                            <?php
+                while($row = $this->reservation->fetch_assoc()){?> 
+                            <tr>
+                            <form action="removeHall" method="post"><input type="submit" name="resid" value=<?php echo $row["reservation_id"];?>><td><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></td></input></form>
+                            <td><?php echo $row["reservation_id"];?></td>
+                            <td><?php echo $row["date"]; ?></td>
+                            <td><?php echo $row["start_time"]; ?></td>
+                            <td><?php echo $row["end_time"]; ?></td>
+                            <td><?php echo $row["reserved_date"]; ?></td>
+                            <td><?php echo $row["no_of_members"]; ?></td>
+                            <td><?php echo "\n".$row["type"]; ?></td>
+                            </tr> 
+            <?php
+                        }   
+                }else{
+                    echo "0 results";
+                }
+            ?>
+            </table>
+            </div>
                     </p>
                 </div>
-            </div>
+        </div>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
-<script>
-                $(document).ready(function(){
-            $(".tabs-list li a").click(function(e){
-                e.preventDefault();
-            });
 
-            $(".tabs-list li").click(function(){
-                var tabid = $(this).find("a").attr("href");
-                $(".tabs-list li,.tabs div.tab").removeClass("active");   // removing active class from tab and tab content
-                $(".tab").hide();   // hiding open tab
-                $(tabid).show();    // show tab
-                $(this).addClass("active"); //  adding active class to clicked tab
-            });
-        });
-    </script>
 </body>
 </html>
