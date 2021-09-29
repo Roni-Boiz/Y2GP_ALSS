@@ -268,6 +268,14 @@ nav i{
     grid-row: 1;
     padding: 20px;
 }
+.pslots{
+  font-size: 1em;
+  width: 80px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 20px ;
+}
 /* form */
 .form1 {
     grid-column: 2;
@@ -351,24 +359,24 @@ input[type=email]{
   font-family: 'Poppins', sans-serif;  
 }
 /* table */
-table {
+.table1 {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
   border: 1px solid white;
 }
-th {
+.table1 th {
   text-align:center;
   padding: 8px;
   border: 1px solid white;
 }
-td {
+.table1 td {
   text-align: left;
   padding: 8px;
   /* border-radius: 15px; */
   border:2px solid white;
 }
-tr{
+.table1 tr{
   background-color: #8880b6;
 }
 
@@ -397,11 +405,9 @@ tr{
       width: 200px;
   }
 }
-@media(max-width:920px) {
-    
-}
+
 /* parking slot */
-.pslots {
+.pslots{
   font-size: 1em;
   width: 80px;
   text-decoration: none;
@@ -572,14 +578,87 @@ tr{
 
 /*active state */
 .active{
-  display:block !important;
+  display:block ;
 }
 .tabs .tabs-list li.active{
-  background-color:lavender !important;
-  color:black !important;
+  background-color:lavender;
+  color:black t;
 }
 .active a{
-  color:black !important;
+  color:black ;
+}
+
+/* media query */
+@media screen and (max-width:360px){
+  .tabs{
+      margin:0;
+      width:96%;
+  }
+  .tabs .tabs-list li{
+      width:80px;
+  }
+}
+/* tab */
+.tabs{
+  width:100%;
+  height:auto;
+  margin:0 auto;
+}
+
+/* tab list item */
+.tabs .tabs-list{
+  list-style:none;
+  margin:10px;
+  padding:10px;
+}
+.tabs .tabs-list li{
+  width:200px;
+  float:left;
+  margin:2px 2px;
+  padding:10px 5px;
+  text-align: center;
+  background-color:#5747b4;
+  border-radius:3px;
+}
+.tabs .tabs-list li:hover{
+  cursor:pointer;
+}
+.tabs .tabs-list li a{
+  text-decoration: none;
+  color:white;
+}
+
+/* Tab section */
+.tabs .tab{
+  display:none;
+  width:96%;
+  min-height:250px;
+  height:auto;
+  border-radius:3px;
+  padding:20px 15px;
+  color:white;
+  clear:both;
+}
+.tabs .tab h3{
+  letter-spacing:1px;
+  font-weight:normal;
+  padding:5px;
+}
+.tabs .tab p{
+  line-height:20px;
+  letter-spacing: 1px;
+}
+
+/*active state */
+.active{
+  display:block ;
+}
+.tabs .tabs-list li.active{
+  background-color:lavender;
+  color:black t;
+}
+.active a{
+  color:black ;
 }
 
 /* media query */

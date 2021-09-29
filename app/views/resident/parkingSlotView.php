@@ -1,8 +1,8 @@
 <?php 
     include_once 'sidenav.php';
 ?>
-</head>
-<body style="background-color: gray; background-image:none;">
+
+<body style="background-color: gray">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">PARKING SLOT <span id="city">RESERVATION</span></h1></div>
