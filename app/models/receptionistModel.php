@@ -28,12 +28,12 @@ class receptionistModel extends model {
         $secondname = mysqli_real_escape_string($this->conn, $secondname);
         $email = mysqli_real_escape_string($this->conn, $email);
  
-       if(strlen(trim($firstname))< 1 )
+       if(strlen(trim($firstname))< 3 )
        {
            $errors[] = 'Enter a valid First name';
        }
 
-       if(strlen(trim($secondname)) < 8 )
+       if(strlen(trim($secondname)) < 3 )
        {
            $errors[] = 'Enter a valid Second name';
        }

@@ -1,27 +1,27 @@
 const cacheName = 'alss';
 var filesToCache = [
-    './',
+    // './',
 
-    './public/index.php',
-    './main.js',
-    './manifest.json',
-    './favicon.ico',
+    // './public/index.php',
+    // './main.js',
+    // './manifest.json',
+    // './favicon.ico',
 
-    './app/init.php',
-    './app/core/app.php',
-    './app/core/controller.php',
-    './app/core/model.php',
-    './app/core/view.php',
+    // './app/init.php',
+    // './app/core/app.php',
+    // './app/core/controller.php',
+    // './app/core/model.php',
+    // './app/core/view.php',
 
-    './public/img/21.jpg',
-    './public/img/bg_3.jpg',
-    './public/img/1.jpg',
-    './public/img/image.png',
-    './public/js/login.js',
+    // './public/img/21.jpg',
+    // './public/img/bg_3.jpg',
+    // './public/img/1.jpg',
+    // './public/img/image.png',
+    // './public/js/login.js',
 
-    './public/css/body.css',
-    './app/views/homeView.php',
-    './app/views/loginView.php'
+    // './public/css/body.css',
+    // './app/views/homeView.php',
+    // './app/views/loginView.php'
 ];
 
 self.addEventListener('install', async e => {
