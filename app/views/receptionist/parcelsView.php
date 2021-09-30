@@ -15,7 +15,7 @@
             <li ><a href="#tab3">Reached</a></li>
         </ul>
         <div id="tab1" class="tab active">
-        <form action="#" class="form" method="post">
+        <form action="#" class="form1" method="post">
                 <label for="Apartment ID">Apartment Id</label>
                 <input type="text" name="apartmentId" id="apartmentId">
                 <br><br>
@@ -27,7 +27,7 @@
         </div>
         <div id="tab2" class="tab">
         <?php    
-        if ($this->parcel->num_rows > 0){?>
+        if ($this->inLocker->num_rows > 0){?>
             <table class="table1">
                             <tr style="background-color:#5747b4">
                             <th>Action</th>
@@ -46,15 +46,21 @@
                             </tr>
                             
             <?php
-                while($row = $this->parcel->fetch_assoc()){?> 
+                while($row = $this->inLocker->fetch_assoc()){?> 
+                            
                             <tr>
                             <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                            <a href="parcels?parcel=<?php echo $row["parcel_id"];?>">
+                            <div class="rowlink" style="display:inline-block">
                             <td><?php echo $row["parcel_id"]; ?></td>
                             <td><?php echo $row["resident_id"]; ?></td>
                             <td><?php echo $row["receive_date"]; ?></td>
                             <td><?php echo $row["receive_time"]; ?></td>
                             <td><?php echo $row["sender"]; ?></td>
+                            </div>
+                            </a>
                             </tr> 
+                            
             <?php
                         }   
                 }else{
@@ -65,7 +71,7 @@
         </div>
         <div id="tab3" class="tab">
         <?php    
-        if ($this->parcel->num_rows > 0){?>
+        if ($this->reached->num_rows > 0){?>
             <table class="table1">
                             <tr style="background-color:#5747b4">
                             <th>Action</th>
@@ -84,14 +90,14 @@
                             </tr>
                             
             <?php
-                while($row = $this->parcel->fetch_assoc()){?> 
+                while($row1 = $this->reached->fetch_assoc()){?> 
                             <tr>
                             <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <td><?php echo $row["parcel_id"]; ?></td>
-                            <td><?php echo $row["resident_id"]; ?></td>
-                            <td><?php echo $row["receive_date"]; ?></td>
-                            <td><?php echo $row["receive_time"]; ?></td>
-                            <td><?php echo $row["sender"]; ?></td>
+                            <td><?php echo $row1["parcel_id"]; ?></td>
+                            <td><?php echo $row1["resident_id"]; ?></td>
+                            <td><?php echo $row1["receive_date"]; ?></td>
+                            <td><?php echo $row1["receive_time"]; ?></td>
+                            <td><?php echo $row1["sender"]; ?></td>
                             </tr> 
             <?php
                         }   
