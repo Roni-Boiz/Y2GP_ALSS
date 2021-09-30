@@ -49,10 +49,12 @@ class receptionistController extends controller{
     //     $this->view->render('resident/residentView');
     // }
     public function parcels(){
-        $this->model->recordParcel(23,234);
+        if(isset($_POST["Save"])){
+            $this->model->recordParcel($_POST["apartmentId"],002,$_POST["sender"]);
+        }    
         $this->view->inLocker=$this->model->getInlocker();
         $this->view->reached=$this->model->getReached();
-        if($_GET["parcel"]){
+        if(isset($_GET["parcel"])){
             $pid=$_GET["parcel"];
             $this->model->updateInlocker($pid);
         }    
