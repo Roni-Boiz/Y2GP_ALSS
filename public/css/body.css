@@ -731,8 +731,11 @@ input[type=email]{
   opacity: 0;
   transition: opacity 1s;
 }
+.btnAddAnnouncement {
+  width: fit-content;
+  grid-column: 3;
+}
 .btnAddAnnouncement i {
-  grid-column: 3 / span 1;
   font-size: 30px;
   float: left;
   cursor: pointer;

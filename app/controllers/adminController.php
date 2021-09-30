@@ -63,7 +63,7 @@ class adminController extends controller
                 foreach ($_FILES['files']['name'] as $key => $val) {
                     $fileName = basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
-                    
+
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
                     if (in_array($fileType, $allowTypes)) {
                         if (move_uploaded_file($_FILES['files']["tmp_name"][$key], $targetFilePath)) {
@@ -92,12 +92,12 @@ class adminController extends controller
                 }
             } else {
                 $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
+                $statusMsg = "Files are uploaded successfully." . $errorMsg;
                 echo $statusMsg;
                 header("Refresh:1; url=announcement");
-                // $this->announcement();
             }
-            
-            // 
         }
     }
 }
+
+
