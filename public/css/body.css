@@ -355,6 +355,7 @@ input[type=email]{
   background-color: #02000c;
 }
 .hawlockbody  label{
+  color: #000;
   margin-left: 5px;
   font-size: 15px;
   font-family: 'Poppins', sans-serif;  
