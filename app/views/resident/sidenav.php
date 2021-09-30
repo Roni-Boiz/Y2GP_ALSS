@@ -56,7 +56,6 @@
                 <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
             </ul>
         </nav>
-</body>
     
 <script>
     /* show sidebar */

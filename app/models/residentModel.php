@@ -18,8 +18,8 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function removeMember(){
-        $sql = "DELETE from family WHERE name='".$_POST["removedmem"]."' ";
+    public function removeMember($id){
+        $sql = "DELETE from family WHERE name='$id'";
         $this->conn->query($sql);
         //echo $_POST["removedmem"];
     }
@@ -36,10 +36,7 @@ class residentModel extends model {
         //$this->conn->query($sql3); 
         //}     
     }
-    public function changePassword(){
-        $opw=$_POST["opw"];
-        $npw=$_POST["npw"];
-        $rnpw=$_POST["rnpw"];
+    public function changePassword( $opw,$npw,$rnpw){
         $errors=array();
         $hashPassword = sha1($rnpw);
         $hash2Password = sha1($hashPassword);
@@ -66,16 +63,27 @@ class residentModel extends model {
         return $errors;
     }
     //reservations
-    public function yourReservation(){
+    public function yourReservation($id){
         //hall
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id=3)";
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_date IS NULL";
         $result = $this->conn->query($sql);
         return $result;
+    }
+    public function removeHall($id){
+        //echo $id;
+        $date = date('Y-m-d H:i:s');
+        $sql = "UPDATE hall_reservation SET cancelled_date='$date' WHERE reservation_id='$id' ";
+        $this->conn->query($sql);
     }
     public function hallreservation(){
         //INSERT INTO `fitness_centre_reservation` (`reservation_id`, `date`, `start_time`, `end_time`, `reserved_time`, `cancelled_time`, `fee`, `resident_id`, `employee_id`, `schedule_id`) VALUES ('2', '2021-09-08', '09:06:02', '02:01:00', '2021-09-27 02:00:00', NULL, '200', '1', null, NULL)
 
         //$sql="insert into hall_reservation value ("3","2008-11-11","13:23:44","15:23:44","2008-11-11 11:12:01","2008-11-11 11:12:01","Hall",10,1000,1)";
+    }
+    public function viewSlots(){
+        $sql = "SELECT * from parking_slot";
+        $result = $this->conn->query($sql);
+        return $result;
     }
 
 
