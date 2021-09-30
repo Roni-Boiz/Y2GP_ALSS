@@ -26,29 +26,29 @@ include_once 'sidenav.php';
                     <h1>New Announcement<i class="fa fa-bullhorn"></i></h1>
 
                     <label for="topic">Topic</label><br>
-                    <input type="text" id="topic" name="topic" class="input-field" placeholder="New Announcement"><br>
+                    <input type="text" id="topic" name="topic" class="input-field" placeholder="New Announcement" required><br>
 
                     <label for="content">Content</label><br>
-                    <textarea id="content" name="content" cols="30" rows="5" placeholder="Your content"></textarea><br>
+                    <textarea id="content" name="content" cols="30" rows="5" placeholder="Your content" required></textarea><br>
 
                     <label for="visibility">Visibility</label><br>
                     <div class="visibility">
                         <label for="resient">Resident</label><br>
-                        <input type="radio" id="resident" name="visibility" value="resident">
+                        <input type="radio" id="resident" name="visibility" value="resident" required>
                         <label for="admin">Administration</label><br>
-                        <input type="radio" id="administration" name="visibility" value="administration">
+                        <input type="radio" id="administration" name="visibility" value="administration" required>
                         <label for="both">Both</label><br>
-                        <input type="radio" id="both" name="visibility" value="both">
+                        <input type="radio" id="both" name="visibility" value="both" required>
                     </div>
 
                     <label for="file">Add File</label><br>
-                    <input type="file" id="file" name="files[]">
+                    <input type="file" id="file" name="files[]" required>
                     <br><br>
 
                     <input type="submit" name="broadcast" value="Broadcast">
                 </form>
             </div>
-
+            
             <!-- Loading Announcements -->
             <?php
             if ($this->ann->num_rows > 0) {

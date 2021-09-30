@@ -63,8 +63,8 @@ include_once 'sidenav.php';
                     <form action="#" class="formAddEmployee" method="GET">
                         <div id="col1">
                             <label for="type">Type</label><br>
-                            <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement">
-                                <option value="manager">Select Employee Type...</option>
+                            <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement" required>
+                                <option value="">Select Employee Type...</option>
                                 <option value="manager">Manager</option>
                                 <option value="manager">Reseptionist</option>
                                 <option value="manager">Parking Officer</option>
@@ -82,22 +82,22 @@ include_once 'sidenav.php';
 
                         <div id="col1">
                             <label for="fname">First Name</label><br>
-                            <input type="text" id="fname" name="fname" class="input-field" placeholder="John">
+                            <input type="text" id="fname" name="fname" class="input-field" placeholder="John" required>
                         </div>
 
                         <div id="col2">
                             <label for="lname">Last Name</label><br>
-                            <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith">
+                            <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" required>
                         </div>
 
                         <div id="col1">
                             <label for="email">Email Address</label><br>
-                            <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com">
+                            <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" required>
                         </div>
 
                         <div id="col2">
                             <label for="cno">Contact Number</label><br>
-                            <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567">
+                            <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" required>
                         </div>
 
                         <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="submit">
