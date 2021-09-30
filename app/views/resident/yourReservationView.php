@@ -18,7 +18,7 @@ include_once 'sidenav.php';
                 <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <?php
-                        
+
                         if ($this->hall->num_rows > 0) { ?>
                             <table class="table1">
                                 <tr style="background-color:#5747b4">
@@ -44,7 +44,7 @@ include_once 'sidenav.php';
                                 while ($row = $this->hall->fetch_assoc()) { ?>
                                     <tr>
                                         <td><a href="removeReservation?hallid=<?php echo $row["reservation_id"]; ?>">
-                                        <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
                                         <td><?php echo $row["start_time"]; ?></td>
@@ -89,7 +89,7 @@ include_once 'sidenav.php';
                                 while ($row = $this->fitness->fetch_assoc()) { ?>
                                     <tr>
                                         <td><a href="removeReservation?fitid=<?php echo $row["reservation_id"]; ?>">
-                                        <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
                                         <td><?php echo $row["start_time"]; ?></td>
@@ -134,7 +134,7 @@ include_once 'sidenav.php';
                                 while ($row = $this->treatment->fetch_assoc()) { ?>
                                     <tr>
                                         <td><a href="removeReservation?treatid=<?php echo $row["reservation_id"]; ?>">
-                                        <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
                                         <td><?php echo $row["start_time"]; ?></td>

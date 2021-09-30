@@ -412,6 +412,7 @@ input[type=email]{
   margin: 10px ;
   padding: 5px;
   float:left;
+  border-right:rgb(0, 0, 0) 1px solid;
 }
 
 .signup_container{
