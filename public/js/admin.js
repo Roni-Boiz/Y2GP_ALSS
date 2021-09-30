@@ -32,15 +32,15 @@ const ans = document.getElementById("answer");
 const closeBtn = document.getElementById("closebtn");
 
 modelBtn.addEventListener("click", ()=>{
-    // document.getElementById("myCanvasNav").style.width = "100%";
-    // document.getElementById("myCanvasNav").style.opacity = "0.8";
+    document.getElementById("myCanvasNav").style.width = "100%";
+    document.getElementById("myCanvasNav").style.opacity = "0.8";
     model.className = "open";
 })
 
 closeBtn.addEventListener("click", ()=>{
     model.className = 'close';
-    // document.getElementById("myCanvasNav").style.width = "0%";
-    // document.getElementById("myCanvasNav").style.opacity = "0";
+    document.getElementById("myCanvasNav").style.width = "0%";
+    document.getElementById("myCanvasNav").style.opacity = "0";
 })
 
 model.addEventListener("click", (e)=>{
@@ -53,7 +53,32 @@ model.addEventListener("click", (e)=>{
         return;
     }
     model.className = 'close';
-})
+});
+
+const imgDiv = document.querySelector('.profile-pic');
+const img = document.querySelector('#photo');
+const file = document.querySelector('#file');
+const uploadBtn = document.querySelector('#uploadBtn');
+
+imgDiv.addEventListener('mouseenter', function(){
+    uploadBtn.style.display = "block";
+});
+
+// imgDiv.addEventListener('mouseleave', function(){
+//     uploadBtn.style.display = "none";
+// });
+
+file.addEventListener('change', function(){
+    const choosefile = this.files[0];
+    if(choosefile){
+        const reader = new FileReader();
+        reader.addEventListener('load', function(){
+            img.setAttribute('src', reader.result);
+        });
+        reader.readAsDataURL(choosefile);
+    }
+});
+
 
 // function loadData() {
 //     var cookies = document.cookie;
