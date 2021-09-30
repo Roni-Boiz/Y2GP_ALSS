@@ -317,6 +317,7 @@ input[type=submit]:hover {
         <div class="data">
           <div class="photo" style="background-image:url(../../public/img/1.jpg);"></div>
             <ul class="details">
+              <?php date_default_timezone_set("Asia/Colombo"); ?>
               <li class="author"><?php echo date("H:i"); ?>  </li>
               <li class="date"><?php echo  date("F j, Y");  ?></li>
             </ul>
