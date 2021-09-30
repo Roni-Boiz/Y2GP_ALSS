@@ -15,14 +15,16 @@
             <li ><a href="#tab3">Reached</a></li>
         </ul>
         <div id="tab1" class="tab active">
-        <form action="#" class="form1" method="post">
+        <form action="recordParcel" class="form1" method="post">
                 <label for="Apartment ID">Apartment Id</label>
-                <input type="text" name="apartmentId" id="apartmentId">
+                <input type="text" class="input-field" name="apartmentId" id="apartmentId">
                 <br><br>
                 <label for="Sender">Sender</label>
-                <input type="text" name="sender" id="sender">
+                <input type="text" class="input-field" name="sender" id="sender">
                 <br><br>
-                <textarea name="description" id="" cols="30" rows="10">Description</textarea>
+                <label for="Description">Description</label>
+                <textarea class="input-field" style=" border-radius: 15px; background-color: #f0f0f0;" name="description" id="" cols="30" rows="10">Your text...</textarea><br>
+                <input class="purplebutton" value="Save" type="submit" style="float:right" onclick="confirmSave()">save</button>
             </form>
         </div>
         <div id="tab2" class="tab">
@@ -50,7 +52,7 @@
                             
                             <tr>
                             <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <a href="parcels?parcel=<?php echo $row["parcel_id"];?>">
+                            <a method="get" href="parcels?parcel=<?php echo $row["parcel_id"];?>">
                             <div class="rowlink" style="display:inline-block">
                             <td><?php echo $row["parcel_id"]; ?></td>
                             <td><?php echo $row["resident_id"]; ?></td>
