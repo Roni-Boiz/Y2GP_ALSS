@@ -63,14 +63,14 @@ class adminController extends controller
                 foreach ($_FILES['files']['name'] as $key => $val) {
                     $fileName = basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
-
+                    
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
                     if (in_array($fileType, $allowTypes)) {
                         if (move_uploaded_file($_FILES['files']["tmp_name"][$key], $targetFilePath)) {
                             $insertValuesSQL .= "('" . $fileName . "'),";
                             $insert = $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], $fileName, $_SESSION['userId']);
                         } else {
-                            $errorUpload .= $_FILES['files']['names'][$key] . ' | ';
+                            $errorUpload .= $_FILES['files']['name'][$key] . ' | ';
                         }
                     } else {
                         $errorUploadType .= $_FILES['files']['name'][$key] . ' | ';
@@ -81,7 +81,7 @@ class adminController extends controller
                 $errorUploadType = !empty($errorUploadType) ? 'File Type Error: ' . trim($errorUploadType, ' | ') : '';
                 $errorMsg = !empty($errorUpload) ? '<br/>' . $errorUpload . '<br/>' . $errorUploadType : '<br/>' . $errorUploadType;
 
-                if ($insert) {
+                if ($insertValuesSQL) {
                     $statusMsg = "Files are uploaded successfully." . $errorMsg;
                     echo $statusMsg;
                     header("Refresh:1; url=announcement");
