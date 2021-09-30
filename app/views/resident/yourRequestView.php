@@ -7,31 +7,7 @@
 
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">YOUR <span id="city">REQUESTS</span></h1></div>
     <div id="hb" class="hawlockbody" > 
-    <?php
-        if ($this->ann->num_rows > 0){
-                while($row = $this->yourreservations->fetch_assoc()){?> 
-        
-        <div class="card" >
-           
-                <div class="card-body">
-                    <div class="detail">
-                        <img src="../../public/img/user.png"alt="user" />
-                        <div class="detail-info"><h5><?php echo $row["date"]; ?></h5><small><?php echo $row["time"]; ?></small></div>
-                    </div>                    
-                <h4><?php echo $row["topic"]; ?></h4>
-                    <p><?php echo $row["content"]; ?></p>
-                </div> 
-                <div class="card-header">
-                    <?php if($count<5) $count++; else $count=2?>
-                    <img src="../../public/img/<?php echo $count?>.jpg">
-                </div>
-        </div>
-    <?php
-                }   
-        }else{
-            echo "0 results";
-        }
-    ?>
+    
 
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->

@@ -261,7 +261,8 @@ nav i{
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
-    align-items: center;
+    /* align-items: center; */
+    min-height: 550px;
 }
 .hawlockbody i,h4{
     color: black;
@@ -269,14 +270,7 @@ nav i{
     grid-row: 1;
     padding: 20px;
 }
-.pslots{
-  font-size: 1em;
-  width: 80px;
-  text-decoration: none;
-  cursor: pointer;
-  display: inline-block;
-  margin: 20px ;
-}
+
 /* form */
 .form1 {
     grid-column: 2;
@@ -379,7 +373,7 @@ input[type=email]{
   border:2px solid white;
 }
 .table1 tr{
-  background-color: #8880b6;
+  background-color: #927ffc;
 }
 
 .footer{
@@ -407,14 +401,6 @@ input[type=email]{
       width: 200px;
   }
 }
-<<<<<<< HEAD
-@media(max-width:920px) {
-    .hawlockbody{
-        grid-template-columns: 1fr;
-    }
-}
-=======
->>>>>>> 864c4598a2b0aee7a2b2a027560be4f71ca8d2e7
 
 /* parking slot */
 .pslots{
@@ -423,7 +409,9 @@ input[type=email]{
   text-decoration: none;
   cursor: pointer;
   display: inline-block;
-  margin: 20px ;
+  margin: 10px ;
+  padding: 5px;
+  float:left;
 }
 
 .signup_container{
@@ -588,14 +576,14 @@ input[type=email]{
 
 /*active state */
 .active{
-  display:block ;
+  display:block !important;
 }
 .tabs .tabs-list li.active{
-  background-color:lavender;
+  background-color:lavender !important;
   color:black t;
 }
 .active a{
-  color:black ;
+  color:black !important;
 }
 
 /* media query */
@@ -605,81 +593,8 @@ input[type=email]{
       width:96%;
   }
   .tabs .tabs-list li{
-      width:80px;
-  }
+    width:80px;
 }
-/* tab */
-.tabs{
-  width:100%;
-  height:auto;
-  margin:0 auto;
-}
-
-/* tab list item */
-.tabs .tabs-list{
-  list-style:none;
-  margin:10px;
-  padding:10px;
-}
-.tabs .tabs-list li{
-  width:200px;
-  float:left;
-  margin:2px 2px;
-  padding:10px 5px;
-  text-align: center;
-  background-color:#5747b4;
-  border-radius:3px;
-}
-.tabs .tabs-list li:hover{
-  cursor:pointer;
-}
-.tabs .tabs-list li a{
-  text-decoration: none;
-  color:white;
-}
-
-/* Tab section */
-.tabs .tab{
-  display:none;
-  width:96%;
-  min-height:250px;
-  height:auto;
-  border-radius:3px;
-  padding:20px 15px;
-  color:white;
-  clear:both;
-}
-.tabs .tab h3{
-  letter-spacing:1px;
-  font-weight:normal;
-  padding:5px;
-}
-.tabs .tab p{
-  line-height:20px;
-  letter-spacing: 1px;
-}
-
-/*active state */
-.active{
-  display:block ;
-}
-.tabs .tabs-list li.active{
-  background-color:lavender;
-  color:black t;
-}
-.active a{
-  color:black ;
-}
-
-/* media query */
-@media screen and (max-width:360px){
-  .tabs{
-      margin:0;
-      width:96%;
-  }
-  .tabs .tabs-list li{
-      width:80px;
-  }
 }
 
 
