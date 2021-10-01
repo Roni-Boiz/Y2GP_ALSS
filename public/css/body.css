@@ -412,7 +412,7 @@ input[type=email]{
   margin: 10px ;
   padding: 5px;
   float:left;
-  border-right:rgb(0, 0, 0) 1px solid;
+  /* border-right:rgb(0, 0, 0) 1px solid; */
 }
 
 .signup_container{
@@ -899,3 +899,20 @@ input[type=email]{
 }
 
 /* End of Admin Styles */
+/* reservation pop up */
+.reservationtime {
+  font-size: small;
+  background-color: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  display: grid;
+}
+.reservationtime select{
+  padding:0 15px ;
+  margin: 15px;
+}
+.reservationtime input{
+  padding:0 15px ;
+  border: 1px solid ;
+}
