@@ -10,20 +10,19 @@ include_once 'sidenav.php';
             <h1 id="title">VISITOR <span id="city">APPROVAL</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <form action="editProfile" class="form1" id="editview" method="post">
+            <div class="card">
+                <form action="#" class="reservationtime" method="GET">
+                    <div id="">
+                        <label for="fname">Name</label><br>
+                        <input type="text" id="fname" name="fname" class="input-field"><br>
+                        <label for="fname">Visiting Date</label><br>
+                        <input type="date" id="fname" name="fname" class="input-field"><br>
+                        <input class="purplebutton" type="submit" name="Submit" value="Send" style="grid-column:2">
+                    </div>
 
-                <input type="hidden" name="res_id" class="input-field" value=<?php ?>>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" class="input-field" value=<?php  ?>><br>
+                </form>
 
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" class="input-field" value=<?php  ?>><br>
-
-                <br>
-                <input type="submit" onclick="confirmSave()" value="Save" style="float:right"><br>
-
-
-            </form>
+            </div>
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
