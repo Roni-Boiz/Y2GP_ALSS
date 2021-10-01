@@ -10,8 +10,31 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody">
 
-
             <div class="card">
+                <form action="#" class="reservationtime" method="GET">
+                    <div id="col1">
+                        <label for="type">Vehicle No</label><br>
+                            <div id="col1">
+                                <label for="fname">Date</label><br>
+                                <input type="date" id="fname" name="fname" class="input-field">
+                            </div>
+                        </select><br>
+                        <label for="type">Start Time</label><br>
+                        <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                            <option value="">Select Time</option>
+                            <?php
+                            for ($hours = 6; $hours < 24; $hours++) {
+                                for ($mins = 0; $mins < 60; $mins += 30) {
+                            ?>
+                                    <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <input class="purplebutton" type="submit" name="Submit" value="View" style="grid-column:2">
+                </form>
                 <?php
                 if ($this->slots->num_rows > 0) { ?>
 
@@ -37,52 +60,54 @@ include_once 'sidenav.php';
 
                 <div class="divPopupModel">
 
-                    <button id="model-btn">Add New</button>
+                    <button id="model-btn" class="purplebutton">Reserve Now</button>
                     <p id="answer"></p>
 
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                     <div id="model">
 
-                        <a href="javascript:void(0)" id="closebtn">&times;</a>
-                        <div style="text-align: center;">
-                            <h1>New Employee<i class="fa fa-user"></i></i></h1>
-                        </div>
 
-                        <form action="#" class="formAddEmployee" method="GET">
+                        <div style="text-align: center;">
+                            <h3>Slot NO<i class="fa fa-car"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                        </div>
+                        <form action="#" class="reservationtime" method="GET">
                             <div id="col1">
-                                <label for="type">Type</label><br>
-                                <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement">
-                                    <option value="manager">Select Employee Type...</option>
-                                    <option value="manager">Manager</option>
-                                    <option value="manager">Reseptionist</option>
-                                    <option value="manager">Parking Officer</option>
-                                    <option value="manager">Trainer</option>
-                                    <option value="manager">Treater</option>
-                                    <option value="manager">Other</option>
+                                <label for="type">Available Time</label><br>8.00:9.00<br><br>
+                                <label for="type">Vehicle No</label><br>
+                                <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                                    <option value="">Select Vehicle</option>
+                                    <option value="endtime">AAA123</option>
+                                    <option value="endtime">ABC123</option>
+                                </select><br>
+                                <label for="type">Start Time</label><br>
+                                <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                                    <option value="">Select Time</option>
+                                    <?php
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </select><br>
+                                <label for="type">End Time</label><br>
+                                <select id="endtime" name="endtime" class="input-field" placeholder="End Time">
+                                    <option value="">Select Time</option>
+                                    <?php
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
-
-                            <div id="col1">
-                                <label for="fname">First Name</label><br>
-                                <input type="text" id="fname" name="fname" class="input-field" placeholder="John">
-                            </div>
-
-                            <div id="col2">
-                                <label for="lname">Last Name</label><br>
-                                <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith">
-                            </div>
-
-                            <div id="col1">
-                                <label for="email">Email Address</label><br>
-                                <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com">
-                            </div>
-
-                            <div id="col2">
-                                <label for="cno">Contact Number</label><br>
-                                <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567">
-                            </div>
-
-                            <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="submit">
+                            <br>
+                            <input class="purplebutton" type="submit" name="Submit" value="Reserve" style="grid-column:1">
                         </form>
                         <!-- <div id="btn-grp" style="grid-column: 1;">
 <button id="yes-btn">Yes</button>
@@ -91,11 +116,8 @@ include_once 'sidenav.php';
                     </div>
 
                 </div>
-
-            </div>
-        </div>
-    </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+            </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .expand div closed here -->
 </body>
 
 </html>
