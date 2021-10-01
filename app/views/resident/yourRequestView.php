@@ -17,18 +17,140 @@ include_once 'sidenav.php';
                     <li><a href="#tab3">Visitors</a></li>
                 </ul>
                 <div id="tab1" class="tab active">
-                    <p style="color:black">
-                        Maintenece
-                    </p>
+                    <div style="overflow-x:auto;grid-column:1/span2">
+                        <?php
+
+                        if ($this->hall->num_rows > 0) { ?>
+                            <table class="table1">
+                                <tr style="background-color:#5747b4">
+                                    <th>Action</th>
+                                    <th>Reservation ID</th>
+                                    <th colspan="3">Reservation</th>
+                                    <th>Reserved Date</th>
+                                    <th>Member</th>
+                                    <th>Type</th>
+                                </tr>
+                                <tr style="background-color:#5747b4">
+                                    <th></th>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+
+                                <?php
+                                while ($row = $this->hall->fetch_assoc()) { ?>
+                                    <tr>
+                                        <td><a href="removeReservation?hallid=<?php echo $row["reservation_id"]; ?>">
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                        <td><?php echo $row["reservation_id"]; ?></td>
+                                        <td><?php echo $row["date"]; ?></td>
+                                        <td><?php echo $row["start_time"]; ?></td>
+                                        <td><?php echo $row["end_time"]; ?></td>
+                                        <td><?php echo $row["reserved_time"]; ?></td>
+                                        <td><?php echo $row["no_of_members"]; ?></td>
+                                        <td><?php echo "\n" . $row["type"]; ?></td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                            </table>
+                    </div>
                 </div>
                 <div id="tab2" class="tab">
-                    <p style="color:black">
-                        Laundry
-                    </p>
+                    <div style="overflow-x:auto;grid-column:1/span2">
+                        <?php
+                        if ($this->fitness->num_rows > 0) { ?>
+                            <table class="table1">
+                                <tr style="background-color:#5747b4">
+                                    <th>Action</th>
+                                    <th>Reservation ID</th>
+                                    <th colspan="3">Reservation</th>
+                                    <th>Reserved Date</th>
+                                    <th>Coach</th>
+
+                                </tr>
+                                <tr style="background-color:#5747b4">
+                                    <th></th>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+
+                                <?php
+                                while ($row = $this->fitness->fetch_assoc()) { ?>
+                                    <tr>
+                                        <td><a href="removeReservation?fitid=<?php echo $row["reservation_id"]; ?>">
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                        <td><?php echo $row["reservation_id"]; ?></td>
+                                        <td><?php echo $row["date"]; ?></td>
+                                        <td><?php echo $row["start_time"]; ?></td>
+                                        <td><?php echo $row["end_time"]; ?></td>
+                                        <td><?php echo $row["reserved_time"]; ?></td>
+                                        <td><?php echo $row["employee_id"]; ?></td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                            </table>
+                    </div>
                 </div>
                 <div id="tab3" class="tab">
                     <p style="color:black">
-                        Visitors
+                    <div style="overflow-x:auto;grid-column:1/span2">
+                        <?php
+
+                        if ($this->treatment->num_rows > 0) { ?>
+                            <table class="table1">
+                                <tr style="background-color:#5747b4">
+                                    <th>Action</th>
+                                    <th>Reservation ID</th>
+                                    <th colspan="3">Reservation</th>
+                                    <th>Reserved Date</th>
+                                    <th>Type</th>
+                                </tr>
+                                <tr style="background-color:#5747b4">
+                                    <th></th>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+
+                                <?php
+                                while ($row = $this->treatment->fetch_assoc()) { ?>
+                                    <tr>
+                                        <td><a href="removeReservation?treatid=<?php echo $row["reservation_id"]; ?>">
+                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                        <td><?php echo $row["reservation_id"]; ?></td>
+                                        <td><?php echo $row["date"]; ?></td>
+                                        <td><?php echo $row["start_time"]; ?></td>
+                                        <td><?php echo $row["end_time"]; ?></td>
+                                        <td><?php echo $row["reserved_time"]; ?></td>
+                                        <td><?php echo "\n" . $row["type"]; ?></td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                            </table>
+                    </div>
                     </p>
                 </div>
             </div>
