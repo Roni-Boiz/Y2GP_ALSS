@@ -10,20 +10,47 @@ include_once 'sidenav.php';
             <h1 id="title">PAYMENT<span id="city"> </span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <form action="editProfile" class="form1" id="editview" method="post">
-
-                <input type="hidden" name="res_id" class="input-field" value=<?php ?>>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" class="input-field" value=<?php  ?>><br>
-
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" class="input-field" value=<?php  ?>><br>
-
-                <br>
-                <input type="submit" onclick="confirmSave()" value="Save" style="float:right"><br>
-
+            <form action="#" class="reservationtime" method="GET">
+                <div id="">
+                    <label for="fname">Total Payable</label><br>
+                    <input type="text" id="fname" name="fname" class="input-field" value="10000.00" READONLY><br>
+                    <label for="fname">Last Payment</label><br>
+                    <input type="text" id="fname" name="fname" class="input-field" value="2000.00" READONLY><br>
+                    <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
+                </div>
 
             </form>
+            <div class="divPopupModel">
+                <p id="answer"></p>
+
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="model">
+
+                    <a href="javascript:void(0)" id="closebtn">&times;</a>
+                    <div style="text-align: center;">
+                        <h3>Pay Bill<i class="fa fa-credit-card"></i></i></h3>
+                    </div>
+
+                    <form action="#" class="reservationtime" method="GET">
+                        <div id="col1">
+                            <label for="fname">Apartment ID</label><br>
+                            <input type="text" id="fname" name="fname" class="input-field" value="AP0001" READONLY>
+                        </div>
+                        <br>
+                        <div id="col2">
+                            <label for="lname">Amount(LKR)</label><br>
+                            <input type="text" id="lname" name="lname" class="input-field" placeholder="" value="10000.00" READONLY>
+                        </div>
+
+                        <input action="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" name="Submit" value="Next">
+                    </form>
+                    <!-- <div id="btn-grp" style="grid-column: 1;">
+<button id="yes-btn">Yes</button>
+<button id="no-btn">No</button>
+</div> -->
+                </div>
+
+            </div>
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
