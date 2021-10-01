@@ -10,24 +10,29 @@ include_once 'sidenav.php';
             <h1 id="title">MAINTENENCE AND TECHNICAL<br> <span id="city">SERVICES</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <form action="editProfile" class="form1" id="editview" method="post">
+            <div class="card">
+                <form action="#" class="reservationtime" method="GET">
 
-                <input type="hidden" name="res_id" class="input-field" value=<?php ?>>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" class="input-field" value=<?php  ?>><br>
-
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" class="input-field" value=<?php  ?>><br>
-
-                <label for="fname">NIC</label>
-                <input type="text" id="nic" name="nic" class="input-field" value=<?php  ?>><br>
-
-                <input type="submit" onclick="confirmSave()" value="Save" style="float:right"><br>
+                    <label for="type">Type</label><br>
+                    <select id="starttime" name="endtime" class="input-field">
+                        <option value="">Select Type</option>
+                        <option value="">Electricity</option>
+                        <option value="">Water</option>
+                    </select><br>
+                    <div id="">
+                        <label for="fname">Prefered Date</label><br>
+                        <input type="date" id="fname" name="fname" class="input-field"><br>
+                        <label for="fname">Description</label><br>
+                        <input type="textarea" id="fname" name="fname" class="input-field"><br>
+                        <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
+                    </div>
+            </div>
 
 
             </form>
 
-        </div> <!-- .hawlockbody div closed here -->
+        </div>
+    </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
 
