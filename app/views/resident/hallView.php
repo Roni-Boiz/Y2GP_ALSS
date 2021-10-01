@@ -10,21 +10,63 @@ include_once 'sidenav.php';
             <h1 id="title">HALL <span id="city">RESERVATION</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="tabs" style="grid-column:1/span3">
-                <ul class="tabs-list">
-                    <li class="active"><a href="#tab1">Conference Hall</a></li>
-                    <li><a href="#tab2">Function Hall</a></li>
-                </ul>
-                <div id="tab1" class="tab active">
-                    <p style="color:black">conference
-                    </p>
+            <div class="divPopupModel">
+
+                <button id="model-btn" class="purplebutton">Reserve Now</button>
+                <p id="answer"></p>
+
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="model">
+
+
+                    <div style="text-align: center;">
+                        <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                    </div>
+
+                    <form action="#" class="reservationtime" method="GET">
+                        <div id="col1">
+                            <label for="fname">No of Members</label><br>
+                            <input type="text" id="fname" name="fname" class="input-field" placeholder="MAX 50">
+                        </div>
+                        <div id="col1">
+                            <label for="type">Start Time</label><br>
+                            <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                                <option value="">Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select><br>
+                            <label for="type">End Time</label><br>
+                            <select id="endtime" name="endtime" class="input-field" placeholder="End Time">
+                                <option value="">Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <br>
+                        <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
+                    </form>
+                    <!-- <div id="btn-grp" style="grid-column: 1;">
+<button id="yes-btn">Yes</button>
+<button id="no-btn">No</button>
+</div> -->
                 </div>
-                <div id="tab2" class="tab">
-                    <p style="color:black">
-                        function
-                    </p>
-                </div>
+
             </div>
+
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
