@@ -1,6 +1,30 @@
 <?php
 include_once 'sidenav.php';
 ?>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script language="javascript">
+    function cancelClicked(hallid) {
+        // function below will run clear.php?h=michael
+        // href="removeReservation?hallid=
+        // echo $row["reservation_id"];
+        $.ajax({
+            type: "GET",
+            url: "removeReservation",
+            data: {
+                hallid: hallid
+            },
+            success: function() {
+
+                // here is the code that will run on client side after running clear.php on server
+
+                // function below reloads current page
+                // location.reload();
+
+            }
+        });
+        console.log(hallid)
+    }
+</script>
 
 <body style="background-color: gray; background-image:none;">
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
@@ -43,7 +67,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->hall->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?hallid=<?php echo $row["reservation_id"]; ?>">
+                                        <td><a onclick="cancelClicked(<?php  echo $row['reservation_id']; ?>)">
                                                 <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>

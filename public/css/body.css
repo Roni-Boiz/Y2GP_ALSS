@@ -928,3 +928,7 @@ input[type=email]{
   font-size:25px;
   padding: 15px;
 }
+.reservationtime input #description{
+  width:100%;
+  padding: 15px;
+}
