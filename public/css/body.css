@@ -35,6 +35,7 @@ body {
   padding: 15px;
   background: var(--main-bg-color);
   color: white;
+  z-index: 1;
 }
 .header h2{
   padding-left: 20px;
@@ -95,6 +96,7 @@ body {
   background: var(--main-bg-color);
   /* background: var(--color2); */
   transition: left 0.4s ease;
+  z-index: 1;
 }
 .sidebar.show{
   left: -200px;
@@ -355,7 +357,7 @@ input[type=email]{
   font-family: 'Poppins', sans-serif;  
 }
 /* table */
-.table1 {
+/* .table1 {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -369,12 +371,11 @@ input[type=email]{
 .table1 td {
   text-align: left;
   padding: 8px;
-  /* border-radius: 15px; */
   border:2px solid white;
 }
 .table1 tr{
   background-color: #927ffc;
-}
+} */
 
 .footer{
 	height: 25px;
@@ -605,7 +606,7 @@ input[type=email]{
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 65px;
   right: 0;
   background-color: whitesmoke;
@@ -633,7 +634,7 @@ input[type=email]{
 }
 #hb,#hh {
   transition: margin-right .5s;
-  padding: 16px;
+  /* padding: 16px; */
 }
 .overlay {
   height: 100%;
@@ -647,6 +648,7 @@ input[type=email]{
   text-align: center;
   opacity: 0;
   transition: opacity 1s;
+  z-index: 2;
 }
 .btnAddAnnouncement {
   width: fit-content;
@@ -747,6 +749,7 @@ input[type=email]{
 
 #model.open {
   animation: open 0.5s forwards;
+  z-index: 2;
 }
 
 #model.close {
