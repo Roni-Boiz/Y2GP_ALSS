@@ -80,3 +80,4 @@
         } 
     }
 </script>
+<script type="text/javascript" src="../../public/js/profile.js"></script>

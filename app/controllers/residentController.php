@@ -52,13 +52,15 @@ class residentController extends controller{
 
     public function yourReservation(){
         $id=$_SESSION['userId'];
-        $this->view->reservation=$this->model->yourReservation($id);
+        $this->view->hall=$this->model->hallReservation($id);
+        $this->view->fitness=$this->model->fitnessReservation($id);
+        $this->view->treatment=$this->model->treatmentReservation($id);
         $this->view->render('resident/yourReservationView');
     }
-    public function removeHall(){
-        $id=$_POST["resid"];
-        $this->model->removeHall($id);
-        $this->yourReservation();
+    public function removeReservation(){
+        $this->model->removeReservation();
+        header("Refresh:0; url=yourReservation");
+        // $this->yourReservation();
     }
 
     public function fitness(){
