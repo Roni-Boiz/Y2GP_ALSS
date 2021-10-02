@@ -406,14 +406,6 @@ input[type=email]{
       width: 200px;
   }
 }
-<<<<<<< HEAD
-@media(max-width:920px) {
-    .hawlockbody{
-        grid-template-columns: 1fr;
-    }
-}
-=======
->>>>>>> 864c4598a2b0aee7a2b2a027560be4f71ca8d2e7
 
 /* parking slot */
 .pslots{
