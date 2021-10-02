@@ -32,7 +32,13 @@ class adminController extends controller
 
     public function employee()
     {
-        $this->view->manager = $this->model->getEmployee(1);
+        $this->view->managers=$this->model->getAllEmployees("manager");
+        $this->view->receptionists=$this->model->getAllEmployees("receptionist");
+        $this->view->parkingOfficers=$this->model->getAllEmployees("parking_officer");
+        $this->view->trainers=$this->model->getAllEmployees("trainer");
+        $this->view->technicians=$this->model->getAllEmployees("technician");
+        $this->view->treaters=$this->model->getAllEmployees("treater");
+        $this->view->laundrys=$this->model->getAllEmployees("treater");
         $this->view->render('admin/employeeView');
     }
 
@@ -119,9 +125,9 @@ class adminController extends controller
                     // Insert image file name into database
                     $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], $fileName);
                     if ($insert) {
-                        $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
+                        $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
                     } else {
-                        $statusMsg = "File upload failed, please try again.";
+                        $statusMsg = "Employee query failed, please try again.";
                     }
                 } else {
                     $statusMsg = "Sorry, there was an error uploading your file.";
@@ -131,7 +137,11 @@ class adminController extends controller
             }
         } else {
             $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL);
-            $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
+            if ($insert) {
+                $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
+            } else {
+                $statusMsg = "Employee query failed, please try again.";
+            }
         }
         // Display status message
         echo $statusMsg;
