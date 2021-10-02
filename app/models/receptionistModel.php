@@ -126,10 +126,10 @@ class receptionistModel extends model {
     //     $result = $this->conn->query($sql);   
     //     return $result;
     // }
-    public function recordParcel($sender,$empid){
+    public function recordParcel($apartment,$empid,$sender){
         $date=date('Y-m-d');
         $time=date('H:i:s');
-        $sql="INSERT INTO parcel (receive_date,receive_time,sender,status,employee_id) VALUES ($date,$time,$sender,1,002) ";
+        $sql="INSERT INTO parcel (receive_date,receive_time,sender,status,employee_id,resident_id) VALUES ($date,$time,$sender,1,002,$apartment) ";
         $this->conn->query($sql);
     }
     public function getInlocker(){

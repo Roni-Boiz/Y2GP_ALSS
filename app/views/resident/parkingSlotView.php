@@ -14,10 +14,10 @@ include_once 'sidenav.php';
                 <form action="#" class="reservationtime" method="GET">
                     <div id="col1">
                         <label for="type">Vehicle No</label><br>
-                            <div id="col1">
-                                <label for="fname">Date</label><br>
-                                <input type="date" id="fname" name="fname" class="input-field">
-                            </div>
+                        <div id="col1">
+                            <label for="fname">Date</label><br>
+                            <input type="date" id="fname" name="fname" class="input-field">
+                        </div>
                         </select><br>
                         <label for="type">Start Time</label><br>
                         <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
@@ -31,9 +31,10 @@ include_once 'sidenav.php';
                                 }
                             }
                             ?>
-                        </select>
+                        </select><br>
+                        <input class="purplebutton" type="submit" name="Submit" value="View" style="grid-column:2">
                     </div>
-                    <input class="purplebutton" type="submit" name="Submit" value="View" style="grid-column:2">
+                    
                 </form>
                 <?php
                 if ($this->slots->num_rows > 0) { ?>
@@ -43,10 +44,10 @@ include_once 'sidenav.php';
                         <a class="pslots" href="#">
                             <?php
                             if ($row["status"]) { ?>
-                                <i class="fas fa-car" style="color:red;font-size:40px"></i>
+                                <button id="model-btn" class="slotbutton"><i class="fas fa-car" style="color:red;font-size:40px"></i></button>
                             <?php echo $row["slot_no"];
                             } else { ?>
-                                <i class="fas fa-car" style="color:green;font-size:40px"></i>
+                                <button id="model-btn" class="slotbutton"><i class="fas fa-car" style="color:green;font-size:40px"></i></button>
                             <?php
                                 echo $row["slot_no"];
                             } ?>
@@ -59,8 +60,6 @@ include_once 'sidenav.php';
                 ?>
 
                 <div class="divPopupModel">
-
-                    <button id="model-btn" class="purplebutton">Reserve Now</button>
                     <p id="answer"></p>
 
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
@@ -68,7 +67,7 @@ include_once 'sidenav.php';
 
 
                         <div style="text-align: center;">
-                            <h3>Slot NO<i class="fa fa-car"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                            <h3>Slot NO 01<i class="fa fa-car"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                         </div>
                         <form action="#" class="reservationtime" method="GET">
                             <div id="col1">

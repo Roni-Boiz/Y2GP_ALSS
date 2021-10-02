@@ -258,7 +258,7 @@ nav i{
 .hawlockbody{
     grid-column: 2;
     display: grid;
-    grid-template-columns: 1fr 2fr 100px;
+    grid-template-columns: 1fr 2fr 150px;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 10px;
@@ -342,11 +342,13 @@ input[type=email]{
   background-color: #2a225a;
   color: white;
   padding: 5px 10px;
-  
+  margin:0;
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  width:fit-content;
 }
+
 .hawlockbody  input[type=submit]:hover {
   background-color: #02000c;
 }
@@ -408,12 +410,16 @@ input[type=email]{
   font-size: 1em;
   width: 80px;
   text-decoration: none;
-  cursor: pointer;
   display: inline-block;
   margin: 10px ;
   padding: 5px;
   float:left;
   /* border-right:rgb(0, 0, 0) 1px solid; */
+}
+.slotbutton{
+  background-color: #ffffff;
+  border: none;
+
 }
 
 .signup_container{
@@ -910,6 +916,8 @@ input[type=email]{
   border-radius: 5px;
   width: 100%;
   display: grid;
+  justify-content: center;
+  margin: auto;
 }
 .reservationtime select{
   padding:0 15px ;
@@ -918,4 +926,8 @@ input[type=email]{
 .reservationtime input{
   padding:0 15px ;
   border: 1px solid ;
+}
+.reservationtime .payicon i{
+  font-size:25px;
+  padding: 15px;
 }
