@@ -111,7 +111,7 @@ class adminController extends controller
         $statusMsg = '';
 
         // File upload path
-        $targetDir = "../uploads/announcement/";
+        $targetDir = "../uploads/profile/employee/";
         $fileName = basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
