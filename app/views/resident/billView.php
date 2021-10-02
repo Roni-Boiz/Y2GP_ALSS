@@ -13,15 +13,15 @@ include_once 'sidenav.php';
             <div class="card">
                 <form action="#" class="reservationtime" method="GET">
                     <div id="">
-                        <label for="type">Year</label><br>
-                        <select id="starttime" name="endtime" class="input-field">
-                            <option value="">Select Year</option>
-                            <option value="">2019</option>
-                            <option value="">2020</option>
-                            <option value="">2021</option>
+                        <label>Year</label><br>
+                        <select name="year" class="input-field">
+                            <option>Select Year</option>
+                            <option>2019</option>
+                            <option>2020</option>
+                            <option>2021</option>
                         </select><br>
                         <label for="type">Month</label><br>
-                        <select id="starttime" name="endtime" class="input-field">
+                        <select name="month" class="input-field">
                             <option value="">Select Month</option>
 
                             <?php
@@ -29,7 +29,7 @@ include_once 'sidenav.php';
                                 $time = strtotime(sprintf('%d months', $i));
                                 $label = date('F', $time);
                                 $value = date('n', $time); ?>
-                                <option value=""><?php echo $value; ?></option>
+                                <option><?php echo $value; ?></option>
                             <?php
                             }
                             ?>
