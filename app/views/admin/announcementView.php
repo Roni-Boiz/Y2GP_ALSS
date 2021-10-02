@@ -42,7 +42,7 @@ include_once 'sidenav.php';
                     </div>
 
                     <label for="file">Add File</label><br>
-                    <input type="file" id="file" name="files[]" required>
+                    <input type="file" id="file" name="files[]">
                     <br><br>
 
                     <input type="submit" name="broadcast" value="Broadcast">
