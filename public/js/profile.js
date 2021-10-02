@@ -198,7 +198,14 @@ function showmembers() {
       $("#showmem").hide();
    }
 }
-
+//payment
+function showcardpayment() {
+   if ($("#cardpayment").is(':hidden')) {
+      $("#cardpayment").show(500);
+   } else {
+      $("#cardpayment").hide();
+   }
+}
 // add announcement slide JS
 
 // btnAddAnnouncement.addEventListener("click", ()=>{
