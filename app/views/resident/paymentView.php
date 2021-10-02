@@ -18,8 +18,29 @@ include_once 'sidenav.php';
                     <input type="text" id="fname" name="fname" class="input-field" value="2000.00" READONLY><br>
                     <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
                 </div>
-
-            </form>
+            </form> <!-- payment form -->
+            <div>
+                <form action="#" class="reservationtime" method="GET" >
+                    <h3>Payment</h3>
+                    <label for="fname">Accepted Cards</label>
+                    <div>
+                        <i class="fab fa-cc-visa" style="color:navy;"></i>
+                        <i class="fab fa-cc-amex" style="color:blue;"></i>
+                        <i class="fab fa-cc-mastercard" style="color:red;"></i>
+                        <i class="fab fa-cc-discover" style="color:orange;"></i>
+                    </div>
+                    <label for="cname">Name on Card</label>
+                    <input type="text" id="cname" class="input-field" name="cardname" placeholder="John More Doe">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" class="input-field" name="cardnumber" placeholder="1111-2222-3333-4444">
+                    <label for="expmonth">Exp Month</label>
+                    <input type="text" id="expmonth" class="input-field" name="expmonth" placeholder="September">
+                    <label for="expyear">Exp Year</label>
+                    <input type="text" id="expyear" class="input-field" name="expyear" placeholder="2018">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" class="input-field" name="cvv" placeholder="352">
+                </form>
+            </div>
             <div class="divPopupModel">
                 <p id="answer"></p>
 
