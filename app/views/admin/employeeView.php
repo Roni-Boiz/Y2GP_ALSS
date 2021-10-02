@@ -77,12 +77,12 @@ include_once 'sidenav.php';
     /* wrapper */
     .wrapper {
         width: 100%;
-        max-width: 1000px;
+        /* max-width: 1000px; */
         margin: 20px auto 1000px auto;
         padding: 0;
         background: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.9);
-        /* overflow: hidden; */
+        overflow: hidden;
         grid-column: 1/ span 3;
         background: rgba(0, 0, 0, 0.9);
         box-sizing: unset;

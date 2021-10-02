@@ -263,7 +263,7 @@ nav i{
     border-radius: 5px;
     padding: 10px;
     margin: 0px 10px 5px 20px;
-    /* align-items: center; */
+    align-items: center;
     min-height: 550px;
 }
 .hawlockbody i,h4{
@@ -638,9 +638,12 @@ input[type=email]{
   font-size: 36px;
   margin-left: 50px;
 }
-#hb,#hh {
+#hb {
   transition: margin-right .5s;
-  /* padding: 16px; */
+  padding: 16px;
+}
+#hh {
+  transition: margin-right .5s;
 }
 .overlay {
   height: 100%;
@@ -660,12 +663,16 @@ input[type=email]{
   width: fit-content;
   grid-column: 3;
 }
-.btnAddAnnouncement i {
+.btnAddAnnouncement img {
   font-size: 30px;
   float: left;
   cursor: pointer;
-  width: min-content;
-  padding: 20px;
+  width: 50px;
+  transition: width .5s;
+  transition-timing-function: ease-out;
+}
+.btnAddAnnouncement img:hover {
+  width: 60px;
 }
 .formAddAnnouncement {
   font-size: small;
@@ -711,12 +718,12 @@ input[type=email]{
 
 /* Employee Styles */
 .divPopupModel {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   width: 100%;
   font-family: "Bree Serif", sans-serif;
+  grid-column: 3;
 }
 
 #model {
