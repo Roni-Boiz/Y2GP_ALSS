@@ -98,6 +98,43 @@ class adminController extends controller
             }
         }
     }
+
+    public function addEmployee()
+    {
+
+        $statusMsg = '';
+
+        // File upload path
+        $targetDir = "../uploads/announcement/";
+        $fileName = basename($_FILES["file"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        if (isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+            // Allow certain file formats
+            $allowTypes = array('jpg', 'png', 'jpeg');
+            if (in_array($fileType, $allowTypes)) {
+                // Upload file to server
+                if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
+                    // Insert image file name into database
+                    $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], $fileName);
+                    if ($insert) {
+                        $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
+                    } else {
+                        $statusMsg = "File upload failed, please try again.";
+                    }
+                } else {
+                    $statusMsg = "Sorry, there was an error uploading your file.";
+                }
+            } else {
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+            }
+        } else {
+            $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL);
+            $statusMsg = "The file " . $fileName . " has been uploaded successfully.";
+        }
+        // Display status message
+        echo $statusMsg;
+        header("Refresh:1; url=employee");
+    }
 }
-
-
