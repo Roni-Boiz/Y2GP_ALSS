@@ -63,28 +63,47 @@ class residentModel extends model {
         return $errors;
     }
     //reservations
-    public function yourReservation($id){
-        //hall
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_date IS NULL";
+    public function hallReservation($id){
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function removeHall($id){
-        //echo $id;
-        $date = date('Y-m-d H:i:s');
-        $sql = "UPDATE hall_reservation SET cancelled_date='$date' WHERE reservation_id='$id' ";
-        $this->conn->query($sql);
-    }
-    public function hallreservation(){
-        //INSERT INTO `fitness_centre_reservation` (`reservation_id`, `date`, `start_time`, `end_time`, `reserved_time`, `cancelled_time`, `fee`, `resident_id`, `employee_id`, `schedule_id`) VALUES ('2', '2021-09-08', '09:06:02', '02:01:00', '2021-09-27 02:00:00', NULL, '200', '1', null, NULL)
-
-        //$sql="insert into hall_reservation value ("3","2008-11-11","13:23:44","15:23:44","2008-11-11 11:12:01","2008-11-11 11:12:01","Hall",10,1000,1)";
+    public function treatmentReservation($id){
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $result = $this->conn->query($sql);
+        return $result;
+    }    
+    public function fitnessReservation($id){
+        $sql = "SELECT * FROM fitness_centre_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function viewSlots(){
         $sql = "SELECT * from parking_slot";
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function removeReservation(){
+        date_default_timezone_set("Asia/Colombo");
+        $date = date('Y-m-d H:i:s');
+        if(isset($_GET["hallid"])){
+            $hallid=$_GET["hallid"];
+            $sql = "UPDATE hall_reservation SET cancelled_time='$date' WHERE reservation_id='$hallid' ";    
+        }
+        else if(isset($_GET["fitid"])){
+            $fitid=$_GET["fitid"];;
+            $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date' WHERE reservation_id='$fitid' ";    
+        }
+        else if(isset($_GET["treatid"])){
+            $treatid=$_GET["treatid"];
+            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date' WHERE reservation_id='$treatid' ";    
+        }
+        if($this->conn->query($sql)){
+            echo "do";
+        }
+    }
+
+
 
 
 
