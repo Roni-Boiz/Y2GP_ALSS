@@ -38,9 +38,15 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getEmployee($empId)
+    public function getEmployee($empType,$empId)
     {
-        $sql = "SELECT * FROM manager WHERE employee_id='{$empId}'";
+        $sql = "SELECT * FROM {$empType} WHERE employee_id='{$empId}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllEmployees($empType)
+    {
+        $sql = "SELECT * FROM {$empType}";
         return $this->conn->query($sql);
     }
 
@@ -61,8 +67,8 @@ class adminModel extends model
         $username = '';
         $password = '';
         $userId = '';
-        if ($empType == 'manager' || $empType == 'reseptionist' || $empType == 'parking' || $empType == 'trainer') {
-            $userType = ($empType == 'manager' ? "MA" : ($empType == 'reseptionist' ? "RE" : ($empType == 'parking' ? "PO" : "TR")));
+        if ($empType == 'manager' || $empType == 'reseptionist' || $empType == 'parking_officer' || $empType == 'trainer') {
+            $userType = ($empType == 'manager' ? "MA" : ($empType == 'reseptionist' ? "RE" : ($empType == 'parking_officer' ? "PO" : "TR")));
             if ($empId < 10) {
                 $username = $userType . '000' . $empId;
                 $password = 'Hawlock@000' . $empId;
@@ -94,17 +100,20 @@ class adminModel extends model
             }
            
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
-            $this->conn->query($sql);
+            $insert = $this->conn->query($sql);
         } else {
-            $sql = "INSERT INTO '{$empType}'(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE()";
-            $this->conn->query($sql);
+            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
+            $insert = $this->conn->query($sql);
         }
         // Commit transaction
         if (!$this->conn->commit()) {
             echo "Commit transaction failed";
-            exit();
+            $this->conn->autocommit(TRUE);
+            return false;
         }
         // Rollback transaction
         $this->conn->rollback();
+        $this->conn->autocommit(TRUE);
+        return $insert;
     }
 }
