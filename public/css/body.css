@@ -359,7 +359,7 @@ input[type=email]{
   font-family: 'Poppins', sans-serif;  
 }
 /* table */
-/* .table1 {
+.table1 {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -377,7 +377,7 @@ input[type=email]{
 }
 .table1 tr{
   background-color: #927ffc;
-} */
+}
 
 .footer{
 	height: 25px;
@@ -996,13 +996,13 @@ input[type=email]{
 }
 
 .card3 {
-  background: radial-gradient(#1fe4f5, #3fbafe);
+  background: radial-gradient(#155796, #480b81);
 }
 
 /* RESPONSIVE */
 
-@media (max-width
+/* @media (max-width
 .reservationtime input #description{
   width:100%;
   padding: 15px;
-}
+} */

@@ -142,7 +142,7 @@ class receptionistModel extends model {
         $sql5="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
         $userid=mysqli_fetch_assoc($this->conn->query($sql5));
         $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
-        '$notification',{$userid["user_id"]},0)";
+        '$notification',{$userid["user_id"]},5)";
         $this->conn->query($sql6);
     }
     // public function sendParcel($apartment){
@@ -167,6 +167,14 @@ class receptionistModel extends model {
         $sql="SELECT * FROM parcel WHERE status=2";
         $result= $this->conn->query($sql);
         return $result;
+    }
+    public function putReachedAway($pid){
+        $sql="UPDATE parcel SET status=3 WHERE parcel_id=$pid";
+        $this->conn->query($sql);
+    }
+    public function deleteParcel($pid){
+        $sql="DELETE FROM parcel WHERE parcel_id=$pid";
+        $this->conn->query($sql);
     }
     
 }
