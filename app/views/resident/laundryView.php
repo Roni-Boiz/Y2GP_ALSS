@@ -48,7 +48,7 @@ include_once 'sidenav.php';
                             <option value="">more than 10</option>
                         </select><br>
                         <label>Description</label><br>
-                        <input type="textarea" style="margin:10px 0;width:100%;min-height:60px" name="description" ><br>
+                        <input type="textarea"  name="description" id="description"><br>
                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
                     </div>
 

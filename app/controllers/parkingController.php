@@ -9,10 +9,11 @@ class parkingController extends controller{
         $this->loadModel('parkingModel');
         session_start();
         if(!isset($_SESSION['type'])){
-            header('Location:logout');
+            header('Location:../homeController/logout');
             }
             else if($_SESSION['type']!='parkingofficer'){
-            header('Location:logout');
+            header('Location:../homeController/logout');
+
         }
     
     }
