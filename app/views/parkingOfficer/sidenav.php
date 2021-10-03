@@ -21,7 +21,7 @@
             <h2>AlSS</h2>
             <div class="head">
                 <ul>
-                    <li class="dropdown"><a href="#"><i class="fa fa-user-circle"></i></a>
+                    <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/blank-profile.png'"></a>
                         <ul>
                             <li><a href="#"></li><i class="fa fa-user"></i>Profile</a>
                     </li>
