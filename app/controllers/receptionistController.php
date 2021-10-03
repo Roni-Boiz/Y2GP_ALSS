@@ -49,8 +49,9 @@ class receptionistController extends controller{
     //     $this->view->render('resident/residentView');
     // }
     public function parcels(){
-        if(isset($_POST["Save"])){
-            $this->model->recordParcel($_POST["apartmentId"],002,$_POST["sender"]);
+        if(isset($_POST["apartmentId"]) and isset($_POST["apartmentId"])) {
+            $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"]);
+            // $this->model->sendParcel($_POST["apartmentId"]);
         }    
         $this->view->inLocker=$this->model->getInlocker();
         $this->view->reached=$this->model->getReached();

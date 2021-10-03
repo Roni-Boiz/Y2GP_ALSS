@@ -126,12 +126,34 @@ class receptionistModel extends model {
     //     $result = $this->conn->query($sql);   
     //     return $result;
     // }
-    public function recordParcel($apartment,$empid,$sender){
+    public function recordParcel($apartment,$sender){
+        date_default_timezone_set("Asia/Colombo");
         $date=date('Y-m-d');
         $time=date('H:i:s');
-        $sql="INSERT INTO parcel (receive_date,receive_time,sender,status,employee_id,resident_id) VALUES ($date,$time,$sender,1,002,$apartment) ";
-        $this->conn->query($sql);
+        $sql="SELECT resident_id FROM resident WHERE apartment_no='$apartment'";
+        $resid=mysqli_fetch_assoc($this->conn->query($sql));
+        $sql2="SELECT employee_id FROM receptionist WHERE user_id={$_SESSION['userId']} LIMIT 1";
+        $empid=mysqli_fetch_assoc($this->conn->query($sql2));
+        $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]}) ";
+        $this->conn->query($sql3);
+        $sql4="SELECT receive_date,receive_time,sender FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
+        $description=mysqli_fetch_assoc($this->conn->query($sql4));
+        $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}";
+        $sql5="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
+        $userid=mysqli_fetch_assoc($this->conn->query($sql5));
+        $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+        '$notification',{$userid["user_id"]},0)";
+        $this->conn->query($sql6);
     }
+    // public function sendParcel($apartment){
+    //     $date=date('Y-m-d');
+    //     $time=date('H:i:s');
+    //     $sql="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
+    //     $userid=mysqli_fetch_assoc($this->conn->query($sql));
+    //     $sql2="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+    //     'notification for parcel',{$userid["user_id"]},0)";
+    //     $this->conn->query($sql2);
+    // }
     public function getInlocker(){
         $sql="SELECT * FROM parcel WHERE status=1";
         $result= $this->conn->query($sql);

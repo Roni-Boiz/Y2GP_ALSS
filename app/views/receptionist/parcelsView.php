@@ -15,18 +15,25 @@
             <li ><a href="#tab3">Reached</a></li>
         </ul>
         <div id="tab1" class="tab active">
-        <form action="recordParcel" class="form1" method="post">
-                <label for="Apartment ID">Apartment Id</label>
+        <div class="card">
+                <form action="parcels" class="reservationtime" method="post" >
+                <div>
+                <label for="Apartment ID">Apartment Id</label><br>
                 <input type="text" class="input-field" name="apartmentId" id="apartmentId">
                 <br><br>
-                <label for="Sender">Sender</label>
+                <label for="Sender">Sender</label><br>
                 <input type="text" class="input-field" name="sender" id="sender">
                 <br><br>
-                <label for="Description">Description</label>
-                <textarea class="input-field" style=" border-radius: 15px; background-color: #f0f0f0;" name="description" id="" cols="30" rows="10">Your text...</textarea><br>
-                <input class="purplebutton" value="Save" type="submit" style="float:right" onclick="confirmSave()">save</button>
+                <label for="Description">Description</label><br>
+                <textarea style="margin:10px 0;width:100%;min-height:60px; border-radius: 15px; border:1px black solid; background-color: #f0f0f0;"
+                name="description" id="" cols="30" rows="10">Your text...</textarea><br>
+                <input class="purplebutton" value="Save" type="submit" style="float:right">save</button>
+                </div>
             </form>
+                
         </div>
+        </div>
+        <!-- </div> -->
         <div id="tab2" class="tab">
         <?php    
         if ($this->inLocker->num_rows > 0){?>
@@ -109,7 +116,7 @@
             ?>
             </table>
         </div>
-    <!-- </div> -->
+    </div>
 
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
