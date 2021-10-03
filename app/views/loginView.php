@@ -191,7 +191,7 @@ input[type=submit]:hover {
   margin: auto;
   margin-bottom: 50px;
   width:90%;
-  height: 375px;
+  height: 400px;
 }
 .logincontainer:hover .photo {
   transform: scale(1.3) rotate(3deg);

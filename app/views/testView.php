@@ -304,24 +304,31 @@
 
 <div class="card1" style="grid-column:2">
 	<div class="data">
-		<div class="photo" style="background-image:url(../../public/img/1.jpg);"></div>
+		<div class="photo" style="background-image:url(../../public/img/gym.jpg);"></div>
 		<ul class="details">
 			<li class="author">12.10</li>
 			<li class="date">Aug. 24, 2015</li>
 		</ul>
 	</div>
 	<div class="description">
-		<h1 style="color:indigo;font-weight:bold;font-size:3rem;text-align:center">Login</h1>
-    <form action="#" class="form1" id="view" style="margin:20%">
-            <label for="fname">USERNAME</label><br>
-            <input type="text" id="fname" name="firstname" class="input-field" placeholder="ALSS"><br>
+  <form action="#" class="reservationtime" method="GET">
+                    <div id="">
+                        <label>Date</label><br>
+                        <input type="date" name="date" class="input-field"><br>
+                        <label>Coach</label><br>
+                        <select name="type" class="input-field">
+                            <option value="">Select coach</option>
+                            <option value="">coach 1</option>
+                            <option value="">coach 1</option>
+                            <option value="">coach 1</option>
+                            <option value="">coach 1</option>
+                        </select><br>
+                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                        Reservations of the day<br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>
+                        <button id="model-btn" class="purplebutton">Reserve Now</button>
 
-            <label for="fname">PASSWORD</label><br>
-            <input type="text" id="fname" name="firstname" class="input-field" placeholder="123456789v"><br>
-            <input type="submit" class="purplebutton" value="login">
-          </form>		<p class="read-more">
-			<a href="#">Forgot password</a>
-		</p>
+                    </div>
+                </form>
 	</div>
 </div>
 <!--  -->
