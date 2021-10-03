@@ -8,8 +8,8 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">PARKING SLOT <span id="city">RESERVATION</span></h1>
         </div>
-        <div id="hb" class="hawlockbody">
-            <div class="card1" style="grid-column:1/span2;min-height:300px">
+        <div id="hb" class="hawlockbody" >
+            <div class="card1" style="grid-column:1/span2;min-height:300px;max-width:100%">
                 <div class="data">
                     <div class="photo" style="background-image:url(../../public/img/park.jpg);"></div>
                     <ul class="details">
@@ -18,10 +18,9 @@ include_once 'sidenav.php';
                         <li class="date"><?php echo  date("F j, Y");  ?></li>
                     </ul>
                 </div>
-                <div class="description">
+                <div class="description" >
                     <form action="#" class="reservationtime" method="GET">
                         <div id="col1">
-                            <label>Vehicle No</label><br>
                             <div>
                                 <label>Date</label><br>
                                 <input type="date" name="date" class="input-field">
@@ -45,8 +44,8 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
-            <div class="card">
-                <h1 style="margin:10px">Current Allocation</h1>
+            <div class="card" style="padding:auto;">
+                <h3 style="margin:10px">Current Allocation</h3>
 
 
                 <?php
