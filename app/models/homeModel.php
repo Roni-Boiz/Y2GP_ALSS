@@ -28,11 +28,13 @@ class homeModel extends model {
        if(strlen(trim($sqlfreeusername))< 1 )
        {
            $errors[] = 'Enter a valid Username';
+        return $errors;
        }
 
        if(strlen(trim($sqlfreepassword)) < 8 )
        {
            $errors[] = 'Enter a valid Password';
+        return $errors;
        }
     //    echo $password;
     //    echo $hash2password;
@@ -66,7 +68,6 @@ class homeModel extends model {
                 }
             } else {
                 $errors[] = 'Database query failed';
-                
             }
         }
         return $errors;
