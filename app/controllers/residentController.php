@@ -103,4 +103,8 @@ class residentController extends controller{
     public function visitor(){
         $this->view->render('resident/visitorView');
     }
+    public function getNotification(){
+        $this->view->notification=$this->model->readNotification();
+        $this->view->render('resident/notificationView');
+    }
 }

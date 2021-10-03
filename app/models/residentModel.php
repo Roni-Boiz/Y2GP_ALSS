@@ -102,6 +102,11 @@ class residentModel extends model {
             echo "do";
         }
     }
+    public function readNotification(){
+        $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ";
+        return ($this->conn->query($sql));
+    }
+
 
 
 
