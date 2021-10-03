@@ -13,14 +13,14 @@ include_once 'sidenav.php';
             <div class="card">
                 <form action="#" class="reservationtime" method="GET">
                     <div id="col1">
-                        <label for="type">Vehicle No</label><br>
-                        <div id="col1">
-                            <label for="fname">Date</label><br>
-                            <input type="date" id="fname" name="fname" class="input-field">
+                        <label>Vehicle No</label><br>
+                        <div>
+                            <label>Date</label><br>
+                            <input type="date" name="date" class="input-field">
                         </div>
                         </select><br>
-                        <label for="type">Start Time</label><br>
-                        <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                        <label>Start Time</label><br>
+                        <select name="time" class="input-field" placeholder="Start Time">
                             <option value="">Select Time</option>
                             <?php
                             for ($hours = 6; $hours < 24; $hours++) {
@@ -34,7 +34,7 @@ include_once 'sidenav.php';
                         </select><br>
                         <input class="purplebutton" type="submit" name="Submit" value="View" style="grid-column:2">
                     </div>
-                    
+
                 </form>
                 <?php
                 if ($this->slots->num_rows > 0) { ?>
@@ -71,16 +71,16 @@ include_once 'sidenav.php';
                         </div>
                         <form action="#" class="reservationtime" method="GET">
                             <div id="col1">
-                                <label for="type">Available Time</label><br>8.00:9.00<br><br>
-                                <label for="type">Vehicle No</label><br>
-                                <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
-                                    <option value="">Select Vehicle</option>
-                                    <option value="endtime">AAA123</option>
-                                    <option value="endtime">ABC123</option>
+                                <label>Available Time</label><br>8.00:9.00<br><br>
+                                <label>Vehicle No</label><br>
+                                <select name="vehicleno" class="input-field" placeholder="Start Time">
+                                    <option>Select Vehicle</option>
+                                    <option>AAA123</option>
+                                    <option>ABC123</option>
                                 </select><br>
-                                <label for="type">Start Time</label><br>
+                                <label>Start Time</label><br>
                                 <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
-                                    <option value="">Select Time</option>
+                                    <option>Select Time</option>
                                     <?php
                                     for ($hours = 6; $hours < 24; $hours++) {
                                         for ($mins = 0; $mins < 60; $mins += 30) {
@@ -92,8 +92,8 @@ include_once 'sidenav.php';
                                     ?>
                                 </select><br>
                                 <label for="type">End Time</label><br>
-                                <select id="endtime" name="endtime" class="input-field" placeholder="End Time">
-                                    <option value="">Select Time</option>
+                                <select name="endtime" class="input-field" placeholder="End Time">
+                                    <option>Select Time</option>
                                     <?php
                                     for ($hours = 6; $hours < 24; $hours++) {
                                         for ($mins = 0; $mins < 60; $mins += 30) {

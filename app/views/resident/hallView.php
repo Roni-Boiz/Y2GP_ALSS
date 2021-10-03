@@ -25,25 +25,25 @@ include_once 'sidenav.php';
 
                     <form action="#" class="reservationtime" method="GET">
                         <div id="col1">
-                            <label for="fname">No of Members</label><br>
-                            <input type="text" id="fname" name="fname" class="input-field" placeholder="MAX 50">
+                            <label>No of Members</label><br>
+                            <input type="text" name="members" class="input-field" placeholder="MAX 50">
                         </div>
                         <div id="col1">
-                            <label for="type">Start Time</label><br>
-                            <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
+                            <label>Start Time</label><br>
+                            <select name="starttime" class="input-field" placeholder="Start Time">
                                 <option value="">Select Time</option>
                                 <?php
                                 for ($hours = 6; $hours < 24; $hours++) {
                                     for ($mins = 0; $mins < 60; $mins += 30) {
                                 ?>
-                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                        <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
                                 <?php
                                     }
                                 }
                                 ?>
                             </select><br>
-                            <label for="type">End Time</label><br>
-                            <select id="endtime" name="endtime" class="input-field" placeholder="End Time">
+                            <label>End Time</label><br>
+                            <select name="endtime" class="input-field" placeholder="End Time">
                                 <option value="">Select Time</option>
                                 <?php
                                 for ($hours = 6; $hours < 24; $hours++) {

@@ -13,17 +13,17 @@ include_once 'sidenav.php';
             <div class="card">
                 <form action="#" class="reservationtime" method="GET">
                     <div id="">
-                        <label for="fname">Total Payable</label><br>
-                        <input type="text" id="fname" name="fname" class="input-field" value="10000.00" READONLY><br>
-                        <label for="fname">Last Payment</label><br>
-                        <input type="text" id="fname" name="fname" class="input-field" value="2000.00" READONLY><br>
+                        <label>Total Payable</label><br>
+                        <input type="text" name="payable" class="input-field" value="10000.00" READONLY><br>
+                        <label>Last Payment</label><br>
+                        <input type="text" name="lastpay" class="input-field" value="2000.00" READONLY><br>
                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
                     </div>
                 </form> <!-- payment form -->
                 <div>
                     <form action="#" class="reservationtime" method="GET" id="cardpayment" style="">
                         <h3>Payment</h3>
-                        <label for="fname">Accepted Cards</label>
+                        <label>Accepted Cards</label>
                         <div class="payicon">
                             <i class="fab fa-cc-visa" style="color:navy;"></i>
                             <i class="fab fa-cc-amex" style="color:blue;"></i>
@@ -55,13 +55,13 @@ include_once 'sidenav.php';
 
                         <form action="#" class="reservationtime" method="GET">
                             <div id="col1">
-                                <label for="fname">Apartment ID</label><br>
-                                <input type="text" id="fname" name="fname" class="input-field" value="AP0001" READONLY>
+                                <label>Apartment ID</label><br>
+                                <input type="text" name="apartmentid" class="input-field" value="AP0001" READONLY>
                             </div>
                             <br>
                             <div id="col2">
                                 <label for="lname">Amount(LKR)</label><br>
-                                <input type="text" id="lname" name="lname" class="input-field" placeholder="" value="10000.00" READONLY>
+                                <input type="text" name="amt" class="input-field" placeholder="" value="10000.00" READONLY>
                             </div>
 
                             <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next">

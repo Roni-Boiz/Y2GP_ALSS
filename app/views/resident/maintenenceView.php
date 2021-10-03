@@ -14,16 +14,18 @@ include_once 'sidenav.php';
                 <form action="#" class="reservationtime" method="GET">
 
                     <label for="type">Type</label><br>
-                    <select id="starttime" name="endtime" class="input-field">
-                        <option value="">Select Type</option>
-                        <option value="">Electricity</option>
-                        <option value="">Water</option>
+                    <select  name="type" class="input-field">
+                        <option >Select Type</option>
+                        <option >Electricity</option>
+                        <option >Painting</option>
+                        <option >AC</option>
+                        <option >Other</option>
                     </select><br>
                     <div id="">
-                        <label for="fname">Prefered Date</label><br>
-                        <input type="date" id="fname" name="fname" class="input-field"><br>
-                        <label for="fname">Description</label><br>
-                        <input type="textarea" id="fname" name="fname" class="input-field"><br>
+                        <label >Prefered Date</label><br>
+                        <input type="date"  name="date" class="input-field"><br>
+                        <label >Description</label><br>
+                        <input type="textarea" name="description" class="input-field"><br>
                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
                     </div>
             </div>

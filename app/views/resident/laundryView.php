@@ -14,7 +14,7 @@ include_once 'sidenav.php';
                 <form action="#" class="reservationtime" method="GET">
                     <div id="">
                         <label for="type">Type</label><br>
-                        <select id="starttime" name="endtime" class="input-field">
+                        <select name="type" class="input-field">
                             <option value="">Select Type</option>
                             <option value="">Quick</option>
                             <option value="">Regular</option>
@@ -23,32 +23,32 @@ include_once 'sidenav.php';
                     </div>
                     <div id="">
                         </select>
-                        <label for="type">Category 1</label><br>
-                        <input type="text" id="fname" name="fname" class="input-field" placeholder="Enter quantity">
-                        <select id="starttime" name="endtime" class="input-field">
+                        <label>Category 1</label><br>
+                        <input type="text" name="quantity1" class="input-field" placeholder="Enter quantity">
+                        <select name="catw1" class="input-field">
                             <option value="">Select weight</option>
                             <option value="">1-5</option>
                             <option value="">5-10</option>
                             <option value="">more than 10</option>
                         </select><br>
-                        <label for="type">Category 2</label><br>
-                        <input type="text" id="fname" name="fname" class="input-field" placeholder="Enter quantity">
-                        <select id="starttime" name="endtime" class="input-field">
+                        <label>Category 2</label><br>
+                        <input type="text" name="quantity2" class="input-field" placeholder="Enter quantity">
+                        <select  name="catw2" class="input-field">
                             <option value="">Select weight</option>
                             <option value="">1-5</option>
                             <option value="">5-10</option>
                             <option value="">more than 10</option>
                         </select><br>
-                        <label for="type">Category 3</label><br>
-                        <input type="text" id="fname" name="fname" class="input-field" placeholder="Enter quantity">
-                        <select id="starttime" name="endtime" class="input-field">
+                        <label>Category 3</label><br>
+                        <input type="text" name="quantity3" class="input-field" placeholder="Enter quantity">
+                        <select  name="catw3" class="input-field">
                             <option value="">Select weight</option>
                             <option value="">1-5</option>
                             <option value="">5-10</option>
                             <option value="">more than 10</option>
                         </select><br>
-                        <label for="fname">Description</label><br>
-                        <input type="textarea" id="fname" name="fname" class="input-field"><br>
+                        <label>Description</label><br>
+                        <input type="textarea" style="margin:10px 0;width:100%;min-height:60px" name="description" ><br>
                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
                     </div>
 
