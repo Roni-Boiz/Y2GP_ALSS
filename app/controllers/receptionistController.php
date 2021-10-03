@@ -9,10 +9,10 @@ class receptionistController extends controller{
         $this->loadModel('receptionistModel');
         session_start();
         if(!isset($_SESSION['type'])){
-        header('Location:logout');
+        header('Location:../homeController/logout');
         }
         else if($_SESSION['type']!='receptionist'){
-        header('Location:logout');
+        header('Location:../homeController/logout');
         }
     }
 

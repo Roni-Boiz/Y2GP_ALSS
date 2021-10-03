@@ -12,9 +12,9 @@ class adminController extends controller
         session_start();
         $this->loadModel('adminModel');
         if (!isset($_SESSION['type'])) {
-            header('Location:logout');
+            header('Location:../homeController/logout');
         } else if ($_SESSION['type'] != 'admin') {
-            header('Location:logout');
+            header('Location:../homeController/logout');
         }
     }
 

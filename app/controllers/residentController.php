@@ -8,10 +8,10 @@ class residentController extends controller{
         parent::__construct();
         session_start();
         if(!isset($_SESSION['type'])){
-            header('Location:logout');
+            header('Location:../homeController/logout');
             }
             else if($_SESSION['type']!='resident'){
-            header('Location:logout');
+                header('Location:../homeController/logout');
         }
     
         $this->loadModel('residentModel');

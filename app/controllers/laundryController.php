@@ -9,10 +9,10 @@ class laundryController extends controller{
         $this->loadModel('laundryModel');
         session_start();
         if(!isset($_SESSION['type'])){
-            header('Location:logout');
+            header('Location:../homeController/logout');
             }
             else if($_SESSION['type']!='laundry'){
-            header('Location:logout');
+            header('Location:../homeController/logout');
         }
     }
 
