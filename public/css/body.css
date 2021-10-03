@@ -167,6 +167,24 @@ nav ul .dropdown:hover ul{
 nav i{
     padding: 5px;
 }
+#mySearch {
+  width: 100%;
+  font-size: 18px;
+  padding: 11px;
+  border: 1px solid #ddd;
+}
+.sidebar .search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+.sidebar .search i {
+  width: 50px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  margin: auto;
+}
 /* card1 */
 .card {
   grid-column:1/span3;
@@ -413,7 +431,7 @@ input[type=email]{
   display: inline-block;
   margin: 10px ;
   padding: 5px;
-  float:left;
+  float: left;
   /* border-right:rgb(0, 0, 0) 1px solid; */
 }
 .slotbutton{

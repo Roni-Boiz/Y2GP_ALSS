@@ -1,21 +1,39 @@
 
-// add announcement slide JS
 
+//  Search Bar
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("mySearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myMenu");
+  li = ul.getElementsByTagName("li");
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+///////////////////////////////////////////////////////
+
+// add announcement slide JS
 // btnAddAnnouncement.addEventListener("click", ()=>{
 //     openNav(); openOffcanvas();
 // })
-
 function openOffcanvas() {
     document.getElementById("mySidenavform").style.width = "400px";
     document.getElementById("hh").style.marginRight = "410px";
     document.getElementById("hb").style.marginRight = "410px";
 }
-
 function openNav() {
     document.getElementById("myCanvasNav").style.width = "100%";
     document.getElementById("myCanvasNav").style.opacity = "0.8";
 }
-
 function closeOffcanvas() {
     document.getElementById("mySidenavform").style.width = "0%";
     document.getElementById("hh").style.marginRight = "10px";

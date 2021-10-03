@@ -34,7 +34,12 @@
         </div>
     
         <nav class="sidebar" id="side">
-            <ul>
+            <div class="search">
+                <i class="fa fa-search"></i>
+                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+            </div>
+        
+            <ul id="myMenu">  
                 <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
                 
                 <li class="dropdown"><a href="user"><i class="fas fa-user-cog"></i>USERS</a>
@@ -71,6 +76,7 @@
             document.getElementById("hh").style.marginLeft="20px";
             document.getElementById("hb").style.marginLeft="20px";
             document.getElementById("side").style.transform="initial";
+
         }else{
             document.getElementById("hh").style.gridColumn="1 / span 3";
             document.getElementById("hb").style.gridColumn="1 / span 3"; 
