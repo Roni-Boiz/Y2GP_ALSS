@@ -20,7 +20,7 @@
                     <?php
                     if($row['view']==5){ ?>
                     <p class="card__apply">
-                        <a class="card__link" href="#">Marks as Reached</a>
+                        <a class="card__link" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as Reached</a>
                     </p>
                     <?php } ?>
                     </div>
