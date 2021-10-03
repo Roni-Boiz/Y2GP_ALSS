@@ -10,6 +10,7 @@ include_once 'sidenav.php';
             <h1 id="title">HALL <span id="city">RESERVATION</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
+            
             <div class="divPopupModel">
 
                 <button id="model-btn" class="purplebutton">Reserve Now</button>

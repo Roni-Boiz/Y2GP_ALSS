@@ -10,9 +10,31 @@ include_once 'sidenav.php';
             <h1 id="title">TREATMENT ROOM <br><span id="city">RESERVATION</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="divPopupModel">
+            <div class="card1" style="grid-column:1/span2;margin:auto">
+                <div class="data">
+                    <div class="photo" style="background-image:url(../../public/img/treatment.jpg);"></div>
+                    <ul class="details">
+                        <?php date_default_timezone_set("Asia/Colombo"); ?>
+                        <li class="author"><?php echo date("H:i"); ?> </li>
+                        <li class="date"><?php echo  date("F j, Y");  ?></li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <form action="#" class="reservationtime" method="GET">
+                        <div id="">
+                            <label>Date</label><br>
+                            <input type="date" name="date" class="input-field"><br>
 
-                <button id="model-btn" class="purplebutton">Reserve Now</button>
+                            <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                            Reservations of the day<br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>
+                            <button id="model-btn" class="purplebutton">Reserve Now</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+   
+            <div class="divPopupModel">
                 <p id="answer"></p>
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
@@ -72,7 +94,7 @@ include_once 'sidenav.php';
                 </div>
 
             </div>
-            </form>
+
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
