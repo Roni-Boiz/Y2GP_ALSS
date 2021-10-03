@@ -19,9 +19,10 @@ class homeModel extends model {
     }
 
     public function readLogin($username, $password){
-
-       $errors = array();
-               // check for the sql queries
+        $errors = array();
+        date_default_timezone_set("Asia/Colombo");
+        $time= date('Y-m-d H:i:sa', time());
+                       // check for the sql queries
         $sqlfreeusername = mysqli_real_escape_string($this->conn, $username);
         $sqlfreepassword = mysqli_real_escape_string($this->conn, $password);
  
@@ -36,41 +37,92 @@ class homeModel extends model {
            $errors[] = 'Enter a valid Password';
         return $errors;
        }
-    //    echo $password;
-    //    echo $hash2password;
-
-    if (empty($errors)){
-
-
 
         //hashing the password
         $hashpassword = sha1($sqlfreepassword);
         $hash2password= sha1($hashpassword);
+    //    echo $password;
+    //    echo $hash2password;
 
-        $sql = "SELECT * FROM user_account WHERE user_name='{$sqlfreeusername}' AND Password='{$hash2password}' limit 1";
-        $resultSet = mysqli_query($this->conn, $sql);
+        $query12 = "SELECT TIMESTAMPDIFF(MINUTE,hold_time,CURRENT_TIMESTAMP) as minutes FROM user_account WHERE user_name='{$sqlfreeusername}' LIMIT 1 ";
+        $resultHold1 = mysqli_query($this->conn, $query12);
+        $res = mysqli_fetch_assoc($resultHold1);
 
-            if ($resultSet) {
-                //query successfull
-
-                    if ( mysqli_num_rows ($resultSet) == 1) 
-                {
-                    //valid user found
-                    $user = mysqli_fetch_assoc($resultSet);
-                    session_start();
-                    $_SESSION['userId'] = $user['user_id'] ;
-                    $_SESSION['userName'] = $user['user_name'];
-                    $_SESSION['type'] = $user['type'];
-
-                } else {
-                    $errors[] = 'Invalid Username or Password';
-                    
-                }
-            } else {
-                $errors[] = 'Database query failed';
-            }
+        if(isset($res) && $res['minutes'] >= 20){
+            $timeresetQuery = "UPDATE user_account SET hold ='0' WHERE user_name='{$sqlfreeusername}' limit 1";
+            $timeReset = mysqli_query($this->conn, $timeresetQuery);
         }
-        return $errors;
-   }
+
+        $dbHold = "SELECT hold FROM user_account WHERE user_name='{$sqlfreeusername}' limit 1";
+        $resultHold = mysqli_query($this->conn, $dbHold);
+        $hold = mysqli_fetch_assoc($resultHold);
+
+        if(isset($hold) && $hold['hold']==5){
+
+            $timeDiff = 20 - $res['minutes'];
+
+            $sql = "SELECT * FROM user_account WHERE user_name='{$sqlfreeusername}' AND Password='{$hash2password}' limit 1";
+                $resultSet = mysqli_query($this->conn, $sql);
+
+                    if ($resultSet) {
+                            if ( mysqli_num_rows ($resultSet) == 1) 
+                        {
+                            $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                            return $errors;
+                        } 
+                        else {
+                            $addHold = "UPDATE user_account SET hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
+                            $resultAdd = mysqli_query($this->conn, $addHold);
+                            $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                            return $errors;
+                            }
+                        }
+        }
+
+        else{
+            if (empty($errors)){
+
+                $sql = "SELECT * FROM user_account WHERE user_name='{$sqlfreeusername}' AND Password='{$hash2password}' limit 1";
+                $resultSet = mysqli_query($this->conn, $sql);
+
+                    if ($resultSet) {
+                        //query successfull
+
+                            if ( mysqli_num_rows ($resultSet) == 1) 
+                        {
+                            $removeHold = "UPDATE user_account SET hold = '0' WHERE user_name='{$sqlfreeusername}' limit 1";
+                            $resultRemove = mysqli_query($this->conn, $removeHold);
+                            //valid user found
+                            $user = mysqli_fetch_assoc($resultSet);
+                            session_start();
+                            $_SESSION['userId'] = $user['user_id'] ;
+                            $_SESSION['userName'] = $user['user_name'];
+                            $_SESSION['type'] = $user['type'];
+
+                        } else {
+                            $errors[] = 'Invalid Username or Password';
+                            if(isset($hold['hold']) && $hold['hold']>=2){
+                                $attempt = $hold['hold']+1;
+                                $addHold = "UPDATE user_account SET hold = '{$attempt}', hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
+                                $resultSet = mysqli_query($this->conn, $addHold);
+                                header('Location:fogotPassword');
+                                return $errors;
+                            }
+                            else if(isset($hold['hold']) && $hold['hold']>=0){
+                                $attempt = $hold['hold']+1;
+                                // date_timezone_set(asia, Colombo);
+                                $addHold = "UPDATE user_account SET hold = '{$attempt}', hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
+                                $resultAdd = mysqli_query($this->conn, $addHold);
+                                return $errors;
+                            }
+                            
+                        }
+                    } else {
+                        $errors[] = 'Database query failed';
+                    }
+                }
+                return $errors;
+                }
+        }
 }
 ?>
