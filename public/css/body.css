@@ -1003,10 +1003,16 @@ input[type=email]{
 }
 
 .card3 {
-  background: radial-gradient(#1fe4f5, #3fbafe);
+  background: radial-gradient(#155796, #480b81);
 }
 
+.reservationtime #description{
+  width:100%;
+  padding: 15px;
+  margin:10px 0;
+  min-height:60px
 
+} 
 /* reservation card */
 .card1 {
   /* margin:auto; */
