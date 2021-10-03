@@ -9,10 +9,11 @@ class managerController extends controller{
         session_start();
         $this->loadModel('managerModel');
         if(!isset($_SESSION['type'])){
-            header('Location:logout');
+            header('Location:../homeController/logout');
             }
             else if($_SESSION['type']!='manager'){
-            header('Location:logout');
+            header('Location:../homeController/logout');
+
         }
     }
 

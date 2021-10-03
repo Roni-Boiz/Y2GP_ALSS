@@ -9,10 +9,10 @@ class receptionistController extends controller{
         $this->loadModel('receptionistModel');
         session_start();
         if(!isset($_SESSION['type'])){
-        header('Location:logout');
+        header('Location:../homeController/logout');
         }
         else if($_SESSION['type']!='receptionist'){
-        header('Location:logout');
+        header('Location:../homeController/logout');
         }
     }
 
@@ -35,6 +35,7 @@ class receptionistController extends controller{
         $email = $_POST ['email'];
         $apartmentId=$_POST ['apartmentId'];
         $this->view->errors = $this->model->readResidentRegistration($firstname, $secondname, $email, $apartmentId);
+        $this->view->apartments = $this->model->readApartment();
         $this->view->render('receptionist/registerResidentView');
     }
     // view profile
@@ -63,7 +64,8 @@ class receptionistController extends controller{
     }
 
     public function visitors(){
+        $this->view->visitors = $this->model->readVisitor();
         $this->view->render('receptionist/visitorsView');
     }
-
+    
 }

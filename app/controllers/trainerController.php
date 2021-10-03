@@ -9,10 +9,10 @@ class trainerController extends controller{
         $this->loadModel('trainerModel');
         session_start();
         if(!isset($_SESSION['type'])){
-            header('Location:logout');
+            header('Location:../homeController/logout');
             }
             else if($_SESSION['type']!='trainer'){
-            header('Location:logout');
+                header('Location:../homeController/logout');
         }    
     }
 
