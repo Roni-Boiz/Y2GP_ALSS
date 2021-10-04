@@ -333,6 +333,21 @@ input[type=submit]:hover {
         <div class="description">
           <h1>Fogot Password</h1>
           
+          <?php 
+              if(isset($this->errors) && sizeof($this->errors)>0){ ?>
+                <center>
+                <div class="red_alert">
+                <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+                <?php 
+                $error = implode("<br>",$this->errors['0']);
+                 echo $error;
+                ?>
+                </div>
+              </center>
+
+              <?php 
+              }
+              ?>
             <form action="resetPassword" class="fogotPasswordForm" method= "POST">
 
             <div class="input-field" id ="apartmentId">
