@@ -332,7 +332,7 @@ input[type=submit]:hover {
         <div class="description">
           <h1>Fogot Password</h1>
           
-            <form action="fogotPassword" class="fogotPasswordForm" method= "POST">
+            <form action="resetPassword" class="fogotPasswordForm" method= "POST">
 
             <div class="input-field" id ="apartmentId">
                         <i class="fa fa-address-card" aria-hidden="true"></i>

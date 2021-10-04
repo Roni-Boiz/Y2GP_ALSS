@@ -28,6 +28,15 @@ class homeController extends controller{
     
     }
 
+    public function resetPassword(){
+        $apartmentId = $_POST ['apartmentNo'];
+        $email=$_POST ['email'];
+        $this->model->readFogot($apartmentId, $email );
+        $this->view->apartments = $this->model->readApartment();
+        $this->view->render('fogotPasswordView');
+    
+    }
+
     public function test(){
         // $this->loadModel('homeModel');
         // $this->view->users = $this->model->readTable();
