@@ -50,17 +50,27 @@ class receptionistController extends controller{
     //     $this->view->render('resident/residentView');
     // }
     public function parcels(){
-        if(isset($_POST["apartmentId"]) and isset($_POST["apartmentId"])) {
+        if(isset($_POST["apartmentId"]) and isset($_POST["sender"])) {
             $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"]);
             // $this->model->sendParcel($_POST["apartmentId"]);
         }    
         $this->view->inLocker=$this->model->getInlocker();
         $this->view->reached=$this->model->getReached();
-        if(isset($_GET["parcel"])){
-            $pid=$_GET["parcel"];
-            $this->model->updateInlocker($pid);
-        }    
+        // if(isset($_GET["parcel"])){
+        //     $pid=$_GET["parcel"];
+        //     $this->model->updateInlocker($pid);
+        // }    
         $this->view->render('receptionist/parcelsView');
+    }
+    public function putReached(){
+        $pid=$_GET["parcel"];
+        $this->model->putReachedAway($pid);
+        $this->parcels();
+    }
+    public function deleteInlocker(){
+        $pid=$_GET["parcel"];
+        $this->model->deleteParcel($pid);
+        $this->parcels();
     }
 
     public function visitors(){

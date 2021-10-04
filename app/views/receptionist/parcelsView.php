@@ -53,13 +53,12 @@
                             <th>Time</th>
                             <th></th>
                             </tr>
-                            
+                          
             <?php
                 while($row = $this->inLocker->fetch_assoc()){?> 
                             
                             <tr>
-                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <a method="get" href="parcels?parcel=<?php echo $row["parcel_id"];?>">
+                            <td><a method="get" href="deleteInlocker?parcel=<?php echo $row["parcel_id"];?>"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                             <div class="rowlink" style="display:inline-block">
                             <td><?php echo $row["parcel_id"]; ?></td>
                             <td><?php echo $row["resident_id"]; ?></td>
@@ -67,7 +66,6 @@
                             <td><?php echo $row["receive_time"]; ?></td>
                             <td><?php echo $row["sender"]; ?></td>
                             </div>
-                            </a>
                             </tr> 
                             
             <?php
@@ -101,7 +99,7 @@
             <?php
                 while($row1 = $this->reached->fetch_assoc()){?> 
                             <tr>
-                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                            <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"];?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td>
                             <td><?php echo $row1["parcel_id"]; ?></td>
                             <td><?php echo $row1["resident_id"]; ?></td>
                             <td><?php echo $row1["receive_date"]; ?></td>

@@ -103,8 +103,13 @@ class residentModel extends model {
         }
     }
     public function readNotification(){
-        $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ";
+        $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
+    }
+    public function setReached($nid){
+        $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
+        $this->conn->query($sql);
+        
     }
 
 
