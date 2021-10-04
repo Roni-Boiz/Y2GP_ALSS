@@ -132,5 +132,42 @@ class homeModel extends model {
             return $result;
         }
         
+        public function readFogot($apartmentId , $email){
+            $sql = "SELECT * FROM resident WHERE apartment_no = '{$apartmentId}' AND email='{$email}' limit 1";
+                $resultSet = mysqli_query($this->conn, $sql);
+                $result = mysqli_fetch_assoc($resultSet);
+                $userId  = $result['user_id'];
+
+                    if ($resultSet) {
+                            if ( mysqli_num_rows ($resultSet) == 1) 
+                        {
+                            $time= date('sdm');
+                            
+                            $newPassword = "Ab@.$time.456" ;
+                            echo $newPassword;
+                            //hashing the password
+                            $hashpassword = sha1($newPassword);
+                            $hash2password= sha1($hashpassword);
+
+
+                            $newpass = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
+                            $resultNewPass = mysqli_query($this->conn, $newpass);
+
+                            if($resultNewPass){
+                                $receiver = "$email";
+                                $subject = "Hawlock RYCN details";
+                                $body = "Your new password is : ".$newPassword;
+                                $sender = "From:hawlockrycn@gmail.com";
+                                mail($receiver, $subject, $body, $sender);
+                            }
+                            
+                            
+                        } 
+                        else {
+                            $errors[] = "Valid user not found";
+                            return $errors;
+                            }
+                        }
+        }
 }
 ?>
