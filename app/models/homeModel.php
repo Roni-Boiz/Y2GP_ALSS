@@ -144,7 +144,8 @@ class homeModel extends model {
                             $time= date('sdm');
                             
                             $newPassword = "Ab@.$time.456" ;
-                            echo $newPassword;
+                            // echo $newPassword;
+
                             //hashing the password
                             $hashpassword = sha1($newPassword);
                             $hash2password= sha1($hashpassword);

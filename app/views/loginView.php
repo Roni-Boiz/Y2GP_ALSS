@@ -352,7 +352,7 @@ input[type=submit]:hover {
               <input type="submit" class="btn" value="Login"/> 
             </div>
             <p class="read-more">
-              <a href="#">Forgot password</a>
+              <a href="fogotPassword">Forgot password</a>
             </p>
             </form>
                       

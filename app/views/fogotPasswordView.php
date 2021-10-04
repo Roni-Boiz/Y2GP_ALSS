@@ -315,6 +315,7 @@ input[type=submit]:hover {
     <nav>
       <ul>
         <li><button><a href="home"><span>HOME</span></a></button></li>
+        <li><button><a href="login"><span>LOGIN</span></a></button></li>
       </ul>
     </nav>
     </div>
@@ -347,8 +348,7 @@ input[type=submit]:hover {
                         }
                         ?>
                         </select>
-                        <!-- <input id="form_apartment" type="email" placeholder="Apartment Number" name = "apartmentId" required> -->
-                        <span class="error_form" id="apartmentId_error_message"></span>
+                        
                     </div>
             <div class="input-field" id ="emailId">
               <i class="fas fa-envelope"></i>
