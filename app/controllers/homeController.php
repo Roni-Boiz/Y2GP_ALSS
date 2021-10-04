@@ -22,6 +22,12 @@ class homeController extends controller{
         $this->view->render('loginView');
     }
 
+    public function fogotPassword(){
+        $this->view->apartments = $this->model->readApartment();
+        $this->view->render('fogotPasswordView');
+    
+    }
+
     public function test(){
         // $this->loadModel('homeModel');
         // $this->view->users = $this->model->readTable();
