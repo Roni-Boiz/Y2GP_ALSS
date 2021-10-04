@@ -68,8 +68,6 @@
                         }
                         ?>
                         </select>
-                        <!-- <input id="form_apartment" type="email" placeholder="Apartment Number" name = "apartmentId" required> -->
-                        <span class="error_form" id="apartmentId_error_message"></span>
                     </div>
 
                     <!-- <div class="input-field-signup" id ="rpasswordId">
