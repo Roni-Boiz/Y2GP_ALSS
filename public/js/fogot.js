@@ -2,11 +2,38 @@
 
 $(function() {
     $("#email_error_message").hide();
-    var error_email = false;
+    $("#email_error_message").hide();
+
 
     });
     $("#form_email").keyup(function() {
        check_email();
+      });
+      $("#form_username").keyup(function() {
+         check_username();
+        });
+       function check_username() {
+         var pattern = /^[a-zA-Z10-9]*$/;
+         var fname = $("#form_username").val();
+         if (fname == '') {
+          $("#username_error_message").html("Enter first name");
+          $("#username_error_message").show();
+          $("#username.input-field i").css("color","#F90A0A");
+          $("#username").css("border-bottom","2px solid #F90A0A");
+  
+         }
+          else if (pattern.test(fname) && fname !== '') {
+            $("#username_error_message").hide();
+            $("#username.input-field i").css("color","#34F458");
+            $("#username").css("border-bottom","2px solid #34F458");
+         } else {
+            $("#username_error_message").html("Should contain only Characters");
+            $("#username_error_message").show();
+            $("#username.input-field i").css("color","#F90A0A");
+            $("#username").css("border-bottom","2px solid #F90A0A");
+  
+         }
+      }
 
     function check_email() {
        var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -32,4 +59,3 @@ $(function() {
     }
 
 
- });
