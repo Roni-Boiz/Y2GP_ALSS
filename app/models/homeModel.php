@@ -2,6 +2,8 @@
 
 require '../app/core/model.php';
 
+date_default_timezone_set("Asia/Colombo");
+
 class homeModel extends model {
     function __construct(){
          parent::__construct();
@@ -20,7 +22,7 @@ class homeModel extends model {
 
     public function readLogin($username, $password){
         $errors = array();
-        date_default_timezone_set("Asia/Colombo");
+
         $time= date('Y-m-d H:i:s', time());
                        // check for the sql queries
         $sqlfreeusername = mysqli_real_escape_string($this->conn, $username);
@@ -132,61 +134,145 @@ class homeModel extends model {
             return $result;
         }
         
-        public function readFogot($apartmentId , $email){
+        public function readFogot($username , $email){
             $errors = array();
-            $CheckEmail = "SELECT email FROM resident WHERE email='{$email}' limit 1";
-            $resultEmail = mysqli_query($this->conn, $CheckEmail);
 
-            if( mysqli_num_rows ($resultEmail) == 1){
-                if($apartmentId !="#"){
-                    $sql = "SELECT * FROM resident WHERE apartment_no = '{$apartmentId}' AND email='{$email}' limit 1";
-                    $resultSet = mysqli_query($this->conn, $sql);
-                    
-                    
-    
-                        if ($resultSet) {
-                                if ( mysqli_num_rows ($resultSet) == 1) 
-                            {
-                                $result = mysqli_fetch_assoc($resultSet);
-                                $userId  = $result['user_id'];
-                                $time= date('sdm');
-                                
-                                $newPassword = "Ab@.$time.456" ;
-                                // echo $newPassword;
-    
-                                //hashing the password
-                                $hashpassword = sha1($newPassword);
-                                $hash2password= sha1($hashpassword);
-    
-    
-                                $newpass = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
-                                $resultNewPass = mysqli_query($this->conn, $newpass);
-    
-                                if($resultNewPass){
-                                    $receiver = "$email";
-                                    $subject = "Hawlock RYCN details";
-                                    $body = "Your new password is : ".$newPassword;
-                                    $sender = "From:hawlockrycn@gmail.com";
-                                    mail($receiver, $subject, $body, $sender);
-                                }
-                                
-                                
-                            }
-                            else {
-                                $errors[] = "Valid user not found";
-                                return $errors;
-                                }
-                            }
-                }
-                else{
-                    $errors[] = "Select a apartment";
-                }
+            $CheckUser = "SELECT user_id, type FROM user_account WHERE user_name='{$username}' limit 1";
+            $resultuser = mysqli_query($this->conn, $CheckUser);
+
+            if($resultuser){
+                 if( mysqli_num_rows ($resultuser) == 1){
+                     $user = mysqli_fetch_assoc($resultuser);
+
+                     $type = "SELECT user_id FROM {$user['type']} WHERE email='{$email}' limit 1";
+                     $resultuser = mysqli_query($this->conn, $type);
+                     $usertype = mysqli_fetch_assoc($resultuser);
+                     if($usertype['user_id'] ==$user['user_id']){
+                         $userId = $user['user_id'];
+                         $time= date('sdm');
+                                    
+                        $newPassword = "Ab@$time.456" ;
+                        // echo $newPassword;
+        
+                        //hashing the password
+                        $hashpassword = sha1($newPassword);
+                        $hash2password= sha1($hashpassword);
+
+                        $change = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
+                        $resultuser = mysqli_query($this->conn, $change);
+                        if($resultuser){
+                            $receiver = "$email";
+                            $subject = "Hawlock RYCN details";
+                            $body = "Your new password is : ".$newPassword;
+                            $sender = "From:hawlockrycn@gmail.com";
+                            mail($receiver, $subject, $body, $sender);
+                        }
+                     }
+                     else{
+                     $errors[] = "Email not match";
+                     }
+
+                 }
+                 else{
+                     $errors[] = "Username not valid";
+                 }
             }
             else{
-                $errors[] = "Enter a valid Email";
+                $errors[] = "Query failed";
+
             }
+
+            // if($typeOrApartmentId !='admin' && $typeOrApartmentId !='manager' && $typeOrApartmentId !='receptionist' && $typeOrApartmentId !='trainer' && $typeOrApartmentId !='laundry' && $typeOrApartmentId !='parking'){
+
+            //     $CheckEmail = "SELECT email FROM resident WHERE email='{$email}' limit 1";
+            //     $resultEmail = mysqli_query($this->conn, $CheckEmail);
+
+            //     if( mysqli_num_rows ($resultEmail) == 1){
+            //         if($typeOrApartmentId !="#"){
+            //             $sql = "SELECT * FROM resident WHERE apartment_no = '{$typeOrApartmentId}' AND email='{$email}' limit 1";
+            //             $resultSet = mysqli_query($this->conn, $sql);
+                        
+            //                 if ($resultSet) {
+            //                         if ( mysqli_num_rows ($resultSet) == 1)
+            //                     {
+            //                         $result = mysqli_fetch_assoc($resultSet);
+            //                         $userId  = $result['user_id'];
+            //                         $time= date('sdm');
+                                    
+            //                         $newPassword = "Ab@.$time.456" ;
+            //                         // echo $newPassword;
+        
+            //                         //hashing the password
+            //                         $hashpassword = sha1($newPassword);
+            //                         $hash2password= sha1($hashpassword);
+        
+        
+            //                         $newpass = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
+            //                         $resultNewPass = mysqli_query($this->conn, $newpass);
+        
+            //                         if($resultNewPass){
+            //                             $receiver = "$email";
+            //                             $subject = "Hawlock RYCN details";
+            //                             $body = "Your new password is : ".$newPassword;
+            //                             $sender = "From:hawlockrycn@gmail.com";
+            //                             mail($receiver, $subject, $body, $sender);
+            //                         }
+            //                     }
+            //                     else {
+            //                         $errors[] = "Valid user not found";
+            //                         return $errors;
+            //                         }
+            //                     }
+            //         }
+            //         else{
+            //             $errors[] = "Select a apartment";
+            //         }
+            //     }
+            //     else{
+            //         $errors[] = "Enter a valid Email";
+            //     }
+            // }
+            // else{
+            //     $CheckEmailEmployee = "SELECT user_id FROM {$typeOrApartmentId} WHERE email='{$email}' limit 1";
+            //     $resultEmployee = mysqli_query($this->conn, $CheckEmailEmployee);
+
+            //     if($resultEmployee){
+            //         if( mysqli_num_rows ($resultEmployee) == 1){
+                    
+            //             $result = mysqli_fetch_assoc($resultEmployee);
+            //             $userId  = $result['user_id'];
+            //             $time= date('sdm');
+                        
+            //             $newPassword = "Ab@.$time.456" ;
+            //             // echo $newPassword;
+    
+            //             //hashing the password
+            //             $hashpassword = sha1($newPassword);
+            //             $hash2password= sha1($hashpassword);
+    
+    
+            //             $newpass = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
+            //             $resultNewPass = mysqli_query($this->conn, $newpass);
+    
+            //             if($resultNewPass){
+            //                 $receiver = "$email";
+            //                 $subject = "Hawlock RYCN details";
+            //                 $body = "Your new password is : ".$newPassword;
+            //                 $sender = "From:hawlockrycn@gmail.com";
+            //                 mail($receiver, $subject, $body, $sender);
+            //             }
+    
+            //         }
+            //         else{
+            //             $errors[] = "Select User type or Apartment";
+            //         }
+            //     }
+            //     else{
+            //         $errors[] = "Enter valid employee details";
+            //     }
+            // }
 
             return $errors;
         }
-}
+    }
 ?>
