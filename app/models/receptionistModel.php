@@ -133,7 +133,7 @@ class receptionistModel extends model {
     //     $result = $this->conn->query($sql);   
     //     return $result;
     // }
-    public function recordParcel($apartment,$sender){
+    public function recordParcel($apartment,$sender,$description){
         date_default_timezone_set("Asia/Colombo");
         $date=date('Y-m-d');
         $time=date('H:i:s');
@@ -141,15 +141,15 @@ class receptionistModel extends model {
         $resid=mysqli_fetch_assoc($this->conn->query($sql));
         $sql2="SELECT employee_id FROM receptionist WHERE user_id={$_SESSION['userId']} LIMIT 1";
         $empid=mysqli_fetch_assoc($this->conn->query($sql2));
-        $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]}) ";
+        $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id,description) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]}),'$description' ";
         $this->conn->query($sql3);
-        $sql4="SELECT receive_date,receive_time,sender FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
+        $sql4="SELECT parcel_id,receive_date,receive_time,sender,description FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
         $description=mysqli_fetch_assoc($this->conn->query($sql4));
-        $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}";
+        $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}.{$description["description"]}";
         $sql5="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
         $userid=mysqli_fetch_assoc($this->conn->query($sql5));
         $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
-        '$notification',{$userid["user_id"]},5)";
+        '$notification',{$userid["user_id"]},{$description["parcel_id"]})";
         $this->conn->query($sql6);
     }
     // public function sendParcel($apartment){

@@ -10,7 +10,6 @@
 
     <?php
         if ($this->notification->num_rows > 0){
-                $count=4;
                 while($row = $this->notification->fetch_assoc()){?> 
                     <div class="card3">
                     <div class="card__icon"><i class="fas fa-bolt"></i></div><?php echo $row['date']." ".$row['time']; ?>
@@ -18,7 +17,7 @@
                     <h2 class="card__title"><?php echo $row['description']; ?>
                     </h2>
                     <?php
-                    if($row['view']==5){ ?>
+                    if($row['view']>5){ ?>
                     <p class="card__apply">
                         <a class="card__link" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as Reached</a>
                     </p>
