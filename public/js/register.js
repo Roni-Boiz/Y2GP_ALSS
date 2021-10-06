@@ -8,11 +8,7 @@ $(function() {
     $("#rpassword_error_message").hide();
     $("#retype_password_error_message").hide();
 
-    var error_fname = false;
-    var error_sname = false;
-    var error_email = false;
-    var error_rpassword = false;
-    var error_retype_password = false;
+
 
     $("#form_fname").keyup(function(){
        check_fname();
@@ -38,7 +34,7 @@ $(function() {
         $("#fname_error_message").show();
         $("#fnameId.input-field-signup i").css("color","#F90A0A");
         $("#fnameId").css("border-bottom","2px solid #F90A0A");
-        error_fname = true;
+
        }
         else if (pattern.test(fname) && fname !== '') {
           $("#fname_error_message").hide();
@@ -49,7 +45,7 @@ $(function() {
           $("#fname_error_message").show();
           $("#fnameId.input-field-signup i").css("color","#F90A0A");
           $("#fnameId").css("border-bottom","2px solid #F90A0A");
-          error_fname = true;
+
        }
     }
 
@@ -71,7 +67,7 @@ $(function() {
           $("#sname_error_message").show();
           $("#snameId.input-field-signup i").css("color","#F90A0A");
           $("#snameId").css("border-bottom","2px solid #F90A0A");
-          error_sname = true;
+
        }
     }
 
@@ -83,14 +79,14 @@ $(function() {
         $("#rpassword_error_message").show();
         $("#rpasswordId.input-field-signup i").css("color","#F90A0A");
         $("#rpasswordId").css("border-bottom","2px solid #F90A0A");
-        error_rpassword = true;
+
      }
        else if (password_length < 8) {
           $("#rpassword_error_message").html("Atleast 8 Characters");
           $("#rpassword_error_message").show();
           $("#rpasswordId.input-field-signup i").css("color","#F90A0A");
           $("#rpasswordId").css("border-bottom","2px solid #F90A0A");
-          error_rpassword = true;
+
        } 
 
        else {
@@ -109,7 +105,6 @@ $(function() {
         $("#retype_passwordfnameId.input-field-signup i").css("color","#34F458");
         $("#retype_passwordfnameId").css("border-bottom","2px solid #34F458");
 
-          error_retype_password = true;
        } else {
         $("#retype_password_error_message").html("Passwords did not Match");
         $("#retype_password_error_message").show();
@@ -126,7 +121,7 @@ $(function() {
           $("#email_error_message").show();
           $("#emailId.input-field-signup i").css("color","#F90A0A");
           $("#emailId").css("border-bottom","2px solid #F90A0A");
-          error_email = true;
+
        }
         else if (pattern.test(email) && email !== '') {
           $("#email_error_message").hide();
@@ -137,31 +132,11 @@ $(function() {
           $("#email_error_message").show();
           $("#emailId.input-field-signup i").css("color","#F90A0A");
           $("#emailId").css("border-bottom","2px solid #F90A0A");
-          error_email = true;
+
        }
     }
 
-    $("#registration_form").submit(function() {
-      error_fname = false;
-      error_sname = false;
-      error_email = false;
-      error_password = false;
-      error_retype_password = false;
 
-      check_fname();
-      check_sname();
-      check_email();
-      check_rpassword();
-      check_retype_password();
-
-      if (error_fname === false && error_sname === false && error_email === false && error_rpassword === false && error_retype_password === false) {
-         alert("Registration Successfull");
-         return true;
-      } else {
-         alert("Please Fill the form Correctly");
-         return false;
-      }
-   });
 
    
 
