@@ -91,7 +91,7 @@ class receptionistModel extends model {
                             // echo 'Register if run query1';
                             if($resultSet4){
                                 echo 'Register successfuly';
-                                $receiver = "chathus.m1999@gmail.com";
+                                $receiver = $email;
                                 $subject = "Hawlock RYCN details";
                                 $body = "Username : ".$username." password : ".$password;
                                 $sender = "From:hawlockrycn@gmail.com";

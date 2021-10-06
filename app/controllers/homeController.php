@@ -23,16 +23,17 @@ class homeController extends controller{
     }
 
     public function fogotPassword(){
-        $this->view->apartments = $this->model->readApartment();
+        
         $this->view->render('fogotPasswordView');
     
     }
 
     public function resetPassword(){
-        $apartmentId = $_POST ['apartmentNo'];
-        $email=$_POST ['email'];
-        $this->view->errors[] = $this->model->readFogot($apartmentId, $email );
-        $this->view->apartments = $this->model->readApartment();
+        if (isset($_POST['email']) && isset($_POST['username'])){
+            $username = $_POST ['username'];
+            $email=$_POST ['email'];
+            $this->view->errors[] = $this->model->readFogot($username, $email );
+        }
         $this->view->render('fogotPasswordView');
     
     }

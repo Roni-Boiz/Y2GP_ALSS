@@ -334,7 +334,7 @@ input[type=submit]:hover {
           <h1>Fogot Password</h1>
           
           <?php 
-              if(isset($this->errors) && sizeof($this->errors)>0){ ?>
+              if(isset($this->errors) && sizeof($this->errors['0'])>0){ ?>
                 <center>
                 <div class="red_alert">
                 <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
@@ -350,21 +350,14 @@ input[type=submit]:hover {
               ?>
             <form action="resetPassword" class="fogotPasswordForm" method= "POST">
 
-            <div class="input-field" id ="apartmentId">
-                        <i class="fa fa-address-card" aria-hidden="true"></i>
-                        
-                        <select name="apartmentNo" id="form_apartment">
-                            <option value="#">Select a apartment</option>
-                        <?php
-                 
-                        while ($row = $this->apartments->fetch_assoc()) {
-                            $apartment= $row['apartment_no'];
-                        echo "<option value='$apartment'>$apartment</option>";
-                        }
-                        ?>
-                        </select>
-                        
-                    </div>
+            <div class="input-field" id ="username">
+              <i class="fas fa-envelope"></i>
+              <input id="form_username" type="text" placeholder="Username" name = "username" required>
+              <br>
+              <span class="error_form" id="username_error_message"></span>
+
+            </div>
+
             <div class="input-field" id ="emailId">
               <i class="fas fa-envelope"></i>
               <input id="form_email" type="email" placeholder="Email" name = "email" required>

@@ -15,7 +15,7 @@ include_once 'sidenav.php';
 
         <div id="hb" class="hawlockbody">
             <h2>Announcements</h2>
-            <div class="btnAddAnnouncement" onclick="openNav(); openOffcanvas()" title="Add Anouncement"><i class="fa fa-plus-square"></i></div>
+            <div class="btnAddAnnouncement" onclick="openNav(); openOffcanvas()" title="Add Anouncement"><img src="../../public/img/announcement.png"></div><!--<i class="fa fa-plus-square"></i>-->
             <!-- Add Anouncement -->
             <div id="myCanvasNav" class="overlay" onclick="closeOffcanvas()" style="width: 0%; opacity: 0;"></div>
 
