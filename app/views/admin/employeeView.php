@@ -77,12 +77,12 @@ include_once 'sidenav.php';
     /* wrapper */
     .wrapper {
         width: 100%;
-        max-width: 1000px;
+        /* max-width: 1000px; */
         margin: 20px auto 1000px auto;
         padding: 0;
         background: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.9);
-        /* overflow: hidden; */
+        overflow: hidden;
         grid-column: 1/ span 3;
         background: rgba(0, 0, 0, 0.9);
         box-sizing: unset;
@@ -487,8 +487,7 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span></h1>
-
+            <h1 id="title">Hawlock <span id="city">City</span> Employees</h1>
         </div>
 
         <div id="hb" class="hawlockbody">
@@ -497,7 +496,7 @@ include_once 'sidenav.php';
 
             <div class="divPopupModel">
 
-                <button id="model-btn">Add New</button>
+                <button id="model-btn" onclick="openModel()">Add New</button>
                 <p id="answer"></p>
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
@@ -526,7 +525,7 @@ include_once 'sidenav.php';
                         <div class="profile-pic" id="col2">
                             <img src="../../public/img/blank-profile.png" id="photo">
                             <input type="file" id="file" name="file">
-                            <label for="file" id="uploadBtn">Choose Photo</label>
+                            <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Choose Photo</label>
                         </div>
 
                         <div id="col1">
