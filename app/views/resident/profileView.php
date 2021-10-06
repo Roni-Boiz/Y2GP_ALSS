@@ -1,6 +1,42 @@
 <?php
 include_once('sidenav.php');
 ?>
+<script>
+    function setVisibility1(id) {
+        if (document.getElementById('editprofile').value == 'Edit Profile') {
+            document.getElementById('editprofile').value = 'Cancel';
+            document.getElementById('editprofile').style.width = 'fit-content';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('editprofile').value = 'Edit Profile';
+            document.getElementById('editprofile').style.width = '100%';
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+    // Change Password show/hide
+    function setVisibility2(id) {
+        if (document.getElementById('changepassword').value == 'Change Password') {
+            document.getElementById('changepassword').value = 'Cancel';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('changepassword').value = 'Change Password';
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+
+    function setVisibility3(id) {
+        if (document.getElementById(id).style.display == 'none') {
+            document.getElementById('showmore').text = 'Show Less';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('showmore').text = 'Show More';
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+</script>
+
+
+</head>
 
 <body style="background-color: gray; background-image:none;">
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand">
@@ -8,139 +44,223 @@ include_once('sidenav.php');
             <h1 id="title">Hawlock <span id="city">City</span></h1>
         </div>
         <div class="hawlockbody" id="hb">
-            <i class="fa fa-user-circle" style="font-size: 40px; padding:0"></i>
-            <button class="purplebutton" onclick="funedit()" id="editbtn1" style="grid-column:3;">Edit Profile</button>
-            <button class="purplebutton" onclick="changePw()" id="editbtn2" style="grid-column:3;">Change Password</button>
-            <h4 style="margin-left: 100px;"><?php
-                                            if ($this->users->num_rows > 0) {
-                                                //while($row = $this->users->fetch_assoc()){
-                                                $row = $this->users->fetch_assoc();
-                                                echo $row["apartment_no"]; ?></h4>
-            <!-- view -->
-            <!-- background:linear-gradient(to left,white,#927ffc) -->
-            <form class="form1" id="view" style="padding:20px 5px">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" class="input-field" placeholder=<?php echo $row["fname"] ?> READONLY><br>
+            <?php
+            $row = $this->users->fetch_assoc()
+            ?>
 
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" class="input-field" placeholder=<?php echo $row["lname"] ?> READONLY><br>
+            <div class="card" id="profileCard" style="grid-column:1/span2;margin:auto">
+                <div class="bio">
+                    <div class="profile-pic">
+                        <img id="photo" src="../../uploads/profile/employee/<?= $_SESSION['profilePic'] ?>" alt="profile picture" onerror="this.onerror=null; this.src='../../public/img/user.png'">
+                        <input type="file" id="file" name="file">
+                        <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
+                    </div>
 
-                <label for="fname">NIC</label>
-                <input type="text" id="nic" class="input-field" placeholder=<?php echo $row["nic"] ?> READONLY><br>
+                    <h4> <?php echo $row["apartment_no"]; ?></h4>
 
-                <label for="fname">Contact</label>
-                <input type="text" id="phone_no" class="input-field" placeholder=<?php echo $row["phone_no"] ?> READONLY><br>
+                    <form action="editprofile" id="profileView" method="post">
+                        <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
 
-                <label for="lname">Email</label>
-                <input type="text" id="email" class="input-field" placeholder=<?php echo $row["email"] ?> READONLY><br>
+                        <label>First Name</label>
+                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
 
-                <label for="lname">Balance</label>
-                <input type="text" id="balance" class="input-field" placeholder=<?php echo $row["balance"] ?> READONLY><br>
+                        <label>Last Name</label>
+                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
 
-                <label for="lname">Vehicle NO</label>
-                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder=<?php echo $row["vehicle_no"] ?> READONLY><br>
 
-                <label for="lname">Family Members</label>
-                <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                        <label>Email</label><br>
+                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
 
-            </form>
-            <!-- end view profile part -->
 
-            <!-- edit basic details -->
-            <form action="editProfile" class="form1" id="editview" style="display:none" method="post">
+                        <label>NIC</label>
+                        <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?>><br>
 
-                <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
+                        <label>Contact</label>
+                        <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?>><br>
 
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
+                        <label>Email</label>
+                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
 
-                <label for="fname">NIC</label>
-                <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?>><br>
+                        <label>Vehicle NO</label>
+                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
 
-                <label for="lname">Contact</label>
-                <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?>><br>
+                        <label>New Member</label>
+                        <!-- add new field -->
+                        <i class="fas fa-plus-circle" style="padding:0" onclick="newMember();"></i><br>
+                        <span id="newmem" style="display:none">
 
-                <label for="lname">Email</label>
-                <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-
-                <label for="lname">Vehicle NO</label>
-                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
-
-                <label for="lname">New Member</label>
-                <!-- add new field -->
-                <i class="fas fa-plus-circle" style="padding:0" onclick="newMember();"></i><br>
-                <span id="newmem" style="display:none">
-
-                    <label for="lname">new member</label>
-                    <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member"></i>
-                </span>
-                <br>
-                <input type="submit" onclick="confirmSave()" value="Save" style="float:right"><br>
-                <label for="lname">Family Members</label>
-                <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
-                <!-- <label for="lname">New Vehicle</label>
-                                add new field
-                                <i class="fas fa-plus-circle" style="padding:0" onclick="newVehicle();"></i><br>
-                                <span id="newveh" style="display:none">
-                                <label for="lname">vehicle<?php echo " " . $v++ ?></label>
-                                <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" placeholder="add new vehicle">
-                                </span>
-                                <br> -->
-
-                <!-- end edit basic details part -->
-
-            </form>
-
-            <!-- member part -->
-            <!-- view family members on click showmembers() -->
-            <div id="showmem" style="display:none;grid-column:2/span3">
-                <?php $m = 1;
-                                                while ($mem = $this->members->fetch_assoc()) { ?>
-                    <form action="removeMember" method="post" class="form1" id="removedmem">
-                        <label for="lname">member<?php echo " " . $m++ ?></label>
-                        <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"] ?> READONLY>
-                        <button type="submit" onclick="confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
+                            <label>new member</label>
+                            <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
+                        </span>
+                        <br>
+                        <label>Family Members</label>
+                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                        <input type="submit" value="Save" onclick="confirmSave()">
                     </form>
-                <?php } ?>
+
+                    <div id="showmem" style="display:none;">
+                        <?php $m = 1;
+                        while ($mem = $this->members->fetch_assoc()) { ?>
+                            <form action="removeMember" method="post" class="form1" id="removedmem">
+                                <label for="member">member<?php echo " " . $m++ ?></label><button type="submit" onclick="confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
+                                <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"] ?> READONLY>
+                            </form>
+                        <?php } ?>
+                    </div>
+
+                    <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');">
+
+                </div>
+                <div class="data">
+                    <div>
+                        <h4>Overview</h4>
+                        <div class="card" id="overview">
+                            <div>
+                                <label>Full Name : </label>
+                                <label><?php echo $row["fname"] . " " . $row["lname"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <label>Email : </label>
+                                <label><?php echo $row["email"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <label>NIC</label>
+                                <label><?php echo $row["nic"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <label>Contact</label>
+                                <label><?php echo $row["phone_no"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <label>Email</label>
+                                <label><?php echo $row["email"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>
+                                    <label>Vehicle NO</label>
+                                    <label><?php echo $row["vehicle_no"] ?></label>
+                                </div>
+                                <hr>
+                                <label>Balance</label>
+                                <label><?php echo $row["balance"] ?></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4>Security</h4>
+                        <div class="card" id="security">
+                            <div>
+                                <div>
+                                    <h2>Your account is protected</h2>
+                                    <div style="font-size: small;color: #545d7a;">The Security Check-Up examinied your account and found no recomended actions</div>
+                                </div>
+                                <picture>
+                                    <source media="(max-width: 660px)" srcset="../../public/img/small-acount-protected.png">
+                                    <img src="../../public/img/account-protected.png">
+                                </picture>
+                            </div>
+                            <!-- change password -->
+                            <form action="changePassword" id="passwordView" method="post">
+                                <label for="fname">Old Password</label>
+                                <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
+                                <span class="error_form" id="old_password_error_message"></span><br>
+
+                                <label for="lname">New Password</label>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
+                                <span class="error_form" id="new_password_error_message"></span><br>
+
+                                <label for="fname">Re-New Password</label>
+                                <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
+                                <span class="error_form" id="renew_password_error_message"></span><br>
+
+                                <input type="submit" onclick="confirm()" value="Save">
+                            </form>
+
+                            <input type="submit" id="changepassword" value="Change Password" onclick="setVisibility2('passwordView');">
+                        </div>
+                    </div>
+                    <a href="javascript:setVisibility3('alldevices')" id="showmore">Show More</a>
+
+                    <div id="alldevices">
+                        <h4>Session</h4>
+                        <div class="card" id="session">
+                            <div>
+                                <h3>Your Devices</h3>
+                                <div style="font-size: small;color: #545d7a;">You’re currently signed in to your Account on these devices.</div>
+
+                                <?php
+                                if ($this->loginDevices->num_rows > 0) {
+                                    while ($row = $this->loginDevices->fetch_assoc()) {
+                                ?>
+                                        <div class="loginDevicesDetails">
+                                            <div id="sec1">
+                                                <img src="../../public/img/computer.png" alt="lap">
+                                            </div>
+                                            <div id="sec2">
+                                                <div><span style="font-size: 1rem; font-weight:600">Time Zone : </span><span style="font-size: .9rem; font-weight:400"><?= $row['time_zone'] ?></span></div>
+                                                <div>
+                                                    <?php $names = json_decode(file_get_contents("http://country.io/names.json"), true); ?>
+                                                    <span style="font-size: 1rem; font-weight:600">Country : </span><span style="font-size: .9rem; font-weight:400"><?= $names[$row['country_code']] ?></span>
+                                                </div>
+                                                <div><span style="font-size: 1rem; font-weight:600">Region : </span><span style="font-size: .9rem; font-weight:400"><?= $row['region'] ?></span></div>
+                                                <div><span style="font-size: 1rem; font-weight:600">City : </span><span style="font-size: .9rem; font-weight:400"><?= $row['city'] ?></span></div>
+                                                <div><span style="font-size: 1rem; font-weight:600">Ip address : </span><span style="font-size: .9rem; font-weight:400"><?= $row['ip_address'] ?></span></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="loginDevicesDetails">
+                                            <div id="sec1">
+                                                <img src="../../public/img/smartphone.png" alt="phone">
+                                            </div>
+                                            <div id="sec2">
+                                                <div><span style="font-size: 1rem; font-weight:600">Time Zone : </span><span style="font-size: .9rem; font-weight:400"><?= $row['time_zone'] ?></span></div>
+                                                <div>
+                                                    <?php $names = json_decode(file_get_contents("http://country.io/names.json"), true); ?>
+                                                    <span style="font-size: 1rem; font-weight:600">Country : </span><span style="font-size: .9rem; font-weight:400"><?= $names[$row['country_code']] ?></span>
+                                                </div>
+                                                <div><span style="font-size: 1rem; font-weight:600">Region : </span><span style="font-size: .9rem; font-weight:400"><?= $row['region'] ?></span></div>
+                                                <div><span style="font-size: 1rem; font-weight:600">City : </span><span style="font-size: .9rem; font-weight:400"><?= $row['city'] ?></span></div>
+                                                <div><span style="font-size: 1rem; font-weight:600">Ip address : </span><span style="font-size: .9rem; font-weight:400"><?= $row['ip_address'] ?></span></div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                } else {
+                                    ?>
+                                    <div class="loginDevicesDetails">
+                                        <div id="sec1">
+                                            <img src="../../public/img/local-area-network.png" alt="local">
+                                        </div>
+                                        <div id="sec2">
+                                            <div><span style="font-size: 1rem; font-weight:600">Time Zone : </span><span style="font-size: .9rem; font-weight:400">Local Host</span></div>
+                                            <div><span style="font-size: 1rem; font-weight:600">Country : </span><span style="font-size: .9rem; font-weight:400">Local Host</span></div>
+                                            <div><span style="font-size: 1rem; font-weight:600">Region : </span><span style="font-size: .9rem; font-weight:400">Local Host</span></div>
+                                            <div><span style="font-size: 1rem; font-weight:600">City : </span><span style="font-size: .9rem; font-weight:400">Local Host</span></div>
+                                            <div><span style="font-size: 1rem; font-weight:600">Ip address : </span><span style="font-size: .9rem; font-weight:400">127.0.0.1</span></div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- member part -->
-            <?php $m = 1;
-                                                while ($mem = $this->members->fetch_assoc()) { ?>
-                <form action="removeMember" method="post" class="form1" id="removedmem">
-                    <label for="lname">member<?php echo " " . $m++ ?></label>
-                    <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"] ?> READONLY>
-                    <button type="submit" onclick="confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
-                </form>
-            <?php } ?>
 
-            <!-- change password -->
-            <form action="changePassword" class="form1" id="pw" style="display:none" method="post">
-                <label for="fname">Old Password</label>
-                <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
-                <span class="error_form" id="old_password_error_message"></span><br>
 
-                <label for="lname">New Password</label>
-                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
-                <span class="error_form" id="new_password_error_message"></span><br>
 
-                <label for="fname">Re-New Password</label>
-                <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
-                <span class="error_form" id="renew_password_error_message"></span><br>
 
-                <input type="submit" onclick="confirm()" value="Save" style="float:right">
-            </form>
-            <!-- end change password -->
-        <?php
-
-                                            } else {
-                                                echo "0 results";
-                                            }
-        ?>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script type="text/javascript" src="../../public/js/profile.js"></script>
+
 </body>
 
 </html>
