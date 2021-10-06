@@ -20,9 +20,14 @@ class adminController extends controller
 
     public function index()
     {
-        // $this->announcement();
         $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('admin/adminView');
+    }
+
+    public function profile(){
+        $this->view->profileDetails = $this->model->getProfileDetails($_SESSION['userId']);
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
+        $this->view->render('admin/profileView');
     }
 
     public function user()
