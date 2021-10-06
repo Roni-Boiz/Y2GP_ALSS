@@ -95,6 +95,7 @@ class homeModel extends model
                         $_SESSION['userId'] = $user['user_id'];
                         $_SESSION['userName'] = $user['user_name'];
                         $_SESSION['type'] = $user['type'];
+                        $_SESSION['profilePic'] = $user['profile_pic'];
 
                         //Gets the IP Address from the visitor
                         $PublicIP =  get_client_ip(); //get_client_ip();  //"112.135.65.171"
