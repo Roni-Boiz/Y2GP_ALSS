@@ -19,10 +19,16 @@ class adminModel extends model
     //     // return $result;
     // }
 
-    public function getDetails()
+    public function getProfileDetails($id)
     {
-        $id = $_SESSION('user_id');
-        $sql = "SELECT * FROM admin WHERE user_id='{$id}'";
+        $sql = "SELECT * FROM admin NATURAL JOIN user_account WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
         $result = $this->conn->query($sql);
         return $result;
     }
