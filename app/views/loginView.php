@@ -317,7 +317,6 @@ input[type=submit]:hover {
         <div class="data">
           <div class="photo" style="background-image:url(../../public/img/1.jpg);"></div>
             <ul class="details">
-              <?php date_default_timezone_set("Asia/Colombo"); ?>
               <li class="author"><?php echo date("H:i"); ?>  </li>
               <li class="date"><?php echo  date("F j, Y");  ?></li>
             </ul>
@@ -337,7 +336,6 @@ input[type=submit]:hover {
             }
             ?>
             <form action="loginSuccess" class="sign-in-form" method= "POST">
-
             <div class="input-field" id ="nameId">
               <i class="fas fa-user"></i>
               <input id="form_name" class="name" type="text" placeholder="Username" name= "name" autofocus required>
@@ -346,7 +344,7 @@ input[type=submit]:hover {
             </div>
             <div class="input-field" id ="passwordId">
               <i class="fas fa-lock"></i>
-              <input id="form_password" type="password" placeholder="password" name = "password" required>
+              <input id="form_password" type="password" placeholder="Password" name = "password" required>
               <br>
               <span class="error_form" id="password_error_message"></span>
               <input type="submit" class="btn" value="Login"/> 
