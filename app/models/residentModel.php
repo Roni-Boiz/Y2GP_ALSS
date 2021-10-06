@@ -91,7 +91,7 @@ class residentModel extends model {
             $sql = "UPDATE hall_reservation SET cancelled_time='$date' WHERE reservation_id='$hallid' ";    
         }
         else if(isset($_GET["fitid"])){
-            $fitid=$_GET["fitid"];;
+            $fitid=$_GET["fitid"];
             $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date' WHERE reservation_id='$fitid' ";    
         }
         else if(isset($_GET["treatid"])){

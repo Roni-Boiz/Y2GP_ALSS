@@ -21,7 +21,7 @@ class homeModel extends model {
     public function readLogin($username, $password){
         $errors = array();
         date_default_timezone_set("Asia/Colombo");
-        $time= date('Y-m-d H:i:sa', time());
+        $time= date('Y-m-d H:i:s', time());
                        // check for the sql queries
         $sqlfreeusername = mysqli_real_escape_string($this->conn, $username);
         $sqlfreepassword = mysqli_real_escape_string($this->conn, $password);

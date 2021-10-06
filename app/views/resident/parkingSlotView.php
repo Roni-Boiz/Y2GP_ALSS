@@ -72,7 +72,6 @@ include_once 'sidenav.php';
                 ?>
 
                 <div class="divPopupModel">
-                    <p id="answer"></p>
 
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                     <div id="model">
