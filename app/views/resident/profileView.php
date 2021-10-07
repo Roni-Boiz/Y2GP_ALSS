@@ -93,11 +93,11 @@ include_once('sidenav.php');
                             <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
                         </span>
                         <br>
-                        <label>Family Members</label>
-                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
                         <input type="submit" value="Save" onclick="confirmSave()">
                     </form>
-
+                    <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
+                    <label>Family Members</label>
+                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
                     <div id="showmem" style="display:none;">
                         <?php $m = 1;
                         while ($mem = $this->members->fetch_assoc()) { ?>
@@ -107,9 +107,7 @@ include_once('sidenav.php');
                             </form>
                         <?php } ?>
                     </div>
-
-                    <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');">
-
+                    
                 </div>
                 <div class="data">
                     <div>

@@ -1,5 +1,3 @@
-//REGISTRATION VALIDATION
-
 $(function () {
 
    $("#old_password_error_message").hide();
@@ -152,24 +150,7 @@ $(function () {
 
 
 });
-function funedit() {
-   $("#editbtn1").hide();
-   $("#editbtn2").show();
-   $("#view").hide();
-   $("#pw").hide();
-   $("#editview").show();
-   $("#showmem").show();
-   //$("#removeicon").show();
-}
-function changePw() {
-   $("#editbtn1").show();
-   $("#editbtn2").hide();
-   $("#editview").hide();
-   $("#view").hide();
-   $("#pw").show();
-   $("#showmem").hide();
-   //$("#removeicon").hide();
-}
+
 function confirmSave() {
    alert("Are Your Sure to Save Details?")
 }

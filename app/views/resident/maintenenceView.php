@@ -10,8 +10,18 @@ include_once 'sidenav.php';
             <h1 id="title">MAINTENENCE AND TECHNICAL<br> <span id="city">SERVICES</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="card">
-                <form action="#" class="reservationtime" method="GET">
+
+            <div class="card1" style="grid-column:1/span2;margin:auto">
+                <div class="data">
+                    <div class="photo" style="background-image:url(../../public/img/tech.jpg);"></div>
+                    <ul class="details">
+                        <?php date_default_timezone_set("Asia/Colombo"); ?>
+                        <li class="author"><?php echo date("H:i"); ?> </li>
+                        <li class="date"><?php echo  date("F j, Y");  ?></li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <form action="#" class="reservationtime" method="GET">
 
                     <label for="type">Type</label><br>
                     <select name="type" class="input-field">
@@ -29,6 +39,7 @@ include_once 'sidenav.php';
                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
                     </div>
                 </form>
+                </div>
             </div>
 
 

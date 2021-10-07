@@ -22,6 +22,11 @@ include_once 'sidenav.php';
                 <div class="description">
                     <form action="#" class="reservationtime" method="GET">
                         <div id="">
+                            
+                            <input type="radio" name="type" value="function">
+                            <label>Function</label>
+                            <input type="radio" name="type" value="conference">
+                            <label>Conference</label><br>
                             <label>Date</label><br>
                             <input type="date" name="date" class="input-field"><br>
                             <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
@@ -31,12 +36,11 @@ include_once 'sidenav.php';
                         </div>
                     </form>
                 </div>
-            </div>
+        </div>
 
 
             <div class="divPopupModel">
 
-                <button id="model-btn" class="purplebutton">Reserve Now</button>
                 <p id="answer"></p>
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>

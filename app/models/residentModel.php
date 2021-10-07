@@ -102,6 +102,21 @@ class residentModel extends model {
             echo "do";
         }
     }
+    public function maintenence(){
+        $sql = "SELECT * from technical_maintenence_request";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function laundry(){
+        $sql = "SELECT * from laundry_request";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function visitor(){
+        $sql = "SELECT * from visitor";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
     public function readNotification(){
         $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
