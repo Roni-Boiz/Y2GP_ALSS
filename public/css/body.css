@@ -1124,7 +1124,7 @@ hr {
   width: 100%;
   display: grid;
   justify-content: center;
-  margin: auto;
+  /* margin: auto; */
 }
 .reservationtime select{
   padding:0 15px ;
@@ -1138,13 +1138,13 @@ hr {
   font-size:25px;
   padding: 15px;
 }
-.reservationtime  #description{
+/* .card1  .description{
   width:100%;
   padding: 15px;
-  margin:10px 0;
+  margin:auto;
   min-height:60px
 
-}
+} */
 /* CARDS */
 
 .card3 {
@@ -1232,15 +1232,16 @@ hr {
   overflow: hidden;
   width: 100%;
   min-height: 400px;
+  z-index: 0;
 }
 
 .card1:hover .photo {
-  transform: scale(1.3) rotate(3deg);
+  /* transform: scale(1.3) rotate(3deg); */
 }
 
 .card1 .data {
   position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 
 .card1 .photo {
@@ -1252,6 +1253,7 @@ hr {
   background-size: cover;
   background-position: center;
   transition: transform 0.2s;
+  z-index:0;
 }
 
 .card1 .details ul {
@@ -1283,8 +1285,8 @@ hr {
   padding: 1rem;
   background: #fff;
   position: relative;
-  /* z-index: 1; */
-  /* margin:auto; */
+  z-index: 0;
+  margin:auto;
 }
 
 .card1 .description h1 {
