@@ -10,53 +10,62 @@ include_once 'sidenav.php';
             <h1 id="title">LAUNDRY <span id="city">REQUEST</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="card">
-                <form action="#" class="reservationtime" method="GET">
-                    <div id="">
-                        <label for="type">Type</label><br>
-                        <select name="type" class="input-field">
-                            <option value="">Select Type</option>
-                            <option value="">Quick</option>
-                            <option value="">Regular</option>
-                        </select><br>
 
-                    </div>
-                    <div id="">
-                        </select>
-                        <label>Category 1</label><br>
-                        <input type="text" name="quantity1" class="input-field" placeholder="Enter quantity">
-                        <select name="catw1" class="input-field">
-                            <option value="">Select weight</option>
-                            <option value="">1-5</option>
-                            <option value="">5-10</option>
-                            <option value="">more than 10</option>
-                        </select><br>
-                        <label>Category 2</label><br>
-                        <input type="text" name="quantity2" class="input-field" placeholder="Enter quantity">
-                        <select  name="catw2" class="input-field">
-                            <option value="">Select weight</option>
-                            <option value="">1-5</option>
-                            <option value="">5-10</option>
-                            <option value="">more than 10</option>
-                        </select><br>
-                        <label>Category 3</label><br>
-                        <input type="text" name="quantity3" class="input-field" placeholder="Enter quantity">
-                        <select  name="catw3" class="input-field">
-                            <option value="">Select weight</option>
-                            <option value="">1-5</option>
-                            <option value="">5-10</option>
-                            <option value="">more than 10</option>
-                        </select><br>
-                        <label>Description</label><br>
-                        <input type="textarea"  name="description" id="description"><br>
-                        <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
-                    </div>
+            <div class="card1" style="grid-column:1/span2;margin:auto;max-width:100%">
+                <div class="data">
+                    <div class="photo" style="background-image:url(../../public/img/laundry.jpg);"></div>
+                    <ul class="details">
+                        <?php date_default_timezone_set("Asia/Colombo"); ?>
+                        <li class="author"><?php echo date("H:i"); ?> </li>
+                        <li class="date"><?php echo  date("F j, Y");  ?></li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <form action="#" class="reservationtime" method="GET">
+                        <div id="">
+                            <label for="type">Type</label><br>
+                            <select name="type" class="input-field">
+                                <option value="">Select Type</option>
+                                <option value="">Quick</option>
+                                <option value="">Regular</option>
+                            </select><br>
 
-                </form>
+                        </div>
+                        <div id="">
+                            </select>
+                            <label>Category 1</label><br>
+                            <input type="text" name="quantity1" class="input-field" placeholder="Enter quantity">
+                            <select name="catw1" class="input-field">
+                                <option value="">Select weight</option>
+                                <option value="">1-5</option>
+                                <option value="">5-10</option>
+                                <option value="">more than 10</option>
+                            </select><br>
+                            <label>Category 2</label><br>
+                            <input type="text" name="quantity2" class="input-field" placeholder="Enter quantity">
+                            <select name="catw2" class="input-field">
+                                <option value="">Select weight</option>
+                                <option value="">1-5</option>
+                                <option value="">5-10</option>
+                                <option value="">more than 10</option>
+                            </select><br>
+                            <label>Category 3</label><br>
+                            <input type="text" name="quantity3" class="input-field" placeholder="Enter quantity">
+                            <select name="catw3" class="input-field">
+                                <option value="">Select weight</option>
+                                <option value="">1-5</option>
+                                <option value="">5-10</option>
+                                <option value="">more than 10</option>
+                            </select><br>
+                            <label>Description</label><br>
+                            <input type="textarea" name="description" id="description"><br>
+                            <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
+                        </div>
 
-            </div>
-        </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+                    </form>
+                </div>
+            </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .expand div closed here -->
 </body>
 
 </html>

@@ -172,17 +172,7 @@ include_once 'sidenav.php';
                     </p>
                 </div>
             </div>
-            <!-- <button id="model-btn" class="purplebutton">Reserve Now</button>
 
-            <div class="divPopupModel">
-                <p id="answer"></p>
-
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="model">
-                            <h3>Deletion Success!</h3>
-                    <button href="#" class="purplebutton">OK</button>
-                </div>
-            </div> -->
 
         </div>
 

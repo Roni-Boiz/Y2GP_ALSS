@@ -16,43 +16,43 @@ include_once 'sidenav.php';
                     <li><a href="#tab2">Laundry</a></li>
                     <li><a href="#tab3">Visitors</a></li>
                 </ul>
+
                 <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
-                        <?php
 
-                        if ($this->hall->num_rows > 0) { ?>
+                        <?php
+                        if ($this->maintenence->num_rows > 0) { ?>
                             <table class="table1">
                                 <tr style="background-color:#5747b4">
                                     <th>Action</th>
-                                    <th>Reservation ID</th>
-                                    <th colspan="3">Reservation</th>
-                                    <th>Reserved Date</th>
-                                    <th>Member</th>
+                                    <th>Request ID</th>
+                                    <th>Prefered Date</th>
+                                    <th colspan="2">Requested</th>
                                     <th>Type</th>
+                                    <th>State</th>
+
                                 </tr>
                                 <tr style="background-color:#5747b4">
                                     <th></th>
                                     <th></th>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
                                     <th></th>
+                                    <th>Date</th>
+                                    <th>Time</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
 
                                 <?php
-                                while ($row = $this->hall->fetch_assoc()) { ?>
+                                while ($row = $this->maintenence->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?hallid=<?php echo $row["reservation_id"]; ?>">
+                                        <td><a href="removeRequest?hallid=<?php echo $row["request_id"]; ?>">
                                                 <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["reservation_id"]; ?></td>
-                                        <td><?php echo $row["date"]; ?></td>
-                                        <td><?php echo $row["start_time"]; ?></td>
-                                        <td><?php echo $row["end_time"]; ?></td>
-                                        <td><?php echo $row["reserved_time"]; ?></td>
-                                        <td><?php echo $row["no_of_members"]; ?></td>
-                                        <td><?php echo "\n" . $row["type"]; ?></td>
+                                        <td><?php echo $row["request_id"]; ?></td>
+                                        <td><?php echo $row["preferred_date"]; ?></td>
+                                        <td><?php echo $row["request_date"]; ?></td>
+                                        <td><?php echo $row["request_time"]; ?></td>
+                                        <td><?php echo $row["category"]; ?></td>
+                                        <td><?php echo $row["state"]; ?></td>
                                     </tr>
                             <?php
                                 }
@@ -65,38 +65,37 @@ include_once 'sidenav.php';
                 </div>
                 <div id="tab2" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
+
                         <?php
-                        if ($this->fitness->num_rows > 0) { ?>
+                        if ($this->maintenence->num_rows > 0) { ?>
                             <table class="table1">
                                 <tr style="background-color:#5747b4">
                                     <th>Action</th>
-                                    <th>Reservation ID</th>
-                                    <th colspan="3">Reservation</th>
-                                    <th>Reserved Date</th>
-                                    <th>Coach</th>
+                                    <th>Request ID</th>
+                                    <th colspan="2">Requested</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
 
                                 </tr>
                                 <tr style="background-color:#5747b4">
                                     <th></th>
                                     <th></th>
                                     <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
+                                    <th>Time</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
 
                                 <?php
-                                while ($row = $this->fitness->fetch_assoc()) { ?>
+                                while ($row = $this->laundry->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?fitid=<?php echo $row["reservation_id"]; ?>">
+                                        <td><a href="removeReservation?hallid=<?php echo $row["request_id"]; ?>">
                                                 <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["reservation_id"]; ?></td>
-                                        <td><?php echo $row["date"]; ?></td>
-                                        <td><?php echo $row["start_time"]; ?></td>
-                                        <td><?php echo $row["end_time"]; ?></td>
-                                        <td><?php echo $row["reserved_time"]; ?></td>
-                                        <td><?php echo $row["employee_id"]; ?></td>
+                                        <td><?php echo $row["request_id"]; ?></td>
+                                        <td><?php echo $row["request_date"]; ?></td>
+                                        <td><?php echo $row["request_time"]; ?></td>
+                                        <td><?php echo $row["description"]; ?></td>
+                                        <td><?php echo $row["type"]; ?></td>
                                     </tr>
                             <?php
                                 }
@@ -108,40 +107,34 @@ include_once 'sidenav.php';
                     </div>
                 </div>
                 <div id="tab3" class="tab">
-                    <p style="color:black">
                     <div style="overflow-x:auto;grid-column:1/span2">
-                        <?php
 
-                        if ($this->treatment->num_rows > 0) { ?>
+                        <?php
+                        if ($this->maintenence->num_rows > 0) { ?>
                             <table class="table1">
                                 <tr style="background-color:#5747b4">
                                     <th>Action</th>
-                                    <th>Reservation ID</th>
-                                    <th colspan="3">Reservation</th>
-                                    <th>Reserved Date</th>
-                                    <th>Type</th>
+                                    <th>Request ID</th>
+                                    <th>Name</th>
+                                    <th colspan="2">Arrived</th>
                                 </tr>
                                 <tr style="background-color:#5747b4">
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                     <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Time</th>
                                 </tr>
 
                                 <?php
-                                while ($row = $this->treatment->fetch_assoc()) { ?>
+                                while ($row = $this->visitor->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?treatid=<?php echo $row["reservation_id"]; ?>">
+                                        <td><a href="removeReservation?hallid=<?php echo $row["visitor_id"]; ?>">
                                                 <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["reservation_id"]; ?></td>
-                                        <td><?php echo $row["date"]; ?></td>
-                                        <td><?php echo $row["start_time"]; ?></td>
-                                        <td><?php echo $row["end_time"]; ?></td>
-                                        <td><?php echo $row["reserved_time"]; ?></td>
-                                        <td><?php echo "\n" . $row["type"]; ?></td>
+                                        <td><?php echo $row["visitor_id"]; ?></td>
+                                        <td><?php echo $row["name"]; ?></td>
+                                        <td><?php echo $row["arrive_date"]; ?></td>
+                                        <td><?php echo $row["arrive_time"]; ?></td>
                                     </tr>
                             <?php
                                 }
@@ -151,12 +144,10 @@ include_once 'sidenav.php';
                             ?>
                             </table>
                     </div>
-                    </p>
                 </div>
-            </div>
 
-        </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+            </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .expand div closed here -->
 </body>
 <script>
     $(document).ready(function() {
@@ -173,4 +164,5 @@ include_once 'sidenav.php';
         });
     });
 </script>
+
 </html>
