@@ -89,6 +89,10 @@ class residentController extends controller{
     }
     
     public function yourRequest(){
+        $id=$_SESSION['userId'];
+        $this->view->maintenence=$this->model->maintenence($id);
+        $this->view->laundry=$this->model->laundry($id);
+        $this->view->visitor=$this->model->visitor($id);
         $this->view->render('resident/yourRequestView');
     }
 
