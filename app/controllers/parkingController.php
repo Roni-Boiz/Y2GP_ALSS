@@ -11,7 +11,7 @@ class parkingController extends controller{
         if(!isset($_SESSION['type'])){
             header('Location:../homeController/logout');
             }
-        else if($_SESSION['type']!='parking'){
+            else if($_SESSION['type']!='parking'){
             header('Location:../homeController/logout');
 
         }
@@ -22,8 +22,9 @@ class parkingController extends controller{
         $this->view->render('parkingOfficer/parkingofficerView');
     }
 
-    public function announcement(){
-        $this->view->ann = $this->model->readTable();
+    public function parkingslot(){
+        // $this->view->ann = $this->model->readTable();
+        $this->view->render('parkingOfficer/parkingslotView');
     }
     public function profile(){
         $this->loadModel('profileModel');

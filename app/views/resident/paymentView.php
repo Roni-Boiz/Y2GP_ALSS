@@ -20,7 +20,7 @@ include_once 'sidenav.php';
                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
                     </div>
                 </form> <!-- payment form -->
-                <div>
+                <div style="display:none" id="gateway">
                     <form action="#" class="reservationtime" method="GET" id="cardpayment" style="">
                         <h3>Payment</h3>
                         <label>Accepted Cards</label>

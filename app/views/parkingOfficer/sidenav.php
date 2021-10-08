@@ -41,13 +41,11 @@
             </div>
 
             <ul id="myMenu">
-                <li><a href="announcement"><i class="fa fa-home"></i>HOME</a></li>
+                <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a></li>
+                <li class="dropdown"><a href="parkingslot"><i class="fa fa-calendar-plus"></i>PARKING SLOT</a></li>
             </ul>
         </nav>
-
-
         <script>
             /* show sidebar */
             $('.btn').click(function() {
@@ -71,3 +69,4 @@
                 }
             }
         </script>
+        <script type="text/javascript" src="../../public/js/profile.js"></script>
