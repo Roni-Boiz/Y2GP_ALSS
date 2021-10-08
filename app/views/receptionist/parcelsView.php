@@ -26,7 +26,7 @@
                 <br><br>
                 <label for="Description">Description</label><br>
                 <textarea style="margin:10px 0;width:100%;min-height:60px; border-radius: 15px; border:1px black solid; background-color: #f0f0f0;"
-                name="description" id="" cols="30" rows="10"></textarea><br>
+                name="description" cols="30" rows="10"></textarea><br>
                 <input class="purplebutton" value="Save" type="submit" style="float:right">save</button>
                 </div>
             </form>

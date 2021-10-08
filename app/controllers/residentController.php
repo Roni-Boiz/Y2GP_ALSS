@@ -116,4 +116,9 @@ class residentController extends controller{
         $this->model->setReached($nid);
         $this->getNotification();
     }
+    public function markRead(){
+        $nid=$_GET['notification'];
+        $this->model->removeNotification($nid);
+        $this->getNotification();
+    }
 }

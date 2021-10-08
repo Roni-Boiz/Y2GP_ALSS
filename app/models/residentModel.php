@@ -129,6 +129,10 @@ class residentModel extends model {
         $sql3="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql3);
     }
+    public function removeNotification($nid){
+        $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
+        $this->conn->query($sql);
+    }
 
 
 
