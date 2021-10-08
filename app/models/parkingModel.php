@@ -2,7 +2,7 @@
 
 require '../app/core/model.php';
 
-class parkinhModel extends model {
+class parkingModel extends model {
     function __construct(){
          parent::__construct();
     }
