@@ -41,10 +41,32 @@
             </div>
 
             <ul id="myMenu">
-                <li><a href="announcement"><i class="fa fa-home"></i>HOME</a></li>
+                <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>PARKING SLOT</a></li>
+                <li class="dropdown"><a href="parkingslot"><i class="fa fa-calendar-plus"></i>PARKING SLOT</a></li>
             </ul>
         </nav>
-
+        <script>
+            /* show sidebar */
+            $('.btn').click(function() {
+                $(this).toggleClass("click");
+                $('.sidebar').toggleClass("show");
+            });
+            /* hide the sidenav */
+            function expand() {
+                if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
+                    document.getElementById("hh").style.gridColumn = "2";
+                    document.getElementById("hb").style.gridColumn = "2";
+                    document.getElementById("hh").style.marginLeft = "20px";
+                    document.getElementById("hb").style.marginLeft = "20px";
+                    document.getElementById("side").style.transform = "initial";
+                } else {
+                    document.getElementById("hh").style.gridColumn = "1 / span 3";
+                    document.getElementById("hb").style.gridColumn = "1 / span 3";
+                    document.getElementById("hh").style.marginLeft = "50px";
+                    document.getElementById("hb").style.marginLeft = "50px";
+                    document.getElementById("side").style.transform = "rotateY(180deg)"; /* icon only */
+                }
+            }
+        </script>
         <script type="text/javascript" src="../../public/js/profile.js"></script>
