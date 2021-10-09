@@ -120,10 +120,6 @@ $(function () {
       uploadBtn.style.display = "block";
    });
 
-   // imgDiv.addEventListener('mouseleave', function(){
-   //     uploadBtn.style.display = "none";
-   // });
-
    file.addEventListener('change', function () {
       const choosefile = this.files[0];
       if (choosefile) {
@@ -134,20 +130,6 @@ $(function () {
          reader.readAsDataURL(choosefile);
       }
    });
-
-
-   // function loadData() {
-   //     var cookies = document.cookie;
-   //     console.log(cookies);
-   //     // document.getElementById("emptype").setAttribute('value','Manager');
-   //     document.getElementById("fname").setAttribute('value',1);
-
-   //     // document.getElementById("lname").setAttribute('value',);
-   //     // document.getElementById("email").setAttribute('value',);
-   //     // document.getElementById("cno").setAttribute('value',);
-   // } 
-
-
 
 });
 
@@ -187,12 +169,6 @@ function showcardpayment() {
       $("#cardpayment").hide();
    }
 }
-// add announcement slide JS
-
-// btnAddAnnouncement.addEventListener("click", ()=>{
-//     openNav(); openOffcanvas();
-// })
-
 function openOffcanvas() {
    document.getElementById("mySidenavform").style.width = "400px";
    document.getElementById("hh").style.marginRight = "410px";
@@ -212,3 +188,82 @@ function closeOffcanvas() {
    document.getElementById("myCanvasNav").style.opacity = "0";
 }
 /////////////////////////////////////////////////////////////////
+function setVisibility1(id) {
+   if (document.getElementById('editprofile').value == 'Edit Profile') {
+       document.getElementById('editprofile').value = 'Cancel';
+       document.getElementById('editprofile').style.width = 'fit-content';
+       document.getElementById(id).style.display = 'inline';
+   } else {
+       document.getElementById('editprofile').value = 'Edit Profile';
+       document.getElementById('editprofile').style.width = '100%';
+       document.getElementById(id).style.display = 'none';
+   }
+}
+// Change Password show/hide
+function setVisibility2(id) {
+   if (document.getElementById('changepassword').value == 'Change Password') {
+       document.getElementById('changepassword').value = 'Cancel';
+       document.getElementById(id).style.display = 'inline';
+   } else {
+       document.getElementById('changepassword').value = 'Change Password';
+       document.getElementById(id).style.display = 'none';
+   }
+}
+
+function setVisibility3(id) {
+   if (document.getElementById(id).style.display == 'none') {
+       document.getElementById('showmore').text = 'Show Less';
+       document.getElementById(id).style.display = 'inline';
+   } else {
+       document.getElementById('showmore').text = 'Show More';
+       document.getElementById(id).style.display = 'none';
+   }
+}
+// delete row and hide
+function deleteRes(id,type) {
+   r = confirm("Are you sure?");
+   if (r == true) {
+      if(type="hall"){
+       $.ajax({
+           type: "GET",
+           url: "removeReservation",
+           data: {
+               hallid: id
+           },
+           success: function() {
+               a = "#"+id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+           }
+       });
+      }
+      if(type="fit"){
+         $.ajax({
+             type: "GET",
+             url: "removeReservation",
+             data: {
+                 fitid: id
+             },
+             success: function() {
+                 a = "#"+id;
+                 console.log(a);
+                 $(a).closest('tr').fadeOut("fast");
+             }
+         });
+        }
+        if(type="hall"){
+         $.ajax({
+             type: "GET",
+             url: "removeReservation",
+             data: {
+                 treatid: id
+             },
+             success: function() {
+                 a = "#"+id;
+                 console.log(a);
+                 $(a).closest('tr').fadeOut("fast");
+             }
+         });
+        }
+   }
+}

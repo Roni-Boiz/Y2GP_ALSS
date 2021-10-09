@@ -2,37 +2,29 @@
 include_once('sidenav.php');
 ?>
 <script>
-    function setVisibility1(id) {
-        if (document.getElementById('editprofile').value == 'Edit Profile') {
-            document.getElementById('editprofile').value = 'Cancel';
-            document.getElementById('editprofile').style.width = 'fit-content';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('editprofile').value = 'Edit Profile';
-            document.getElementById('editprofile').style.width = '100%';
-            document.getElementById(id).style.display = 'none';
-        }
-    }
-    // Change Password show/hide
-    function setVisibility2(id) {
-        if (document.getElementById('changepassword').value == 'Change Password') {
-            document.getElementById('changepassword').value = 'Cancel';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('changepassword').value = 'Change Password';
-            document.getElementById(id).style.display = 'none';
-        }
-    }
+document.querySelector('.profile-pic').addEventListener('mouseenter', function() {
+   uploadBtn.style.display = "block";
+});
 
-    function setVisibility3(id) {
-        if (document.getElementById(id).style.display == 'none') {
-            document.getElementById('showmore').text = 'Show Less';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('showmore').text = 'Show More';
-            document.getElementById(id).style.display = 'none';
-        }
-    }
+document.querySelector('.profile-pic').addEventListener('mouseleave', function() {
+   uploadBtn.style.display = "none";
+});
+
+function uploadPhoto(phpto, newfile) {
+   const img = document.getElementById(phpto);
+   const file = document.getElementById(newfile);
+
+   file.addEventListener('change', function() {
+       const choosefile = this.files[0];
+       if (choosefile) {
+           const reader = new FileReader();
+           reader.addEventListener('load', function() {
+               img.setAttribute('src', reader.result);
+           });
+           reader.readAsDataURL(choosefile);
+       }
+   });
+}
 </script>
 
 
@@ -51,11 +43,11 @@ include_once('sidenav.php');
             <div class="card" id="profileCard" style="grid-column:1/span2;margin:auto">
                 <div class="bio">
                     <div class="profile-pic">
-                        <img id="photo" src="../../uploads/profile/employee/<?= $_SESSION['profilePic'] ?>" alt="profile picture" onerror="this.onerror=null; this.src='../../public/img/user.png'">
+                        <img id="photo" src="../../uploads/profile/employee/<?= $_SESSION['profilePic'] ?>" alt="profile picture" onerror="this.onerror=null; this.src='../../public/img/profile.png'">
                         <input type="file" id="file" name="file">
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
-
+                    
                     <h4> <?php echo $row["apartment_no"]; ?></h4>
 
                     <form action="editprofile" id="profileView" method="post">
@@ -66,11 +58,6 @@ include_once('sidenav.php');
 
                         <label>Last Name</label>
                         <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
-
-
-                        <label>Email</label><br>
-                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-
 
                         <label>NIC</label>
                         <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?>><br>
@@ -167,15 +154,15 @@ include_once('sidenav.php');
                             <form action="changePassword" id="passwordView" method="post">
                                 <label for="fname">Old Password</label>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
-                                <span class="error_form" id="old_password_error_message"></span><br>
+                                <span class="error_form" id="old_password_error_message" style="font-size:10px"></span><br>
 
                                 <label for="lname">New Password</label>
                                 <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
-                                <span class="error_form" id="new_password_error_message"></span><br>
+                                <span class="error_form" id="new_password_error_message" style="font-size:10px"></span><br>
 
                                 <label for="fname">Re-New Password</label>
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
-                                <span class="error_form" id="renew_password_error_message"></span><br>
+                                <span class="error_form" id="renew_password_error_message" style="font-size:10px;"></span><br>
 
                                 <input type="submit" onclick="confirm()" value="Save">
                             </form>
