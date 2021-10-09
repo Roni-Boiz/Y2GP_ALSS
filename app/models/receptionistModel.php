@@ -152,11 +152,23 @@ class receptionistModel extends model {
             return $errors;
         }
 
-        public function readVisitor(){
+        public function readTodayVisitor(){
+            date_default_timezone_set("Asia/Colombo");
             $date= date("Y-m-d");
-            $sql = "SELECT * FROM visitor WHERE arrive_date = '{$date}' ";
+            $sql = "SELECT * FROM visitor WHERE (arrive_date ='$date'AND arrive_time IS NULL)";
             $result = $this->conn->query($sql);   
             return $result;
+        }
+        public function readPreviousVisitor(){
+            $sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ";
+            $result = $this->conn->query($sql);   
+            return $result;
+        }
+        public function setVisited($vid){
+            $time=date('H:i:s');
+            $sql="UPDATE visitor SET arrive_time='$time' WHERE visitor_id='$vid'";
+            $this->conn->query($sql);
+
         }
     // public function readTable(){
     //     session_start();
