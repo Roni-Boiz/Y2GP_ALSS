@@ -39,14 +39,12 @@
         if ($this->inLocker->num_rows > 0){?>
             <table class="table1">
                             <tr style="background-color:#5747b4">
-                            <th>Action</th>
                             <th>Parcel ID</th>
                             <th>Apartment ID</th>
                             <th colspan="2">Received</th>
                             <th>Sender</th>
                             </tr>
                             <tr style="background-color:#5747b4">
-                            <th></th>
                             <th></th>
                             <th></th>
                             <th>Date</th>
@@ -58,7 +56,6 @@
                 while($row = $this->inLocker->fetch_assoc()){?> 
                             
                             <tr>
-                            <td><a method="get" href="deleteInlocker?parcel=<?php echo $row["parcel_id"];?>"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                             <div class="rowlink" style="display:inline-block">
                             <td><?php echo $row["parcel_id"]; ?></td>
                             <td><?php echo $row["resident_id"]; ?></td>
