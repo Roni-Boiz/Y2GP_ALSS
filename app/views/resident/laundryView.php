@@ -28,7 +28,7 @@ include_once 'sidenav.php';
                                 <option value="">Select Type</option>
                                 <option value="">Quick</option>
                                 <option value="">Regular</option>
-                            </select><br>
+                            </select><i class="fas fa-info-circle" id="model-btn"></i><br>
 
                         </div>
                         <div id="">
@@ -63,6 +63,34 @@ include_once 'sidenav.php';
                         </div>
 
                     </form>
+                    <div class="divPopupModel">
+                        <p id="answer"></p>
+
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="model" style="left: 75%;">
+
+                            <a href="javascript:void(0)" id="closebtn">&times;</a>
+                            <div style="text-align: center;">
+                                <h3>Help<i class="fas fa-info-circle"></i></h3>
+                            </div>
+                            <ul>____Category 1____</ul>
+                            <li>T-Shirt</li>
+                            <li>Shorts</li>
+                            <ul>____Category 2____</ul>
+                            <li>Bed-sheet</li>
+                            <li>Table Cloth</li>
+                            <li>Certain</li>
+                            <ul>____Category 3____</ul>
+                            <li>Shirts</li>
+                            <li>Troushers</li>
+
+
+                            <!-- <div id="btn-grp" style="grid-column: 1;">
+<button id="yes-btn">Yes</button>
+<button id="no-btn">No</button>
+</div> -->
+                        </div>
+                    </div>
                 </div>
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
