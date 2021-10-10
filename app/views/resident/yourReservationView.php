@@ -118,7 +118,7 @@ include_once 'sidenav.php';
                                         <td><?php echo $row["start_time"]; ?></td>
                                         <td><?php echo $row["end_time"]; ?></td>
                                         <td><?php echo $row["reserved_time"]; ?></td>
-                                        <td><?php echo $row["employee_id"]; ?></td>
+                                        <td><?php echo $row["fname"]." ".$row["lname"]; ?></td>
                                     </tr>
                             <?php
                                 }

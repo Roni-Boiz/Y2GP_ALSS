@@ -61,7 +61,7 @@ include_once 'sidenav.php';
                             <br>
                             <div id="col2">
                                 <label for="lname">Amount(LKR)</label><br>
-                                <input type="text" name="amt" class="input-field" placeholder="" value="10000.00" READONLY>
+                                <input type="text" name="amt" class="input-field" placeholder="" value="" >
                             </div>
 
                             <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next">

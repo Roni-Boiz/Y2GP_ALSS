@@ -74,7 +74,7 @@ class residentModel extends model {
         return $result;
     }    
     public function fitnessReservation($id){
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
