@@ -33,6 +33,12 @@ class adminModel extends model
         return $result;
     }
 
+    public function getMyDoList($id){
+        $sql = "SEELCT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
         $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");

@@ -20,8 +20,8 @@ class adminController extends controller
 
     public function index()
     {
-        $this->view->ann = $this->model->getAnnouncement();
-        $this->view->render('admin/adminView');
+        $this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
+        $this->view->render('admin/homeView');
     }
 
     public function profile(){

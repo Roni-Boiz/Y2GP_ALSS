@@ -104,7 +104,7 @@ class homeModel extends model
                             $json     = file_get_contents("http://ipinfo.io/$PublicIP/geo");
                             //Breaks down the JSON object into an array
                             $json     = json_decode($json, true);
-                            $ip = $json['ip'];
+                            $ip       = $json['ip'];
                             $city     = $json['city'];
                             $region   = $json['region'];
                             $country  = $json['country'];
