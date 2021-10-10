@@ -54,5 +54,10 @@ class laundryModel extends model {
         }
         return $errors;
     }
+    public function getRequests(){
+        $sql = "SELECT * FROM laundry_request";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
 
 }
