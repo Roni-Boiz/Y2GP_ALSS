@@ -18,188 +18,7 @@ include_once 'sidenav.php';
         animation: spin 2s linear infinite;
     }
 
-    @-webkit-keyframes spin {
-        0% {
-            -webkit-transform: rotate(0deg);
-        }
 
-        100% {
-            -webkit-transform: rotate(360deg);
-        }
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* Add animation to "page content" */
-    .animate-bottom {
-        position: relative;
-        -webkit-animation-name: animatebottom;
-        -webkit-animation-duration: 1s;
-        animation-name: animatebottom;
-        animation-duration: 1s
-    }
-
-    @-webkit-keyframes animatebottom {
-        from {
-            bottom: -100px;
-            opacity: 0
-        }
-
-        to {
-            bottom: 0px;
-            opacity: 1
-        }
-    }
-
-    @keyframes animatebottom {
-        from {
-            bottom: -100px;
-            opacity: 0
-        }
-
-        to {
-            bottom: 0;
-            opacity: 1
-        }
-    }
-
-    .myDoList {
-        display: inline-block;
-        border: 1px solid #eee;
-        width: 100%;
-    }
-
-    .myDoList .head{
-        background-color: #1d2f4c;
-        color: white;
-        text-align: left;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-    }
-
-    .myDoList .list-group-item {
-        font-size: 26;
-    }
-
-    .myDoList ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    /* Style the list items */
-    .myDoList ul li {
-        cursor: pointer;
-        position: relative;
-        padding: 12px 8px 12px 40px;
-        list-style-type: none;
-        background: #eee;
-        font-size: 15px;
-        transition: 0.2s;
-
-        /* make the list items unselectable */
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    /* Set all odd list items to a different color (zebra-stripes) */
-    .myDoList ul li:nth-child(odd) {
-        background: #f9f9f9;
-    }
-
-    /* Darker background-color on hover */
-    .myDoList ul li:hover {
-        background: #ddd;
-    }
-
-    /* When clicked on, add a background color and strike out text */
-    .myDoList ul li.checked {
-        background: #888;
-        color: #fff;
-        text-decoration: line-through;
-    }
-
-    /* Add a "checked" mark when clicked on */
-    .myDoList ul li.checked::before {
-        content: '';
-        position: absolute;
-        border-color: #fff;
-        border-style: solid;
-        border-width: 0 2px 2px 0;
-        top: 10px;
-        left: 16px;
-        transform: rotate(45deg);
-        height: 15px;
-        width: 7px;
-    }
-
-    /* Style the close button */
-    .myDoList .close {
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 12px 16px 12px 16px;
-    }
-
-    .myDoList .close:hover {
-        background-color: #f44336;
-        color: white;
-    }
-
-    /* Style the input */
-    .myDoList input {
-        margin: 0;
-        border: none;
-        border-radius: 0;
-        width: 80%;
-        padding: 10px;
-        float: left;
-        font-size: 15px;
-        border: 1px solid #adadad;
-    }
-
-    /* Style the "Add" button */
-    .myDoList .addBtn {
-        padding: 11px;
-        background: #d9d9d9;
-        color: #555;
-        float: left;
-        text-align: center;
-        font-size: 15px;
-        cursor: pointer;
-        transition: 0.3s;
-        border-radius: 0;
-        width: 20%;
-    }
-
-    .myDoList .addBtn:hover {
-        background-color: #bbb;
-        display: block;
-    }
-
-    .myDiList {
-        position: relative;
-    }
-
-    .doListAdd {
-        height: 50px;
-        display: block;
-    }
-
-    .doListAdd i {
-        font-size: 15px;
-        padding: 0;
-    }
 
     /* .collapsible {
         background-color: #777;
@@ -386,7 +205,7 @@ include_once 'sidenav.php';
                             </div>
                         </div>
                         <div>
-                            <ul id="myUL">
+                            <ul id="myUL" onload="myDoList()">
                                 <li>Update Services</li>
                                 <li class="checked">Make Announcement</li>
                             </ul>
@@ -417,6 +236,8 @@ include_once 'sidenav.php';
         // }
         ///////////////////////////////////////////////
 
+
+        //  My do list Function
         // Create a "close" button and append it to each list item
         var myDoList = document.getElementById("myUL");
         var myNodelist = myDoList.getElementsByTagName("LI");
@@ -472,21 +293,6 @@ include_once 'sidenav.php';
                     div.style.display = "none";
                 }
             }
-        }
-
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
         }
     </script>
 </body>
