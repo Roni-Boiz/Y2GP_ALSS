@@ -496,7 +496,7 @@ include_once 'sidenav.php';
 
             <div class="divPopupModel">
 
-                <button id="model-btn" onclick="openModel()">Add New</button>
+                <button id="model-btn" onclick="openModel('model')">Add New</button>
                 <p id="answer"></p>
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
