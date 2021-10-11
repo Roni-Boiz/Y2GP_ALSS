@@ -34,7 +34,13 @@ class adminModel extends model
     }
 
     public function getMyDoList($id){
-        $sql = "SEELCT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
+        $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
+    public function getAllUsers(){
+        $sql = "SELECT * FROM user_account ORDER BY type ASC";
         $result = $this->conn->query($sql);
         return $result;
     }
