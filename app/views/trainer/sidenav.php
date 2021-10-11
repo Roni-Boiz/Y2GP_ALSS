@@ -24,7 +24,7 @@
                             <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
-                            <li><a href="#">id</a></li>
+                            <li><a>id</a></li>
                             <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
                     </li>
                 </ul>
