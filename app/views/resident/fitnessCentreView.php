@@ -13,27 +13,7 @@ include_once 'sidenav.php';
             <h1 id="title">FITNESS CENTRE<br> <span id="city">RESERVATION</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <!-- <div class="card">
-                <form action="#" class="reservationtime" method="GET">
-                    <div id="">
-                        <label>Date</label><br>
-                        <input type="date" name="date" class="input-field"><br>
-                        <label>Coach</label><br>
-                        <select name="type" class="input-field">
-                            <option value="">Select coach</option>
-                            <option value="">coach 1</option>
-                            <option value="">coach 1</option>
-                            <option value="">coach 1</option>
-                            <option value="">coach 1</option>
-                        </select><br>
-                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
-                        Reservations of the day<br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>
-                        <button id="model-btn" class="purplebutton">Reserve Now</button>
 
-                    </div>
-                </form>
-
-            </div> -->
             <div class="card1" style="grid-column:1/span2;margin:auto">
                 <div class="data">
                     <div class="photo" style="background-image:url(../../public/img/gym.jpg);"></div>
@@ -66,13 +46,8 @@ include_once 'sidenav.php';
             </div>
             <!-- card end -->
             <div class="divPopupModel">
-
-                <p id="answer"></p>
-
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
-
-
                     <div style="text-align: center;">
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
@@ -113,9 +88,7 @@ include_once 'sidenav.php';
 <button id="no-btn">No</button>
 </div> -->
                 </div>
-
             </div>
-
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
