@@ -7,7 +7,6 @@
   --color2:rgb(146, 145, 150);
   --color3:rgb(0, 0, 0);
   --color2:#eab676;
-  ;
 }
 *{
   margin: 0;
@@ -265,7 +264,7 @@ nav i{
     grid-template-columns: 1fr 100px 2fr;
     align-items: center;
     background-color: white;
-    margin: 80px 10px 5px 20px;
+    margin: 75px 10px 5px 20px;
     border-radius: 5px;
 }
 .hawlockhead #title{
@@ -1007,9 +1006,7 @@ input[type=email]{
   padding-bottom: 8px;
 }
 
-.bio form>input[type="text"] {
-  border-radius: 12px;
-}
+
 
 #editprofile {
   width: 100%;
@@ -1050,7 +1047,7 @@ hr {
 }
 
 #security form>input[type="password"] {
-  border-radius: 12px;
+  /* border-radius: 12px; */
   width: fit-content;
 }
 

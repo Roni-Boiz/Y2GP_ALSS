@@ -1,33 +1,6 @@
 <?php
 include_once('sidenav.php');
 ?>
-<script>
-document.querySelector('.profile-pic').addEventListener('mouseenter', function() {
-   uploadBtn.style.display = "block";
-});
-
-document.querySelector('.profile-pic').addEventListener('mouseleave', function() {
-   uploadBtn.style.display = "none";
-});
-
-function uploadPhoto(phpto, newfile) {
-   const img = document.getElementById(phpto);
-   const file = document.getElementById(newfile);
-
-   file.addEventListener('change', function() {
-       const choosefile = this.files[0];
-       if (choosefile) {
-           const reader = new FileReader();
-           reader.addEventListener('load', function() {
-               img.setAttribute('src', reader.result);
-           });
-           reader.readAsDataURL(choosefile);
-       }
-   });
-}
-</script>
-
-
 </head>
 
 <body style="background-color: gray; background-image:none;">
@@ -120,10 +93,6 @@ function uploadPhoto(phpto, newfile) {
                                 <label><?php echo $row["phone_no"] ?></label>
                             </div>
                             <hr>
-                            <div>
-                                <label>Email</label>
-                                <label><?php echo $row["email"] ?></label>
-                            </div>
                             <hr>
                             <div>
                                 <div>
@@ -245,6 +214,9 @@ function uploadPhoto(phpto, newfile) {
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script type="text/javascript" src="../../public/js/profile.js"></script>
+    <script>
+          
+    </script>
 
 </body>
 

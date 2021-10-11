@@ -73,14 +73,14 @@ include_once 'sidenav.php';
                             <div style="text-align: center;">
                                 <h3>Help<i class="fas fa-info-circle"></i></h3>
                             </div>
-                            <ul>____Category 1____</ul>
+                            <ul>-----Category 1-----</ul>
                             <li>T-Shirt</li>
                             <li>Shorts</li>
-                            <ul>____Category 2____</ul>
+                            <ul>-----Category 2-----</ul>
                             <li>Bed-sheet</li>
                             <li>Table Cloth</li>
                             <li>Certain</li>
-                            <ul>____Category 3____</ul>
+                            <ul>-----Category 3-----</ul>
                             <li>Shirts</li>
                             <li>Troushers</li>
 

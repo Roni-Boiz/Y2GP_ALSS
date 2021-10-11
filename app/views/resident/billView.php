@@ -23,7 +23,7 @@ include_once 'sidenav.php';
                         <label for="type">Month</label><br>
                         <select name="month" class="input-field">
                             <option value="">Select Month</option>
-
+                            <!-- to get time slots -->
                             <?php
                             for ($i = 0; $i < 12; $i++) {
                                 $time = strtotime(sprintf('%d months', $i));
