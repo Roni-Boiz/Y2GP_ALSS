@@ -227,6 +227,11 @@ class receptionistModel extends model {
         $sql="DELETE FROM parcel WHERE parcel_id=$pid";
         $this->conn->query($sql);
     }
+    public function getApartment(){
+        $sql = "SELECT apartment_no FROM apartment WHERE status = '1' ";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
     
 }
 ?>
