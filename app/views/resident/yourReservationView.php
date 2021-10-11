@@ -162,11 +162,6 @@ include_once 'sidenav.php';
 
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
-    <script>
-        //$(document).ready(function() {
-
-        //});
-    </script>
 </body>
 
 </html>

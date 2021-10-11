@@ -87,8 +87,4 @@
             </ul>
         </nav>
 
-        <script>
-            /* show sidebar */
-            
-        </script>
         <script type="text/javascript" src="../../public/js/resident.js"></script>

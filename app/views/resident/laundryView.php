@@ -84,11 +84,6 @@ include_once 'sidenav.php';
                             <li>Shirts</li>
                             <li>Troushers</li>
 
-
-                            <!-- <div id="btn-grp" style="grid-column: 1;">
-<button id="yes-btn">Yes</button>
-<button id="no-btn">No</button>
-</div> -->
                         </div>
                     </div>
                 </div>

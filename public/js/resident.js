@@ -31,33 +31,34 @@ $(function () {
       $('.sidebar').toggleClass("show");
    });
     // add profile pic
-    const imgDiv = document.querySelector('.profile-pic');
-    const img = document.querySelector('#photo');
-    const file = document.querySelector('#file');
-    const uploadBtn = document.querySelector('#uploadBtn');
+   //  const imgDiv = document.querySelector('.profile-pic');
+   //  const img = document.querySelector('#photo');
+   //  const file = document.querySelector('#file');
+   //  const uploadBtn = document.querySelector('#uploadBtn');
  
-    imgDiv.addEventListener('mouseenter', function () {
-       uploadBtn.style.display = "block";
-    });
+   //  imgDiv.addEventListener('mouseenter', function () {
+   //     uploadBtn.style.display = "block";
+   //  });
  
-    file.addEventListener('change', function () {
-       const choosefile = this.files[0];
-       if (choosefile) {
-          const reader = new FileReader();
-          reader.addEventListener('load', function () {
-             img.setAttribute('src', reader.result);
-          });
-          reader.readAsDataURL(choosefile);
-       }
-    });
+   //  file.addEventListener('change', function () {
+   //     const choosefile = this.files[0];
+   //     if (choosefile) {
+   //        const reader = new FileReader();
+   //        reader.addEventListener('load', function () {
+   //           img.setAttribute('src', reader.result);
+   //        });
+   //        reader.readAsDataURL(choosefile);
+   //     }
+   //  });
  
-    document.querySelector('.profile-pic').addEventListener('mouseenter', function () {
-       uploadBtn.style.display = "block";
-    });
+   //  document.querySelector('.profile-pic').addEventListener('mouseenter', function () {
+   //     uploadBtn.style.display = "block";
+   //  });
  
-    document.querySelector('.profile-pic').addEventListener('mouseleave', function () {
-       uploadBtn.style.display = "none";
-    });
+   //  document.querySelector('.profile-pic').addEventListener('mouseleave', function () {
+   //     uploadBtn.style.display = "none";
+   //  });
+   
    // popup
    const model = document.getElementById("model");
    const modelBtn = document.getElementById("model-btn");

@@ -1135,6 +1135,11 @@ hr {
   font-size:25px;
   padding: 15px;
 }
+#available{
+  display:block;
+  border:1px solid;
+  padding:5px;
+}
 /* .card1  .description{
   width:100%;
   padding: 15px;
