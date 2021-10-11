@@ -46,5 +46,12 @@ class laundryController extends controller{
         $this->model->changePassword($opw,$npw,$rnpw);
         $this->profile();
     }
+    public function requests(){
+        $this->view->laundyRequests=$this->model->getRequests();
+        $this->view->render('laundry/requestView');
+    }
+    public function getNotification(){
+        $this->view->render('laundry/notificationView');
+    }
 
 }

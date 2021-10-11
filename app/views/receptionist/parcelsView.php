@@ -16,20 +16,22 @@
         </ul>
         <div id="tab1" class="tab active">
         <div class="card">
-                <form action="parcels" class="reservationtime" method="post" >
+            <div class="signup_container">
+                <form action="parcels" method="post" >
                 <div>
                 <label for="Apartment ID">Apartment Id</label><br>
-                <input type="text" class="input-field" name="apartmentId" id="apartmentId">
-                <br><br>
+                <input type="text" class="input-field-signup" name="apartmentId" id="apartmentId">
+                <!-- <br><br> -->
                 <label for="Sender">Sender</label><br>
-                <input type="text" class="input-field" name="sender" id="sender">
-                <br><br>
+                <input type="text" class="input-field-signup" name="sender" id="sender">
+                <!-- <br><br> -->
                 <label for="Description">Description</label><br>
-                <textarea style="margin:10px 0;width:100%;min-height:60px; border-radius: 15px; border:1px black solid; background-color: #f0f0f0;"
-                name="description" cols="30" rows="10"></textarea><br>
+                <textarea 
+                name="description" cols="30" rows="10" class="input-field-signup"></textarea><br>
                 <input class="purplebutton" value="Save" type="submit" style="float:right">save</button>
                 </div>
             </form>
+            </div>    
                 
         </div>
         </div>

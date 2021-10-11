@@ -19,27 +19,20 @@
             <div style="overflow-x:auto;grid-column:1/span2">
     
             <table class="table1">
-                            <tr style="background-color:#5747b4">
-                            <th>Visitor Id</th>
-                            <th>Visitor Name</th>
-                            <th>Resident Name</th>
-                            <th>Approve</th>
-                            
-                            </tr>
-                            
-                            
-                           
-                            <?php
-                            
-                while($row = mysqli_fetch_assoc($this->visitors)){?> 
-                            <tr>
-                            <td><a href="#"><i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                            <td><?php echo $row["reservation_id"]; ?></td>
-                            <td><?php echo $row["date"]; ?></td>
-                            <td><?php echo $row["start_time"]; ?></td>
-                            <td><?php echo $row["end_time"]; ?></td>
-                            
-                            </tr> 
+                <tr style="background-color:#5747b4">
+                    <th>Action</th>
+                    <th>Visitor Id</th>
+                    <th>Visitor Name</th>
+                    <th>Resident Id</th>
+                </tr>
+                <?php
+                while($row = $this->todayVisitors->fetch_assoc()){?>  
+                        <tr>
+                            <td><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"];?>"><i class="far fa-check-circle" style="color:black;padding:1px 10px"></i></a></td>
+                            <td><?php echo $row["visitor_id"]; ?></td>
+                            <td><?php echo $row["name"]; ?></td>
+                            <td><?php echo $row["resident_id"]; ?></td>   
+                        </tr> 
             <?php
                         }   
                 
@@ -49,16 +42,30 @@
                     </p>
         </div>
         <div id="tab2" class="tab">
-                <p style="color:black">
-                    Content...
-                </p>
-        </div>
-        <div id="tab3" class="tab">
-                <p style="color:black">
-                Content...
-                </p>
-                </div>
+        <p>
+            <div style="overflow-x:auto;grid-column:1/span2">
+    
+            <table class="table1">
+                <tr style="background-color:#5747b4">
+                    <th>Visitor Id</th>
+                    <th>Visitor Name</th>
+                    <th>Resident Id</th>
+                </tr>
+                <?php
+                while($row1 = $this->previousVisitors->fetch_assoc()){?>  
+                        <tr>
+                            <td><?php echo $row1["visitor_id"]; ?></td>
+                            <td><?php echo $row1["name"]; ?></td>
+                            <td><?php echo $row1["resident_id"]; ?></td>   
+                        </tr> 
+            <?php
+                        }   
+                
+            ?>
+            </table>
             </div>
+                    </p>
+        </div>
     </div> <!-- .hawlockbody div closed here -->
 </div> <!-- .expand div closed here -->
 <script>

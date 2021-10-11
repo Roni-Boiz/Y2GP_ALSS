@@ -81,15 +81,15 @@ class receptionistController extends controller{
         $this->model->putReachedAway($pid);
         $this->parcels();
     }
-    public function deleteInlocker(){
-        $pid=$_GET["parcel"];
-        $this->model->deleteParcel($pid);
-        $this->parcels();
-    }
-
     public function visitors(){
-        $this->view->visitors = $this->model->readVisitor();
+        $this->view->todayVisitors = $this->model->readTodayVisitor();
+        $this->view->previousVisitors = $this->model->readPreviousVisitor();
         $this->view->render('receptionist/visitorsView');
+    }
+    public function markVisited(){
+        $vid=$_GET['visitor'];
+        $this->model->setVisited($vid);
+        $this->visitors();
     }
     
 }
