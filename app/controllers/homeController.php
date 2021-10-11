@@ -8,6 +8,12 @@ class homeController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('homeModel');
+        // session_start();
+        // if(isset($_SESSION['type']) && !empty($_SESSION['type']) && $_SESSION['type'] == "admin"){
+        //     echo "Why";
+        //     $type = $_SESSION['type'];
+        //     header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+        // }
     }
 
     public function index(){
