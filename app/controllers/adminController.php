@@ -32,6 +32,7 @@ class adminController extends controller
 
     public function user()
     {
+        $this->view->users=$this->model->getAllUsers();
         $this->view->render('admin/userView');
     }
 
