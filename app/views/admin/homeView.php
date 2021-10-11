@@ -71,22 +71,19 @@ include_once 'sidenav.php';
         }
     }
 
-    .hawlockbody {
-        align-items: baseline;
-
+    .myDoList {
+        display: inline-block;
+        border: 1px solid #eee;
+        width: 100%;
     }
 
-    .leftPanel {
-        grid-column: 1/span 2;
-    }
-
-    .righrPanel {
-        grid-column: 3;
-    }
-
-    #homeCard {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
+    .myDoList .head{
+        background-color: #1d2f4c;
+        color: white;
+        text-align: left;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
     }
 
     .myDoList .list-group-item {
@@ -190,17 +187,8 @@ include_once 'sidenav.php';
         display: block;
     }
 
-    .leftPanel {
-        padding: 10px;
-        border-right: 1px solid #eee;
-    }
-
     .myDiList {
         position: relative;
-    }
-
-    .rightPanel {
-        padding: 10px;
     }
 
     .doListAdd {
@@ -323,12 +311,12 @@ include_once 'sidenav.php';
         justify-content: center;
     }
 
-    #serverstatus>div{
+    #serverstatus>div {
         margin: 0px 10px;
         text-align: center;
     }
 
-    #serverstatus h4{
+    #serverstatus h4 {
         padding: 10px;
     }
 </style>
@@ -344,7 +332,7 @@ include_once 'sidenav.php';
             <img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">Hawlock <span id="city">City</span></h1>
         </div>
-        <div id="hb" class="hawlockbody animate-bottom" onload="myFunction();">
+        <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
                     <div>
@@ -389,9 +377,9 @@ include_once 'sidenav.php';
                 <div class="rightPanel">
                     <div class="myDoList">
                         <div>
-                            <!-- <button class="collapsible"> -->
-                            <h2>To Do List</h2>
-                            <!-- </button> -->
+                            <div class="head">
+                                <h3>To Do List</h3>
+                            </div>
                             <div class="doListAdd">
                                 <input type="text" id="myInput" placeholder="Title...">
                                 <span onclick="newElement()" class="addBtn"><i class="fas fa-plus"></i></span>
@@ -417,16 +405,16 @@ include_once 'sidenav.php';
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script>
-        var myVar;
+        // var myVar;
 
-        function myFunction() {
-            myVar = setTimeout(showPage, 3000);
-        }
+        // function myFunction() {
+        //     myVar = setTimeout(showPage, 3000);
+        // }
 
-        function showPage() {
-            document.getElementById("loader").style.display = "none";
-            document.getElementsByClassName("hb").style.display = "block";
-        }
+        // function showPage() {
+        //     document.getElementById("loader").style.display = "none";
+        //     document.getElementsByClassName("hb").style.display = "block";
+        // }
         ///////////////////////////////////////////////
 
         // Create a "close" button and append it to each list item
