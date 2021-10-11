@@ -4,26 +4,7 @@ include_once 'sidenav.php';
 <link rel="stylesheet" href="vendor/pnotify/pnotify.custom.css" />
 <script src="vendor/pnotify/pnotify.custom.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script language="javascript">
-    // function deleteRes(id,type) {
-    //     r = confirm("Are you sure?");
-    //     if (r == true) {
-    //         $.ajax({
-    //             type: "GET",
-    //             url: "removeReservation",
-    //             data: {
-    //                 hallid: id
-    //             },
-    //             success: function() {
-    //                 a = "#"+id;
-    //                 console.log(a);
-    //                 $(a).closest('tr').fadeOut("fast");
-    //                 // alert("Delete Success!!!");
-    //             }
-    //         });
-    //     }
-    // }
-</script>
+
 
 <body style="background-color: gray; background-image:none;">
 
@@ -177,7 +158,7 @@ include_once 'sidenav.php';
             </div>
 
 
-        </div>
+       
 
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

@@ -44,7 +44,7 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
-            <!-- card end -->
+
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
@@ -83,10 +83,7 @@ include_once 'sidenav.php';
                         <br>
                         <input class="purplebutton" type="submit" name="Submit" value="Reserve" style="grid-column:1">
                     </form>
-                    <!-- <div id="btn-grp" style="grid-column: 1;">
-<button id="yes-btn">Yes</button>
-<button id="no-btn">No</button>
-</div> -->
+
                 </div>
             </div>
         </div> <!-- .hawlockbody div closed here -->
