@@ -23,9 +23,6 @@ function myFunction() {
 ///////////////////////////////////////////////////////
 
 // add announcement slide JS
-// btnAddAnnouncement.addEventListener("click", ()=>{
-//     openNav(); openOffcanvas();
-// })
 function openOffcanvas() {
     document.getElementById("mySidenavform").style.width = "400px";
     document.getElementById("hh").style.marginRight = "410px";
@@ -45,8 +42,8 @@ function closeOffcanvas() {
 /////////////////////////////////////////////////////////////////
 
 // popup model JS
-function openModel() {
-    const model = document.getElementById("model");
+function openModel(amodel) {
+    const model = document.getElementById(amodel);
     const modelBtn = document.getElementById("model-btn");
     const ans = document.getElementById("answer");
     const closeBtn = document.getElementById("closebtn");
@@ -75,30 +72,26 @@ function openModel() {
         model.className = 'close';
     });
 }
+/////////////////////////////////////////////////////
 
-// const imgDiv = document.querySelector('.profile-pic');
-// const img = document.querySelector('#photo');
-// const file = document.querySelector('#file');
-// const uploadBtn = document.querySelector('#uploadBtn');
-
-// imgDiv.addEventListener('mouseenter', function(){
-//     uploadBtn.style.display = "block";
-// });
-
-// imgDiv.addEventListener('mouseleave', function(){
-//     uploadBtn.style.display = "none";
-// });
-
-// file.addEventListener('change', function(){
-//     const choosefile = this.files[0];
-//     if(choosefile){
-//         const reader = new FileReader();
-//         reader.addEventListener('load', function(){
-//             img.setAttribute('src', reader.result);
-//         });
-//         reader.readAsDataURL(choosefile);
-//     }
-// });
+//  Function to Collide the do list
+function collide(){
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+}
+//////////////////////////////////////////////
 
 document.querySelector('.profile-pic').addEventListener('mouseenter', function () {
     uploadBtn.style.display = "block";
@@ -159,15 +152,4 @@ function setVisibility3(id) {
 function confirm() {
     alert("Are your sure?")
 }
-
-
-// function loadData() {
-//     var cookies = document.cookie;
-//     console.log(cookies);
-//     // document.getElementById("emptype").setAttribute('value','Manager');
-//     document.getElementById("fname").setAttribute('value',1);
-
-//     // document.getElementById("lname").setAttribute('value',);
-//     // document.getElementById("email").setAttribute('value',);
-//     // document.getElementById("cno").setAttribute('value',);
-// }
+/////////////////////////////////////////////////////////
