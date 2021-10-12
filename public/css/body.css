@@ -1164,7 +1164,7 @@ input[type=email]{
   padding: 5px;
 }
 
-#usersummary .resident {
+#usersummary .user {
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -1178,19 +1178,12 @@ input[type=email]{
   width: 150px;
 }
 
-#usersummary .admin {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: 150px;
-}
-
 #usersummary i {
   padding: 0px;
   color: #110B2E;
 }
 
-.resident i {
+.user i {
   font-size: 80px;
 }
 
@@ -1198,28 +1191,122 @@ input[type=email]{
   font-size: 80px;
 }
 
-.admin i {
-  font-size: 80px;
-}
-
-.resident {
+.user {
   border: 1px solid #898484;
   margin: 10px;
   border-radius: 10px;
 }
 
+/* Employee styles */
 .employee {
   border: 1px solid #898484;
   margin: 10px;
   border-radius: 10px;
 }
 
-.admin {
-  border: 1px solid #898484;
-  margin: 10px;
-  border-radius: 10px;
+#employeeSummary{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #545d7a;
 }
 
+#employeeSummary >div {
+  display: flex;
+}
+
+#employeeSummary div {
+  padding: 5px;
+}
+
+#employeeSummary .employee {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+}
+
+#employeeSummary i{
+  padding: 0px;
+  color: #110B2E;
+}
+
+#employeeCard {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-areas: "one two"
+      "three two";
+}
+
+.staffDetails {
+  grid-column: 1;
+}
+
+.staffPlotDetaills {
+  grid-area: two;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 15px;
+  display: inline-block;
+}
+
+.staffPlotDetaills div:nth-child(2) {
+  height: 300px;
+  width: 400px;
+}
+
+#employeeCard .empsearch input[type=text] {
+  width: 88%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../../public/img/searchicon.png');
+  background-position: 7px 15px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  align-items: center;
+  justify-content: center;
+}
+
+.empsearch .addBtn {
+  background: #d9d9d9;
+  color: #555;
+  float: right;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.empsearch .addBtn i {
+  padding: 11px;
+  font-size: 30px;
+  color: #110B2E;
+}
+
+.empsearch .addBtn:hover {
+  background-color: #bbb;
+  display: block;
+}
+
+.empsearch{
+  color: #605C73;
+  font-size: 15px;
+  float: left;
+}
+
+.empsearch i{
+  padding: 5px 10px 10px 5px;
+}
+/* End of Employee Styles */
+
+/* //////////////////////////////////////////////// */
 .leftPanel .usersearch input[type=text] {
   width: 200px;
   max-width: 100%;
@@ -1246,6 +1333,7 @@ input[type=email]{
 #userCard {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  grid-column:1/span 3
 }
 
 .usersearch .addBtn {
@@ -1272,6 +1360,8 @@ input[type=email]{
 
 .usersearch {
   position: relative;
+  color: #605C73;
+  font-size: 15px;
 }
 
 .holdAccount {
