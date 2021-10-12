@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../public/css/body.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script src="../../public/js/admin.js" defer></script>
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
