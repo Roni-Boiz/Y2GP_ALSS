@@ -4,8 +4,6 @@ include_once 'sidenav.php';
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
 
-
-
     button {
         padding: 16px 24px;
         min-width: 8rem;
@@ -77,8 +75,6 @@ include_once 'sidenav.php';
     /* wrapper */
     .wrapper {
         width: 100%;
-        /* max-width: 1000px; */
-        margin: 20px auto 1000px auto;
         padding: 0;
         background: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.9);
@@ -479,6 +475,9 @@ include_once 'sidenav.php';
         }
     }
 
+    
+
+
 </style>
 
 </head>
@@ -491,13 +490,109 @@ include_once 'sidenav.php';
         </div>
 
         <div id="hb" class="hawlockbody">
-            <h2>Employees</h2>
+            <div id="employeeCard" style="grid-column:1/span 3">
+                <div class="staffDetails">
+                    <h4>Employee Summary</h4>
+                    <div class="card" id="employeeSummary">
+                        <div>
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user"></i></span>
+                                    <h3>Manager</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    8
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-users"></i></span>
+                                    <h3>Reseptionist</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    3
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user-tie"></i></span>
+
+                                    <h3>Trainer</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    4
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user"></i></span>
+                                    <h3>Treaters</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    4
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-users"></i></span>
+                                    <h3>P. Officers</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    5
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user-tie"></i></span>
+
+                                    <h3>Other</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    30
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="staffPlotDetaills">
+                    <div class="chartContainer">
+                        <canvas id="employeeChart">
+                        </canvas>
+                    </div>
+
+                    <div class="chartContainer" style="height: 360px; width: 360px;">
+                        <canvas id="employeePercentageChart">
+                        </canvas>
+                    </div>
+                </div>
+
+                <div class="empsearch">
+                    <input type="text" name="search" placeholder="Search..">
+                    <span onclick="openModel('model')" id="model-btn" class="addBtn"><i class="fas fa-user-plus"></i></span>
+                    <div>
+                        <span style="display: inline-block;"> Manager <i class="fa fa-square" style="color: #EB7655;"></i></span>
+                        <span style="display: inline-block;"> Reseptionist <i class="fa fa-square" style="color: #52D29A;"></i></span>
+                        <span style="display: inline-block;"> Trainer <i class="fa fa-square" style="color: #AA9150;"></i></span>
+                        <span style="display: inline-block;"> Treater <i class="fa fa-square" style="color: #EB7655;"></i></span>
+                        <span style="display: inline-block;"> P. Officer <i class="fa fa-square" style="color: #52D29A;"></i></span>
+                        <span style="display: inline-block;"> Other <i class="fa fa-square" style="color: #AA9150;"></i></span>    
+                    </div>
+                </div>
+            </div>
 
 
             <div class="divPopupModel">
 
-                <button id="model-btn" onclick="openModel('model')">Add New</button>
-                <p id="answer"></p>
+                <!-- <button id="model-btn" onclick="openModel('model')">Add New</button>
+                <p id="answer"></p> -->
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
@@ -581,10 +676,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -605,10 +701,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -629,10 +726,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -653,10 +751,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -677,10 +776,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -701,10 +801,11 @@ include_once 'sidenav.php';
                                 <li><?php echo $row["contact_no"] ?></li>
                                 <li><?php echo $row["email"] ?></li>
                                 <li><?php echo $row["start_date"] ?></li>
+                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
                             </ul>
-                            <ul class="more-content">
+                            <!-- <ul class="more-content">
                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul>
+                            </ul> -->
                         </article>
                     <?php
                     }
@@ -715,7 +816,133 @@ include_once 'sidenav.php';
             </section>
 
         </div> <!-- .hawlockbody div closed here -->
-    </div> 
+    </div>
+
+    <script>
+        let chart1 = document.getElementById('employeeChart').getContext('2d');
+        let massChart1 = new Chart(chart1, {
+            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['Manager', 'Reseptionist', 'Trainer', 'Parking Officers'],
+                datasets: [{
+                    label: 'Employee',
+                    data: [
+                        8, 3, 4, 5
+                    ],
+                    // backgroundColor : '#423D59',
+                    backgroundColor: [
+                        'rgba(153,102,255,0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 1,
+                    hoverBorderColor: '#003'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                        // position: 'center',
+                        labels: {
+                            fontColor: '#000'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Employability Rate',
+                        fontSize: 25
+                    },
+                },
+            },
+        });
+
+        let chart2 = document.getElementById('employeePercentageChart').getContext('2d');
+        let massChart2 = new Chart(chart2, {
+            type: 'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['Manager', 'Reseptionist', 'Trainer', 'Parking Officers'],
+                datasets: [{
+                    label: 'Employee',
+                    data: [
+                        3, 4, 5, 6
+                    ],
+                    // backgroundColor : '#423D59',
+                    backgroundColor: [
+                        'rgba(153,102,255,0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 1,
+                    hoverBorderColor: '#003'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: true,
+                        // position: 'center',
+                        labels: {
+                            fontColor: '#000'
+                        }
+                    },
+                    title: {
+                        display: false,
+                        text: 'Employability Rate',
+                        fontSize: 25
+                    },
+                },
+            },
+        });
+
+        // $(document).ready(function() {
+        //     $.ajax({
+        //         url: "employeeView",
+        //         type: "GET",
+        //         success: function(data) {
+        //             var type = [];
+        //             var count = [];
+        //             var date = [];
+
+        //             for (var i in data) {
+        //                 type.push("Type " + data[i].type);
+        //                 count.push(data[i].count);
+        //                 date.push(data[i].start_date);
+        //             }
+
+        //             var chartdata = {
+        //                 labels: type,
+        //                 datasets: [
+        //                     {
+        //                         lable: "Employee",
+        //                         fill: false,
+        //                         backgroundColor: '#423D59',
+        //                         pointHoverBackgroundColor: "rgba(32,343,545,23)",
+        //                         pointHoverBorderColor: "rgba(232,21,21,434)",
+        //                         data: count
+        //                     },
+        //                     {
+        //                         lable: "Employee",
+        //                         fill: false,
+        //                         backgroundColor: '#423D59',
+        //                         pointHoverBackgroundColor: "rgba(32,343,545,23)",
+        //                         pointHoverBorderColor: "rgba(232,21,21,434)",
+        //                         data: date
+        //                     }
+        //                 ]
+        //             };
+        //             var ctx = $("#employeeChart");
+        //             var LineGraph = new Chart(ctx, {
+        //                 type:'line',
+        //                 data: chartdata
+        //             });
+        //         },
+        //         error: function(data) {
+
+        //         }
+        //     });
+        // });
+    </script>
 </body>
 
 </html>
