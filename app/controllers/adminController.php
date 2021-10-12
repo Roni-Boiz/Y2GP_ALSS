@@ -45,6 +45,7 @@ class adminController extends controller
         $this->view->technicians=$this->model->getAllEmployees("technician");
         $this->view->treaters=$this->model->getAllEmployees("treater");
         $this->view->laundrys=$this->model->getAllEmployees("treater");
+        $this->view->employeeCount = $this->model->getEmployeesCountByTypeDate();
         $this->view->render('admin/employeeView');
     }
 
