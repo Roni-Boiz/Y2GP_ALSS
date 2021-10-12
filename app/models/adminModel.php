@@ -45,6 +45,12 @@ class adminModel extends model
         return $result;
     }
 
+    public function getEmployeesCountByTypeDate(){
+        $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
         $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");
@@ -79,7 +85,7 @@ class adminModel extends model
         // Turn autocommit off
         $this->conn->autocommit(FALSE);
         
-        $sql = "INSERT INTO employee(type) VALUES ('{$empType}')";
+        $sql = "INSERT INTO employee(type,start_data) VALUES ('{$empType}', CURDATE())";
         $this->conn->query($sql);
         $empId = mysqli_insert_id($this->conn);
         $username = '';
