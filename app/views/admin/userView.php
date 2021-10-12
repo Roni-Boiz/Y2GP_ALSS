@@ -461,13 +461,13 @@ include_once 'sidenav.php';
             <h1 id="title">Hawlock <span id="city">City</span> Users</h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom" onload="myFunction();">
-            <div class="card" id="userCard" style="grid-column:1/span 3">
+            <div class="card" id="userCard">
                 <div class="leftPanel">
                     <div>
                         <h4>User Summary</h4>
                         <div class="card" id="usersummary">
 
-                            <div class="resident">
+                            <div class="user">
                                 <div>
                                     <span><i class="fas fa-user"></i></span>
                                     <h3>Residents</h3>
@@ -477,7 +477,7 @@ include_once 'sidenav.php';
                                 </div>
                             </div>
 
-                            <div class="employee">
+                            <div class="user">
                                 <div>
                                     <span><i class="fas fa-users"></i></span>
                                     <h3>Employees</h3>
@@ -487,7 +487,7 @@ include_once 'sidenav.php';
                                 </div>
                             </div>
 
-                            <div class="admin">
+                            <div class="user">
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
 
