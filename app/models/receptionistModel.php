@@ -9,12 +9,12 @@ class receptionistModel extends model {
 
     public function profile(){
         require '../app/core/database.php';
-        $sql = "SELECT * FROM parking_officer WHERE user_id={$_SESSION['userId']}";
+        $sql = "SELECT * FROM receptionist WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);   
         return $result;
     }
     public function editProfile($fname,$lname,$email,$contact){
-        $sql="UPDATE parking_officer SET fname='$fname', lname='$lname', email='$email', contact_no='$contact' WHERE user_id={$_SESSION['userId']}";
+        $sql="UPDATE receptionist SET fname='$fname', lname='$lname', email='$email', contact_no='$contact' WHERE user_id={$_SESSION['userId']}";
         $this->conn->query($sql);
 
     }
