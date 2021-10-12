@@ -92,14 +92,15 @@ function collide(){
     }
 }
 //////////////////////////////////////////////
-
-document.querySelector('.profile-pic').addEventListener('mouseenter', function () {
-    uploadBtn.style.display = "block";
-});
-
-document.querySelector('.profile-pic').addEventListener('mouseleave', function () {
-    uploadBtn.style.display = "none";
-});
+var profile = document.querySelector('.profile-pic');
+if(profile){
+    profile.addEventListener('mouseenter', function () {
+        uploadBtn.style.display = "block";
+    });
+    profile.addEventListener('mouseleave', function () {
+        uploadBtn.style.display = "none";
+    });
+}
 
 function uploadPhoto(phpto, newfile) {
     const img = document.getElementById(phpto);
@@ -153,3 +154,4 @@ function confirm() {
     alert("Are your sure?")
 }
 /////////////////////////////////////////////////////////
+
