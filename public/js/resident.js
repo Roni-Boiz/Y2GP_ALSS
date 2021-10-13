@@ -176,54 +176,8 @@ function setVisibility3(id) {
       document.getElementById(id).style.display = 'none';
    }
 }
-// delete row and hide for value addition
-function deleteRes(id, type) {
-   r = confirm("Are you sure?");
-   if (r == true) {
-      if (type = "hall") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               hallid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('tr').fadeOut("fast");
-            }
-         });
-      }
-      if (type = "fit") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               fitid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('tr').fadeOut("fast");
-            }
-         });
-      }
-      if (type = "hall") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               treatid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('tr').fadeOut("fast");
-            }
-         });
-      }
-   }
-}
+
+
 function check_oldpassword() {
    var password_length = $("#opw").val().length;
 
@@ -277,5 +231,53 @@ function check_retypepassword() {
       $("#renew_password_error_message").html("Passwords did not Match");
       $("#renew_password_error_message").show();
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
+   }
+}
+// delete row and hide for value addition
+function deleteReq(id, type) {
+   r = confirm("Are you sure?");
+   if (r == true) {
+      if (type = "laundry") {
+         $.ajax({
+            type: "GET",
+            url: "removeRequest",
+            data: {
+               laundryid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
+      if (type = "maintenenceid") {
+         $.ajax({
+            type: "GET",
+            url: "removeRequest",
+            data: {
+               maintenenceid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
+      if (type = "visitor") {
+         $.ajax({
+            type: "GET",
+            url: "removeRequest",
+            data: {
+               visitorid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
    }
 }

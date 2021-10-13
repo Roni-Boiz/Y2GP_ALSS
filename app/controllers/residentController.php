@@ -62,6 +62,11 @@ class residentController extends controller{
         header("Refresh:0; url=yourReservation");
         // $this->yourReservation();
     }
+    public function removeRequest(){
+        $this->model->removeRequest();
+        header("Refresh:0; url=yourRequest");
+        // $this->yourRequest();
+    }
 
     public function fitness(){
         $this->view->render('resident/fitnessCentreView');
