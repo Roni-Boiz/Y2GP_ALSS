@@ -58,52 +58,22 @@ include_once 'sidenav.php';
 
                     <a href="javascript:void(0)" id="closebtn">&times;</a>
                     <div style="text-align: center;">
-                        <h1>New Employee<i class="fa fa-user"></i></i></h1>
+                        <h3>Update Service Rate</h3>
                     </div>
-
-                    <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                    <form action="#" class="reservationtime" method="GET">
                         <div id="col1">
-                            <label for="type">Type</label><br>
-                            <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement" required>
-                                <option value="">Select Employee Type...</option>
-                                <option value="manager">Manager</option>
-                                <option value="reseptionist">Reseptionist</option>
-                                <option value="parking_officer">Parking Officer</option>
-                                <option value="trainer">Trainer</option>
-                                <option value="treater">Treater</option>
-                                <option value="technician">Technician</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <label>Upcoming  Fee</label><br>
+                            <input type="text" name="" class="input-field" placeholder=""><br>
+                            <label>Upcoming Cancellation Fee</label><br>
+                            <input type="text" name="" class="input-field" placeholder=""><br>
+                            <label>Date</label><br>
+                            <input type="date" name="" class="input-field" placeholder="">
                         </div>
-
-                        <div class="profile-pic" id="col2">
-                            <img src="../../public/img/blank-profile.png" id="photo">
-                            <input type="file" id="file" name="file">
-                            <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Choose Photo</label>
-                        </div>
-
-                        <div id="col1">
-                            <label for="fname">First Name</label><br>
-                            <input type="text" id="fname" name="fname" class="input-field" placeholder="John" required>
-                        </div>
-
-                        <div id="col2">
-                            <label for="lname">Last Name</label><br>
-                            <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" required>
-                        </div>
-
-                        <div id="col1">
-                            <label for="email">Email Address</label><br>
-                            <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" required>
-                        </div>
-
-                        <div id="col2">
-                            <label for="cno">Contact Number</label><br>
-                            <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" required>
-                        </div>
-
-                        <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="submit">
+                        
+                        <br>
+                        <input class="purplebutton" type="submit" name="Submit" value="UPDATE" style="grid-column:1">
                     </form>
+                    
                 </div>
 
             </div>
