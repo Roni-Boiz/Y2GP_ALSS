@@ -39,27 +39,42 @@ class receptionistController extends controller{
         $this->view->render('receptionist/registerResidentView');
     }
     // view profile
-    // public function profile(){
-    //     $this->loadModel('profileModel');
-    //     $this->view->users = $this->model->readTable();
-    //     $this->view->render('resident/profileView');
-    // }
+    public function profile(){
+        $this->loadModel('profileModel');
+        $this->view->users = $this->model->profile();
+        $this->view->render('receptionist/profileView');
+        $this->model->editProfile();
+    }
+    public function editProfile(){
+        $fname=$_POST["fname"];
+        $lname=$_POST["lname"];
+        $email=$_POST["email"];
+        $contact=$_POST["contact_no"];
+        $this->model->editProfile($fname,$lname,$email,$contact);
+        $this->profile();
+    }
+
+    public function changePassword(){
+        $opw=$_POST["opw"];
+        $npw=$_POST["npw"];
+        $rnpw=$_POST["rnpw"];
+        $this->model->changePassword($opw,$npw,$rnpw);
+        $this->profile();
+    }
+
     // public function announcement(){
     //     $this->loadModel('announcementModel');
     //     $this->view->ann = $this->model->readTable();
     //     $this->view->render('resident/residentView');
     // }
     public function parcels(){
+        $this->view->presentApartments = $this->model->getApartment();
         if(isset($_POST["apartmentId"]) and isset($_POST["sender"])) {
-            $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"]);
+            $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"],$_POST["description"]);
             // $this->model->sendParcel($_POST["apartmentId"]);
         }    
         $this->view->inLocker=$this->model->getInlocker();
-        $this->view->reached=$this->model->getReached();
-        // if(isset($_GET["parcel"])){
-        //     $pid=$_GET["parcel"];
-        //     $this->model->updateInlocker($pid);
-        // }    
+        $this->view->reached=$this->model->getReached(); 
         $this->view->render('receptionist/parcelsView');
     }
     public function putReached(){
@@ -67,15 +82,15 @@ class receptionistController extends controller{
         $this->model->putReachedAway($pid);
         $this->parcels();
     }
-    public function deleteInlocker(){
-        $pid=$_GET["parcel"];
-        $this->model->deleteParcel($pid);
-        $this->parcels();
-    }
-
     public function visitors(){
-        $this->view->visitors = $this->model->readVisitor();
+        $this->view->todayVisitors = $this->model->readTodayVisitor();
+        $this->view->previousVisitors = $this->model->readPreviousVisitor();
         $this->view->render('receptionist/visitorsView');
+    }
+    public function markVisited(){
+        $vid=$_GET['visitor'];
+        $this->model->setVisited($vid);
+        $this->visitors();
     }
     
 }

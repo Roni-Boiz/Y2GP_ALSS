@@ -23,12 +23,12 @@
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
                         <ul>
-                            <li><a href="#"></li><i class="fa fa-user"></i>Profile</a>
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a>
                     </li>
                     <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                 </ul>
                 <li><a href="#"><?php echo  $_SESSION['userName']; ?></a></li>
-                <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
+                <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
                 </li>
                 </ul>
             </div>
@@ -41,9 +41,9 @@
             </div>
 
             <ul id="myMenu">
-                <li><a href="#"><i class="fa fa-home"></i>HOME</a></li>
+                <li><a href="../laundryController/index"><i class="fa fa-home"></i>HOME</a></li>
 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE LAUNDRY </a></li>
+                <li class="dropdown"><a href="../laundryController/requests"><i class="fa fa-calendar-plus"></i>HANDLE LAUNDRY </a></li>
 
             </ul>
         </nav>

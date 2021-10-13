@@ -48,13 +48,9 @@
                             <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
-                            <li><a href="#"><?php echo  $_SESSION['userName'];?></a></li>
+                            <li><a><?php echo  $_SESSION['userName'];?></a></li>
                             <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
                     </li>
-                    <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
-                </ul>
-                <li><a href="#"><?php echo  $_SESSION['userName']; ?></a></li>
-                <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
                 </li>
                 </ul>
             </div>
@@ -93,25 +89,6 @@
 
         <script>
             /* show sidebar */
-            $('.btn').click(function() {
-                $(this).toggleClass("click");
-                $('.sidebar').toggleClass("show");
-            });
-            /* hide the sidenav */
-            function expand() {
-                if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
-                    document.getElementById("hh").style.gridColumn = "2";
-                    document.getElementById("hb").style.gridColumn = "2";
-                    document.getElementById("hh").style.marginLeft = "20px";
-                    document.getElementById("hb").style.marginLeft = "20px";
-                    document.getElementById("side").style.transform = "initial";
-                } else {
-                    document.getElementById("hh").style.gridColumn = "1 / span 3";
-                    document.getElementById("hb").style.gridColumn = "1 / span 3";
-                    document.getElementById("hh").style.marginLeft = "50px";
-                    document.getElementById("hb").style.marginLeft = "50px";
-                    document.getElementById("side").style.transform = "rotateY(180deg)"; /* icon only */
-                }
-            }
+            
         </script>
-        <script type="text/javascript" src="../../public/js/profile.js"></script>
+        <script type="text/javascript" src="../../public/js/resident.js"></script>

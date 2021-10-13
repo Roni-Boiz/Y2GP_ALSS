@@ -23,7 +23,7 @@
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
                         <ul>
-                            <li><a href="#"></li><i class="fa fa-user"></i>Profile</a>
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a>
                     </li>
                     <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                 </ul>
@@ -41,13 +41,11 @@
             </div>
 
             <ul id="myMenu">
-                <li><a href="announcement"><i class="fa fa-home"></i>HOME</a></li>
+                <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
 
-                <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a></li>
+                <li class="dropdown"><a href="parkingslot"><i class="fa fa-calendar-plus"></i>PARKING SLOT</a></li>
             </ul>
         </nav>
-
-
         <script>
             /* show sidebar */
             $('.btn').click(function() {
@@ -71,3 +69,4 @@
                 }
             }
         </script>
+        <script type="text/javascript" src="../../public/js/profile.js"></script>

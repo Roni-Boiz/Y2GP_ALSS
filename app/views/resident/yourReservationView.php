@@ -4,21 +4,7 @@ include_once 'sidenav.php';
 <link rel="stylesheet" href="vendor/pnotify/pnotify.custom.css" />
 <script src="vendor/pnotify/pnotify.custom.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script language="javascript">
-    function deleteRes(id) {
-        $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-                hallid: id
-            },
 
-            success: function() {
-                alert("Delete Success!!!")
-            }
-        });
-    }
-</script>
 
 <body style="background-color: gray; background-image:none;">
 
@@ -62,7 +48,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->hall->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>)">
+                                        <td id="<?php echo $row['reservation_id'];?>"><a onclick="deleteRes(<?php echo $row['reservation_id'];?>,'hall')">
                                                 <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
@@ -107,14 +93,13 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->fitness->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?fitid=<?php echo $row["reservation_id"]; ?>">
-                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                    <td id="<?php echo $row['reservation_id'];?>"><a onclick="deleteRes(<?php echo $row['reservation_id'];?>,'fit')">                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
                                         <td><?php echo $row["start_time"]; ?></td>
                                         <td><?php echo $row["end_time"]; ?></td>
                                         <td><?php echo $row["reserved_time"]; ?></td>
-                                        <td><?php echo $row["employee_id"]; ?></td>
+                                        <td><?php echo $row["fname"]." ".$row["lname"]; ?></td>
                                     </tr>
                             <?php
                                 }
@@ -152,8 +137,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->treatment->fetch_assoc()) { ?>
                                     <tr>
-                                        <td><a href="removeReservation?treatid=<?php echo $row["reservation_id"]; ?>">
-                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
+                                    <td id="<?php echo $row['reservation_id'];?>"><a onclick="deleteRes(<?php echo $row['reservation_id'];?>,'treat')">                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
                                         <td><?php echo $row["reservation_id"]; ?></td>
                                         <td><?php echo $row["date"]; ?></td>
                                         <td><?php echo $row["start_time"]; ?></td>
@@ -172,19 +156,9 @@ include_once 'sidenav.php';
                     </p>
                 </div>
             </div>
-            <!-- <button id="model-btn" class="purplebutton">Reserve Now</button>
 
-            <div class="divPopupModel">
-                <p id="answer"></p>
 
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="model">
-                            <h3>Deletion Success!</h3>
-                    <button href="#" class="purplebutton">OK</button>
-                </div>
-            </div> -->
-
-        </div>
+       
 
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

@@ -1,6 +1,47 @@
 <?php
 include_once('sidenav.php');
 ?>
+<style>
+
+</style>
+
+
+<script>
+    function setVisibility1(id) {
+        if (document.getElementById('editprofile').value == 'Edit Profile') {
+            document.getElementById('editprofile').value = 'Cancel';
+            document.getElementById('editprofile').style.width = 'fit-content';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('editprofile').value = 'Edit Profile';
+            document.getElementById('editprofile').style.width = '100%';
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+    // Change Password show/hide
+    function setVisibility2(id) {
+        if (document.getElementById('changepassword').value == 'Change Password') {
+            document.getElementById('changepassword').value = 'Cancel';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('changepassword').value = 'Change Password';
+            document.getElementById(id).style.display ='none';
+        }
+    }
+
+    function setVisibility3(id) {
+        if (document.getElementById(id).style.display == 'none') {
+            document.getElementById('showmore').text = 'Show Less';
+            document.getElementById(id).style.display = 'inline';
+        } else {
+            document.getElementById('showmore').text = 'Show More';
+            document.getElementById(id).style.display = 'none';
+        }
+    }
+</script>
+
+
+
 </head>
 
 <body style="background-color: gray; background-image:none;">
@@ -20,62 +61,31 @@ include_once('sidenav.php');
                         <input type="file" id="file" name="file">
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
-                    
-                    <h4> <?php echo $row["apartment_no"]; ?></h4>
 
-                    <form action="editprofile" id="profileView" method="post">
-                        <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
+                    <!-- <h4> <?php echo $row["user_name"]; ?></h4> -->
 
-                        <label>First Name</label>
-                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
-
-                        <label>Last Name</label>
-                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
-
-                        <label>NIC</label>
-                        <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?>><br>
-
-                        <label>Contact</label>
-                        <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?>><br>
-
-                        <label>Email</label>
+                    <form action="editProfile" id="profileView" method="post">
+                        <label for="fname">First Name</label><br>
+                        <input type="text" id="name" name="fname" class="input-field" value=<?php echo $row["fname"]?> required><br>
+                        <label for="fname">Last Name</label><br>
+                        <input type="text" id="name" name="lname" class="input-field" value=<?php echo $row["lname"]?> required><br>
+                        <label for="email">Email</label><br>
                         <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
-
-                        <label>Vehicle NO</label>
-                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
-
-                        <label>New Member</label>
-                        <!-- add new field -->
-                        <i class="fas fa-plus-circle" style="padding:0" onclick="newMember();"></i><br>
-                        <span id="newmem" style="display:none">
-
-                            <label>new member</label>
-                            <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
-                        </span>
-                        <br>
-                        <input type="submit" value="Save" onclick="confirmSave()">
+                        <label for="contctno">Contact No</label><br>
+                        <input type="text" id="contacno" name="contact_no" class="input-field" value=<?php echo $row["contact_no"] ?>><br>
+                        <input type="submit" value="Save">
                     </form>
-                    <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
-                    <label>Family Members</label>
-                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
-                    <div id="showmem" style="display:none;">
-                        <?php $m = 1;
-                        while ($mem = $this->members->fetch_assoc()) { ?>
-                            <form action="removeMember" method="post" class="form1" id="removedmem">
-                                <label for="member">member<?php echo " " . $m++ ?></label><button type="submit" onclick="confirmDelete()" style="background-color: transparent;border:none;"><i id="removeicon" class="fas fa-minus-circle" style="display:visible;padding:0"></i></button><br>
-                                <input type="text" id="fam" name="removedmem" class="input-field" value=<?php echo $mem["membername"] ?> READONLY>
-                            </form>
-                        <?php } ?>
-                    </div>
-                    
+
+                    <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');">
                 </div>
                 <div class="data">
+
                     <div>
                         <h4>Overview</h4>
                         <div class="card" id="overview">
                             <div>
                                 <label>Full Name : </label>
-                                <label><?php echo $row["fname"] . " " . $row["lname"] ?></label>
+                                <label><?php echo $row["fname"]." ".$row["lname"]?></label>
                             </div>
                             <hr>
                             <div>
@@ -84,25 +94,10 @@ include_once('sidenav.php');
                             </div>
                             <hr>
                             <div>
-                                <label>NIC</label>
-                                <label><?php echo $row["nic"] ?></label>
+                                <label>Contact No:</label>
+                                <label><?php echo $row["contact_no"] ?></label>
                             </div>
-                            <hr>
-                            <div>
-                                <label>Contact</label>
-                                <label><?php echo $row["phone_no"] ?></label>
-                            </div>
-                            <hr>
-                            <hr>
-                            <div>
-                                <div>
-                                    <label>Vehicle NO</label>
-                                    <label><?php echo $row["vehicle_no"] ?></label>
-                                </div>
-                                <hr>
-                                <label>Balance</label>
-                                <label><?php echo $row["balance"] ?></label>
-                            </div>
+                            <div style="font-size: small;color: #545d7a;">You currently do not have any ongoing activities</div>
                         </div>
                     </div>
 
@@ -119,23 +114,21 @@ include_once('sidenav.php');
                                     <img src="../../public/img/account-protected.png">
                                 </picture>
                             </div>
-                            <!-- change password -->
                             <form action="changePassword" id="passwordView" method="post">
                                 <label for="fname">Old Password</label>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
-                                <span class="error_form" id="old_password_error_message" style="font-size:10px"></span><br>
+                                <span class="error_form" id="old_password_error_message"></span><br>
 
                                 <label for="lname">New Password</label>
                                 <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
-                                <span class="error_form" id="new_password_error_message" style="font-size:10px"></span><br>
+                                <span class="error_form" id="new_password_error_message"></span><br>
 
                                 <label for="fname">Re-New Password</label>
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
-                                <span class="error_form" id="renew_password_error_message" style="font-size:10px;"></span><br>
+                                <span class="error_form" id="renew_password_error_message"></span><br>
 
-                                <input type="submit" onclick="confirm()" value="Save">
+                                <input type="submit" value="Save">
                             </form>
-
                             <input type="submit" id="changepassword" value="Change Password" onclick="setVisibility2('passwordView');">
                         </div>
                     </div>
@@ -213,11 +206,7 @@ include_once('sidenav.php');
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
-    <script type="text/javascript" src="../../public/js/profile.js"></script>
-    <script>
-          
-    </script>
-
+    <script type="text/javascript" src="../../public/js/profile.js">    
 </body>
 
 </html>

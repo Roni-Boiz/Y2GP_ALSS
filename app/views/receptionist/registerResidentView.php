@@ -6,7 +6,7 @@
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">REGISTER <span id="city">RESIDENT</span></h1></div>
-    <div id="hb" class="hawlockbody" > 
+    <div id="hb" class="hawlockbody" >    
 
     <div class="signup_container">
             <div class="signup">
@@ -29,8 +29,6 @@
               ?>
 
                 <form action="registerSuccess" class="sign-up-form" method= "POST">
-
-            
                     <div class="input-field-signup" id ="fnameId">
                         <i class="fas fa-user"></i>
                         <input id="form_fname" class="fname" type="text" placeholder="First Name" name= "fname" autofocus required>
@@ -55,12 +53,6 @@
                         <select name="apartmentId" id="form_apartment">
                             <option value="#">Select a apartment</option>
                         <?php
-                        
-                        //     <option value="AP001">AP001</option>
-                        //     <option value="AP002">AP002</option>
-                        //     <option value="AP003">AP003</option>
-                        //     <option value="AP004">AP004</option>
-                        //     <option value="#">fffffs</option>
 
                         while ($row = $this->apartments->fetch_assoc()) {
                             $apartment= $row['apartment_no'];
@@ -82,7 +74,7 @@
                         <span class="error_form" id="retype_password_error_message"></span>
                     </div> -->
 
-                    <div class="btn-signup"><input type="submit" name ="submit"  value="Sign Up"/></div>
+                    <div class="btn-signup"><input type="submit" name ="submit"  value="Register"/></div>
                     
                 </form>
             

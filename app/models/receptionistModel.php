@@ -7,12 +7,44 @@ class receptionistModel extends model {
          parent::__construct();
     }
 
-    public function readTable(){
+    public function profile(){
         require '../app/core/database.php';
-        $sql = "SELECT * FROM user_account";
+        $sql = "SELECT * FROM parking_officer WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);   
         return $result;
     }
+    public function editProfile($fname,$lname,$email,$contact){
+        $sql="UPDATE parking_officer SET fname='$fname', lname='$lname', email='$email', contact_no='$contact' WHERE user_id={$_SESSION['userId']}";
+        $this->conn->query($sql);
+
+    }
+    public function changePassword( $opw,$npw,$rnpw){
+        $errors=array();
+        $hashPassword = sha1($rnpw);
+        $hash2Password = sha1($hashPassword);
+        
+        $sql = "SELECT password from user_account WHERE user_id={$_SESSION['userId']} LIMIT 1";
+        $oldpw = mysqli_fetch_assoc($this->conn->query($sql));
+        $oldpw = $oldpw["password"];
+        $hashPassword = sha1($opw);
+        $hash2Password = sha1($hashPassword);
+        if($hash2Password==$oldpw){
+            if($npw==$rnpw){
+                $hashPassword = sha1($rnpw);
+                $hash2Password = sha1($hashPassword);
+                $sql = "UPDATE user_account SET password='{$hash2Password}' WHERE user_id={$_SESSION['userId']}";
+                if($this->conn->query($sql)){
+                
+                }        
+            }else{
+                $errors[]="doesn't match new passwords";
+            }     
+        }else{
+            $errors[]="doesn't match with previous password";
+        }
+        return $errors;
+    }
+
 
     public function readApartment(){
         $sql = "SELECT apartment_no FROM apartment WHERE status = '0' ";
@@ -120,11 +152,23 @@ class receptionistModel extends model {
             return $errors;
         }
 
-        public function readVisitor(){
+        public function readTodayVisitor(){
+            date_default_timezone_set("Asia/Colombo");
             $date= date("Y-m-d");
-            $sql = "SELECT * FROM visitor WHERE arrive_date = '{$date}' ";
+            $sql = "SELECT * FROM visitor WHERE (arrive_date ='$date'AND arrive_time IS NULL)";
             $result = $this->conn->query($sql);   
             return $result;
+        }
+        public function readPreviousVisitor(){
+            $sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ";
+            $result = $this->conn->query($sql);   
+            return $result;
+        }
+        public function setVisited($vid){
+            $time=date('H:i:s');
+            $sql="UPDATE visitor SET arrive_time='$time' WHERE visitor_id='$vid'";
+            $this->conn->query($sql);
+
         }
     // public function readTable(){
     //     session_start();
@@ -133,7 +177,7 @@ class receptionistModel extends model {
     //     $result = $this->conn->query($sql);   
     //     return $result;
     // }
-    public function recordParcel($apartment,$sender){
+    public function recordParcel($apartment,$sender,$description){
         date_default_timezone_set("Asia/Colombo");
         $date=date('Y-m-d');
         $time=date('H:i:s');
@@ -141,15 +185,15 @@ class receptionistModel extends model {
         $resid=mysqli_fetch_assoc($this->conn->query($sql));
         $sql2="SELECT employee_id FROM receptionist WHERE user_id={$_SESSION['userId']} LIMIT 1";
         $empid=mysqli_fetch_assoc($this->conn->query($sql2));
-        $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]}) ";
+        $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id,description) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]},'$description')";
         $this->conn->query($sql3);
-        $sql4="SELECT receive_date,receive_time,sender FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
+        $sql4="SELECT parcel_id,receive_date,receive_time,sender,description FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
         $description=mysqli_fetch_assoc($this->conn->query($sql4));
-        $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}";
+        $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}.({$description["description"]})";
         $sql5="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
         $userid=mysqli_fetch_assoc($this->conn->query($sql5));
         $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
-        '$notification',{$userid["user_id"]},5)";
+        '$notification',{$userid["user_id"]},{$description["parcel_id"]})";
         $this->conn->query($sql6);
     }
     // public function sendParcel($apartment){
@@ -182,6 +226,11 @@ class receptionistModel extends model {
     public function deleteParcel($pid){
         $sql="DELETE FROM parcel WHERE parcel_id=$pid";
         $this->conn->query($sql);
+    }
+    public function getApartment(){
+        $sql = "SELECT apartment_no FROM apartment WHERE status = '1' ";
+        $result = $this->conn->query($sql);   
+        return $result;
     }
     
 }

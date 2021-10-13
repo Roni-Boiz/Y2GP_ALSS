@@ -10,8 +10,18 @@ include_once 'sidenav.php';
             <h1 id="title">VISITOR <span id="city">APPROVAL</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="card">
-                <form action="#" class="reservationtime" method="GET">
+
+            <div class="card1" style="grid-column:1/span2;margin:auto">
+                <div class="data">
+                    <div class="photo" style="background-image:url(../../public/img/visitor.jpg);"></div>
+                    <ul class="details" >
+                        <?php date_default_timezone_set("Asia/Colombo"); ?>
+                        <li class="author"><?php echo date("H:i"); ?> </li>
+                        <li class="date"><?php echo  date("F j, Y");  ?></li>
+                    </ul>
+                </div>
+                <div class="description">
+                    <form action="#" class="reservationtime" method="GET">
                     <div id="">
                         <label>Name</label><br>
                         <input type="text" name="name" class="input-field"><br>
@@ -21,7 +31,7 @@ include_once 'sidenav.php';
                     </div>
 
                 </form>
-
+                </div>
             </div>
 
         </div> <!-- .hawlockbody div closed here -->

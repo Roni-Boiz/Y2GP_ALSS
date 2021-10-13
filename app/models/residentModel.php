@@ -74,7 +74,7 @@ class residentModel extends model {
         return $result;
     }    
     public function fitnessReservation($id){
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -102,14 +102,36 @@ class residentModel extends model {
             echo "do";
         }
     }
+    public function maintenence(){
+        $sql = "SELECT * from technical_maintenence_request";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function laundry(){
+        $sql = "SELECT * from laundry_request";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function visitor(){
+        $sql = "SELECT * from visitor";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
     public function readNotification(){
         $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
     }
     public function setReached($nid){
+        $sql1="SELECT view FROM notification WHERE notification_id='$nid'";
+        $pid=mysqli_fetch_assoc($this->conn->query($sql1));
+        $sql2="UPDATE parcel SET status=2 WHERE parcel_id={$pid["view"]}";
+        $this->conn->query($sql2);
+        $sql3="UPDATE notification SET view=1 WHERE notification_id='$nid'";
+        $this->conn->query($sql3);
+    }
+    public function removeNotification($nid){
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
-        
     }
 
 

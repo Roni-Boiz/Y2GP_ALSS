@@ -89,6 +89,10 @@ class residentController extends controller{
     }
     
     public function yourRequest(){
+        $id=$_SESSION['userId'];
+        $this->view->maintenence=$this->model->maintenence($id);
+        $this->view->laundry=$this->model->laundry($id);
+        $this->view->visitor=$this->model->visitor($id);
         $this->view->render('resident/yourRequestView');
     }
 
@@ -110,6 +114,11 @@ class residentController extends controller{
     public function markReached(){
         $nid=$_GET['notification'];
         $this->model->setReached($nid);
+        $this->getNotification();
+    }
+    public function markRead(){
+        $nid=$_GET['notification'];
+        $this->model->removeNotification($nid);
         $this->getNotification();
     }
 }
