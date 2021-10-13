@@ -33,19 +33,22 @@ class adminModel extends model
         return $result;
     }
 
-    public function getMyDoList($id){
+    public function getMyDoList($id)
+    {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
         $result = $this->conn->query($sql);
         return $result;
     }
 
-    public function getAllUsers(){
+    public function getAllUsers()
+    {
         $sql = "SELECT * FROM user_account ORDER BY type ASC";
         $result = $this->conn->query($sql);
         return $result;
     }
 
-    public function getEmployeesCountByTypeDate(){
+    public function getEmployeesCountByTypeDate()
+    {
         $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
         $result = $this->conn->query($sql);
         return $result;
@@ -62,7 +65,7 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getEmployee($empType,$empId)
+    public function getEmployee($empType, $empId)
     {
         $sql = "SELECT * FROM {$empType} WHERE employee_id='{$empId}'";
         return $this->conn->query($sql);
@@ -84,7 +87,7 @@ class adminModel extends model
 
         // Turn autocommit off
         $this->conn->autocommit(FALSE);
-        
+
         $sql = "INSERT INTO employee(type,start_data) VALUES ('{$empType}', CURDATE())";
         $this->conn->query($sql);
         $empId = mysqli_insert_id($this->conn);
@@ -122,7 +125,7 @@ class adminModel extends model
                 $sender = "From:hawlockrycn@gmail.com";
                 mail($receiver, $subject, $body, $sender);
             }
-           
+
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
             $insert = $this->conn->query($sql);
         } else {
@@ -139,5 +142,11 @@ class adminModel extends model
         $this->conn->rollback();
         $this->conn->autocommit(TRUE);
         return $insert;
+    }
+
+    public function getAllServices()
+    {
+        $sql = "SELECT * FROM service";
+        return $this->conn->query($sql);
     }
 }
