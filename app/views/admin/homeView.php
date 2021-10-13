@@ -18,8 +18,6 @@ include_once 'sidenav.php';
         animation: spin 2s linear infinite;
     }
 
-
-
     /* .collapsible {
         background-color: #777;
         color: white;
@@ -211,11 +209,14 @@ include_once 'sidenav.php';
                             </ul>
                         </div>
                     </div>
-
-
                 </div>
+            </div>
 
-
+            <div id="upactivities">
+                <h4>Upcomming Activities</h4>
+                <div class="card">
+                    <div style="font-size: small;color: #545d7a;">Currently you  do not have any upcomming activities</div>
+                </div>
             </div>
         </div>
     </div>
@@ -296,7 +297,4 @@ include_once 'sidenav.php';
         }
     </script>
 </body>
-
-
-
 </html>
