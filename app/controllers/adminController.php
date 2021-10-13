@@ -24,7 +24,8 @@ class adminController extends controller
         $this->view->render('admin/homeView');
     }
 
-    public function profile(){
+    public function profile()
+    {
         $this->view->profileDetails = $this->model->getProfileDetails($_SESSION['userId']);
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('admin/profileView');
@@ -32,25 +33,26 @@ class adminController extends controller
 
     public function user()
     {
-        $this->view->users=$this->model->getAllUsers();
+        $this->view->users = $this->model->getAllUsers();
         $this->view->render('admin/userView');
     }
 
     public function employee()
     {
-        $this->view->managers=$this->model->getAllEmployees("manager");
-        $this->view->receptionists=$this->model->getAllEmployees("receptionist");
-        $this->view->parkingOfficers=$this->model->getAllEmployees("parking_officer");
-        $this->view->trainers=$this->model->getAllEmployees("trainer");
-        $this->view->technicians=$this->model->getAllEmployees("technician");
-        $this->view->treaters=$this->model->getAllEmployees("treater");
-        $this->view->laundrys=$this->model->getAllEmployees("treater");
+        $this->view->managers = $this->model->getAllEmployees("manager");
+        $this->view->receptionists = $this->model->getAllEmployees("receptionist");
+        $this->view->parkingOfficers = $this->model->getAllEmployees("parking_officer");
+        $this->view->trainers = $this->model->getAllEmployees("trainer");
+        $this->view->technicians = $this->model->getAllEmployees("technician");
+        $this->view->treaters = $this->model->getAllEmployees("treater");
+        $this->view->laundrys = $this->model->getAllEmployees("treater");
         $this->view->employeeCount = $this->model->getEmployeesCountByTypeDate();
         $this->view->render('admin/employeeView');
     }
 
     public function service()
     {
+        $this->view->services = $this->model->getAllServices();
         $this->view->render('admin/serviceView');
     }
 
@@ -114,7 +116,6 @@ class adminController extends controller
 
     public function addEmployee()
     {
-
         $statusMsg = '';
 
         // File upload path
