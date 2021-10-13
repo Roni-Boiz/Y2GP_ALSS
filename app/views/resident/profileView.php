@@ -208,16 +208,8 @@ include_once('sidenav.php');
                 </div>
             </div>
 
-
-
-
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
-    <script type="text/javascript" src="../../public/js/profile.js"></script>
-    <script>
-          
-    </script>
-
 </body>
 
 </html>

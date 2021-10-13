@@ -41,10 +41,6 @@ include_once 'sidenav.php';
                 </form>
                 </div>
             </div>
-
-
-
-
         </div>
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

@@ -30,7 +30,10 @@ include_once 'sidenav.php';
                             <label>Date</label><br>
                             <input type="date" name="date" class="input-field"><br>
                             <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
-                            Reservations of the day<br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>
+                            <div id="available">
+                                <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                            </div>
+                            <br>
                             <button id="model-btn" class="purplebutton">Reserve Now</button>
 
                         </div>
@@ -87,10 +90,6 @@ include_once 'sidenav.php';
                         <br>
                         <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
                     </form>
-                    <!-- <div id="btn-grp" style="grid-column: 1;">
-<button id="yes-btn">Yes</button>
-<button id="no-btn">No</button>
-</div> -->
                 </div>
 
             </div>

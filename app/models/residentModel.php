@@ -117,6 +117,25 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function removeRequest(){
+        date_default_timezone_set("Asia/Colombo");
+        $date = date('Y-m-d H:i:s');
+        if(isset($_GET["laundryid"])){
+            $laundryid=$_GET["laundryid"];
+            $sql = "UPDATE laundry_request SET cancelled_time='$date' WHERE reservation_id='$laundryid' ";    
+        }
+        else if(isset($_GET["maintenenceid"])){
+            $maintenenceid=$_GET["maintenenceid"];
+            $sql = "UPDATE technical_maintenence_request SET cancelled_time='$date' WHERE reservation_id='$maintenenceid' ";    
+        }
+        else if(isset($_GET["visitorid"])){
+            $visitorid=$_GET["visitorid"];
+            $sql = "UPDATE visitor SET cancelled_time='$date' WHERE reservation_id='$visitorid' ";    
+        }
+        if($this->conn->query($sql)){
+            echo "do";
+        }
+    }
     public function readNotification(){
         $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
