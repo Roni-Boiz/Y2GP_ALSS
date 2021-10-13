@@ -54,7 +54,7 @@ include_once 'sidenav.php';
                                         <i class="fas fa-pen-square"></i>
                                         <input type="text" name="description" placeholder="Description">
                                         </div>    
-                                        <input class="purplebutton" value="Save" type="submit" style="float:right">save</button>
+                                        <input class="purplebutton" onclick="confirmation()" value="Save" type="submit" style="float:right">save</button>
                                     </div>
                                 </form>
                             </div>    
@@ -147,7 +147,8 @@ include_once 'sidenav.php';
                     <?php
                     while ($row1 = $this->reached->fetch_assoc()) { ?>
                         <tr>
-                            <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td>
+                            <td id="<?php echo $row1['parcel_id'];?>"><a onclick="deleteparcel(<?php echo $row1['parcel_id'];?>)"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td>
+                            <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
                             <td><?php echo $row1["parcel_id"]; ?></td>
                             <td><?php echo $row1["resident_id"]; ?></td>
                             <td><?php echo $row1["receive_date"]; ?></td>
@@ -183,4 +184,29 @@ include_once 'sidenav.php';
             $(this).addClass("active"); //  adding active class to clicked tab
         });
     });
+    function deleteparcel(id) {
+   console.log(id);
+   r = confirm("Are you sure?");
+   if (r == true) {
+      
+         $.ajax({
+            type: "GET",
+            url: "putReached",
+            data: {
+               parcel: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      
+      
+      
+   }
+}
+    function confirmation(){
+            confirm("Press OK or Cancel");
+        }
 </script>

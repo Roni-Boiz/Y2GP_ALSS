@@ -111,3 +111,25 @@ $(function () {
     //    model.className = 'close';
     // });
 });
+function deleteparcel(id) {
+   console.log(id);
+   r = confirm("Are you sure?");
+   if (r == true) {
+      
+         $.ajax({
+            type: "GET",
+            url: "putReached",
+            data: {
+               parcel: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      
+      
+      
+   }
+}
