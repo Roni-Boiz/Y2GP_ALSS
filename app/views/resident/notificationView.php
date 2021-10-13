@@ -12,11 +12,11 @@
         if ($this->notification->num_rows > 0){
                 while($row = $this->notification->fetch_assoc()){?> 
                     <div class="card3">
-                    <div class="card__icon"><i class="fas fa-bolt"></i></div><?php echo $row['date']." ".$row['time']; ?>
+                    <b><?php echo $row['date']." ".$row['time']; ?></b>
                     <?php
                     if($row['view']<6){ ?>
                         <p class="card__exit"><a method="get" href="markRead?notification=<?php echo $row["notification_id"];?>"><i class="fas fa-times"></i></a></p>
-                    <?php } ?>    
+                    <?php } ?>   <hr>
                     <h2 class="card__title"><?php echo $row['description']; ?>
                     </h2>
                     <?php
@@ -25,7 +25,7 @@
                         <a class="card__link" style="float:right;" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as Reached</a>
                     </p>
                     <?php } ?>
-                    </div>
+                    </div><br>
 
     <?php
                 }   

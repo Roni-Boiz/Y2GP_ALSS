@@ -234,6 +234,54 @@ function check_retypepassword() {
    }
 }
 // delete row and hide for value addition
+function deleteRes(id, type) {
+   r = confirm("Are you sure?");
+   if (r == true) {
+      if (type = "hall") {
+         $.ajax({
+            type: "GET",
+            url: "removeReservation",
+            data: {
+               hallid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
+      if (type = "fit") {
+         $.ajax({
+            type: "GET",
+            url: "removeReservation",
+            data: {
+               maintenenceid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
+      if (type = "treat") {
+         $.ajax({
+            type: "GET",
+            url: "removeReservation",
+            data: {
+               visitorid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('tr').fadeOut("fast");
+            }
+         });
+      }
+   }
+}
+// delete row and hide for value addition
 function deleteReq(id, type) {
    r = confirm("Are you sure?");
    if (r == true) {
@@ -281,3 +329,4 @@ function deleteReq(id, type) {
       }
    }
 }
+

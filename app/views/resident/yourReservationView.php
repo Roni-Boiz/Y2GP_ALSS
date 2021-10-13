@@ -4,7 +4,10 @@ include_once 'sidenav.php';
 <link rel="stylesheet" href="vendor/pnotify/pnotify.custom.css" />
 <script src="vendor/pnotify/pnotify.custom.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
 
+
+</script>
 
 <body style="background-color: gray; background-image:none;">
 
