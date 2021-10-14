@@ -247,7 +247,7 @@ function deleteRes(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
@@ -261,7 +261,7 @@ function deleteRes(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
@@ -275,7 +275,7 @@ function deleteRes(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
@@ -295,7 +295,7 @@ function deleteReq(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
@@ -309,7 +309,7 @@ function deleteReq(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
@@ -323,7 +323,7 @@ function deleteReq(id, type) {
             success: function () {
                a = "#" + id;
                console.log(a);
-               $(a).closest('tr').fadeOut("fast");
+               $(a).closest('article').fadeOut("fast");
             }
          });
       }
