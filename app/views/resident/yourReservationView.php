@@ -103,7 +103,6 @@ include_once 'sidenav.php';
                                         <ul class="more-content">
                                             <li>
                                                 <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
-                                                <span style="padding-right: 20px;">Coach : <?php echo $row["fname"] . " " . $row["lname"]; ?></span>
                                             </li>
                                         </ul>
 

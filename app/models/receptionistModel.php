@@ -155,7 +155,7 @@ class receptionistModel extends model {
         public function readTodayVisitor(){
             date_default_timezone_set("Asia/Colombo");
             $date= date("Y-m-d");
-            $sql = "SELECT * FROM resident_,visitor WHERE (arrive_date ='$date'AND arrive_time IS NULL)";
+            $sql = "SELECT * FROM resident,visitor WHERE (arrive_date ='$date'AND arrive_time IS NULL)";
             $result = $this->conn->query($sql);   
             return $result;
         }

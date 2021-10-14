@@ -32,36 +32,36 @@ include_once 'sidenav.php';
                                 <form action="parcels" method="post">
                                     <div>
                                         <!-- <input type="text" class="input-field-signup" name="apartmentId" placeholder="          Apartment Id" id="apartmentId"> -->
-                                        <div class="input-field-signup" id ="apartmentId">
+                                        <div class="input-field-signup" id="apartmentId">
                                             <i class="fa fa-address-card" aria-hidden="true"></i>
                                             <select name="apartmentId" id="form_apartment">
                                                 <option value="#">Select a apartment</option>
                                                 <?php
 
                                                 while ($row0 = $this->presentApartments->fetch_assoc()) {
-                                                    $apartment= $row0['apartment_no'];
+                                                    $apartment = $row0['apartment_no'];
                                                     echo "<option value='$apartment'>$apartment</option>";
                                                 }
                                                 ?>
                                             </select>
-                                        </div>    
+                                        </div>
                                         <!-- <br><br> -->
                                         <div class="input-field-signup">
-                                        <i class="fas fa-paper-plane"></i>    
-                                        <input type="text" name="sender" id="sender" placeholder="Sender">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <input type="text" name="sender" id="sender" placeholder="Sender">
                                         </div>
                                         <div class="input-field-signup">
-                                        <i class="fas fa-pen-square"></i>
-                                        <input type="text" name="description" placeholder="Description">
-                                        </div>    
+                                            <i class="fas fa-pen-square"></i>
+                                            <input type="text" name="description" placeholder="Description">
+                                        </div>
                                         <input class="purplebutton" onclick="confirmation()" value="Save" type="submit" style="float:right">save</button>
                                     </div>
                                 </form>
-                            </div>    
+                            </div>
                         </div>
                     </div>
-                </div>    
-                    <!-- <div class="card">
+                </div>
+                <!-- <div class="card">
             <div class="signup_container">
                 <form action="parcels" method="post" >
                 <div>
@@ -77,96 +77,99 @@ include_once 'sidenav.php';
                 <input class="purplebutton" value="Save" type="submit" style="float:right">save</button>
                 </div>
             </form>-->
-            
-            <!-- </div>
+
+                <!-- </div>
         </div> -->
-    
-    <!-- </div> -->
-    <div id="tab2" class="tab">
-        <div style="overflow-x:auto;grid-column:1/span2">
 
-            <?php
-            if ($this->inLocker->num_rows > 0) { ?>
-                <table class="table1">
-                    <tr style="background-color:#5747b4">
-                        <th>Parcel ID</th>
-                        <th>Apartment ID</th>
-                        <th colspan="2">Received</th>
-                        <th>Sender</th>
-                    </tr>
-                    <tr style="background-color:#5747b4">
-                        <th></th>
-                        <th></th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th></th>
-                    </tr>
+                <!-- </div> -->
+                <div id="tab2" class="tab">
+                    <div style="overflow-x:auto;grid-column:1/span2">
+                        <!-- inlocker -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Parcel ID</li>
+                                    <li>Apartment ID</li>
+                                    <li>Recieved Date</li>
+                                    <li>Recieved Time</li>
+                                    <li>Sender</li>
+                                </ul>
+                            </main>
+                            <?php
+                            if ($this->inLocker->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->inLocker->fetch_assoc()) {
+                                ?><a style="color:white" href="#">
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li><?php echo $row["parcel_id"]; ?></li>
+                                            <li><?php echo $row["resident_id"]; ?></li>
+                                            <li><?php echo $row["receive_date"]; ?></li>
+                                            <li><?php echo $row["receive_time"]; ?></li>
+                                            <li><?php echo $row["sender"]; ?></li>
+                                        </ul>
+                                    </article></a>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
+        
+                    </div>
+                </div>
+                <div id="tab3" class="tab">
+                    <div style="overflow-x:auto;grid-column:1/span2">
 
-                    <?php
-                    while ($row = $this->inLocker->fetch_assoc()) { ?>
+                        <!-- reach -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Action</li>
+                                    <li>Parcel ID</li>
+                                    <li>Apartment ID</li>
+                                    <li>Recieved Date</li>
+                                    <li>Recieved Time</li>
+                                </ul>
+                            </main>
+                            <?php
+                            if ($this->reached->num_rows > 0) { ?>
+                                <?php
+                                while ($row1 = $this->reached->fetch_assoc()) {
+                                ?>
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li id="<?php echo $row1['parcel_id']; ?>"><a onclick="deleteparcel(<?php echo $row1['parcel_id']; ?>)"><i class="fas fa-microchip" style="color:white;padding:1px 10px"></i></a></td>
+                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                            <li><?php echo $row1["parcel_id"]; ?></li>
+                                            <li><?php echo $row1["resident_id"]; ?></li>
+                                            <li><?php echo $row1["receive_date"]; ?></li>
+                                            <li><?php echo $row1["receive_time"]; ?></li>
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Sender: <?php echo $row["sender"] ?></span>
+                                            </li>
+                                        </ul>
 
-                        <tr>
-                            <div class="rowlink" style="display:inline-block">
-                                <td><?php echo $row["parcel_id"]; ?></td>
-                                <td><?php echo $row["resident_id"]; ?></td>
-                                <td><?php echo $row["receive_date"]; ?></td>
-                                <td><?php echo $row["receive_time"]; ?></td>
-                                <td><?php echo $row["sender"]; ?></td>
-                            </div>
-                        </tr>
-
-                <?php
-                    }
-                } else {
-                    echo "0 results";
-                }
-                ?>
-            </table>
-        </div>    
-    </div>
-    <div id="tab3" class="tab">
-            <?php
-            if ($this->reached->num_rows > 0) { ?>
-                <table class="table1">
-                    <tr style="background-color:#5747b4">
-                        <th>Action</th>
-                        <th>Parcel ID</th>
-                        <th>Apartment ID</th>
-                        <th colspan="2">Received</th>
-                        <th>Sender</th>
-                    </tr>
-                    <tr style="background-color:#5747b4">
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th></th>
-                    </tr>
-
-                    <?php
-                    while ($row1 = $this->reached->fetch_assoc()) { ?>
-                        <tr>
-                            <td id="<?php echo $row1['parcel_id'];?>"><a onclick="deleteparcel(<?php echo $row1['parcel_id'];?>)"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td>
-                            <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                            <td><?php echo $row1["parcel_id"]; ?></td>
-                            <td><?php echo $row1["resident_id"]; ?></td>
-                            <td><?php echo $row1["receive_date"]; ?></td>
-                            <td><?php echo $row1["receive_time"]; ?></td>
-                            <td><?php echo $row1["sender"]; ?></td>
-                        </tr>
-                <?php
-                    }
-                } else {
-                    echo "0 results";
-                }
-                ?>
-                </table>
-    </div>
-    </div>
-    </div>
-    </div> <!-- .hawlockbody div closed here -->
-</div> <!-- .expand div closed here -->
+                                    </article>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- .hawlockbody div closed here -->
+    </div> <!-- .expand div closed here -->
 </body>
 
 </html>
@@ -184,29 +187,31 @@ include_once 'sidenav.php';
             $(this).addClass("active"); //  adding active class to clicked tab
         });
     });
+
     function deleteparcel(id) {
-   console.log(id);
-   r = confirm("Are you sure?");
-   if (r == true) {
-      
-         $.ajax({
-            type: "GET",
-            url: "putReached",
-            data: {
-               parcel: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('tr').fadeOut("fast");
-            }
-         });
-      
-      
-      
-   }
-}
-    function confirmation(){
-            confirm("Press OK or Cancel");
+        console.log(id);
+        r = confirm("Are you sure?");
+        if (r == true) {
+
+            $.ajax({
+                type: "GET",
+                url: "putReached",
+                data: {
+                    parcel: id
+                },
+                success: function() {
+                    a = "#" + id;
+                    console.log(a);
+                    $(a).closest('article').fadeOut("fast");
+                }
+            });
+
+
+
         }
+    }
+
+    function confirmation() {
+        confirm("Press OK or Cancel");
+    }
 </script>
