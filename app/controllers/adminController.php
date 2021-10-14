@@ -31,6 +31,17 @@ class adminController extends controller
         $this->view->render('admin/profileView');
     }
 
+    public function editProfile(){
+        $this->model->updateProfile($_POST['name'], $_POST['email'], $_SESSION['userId']);
+        header("Refresh:0; url=profile");
+    }
+
+    public function changePassword()
+    {
+        $this->model->updatePassword($_POST["opw"], $_POST["npw"], $_POST["rnpw"], $_SESSION['userId']);
+        header("Refresh:0; url=profile");
+    }
+
     public function user()
     {
         $this->view->users = $this->model->getAllUsers();
@@ -76,7 +87,7 @@ class adminController extends controller
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {
                 foreach ($_FILES['files']['name'] as $key => $val) {
-                    $fileName = basename($_FILES['files']['name'][$key]);
+                    $fileName = time().'_'.basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
 
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -109,7 +120,7 @@ class adminController extends controller
                 $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
                 $statusMsg = "Files are uploaded successfully." . $errorMsg;
                 echo $statusMsg;
-                header("Refresh:1; url=announcement");
+                header("Refresh:0; url=announcement");
             }
         }
     }
@@ -120,11 +131,11 @@ class adminController extends controller
 
         // File upload path
         $targetDir = "../uploads/profile/employee/";
-        $fileName = basename($_FILES["file"]["name"]);
+        $fileName = time().'_'.basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        if (isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+        if (isset($_POST['submit']) && !empty($_FILES["file"]["name"])) {
             // Allow certain file formats
             $allowTypes = array('jpg', 'png', 'jpeg');
             if (in_array($fileType, $allowTypes)) {
@@ -141,7 +152,7 @@ class adminController extends controller
                     $statusMsg = "Sorry, there was an error uploading your file.";
                 }
             } else {
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
             }
         } else {
             $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL);
@@ -153,6 +164,7 @@ class adminController extends controller
         }
         // Display status message
         echo $statusMsg;
-        header("Refresh:1; url=employee");
+        header("Refresh:0; url=employee");
     }
+
 }
