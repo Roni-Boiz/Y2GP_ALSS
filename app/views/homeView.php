@@ -94,7 +94,7 @@ nav ul li a:hover{
   margin-left: 100px;
 }
 #mission{
-  font-size:10px;
+  font-size:15px;
   font-weight: bold;
 }
 #apartment{
@@ -178,7 +178,7 @@ nav ul li{
       <img src="../../public/img/image.png" alt="" id="logo"/>
       <h1 id="title">Hawlock <span id="city">City</span></h1>
       <img src="../../public/img/1.jpg" id="apartment">
-      <p id="ALSS">Apartment Life</br> Support System<span id="mission"><br>Make Your Life Easier</span><br><p id ="content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti unde mollitia, repudiandae </p></p>        
+      <p id="ALSS">Apartment Life</br> Support System<span id="mission"><br>Make Your Life Easier</span><br><p id ="content">Welcome to the Hawlock City Virtual Environment</p></p>        
     </div>
   </div>
   <div class="footer">

@@ -23,7 +23,12 @@ include_once 'sidenav.php';
                     <li><a href="#tab2">Fitness Centre</a></li>
                     <li><a href="#tab3">Treatment Room</a></li>
                 </ul>
+                <br>
+                <!-- <div class="servicesearch">
+                    <input type="text" name="search" placeholder="Search..">
+                </div> -->
                 <div id="tab1" class="tab active">
+                
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- hall -->
                         <section class="wrapper">
