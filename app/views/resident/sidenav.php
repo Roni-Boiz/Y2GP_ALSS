@@ -58,10 +58,10 @@
         </div>
 
         <nav class="sidebar" id="side">
-            <div class="search">
+            <!-- <div class="search">
                 <i class="fa fa-search"></i>
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div>
+            </div> -->
 
             <ul id="myMenu">
                 <li><a href="../residentController/index"><i class="fa fa-home"></i>HOME</a></li>
@@ -85,6 +85,7 @@
                 </li>
                 <li><a href="payment"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
                 <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
+                <li><a href="complaint"><i class="fa fa-credit-card"></i>COMPLAINTS</a></li>
             </ul>
         </nav>
 
