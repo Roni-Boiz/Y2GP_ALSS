@@ -15,6 +15,7 @@ class model{
         require_once 'database.php';
         return $conn;
     }
+    
     public function getAnnouncement(){
         if($_SESSION['type']=="resident"){
             $sql = "SELECT * FROM announcement WHERE category='resident' OR category='both' ORDER BY date DESC";
@@ -23,5 +24,13 @@ class model{
         }
         $ann = $this->conn->query($sql);   
         return $ann;
+    }
+
+    public function updateProfilePic($fileName,$id){
+        $fileName = $this->conn->real_escape_string($fileName);
+        $sql = "UPDATE user_account SET profile_pic = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ss", $fileName, $id);
+        return $stmt->execute();
     }
 }
