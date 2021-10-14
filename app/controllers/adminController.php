@@ -110,7 +110,7 @@ class adminController extends controller
                 if ($insertValuesSQL) {
                     $statusMsg = "Files are uploaded successfully." . $errorMsg;
                     echo $statusMsg;
-                    header("Refresh:1; url=announcement");
+                    header("Refresh:0; url=announcement");
                 } else {
                     $statusMsg = "Upload failed! " . $errorMsg;
                     $this->view->error_message = $statusMsg;

@@ -99,7 +99,7 @@ class managerController extends controller
                 if ($insertValuesSQL) {
                     $statusMsg = "Files are uploaded successfully." . $errorMsg;
                     echo $statusMsg;
-                    header("Refresh:1; url=announcement");
+                    header("Refresh:0; url=announcement");
                 } else {
                     $statusMsg = "Upload failed! " . $errorMsg;
                     $this->view->error_message = $statusMsg;
@@ -109,7 +109,7 @@ class managerController extends controller
                 $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
                 $statusMsg = "Files are uploaded successfully." . $errorMsg;
                 echo $statusMsg;
-                header("Refresh:1; url=announcement");
+                header("Refresh:0; url=announcement");
             }
         }
     }
