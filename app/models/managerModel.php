@@ -9,12 +9,12 @@ class managerModel extends model {
 
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
-        $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");
-        if ($admin) {
-            $id = mysqli_fetch_assoc($admin);
-            $adminId = $id['admin_id'];
+        $manager = $this->conn->query("SELECT employee_id FROM manager WHERE user_id='{$id}'");
+        if ($manager) {
+            $id = mysqli_fetch_assoc($manager);
+            $managerId = $id['employee_id'];
         }
-        $sql = "INSERT INTO announcement(topic,content,category,date,file_name,admin_id) VALUES ('{$topic}','{$content}','{$category}',NOW(),'{$fileName}','{$adminId}')";
+        $sql = "INSERT INTO announcement(topic,content,category,date,file_name,employee_id) VALUES ('{$topic}','{$content}','{$category}',NOW(),'{$fileName}','{$managerId}')";
         return $this->conn->query($sql);
     }
 
