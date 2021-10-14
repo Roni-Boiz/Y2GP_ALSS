@@ -117,6 +117,57 @@ function uploadPhoto(phpto, newfile) {
         }
     });
 }
+
+$(function(){
+    //call a function to handle file upload on select file
+    $('input[type=file]').on('change', fileUpload);
+});
+
+function fileUpload(event){
+    //notify user about the file upload status
+    $("#uploadBtn").html("Uploading...");
+    
+    //get selected file
+    files = event.target.files;
+    
+    //form data check the above bullet for what it is  
+    var data = new FormData();                                   
+
+    //file data is presented as an array
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        if(!file.type.match('image.*')) {              
+            //check file type
+            $("#uploadBtn").html("Images Only");
+        }else if(file.size > 10485760){
+            //check file size (in bytes)
+            $("#uploadBtn").html("Select Size (< 10 MB)");
+        }else{
+            //append the uploadable file to FormData object
+            data.append('file', file, file.name);
+            
+            //create a new XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+            
+            //post file data for upload
+            xhr.open('POST', 'editProfilePhoto', true);
+            console.log(xhr);
+            xhr.send(data);
+            xhr.onload = function () {
+                //get response and show the uploading status
+                var response = JSON.parse(xhr.responseText);
+                if(xhr.status === 200 && response.status == 'ok'){
+                    $("#uploadBtn").html("Change Photo");
+                }else if(response.status == 'type_err'){
+                    $("#uploadBtn").html("Images Only");
+                }else{
+                    $("#uploadBtn").html("Error try again");
+                }
+            };
+        }
+    }
+}
+
 // Edit Profile show/hide
 function setVisibility1(id) {
     if (document.getElementById('editprofile').value == 'Edit Profile') {
@@ -155,3 +206,77 @@ function confirm() {
 }
 /////////////////////////////////////////////////////////
 
+// Password validity check
+$(function () {
+
+    $("#old_password_error_message").hide();
+    $("#new_password_error_message").hide();
+    $("#renew_password_error_message").hide();
+
+    $("#opw").keyup(function () {
+        check_oldpassword();
+    });
+    $("#npw").keyup(function () {
+        check_newpassword();
+    });
+    $("#rnpw").keyup(function () {
+        check_retypepassword();
+    });
+});
+
+function check_oldpassword() {
+    var password_length = $("#opw").val().length;
+
+    if (password_length == 0) {
+        $("#old_password_error_message").html("Enter old password");
+        $("#old_password_error_message").show();
+        $("#opw").css("border-bottom", "2px solid #F90A0A");
+    }
+    else if (password_length < 8) {
+        $("#old_password_error_message").html("Atleast 8 Characters");
+        $("#old_password_error_message").show();
+        $("#opw").css("border-bottom", "2px solid #F90A0A");
+    }
+
+    else {
+        $("#old_password_error_message").hide();
+        $("#opw").css("border-bottom", "2px solid #34F458");
+    }
+
+}
+function check_newpassword() {
+    var password_length = $("#npw").val().length;
+
+    if (password_length == 0) {
+        $("#new_password_error_message").html("Enter password");
+        $("#new_password_error_message").show();
+        $("#npw").css("border-bottom", "2px solid #F90A0A");
+        error_rpassword = true;
+    }
+    else if (password_length < 8) {
+        $("#new_password_error_message").html("Atleast 8 Characters");
+        $("#new_password_error_message").show();
+        $("#npw").css("border-bottom", "2px solid #F90A0A");
+        error_rpassword = true;
+    }
+    else {
+        $("#new_password_error_message").hide();
+        $("#npw").css("border-bottom", "2px solid #34F458");
+    }
+}
+
+function check_retypepassword() {
+    var rpassword = $("#npw").val();
+    var retype_password = $("#rnpw").val();
+    if (rpassword == retype_password && retype_password != "") {
+        $("#renew_password_error_message").hide();
+        $("#rnpw").css("border-bottom", "2px solid #34F458");
+
+        error_retype_password = true;
+    } else {
+        $("#renew_password_error_message").html("Passwords did not Match");
+        $("#renew_password_error_message").show();
+        $("#rnpw").css("border-bottom", "2px solid #F90A0A");
+    }
+}
+////////////////////////////////////////////////////
