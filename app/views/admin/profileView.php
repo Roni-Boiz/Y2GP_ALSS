@@ -17,7 +17,7 @@ include_once('sidenav.php');
                 <div class="bio">
                     <div class="profile-pic">
                         <img id="photo" src="../../uploads/profile/employee/<?= $_SESSION['profilePic'] ?>" alt="profile picture" onerror="this.onerror=null; this.src='../../public/img/profile.png'">
-                        <input type="file" id="file" name="file">
+                        <input type="file" id="file" class="profilePto" name="file">
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
 
