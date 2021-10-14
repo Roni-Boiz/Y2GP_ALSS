@@ -19,134 +19,142 @@ include_once 'sidenav.php';
 
                 <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
-
-                        <?php
-                        if ($this->maintenence->num_rows > 0) { ?>
-                            <table class="table1">
-                                <tr style="background-color:#5747b4">
-                                    <th>Action</th>
-                                    <th>Request ID</th>
-                                    <th>Prefered Date</th>
-                                    <th colspan="2">Requested</th>
-                                    <th>Type</th>
-                                    <th>State</th>
-
-                                </tr>
-                                <tr style="background-color:#5747b4">
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-
-                                <?php
-                                while ($row = $this->maintenence->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td><a href="removeRequest?hallid=<?php echo $row["request_id"]; ?>">
-                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["request_id"]; ?></td>
-                                        <td><?php echo $row["preferred_date"]; ?></td>
-                                        <td><?php echo $row["request_date"]; ?></td>
-                                        <td><?php echo $row["request_time"]; ?></td>
-                                        <td><?php echo $row["category"]; ?></td>
-                                        <td><?php echo $row["state"]; ?></td>
-                                    </tr>
+                        <!-- maintenence -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Action</li>
+                                    <li>Request ID</li>
+                                    <li>Prefered Date</li>
+                                    <li>Type</li>
+                                    <li>State</li>
+                                </ul>
+                            </main>
                             <?php
+                            if ($this->maintenence->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->maintenence->fetch_assoc()) {
+                                ?>
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
+                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                            <li><?php echo $row["request_id"]; ?></li>
+                                            <li><?php echo $row["preferred_date"]; ?></li>
+                                            <li><?php echo $row["category"]; ?></li>
+                                            <li><?php echo $row["state"]; ?></li>
+
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Requested Date : <?php echo $row["request_date"] ?></span>
+                                                <span style="padding-right: 20px;">Requested Time : <?php echo $row["request_time"]  ?></span>
+                                            </li>
+                                        </ul>
+
+                                    </article>
+                                <?php
                                 }
+                                ?>
+                            <?php
                             } else {
                                 echo "0 results";
                             }
                             ?>
-                            </table>
+                        </section>
                     </div>
                 </div>
                 <div id="tab2" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
-
-                        <?php
-                        if ($this->maintenence->num_rows > 0) { ?>
-                            <table class="table1">
-                                <tr style="background-color:#5747b4">
-                                    <th>Action</th>
-                                    <th>Request ID</th>
-                                    <th colspan="2">Requested</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-
-                                </tr>
-                                <tr style="background-color:#5747b4">
-                                    <th></th>
-                                    <th></th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-
-                                <?php
-                                while ($row = $this->laundry->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td><a href="removeReservation?hallid=<?php echo $row["request_id"]; ?>">
-                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["request_id"]; ?></td>
-                                        <td><?php echo $row["request_date"]; ?></td>
-                                        <td><?php echo $row["request_time"]; ?></td>
-                                        <td><?php echo $row["description"]; ?></td>
-                                        <td><?php echo $row["type"]; ?></td>
-                                    </tr>
+                        <!-- laundry -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Action</li>
+                                    <li>Request ID</li>
+                                    <li>Requested Date</li>
+                                    <li>Requested Time</li>
+                                    <li>Type</li>
+                                </ul>
+                            </main>
                             <?php
+                            if ($this->laundry->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->laundry->fetch_assoc()) {
+                                ?>
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
+                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                            <li><?php echo $row["request_id"]; ?></li>
+                                            <li><?php echo $row["request_date"]; ?></li>
+                                            <li><?php echo $row["request_time"]; ?></li>
+                                            <li><?php echo $row["type"]; ?></li>
+
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                            </li>
+                                        </ul>
+
+                                    </article>
+                                <?php
                                 }
+                                ?>
+                            <?php
                             } else {
                                 echo "0 results";
                             }
                             ?>
-                            </table>
+                        </section>
                     </div>
                 </div>
                 <div id="tab3" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
-
-                        <?php
-                        if ($this->maintenence->num_rows > 0) { ?>
-                            <table class="table1">
-                                <tr style="background-color:#5747b4">
-                                    <th>Action</th>
-                                    <th>Request ID</th>
-                                    <th>Name</th>
-                                    <th colspan="2">Arrived</th>
-                                </tr>
-                                <tr style="background-color:#5747b4">
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                </tr>
-
-                                <?php
-                                while ($row = $this->visitor->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td><a href="removeReservation?hallid=<?php echo $row["visitor_id"]; ?>">
-                                                <i class="fas fa-trash-alt" style="color:black;padding:1px 10px"></i></a></td>
-                                        <td><?php echo $row["visitor_id"]; ?></td>
-                                        <td><?php echo $row["name"]; ?></td>
-                                        <td><?php echo $row["arrive_date"]; ?></td>
-                                        <td><?php echo $row["arrive_time"]; ?></td>
-                                    </tr>
+<!-- laundrye -->
+<section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Action</li>
+                                    <li>Request ID</li>
+                                    <li>Name</li>
+                                    <li>Arrived Date</li>
+                                    <li>Arrived Time</li>
+                                </ul>
+                            </main>
                             <?php
+                            if ($this->visitor->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->visitor->fetch_assoc()) {
+                                ?>
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteRes(<?php echo $row['visitor_id']; ?>,'treat')">
+                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                            <li><?php echo $row["visitor_id"]; ?></li>
+                                            <li><?php echo $row["name"]; ?></li>
+                                            <li><?php echo $row["arrive_date"]; ?></li>
+                                            <li><?php echo $row["arrive_date"]; ?></li>
+
+                                        </ul>
+                                        
+
+                                    </article>
+                                <?php
                                 }
+                                ?>
+                            <?php
                             } else {
                                 echo "0 results";
                             }
                             ?>
-                            </table>
+                        </section>
                     </div>
                 </div>
 
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
 </body>
+
 </html>
