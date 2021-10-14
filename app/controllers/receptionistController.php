@@ -71,6 +71,8 @@ class receptionistController extends controller{
         $this->view->presentApartments = $this->model->getApartment();
         if(isset($_POST["apartmentId"]) and isset($_POST["sender"])) {
             $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"],$_POST["description"]);
+            header("Refresh:0; url=parcels");
+
             // $this->model->sendParcel($_POST["apartmentId"]);
         }    
         $this->view->inLocker=$this->model->getInlocker();

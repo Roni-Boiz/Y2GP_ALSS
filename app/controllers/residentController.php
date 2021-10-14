@@ -30,7 +30,7 @@ class residentController extends controller{
     // edit profile
     public function editProfile(){
         $this->model->editProfile();
-        $this->profile();
+        header("Refresh:0; url=profile");
     }
     public function removeMember(){
         $id=$_POST["removedmem"];
