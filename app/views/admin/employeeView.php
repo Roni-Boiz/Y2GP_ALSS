@@ -158,7 +158,7 @@ include_once 'sidenav.php';
                             <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement" required>
                                 <option value="">Select Employee Type...</option>
                                 <option value="manager">Manager</option>
-                                <option value="reseptionist">Reseptionist</option>
+                                <option value="receptionist">Receptionist</option>
                                 <option value="parking_officer">Parking Officer</option>
                                 <option value="trainer">Trainer</option>
                                 <option value="treater">Treater</option>
@@ -193,7 +193,7 @@ include_once 'sidenav.php';
                             <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" required>
                         </div>
 
-                        <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="submit">
+                        <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
                     </form>
                     <!-- <div id="btn-grp" style="grid-column: 1;">
                         <button id="yes-btn">Yes</button>

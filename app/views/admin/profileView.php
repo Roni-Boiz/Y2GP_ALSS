@@ -1,11 +1,6 @@
 <?php
 include_once('sidenav.php');
 ?>
-<style>
-
-</style>
-
-
 </head>
 
 <body style="background-color: gray; background-image:none;">
@@ -28,9 +23,9 @@ include_once('sidenav.php');
 
                     <h4> <?php echo $row["user_name"]; ?></h4>
 
-                    <form action="#" id="profileView" method="post">
+                    <form action="editProfile" id="profileView" method="post">
                         <label for="fname">Name</label><br>
-                        <input type="text" id="name" name="name" class="input-field" value=<?php echo $row["name"] ?> pattern="$[1-9]*^" required><br>
+                        <input type="text" id="name" name="name" class="input-field" value=<?php echo $row["name"] ?> required><br>
 
                         <label for="email">Email</label><br>
                         <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
@@ -71,7 +66,7 @@ include_once('sidenav.php');
                                     <img src="../../public/img/account-protected.png">
                                 </picture>
                             </div>
-                            <form action="#" id="passwordView" method="post">
+                            <form action="changePassword" id="passwordView" method="post">
                                 <label for="fname">Old Password</label>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
                                 <span class="error_form" id="old_password_error_message"></span><br>
@@ -157,31 +152,8 @@ include_once('sidenav.php');
                     </div>
                 </div>
             </div>
-
-
-
-
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
-    <script>
-        function funedit() {
-            document.getElementById("view").style.display = "none";
-            document.getElementById("edit").style.display = "block";
-            document.getElementById("pw").style.display = "none";
-        }
-
-        function ChangePw() {
-            document.getElementById("edit").style.display = "none";
-            document.getElementById("view").style.display = "none";
-            document.getElementById("pw").style.display = "block";
-        }
-
-        
-    </script>
-
-    <script>
-
-    </script>
 </body>
 
 </html>
