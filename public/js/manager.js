@@ -70,7 +70,7 @@ function uploadPhoto(phpto, newfile) {
 
 $(function(){
     //call a function to handle file upload on select file
-    $('input[type=file]').on('change', fileUpload);
+    $('.profilePto').on('change', fileUpload);
 });
 
 function fileUpload(event){
