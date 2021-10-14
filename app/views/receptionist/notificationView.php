@@ -19,12 +19,6 @@
                     <?php } ?>   <hr>
                     <h2 class="card__title"><?php echo $row['description']; ?>
                     </h2>
-                    <?php
-                    if($row['view']>5){ ?>
-                    <p class="card__apply">
-                        <a class="card__link" style="float:right;" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as Reached</a>
-                    </p>
-                    <?php } ?>
                     </div><br>
 
     <?php
