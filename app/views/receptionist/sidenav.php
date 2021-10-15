@@ -18,7 +18,7 @@
     <div id="myheader">
         <div class="header">
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
-            <h2>AlSS</h2>
+            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px"/>
             <div class="head">
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
