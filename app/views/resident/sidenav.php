@@ -63,7 +63,7 @@
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
             </div> -->
 
-            <ul id="myMenu">
+            <ul >
                 <li><a href="../residentController/index"><i class="fa fa-home"></i>HOME</a></li>
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>RESERVATIONS </a>
