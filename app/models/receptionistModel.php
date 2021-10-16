@@ -206,7 +206,7 @@ class receptionistModel extends model {
     //     $this->conn->query($sql2);
     // }
     public function getInlocker(){
-        $sql="SELECT * FROM parcel WHERE status=1 ORDER BY receive_date ASC ";
+        $sql="SELECT * FROM parcel WHERE status=1 ORDER BY receive_date ASC";
         $result= $this->conn->query($sql);
         return $result;
     }
@@ -215,7 +215,7 @@ class receptionistModel extends model {
         $this->conn->query($sql);
     }
     public function getReached(){
-        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC";
+        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }
@@ -231,6 +231,14 @@ class receptionistModel extends model {
         $sql = "SELECT apartment_no FROM apartment WHERE status = '1' ";
         $result = $this->conn->query($sql);   
         return $result;
+    }
+    public function readNotification(){
+        $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} AND (view<>1) ORDER BY notification_id DESC LIMIT 10 ";
+        return ($this->conn->query($sql));
+    }
+    public function removeNotification($nid){
+        $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
+        $this->conn->query($sql);
     }
     
 }

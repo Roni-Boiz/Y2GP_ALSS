@@ -23,12 +23,18 @@ include_once('sidenav.php');
 
                     <h4> <?php echo $row["user_name"]; ?></h4>
 
-                    <form action="editProfile" id="profileView" method="post">
-                        <label for="fname">Name</label><br>
-                        <input type="text" id="name" name="name" class="input-field" value=<?php echo $row["name"] ?> required><br>
+                    <form action="editProfile" id="profileView" method="POST">
+                        <label for="fname">First Name</label><br>
+                        <input type="text" id="fname" name="fname" class="input-field" value=<?php echo $row["fname"] ?> required><br>
+
+                        <label for="lname">Last Name</label><br>
+                        <input type="text" id="lname" name="lname" class="input-field" value=<?php echo $row["lname"] ?> required><br>
 
                         <label for="email">Email</label><br>
-                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?> required><br>
+
+                        <label for="email">Contact Number</label><br>
+                        <input type="text" id="cno" name="cno" class="input-field" value=0<?php echo $row["contact_no"] ?> required><br>
 
                         <input type="submit" value="Save">
                     </form>
@@ -42,12 +48,17 @@ include_once('sidenav.php');
                         <div class="card" id="overview">
                             <div>
                                 <label>Full Name : </label>
-                                <label><?php echo $row["name"] ?></label>
+                                <label><?php echo $row["fname"] . " " . $row["lname"]?></label>
                             </div>
                             <hr>
                             <div>
                                 <label>Email : </label>
                                 <label><?php echo $row["email"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
+                                <label>Contact Number : </label>
+                                <label>0<?php echo $row["contact_no"] ?></label>
                             </div>
                             <div style="font-size: small;color: #545d7a;">You currently do not have any ongoing activities</div>
                         </div>
@@ -66,16 +77,16 @@ include_once('sidenav.php');
                                     <img src="../../public/img/account-protected.png">
                                 </picture>
                             </div>
-                            <form action="changePassword" id="passwordView" method="post">
-                                <label for="fname">Old Password</label>
+                            <form action="changePassword" id="passwordView" method="POST">
+                                <label for="opw">Old Password</label>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
                                 <span class="error_form" id="old_password_error_message"></span><br>
 
-                                <label for="lname">New Password</label>
+                                <label for="npw">New Password</label>
                                 <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
                                 <span class="error_form" id="new_password_error_message"></span><br>
 
-                                <label for="fname">Re-New Password</label>
+                                <label for="rnpw">Re-New Password</label>
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
                                 <span class="error_form" id="renew_password_error_message"></span><br>
 

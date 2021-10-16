@@ -111,9 +111,9 @@ class homeModel extends model
                             $timezone = $json['timezone'];
 
                             $sql = "INSERT INTO ip_location(ip_address,city,region,country_code,time_zone,user_id) VALUES (?,?,?,?,?,?)";
-                            $stm = mysqli_prepare($this->conn, $sql);
-                            mysqli_stmt_bind_param($stm, "sssssi", $ip, $city, $region, $country, $timezone, $_SESSION['userId']);
-                            mysqli_stmt_execute($stm);
+                            $stmt = mysqli_prepare($this->conn, $sql);
+                            mysqli_stmt_bind_param($stmt, "sssssi", $ip, $city, $region, $country, $timezone, $_SESSION['userId']);
+                            mysqli_stmt_execute($stmt);
                         }
                     } else {
                         $errors[] = 'Invalid Username or Password';

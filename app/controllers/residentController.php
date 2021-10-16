@@ -126,4 +126,7 @@ class residentController extends controller{
         $this->model->removeNotification($nid);
         $this->getNotification();
     }
+    public function complaint(){
+        $this->view->render('resident/complaintView');
+    }
 }

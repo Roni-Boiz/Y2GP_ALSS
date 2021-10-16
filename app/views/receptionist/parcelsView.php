@@ -99,7 +99,7 @@ include_once 'sidenav.php';
                             if ($this->inLocker->num_rows > 0) { ?>
                                 <?php
                                 while ($row = $this->inLocker->fetch_assoc()) {
-                                ?><a style="color:white" href="#">
+                                ?>
                                     <article class="row mlb">
                                         <ul>
                                             <li><?php echo $row["parcel_id"]; ?></li>
@@ -107,6 +107,11 @@ include_once 'sidenav.php';
                                             <li><?php echo $row["receive_date"]; ?></li>
                                             <li><?php echo $row["receive_time"]; ?></li>
                                             <li><?php echo $row["sender"]; ?></li>
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                            </li>
                                         </ul>
                                     </article></a>
                                 <?php
@@ -151,7 +156,7 @@ include_once 'sidenav.php';
                                         </ul>
                                         <ul class="more-content">
                                             <li>
-                                                <span style="padding-right: 20px;">Sender: <?php echo $row["sender"] ?></span>
+                                                <span style="padding-right: 20px;">Reached Time: <?php echo $row1["reached_time"] ?></span>
                                             </li>
                                         </ul>
 

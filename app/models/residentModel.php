@@ -141,9 +141,10 @@ class residentModel extends model {
         return ($this->conn->query($sql));
     }
     public function setReached($nid){
+        $time = date('Y-m-d H:i:s');
         $sql1="SELECT view FROM notification WHERE notification_id='$nid'";
         $pid=mysqli_fetch_assoc($this->conn->query($sql1));
-        $sql2="UPDATE parcel SET status=2 WHERE parcel_id={$pid["view"]}";
+        $sql2="UPDATE parcel SET status=2,reached_time='$time' WHERE parcel_id={$pid["view"]}";
         $this->conn->query($sql2);
         $sql3="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql3);

@@ -5,8 +5,18 @@ include_once 'sidenav.php';
 <script src="vendor/pnotify/pnotify.custom.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>
-
-
+    $(document).ready(function() {
+        $("#mySearch").on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $("#searchrow article").each(function() {
+                if ($(this).text().toLowerCase().search(value) > -1) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        })
+    });
 </script>
 
 <body style="background-color: gray; background-image:none;">
@@ -23,7 +33,15 @@ include_once 'sidenav.php';
                     <li><a href="#tab2">Fitness Centre</a></li>
                     <li><a href="#tab3">Treatment Room</a></li>
                 </ul>
+                <br>
+<!-- for search row -->
+                <div class="search">
+                    
+                    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                </div>
+
                 <div id="tab1" class="tab active">
+
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- hall -->
                         <section class="wrapper">
@@ -42,24 +60,26 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->hall->fetch_assoc()) {
                                 ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'hall')">
-                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
-                                            <li><?php echo $row["reservation_id"]; ?></li>
-                                            <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]." - ".$row["end_time"]; ?></li>
-                                            <li><?php echo $row["type"] ?></li>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'hall')">
+                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["reservation_id"]; ?></li>
+                                                <li><?php echo $row["date"]; ?></li>
+                                                <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
+                                                <li><?php echo $row["type"] ?></li>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
-                                                <span style="padding-right: 20px;">Member : <?php echo $row["no_of_members"] ?></span>
-                                            </li>
-                                        </ul>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
+                                                    <span style="padding-right: 20px;">Member : <?php echo $row["no_of_members"] ?></span>
+                                                </li>
+                                            </ul>
 
-                                    </article>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -90,13 +110,14 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->fitness->fetch_assoc()) {
                                 ?>
+                                <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'fit')">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]." - ".$row["end_time"]; ?></li>
+                                            <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                             <li><?php echo $row["fname"] . " " . $row["lname"]; ?></li>
 
                                         </ul>
@@ -105,8 +126,8 @@ include_once 'sidenav.php';
                                                 <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>
-
                                     </article>
+                                </span>
                                 <?php
                                 }
                                 ?>
@@ -137,13 +158,14 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->treatment->fetch_assoc()) {
                                 ?>
+                                <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat')">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]." - ".$row["end_time"]; ?></li>
+                                            <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                             <li><?php echo $row["type"]; ?></li>
                                         </ul>
                                         <ul class="more-content">
@@ -153,6 +175,7 @@ include_once 'sidenav.php';
                                         </ul>
 
                                     </article>
+                                </span>
                                 <?php
                                 }
                                 ?>

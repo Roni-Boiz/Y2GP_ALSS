@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../../public/css/body.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../../public/js/manager.js" defer></script>
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
@@ -18,7 +21,7 @@
     <div id="myheader">
         <div class="header">
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
-            <h2>AlSS</h2>
+            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px"/>
             <div class="head">
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
@@ -43,16 +46,16 @@
             <ul id="myMenu">
                 <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
 
-                <li class="dropdown"><a href="request"><i class="fa fa-calendar-plus"></i>HANDLE REQUESTS </a>
+                <li class="dropdown"><a href="request"><i class="fa fa-th-list"></i>HANDLE REQUESTS </a>
                     <ul>
                         <li><a href="#">SUB 1</a></li>
                         <li><a href="#">SUB 2</a></li>
                     </ul>
                 </li>
-                <li><a href="reservation"><i class="fa fa-credit-card"></i>MANAGE RESERVATIONS</a></li>
-                <li><a href="announcement"><i class="fa fa-sticky-note"></i>ANNOUNCEMENT</a></li>
+                <li><a href="reservation"><i class="fa fa-handshake"></i>MANAGE RESERVATIONS</a></li>
+                <li><a href="announcement"><i class="fa fa-bullhorn"></i>ANNOUNCEMENT</a></li>
                 <li><a href="complaint"><i class="fa fa-sticky-note"></i>COMPLAINTS</a></li>
-                <li><a href="report"><i class="fa fa-sticky-note"></i>VIEW REPORTS</a></li>
+                <li><a href="report"><i class="fas fa-chart-pie"></i>VIEW REPORTS</a></li>
                 <!-- <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW RESIDENT</a></li> -->
 
 

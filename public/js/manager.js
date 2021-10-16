@@ -1,4 +1,3 @@
-
 //  Search Bar
 function myFunction() {
     // Declare variables
@@ -20,7 +19,7 @@ function myFunction() {
         }
     }
 }
-///////////////////////////////////////////////////////
+//////////////////////////////////////////////
 
 // add announcement slide JS
 function openOffcanvas() {
@@ -39,61 +38,12 @@ function closeOffcanvas() {
     document.getElementById("myCanvasNav").style.width = "0%";
     document.getElementById("myCanvasNav").style.opacity = "0";
 }
-/////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////
 
-// popup model JS
-function openModel(amodel) {
-    const model = document.getElementById(amodel);
-    const modelBtn = document.getElementById("model-btn");
-    const ans = document.getElementById("answer");
-    const closeBtn = document.getElementById("closebtn");
 
-    modelBtn.addEventListener("click", () => {
-        document.getElementById("myCanvasNav").style.width = "100%";
-        document.getElementById("myCanvasNav").style.opacity = "0.8";
-        model.className = "open";
-    })
-
-    closeBtn.addEventListener("click", () => {
-        model.className = 'close';
-        document.getElementById("myCanvasNav").style.width = "0%";
-        document.getElementById("myCanvasNav").style.opacity = "0";
-    })
-
-    model.addEventListener("click", (e) => {
-        if (e.target.id === "yes-btn") {
-            ans.innerText = "Hello Guys";
-
-        } else if (e.target.id === "no-btn") {
-            ans.innerText = "Oh no! ";
-        } else {
-            return;
-        }
-        model.className = 'close';
-    });
-}
-/////////////////////////////////////////////////////
-
-//  Function to Collide the do list
-function collide(){
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-    
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    }
-}
-//////////////////////////////////////////////
+// Edit profile
 var profile = document.querySelector('.profile-pic');
-if(profile){
+if (profile) {
     profile.addEventListener('mouseenter', function () {
         uploadBtn.style.display = "block";
     });
@@ -168,6 +118,7 @@ function fileUpload(event){
     }
 }
 
+
 // Edit Profile show/hide
 function setVisibility1(id) {
     if (document.getElementById('editprofile').value == 'Edit Profile') {
@@ -200,11 +151,7 @@ function setVisibility3(id) {
         document.getElementById(id).style.display = 'none';
     }
 }
-
-function confirm() {
-    alert("Are your sure?")
-}
-/////////////////////////////////////////////////////////
+//////////////////////////////////////////////
 
 // Password validity check
 $(function () {
@@ -279,4 +226,3 @@ function check_retypepassword() {
         $("#rnpw").css("border-bottom", "2px solid #F90A0A");
     }
 }
-////////////////////////////////////////////////////

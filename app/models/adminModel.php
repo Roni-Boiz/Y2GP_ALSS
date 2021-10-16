@@ -9,21 +9,21 @@ class adminModel extends model
         parent::__construct();
     }
 
-    // public function readTable(){
-    //     $sql = "SELECT * FROM user_account";
-    //     $result = $this->conn->query($sql);   
-    //     return $result;
-
-    //     // $sql = "SELECT * FROM user_account";
-    //     // $result = $this->db->runQuery($sql);   
-    //     // return $result;
-    // }
-
     public function getProfileDetails($id)
     {
         $sql = "SELECT * FROM admin NATURAL JOIN user_account WHERE user_id='{$id}'";
         $result = $this->conn->query($sql);
         return $result;
+    }
+
+    public function updateProfile($name,$email,$id){
+        $name = $this->conn->real_escape_string($name);
+        $email = $this->conn->real_escape_string($email);
+
+        $sql = "UPDATE admin SET name = ?, email = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("ssi", $name, $email, $id);
+        return $stmt->execute();
     }
 
     public function getLoginDevices($id)
@@ -56,6 +56,12 @@ class adminModel extends model
 
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
+        $topic = $this->conn->real_escape_string($topic);
+        $content = $this->conn->real_escape_string($content);
+        $category = $this->conn->real_escape_string($category);
+        $fileName = $this->conn->real_escape_string($fileName);
+        $id = $this->conn->real_escape_string($id);
+
         $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");
         if ($admin) {
             $id = mysqli_fetch_assoc($admin);
@@ -79,23 +85,22 @@ class adminModel extends model
 
     public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName)
     {
-
         $fname = $this->conn->real_escape_string($fname);
         $lname = $this->conn->real_escape_string($lname);
         $email = $this->conn->real_escape_string($email);
         $con = $this->conn->real_escape_string($con);
-
+        $result1 = $result2 = $result3 = '';
         // Turn autocommit off
         $this->conn->autocommit(FALSE);
 
-        $sql = "INSERT INTO employee(type,start_data) VALUES ('{$empType}', CURDATE())";
-        $this->conn->query($sql);
+        $sql = "INSERT INTO employee(type, start_date) VALUES ('{$empType}', CURDATE())";
+        $result1 = $this->conn->query($sql);
         $empId = mysqli_insert_id($this->conn);
         $username = '';
         $password = '';
         $userId = '';
-        if ($empType == 'manager' || $empType == 'reseptionist' || $empType == 'parking_officer' || $empType == 'trainer') {
-            $userType = ($empType == 'manager' ? "MA" : ($empType == 'reseptionist' ? "RE" : ($empType == 'parking_officer' ? "PO" : "TR")));
+        if ($empType == 'manager' || $empType == 'receptionist' || $empType == 'parking_officer' || $empType == 'trainer') {
+            $userType = ($empType == 'manager' ? "MA" : ($empType == 'receptionist' ? "RE" : ($empType == 'parking_officer' ? "PO" : "TR")));
             if ($empId < 10) {
                 $username = $userType . '000' . $empId;
                 $password = 'Hawlock@000' . $empId;
@@ -115,10 +120,10 @@ class adminModel extends model
             $hash2Password = sha1($hashPassword);
 
             $sql = "INSERT INTO user_account(user_name, password, type, profile_pic, hold) VALUES ('{$username}', '{$hash2Password}', '{$empType}', '{$fileName}', '0')";
-            $result = $this->conn->query($sql);
+            $result2 = $this->conn->query($sql);
             $userId = mysqli_insert_id($this->conn);
 
-            if ($result) {
+            if ($result1 && $result2) {
                 $receiver = "chathus.m1999@gmail.com";
                 $subject = "Hawlock RYNC Employee Login Details";
                 $body = "Your Username : " . $username . " and password : " . $password;
@@ -127,10 +132,10 @@ class adminModel extends model
             }
 
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
-            $insert = $this->conn->query($sql);
+            $result3 = $this->conn->query($sql);
         } else {
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
-            $insert = $this->conn->query($sql);
+            $result3 = $this->conn->query($sql);
         }
         // Commit transaction
         if (!$this->conn->commit()) {
@@ -141,7 +146,7 @@ class adminModel extends model
         // Rollback transaction
         $this->conn->rollback();
         $this->conn->autocommit(TRUE);
-        return $insert;
+        return $result3;
     }
 
     public function getAllServices()

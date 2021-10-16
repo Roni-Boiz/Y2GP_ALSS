@@ -598,7 +598,7 @@ input[type=email]{
   min-height:250px;
   height:auto;
   border-radius:3px;
-  padding:20px 15px;
+  padding:0px 20px;
   color:white;
   clear:both;
 }

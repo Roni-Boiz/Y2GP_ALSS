@@ -94,5 +94,14 @@ class receptionistController extends controller{
         $this->model->setVisited($vid);
         $this->visitors();
     }
+    public function getNotification(){
+        $this->view->notification=$this->model->readNotification();
+        $this->view->render('receptionist/notificationView');
+    }
+    public function markRead(){
+        $nid=$_GET['notification'];
+        $this->model->removeNotification($nid);
+        $this->getNotification();
+    }
     
 }
