@@ -11,80 +11,111 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody">
             <!-- payment form -->
-            <div class="card1" style="grid-column:1/span2;margin:auto">
-                <div class="data">
-                    <div class="photo" style="background-image:url(../../public/img/pay.jpg);"></div>
-                    <ul class="details">
-                        <?php date_default_timezone_set("Asia/Colombo"); ?>
-                        <li class="author"><?php echo date("H:i"); ?> </li>
-                        <li class="date"><?php echo  date("F j, Y");  ?></li>
-                    </ul>
-                </div>
-                <div class="description">
-                    <form action="#" class="reservationtime" method="GET">
-                        <div>
-                            <label>Total Payable</label><br>
-                            <input type="text" name="payable" class="input-field" value="10000.00" READONLY><br>
-                            <label>Last Payment</label><br>
-                            <input type="text" name="lastpay" class="input-field" value="2000.00" READONLY><br>
-                            <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
+            <div class="card" id="userCard" style="z-index:0">
+                <div class="leftPanel" style="margin-top:30px">
+                    <div>
+                        <div class="card1" style="grid-column:1/span2;margin:auto">
+                            <div class="data">
+                                <div class="photo" style="background-image:url(../../public/img/pay.jpg);"></div>
+                                <ul class="details">
+                                    <?php date_default_timezone_set("Asia/Colombo"); ?>
+                                    <li class="author"><?php echo date("H:i"); ?> </li>
+                                    <li class="date"><?php echo  date("F j, Y");  ?></li>
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <form action="#" class="reservationtime" method="GET">
+                                    <div>
+                                        <label>Total Payable</label><br>
+                                        <input type="text" name="payable" class="input-field" value="10000.00" READONLY><br>
+                                        <label>Last Payment</label><br>
+                                        <input type="text" name="lastpay" class="input-field" value="2000.00" READONLY><br>
+                                        <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-
-            <div style="display:none" id="gateway">
-                <form action="#" class="reservationtime" method="GET" id="cardpayment">
-                    <h3>Payment</h3>
-                    <label>Accepted Cards</label>
-                    <div class="payicon">
-                        <i class="fab fa-cc-visa" style="color:navy;"></i>
-                        <i class="fab fa-cc-amex" style="color:blue;"></i>
-                        <i class="fab fa-cc-mastercard" style="color:red;"></i>
-                        <i class="fab fa-cc-discover" style="color:orange;"></i>
-                    </div>
-                    <label for="cname">Name on Card</label>
-                    <input type="text" id="cname" class="input-field" name="cardname" placeholder="John More Doe">
-                    <label for="ccnum">Credit card number</label>
-                    <input type="text" id="ccnum" class="input-field" name="cardnumber" placeholder="1111-2222-3333-4444">
-                    <label for="expmonth">Exp Month</label>
-                    <input type="text" id="expmonth" class="input-field" name="expmonth" placeholder="September">
-                    <label for="expyear">Exp Year</label>
-                    <input type="text" id="expyear" class="input-field" name="expyear" placeholder="2018">
-                    <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" class="input-field" name="cvv" placeholder="352">
-                </form>
-            </div>
-            <div class="divPopupModel">
-                <p id="answer"></p>
-
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="model">
-
-                    <a href="javascript:void(0)" id="closebtn">&times;</a>
-                    <div style="text-align: center;">
-                        <h3>Pay Bill<i class="fa fa-credit-card"></i></i></h3>
                     </div>
 
-                    <form action="#" class="reservationtime" method="GET">
-                        <div id="col1">
-                            <label>Apartment ID</label><br>
-                            <input type="text" name="apartmentid" class="input-field" value="AP0001" READONLY>
+                </div>
+
+                <div class="rightPanel" style="margin-top:30px">
+                    <div class="holdAccount">
+                        <div class="head">
+                            <h3>Last Payments</h3>
                         </div>
-                        <br>
-                        <div id="col2">
-                            <label for="lname">Amount(LKR)</label><br>
-                            <input type="text" name="amt" class="input-field" placeholder="" value="">
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-28 - 16:00</h5>
+                                    <small>Coach Kasun</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-30 - 10:00</h5>
+                                    <small>Coach Kasun</small>
+                                </div>
+                            </div>
                         </div>
 
-                        <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next">
+                    </div>
+                </div>
+
+                <div style="display:none" id="gateway">
+                    <form action="#" class="reservationtime" method="GET" id="cardpayment">
+                        <h3>Payment</h3>
+                        <label>Accepted Cards</label>
+                        <div class="payicon">
+                            <i class="fab fa-cc-visa" style="color:navy;"></i>
+                            <i class="fab fa-cc-amex" style="color:blue;"></i>
+                            <i class="fab fa-cc-mastercard" style="color:red;"></i>
+                            <i class="fab fa-cc-discover" style="color:orange;"></i>
+                        </div>
+                        <label for="cname">Name on Card</label>
+                        <input type="text" id="cname" class="input-field" name="cardname" placeholder="John More Doe">
+                        <label for="ccnum">Credit card number</label>
+                        <input type="text" id="ccnum" class="input-field" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        <label for="expmonth">Exp Month</label>
+                        <input type="text" id="expmonth" class="input-field" name="expmonth" placeholder="September">
+                        <label for="expyear">Exp Year</label>
+                        <input type="text" id="expyear" class="input-field" name="expyear" placeholder="2018">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" class="input-field" name="cvv" placeholder="352">
                     </form>
+                </div>
+                <div class="divPopupModel">
+                    <p id="answer"></p>
+
+                    <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                    <div id="model">
+
+                        <a href="javascript:void(0)" id="closebtn">&times;</a>
+                        <div style="text-align: center;">
+                            <h3>Pay Bill<i class="fa fa-credit-card"></i></i></h3>
+                        </div>
+
+                        <form action="#" class="reservationtime" method="GET">
+                            <div id="col1">
+                                <label>Apartment ID</label><br>
+                                <input type="text" name="apartmentid" class="input-field" value="AP0001" READONLY>
+                            </div>
+                            <br>
+                            <div id="col2">
+                                <label for="lname">Amount(LKR)</label><br>
+                                <input type="text" name="amt" class="input-field" placeholder="" value="">
+                            </div>
+
+                            <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next">
+                        </form>
 
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
 
