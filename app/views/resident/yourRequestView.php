@@ -16,6 +16,11 @@ include_once 'sidenav.php';
                     <li><a href="#tab2">Laundry</a></li>
                     <li><a href="#tab3">Visitors</a></li>
                 </ul>
+                <br>
+                <!-- for search row --><br>
+                <div class="search">
+                    <input type="text" id="mySearch"  placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                </div>
 
                 <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
@@ -35,6 +40,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->maintenence->fetch_assoc()) {
                                 ?>
+                                <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
@@ -53,6 +59,7 @@ include_once 'sidenav.php';
                                         </ul>
 
                                     </article>
+                                </span>
                                 <?php
                                 }
                                 ?>
@@ -82,6 +89,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->laundry->fetch_assoc()) {
                                 ?>
+                                <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
@@ -99,6 +107,7 @@ include_once 'sidenav.php';
                                         </ul>
 
                                     </article>
+                                </span>
                                 <?php
                                 }
                                 ?>
@@ -128,6 +137,7 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->visitor->fetch_assoc()) {
                                 ?>
+                                <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteRes(<?php echo $row['visitor_id']; ?>,'treat')">
@@ -138,9 +148,8 @@ include_once 'sidenav.php';
                                             <li><?php echo $row["arrive_date"]; ?></li>
 
                                         </ul>
-                                        
-
                                     </article>
+                                </span>
                                 <?php
                                 }
                                 ?>

@@ -4,21 +4,6 @@ include_once 'sidenav.php';
 <link rel="stylesheet" href="vendor/pnotify/pnotify.custom.css" />
 <script src="vendor/pnotify/pnotify.custom.js"></script>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#mySearch").on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-            $("#searchrow article").each(function() {
-                if ($(this).text().toLowerCase().search(value) > -1) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        })
-    });
-</script>
-
 <body style="background-color: gray; background-image:none;">
 
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
@@ -34,10 +19,9 @@ include_once 'sidenav.php';
                     <li><a href="#tab3">Treatment Room</a></li>
                 </ul>
                 <br>
-<!-- for search row -->
+                <!-- for search row --><br>
                 <div class="search">
-                    
-                    <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                    <input type="text" id="mySearch"  placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
                 </div>
 
                 <div id="tab1" class="tab active">
@@ -189,10 +173,6 @@ include_once 'sidenav.php';
                     </p>
                 </div>
             </div>
-
-
-
-
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>

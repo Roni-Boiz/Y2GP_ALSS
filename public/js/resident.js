@@ -30,16 +30,27 @@ $(function () {
       $(this).toggleClass("click");
       $('.sidebar').toggleClass("show");
    });
-    // add profile pic
+   // search row
+   $("#mySearch").on('keyup', function () {
+      var value = $(this).val().toLowerCase();
+      $("#searchrow article").each(function () {
+         if ($(this).text().toLowerCase().search(value) > -1) {
+            $(this).show();
+         } else {
+            $(this).hide();
+         }
+      });
+   })
+   // add profile pic
    //  const imgDiv = document.querySelector('.profile-pic');
    //  const img = document.querySelector('#photo');
    //  const file = document.querySelector('#file');
    //  const uploadBtn = document.querySelector('#uploadBtn');
- 
+
    //  imgDiv.addEventListener('mouseenter', function () {
    //     uploadBtn.style.display = "block";
    //  });
- 
+
    //  file.addEventListener('change', function () {
    //     const choosefile = this.files[0];
    //     if (choosefile) {
@@ -50,15 +61,15 @@ $(function () {
    //        reader.readAsDataURL(choosefile);
    //     }
    //  });
- 
+
    //  document.querySelector('.profile-pic').addEventListener('mouseenter', function () {
    //     uploadBtn.style.display = "block";
    //  });
- 
+
    //  document.querySelector('.profile-pic').addEventListener('mouseleave', function () {
    //     uploadBtn.style.display = "none";
    //  });
-   
+
    // popup
    const model = document.getElementById("model");
    const modelBtn = document.getElementById("model-btn");
@@ -79,19 +90,19 @@ $(function () {
 
 });
 function uploadPhoto(photo, newfile) {
-      const img = document.getElementById(photo);
-      const file = document.getElementById(newfile);
+   const img = document.getElementById(photo);
+   const file = document.getElementById(newfile);
 
-      file.addEventListener('change', function () {
-         const choosefile = this.files[0];
-         if (choosefile) {
-            const reader = new FileReader();
-            reader.addEventListener('load', function () {
-               img.setAttribute('src', reader.result);
-            });
-            reader.readAsDataURL(choosefile);
-         }
-      });
+   file.addEventListener('change', function () {
+      const choosefile = this.files[0];
+      if (choosefile) {
+         const reader = new FileReader();
+         reader.addEventListener('load', function () {
+            img.setAttribute('src', reader.result);
+         });
+         reader.readAsDataURL(choosefile);
+      }
+   });
 }
 function expand() {
    if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
@@ -222,7 +233,7 @@ function check_newpassword() {
 function check_retypepassword() {
    var rpassword = $("#npw").val();
    var retype_password = $("#rnpw").val();
-   if (rpassword == retype_password && retype_password != "") {         
+   if (rpassword == retype_password && retype_password != "") {
       $("#renew_password_error_message").hide();
       $("#rnpw").css("border-bottom", "2px solid #34F458");
 
@@ -329,4 +340,3 @@ function deleteReq(id, type) {
       }
    }
 }
-
