@@ -121,7 +121,7 @@ include_once 'sidenav.php';
                 </div>
                 <div id="tab3" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
-<!-- laundrye -->
+<!-- laundry -->
 <section class="wrapper">
                             <main class="row title">
                                 <ul>

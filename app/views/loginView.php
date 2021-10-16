@@ -149,6 +149,7 @@ input[type=text] , input[type=password]{
 }
 input[type=submit] {
   width: 90px;
+  line-height: 25px;
   background-color: #2a225a;
   color: white;
   padding: 5px 0px;
