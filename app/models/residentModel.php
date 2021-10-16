@@ -152,7 +152,11 @@ class residentModel extends model {
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
-
+    public function bill($id){
+        $sql = "SELECT *   from bill where residentId='1' ";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
 
 
 
