@@ -63,24 +63,24 @@ include_once 'sidenav.php';
                         </div>
 
                     </form>
-                    <div class="divPopupModel">
+                    <div class="divPopupModel" >
                         <p id="answer"></p>
 
                         <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                        <div id="model" style="left: 75%;">
+                        <div id="model" style="left: 75%;width: 300px">
 
                             <a href="javascript:void(0)" id="closebtn">&times;</a>
                             <div style="text-align: center;">
                                 <h3>Help<i class="fas fa-info-circle"></i></h3>
                             </div>
-                            <ul>-----Category 1-----</ul>
+                            <ul>Category 1</ul>
                             <li>T-Shirt</li>
-                            <li>Shorts</li>
-                            <ul>-----Category 2-----</ul>
+                            <li>Shorts</li><hr>
+                            <ul>Category 2</ul>
                             <li>Bed-sheet</li>
                             <li>Table Cloth</li>
-                            <li>Certain</li>
-                            <ul>-----Category 3-----</ul>
+                            <li>Certain</li><hr>
+                            <ul>Category 3</ul>
                             <li>Shirts</li>
                             <li>Troushers</li>
 

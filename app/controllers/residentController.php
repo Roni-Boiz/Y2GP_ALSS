@@ -90,6 +90,8 @@ class residentController extends controller{
     }
 
     public function bill(){
+        $id=$_SESSION['userId'];
+        $this->view->bill=$this->model->bill($id);
         $this->view->render('resident/billView');
     }
     

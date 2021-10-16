@@ -12,14 +12,7 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody">
             <!-- payment form -->
             <div class="card1" style="grid-column:1/span2;margin:auto">
-                <div class="data">
-                    <div class="photo" style="background-image:url(../../public/img/.jpg);"></div>
-                    <ul class="details">
-                        <?php date_default_timezone_set("Asia/Colombo"); ?>
-                        <li class="author"><?php echo date("H:i"); ?> </li>
-                        <li class="date"><?php echo  date("F j, Y");  ?></li>
-                    </ul>
-                </div>
+                
                 <div class="description">
                     <form action="#" class="reservationtime" method="GET">
                         <div>

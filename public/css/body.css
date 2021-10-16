@@ -438,16 +438,16 @@ input[type=email]{
 .pslots{
   font-size: 1em;
   width: 80px;
-  text-decoration: none;
   display: inline-block;
   margin: 10px ;
-  padding: 5px;
+  padding: 10px;
   float: left;
   /* border-right:rgb(0, 0, 0) 1px solid; */
 }
 .slotbutton{
   background-color: #ffffff;
   border: none;
+  margin: 10px ;
 
 }
 
@@ -1477,7 +1477,8 @@ input[type=email]{
 }
 
 .holdAccount .head {
-  background-color: #1d2f4c;
+  /* background-color: #1d2f4c; */
+  background-color: #2a225a;
   color: white;
   text-align: center;
   align-items: center;
@@ -1523,7 +1524,8 @@ input[type=email]{
 }
 
 .activeUsers .head {
-  background-color: #1d2f4c;
+  /* background-color: #1d2f4c; */
+  background-color: #2a225a;
   color: white;
   text-align: center;
   align-items: center;
