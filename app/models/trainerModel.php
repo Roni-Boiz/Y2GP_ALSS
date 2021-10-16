@@ -8,7 +8,6 @@ class trainerModel extends model {
     }
 
     public function readTable(){
-        require '../app/core/database.php';
         $sql = "SELECT * FROM user_account";
         $result = $this->conn->query($sql);   
         return $result;
@@ -17,8 +16,15 @@ class trainerModel extends model {
         // $result = $this->db->runQuery($sql);   
         // return $result;
     }
+
+    public function getReservation(){
+        $sql = "SELECT * FROM fitness_centre_reservation WHERE employee_id= '3'";
+        $result = $this->conn->query($sql);   
+        return $result;
+
+    }
+
     public function profile(){
-        require '../app/core/database.php';
         $sql = "SELECT * FROM trainer WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);   
         return $result;
