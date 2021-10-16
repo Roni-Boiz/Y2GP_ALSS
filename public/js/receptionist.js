@@ -13,7 +13,18 @@ $(function () {
     $("#rnpw").keyup(function () {
        check_retypepassword();
     });
-    
+      // search row
+      $("#mySearch").on('keyup', function () {
+         var value = $(this).val().toLowerCase();
+         $("#searchrow article").each(function () {
+            if ($(this).text().toLowerCase().search(value) > -1) {
+               $(this).show();
+            } else {
+               $(this).hide();
+            }
+         });
+      })
+
     // $(".tabs-list li a").click(function (e) {
     //    e.preventDefault();
     // });

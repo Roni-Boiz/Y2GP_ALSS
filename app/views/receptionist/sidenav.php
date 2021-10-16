@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <style>
+        .sidebar i{
+            width: 35px;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,7 +47,7 @@
 
             <ul id="myMenu">
                 <li><a href="../receptionistController/index"><i class="fa fa-home"></i>HOME</a></li>
-                <li><a href="register"><i class="fa fa-file-medical"></i>REGISTER RESIDENT</a></li>
+                <li><a href="register"><i class="fa fa-file-medical"></i>REGISTRATION</a></li>
                 <li><a href="parcels"><i class="fas fa-box-open"></i>PARCELS</a></li>
                 <li><a href="visitors"><i class="fas fa-users"></i>VISITORS</a></li>
             </ul>
