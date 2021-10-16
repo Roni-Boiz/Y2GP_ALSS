@@ -10,51 +10,106 @@ include_once 'sidenav.php';
             <h1 id="title">HALL <span id="city">RESERVATION</span></h1>
         </div>
         <div id="hb" class="hawlockbody">
-        <div class="card1" style="grid-column:1/span2;margin:auto">
-                <div class="data">
-                    <div class="photo" style="background-image:url(../../public/img/hall.jpg);"></div>
-                    <ul class="details">
-                        <?php date_default_timezone_set("Asia/Colombo"); ?>
-                        <li class="author"><?php echo date("H:i"); ?> </li>
-                        <li class="date"><?php echo  date("F j, Y");  ?></li>
-                    </ul>
-                </div>
-                <div class="description">
-                    <form action="#" class="reservationtime" method="GET">
-                        <div id="">
-                            
-                            <input type="radio" name="type" value="function">
-                            <label>Function</label>
-                            <input type="radio" name="type" value="conference">
-                            <label>Conference</label><br>
-                            <label>Date</label><br>
-                            <input type="date" name="date" class="input-field"><br>
-                            <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
-                            <div id="available">
-                                <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+
+            <div class="card" id="userCard" style="z-index:0">
+                <div class="leftPanel" style="margin-top:30px">
+                    <div>
+                        <div class="card1" style="grid-column:1/span2;margin:auto">
+                            <div class="data">
+                                <div class="photo" style="background-image:url(../../public/img/hall.jpg);"></div>
+                                <ul class="details">
+                                    <?php date_default_timezone_set("Asia/Colombo"); ?>
+                                    <li class="author"><?php echo date("H:i"); ?> </li>
+                                    <li class="date"><?php echo  date("F j, Y");  ?></li>
+                                </ul>
                             </div>
-                            <br>
-                            <button id="model-btn" class="purplebutton">Reserve Now</button>
+                            <div class="description">
+                                <form action="#" class="reservationtime" method="GET">
+                                    <div id="">
 
+                                        <input type="radio" name="type" value="function">
+                                        <label>Function</label>
+                                        <input type="radio" name="type" value="conference">
+                                        <label>Conference</label><br>
+                                        <label>Date</label><br>
+                                        <input type="date" name="date" class="input-field"><br>
+                                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <div id="available">
+                                            <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                                        </div>
+                                        <br>
+                                        <button id="model-btn" class="purplebutton">Reserve Now</button>
+
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-        </div>
+                    </div>
 
+                </div>
+
+                <div class="rightPanel" style="margin-top:30px">
+                    <div class="holdAccount">
+                        <div class="head">
+                            <h3>Upcoming Functions</h3>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-28 - 16:00</h5>
+                                    <small>10 Members</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-30 - 10:00</h5>
+                                    <small>50 Members</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="activeUsers">
+                        <div class="head">
+                            <h3>Upcoming Meetings</h3>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>2021-10-30 - 10:00</h5>
+                                <small>5 Members</small>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>2021-10-30 - 10:00</h5>
+                                <small>10 Members</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="divPopupModel">
-
                 <p id="answer"></p>
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
-
 
                     <div style="text-align: center;">
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
 
                     <form action="#" class="reservationtime" method="GET">
+                        <div id="col1">
+                            <input type="radio" name="type" value="function">
+                            <label>Function </label>
+                            <input type="radio" name="type" value="conference">
+                            <label>Conference</label><br><br>
+                        </div>
+
                         <div id="col1">
                             <label>No of Members</label><br>
                             <input type="text" name="members" class="input-field" placeholder="MAX 50">
