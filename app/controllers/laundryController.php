@@ -28,7 +28,7 @@ class laundryController extends controller{
         $this->loadModel('profileModel');
         $this->view->users = $this->model->profile();
         $this->view->render('laundry/profileView');
-        $this->model->editProfile();
+        // $this->model->editProfile();
     }
     public function editProfile(){
         $fname=$_POST["fname"];
