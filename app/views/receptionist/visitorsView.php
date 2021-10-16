@@ -28,9 +28,9 @@ include_once 'sidenav.php';
                             <main class="row title">
                                 <ul>
                                     <li>Action</li>
-                                    <li>Vistor ID</li>
+                                    <li>Apartment No</li>
                                     <li>Visitor Name</li>
-                                    <li>Resident Id</li>
+                                    <!-- <li>Description</li> -->
                                 </ul>
                             </main>
 
@@ -43,11 +43,15 @@ include_once 'sidenav.php';
 
                                         <article class="row mlb">
                                             <ul>
-                                                <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
-                                                <li><?php echo $row["visitor_id"]; ?></li>
+                                                <li><a method="get" href="markVisited?visitor=<?php echo $row["apartment_no"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["apartment_no"]; ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
-                                                <li><?php echo $row["resident_id"]; ?></li>
-
+                                                
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                </li>
                                             </ul>
 
                                         </article>
