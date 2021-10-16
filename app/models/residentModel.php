@@ -158,6 +158,11 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function pay($id){
+        $sql = "SELECT *   from bill where residentId='1' and type LIKE 'payment' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
 
 
 

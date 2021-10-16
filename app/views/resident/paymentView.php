@@ -16,7 +16,7 @@ include_once 'sidenav.php';
                     <div>
                         <div class="card1" style="grid-column:1/span2;margin:auto">
                             <div class="data">
-                                <div class="photo" style="background-image:url(../../public/img/pay.jpg);"></div>
+                                <div class="photo" style="background-image:url(../../public/img/payment.jpg);"></div>
                                 <ul class="details">
                                     <?php date_default_timezone_set("Asia/Colombo"); ?>
                                     <li class="author"><?php echo date("H:i"); ?> </li>
@@ -44,22 +44,29 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Last Payments</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-28 - 16:00</h5>
-                                    <small>Coach Kasun</small>
+                        <?php
+                        if ($this->pay->num_rows > 0) { ?>
+                            <?php
+                            while ($row = $this->pay->fetch_assoc()) {
+                            ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["fee"]." LKR"; ?></h5>
+                                            <small><?php echo $row["date"]; ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-30 - 10:00</h5>
-                                    <small>Coach Kasun</small>
-                                </div>
-                            </div>
-                        </div>
+                            <?php
+                            }
+                            ?>
+                        <?php
+                        } else {
+                            echo "0 results";
+                        }
+                        ?>
+
+
 
                     </div>
                 </div>

@@ -1,28 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script>
-    //  Search Bar
-    function myFunction() {
-        // Declare variables
-        var input, filter, ul, li, a, i;
-        input = document.getElementById("mySearch");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("myMenu");
-        li = ul.getElementsByTagName("li");
-
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
-        }
-    }
-</script>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,11 +36,6 @@
         </div>
 
         <nav class="sidebar" id="side">
-            <!-- <div class="search">
-                <i class="fa fa-search"></i>
-                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div> -->
-
             <ul >
                 <li><a href="../residentController/index"><i class="fa fa-home"></i>HOME</a></li>
                 <!-- for resident -->
@@ -85,7 +58,7 @@
                 </li>
                 <li><a href="payment"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
                 <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
-                <li><a href="complaint"><i class="fa fa-credit-card"></i>COMPLAINTS</a></li>
+                <li><a href="complaint"><i class="fa fa-credit-card"></i>CONTACT US</a></li>
             </ul>
         </nav>
 

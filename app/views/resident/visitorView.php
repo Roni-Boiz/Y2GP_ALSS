@@ -27,6 +27,8 @@ include_once 'sidenav.php';
                         <input type="text" name="name" class="input-field"><br>
                         <label>Visiting Date</label><br>
                         <input type="date"  name="vdate" class="input-field"><br>
+                        <label>Description</label><br>
+                        <input type="textarea" name="description" id="description"><br>
                         <input class="purplebutton" type="submit" name="Submit" value="Send" style="grid-column:2">
                     </div>
 

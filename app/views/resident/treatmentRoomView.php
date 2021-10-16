@@ -7,10 +7,13 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">TREATMENT ROOM <br><span id="city">RESERVATION</span></h1>
+            <h1 id="title">TREATMENT ROOM </h1>
         </div>
         <div id="hb" class="hawlockbody">
-            <div class="card1" style="grid-column:1/span2;margin:auto">
+        <div class="card" id="userCard" style="z-index:0">
+                <div class="leftPanel" style="margin-top:30px">
+                    <div>
+                    <div class="card1" style="grid-column:1/span2;margin:auto">
                 <div class="data">
                     <div class="photo" style="background-image:url(../../public/img/treatment.jpg);"></div>
                     <ul class="details">
@@ -35,6 +38,65 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+                    </div>
+
+                </div>
+
+                <div class="rightPanel" style="margin-top:30px">
+                    <div class="holdAccount">
+                        <div class="head">
+                            <h3>Upcoming . . .</h3>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-28 - 16:00</h5>
+                                    <small>Nirupama Rajapaksha</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>2021-10-30 - 10:00</h5>
+                                    <small> Nirupama Rajapaksha</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="activeUsers">
+                        <div class="head">
+                            <h3>Treatment Types</h3>
+                        </div>
+                        <div class="detail">
+                            <img src="../../public/img/user.png" alt="user" />
+                            <div class="detail-info">
+                                <h5>Full Body Massage</h5>
+                                <small>Nirupama Rajapaksha</small>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <img src="../../public/img/user.png" alt="user" />
+                            <div class="detail-info">
+                                <h5>Full-body facia</h5>
+                                <small>Shiranthi Rajapaksha</small>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <img src="../../public/img/user.png" alt="user" />
+                            <div class="detail-info">
+                                <h5>Water Therapy</h5>
+                                <small>Chandrika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            
    
             <div class="divPopupModel">
                 <p id="answer"></p>
