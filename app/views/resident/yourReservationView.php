@@ -75,6 +75,7 @@ include_once 'sidenav.php';
                         </section>
                     </div>
                 </div>
+                
                 <div id="tab2" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- fitness -->

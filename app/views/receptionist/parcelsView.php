@@ -3,46 +3,8 @@ include_once 'sidenav.php';
 ?>
 
 </head>
-<script type="text/javascript"
-src="../../../public/js/receptionist.js"></script>
+
 <script>
-    $(document).ready(function() {
-
-        $(".tabs-list li a").click(function(e) {
-            e.preventDefault();
-        });
-
-        $(".tabs-list li").click(function() {
-            var tabid = $(this).find("a").attr("href");
-            $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
-            $(".tab").hide(); // hiding open tab
-            $(tabid).show(); // show tab
-            $(this).addClass("active"); //  adding active class to clicked tab
-        });
-    });
-    function deleteparcel(id) {
-        console.log(id);
-        r = confirm("Are you sure?");
-        if (r == true) {
-
-            $.ajax({
-                type: "GET",
-                url: "putReached",
-                data: {
-                    parcel: id
-                },
-                success: function() {
-                    a = "#" + id;
-                    console.log(a);
-                    $(a).closest('article').fadeOut("fast");
-                }
-            });
-
-
-
-        }
-    }
-
     function confirmation() {
         confirm("Press OK or Cancel");
     }
@@ -78,7 +40,7 @@ src="../../../public/js/receptionist.js"></script>
                                         <!-- <input type="text" class="input-field-signup" name="apartmentId" placeholder="          Apartment Id" id="apartmentId"> -->
                                         <div class="input-field-signup" id="apartmentId">
                                             <i class="fa fa-address-card" aria-hidden="true"></i>
-                                            <select name="apartmentId" id="form_apartment" >
+                                            <select name="apartmentId" id="form_apartment">
                                                 <option value="#">Apartment No</option>
                                                 <?php
 
@@ -126,10 +88,10 @@ src="../../../public/js/receptionist.js"></script>
         </div> -->
 
                 <!-- </div> -->
-                
+
 
                 <div id="tab2" class="tab">
-                    <!-- for search row --><br>
+                    <br>
                     <div class="search">
                         <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
                     </div>
@@ -150,20 +112,22 @@ src="../../../public/js/receptionist.js"></script>
                                 <?php
                                 while ($row = $this->inLocker->fetch_assoc()) {
                                 ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li><?php echo $row["parcel_id"]; ?></li>
-                                            <li><?php echo $row["resident_id"]; ?></li>
-                                            <li><?php echo $row["receive_date"]; ?></li>
-                                            <li><?php echo $row["receive_time"]; ?></li>
-                                            <li><?php echo $row["sender"]; ?></li>
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article></a>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li><?php echo $row["parcel_id"]; ?></li>
+                                                <li><?php echo $row["resident_id"]; ?></li>
+                                                <li><?php echo $row["receive_date"]; ?></li>
+                                                <li><?php echo $row["receive_time"]; ?></li>
+                                                <li><?php echo $row["sender"]; ?></li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -173,13 +137,13 @@ src="../../../public/js/receptionist.js"></script>
                             }
                             ?>
                         </section>
-        
+
                     </div>
                 </div>
                 <div id="tab3" class="tab">
-                    <!-- for search row --><br>
+                    <br>
                     <div class="search">
-                        <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
+                        <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
                     </div>
                     <div style="overflow-x:auto;grid-column:1/span2">
 
@@ -200,21 +164,21 @@ src="../../../public/js/receptionist.js"></script>
                                 while ($row1 = $this->reached->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li id="<?php echo $row1['parcel_id']; ?>"><a onclick="deleteparcel(<?php echo $row1['parcel_id']; ?>)"><i class="fas fa-microchip" style="color:white;padding:1px 10px"></i></a></td>
-                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                                            <li><?php echo $row1["parcel_id"]; ?></li>
-                                            <li><?php echo $row1["resident_id"]; ?></li>
-                                            <li><?php echo $row1["receive_date"]; ?></li>
-                                            <li><?php echo $row1["receive_time"]; ?></li>
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Reached Time: <?php echo $row1["reached_time"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row1['parcel_id']; ?>"><a onclick="deleteparcel(<?php echo $row1['parcel_id']; ?>)"><i class="fas fa-microchip" style="color:white;padding:1px 10px"></i></a></td>
+                                                    <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["parcel_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                <li><?php echo $row1["parcel_id"]; ?></li>
+                                                <li><?php echo $row1["resident_id"]; ?></li>
+                                                <li><?php echo $row1["receive_date"]; ?></li>
+                                                <li><?php echo $row1["receive_time"]; ?></li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Reached Time: <?php echo $row1["reached_time"] ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
                                     </span>
                                 <?php
                                 }

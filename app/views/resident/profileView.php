@@ -21,7 +21,7 @@ include_once('sidenav.php');
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
                     
-                    <h4> <?php echo $row["apartment_no"]; ?></h4>
+                    <h4> <?php echo  $_SESSION['userName'];?></h4>
 
                     <form action="editprofile" id="profileView" method="post">
                         <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>

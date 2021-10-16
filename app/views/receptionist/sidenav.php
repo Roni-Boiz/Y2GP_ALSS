@@ -77,3 +77,4 @@
                 }
             }
         </script>
+        <script type="text/javascript" src="../../public/js/receptionist.js"></script>

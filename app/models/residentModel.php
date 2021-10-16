@@ -154,7 +154,7 @@ class residentModel extends model {
         $this->conn->query($sql);
     }
     public function bill($id){
-        $sql = "SELECT *   from bill where residentId='1' ";
+        $sql = "SELECT *   from bill where residentId='1' and type NOT LIKE 'payment' ";
         $result = $this->conn->query($sql);
         return $result;
     }
