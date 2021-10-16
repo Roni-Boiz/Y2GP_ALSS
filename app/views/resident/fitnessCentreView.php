@@ -57,7 +57,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Upcoming Reservations</h3>
+                            <h3>Upcoming . . .</h3>
                         </div>
                         <div class="detail">
                             <div>
