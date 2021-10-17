@@ -53,6 +53,7 @@ class managerController extends controller
 
     public function complaint()
     {
+        $this->view->complaints = $this->model->getAllComplaints();
         $this->view->render('manager/complaintView');
     }
 
