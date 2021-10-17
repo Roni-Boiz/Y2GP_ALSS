@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../public/css/body.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
+    
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
 
@@ -18,7 +18,7 @@
     <div id="myheader">
         <div class="header">
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
-            <h2>AlSS</h2>
+            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px"/>
             <div class="head">
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
@@ -27,7 +27,7 @@
                     </li>
                     <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                 </ul>
-                <li><a href="#"><?php echo  $_SESSION['userName']; ?></a></li>
+                <li><a><?php echo  $_SESSION['userName']; ?></a></li>
                 <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
                 </li>
                 </ul>
@@ -35,10 +35,10 @@
         </div>
 
         <nav class="sidebar" id="side">
-            <div class="search">
+            <!-- <div class="search">
                 <i class="fa fa-search"></i>
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div>
+            </div> -->
 
             <ul id="myMenu">
                 <li><a href="../laundryController/index"><i class="fa fa-home"></i>HOME</a></li>
@@ -72,3 +72,4 @@
                 }
             }
         </script>
+        <script src="../../public/js/laundry.js"></script>

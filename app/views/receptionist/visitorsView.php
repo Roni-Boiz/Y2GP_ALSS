@@ -16,7 +16,10 @@ include_once 'sidenav.php';
                     <li class="active"><a href="#tab1">TODAY</a></li>
                     <li><a href="#tab2">PREVIOUS</a></li>
                     <!-- <li ><a href="#tab3">OVERDUE VISITORS</a></li> -->
-                </ul>
+                </ul><br><br>
+                <div class="search">
+                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                </div>
                 <div id="tab1" class="tab active">
 
                     <div style="overflow-x:auto;grid-column:1/span2">
@@ -25,9 +28,9 @@ include_once 'sidenav.php';
                             <main class="row title">
                                 <ul>
                                     <li>Action</li>
-                                    <li>Vistor ID</li>
+                                    <li>Apartment No</li>
                                     <li>Visitor Name</li>
-                                    <li>Resident Id</li>
+                                    <!-- <li>Description</li> -->
                                 </ul>
                             </main>
 
@@ -36,16 +39,23 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->todayVisitors->fetch_assoc()) {
                                 ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
-                                            <li><?php echo $row["visitor_id"]; ?></li>
-                                            <li><?php echo $row["name"]; ?></li>
-                                            <li><?php echo $row["resident_id"]; ?></li>
+                                    <span id="searchrow">
 
-                                        </ul>
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li><a method="get" href="markVisited?visitor=<?php echo $row["apartment_no"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["apartment_no"]; ?></li>
+                                                <li><?php echo $row["name"]; ?></li>
+                                                
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                </li>
+                                            </ul>
 
-                                    </article>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -59,7 +69,9 @@ include_once 'sidenav.php';
                     </div>
 
                 </div>
+
                 <div id="tab2" class="tab">
+
                     <p>
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- pre -->
@@ -77,7 +89,8 @@ include_once 'sidenav.php';
                             if ($this->previousVisitors->num_rows > 0) { ?>
                                 <?php
                                 while ($row = $this->previousVisitors->fetch_assoc()) {
-                                ?>
+                                ?>                               
+                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
                                             <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
@@ -88,6 +101,7 @@ include_once 'sidenav.php';
                                         </ul>
 
                                     </article>
+                                 </span>
                                 <?php
                                 }
                                 ?>
@@ -97,7 +111,7 @@ include_once 'sidenav.php';
                             }
                             ?>
                         </section>
-                        
+
                     </div>
                     </p>
                 </div>

@@ -7,37 +7,7 @@ include_once('sidenav.php');
 
 
 <script>
-    function setVisibility1(id) {
-        if (document.getElementById('editprofile').value == 'Edit Profile') {
-            document.getElementById('editprofile').value = 'Cancel';
-            document.getElementById('editprofile').style.width = 'fit-content';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('editprofile').value = 'Edit Profile';
-            document.getElementById('editprofile').style.width = '100%';
-            document.getElementById(id).style.display = 'none';
-        }
-    }
-    // Change Password show/hide
-    function setVisibility2(id) {
-        if (document.getElementById('changepassword').value == 'Change Password') {
-            document.getElementById('changepassword').value = 'Cancel';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('changepassword').value = 'Change Password';
-            document.getElementById(id).style.display ='none';
-        }
-    }
 
-    function setVisibility3(id) {
-        if (document.getElementById(id).style.display == 'none') {
-            document.getElementById('showmore').text = 'Show Less';
-            document.getElementById(id).style.display = 'inline';
-        } else {
-            document.getElementById('showmore').text = 'Show More';
-            document.getElementById(id).style.display = 'none';
-        }
-    }
 </script>
 
 

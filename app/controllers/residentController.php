@@ -86,10 +86,15 @@ class residentController extends controller{
     }
 
     public function payment(){
+        $id=$_SESSION['userId'];
+        $this->view->pay=$this->model->pay($id);
         $this->view->render('resident/paymentView');
     }
 
     public function bill(){
+        $id=$_SESSION['userId'];
+        $this->view->bill=$this->model->bill($id);
+        
         $this->view->render('resident/billView');
     }
     
@@ -125,5 +130,8 @@ class residentController extends controller{
         $nid=$_GET['notification'];
         $this->model->removeNotification($nid);
         $this->getNotification();
+    }
+    public function complaint(){
+        $this->view->render('resident/complaintView');
     }
 }

@@ -12,13 +12,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <style>
+        .sidebar i{
+            width: 35px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="myheader">
         <div class="header">
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
-            <h2>AlSS</h2>
+            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px"/>
             <div class="head">
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
@@ -27,22 +32,22 @@
                     </li>
                     <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                 </ul>
-                <li><a href="#"><?php echo  $_SESSION['userName']; ?></a></li>
-                <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
+                <li><a><?php echo  $_SESSION['userName']; ?></a></li>
+                <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
                 </li>
                 </ul>
             </div>
         </div>
 
         <nav class="sidebar" id="side">
-            <div class="search">
+            <!-- <div class="search">
                 <i class="fa fa-search"></i>
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div>
+            </div> -->
 
             <ul id="myMenu">
                 <li><a href="../receptionistController/index"><i class="fa fa-home"></i>HOME</a></li>
-                <li><a href="register"><i class="fa fa-file-medical"></i>REGISTER RESIDENT</a></li>
+                <li><a href="register"><i class="fa fa-file-medical"></i>REGISTRATION</a></li>
                 <li><a href="parcels"><i class="fas fa-box-open"></i>PARCELS</a></li>
                 <li><a href="visitors"><i class="fas fa-users"></i>VISITORS</a></li>
             </ul>
@@ -72,3 +77,4 @@
                 }
             }
         </script>
+        <script type="text/javascript" src="../../public/js/receptionist.js"></script>

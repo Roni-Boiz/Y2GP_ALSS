@@ -117,15 +117,15 @@ include_once('sidenav.php');
                             <form action="changePassword" id="passwordView" method="post">
                                 <label for="fname">Old Password</label>
                                 <input type="password" id="opw" name="opw" class="input-field" placeholder="old password"><br>
-                                <span class="error_form" id="old_password_error_message"></span><br>
+                                <span class="error_form" id="old_password_error_message" style="font-size: 10px;"></span><br>
 
                                 <label for="lname">New Password</label>
                                 <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
-                                <span class="error_form" id="new_password_error_message"></span><br>
+                                <span class="error_form" id="new_password_error_message" style="font-size: 10px;"></span><br>
 
                                 <label for="fname">Re-New Password</label>
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
-                                <span class="error_form" id="renew_password_error_message"></span><br>
+                                <span class="error_form" id="renew_password_error_message" style="font-size: 10px;"></span><br>
 
                                 <input type="submit" value="Save">
                             </form>
@@ -205,8 +205,6 @@ include_once('sidenav.php');
 
 
         </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
-    <script type="text/javascript" src="../../public/js/profile.js">    
+    </div> <!-- .expand div closed here -->   
 </body>
-
 </html>
