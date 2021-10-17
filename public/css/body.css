@@ -1023,6 +1023,7 @@ input[type=email]{
   display: inline-block;
   border: 1px solid #eee;
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .myDoList .head{
@@ -1153,9 +1154,9 @@ input[type=email]{
 /* Admin User view styles*/
 #usersummary {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   color: #545d7a;
 }
 
@@ -1168,6 +1169,11 @@ input[type=email]{
   justify-content: center;
   align-items: center;
   width: 150px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 66%);
+}
+
+#usersummary .user:hover {
+  box-shadow: 0 8px 16px 0 rgba(0 0 0 / 66%);
 }
 
 #usersummary .employee {
@@ -1205,7 +1211,6 @@ input[type=email]{
 
 #upactivities div {
   padding: 5px;
-  width: 80%;
 }
 
 #upactivities div>label {
@@ -1230,6 +1235,8 @@ input[type=email]{
 
 #employeeSummary >div {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #employeeSummary div {
@@ -1241,7 +1248,13 @@ input[type=email]{
   justify-content: center;
   align-items: center;
   width: 150px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 66%);
 }
+
+#employeeSummary .employee:hover{
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 66%);
+}
+
 
 #employeeSummary i{
   padding: 0px;
@@ -1306,7 +1319,9 @@ input[type=email]{
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
-  border-radius: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
+
 }
 
 .empsearch .addBtn i {
@@ -1388,7 +1403,8 @@ input[type=email]{
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
-  border-radius: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
 }
 
 .servicesearch .addBtn i {
@@ -1451,7 +1467,8 @@ input[type=email]{
   font-size: 14px;
   cursor: pointer;
   transition: 0.3s;
-  border-radius: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
 }
 
 .usersearch .addBtn i {
@@ -1563,6 +1580,91 @@ input[type=email]{
 /* End of user view styles */
 /* End of Admin Styles */
 
+/* Manager Styles */
+.upactivities div{
+  width: 100%;
+}
+/* complaint view  */
+#complaint {
+  grid-column: 1/ span 3;
+}
+
+#newcomplaints {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+}
+
+#newcomplaints >div {
+  padding: 0px 20px;
+  width: 300px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 65%);
+  margin: 10px 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#newcomplaints >div>div{
+  display: grid;
+  grid-template-columns: 1fr 78px;
+  margin-bottom: 8px;
+}
+
+#newcomplaints >div>div>div:nth-child(2){
+  text-align: right;
+  padding: 2px;
+}
+
+#complaint div h4{
+  padding: 0px;
+}
+
+#complaint div h4 small{
+  color: #545d7a;
+}
+
+#newcomplaints >div input[type="submit"] {
+  float: right;
+}
+
+#newcomplaints >div p {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+#newcomplaints div dd {
+  font-size: 10px;
+  color: #545d7a;
+  top: 0px;
+}
+
+#newcomplaints >div:hover {
+  box-shadow: 0 8px 16px 0 rgba(0 0 0 / 66%);
+}
+
+#complaint .complaintsearch input[type=text] {
+  width: 30%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url(../../public/img/searchicon.png);
+  background-position: 7px 15px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  align-items: center;
+  justify-content: center;
+}
+/* End of complaint view  */
+
+/* End of Manager styles */
 /* Table Styles */
 .nfl a,.mlb a,.nhl a,.pga a {
   text-decoration: none;
