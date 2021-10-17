@@ -2591,3 +2591,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* media for panel */
+@media (max-width: 1200px) {
+  .leftPanel {
+    grid-column: 1/span 3;
+  }
+
+  .rightPanel {
+    grid-column: 1/span 3;
+}
+}
