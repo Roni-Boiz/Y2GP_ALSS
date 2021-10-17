@@ -124,6 +124,7 @@ include_once 'sidenav.php';
     #serverstatus {
         padding: 20px;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
     }
