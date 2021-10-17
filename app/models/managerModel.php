@@ -44,6 +44,11 @@ class managerModel extends model {
         return $stmt->execute();
     }
 
+    public function getAllCOmplaints(){
+        $sql = "SELECT complaint.*,resident.fname,resident.lname,resident.apartment_no FROM complaint left join resident on complaint.resident_id = resident.resident_id";
+        return $this->conn->query($sql);
+    }
+
     
 
 }
