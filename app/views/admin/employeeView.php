@@ -75,8 +75,6 @@ include_once 'sidenav.php';
                                     4
                                 </div>
                             </div>
-                        </div>
-                        <div>
                             <div class="employee">
                                 <div>
                                     <span><i class="fas fa-user"></i></span>
