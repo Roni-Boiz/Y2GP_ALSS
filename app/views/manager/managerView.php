@@ -1,12 +1,6 @@
 <?php
 include_once 'sidenav.php';
 ?>
-
-<style>
-    .upactivities div{
-        width: 100%;
-    }
-</style>
 </head>
 
 <body style="background-color: gray; background-image:none;">
