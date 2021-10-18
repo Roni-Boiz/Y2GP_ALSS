@@ -7,7 +7,7 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">COMPLAINT<span id="city"> </span></h1>
+            <h1 id="title">CONTACT US<span id="city"> </span></h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
