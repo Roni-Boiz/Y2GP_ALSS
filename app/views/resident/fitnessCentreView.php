@@ -12,7 +12,7 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">FITNESS CENTRE</h1>
         </div>
-        <div id="hb" class="hawlockbody">
+        <div id="hb" class="hawlockbody animate-bottom">
 
             <div class="card" id="userCard" style="z-index:0">
                 <div class="leftPanel" style="margin-top:30px">

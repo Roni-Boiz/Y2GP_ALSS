@@ -49,7 +49,7 @@ include_once('sidenav.php');
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">Hawlock <span id="city">City</span></h1>
         </div>
-        <div class="hawlockbody" id="hb">
+        <div class="hawlockbody animate-bottom" id="hb">
             <?php
             $row = $this->users->fetch_assoc()
             ?>

@@ -6,7 +6,7 @@
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">Notifications</span></h1></div>
-    <div id="hb" class="hawlockbody"> 
+    <div id="hb" class="hawlockbody animate-bottom"> 
 
     <?php
         if ($this->notification->num_rows > 0){

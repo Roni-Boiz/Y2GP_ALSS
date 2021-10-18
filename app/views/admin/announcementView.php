@@ -13,7 +13,7 @@ include_once 'sidenav.php';
 
         </div>
 
-        <div id="hb" class="hawlockbody">
+        <div id="hb" class="hawlockbody animate-bottom">
             <h2>Announcements</h2>
             <div class="btnAddAnnouncement" onclick="openNav(); openOffcanvas()" title="Add Anouncement"><img src="../../public/img/announcement.png"></div><!--<i class="fa fa-plus-square"></i>-->
             <!-- Add Anouncement -->

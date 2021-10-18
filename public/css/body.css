@@ -1455,7 +1455,7 @@ input[type=email]{
 
 #userCard {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr;
   grid-column:1/span 3
 }
 
@@ -1508,9 +1508,11 @@ input[type=email]{
   display: grid;
   grid-template-rows: 1fr;
   box-shadow: 0 2px 20px rgb(0 0 0 / 20%);
-  align-items: center;
   padding: 5px;
   border-radius: 10px;
+  height: 50px;
+  overflow: hidden;
+  transition: .3s;
 }
 
 .holdAccount .detail> :nth-child(1) {
@@ -1528,11 +1530,12 @@ input[type=email]{
 }
 
 .detail .moreContent {
-  display: none;
+  display: block;
 }
 
-.detail:hover>.moreContent {
+.holdAccount .detail:hover {
   display: block;
+  height: 100px;
 }
 
 .activeUsers {

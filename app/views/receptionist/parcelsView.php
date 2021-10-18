@@ -16,7 +16,7 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">PARCELS</h1>
         </div>
-        <div id="hb" class="hawlockbody">
+        <div id="hb" class="hawlockbody animate-bottom">
             <div class="tabs" style="grid-column:1/span3">
                 <ul class="tabs-list">
                     <li class="active"><a href="#tab1">New</a></li>

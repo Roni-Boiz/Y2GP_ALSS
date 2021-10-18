@@ -9,7 +9,7 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">Hawlock <span id="city">City</span> Complaints</h1>
         </div>
-        <div id="hb" class="hawlockbody">
+        <div id="hb" class="hawlockbody animate-bottom">
             <div id="complaint">
                 <div>
                     <h2>New Complaints</h2>
