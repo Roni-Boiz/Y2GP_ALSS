@@ -16,12 +16,12 @@ include_once 'sidenav.php';
                         <h4>Complaints</h4>
                         <div class="card" id="usersummary">
                             <div>
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="complaint" class="reservationtime" method="post">
                                     <div>
                                         <label>Complaint</label><br>
                                         <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..."><br>
                                         your complaint will be considered soon.. thank you for your feedback<br>
-                                        <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2">
+                                        <input class="purplebutton"  type="submit" value="Send" id="model-btn" style="grid-column:2" >
                                     </div>
                                 </form>
                             </div>
