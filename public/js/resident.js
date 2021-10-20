@@ -125,6 +125,9 @@ function confirmSave() {
 function confirmDelete() {
    confirm('Are Your Sure to Delete')
 }
+function successcomplaint(){
+   alert("your complaint will be considered soon.. thank you for your feedback")
+}
 // add new field
 function newVehicle() {
    if ($("#newveh").is(':hidden')) {

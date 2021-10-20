@@ -98,9 +98,7 @@ class residentModel extends model {
             $treatid=$_GET["treatid"];
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date' WHERE reservation_id='$treatid' ";    
         }
-        if($this->conn->query($sql)){
-            echo "do";
-        }
+        $this->conn->query($sql);
     }
     public function maintenence(){
         $sql = "SELECT * from technical_maintenence_request";
@@ -154,19 +152,30 @@ class residentModel extends model {
         $this->conn->query($sql);
     }
     public function bill($id){
-        $sql = "SELECT *   from bill where residentId='1' and type NOT LIKE 'payment' ";
+        $s=date('Y-m-d 00:00:00',strtotime("first day of this month"));
+        $e=date('Y-m-d 23:59:59',strtotime("last day of this month"));
+        $sql = "SELECT * from bill where '$s'<=dateaffect and dateaffect<'$e' and resident_id IN (select resident_id from resident where user_id='$id')";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function billtotal($id){
+        $s=date('Y-m-d 00:00:00',strtotime("first day of this month"));
+        $e=date('Y-m-d 23:59:59',strtotime("last day of this month"));
+        $sql = "SELECT sum(fee) as total  from bill where '$s'<=dateaffect and dateaffect<'$e' and resident_id IN (select resident_id from resident where user_id='$id') ";
         $result = $this->conn->query($sql);
         return $result;
     }
     public function pay($id){
-        $sql = "SELECT *   from bill where residentId='1' and type LIKE 'payment' LIMIT 5";
+        $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY dateaffect DESC LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
-
-
-
-
+    public function complaint($des){
+        $date = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO complaint(date_time,description,resident_id) VALUES('$date','$des','1')";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
 
 
 }
