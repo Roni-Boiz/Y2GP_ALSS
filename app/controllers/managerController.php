@@ -48,6 +48,14 @@ class managerController extends controller
 
     public function reservation()
     {
+        $this->view->todayHallRes = $this->model->getTodayHallRes();
+        $this->view->todayFitnessRes = $this->model->getTodayFitnessRes();
+        $this->view->todayTreatmentRes = $this->model->getTodayTreatmentRes();
+
+        $this->view->allHallRes = $this->model->getAllHallRes();
+        $this->view->allFitnessRes = $this->model->getAllFitnessRes();
+        $this->view->allTreatmentRes = $this->model->getAllTreatmentRes();
+
         $this->view->render('manager/manageResView');
     }
 
