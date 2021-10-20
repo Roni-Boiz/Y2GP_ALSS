@@ -131,7 +131,7 @@ include_once 'sidenav.php';
                         <span style="display: inline-block;"> Trainer <i class="fa fa-square" style="color: #AA9150;"></i></span>
                         <span style="display: inline-block;"> Treater <i class="fa fa-square" style="color: #EB7655;"></i></span>
                         <span style="display: inline-block;"> P. Officer <i class="fa fa-square" style="color: #52D29A;"></i></span>
-                        <span style="display: inline-block;"> Other <i class="fa fa-square" style="color: #AA9150;"></i></span>    
+                        <span style="display: inline-block;"> Other <i class="fa fa-square" style="color: #AA9150;"></i></span>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@ include_once 'sidenav.php';
                     <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                         <div id="col1">
                             <label for="type">Type</label><br>
-                            <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement" required>
+                            <select id="emptype" name="emptype" class="input-field" required>
                                 <option value="">Select Employee Type...</option>
                                 <option value="manager">Manager</option>
                                 <option value="receptionist">Receptionist</option>
