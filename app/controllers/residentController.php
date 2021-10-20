@@ -94,7 +94,7 @@ class residentController extends controller{
     public function bill(){
         $id=$_SESSION['userId'];
         $this->view->bill=$this->model->bill($id);
-        
+        $this->view->billtotal=$this->model->billtotal($id);
         $this->view->render('resident/billView');
     }
     
@@ -132,6 +132,10 @@ class residentController extends controller{
         $this->getNotification();
     }
     public function complaint(){
+        if(isset($_POST["description"])){
+            $des=$_POST["description"];
+            $this->model->complaint($des);
+        }
         $this->view->render('resident/complaintView');
     }
 }

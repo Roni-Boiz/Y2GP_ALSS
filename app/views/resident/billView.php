@@ -13,7 +13,7 @@ include_once 'sidenav.php';
 
             <div id="employeeCard" style="grid-column:1/span 3">
                 <div class="staffDetails">
-                    <h4>Your Bills - October</h4>
+                    <h4>Your Bills - <?php echo date('F') ?></h4>
                     <div class="card" id="employeeSummary">
                         
                         <section class="wrapper" style="margin:auto">
@@ -35,7 +35,7 @@ include_once 'sidenav.php';
                                         <ul>
                                             <li><?php echo $row["description"]; ?></li>
                                             <li><?php echo $row["fee"]; ?></li>
-                                            <li><?php echo $row["date"]?></li>
+                                            <li><?php echo $row["dateaffect"]?></li>
                                         </ul>
                                         <ul class="more-content">
                                             <li>
@@ -51,12 +51,12 @@ include_once 'sidenav.php';
                             } else {
                                 echo "0 results";
                             }
-                            ?>
+                            
+                            $row1 = $this->billtotal->fetch_assoc()?>
                             <main class="row title">
                                 <ul>
                                     <li>Total</li>
-                                    <li></li>
-                                    <li><?php echo $row["total"]?></li>
+                                    <li><?php echo $row1["total"]?></li>
                                 </ul>
                             </main>
                         </section>
