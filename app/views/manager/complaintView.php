@@ -43,6 +43,10 @@ include_once 'sidenav.php';
                         <?php
                                 }
                             }
+                        } else {
+                        ?>
+                            <h4>No complaints</h4>
+                        <?php
                         }
                         ?>
 
@@ -54,7 +58,6 @@ include_once 'sidenav.php';
                     <div style="float: right;">
                         <span style="display: inline-block;"> New <i class="fa fa-square" style="color: #EB7655;"></i></span>
                         <span style="display: inline-block;"> Old <i class="fa fa-square" style="color: #52D29A;"></i></span>
-                        <!-- <span onclick="openModel('model')" id="model-btn" class="addBtn"><i class="fas fa-user-plus"></i></span> -->
                     </div>
                 </div>
                 <div>
