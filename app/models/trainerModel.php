@@ -60,5 +60,8 @@ class trainerModel extends model {
         }
         return $errors;
     }
+    public function addSchedule(){
+       
+    }
 
 }
