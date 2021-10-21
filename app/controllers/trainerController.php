@@ -51,5 +51,9 @@ class trainerController extends controller{
         $this->model->changePassword($opw,$npw,$rnpw);
         $this->profile();
     }
+    public function addSchedule(){
+
+        $this->view->render('trainer/addScheduleView');
+    }
 
 }
