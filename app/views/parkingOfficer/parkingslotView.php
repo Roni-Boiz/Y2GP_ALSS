@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                             <div>
                                 <div>
                                     <label>Vehicle No</label><br>
-                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  ?>>
+                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  echo "AAA123" ?>>
                                     <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
                                 </div>
 
