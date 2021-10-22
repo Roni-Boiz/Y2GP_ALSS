@@ -151,16 +151,17 @@ class residentModel extends model {
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
-    public function bill($id){
-        $s=date('Y-m-d 00:00:00',strtotime("first day of this month"));
-        $e=date('Y-m-d 23:59:59',strtotime("last day of this month"));
+    // bills
+    public function bill($id,$year,$month){
+        $s=date("$year-$month-d 00:00:00",strtotime("first day of this month"));
+        $e=date("$year-$month-d 23:59:59",strtotime("last day of this month"));
         $sql = "SELECT * from bill where '$s'<=dateaffect and dateaffect<'$e' and resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function billtotal($id){
-        $s=date('Y-m-d 00:00:00',strtotime("first day of this month"));
-        $e=date('Y-m-d 23:59:59',strtotime("last day of this month"));
+    public function billtotal($id,$year,$month){
+        $s=date("$year-$month-d 00:00:00",strtotime("first day of this month"));
+        $e=date("$year-$month-d 23:59:59",strtotime("last day of this month"));
         $sql = "SELECT sum(fee) as total  from bill where '$s'<=dateaffect and dateaffect<'$e' and resident_id IN (select resident_id from resident where user_id='$id') ";
         $result = $this->conn->query($sql);
         return $result;

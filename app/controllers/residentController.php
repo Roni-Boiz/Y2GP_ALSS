@@ -93,8 +93,16 @@ class residentController extends controller{
 
     public function bill(){
         $id=$_SESSION['userId'];
-        $this->view->bill=$this->model->bill($id);
-        $this->view->billtotal=$this->model->billtotal($id);
+        if(isset($_POST["month"]) && isset($_POST["year"])){
+            $this->view->bill=$this->model->bill($id,$_POST["year"],$_POST["month"]);
+            // convert-number-to-month-name
+            $this->view->y=$_POST["year"]." ".date("F", mktime(0, 0, 0,$_POST["month"], 10));;
+            $this->view->billtotal=$this->model->billtotal($id,$_POST["year"],$_POST["month"]);
+        }else{
+            $this->view->bill=$this->model->bill($id,date('Y'),date('m'));
+            $this->view->y=date('Y')." ".date('F');
+            $this->view->billtotal=$this->model->billtotal($id,date('Y'),date('m'));
+        }
         $this->view->render('resident/billView');
     }
     
