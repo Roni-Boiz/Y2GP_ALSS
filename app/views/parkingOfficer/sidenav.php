@@ -35,10 +35,10 @@
         </div>
 
         <nav class="sidebar" id="side">
-            <div class="search">
+            <!-- <div class="search">
                 <i class="fa fa-search"></i>
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div>
+            </div> -->
 
             <ul id="myMenu">
                 <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
