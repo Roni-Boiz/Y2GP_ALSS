@@ -21,8 +21,8 @@ include_once 'sidenav.php';
                     </ul>
                 </div>
                 <div class="description">
-                    <form action="#" class="reservationtime" method="GET">
-                    <div id="">
+                    <form action="visitor" class="reservationtime" method="POST">
+                    <div>
                         <label>Name</label><br>
                         <input type="text" name="name" class="input-field"><br>
                         <label>Visiting Date</label><br>

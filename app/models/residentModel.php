@@ -68,20 +68,32 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function latesthall($id){
+        
+    }
     public function treatmentReservation($id){
         $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
-    }    
+    }   
+    public function latestreatment($id){
+        
+    } 
     public function fitnessReservation($id){
         $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function latestfitness($id){
+        
+    }
     public function viewSlots(){
         $sql = "SELECT * from parking_slot";
         $result = $this->conn->query($sql);
         return $result;
+    }
+    public function latestparking($id){
+        
     }
     public function removeReservation(){
         date_default_timezone_set("Asia/Colombo");
@@ -100,20 +112,31 @@ class residentModel extends model {
         }
         $this->conn->query($sql);
     }
-    public function maintenence(){
-        $sql = "SELECT * from technical_maintenence_request";
+    public function maintenence($id){
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function laundry(){
-        $sql = "SELECT * from laundry_request";
+    public function latestmaintenence($id){
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function visitor(){
-        $sql = "SELECT * from visitor";
+    public function laundry($id){
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') ";
         $result = $this->conn->query($sql);
         return $result;
+    }
+    public function visitor($id){
+        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id')";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function requestVisitor($name,$vdate,$des){
+        $date = date('Y-m-d H:i:s');
+        // resident id
+        $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','1')";
+        $this->conn->query($sql);
     }
     public function removeRequest(){
         date_default_timezone_set("Asia/Colombo");
