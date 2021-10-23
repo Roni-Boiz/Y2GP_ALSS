@@ -17,6 +17,7 @@ include_once 'sidenav.php';
                     <li class="active"><a href="#tab1">Hall</a></li>
                     <li><a href="#tab2">Fitness Centre</a></li>
                     <li><a href="#tab3">Treatment Room</a></li>
+                    <li><a href="#tab3">Parking Slot</a></li>
                 </ul>
                 <br>
                 <!-- for search row --><br>
