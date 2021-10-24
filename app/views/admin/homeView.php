@@ -121,24 +121,8 @@ include_once 'sidenav.php';
         }
     }
 
-    #serverstatus {
-        padding: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-    }
 
-    #serverstatus>div {
-        margin: 0px 10px;
-        text-align: center;
-    }
-
-    #serverstatus h4 {
-        padding: 10px;
-    }
 </style>
-
 
 </head>
 
@@ -154,39 +138,39 @@ include_once 'sidenav.php';
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
                     <div>
-                        <h3>Server Status</h3>
-                        <div class="card" id="serverstatus">
+                        <h3>Total Income</h3>
+                        <div class="card" id="income">
                             <div>
-                                <h4>Performance</h4>
-                                <figure class="chart-three animate">
-                                    <svg role="img" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="circle-background" />
-                                        <circle class="circle-foreground" />
-                                    </svg>
-                                    <figcaption></figcaption>
-                                </figure>
+                                <h4>Payment Received</h4>
+                                <div>
+                                    <img src="../../public/img/cash.png" alt="cash icon">
+                                    <h3>Rs.<?= number_format("1500000", 2) ?></h3>
+                                </div>
                             </div>
-
                             <div>
-                                <h4>Storage</h4>
-                                <figure class="chart-three animate">
-                                    <svg role="img" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="circle-background" />
-                                        <circle class="circle-foreground" />
-                                    </svg>
-                                    <figcaption></figcaption>
-                                </figure>
+                                <h4>Overdues</h4>
+                                <div>
+                                    <img src="../../public/img/overdue.png" alt="overdue icon">
+                                    <h3>Rs.<?= number_format("50000", 2) ?></h3>
+                                </div>
                             </div>
+                        </div>
+                    </div>
 
+                    <div>
+                        <h3>Earning Summary</h3>
+                        <div class="card" id="earning">
+                            <canvas id="earningChart"> 
+                            </canvas>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3>Service Usage Summary</h3>
+                        <div class="card" id="serviceusage">
                             <div>
-                                <h4>Bandwidth</h4>
-                                <figure class="chart-three animate" style="display: inline-block;">
-                                    <svg role="img" xmlns="http://www.w3.org/2000/svg">
-                                        <circle class="circle-background" />
-                                        <circle class="circle-foreground" />
-                                    </svg>
-                                    <figcaption></figcaption>
-                                </figure>
+                                <canvas id="reservationChart">
+                                </canvas>
                             </div>
                         </div>
                     </div>
@@ -210,13 +194,40 @@ include_once 'sidenav.php';
                             </ul>
                         </div>
                     </div>
+
+                    <div>
+                        <h3>Server Status :<span><i style="color: #389967;" class="fa fa-server"></i></span><small style="font-size: small; color: #6e6e6e;">(Active)</small></h3>
+                        <div class="card" id="serverstatus">
+                            <div>
+                                <h4>Storage</h4>
+                                <figure class="chart-three animate">
+                                    <svg role="img" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="circle-background" />
+                                        <circle class="circle-foreground" />
+                                    </svg>
+                                    <figcaption></figcaption>
+                                </figure>
+                            </div>
+
+                            <div>
+                                <h4>Performance</h4>
+                                <figure class="chart-three animate">
+                                    <svg role="img" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="circle-background" />
+                                        <circle class="circle-foreground" />
+                                    </svg>
+                                    <figcaption></figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div id="upactivities">
                 <h4>Upcomming Activities</h4>
                 <div class="card">
-                    <div style="font-size: small;color: #545d7a;">Currently you  do not have any upcomming activities</div>
+                    <div style="font-size: small;color: #545d7a;">Currently you do not have any upcomming activities</div>
                 </div>
             </div>
         </div>
@@ -226,19 +237,6 @@ include_once 'sidenav.php';
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script>
-        // var myVar;
-
-        // function myFunction() {
-        //     myVar = setTimeout(showPage, 3000);
-        // }
-
-        // function showPage() {
-        //     document.getElementById("loader").style.display = "none";
-        //     document.getElementsByClassName("hb").style.display = "block";
-        // }
-        ///////////////////////////////////////////////
-
-
         //  My do list Function
         // Create a "close" button and append it to each list item
         var myDoList = document.getElementById("myUL");
@@ -296,6 +294,172 @@ include_once 'sidenav.php';
                 }
             }
         }
+
+        //Charts
+        let chart1 = document.getElementById('earningChart').getContext('2d');
+        let massChart1 = new Chart(chart1, {
+            type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Reservations',
+                    data: [
+                        100, 1500, 500, 500, 100, 1000, 100, 1500, 500, 500, 100, 1000
+                    ],
+                    // backgroundColor : '#423D59',
+                    backgroundColor: [
+                        'rgba(153,102,255,0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 1,
+                    hoverBorderColor: '#003'
+                }]
+            },
+            options: {
+                // scales: {
+                //     x: {
+                //         ticks: {
+                //             maxTicksLimit: 10
+                //         }
+                //     }
+                // },
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            display: false,
+                            autoSkip: false,
+                            maxRotation: 90,
+                            minRotation: 90
+                        }
+                    }]
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+                        labels: {
+                            fontColor: '#000'
+                        }
+                    },
+                    title: {
+                        display: false,
+                        text: 'Employability Rate',
+                        fontSize: 25
+                    },
+                },
+            },
+        });
+
+        let chart2 = document.getElementById('reservationChart').getContext('2d');
+        let massChart2 = new Chart(chart2, {
+            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                        label: 'Hall',
+                        data: [
+                            10, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    },
+                    {
+                        label: 'Fitness',
+                        data: [
+                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    },
+                    {
+                        label: 'Treatment',
+                        data: [
+                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    },
+                    {
+                        label: 'Parking',
+                        data: [
+                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    },
+                    {
+                        label: 'Laundry',
+                        data: [
+                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    },
+                    {
+                        label: 'Maintenence',
+                        data: [
+                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                        ],
+                        // backgroundColor : '#423D59',
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003'
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false,
+                        // position: 'center',
+                        labels: {
+                            fontColor: '#000'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Total Reservations and Requests',
+                        fontSize: 25
+                    },
+                },
+            },
+        });
     </script>
 </body>
+
 </html>
