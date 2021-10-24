@@ -47,7 +47,7 @@ include_once 'sidenav.php';
                         <div>
                             <div class="employee">
                                 <div>
-                                    <span><i class="fas fa-user"></i></span>
+                                    <span><i class="fas fa-user-tie"></i></span>
                                     <h3>Manager</h3>
                                 </div>
                                 <div style="font-size: 40px;">
@@ -57,7 +57,7 @@ include_once 'sidenav.php';
 
                             <div class="employee">
                                 <div>
-                                    <span><i class="fas fa-users"></i></span>
+                                    <span><i class="fas fa-user-tie"></i></span>
                                     <h3>Reseptionist</h3>
                                 </div>
                                 <div style="font-size: 40px;">
@@ -77,7 +77,7 @@ include_once 'sidenav.php';
                             </div>
                             <div class="employee">
                                 <div>
-                                    <span><i class="fas fa-user"></i></span>
+                                    <span><i class="fas fa-user-tie"></i></span>
                                     <h3>Treaters</h3>
                                 </div>
                                 <div style="font-size: 40px;">
@@ -87,7 +87,7 @@ include_once 'sidenav.php';
 
                             <div class="employee">
                                 <div>
-                                    <span><i class="fas fa-users"></i></span>
+                                    <span><i class="fas fa-user-tie"></i></span>
                                     <h3>P. Officers</h3>
                                 </div>
                                 <div style="font-size: 40px;">
@@ -123,19 +123,19 @@ include_once 'sidenav.php';
                 </div>
 
                 <div class="empsearch">
-                    <input type="text" name="search" placeholder="Search..">
-                    <span onclick="openModel('model')" id="model-btn" class="addBtn"><i class="fas fa-user-plus"></i></span>
+                    <input type="text" name="search" placeholder="Search.." class="mySearch">
+                    <span onclick="openModel('model','addBtn')" class="addBtn"><i class="fas fa-user-plus"></i></span>
                     <div>
-                        <span style="display: inline-block;"> Manager <i class="fa fa-square" style="color: #EB7655;"></i></span>
-                        <span style="display: inline-block;"> Reseptionist <i class="fa fa-square" style="color: #52D29A;"></i></span>
-                        <span style="display: inline-block;"> Trainer <i class="fa fa-square" style="color: #AA9150;"></i></span>
-                        <span style="display: inline-block;"> Treater <i class="fa fa-square" style="color: #EB7655;"></i></span>
-                        <span style="display: inline-block;"> P. Officer <i class="fa fa-square" style="color: #52D29A;"></i></span>
-                        <span style="display: inline-block;"> Other <i class="fa fa-square" style="color: #AA9150;"></i></span>
+                        <span style="display: inline-block;"> Manager <i class="fa fa-square" style="color: #52D29A;"></i></span>
+                        <span style="display: inline-block;"> Receptionist <i class="fa fa-square" style="color: #AA9150;"></i></span>
+                        <span style="display: inline-block;"> P. Officer <i class="fa fa-square" style="color: #EB7655;"></i></span>
+                        <span style="display: inline-block;"> Trainer <i class="fa fa-square" style="color: #4fc0d2;"></i></span>
+                        <span style="display: inline-block;"> Treater <i class="fa fa-square" style="color: #d91393;"></i></span>
+                        <span style="display: inline-block;"> Techinician <i class="fa fa-square" style="color: #1ccf52;"></i></span>
+                        <!-- <span style="display: inline-block;"> Other <i class="fa fa-square" style="color: #AA9150;"></i></span> -->
                     </div>
                 </div>
             </div>
-
 
             <div class="divPopupModel">
 
@@ -145,7 +145,7 @@ include_once 'sidenav.php';
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
 
-                    <a href="javascript:void(0)" id="closebtn">&times;</a>
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center;">
                         <h1>New Employee<i class="fa fa-user"></i></i></h1>
                     </div>
@@ -198,7 +198,74 @@ include_once 'sidenav.php';
                         <button id="no-btn">No</button>
                     </div> -->
                 </div>
+            </div>
 
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Update Shift</h3>
+                    </div>
+                    <form action="#" class="formEdit" method="GET">
+                        <div>
+                            <label>Employee ID : </label>
+                            <span><?= "EMP1234" ?></span>
+                        </div>
+                        <div>
+                            <div>
+                                <label>Week 01</label><br>
+                                <select id="week1" name="week1" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Week 02</label><br>
+                                <select id="week2" name="week2" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Week 03</label><br>
+                                <select id="week3" name="week3" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <input class="btnPurple" type="submit" name="submit" value="Update">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="deleteModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Are You Sure ?</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Delete Employee With EMP ID </label>
+                            <span><?= "EMP1234" ?></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                        </div>
+
+                    </form>
+                </div>
             </div>
 
             <section class="wrapper">
@@ -208,7 +275,7 @@ include_once 'sidenav.php';
                         <li>Full Name</li>
                         <li>Contact Number</li>
                         <li>Email</li>
-                        <li>Start Date</li>
+                        <li>Actions</li>
                     </ul>
                 </main>
                 <!-- manager -->
@@ -217,19 +284,23 @@ include_once 'sidenav.php';
                     <?php
                     while ($row = $this->managers->fetch_assoc()) {
                     ?>
-                        <article class="row mlb">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row mlb">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Manager" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
@@ -242,19 +313,23 @@ include_once 'sidenav.php';
                     <?php
                     while ($row = $this->receptionists->fetch_assoc()) {
                     ?>
-                        <article class="row nhl">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row nhl">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Receptionist" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
@@ -267,19 +342,23 @@ include_once 'sidenav.php';
                     <?php
                     while ($row = $this->parkingOfficers->fetch_assoc()) {
                     ?>
-                        <article class="row pga">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row pga">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Parking Officer" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
@@ -292,44 +371,56 @@ include_once 'sidenav.php';
                     <?php
                     while ($row = $this->trainers->fetch_assoc()) {
                     ?>
-                        <article class="row mlb">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row nfl">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li>
+                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                        &emsp;
+                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-calendar-check"></i></span>
+                                    </li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Trainer" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
                 <?php
                 }
                 ?>
-                <!-- Techinition -->
+                <!-- Techinician -->
                 <?php
                 if ($this->technicians->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->technicians->fetch_assoc()) {
                     ?>
-                        <article class="row nfl">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row bfg">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Technician" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
@@ -342,19 +433,27 @@ include_once 'sidenav.php';
                     <?php
                     while ($row = $this->treaters->fetch_assoc()) {
                     ?>
-                        <article class="row nhl">
-                            <ul>
-                                <li><a href="#"><?php echo $row["employee_id"] ?></a><span class="small">(update)</span></li>
-                                <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
-                                <li><?php echo $row["contact_no"] ?></li>
-                                <li><?php echo $row["email"] ?></li>
-                                <li><?php echo $row["start_date"] ?></li>
-                                <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                            </ul>
-                            <!-- <ul class="more-content">
-                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                            </ul> -->
-                        </article>
+                        <span id="searchrow">
+                            <article class="row mba">
+                                <ul>
+                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                    <li><?php echo $row["contact_no"] ?></li>
+                                    <li><?php echo $row["email"] ?></li>
+                                    <li>
+                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                        &emsp;
+                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-calendar-check"></i></span>
+                                    </li>
+                                </ul>
+                                <ul class="more-content">
+                                    <li>
+                                        <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
+                                        <span style="padding-right: 20px;">Job Title : <?= "Treater" ?></span>
+                                    </li>
+                                </ul>
+                            </article>
+                        </span>
                     <?php
                     }
                     ?>
@@ -398,7 +497,7 @@ include_once 'sidenav.php';
                     },
                     title: {
                         display: true,
-                        text: 'Employability Rate',
+                        text: 'Growth of Employees by Year',
                         fontSize: 25
                     },
                 },
