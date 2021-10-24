@@ -346,12 +346,18 @@ input[type=text]{
 input[type=password]{
     border: 1px solid #ccc;
     padding: 10px 15px;
-
 }
 input[type=email]{
   border: 1px solid #ccc;
   padding: 10px 15px;
-
+}
+input[type=date]{
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+}
+select{
+  border: 1px solid #ccc;
+  padding: 5px;
 }
 .hawlockbody input[type=submit] {
     background-color: #2a225a;
@@ -637,6 +643,81 @@ input[type=email]{
 
 
 /* Start of Admin Styles */
+/* home page styles */
+#serverstatus {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#serverstatus>div {
+  margin: 0px 10px;
+  text-align: center;
+}
+
+#serverstatus h4 {
+  padding: 10px;
+}
+
+#income {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#income>div:nth-child(1) {
+  grid-column: 1;
+}
+
+#income>div:nth-child(2) {
+  grid-column: 2;
+}
+
+#serviceusage {
+  display: grid;
+}
+
+#serviceusage>div {
+  margin: 0px 5px;
+}
+
+#serviceusage>div:nth-child(1) {
+  grid-column: 1;
+}
+
+#serviceusage>div:nth-child(2) {
+  grid-column: 2;
+}
+
+#earning {
+  padding: 10px;
+}
+
+#serviceusage {
+  padding: 10px;
+}
+
+#income div {
+  margin-bottom: 0px;
+}
+
+#income div>h4 {
+  padding-bottom: 0px !important;
+}
+
+#income div>div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#income div>div>img {
+  padding: 10px;
+  width: 50%;
+}
+/* End of home page styles */
+
 /* Announcement Styles */
 .sidenavform {
   height: 100%;
@@ -745,7 +826,7 @@ input[type=email]{
   margin-right: 20px;
   margin-bottom: 20px;
 }
-
+/* End of announcement styles */
 /* Employee Styles */
 .divPopupModel {
   flex-direction: column;
@@ -797,9 +878,19 @@ input[type=email]{
 
 #model.close {
   animation: close 0.5s forwards;
+  z-index: 2;
 }
 
-/* Home page styles */
+#addShiftModel.open {
+  animation: open 0.5s forwards;
+  z-index: 2;
+}
+
+#addShiftModel.close {
+  animation: close 0.5s forwards;
+  z-index: 2;
+}
+
 @keyframes open {
   0% {
       transform: translate(-50%, -50%) scale(0);
@@ -842,6 +933,18 @@ input[type=email]{
   0% {
       transform: translate(-50%, -50%) scale(1);
   }
+}
+
+#addShiftModel{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 2rem 5rem 0 #00000040;
+  width: fit-content;
+  padding: 1rem;
 }
 
 .btnAddEmployee i {
@@ -947,9 +1050,10 @@ input[type=email]{
 
 .hawlockbody {
   align-items: baseline;
-
 }
 
+
+/* Home page styles */
 .leftPanel {
   padding: 10px;
   border-right: 1px solid #c0bcbc;
@@ -1169,11 +1273,11 @@ input[type=email]{
   justify-content: center;
   align-items: center;
   width: 150px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 66%);
+  box-shadow: 0 4px 8px 0 rgb(61 38 193);
 }
 
 #usersummary .user:hover {
-  box-shadow: 0 8px 16px 0 rgba(0 0 0 / 66%);
+  box-shadow: 0 8px 16px rgb(61 38 193);
 }
 
 #usersummary .employee {
@@ -1203,8 +1307,9 @@ input[type=email]{
 }
 
 #upactivities{
-  grid-column: 1 /span 2;
+  grid-column: 1 /span 3;
 }
+
 #upactivities h4{
   padding-bottom: 5px;
 }
@@ -1215,6 +1320,34 @@ input[type=email]{
 
 #upactivities div>label {
   margin-right: 15px;
+}
+
+.formDelete{
+  width: 250px;
+}
+
+.formDelete>div:nth-child(1){
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.formDelete>div:nth-child(2){
+  text-align: center;
+}
+
+.formDelete .btnRed{
+  background-color: #e34c4c !important;
+}
+
+.formDelete .btnRed:hover{
+  background-color: #db2323 !important;
+  cursor: pointer;
+}
+
+.formDelete label{
+  font-weight: 600;   
 }
 /* End of Admin user view styles */
 
@@ -1248,11 +1381,11 @@ input[type=email]{
   justify-content: center;
   align-items: center;
   width: 150px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 66%);
+  box-shadow: 0 4px 8px 0 rgb(61 38 193);
 }
 
 #employeeSummary .employee:hover{
-  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 66%);
+  box-shadow: 0 8px 16px rgb(61 38 193);
 }
 
 
@@ -1427,6 +1560,31 @@ input[type=email]{
 .servicesearch i {
   padding: 15px 20px 0px 5px;
 }
+
+.formEdit {
+  width: 275px;
+}
+
+.formEdit label {
+  font-weight: 600;
+}
+
+.formEdit>div:nth-child(1) {
+  text-align: center;
+}
+
+.formEdit>div div {
+  width: fit-content;
+  margin: auto;
+}
+
+.formEdit>div:nth-child(3) {
+  text-align: center;
+}
+
+.formEdit>div {
+  margin-bottom: 10px;
+}
 /* End of Admin service view  */
 
 /* //////////////////////////////////////////////// */
@@ -1566,7 +1724,7 @@ input[type=email]{
   padding: 0px;
   padding-left: 30px;
   padding-right: 10px;
-  font-size: 15px;
+  font-size: 10px;
   color: #1d6e4b;
   float: right;
 }
@@ -1579,8 +1737,15 @@ input[type=email]{
 }
 
 .row i:hover {
-  color: crimson;
   cursor: pointer;
+}
+
+.row .model-Btn1 i:hover{
+  color: crimson;
+}
+
+.row .model-Btn2 i:hover{
+  color: rgb(14, 161, 206);
 }
 /* End of user view styles */
 /* End of Admin Styles */
@@ -1735,6 +1900,7 @@ input[type=email]{
 
 #deleteModel.close {
   animation: close 0.5s forwards;
+  z-index: 2;
 }
 
 #editModel.open {
@@ -1744,6 +1910,7 @@ input[type=email]{
 
 #editModel.close {
   animation: close 0.5s forwards;
+  z-index: 2;
 }
 
 .closebtn {
@@ -1819,7 +1986,7 @@ input[type=email]{
 /* End of manage Reseervation  */
 /* End of Manager styles */
 /* Table Styles */
-.nfl a,.mlb a,.nhl a,.pga a {
+.nfl a,.mlb a,.nhl a,.pga a,.bfg a,.mba a {
   text-decoration: none;
   transition: color 0.2s ease-out;
 }
@@ -1854,6 +2021,22 @@ input[type=email]{
 
 .pga a:hover {
   color: #c33d17;
+}
+
+.bfg a {
+  color: #1ccf52;
+}
+
+.bfg a:hover {
+  color: #22b14d;
+}
+
+.mba a {
+  color: #d91393;
+}
+
+.mba a:hover {
+  color: #a72d7c;
 }
 
 /* wrapper */
@@ -2002,6 +2185,22 @@ input[type=email]{
 
 .pga:hover {
   border-left: 3px solid #eb7655;
+}
+
+.bfg {
+  border-left: 3px solid #1d833d;
+}
+
+.bfg:hover {
+  border-left: 3px solid #22b14d;
+}
+
+.mba {
+  border-left: 3px solid #8a0e5e;
+}
+
+.mba:hover {
+  border-left: 3px solid #a72d7c;
 }
 
 /* row one - fadeIn */
@@ -2758,5 +2957,22 @@ input:checked + .slider:before {
 
   .rightPanel {
     grid-column: 1/span 3;
+    display: flex;
+    margin: auto; 
+  }
+
+  .holdAccount{
+    margin: 0px 20px;
+  }
+
+  .activeUsers{
+    margin: 0px 20px;
+  }
 }
+
+@media (max-width: 800px) {
+  .serviceSummary{
+    display: flex;
+    flex-direction: column;
+  }
 }
