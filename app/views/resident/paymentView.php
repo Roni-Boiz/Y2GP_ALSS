@@ -43,7 +43,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Last Payments</h3>
+                            <h3>Last Payments . . . . .</h3>
                         </div>
                         <?php
                         if ($this->pay->num_rows > 0) { 

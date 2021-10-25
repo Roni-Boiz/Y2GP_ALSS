@@ -7,13 +7,13 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Bill <span id="city"></span></h1>
+            <h1 id="title">BILL <span id="city"></span></h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
 
             <div id="employeeCard" style="grid-column:1/span 3">
                 <div class="staffDetails">
-                    <h4>Your Bills - <?php echo date('F') ?></h4>
+                    <h4>Your Bills - <?php echo $this->y ?></h4>
                     <div class="card" id="employeeSummary">
                         
                         <section class="wrapper" style="margin:auto">
@@ -46,11 +46,6 @@ include_once 'sidenav.php';
                                 </span>
                                 <?php
                                 }
-                                ?>
-                            <?php
-                            } else {
-                                echo "0 results";
-                            }
                             
                             $row1 = $this->billtotal->fetch_assoc()?>
                             <main class="row title">
@@ -59,17 +54,16 @@ include_once 'sidenav.php';
                                     <li><?php echo $row1["total"]?></li>
                                 </ul>
                             </main>
-                        </section>
-                        
-                            
-                        
-
+                        </section><?php
+                            } else {
+                                echo "No bills";
+                            }?>
                     </div>
                 </div>
 
                 <div class="staffPlotDetaills card">
                 <h4>Previous Bills</h4>
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="Bill" class="reservationtime" method="POST">
                         <div id="">
                             <label>Year</label><br>
                             <select name="year" class="input-field">
@@ -84,7 +78,7 @@ include_once 'sidenav.php';
                                 <!-- to get time slots -->
                                 <?php
                                 for ($i = 0; $i < 12; $i++) {
-                                    $time = strtotime(sprintf('%d months', $i));
+                                    $time = strtotime(sprintf('%02d months', $i));
                                     $label = date('F', $time);
                                     $value = date('n', $time); ?>
                                     <option><?php echo $value; ?></option>

@@ -79,6 +79,11 @@ include_once('sidenav.php');
                             </div>
                             <hr>
                             <div>
+                                <label>Apartment No: </label>
+                                <label><?php echo $row["apartment_no"] ?></label>
+                            </div>
+                            <hr>
+                            <div>
                                 <label>Email : </label>
                                 <label><?php echo $row["email"] ?></label>
                             </div>

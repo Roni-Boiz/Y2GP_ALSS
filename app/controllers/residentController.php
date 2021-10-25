@@ -93,8 +93,18 @@ class residentController extends controller{
 
     public function bill(){
         $id=$_SESSION['userId'];
-        $this->view->bill=$this->model->bill($id);
-        $this->view->billtotal=$this->model->billtotal($id);
+        // particular month
+        if(isset($_POST["month"]) && isset($_POST["year"])){
+            $this->view->bill=$this->model->bill($id,$_POST["year"],$_POST["month"]);
+            // convert-number-to-month-name
+            $this->view->y=$_POST["year"]." ".date("F", mktime(0, 0, 0,$_POST["month"], 10));;
+            $this->view->billtotal=$this->model->billtotal($id,$_POST["year"],$_POST["month"]);
+            // this month
+        }else{
+            $this->view->bill=$this->model->bill($id,date('Y'),date('m'));
+            $this->view->y=date('Y')." ".date('F');
+            $this->view->billtotal=$this->model->billtotal($id,date('Y'),date('m'));
+        }
         $this->view->render('resident/billView');
     }
     
@@ -107,6 +117,8 @@ class residentController extends controller{
     }
 
     public function maintenence(){
+        $id=$_SESSION['userId'];
+        $this->view->latest=$this->model->latestmaintenence($id);
         $this->view->render('resident/maintenenceView');
     }
 
@@ -115,6 +127,12 @@ class residentController extends controller{
     }
 
     public function visitor(){
+        if(isset($_POST["name"]) && isset($_POST["vdate"]) && isset($_POST["description"]) ){
+            $des=$_POST["description"];
+            $vdate=$_POST["vdate"];
+            $name=$_POST["name"];
+            $this->model->requestVisitor($name,$vdate,$des);
+        }
         $this->view->render('resident/visitorView');
     }
     public function getNotification(){

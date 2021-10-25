@@ -59,6 +59,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user.png" alt="user" />
                                 <div class="detail-info">
                                     <h5>Receptionist Desk</h5>
+                                    <small>Hawlock City</small><br>
                                     <small>011-145872</small>
                                 </div>
                             </div>
@@ -68,6 +69,16 @@ include_once 'sidenav.php';
                     <div class="activeUsers">
                         <div class="head">
                             <h3>Privacy Policy</h3>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                            </div>
                         </div>
                         <div class="detail">
                             <div class="detail-info">

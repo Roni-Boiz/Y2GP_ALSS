@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                             <div>
                                 <div>
                                     <label>Vehicle No</label><br>
-                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  ?>>
+                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  echo "AAA123" ?>>
                                     <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
                                 </div>
 
@@ -74,7 +74,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Outgoing . . .</h3>
+                            <h3>Outgoing Vehicles. . .</h3>
                         </div>
                         <div class="detail">
                             <div>
@@ -97,7 +97,7 @@ include_once 'sidenav.php';
                     <br>
                     <div class="activeUsers">
                         <div class="head">
-                            <h3>OverDue</h3>
+                            <h3>OverDue Vehicles</h3>
                         </div>
                         <div class="detail">
                             <div class="detail-info">

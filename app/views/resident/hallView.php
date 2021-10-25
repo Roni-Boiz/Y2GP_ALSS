@@ -51,7 +51,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Upcoming Functions</h3>
+                            <h3>Upcoming Functions. . .</h3>
                         </div>
                         <div class="detail">
                             <div>
@@ -74,7 +74,7 @@ include_once 'sidenav.php';
                     <br>
                     <div class="activeUsers">
                         <div class="head">
-                            <h3>Upcoming Meetings</h3>
+                            <h3>Upcoming Meetings. . .</h3>
                         </div>
                         <div class="detail">
                             <div class="detail-info">
