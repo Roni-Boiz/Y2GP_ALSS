@@ -94,6 +94,80 @@ include_once 'sidenav.php';
             Reservations
         </h3>
     </div>
+    <!-- hkjljlklkjlkj -->
+
+    <section class="wrapper">
+                        <main class="row title">
+                            <ul>
+                                <li>User ID</li>
+                                <li>User Name</li>
+                                <li>Type</li>
+                                <li>Hold</li>
+                                <li>Remove User</li>
+                            </ul>
+                        </main>
+                        <?php
+                        if ($this->users->num_rows > 0) { ?>
+                            <?php
+                            while ($row = $this->users->fetch_assoc()) {
+                                if ($row["type"] == 'resident') {
+                            ?>
+                                    <article class="row pga">
+                                        <ul>
+                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
+                                            <li><?php echo $row["user_name"] ?></li>
+                                            <li><?php echo $row["type"] ?></li>
+                                            <li><?php echo $row["hold"] ?></li>
+                                            <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
+                                        </ul>
+                                        <!-- <ul class="more-content">
+                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                    </ul> -->
+                                    </article>
+                                <?php
+
+                                } else if ($row["type"] == 'admin') {
+                                ?>
+                                    <article class="row nhl">
+                                        <ul>
+                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
+                                            <li><?php echo $row["user_name"] ?></li>
+                                            <li><?php echo $row["type"] ?></li>
+                                            <li><?php echo $row["hold"] ?></li>
+                                            <li><i class="fa fa-trash"></i></li>
+                                        </ul>
+                                        <!-- <ul class="more-content">
+                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                    </ul> -->
+                                    </article>
+                                <?php
+                                } else {
+                                ?>
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
+                                            <li><?php echo $row["user_name"] ?></li>
+                                            <li><?php echo $row["type"] ?></li>
+                                            <li><?php echo $row["hold"] ?></li>
+                                            <li><i class="fa fa-trash"></i></li>
+                                        </ul>
+                                        <!-- <ul class="more-content">
+                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                    </ul> -->
+                                    </article>
+                                <?php
+                                }
+                                ?>
+
+                            <?php
+                            }
+                            ?>
+                        <?php
+                        }
+                        ?>
+                    </section>
+
+    <!-- jkjkhkhjkhj -->
     <div class="leftList">
         <p>08:00-09:00 - 0</p>
         <p>09:00-10:00 - 1</p>
