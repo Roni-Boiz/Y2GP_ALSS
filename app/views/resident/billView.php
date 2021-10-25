@@ -47,15 +47,37 @@ include_once 'sidenav.php';
                                 <?php
                                 }
                             
-                            $row1 = $this->billtotal->fetch_assoc()?>
+                            $row1 = $this->billtotal->fetch_assoc();
+                            $row2 = $this->balanceforward->fetch_assoc()?>
                             <main class="row title">
                                 <ul>
                                     <li>Total</li>
                                     <li><?php echo $row1["total"]?></li>
                                 </ul>
                             </main>
-                        </section><?php
-                            } else {
+                            <main class="row title">
+                                <ul>
+                                    <li>B/F</li>
+                                    <li><?php echo $row2["balance"]?></li>
+                                </ul>
+                                <ul>
+                                    <li><?php echo date('Y-m-d');?></li>
+                                </ul>
+                            </main>
+                            <main class="row title">
+                                <ul>
+                                    <?php if($row2["balance"]-$row1["total"]>0){?>
+                                        <li>B/F</li>
+                                        <li><?php echo $row2["balance"]-$row1["total"]?></li>
+                                    <?php }else{?>
+                                        <li>Total Payable</li>
+                                        <li><?php echo $row1["total"]-$row2["balance"]?></li>
+                                    <?php } ?>
+                                </ul>
+                            </main>
+                        </section>
+                        <?php
+                            }else{
                                 echo "No bills";
                             }?>
                     </div>
