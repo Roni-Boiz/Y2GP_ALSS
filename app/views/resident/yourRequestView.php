@@ -54,7 +54,7 @@ include_once 'sidenav.php';
                                         <ul class="more-content">
                                             <li>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["request_date"] ?></span>
-                                                <span style="padding-right: 20px;">Requested Time : <?php echo $row["request_time"]  ?></span>
+                                                <span style="padding-right: 20px;">Description : <?php echo $row["description"]  ?></span>
                                             </li>
                                         </ul>
 

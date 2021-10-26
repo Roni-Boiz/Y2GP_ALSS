@@ -122,6 +122,11 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function reqMaintenence($type,$pdate,$des){
+        $date = date('Y-m-d H:i:s');
+        $sql="INSERT INTO technical_maintenence_request(request_date,preferred_date,category,description,resident_id) VALUES('$date','$pdate','$type','$des','1')";
+        $this->conn->query($sql);
+    }
     public function laundry($id){
         $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') ";
         $result = $this->conn->query($sql);

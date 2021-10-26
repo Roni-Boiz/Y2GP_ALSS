@@ -11,7 +11,7 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
-                <div class="leftPanel">
+                <div class="leftPanel" >
                     <div>
                         <h4>Complaints</h4>
                         <div class="card" id="usersummary">
@@ -29,7 +29,7 @@ include_once 'sidenav.php';
                     </div>
                 </div>
 
-                <div class="rightPanel">
+                <div class="rightPanel" >
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Contact Us</h3>
@@ -72,22 +72,22 @@ include_once 'sidenav.php';
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                     </div>
