@@ -22,6 +22,7 @@ if ($timestamp === false) {
     $timestamp = strtotime($ym . '-01');
 }
 $idCount= 1;
+// $idDate = date('Y-m-d', $timestamp);
 
 // Today (Format:2018-08-8)
 $today = date('Y-m-j');
@@ -53,7 +54,8 @@ for ($day = 1; $day <= $day_count; $day++, $str++, $idCount++) {
     if ($today == $date) {
         $week .= '<td id="'. $idCount.'" class="today" onclick="clickDate('. $idCount.')">';
     } else {
-        $week .= '<td id="'. $idCount.'" onclick="clickDate('. $idCount.')" >';
+        
+        $week .= '<td id="'.$idDate.'" onclick="clickDate('.$idDate.')" >';
     }
     $week .= $day . '</td>';
 
@@ -70,7 +72,11 @@ for ($day = 1; $day <= $day_count; $day++, $str++, $idCount++) {
 
         $week = '';
     }
+$idDate = date('Y-m', strtotime('-1 month', $timestamp));
+
 }
+
+
 ?>
 
 <style>
@@ -107,6 +113,10 @@ for ($day = 1; $day <= $day_count; $day++, $str++, $idCount++) {
             background-color: ghostwhite;
         }
 
+        .canvas{
+            grid-column: 1 span/3;
+        }
+
        
 </style>
 </head>
@@ -117,6 +127,8 @@ for ($day = 1; $day <= $day_count; $day++, $str++, $idCount++) {
     <div id="hb" class="hawlockbody animate-bottom" > 
     
 
+    <?php echo $idDate; ?>
+   
     <div class="calenderContainer">
         <ul class="list-inline">
             <li class="list-inline-item"><a href="?ym=<?= $prev; ?>" class="button btn-link">&lt; prev</a></li>
@@ -148,6 +160,47 @@ for ($day = 1; $day <= $day_count; $day++, $str++, $idCount++) {
 
     <div class="canvas">
 
+    <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    
+                                    <li>Reservation ID</li>
+                                    <li>Reservation Date</li>
+                                    <li>Start Time</li>
+                                    <li>End Time</li>
+                                </ul>
+                            </main>
+
+                            <?php
+                            if ($this->reserve->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->reserve->fetch_assoc()) {
+                                ?>
+                                    <article id="<?php echo $row["date"];?>" class="row mlb">
+                                        <ul>
+                                            
+                                            <li><?php echo $row["reservation_id"]; ?></li>
+                                            <li><?php echo $row["date"]; ?></li>
+                                            <li><?php echo $row["start_time"] ?></li>
+                                            <li><?php echo $row["end_time"]; ?></li>
+
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
+                                            </li>
+                                        </ul>
+
+                                    </article>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
     </div>
 
 

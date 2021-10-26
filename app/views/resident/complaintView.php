@@ -11,17 +11,17 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
-                <div class="leftPanel">
+                <div class="leftPanel" >
                     <div>
                         <h4>Complaints</h4>
                         <div class="card" id="usersummary">
                             <div>
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="complaint" class="reservationtime" method="post">
                                     <div>
                                         <label>Complaint</label><br>
                                         <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..."><br>
                                         your complaint will be considered soon.. thank you for your feedback<br>
-                                        <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2">
+                                        <input class="purplebutton"  type="submit" value="Send" id="model-btn" style="grid-column:2" >
                                     </div>
                                 </form>
                             </div>
@@ -29,7 +29,7 @@ include_once 'sidenav.php';
                     </div>
                 </div>
 
-                <div class="rightPanel">
+                <div class="rightPanel" >
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Contact Us</h3>
@@ -59,6 +59,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user.png" alt="user" />
                                 <div class="detail-info">
                                     <h5>Receptionist Desk</h5>
+                                    <small>Hawlock City</small><br>
                                     <small>011-145872</small>
                                 </div>
                             </div>
@@ -71,12 +72,22 @@ include_once 'sidenav.php';
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                         <div class="detail">
                             <div class="detail-info">
-                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div class="detail-info">
+                                <h5>Lorem ipsum dolor, sit amet consectetur corporis.a suscipit <br>quod doloribus consequatur officia! Dolore consectetur delectus nobis.</h5>
                             </div>
                         </div>
                     </div>

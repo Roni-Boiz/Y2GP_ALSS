@@ -155,12 +155,12 @@ class receptionistModel extends model {
         public function readTodayVisitor(){
             date_default_timezone_set("Asia/Colombo");
             $date= date("Y-m-d");
-            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE (arrive_date ='$date' AND arrive_time IS NULL)";
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE (arrive_date ='$date' AND arrive_time IS NULL)";
             $result = $this->conn->query($sql);   
             return $result;
         }
         public function readPreviousVisitor(){
-            $sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ";
+            $sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             $result = $this->conn->query($sql);   
             return $result;
         }
@@ -215,7 +215,7 @@ class receptionistModel extends model {
         $this->conn->query($sql);
     }
     public function getReached(){
-        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC LIMIT 20";
+        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }

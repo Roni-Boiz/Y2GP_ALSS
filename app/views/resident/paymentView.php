@@ -25,11 +25,12 @@ include_once 'sidenav.php';
                             </div>
                             <div class="description">
                                 <form action="#" class="reservationtime" method="GET">
+                                    
                                     <div>
                                         <label>Total Payable</label><br>
-                                        <input type="text" name="payable" class="input-field" value="10000.00" READONLY><br>
+                                        <input type="text" name="payable" class="input-field" value="2000.00" READONLY><br>
                                         <label>Last Payment</label><br>
-                                        <input type="text" name="lastpay" class="input-field" value="2000.00" READONLY><br>
+                                        <input type="text" name="lastpay" class="input-field" value="5000.00" READONLY><br>
                                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
                                     </div>
                                 </form>
@@ -42,18 +43,17 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Last Payments</h3>
+                            <h3>Last Payments . . . . .</h3>
                         </div>
                         <?php
-                        if ($this->pay->num_rows > 0) { ?>
-                            <?php
+                        if ($this->pay->num_rows > 0) { 
                             while ($row = $this->pay->fetch_assoc()) {
                             ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
-                                            <h5><?php echo $row["fee"]." LKR"; ?></h5>
-                                            <small><?php echo $row["date"]; ?></small>
+                                            <h5><?php echo $row["amount"]." LKR"; ?></h5>
+                                            <small><?php echo $row["dateaffect"]; ?></small>
                                         </div>
                                     </div>
                                 </div>

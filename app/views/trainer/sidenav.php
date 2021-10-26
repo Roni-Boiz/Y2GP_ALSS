@@ -24,7 +24,7 @@
                             <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                         </ul>    
-                            <li><a>id</a></li>
+                            <li><a><?php echo  $_SESSION['userName'];?></a></li>
                             <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
                     </li>
                 </ul>
@@ -36,8 +36,7 @@
             <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
             
                 <li><a href="reservations"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
-                
-
+                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>ADD SCHEDULE</a></li>
             </ul>
         </nav>
 

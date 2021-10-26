@@ -22,7 +22,7 @@ class trainerController extends controller{
     }
 
     public function reservations(){
-        $this->view->ann = $this->model->getAnnouncement();
+        $this->view->reserve = $this->model->getReservation();
         $this->view->render('trainer/checkGymReservationsView');
     }
 
@@ -50,6 +50,10 @@ class trainerController extends controller{
         $rnpw=$_POST["rnpw"];
         $this->model->changePassword($opw,$npw,$rnpw);
         $this->profile();
+    }
+    public function addSchedule(){
+
+        $this->view->render('trainer/addScheduleView');
     }
 
 }

@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="maintenence" class="reservationtime" method="POST">
 
                                     <label for="type">Type</label><br>
                                     <select name="type" class="input-field">
@@ -36,7 +36,7 @@ include_once 'sidenav.php';
                                     </select><br>
                                     <div id="">
                                         <label>Prefered Date</label><br>
-                                        <input type="date" name="date" class="input-field"><br>
+                                        <input type="date" name="pdate" class="input-field"><br>
                                         <label>Description</label><br>
                                         <input type="textarea" name="description" id="description"><br>
                                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
@@ -51,24 +51,30 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Upcoming Activities</h3>
+                            <h3>Upcoming Activities . . .</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-28 - 16:00</h5>
-                                    <small>AC Maintenence</small>
+                        
+                        <?php
+                        if ($this->latest->num_rows > 0) { ?>
+                            <?php
+                            while ($row = $this->latest->fetch_assoc()) {
+                            ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["preferred_date"]; ?></h5>
+                                            <small><?php echo $row["category"]; ?></small><br>
+                                            <small><?php echo $row["description"]; ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-30 - 10:00</h5>
-                                    <small>Water Supply</small>
-                                </div>
-                            </div>
-                        </div>
+                            <?php
+                            } ?>
+
+                        <?php
+                        } else {
+                            echo "No bills";
+                        } ?>
 
                     </div>
                 </div>
