@@ -79,4 +79,39 @@ class managerModel extends model {
         return $this->conn->query($sql);  
     }
 
+    public function getTodayPendingTechnicalReq(){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' AND technical_maintenence_request.preferred_date=CURDATE() ORDER BY preferred_date,preferred_time ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllPendingTechnicalReq(){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' ORDER BY preferred_date,preferred_time ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllInprogressTechnicalReq(){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='I' ORDER BY preferred_date,preferred_time ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllCompletedTechnicalReq(){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='C' ORDER BY preferred_date,preferred_time ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllDeclinedTechnicalReq(){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='D' ORDER BY request_id DESC";
+        return $this->conn->query($sql);
+    }
+
+    public function getUpcommingRequests($date){
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,user_account.profile_pic FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN user_account ON resident.user_id=user_account.user_id WHERE state='P' AND preferred_date<='{$date}' ORDER BY preferred_date,preferred_time ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getUpcommingHallReservations($date){
+        $sql = "SELECT hall_reservation.*,resident.fname,resident.lname,resident.apartment_no,user_account.profile_pic FROM hall_reservation LEFT JOIN resident ON hall_reservation.resident_id=resident.resident_id LEFT JOIN user_account ON resident.user_id=user_account.user_id WHERE cancelled_time IS NULL AND date>=CURDATE() AND date<='{$date}' ORDER BY date,start_time ASC";
+        return $this->conn->query($sql);
+    }
+
 }
