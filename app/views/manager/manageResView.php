@@ -45,127 +45,138 @@ include_once 'sidenav.php';
                                     <li>Duration</li>
                                     <li>Fee (Rs.)</li>
                                     <li>Reserved Date</li>
-                                    <li>Cancel / Update</li>
+                                    <li>Action</li>
                                 </ul>
                             </main>
                             <!-- Today Hall -->
                             <?php
-                            if ($this->todayHallRes->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->todayHallRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row pga">
-                                        <ul>
-                                            <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <li>
-                                                <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
-                                            </li>
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
-                                <?php
-                                }
-                                ?>
-                            <?php
-                            }
-                            ?>
-                            <!-- Today Fitness -->
-                            <?php
-                            if ($this->todayFitnessRes->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->todayFitnessRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row nhl">
-                                        <ul>
-                                            <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <li>
-                                                <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
-                                                &emsp;
-                                                <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
-                                            </li>
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : Fitness</span>
-                                                <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                            if ($this->todayHallRes->num_rows || $this->todayFitnessRes->num_rows || $this->todayTreatmentRes->num_rows) {
+                                if ($this->todayHallRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->todayHallRes->fetch_assoc()) {
+                                    ?>
+                                        <article class="row pga">
+                                            <ul>
+                                                <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?></li>
+                                                <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
+                                                <?php
+                                                $stime =  $row["start_time"];
+                                                $etime =  $row["end_time"];
+                                                $stime = date('h:i A', strtotime($stime));
+                                                $etime = date('h:i A', strtotime($etime));
+                                                ?>
+                                                <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                <?php
+                                                $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                ?>
+                                                <li><?php echo $datetime ?></li>
+                                                <li>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                </li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
+                                                    <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "H" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    <?php
+                                    }
+                                    ?>
                                 <?php
                                 }
                                 ?>
-                            <?php
-                            }
-                            ?>
-                            <!-- Today Treatement -->
-                            <?php
-                            if ($this->todayTreatmentRes->num_rows > 0) { ?>
+                                <!-- Today Fitness -->
                                 <?php
-                                while ($row = $this->todayTreatmentRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <li>
-                                                <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
-                                                &emsp;
-                                                <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
-                                            </li>
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                                if ($this->todayFitnessRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->todayFitnessRes->fetch_assoc()) {
+                                    ?>
+                                        <article class="row nhl">
+                                            <ul>
+                                                <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
+                                                <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
+                                                <?php
+                                                $stime =  $row["start_time"];
+                                                $etime =  $row["end_time"];
+                                                $stime = date('h:i A', strtotime($stime));
+                                                $etime = date('h:i A', strtotime($etime));
+                                                ?>
+                                                <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                <?php
+                                                $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                ?>
+                                                <li><?php echo $datetime ?></li>
+                                                <li>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    &emsp;
+                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
+                                                </li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="margin-right: 20px;">Reservation Type : Fitness</span>
+                                                    <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "F" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    <?php
+                                    }
+                                    ?>
                                 <?php
                                 }
                                 ?>
+                                <!-- Today Treatement -->
+                                <?php
+                                if ($this->todayTreatmentRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->todayTreatmentRes->fetch_assoc()) {
+                                    ?>
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
+                                                <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
+                                                <?php
+                                                $stime =  $row["start_time"];
+                                                $etime =  $row["end_time"];
+                                                $stime = date('h:i A', strtotime($stime));
+                                                $etime = date('h:i A', strtotime($etime));
+                                                ?>
+                                                <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                <?php
+                                                $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                ?>
+                                                <li><?php echo $datetime ?></li>
+                                                <li>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    &emsp;
+                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
+                                                </li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
+                                                    <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "T" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    <?php
+                                    }
+                                    ?>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <ul>
+                                    <li style="text-align: center;">No Reservations Today</li>
+                                </ul>
                             <?php
                             }
                             ?>
@@ -173,7 +184,7 @@ include_once 'sidenav.php';
                     </div>
                 </div>
                 <div class="reservationsearch">
-                    <input type="text" name="search" placeholder="Search.." />
+                    <input type="text" name="search" placeholder="Search.." class="mySearch" />
                     <div>
                         <span style="display: inline-block;"> Hall <i class="fa fa-square" style="color: #EB7655;"></i></span>
                         <span style="display: inline-block;"> Fitness <i class="fa fa-square" style="color: #AA9150;"></i></span>
@@ -192,183 +203,200 @@ include_once 'sidenav.php';
                                     <li>Duration</li>
                                     <li>Fee (Rs.)</li>
                                     <li>Reserved Date</li>
-                                    <li>Update</li>
+                                    <li>Action</li>
                                 </ul>
                             </main>
                             <!-- Hall -->
                             <?php
-                            if ($this->allHallRes->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->allHallRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row pga">
-                                        <ul>
-                                            <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <?php
-                                            if (empty($row['cancelled_time'])) {
-                                                if (date('Y-m-d') <= $row["date"]) {
-                                            ?>
-                                                    <li>No Permission</li>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <li>Completed</li>
-                                                <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <li>
+                            if ($this->allHallRes->num_rows || $this->allFitnessRes->num_rows || $this->allTreatmentRes->num_rows) {
+                                if ($this->allHallRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->allHallRes->fetch_assoc()) {
+                                    ?>
+                                        <span id="searchrow">
+                                            <article class="row pga">
+                                                <ul>
+                                                    <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?></li>
+                                                    <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
                                                     <?php
-                                                    $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                    $stime =  $row["start_time"];
+                                                    $etime =  $row["end_time"];
+                                                    $stime = date('h:i A', strtotime($stime));
+                                                    $etime = date('h:i A', strtotime($etime));
                                                     ?>
-                                                    <span>Cancelled : <?php echo $datetime ?></span>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
+                                                    <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                    <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                    <?php
+                                                    $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                    ?>
+                                                    <li><?php echo $datetime ?></li>
+                                                    <?php
+                                                    if (empty($row['cancelled_time'])) {
+                                                        if (date('Y-m-d') <= $row["date"]) {
+                                                    ?>
+                                                            <li>No Permission</li>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <li>Completed</li>
+                                                        <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <li>
+                                                            <?php
+                                                            $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                            ?>
+                                                            <span>Cancelled : <?php echo $datetime ?></span>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                                                </ul>
+                                                <ul class="more-content">
+                                                    <li>
+                                                        <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
+                                                        <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "H" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </span>
+                                    <?php
+                                    }
+                                    ?>
                                 <?php
                                 }
                                 ?>
-                            <?php
-                            }
-                            ?>
-                            <!-- Fitness -->
-                            <?php
-                            if ($this->allFitnessRes->num_rows > 0) { ?>
+                                <!-- Fitness -->
                                 <?php
-                                while ($row = $this->allFitnessRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row nhl">
-                                        <ul>
-                                            <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <?php
-                                            if (empty($row['cancelled_time'])) {
-                                                if (date('Y-m-d') <= $row["date"]) {
-                                            ?>
-                                                    <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <li>Completed</li>
-                                                <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <li>
+                                if ($this->allFitnessRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->allFitnessRes->fetch_assoc()) {
+                                    ?>
+                                        <span id="searchrow">
+                                            <article class="row nhl">
+                                                <ul>
+                                                    <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
+                                                    <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
                                                     <?php
-                                                    $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                    $stime =  $row["start_time"];
+                                                    $etime =  $row["end_time"];
+                                                    $stime = date('h:i A', strtotime($stime));
+                                                    $etime = date('h:i A', strtotime($etime));
                                                     ?>
-                                                    <span>Cancelled : <?php echo $datetime ?></span>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
+                                                    <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                    <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                    <?php
+                                                    $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                    ?>
+                                                    <li><?php echo $datetime ?></li>
+                                                    <?php
+                                                    if (empty($row['cancelled_time'])) {
+                                                        if (date('Y-m-d') <= $row["date"]) {
+                                                    ?>
+                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <li>Completed</li>
+                                                        <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <li>
+                                                            <?php
+                                                            $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                            ?>
+                                                            <span>Cancelled : <?php echo $datetime ?></span>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : Fitness</span>
-                                                <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                                                </ul>
+                                                <ul class="more-content">
+                                                    <li>
+                                                        <span style="margin-right: 20px;">Reservation Type : Fitness</span>
+                                                        <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "F" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </span>
+                                    <?php
+                                    }
+                                    ?>
                                 <?php
                                 }
                                 ?>
-                            <?php
-                            }
-                            ?>
-                            <!-- Treatment -->
-                            <?php
-                            if ($this->allTreatmentRes->num_rows > 0) { ?>
+                                <!-- Treatment -->
                                 <?php
-                                while ($row = $this->allTreatmentRes->fetch_assoc()) {
-                                ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
-                                            <li><?php echo $row["date"] ?></li>
-                                            <?php
-                                            $stime =  $row["start_time"];
-                                            $etime =  $row["end_time"];
-                                            $stime = date('h:i A', strtotime($stime));
-                                            $etime = date('h:i A', strtotime($etime));
-                                            ?>
-                                            <li><?php echo $stime . ' - ' . $etime ?></li>
-                                            <li><?php echo number_format($row["fee"], 2) ?></li>
-                                            <?php
-                                            $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
-                                            ?>
-                                            <li><?php echo $datetime ?></li>
-                                            <?php
-                                            if (empty($row['cancelled_time'])) {
-                                                if (date('Y-m-d') <= $row["date"]) {
-                                            ?>
-                                                    <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <li>Completed</li>
-                                                <?php
-                                                }
-                                            } else {
-                                                ?>
-                                                <li>
+                                if ($this->allTreatmentRes->num_rows > 0) { ?>
+                                    <?php
+                                    while ($row = $this->allTreatmentRes->fetch_assoc()) {
+                                    ?>
+                                        <span id="searchrow">
+                                            <article class="row mlb">
+                                                <ul>
+                                                    <li><?php echo $row["rfname"][0] . ". " . $row["rlname"] ?></li>
+                                                    <li><?php echo date('D, M d, Y', strtotime($row["date"])) ?></li>
                                                     <?php
-                                                    $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                    $stime =  $row["start_time"];
+                                                    $etime =  $row["end_time"];
+                                                    $stime = date('h:i A', strtotime($stime));
+                                                    $etime = date('h:i A', strtotime($etime));
                                                     ?>
-                                                    <span>Cancelled : <?php echo $datetime ?></span>
-                                                </li>
-                                            <?php
-                                            }
-                                            ?>
+                                                    <li><?php echo $stime . ' - ' . $etime ?></li>
+                                                    <li><?php echo number_format($row["fee"], 2) ?></li>
+                                                    <?php
+                                                    $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
+                                                    ?>
+                                                    <li><?php echo $datetime ?></li>
+                                                    <?php
+                                                    if (empty($row['cancelled_time'])) {
+                                                        if (date('Y-m-d') <= $row["date"]) {
+                                                    ?>
+                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <li>Completed</li>
+                                                        <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <li>
+                                                            <?php
+                                                            $datetime = date('Y-m-d h:i A', strtotime($row["cancelled_time"]));
+                                                            ?>
+                                                            <span>Cancelled : <?php echo $datetime ?></span>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                            </li>
-                                        </ul>
-                                    </article>
+                                                </ul>
+                                                <ul class="more-content">
+                                                    <li>
+                                                        <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
+                                                        <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "T" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </span>
+                                    <?php
+                                    }
+                                    ?>
                                 <?php
                                 }
+                            } else {
                                 ?>
+                                <ul>
+                                    <li style="text-align: center;">No Reservations Yet</li>
+                                </ul>
                             <?php
                             }
                             ?>
@@ -378,7 +406,6 @@ include_once 'sidenav.php';
             </div>
 
             <div class="divPopupModel">
-
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="deleteModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
@@ -397,13 +424,11 @@ include_once 'sidenav.php';
                         <div>
                             <input class="purplebutton" type="submit" name="submit" value="Done">
                         </div>
-
                     </form>
                 </div>
             </div>
 
             <div class="divPopupModel">
-
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="editModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
