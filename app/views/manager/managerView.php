@@ -1,10 +1,6 @@
 <?php
 include_once 'sidenav.php';
 ?>
-
-<style>
-
-</style>
 </head>
 
 <body style="background-color: gray; background-image:none;">
