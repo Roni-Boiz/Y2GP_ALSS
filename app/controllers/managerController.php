@@ -28,6 +28,7 @@ class managerController extends controller
     {
         $this->view->profileDetails = $this->model->getProfileDetails($_SESSION['userId']);
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('manager/profileView');
     }
 

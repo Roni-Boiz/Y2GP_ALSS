@@ -25,6 +25,7 @@ class residentController extends controller{
     public function profile(){
         $this->view->users = $this->model->readResident();
         $this->view->members = $this->model->readMembers();
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('resident/profileView');
     }
     // edit profile
