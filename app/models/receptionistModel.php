@@ -240,6 +240,14 @@ class receptionistModel extends model {
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
+
     
 }
 ?>

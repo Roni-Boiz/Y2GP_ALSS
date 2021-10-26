@@ -124,7 +124,7 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                 </div>
-                <div class="rightPanel" style="margin-top:30px">
+                <!-- <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Upcoming Activities . . .</h3>
@@ -143,7 +143,7 @@ include_once 'sidenav.php';
                                             <small><?php echo $row["description"]; ?></small>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                     <?php
                             } ?>
 
