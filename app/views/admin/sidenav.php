@@ -36,28 +36,28 @@
     
         <nav class="sidebar" id="side">
             <div class="search">
-                <i class="fa fa-search"></i>
-                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+                <!-- <i class="fa fa-search"></i> -->
+                <!-- <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category"> -->
             </div>
         
             <ul id="myMenu">  
                 <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
                 
                 <li class="dropdown"><a href="user"><i class="fas fa-user-cog"></i>USERS</a>
-                <ul>
-                    <li ><a href="#"><i class="fas fa-user-plus"></i>ADD USER</a></li>
-                    <li><a href="#"><i class="fas fa-user-times"></i>REMOVE USER</a></li>
-                </ul>
+                <!-- <ul>
+                    <li ><a href="user#"><i class="fas fa-user-plus"></i>ADD USER</a></li>
+                    <li><a href="user#"><i class="fas fa-user-times"></i>REMOVE USER</a></li>
+                </ul> -->
                 </li>
                 <li class="dropdown"><a href="employee"><i class="fas fa-users-cog"></i>EMPLOYEES</a>
-                <ul>
-                    <li><a href="#"><i class="fas fa-user-plus"></i>ADD EMPLOYEES</a></li>
-                    <li><a href="#"><i class="fas fa-users-slash"></i>REMOVE EMPLOYEES</a></li>
-                </ul>
+                <!-- <ul>
+                    <li><a href="employee#"><i class="fas fa-user-plus"></i>ADD EMPLOYEES</a></li>
+                    <li><a href="employee#"><i class="fas fa-users-slash"></i>REMOVE EMPLOYEES</a></li>
+                </ul> -->
                 </li>
                 <li><a href="service"><i class="fas fa-chart-line"></i>UPDATE SERVICE</a></li>
                 <li><a href="announcement"><i class="fa fa-bullhorn" ></i>MAKE ANNOUNCEMENT</a></li>
-                <li><a href="report"><i class="fas fa-chart-pie"  ></i>REPORTS</a></li>
+                <!-- <li><a href="report"><i class="fas fa-chart-pie"  ></i>REPORTS</a></li> -->
                 
             </ul>
         </nav>

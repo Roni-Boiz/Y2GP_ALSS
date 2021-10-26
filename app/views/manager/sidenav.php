@@ -38,24 +38,18 @@
         </div>
 
         <nav class="sidebar" id="side">
-            <div class="search">
+            <!-- <div class="search">
                 <i class="fa fa-search"></i>
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
-            </div>
+            </div> -->
 
             <ul id="myMenu">
                 <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
-
-                <li class="dropdown"><a href="request"><i class="fa fa-th-list"></i>HANDLE REQUESTS </a>
-                    <ul>
-                        <li><a href="#">SUB 1</a></li>
-                        <li><a href="#">SUB 2</a></li>
-                    </ul>
-                </li>
+                <li class="dropdown"><a href="request"><i class="fa fa-th-list"></i>HANDLE REQUESTS </a></li>
                 <li><a href="reservation"><i class="fa fa-handshake"></i>MANAGE RESERVATIONS</a></li>
                 <li><a href="announcement"><i class="fa fa-bullhorn"></i>ANNOUNCEMENT</a></li>
                 <li><a href="complaint"><i class="fa fa-sticky-note"></i>COMPLAINTS</a></li>
-                <li><a href="report"><i class="fas fa-chart-pie"></i>VIEW REPORTS</a></li>
+                <!-- <li><a href="report"><i class="fas fa-chart-pie"></i>VIEW REPORTS</a></li> -->
                 <!-- <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW RESIDENT</a></li> -->
 
 

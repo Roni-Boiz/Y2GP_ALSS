@@ -19,6 +19,8 @@ class managerController extends controller
 
     public function index()
     {
+        $this->view->upcommingReq = $this->model->getUpcommingRequests(date("Y-m-d", strtotime("+1 week")));
+        $this->view->upcommingHallRes = $this->model->getUpcommingHallReservations(date("Y-m-d", strtotime("+1 week")));
         $this->view->render('manager/managerView');
     }
 
@@ -43,11 +45,24 @@ class managerController extends controller
 
     public function request()
     {
+        $this->view->TodayPendingReq = $this->model->getTodayPendingTechnicalReq();
+        $this->view->pendingReq = $this->model->getAllPendingTechnicalReq();
+        $this->view->inprogressReq = $this->model->getAllInprogressTechnicalReq();
+        $this->view->completedReq = $this->model->getAllCompletedTechnicalReq();
+        $this->view->declinedReq = $this->model->getAllDeclinedTechnicalReq();
         $this->view->render('manager/handleReqView');
     }
 
     public function reservation()
     {
+        $this->view->todayHallRes = $this->model->getTodayHallRes();
+        $this->view->todayFitnessRes = $this->model->getTodayFitnessRes();
+        $this->view->todayTreatmentRes = $this->model->getTodayTreatmentRes();
+
+        $this->view->allHallRes = $this->model->getAllHallRes();
+        $this->view->allFitnessRes = $this->model->getAllFitnessRes();
+        $this->view->allTreatmentRes = $this->model->getAllTreatmentRes();
+
         $this->view->render('manager/manageResView');
     }
 

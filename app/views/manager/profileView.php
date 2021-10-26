@@ -34,7 +34,7 @@ include_once('sidenav.php');
                         <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?> required><br>
 
                         <label for="email">Contact Number</label><br>
-                        <input type="text" id="cno" name="cno" class="input-field" value=0<?php echo $row["contact_no"] ?> required><br>
+                        <input type="text" id="cno" name="cno" class="input-field" value=<?php echo $row["contact_no"] ?> required><br>
 
                         <input type="submit" value="Save">
                     </form>
@@ -58,7 +58,7 @@ include_once('sidenav.php');
                             <hr>
                             <div>
                                 <label>Contact Number : </label>
-                                <label>0<?php echo $row["contact_no"] ?></label>
+                                <label><?php echo $row["contact_no"] ?></label>
                             </div>
                             <div style="font-size: small;color: #545d7a;">You currently do not have any ongoing activities</div>
                         </div>
