@@ -66,100 +66,114 @@ include_once 'sidenav.php';
                             }
                             ?>
                         </section>
-                        <div id="tab2" class="tab">
-                            <br>
-                            <div class="search">
-                                <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
-                            </div>
-                            <div style="overflow-x:auto;grid-column:1/span2">
+                    </div>
+                </div>
+                <div id="tab2" class="tab">
+                    <br>
+                    <div class="search">
+                        <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
+                    </div>
+                    <div style="overflow-x:auto;grid-column:1/span2">
 
-                                <!-- reach -->
-                                <section class="wrapper">
-                                    <main class="row title">
-                                        <ul>
-                                            <li>Request Id</li>
-                                            <li>Apartment No</li>
-                                            <li>Type</li>
-                                            <li>Requested Date</li>
-                                            <li>Requested Time</li>
-                                        </ul>
-                                    </main>
-                                    <?php
-                                    if ($this->laundyCleaningRequests->num_rows > 0) { ?>
-                                        <?php
-                                        while ($row2 = $this->laundyCleaningRequests->fetch_assoc()) {
-                                        ?>
-                                            <span id="searchrow">
-                                                <article class="row mlb">
-                                                    <ul>
-                                                        <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
-                                                        <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                                                        <li><?php echo $row2["apartment_no"]; ?></li>
-                                                        <li><?php echo $row2["type"]; ?></li>
-                                                        <li><?php echo $row2["request_date"]; ?></li>
-                                                        <li><?php echo $row2["request_time"]; ?></li>
-                                                    </ul>
-                                                    <ul class="more-content">
-                                                        <li>
-                                                            <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
-                                                        </li>
-                                                    </ul>
-                                                </article>
-                                            </span>
-                                        <?php
-                                        }
-                                        ?>
-                                    <?php
-                                    } else {
-                                        echo "0 results";
-                                    }
-                                    ?>
-                                </section>
-                                <div id="tab3" class="tab">
-                                    <?php
-                                    if ($this->laundyRequests->num_rows > 0) { ?>
-                                        <table class="table1">
-                                            <tr style="background-color:#5747b4">
-                                                <th>Request Id</th>
-                                                <th>Resident Name</th>
-                                                <th>Type</th>
-                                                <th colspan="2">Requested</th>
-                                                <th>Weight</th>
-                                            </tr>
-                                            <tr style="background-color:#5747b4">
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>Date</th>
-                                                <th>Time</th>
-                                                <th></th>
-                                            </tr>
+                        <!-- reach -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Request Id</li>
+                                    <li>Apartment No</li>
+                                    <li>Type</li>
+                                    <li>Requested Date</li>
+                                    <li>Requested Time</li>
+                                </ul>
+                            </main>
+                            <?php
+                            if ($this->laundyCleaningRequests->num_rows > 0) { ?>
+                                <?php
+                                while ($row2 = $this->laundyCleaningRequests->fetch_assoc()) {
+                                ?>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
+                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                <li><?php echo $row2["apartment_no"]; ?></li>
+                                                <li><?php echo $row2["type"]; ?></li>
+                                                <li><?php echo $row2["request_date"]; ?></li>
+                                                <li><?php echo $row2["request_time"]; ?></li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    </span>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
+                    </div>
+                </div>
+                <div id="tab3" class="tab">
+                <br>
+                    <div class="search">
+                        <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
+                    </div>
+                    <div style="overflow-x:auto;grid-column:1/span2">
 
-                                            <?php
-                                            while ($row1 = $this->laundyRequests->fetch_assoc()) { ?>
+                        <!-- reach -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Request Id</li>
+                                    <li>Apartment No</li>
+                                    <li>Type</li>
+                                    <li>Requested Date</li>
+                                    <li>Requested Time</li>
+                                </ul>
+                            </main>
+                            <?php
+                            if ($this->laundyCompletedRequests->num_rows > 0) { ?>
+                                <?php
+                                while ($row2 = $this->laundyCompletedRequests->fetch_assoc()) {
+                                ?>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
+                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                <li><?php echo $row2["apartment_no"]; ?></li>
+                                                <li><?php echo $row2["type"]; ?></li>
+                                                <li><?php echo $row2["request_date"]; ?></li>
+                                                <li><?php echo $row2["request_time"]; ?></li>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
+                                                </li>
+                                            </ul>
+                                        </article>
+                                    </span>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
+                    </div>
+                </div>
+            </div>
 
-                                                <tr>
-                                                    <div class="rowlink" style="display:inline-block">
-                                                        <td><?php echo $row1["request_id"]; ?></td>
-                                                        <td><?php echo $row1["type"]; ?></td>
-                                                        <td><?php echo $row1["request_date"]; ?></td>
-                                                        <td><?php echo $row1["request_time"]; ?></td>
-                                                        <td><?php echo $row1["resident_id"]; ?></td>
-                                                    </div>
-                                                </tr>
-
-                                        <?php
-                                            }
-                                        } else {
-                                            echo "0 results";
-                                        }
-                                        ?>
-                                        </table>
-                                </div>
-                            </div>
-
-                        </div> <!-- .hawlockbody div closed here -->
-                    </div> <!-- .expand div closed here -->
+        </div> <!-- .hawlockbody div closed here -->
+    </div> <!-- .expand div closed here -->
 </body>
 
 </html>
