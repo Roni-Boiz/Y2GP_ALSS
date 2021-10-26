@@ -215,7 +215,7 @@ class receptionistModel extends model {
         $this->conn->query($sql);
     }
     public function getReached(){
-        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC LIMIT 20";
+        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }

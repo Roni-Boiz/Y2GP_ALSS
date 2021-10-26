@@ -143,35 +143,37 @@ include_once 'sidenav.php';
                                             <small><?php echo $row["description"]; ?></small>
                                         </div>
                                     </div>
-                                </div> -->
-                            <?php
+                                </div>
+                    <?php
                             } ?>
 
-                        <?php
+                    <?php
                         } else {
                             echo "No Activities";
                         } ?>
 
-                    </div>
-                </div>
+            </div>
+        </div> -->
+    </div>
+    </div>
 
-            </div> <!-- .hawlockbody div closed here -->
-        </div> <!-- .expand div closed here -->
-        <script>
-            $(document).ready(function() {
-                $(".tabs-list li a").click(function(e) {
-                    e.preventDefault();
-                });
-
-                $(".tabs-list li").click(function() {
-                    var tabid = $(this).find("a").attr("href");
-                    $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
-                    $(".tab").hide(); // hiding open tab
-                    $(tabid).show(); // show tab
-                    $(this).addClass("active"); //  adding active class to clicked tab
-                });
+    </div> <!-- .hawlockbody div closed here -->
+    </div> <!-- .expand div closed here -->
+    <script>
+        $(document).ready(function() {
+            $(".tabs-list li a").click(function(e) {
+                e.preventDefault();
             });
-        </script>
+
+            $(".tabs-list li").click(function() {
+                var tabid = $(this).find("a").attr("href");
+                $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
+                $(".tab").hide(); // hiding open tab
+                $(tabid).show(); // show tab
+                $(this).addClass("active"); //  adding active class to clicked tab
+            });
+        });
+    </script>
 </body>
 
 </html>
