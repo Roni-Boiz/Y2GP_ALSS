@@ -54,6 +54,13 @@ class parkingModel extends model {
         }
         return $errors;
     }
+        //location
+        public function getLoginDevices($id)
+        {
+            $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
 
 
 }

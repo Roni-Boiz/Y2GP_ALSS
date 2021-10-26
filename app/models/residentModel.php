@@ -195,7 +195,7 @@ class residentModel extends model {
         return $result;
     }
     public function pay($id){
-        $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY dateaffect DESC LIMIT 5";
+        $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY paid_date DESC LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -205,6 +205,14 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    //location
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
 
 
 }
