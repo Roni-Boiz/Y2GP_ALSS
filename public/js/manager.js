@@ -278,4 +278,17 @@ $(".tabs-list li").click(function () {
     $(".tab").hide(); // hiding open tab
     $(tabid).show(); // show tab
     $(this).addClass("active"); //  adding active class to clicked tab
+    $(".mySearch").val('');
+    $("#searchrow article").show();
 });
+
+$(".mySearch").on('keyup', function () {
+    var value = $(this).val().toLowerCase();
+    $("#searchrow article").each(function () {
+       if ($(this).text().toLowerCase().search(value) > -1) {
+          $(this).show();
+       } else {
+          $(this).hide();
+       }
+    });
+ })
