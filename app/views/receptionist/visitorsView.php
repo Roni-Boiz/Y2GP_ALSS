@@ -47,6 +47,7 @@ include_once 'sidenav.php';
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                        <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
                                                         <li><?php echo $row["visitor_id"]; ?></li>
                                                         <li><?php echo $row["apartment_no"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
@@ -70,6 +71,25 @@ include_once 'sidenav.php';
                                     ?>
                                 </section>
 
+                            </div>
+                            <div class="divPopupModel">
+                                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                                <div id="deleteModel">
+                                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                                    <div style="text-align: center; margin-bottom: 10px;">
+                                        <h2>Are You Sure ?</h2>
+                                    </div>
+                                    <form action="#" class="formDelete" method="GET">
+                                        <div>
+                                            <label> Delete User With User ID </label>
+                                            <span><?= "UID1234" ?></span>
+                                        </div>
+                                        <div>
+                                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                                        </div>
+
+                                    </form>
+                                </div>
                             </div>
 
                         </div>
@@ -144,10 +164,10 @@ include_once 'sidenav.php';
                                         </div>
                                     </div>
                                 </div> -->
-                    <?php
+            <?php
                             } ?>
 
-                    <?php
+        <?php
                         } else {
                             echo "No Activities";
                         } ?>
