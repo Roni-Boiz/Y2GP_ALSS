@@ -41,7 +41,7 @@ include_once 'sidenav.php';
                                 while ($row1 = $this->laundyNewRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                        <article class="row mlb">
+                                        <article class="row mlb" id="model-btn">
                                             <ul>
                                                 <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
                                                 <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
@@ -57,6 +57,7 @@ include_once 'sidenav.php';
                                             </ul>
                                         </article>
                                     </span>
+                                    <!-- <button id="model-btn" class="purplebutton">Reserve Now</button> -->
                                 <?php
                                 }
                                 ?>
@@ -237,18 +238,3 @@ include_once 'sidenav.php';
 </body>
 
 </html>
-<script>
-    $(document).ready(function() {
-        $(".tabs-list li a").click(function(e) {
-            e.preventDefault();
-        });
-
-        $(".tabs-list li").click(function() {
-            var tabid = $(this).find("a").attr("href");
-            $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
-            $(".tab").hide(); // hiding open tab
-            $(tabid).show(); // show tab
-            $(this).addClass("active"); //  adding active class to clicked tab
-        });
-    });
-</script>
