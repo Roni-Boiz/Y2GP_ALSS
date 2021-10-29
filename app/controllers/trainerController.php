@@ -21,11 +21,6 @@ class trainerController extends controller{
         $this->view->render('trainer/trainerView');
     }
 
-    public function reservations(){
-        $this->view->reserve = $this->model->getReservation();
-        $this->view->render('trainer/checkGymReservationsView');
-    }
-
     public function announcement(){
         $this->view->ann = $this->model->readTable();
     }
@@ -53,8 +48,11 @@ class trainerController extends controller{
         $this->profile();
     }
     public function addSchedule(){
-
+        $this->view->history = $this->model->getReservationHistory();
+        $this->view->today = $this->model->getReservationToday();
+        $this->view->upcoming = $this->model->getReservationUpcoming();
         $this->view->render('trainer/addScheduleView');
     }
+    
 
 }

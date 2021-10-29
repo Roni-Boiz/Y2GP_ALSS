@@ -114,8 +114,9 @@ $idDate = date('Y-m', strtotime('-1 month', $timestamp));
         }
 
         .canvas{
-            grid-column: 1 span/3;
+            grid-column: 1 / span 3;
         }
+        
 
        
 </style>
@@ -126,8 +127,6 @@ $idDate = date('Y-m', strtotime('-1 month', $timestamp));
     <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">Reservations </h1></div>
     <div id="hb" class="hawlockbody animate-bottom" > 
     
-
-    <?php echo $idDate; ?>
    
     <div class="calenderContainer">
         <ul class="list-inline">
