@@ -75,5 +75,15 @@ class trainerModel extends model {
         return $errors;
     }
     
+    public function addSchedule(){
+       
+    }
+        //location
+        public function getLoginDevices($id)
+        {
+            $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
 
 }

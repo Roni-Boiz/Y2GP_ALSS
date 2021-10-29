@@ -183,4 +183,44 @@ function setVisibility3(id) {
        document.getElementById(id).style.display = 'none';
    }
 }
+////////////////////////////////////////////////////
+function openModel(amodel, amodelBtn) {
+
+   const model = document.getElementById(amodel);
+   const modelBtn = document.getElementsByClassName(amodelBtn);
+   const ans = document.getElementById("answer");
+   const closeBtn = document.getElementsByClassName("closebtn");
+
+   for (var i = 0; i < modelBtn.length; i++) {
+       modelBtn[i].addEventListener('click', showModel, false);
+   }
+
+   function showModel() {
+       document.getElementById("myCanvasNav").style.width = "100%";
+       document.getElementById("myCanvasNav").style.opacity = "0.8";
+       model.className = "open";
+   }
+
+   for (var i = 0; i < closeBtn.length; i++) {
+       closeBtn[i].addEventListener('click', closeModel, false);
+   }
+
+   function closeModel() {
+       document.getElementById("myCanvasNav").style.width = "0%";
+       document.getElementById("myCanvasNav").style.opacity = "0";
+       model.className = "close";
+   }
+
+   // model.addEventListener("click", (e) => {
+   //     if (e.target.id === "yes-btn") {
+   //         ans.innerText = "Hello Guys";
+
+   //     } else if (e.target.id === "no-btn") {
+   //         ans.innerText = "Oh no! ";
+   //     } else {
+   //         return;
+   //     }
+   //     model.className = 'close';
+   // });
+}
 

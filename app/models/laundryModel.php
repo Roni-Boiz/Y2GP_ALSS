@@ -54,10 +54,28 @@ class laundryModel extends model {
         }
         return $errors;
     }
-    public function getRequests(){
-        $sql = "SELECT * FROM laundry_request";
+    public function getNewRequests(){
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=0";
+        // $sql = "SELECT * FROM laundry_request WHERE status=1";
         $result = $this->conn->query($sql);   
         return $result;
     }
+    public function getCleaningRequests(){
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=1";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
+    public function getCompletedRequests(){
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=2";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
 
 }

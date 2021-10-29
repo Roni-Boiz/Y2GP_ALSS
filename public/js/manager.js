@@ -68,37 +68,37 @@ function uploadPhoto(phpto, newfile) {
     });
 }
 
-$(function(){
+$(function () {
     //call a function to handle file upload on select file
     $('.profilePto').on('change', fileUpload);
 });
 
-function fileUpload(event){
+function fileUpload(event) {
     //notify user about the file upload status
     $("#uploadBtn").html("Uploading...");
-    
+
     //get selected file
     files = event.target.files;
-    
+
     //form data check the above bullet for what it is  
-    var data = new FormData();                                   
+    var data = new FormData();
 
     //file data is presented as an array
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
-        if(!file.type.match('image.*')) {              
+        if (!file.type.match('image.*')) {
             //check file type
             $("#uploadBtn").html("Images Only");
-        }else if(file.size > 10485760){
+        } else if (file.size > 10485760) {
             //check file size (in bytes)
             $("#uploadBtn").html("Select Size (< 10 MB)");
-        }else{
+        } else {
             //append the uploadable file to FormData object
             data.append('file', file, file.name);
-            
+
             //create a new XMLHttpRequest
             var xhr = new XMLHttpRequest();
-            
+
             //post file data for upload
             xhr.open('POST', 'editProfilePhoto', true);
             console.log(xhr);
@@ -106,11 +106,11 @@ function fileUpload(event){
             xhr.onload = function () {
                 //get response and show the uploading status
                 var response = JSON.parse(xhr.responseText);
-                if(xhr.status === 200 && response.status == 'ok'){
+                if (xhr.status === 200 && response.status == 'ok') {
                     $("#uploadBtn").html("Change Photo");
-                }else if(response.status == 'type_err'){
+                } else if (response.status == 'type_err') {
                     $("#uploadBtn").html("Images Only");
-                }else{
+                } else {
                     $("#uploadBtn").html("Error try again");
                 }
             };
@@ -226,3 +226,69 @@ function check_retypepassword() {
         $("#rnpw").css("border-bottom", "2px solid #F90A0A");
     }
 }
+
+function openModel(amodel, amodelBtn) {
+
+    const model = document.getElementById(amodel);
+    const modelBtn = document.getElementsByClassName(amodelBtn);
+    const ans = document.getElementById("answer");
+    const closeBtn = document.getElementsByClassName("closebtn");
+
+    console.log(model, modelBtn, closeBtn);
+    for (var i = 0; i < modelBtn.length; i++) {
+        modelBtn[i].addEventListener('click', showModel, false);
+    }
+
+    function showModel() {
+        document.getElementById("myCanvasNav").style.width = "100%";
+        document.getElementById("myCanvasNav").style.opacity = "0.8";
+        model.className = "open";
+    }
+
+    for (var i = 0; i < closeBtn.length; i++) {
+        closeBtn[i].addEventListener('click', closeModel, false);
+    }
+
+    function closeModel() {
+        document.getElementById("myCanvasNav").style.width = "0%";
+        document.getElementById("myCanvasNav").style.opacity = "0";
+        model.className = "close";
+    }
+
+    // model.addEventListener("click", (e) => {
+    //     if (e.target.id === "yes-btn") {
+    //         ans.innerText = "Hello Guys";
+
+    //     } else if (e.target.id === "no-btn") {
+    //         ans.innerText = "Oh no! ";
+    //     } else {
+    //         return;
+    //     }
+    //     model.className = 'close';
+    // });
+}
+
+$(".tabs-list li a").click(function (e) {
+    e.preventDefault();
+});
+
+$(".tabs-list li").click(function () {
+    var tabid = $(this).find("a").attr("href");
+    $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
+    $(".tab").hide(); // hiding open tab
+    $(tabid).show(); // show tab
+    $(this).addClass("active"); //  adding active class to clicked tab
+    $(".mySearch").val('');
+    $("#searchrow article").show();
+});
+
+$(".mySearch").on('keyup', function () {
+    var value = $(this).val().toLowerCase();
+    $("#searchrow article").each(function () {
+       if ($(this).text().toLowerCase().search(value) > -1) {
+          $(this).show();
+       } else {
+          $(this).hide();
+       }
+    });
+ })

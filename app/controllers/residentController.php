@@ -25,6 +25,7 @@ class residentController extends controller{
     public function profile(){
         $this->view->users = $this->model->readResident();
         $this->view->members = $this->model->readMembers();
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('resident/profileView');
     }
     // edit profile
@@ -99,12 +100,13 @@ class residentController extends controller{
             // convert-number-to-month-name
             $this->view->y=$_POST["year"]." ".date("F", mktime(0, 0, 0,$_POST["month"], 10));;
             $this->view->billtotal=$this->model->billtotal($id,$_POST["year"],$_POST["month"]);
-            // this month
+            //else this month
         }else{
             $this->view->bill=$this->model->bill($id,date('Y'),date('m'));
             $this->view->y=date('Y')." ".date('F');
             $this->view->billtotal=$this->model->billtotal($id,date('Y'),date('m'));
         }
+        $this->view->balanceforward=$this->model->readResident();
         $this->view->render('resident/billView');
     }
     
@@ -118,6 +120,13 @@ class residentController extends controller{
 
     public function maintenence(){
         $id=$_SESSION['userId'];
+        if(isset($_POST["pdate"]) && isset($_POST["type"]) && isset($_POST["description"]) ){
+            $des=$_POST["description"];
+            $pdate=$_POST["pdate"];
+            $type=$_POST["type"];
+            $this->model->reqMaintenence($type,$pdate,$des);
+            header("Refresh:0; url=maintenence");
+        }
         $this->view->latest=$this->model->latestmaintenence($id);
         $this->view->render('resident/maintenenceView');
     }

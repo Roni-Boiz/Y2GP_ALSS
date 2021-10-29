@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="maintenence" class="reservationtime" method="POST">
 
                                     <label for="type">Type</label><br>
                                     <select name="type" class="input-field">
@@ -36,7 +36,7 @@ include_once 'sidenav.php';
                                     </select><br>
                                     <div id="">
                                         <label>Prefered Date</label><br>
-                                        <input type="date" name="date" class="input-field"><br>
+                                        <input type="date" name="pdate" class="input-field"><br>
                                         <label>Description</label><br>
                                         <input type="textarea" name="description" id="description"><br>
                                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">

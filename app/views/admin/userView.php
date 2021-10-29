@@ -50,12 +50,12 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                     <div class="usersearch">
-                        <input type="text" name="search" placeholder="Search..">
+                        <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
                         <div style="float: right;">
                             <span style="display: inline-block;"> Resident <i class="fa fa-square" style="color: #EB7655;"></i></span>
                             <span style="display: inline-block;"> Employee <i class="fa fa-square" style="color: #52D29A;"></i></span>
                             <span style="display: inline-block;"> Admin <i class="fa fa-square" style="color: #AA9150;"></i></span>
-                            <span onclick="openModel('model')" id="model-btn" class="addBtn"><i class="fas fa-user-plus"></i></span>
+                            <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser"><i class="fas fa-user-plus"></i></span>
                         </div>
                     </div>
                     <section class="wrapper">
@@ -74,49 +74,55 @@ include_once 'sidenav.php';
                             while ($row = $this->users->fetch_assoc()) {
                                 if ($row["type"] == 'resident') {
                             ?>
-                                    <article class="row pga">
-                                        <ul>
-                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
-                                            <li><?php echo $row["user_name"] ?></li>
-                                            <li><?php echo $row["type"] ?></li>
-                                            <li><?php echo $row["hold"] ?></li>
-                                            <li><i onclick="openModel('model')" class="fa fa-trash"></i></li>
-                                        </ul>
-                                        <!-- <ul class="more-content">
-                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                                    </ul> -->
-                                    </article>
+                                    <span id="searchrow">
+                                        <article class="row pga">
+                                            <ul>
+                                                <li><a href="#" onclick=""><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $row["user_name"] ?></li>
+                                                <li><?php echo $row["type"] ?></li>
+                                                <li><?php echo $row["hold"] ?></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                            </ul>
+                                            <!-- <ul class="more-content">
+                                            <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                            </ul> -->
+                                        </article>
+                                    </span>
                                 <?php
 
                                 } else if ($row["type"] == 'admin') {
                                 ?>
-                                    <article class="row nhl">
-                                        <ul>
-                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
-                                            <li><?php echo $row["user_name"] ?></li>
-                                            <li><?php echo $row["type"] ?></li>
-                                            <li><?php echo $row["hold"] ?></li>
-                                            <li><i class="fa fa-trash"></i></li>
-                                        </ul>
-                                        <!-- <ul class="more-content">
-                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                                    </ul> -->
-                                    </article>
+                                    <span id="searchrow">
+                                        <article class="row nhl">
+                                            <ul>
+                                                <li><a href="#"><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $row["user_name"] ?></li>
+                                                <li><?php echo $row["type"] ?></li>
+                                                <li><?php echo $row["hold"] ?></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                            </ul>
+                                            <!-- <ul class="more-content">
+                                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                            </ul> -->
+                                        </article>
+                                    </span>
                                 <?php
                                 } else {
                                 ?>
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li><a href="#"><?php echo $row["user_id"] ?></a><span class="small">(update)</span></li>
-                                            <li><?php echo $row["user_name"] ?></li>
-                                            <li><?php echo $row["type"] ?></li>
-                                            <li><?php echo $row["hold"] ?></li>
-                                            <li><i class="fa fa-trash"></i></li>
-                                        </ul>
-                                        <!-- <ul class="more-content">
-                                        <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
-                                    </ul> -->
-                                    </article>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li><a href="#"><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $row["user_name"] ?></li>
+                                                <li><?php echo $row["type"] ?></li>
+                                                <li><?php echo $row["hold"] ?></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                            </ul>
+                                            <!-- <ul class="more-content">
+                                                <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+                                            </ul> -->
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -134,24 +140,15 @@ include_once 'sidenav.php';
                         <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                         <div id="model">
 
-                            <a href="javascript:void(0)" id="closebtn">&times;</a>
+                            <a href="javascript:void(0)" class="closebtn">&times;</a>
                             <div style="text-align: center;">
-                                <h1>User Account<i class="fa fa-user"></i></i></h1>
+                                <h1>Create User Account<i class="fa fa-user"></i></i></h1>
                             </div>
 
                             <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                                 <div id="col1">
-                                    <label for="type">User Name</label><br>
-                                    <select id="emptype" name="emptype" class="input-field" placeholder="New Announcement" required>
-                                        <option value="">Select Employee Type...</option>
-                                        <option value="manager">Manager</option>
-                                        <option value="reseptionist">Reseptionist</option>
-                                        <option value="parking_officer">Parking Officer</option>
-                                        <option value="trainer">Trainer</option>
-                                        <option value="treater">Treater</option>
-                                        <option value="technician">Technician</option>
-                                        <option value="other">Other</option>
-                                    </select>
+                                    <label for="type">Enter Employee ID</label><br>
+                                    <input type="text" id="eid" name="eid" class="input-field" placeholder="Employee ID" required autofocus>
                                 </div>
 
                                 <div class="profile-pic" id="col2">
@@ -162,25 +159,45 @@ include_once 'sidenav.php';
 
                                 <div id="col1">
                                     <label for="fname">First Name</label><br>
-                                    <input type="text" id="fname" name="fname" class="input-field" placeholder="John" required>
+                                    <input type="text" id="fname" name="fname" class="input-field" placeholder="John" readonly>
                                 </div>
 
                                 <div id="col2">
                                     <label for="lname">Last Name</label><br>
-                                    <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" required>
+                                    <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" readonly>
                                 </div>
 
                                 <div id="col1">
                                     <label for="email">Email Address</label><br>
-                                    <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" required>
+                                    <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" readonly>
                                 </div>
 
                                 <div id="col2">
                                     <label for="cno">Contact Number</label><br>
-                                    <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" required>
+                                    <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" readonly>
                                 </div>
 
-                                <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="submit">
+                                <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="Create">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="deleteModel">
+                            <a href="javascript:void(0)" class="closebtn">&times;</a>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Are You Sure ?</h2>
+                            </div>
+                            <form action="#" class="formDelete" method="GET">
+                                <div>
+                                    <label> Delete User With User ID </label>
+                                    <span><?= "UID1234" ?></span>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="Delete">
+                                </div>
+
                             </form>
                         </div>
                     </div>

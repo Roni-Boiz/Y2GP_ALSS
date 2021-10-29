@@ -9,7 +9,7 @@ include_once 'sidenav.php';
 
         <div id="hh" class="hawlockhead">
             <img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span></h1>
+            <h1 id="title">Hawlock City</h1>
 
         </div>
 

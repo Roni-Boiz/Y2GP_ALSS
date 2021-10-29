@@ -32,7 +32,16 @@
                             <div class="card-body">
                                 <div class="detail">
                                     <img src="../../public/img/user.png"alt="user" />
-                                    <div class="detail-info"><h5><?php echo $row["date"]; ?></h5><small><?php echo $row["time"]; ?></small></div>
+                                    <div class="detail-info">
+                                    <?php
+                                    $datetime =  $row["date"];
+                                    $date = date('Y-m-d', strtotime($datetime));
+                                    $time = date('H:i:s', strtotime($datetime));
+                                    ?>
+                                    <h5><?php echo  $date ?></h5>
+                                    <small><?php echo $time ?></small>
+                                </div>
+
                                 </div>                    
                             <h4><?php echo $row["topic"]; ?></h4>
                                 <p><?php echo $row["content"]; ?></p>

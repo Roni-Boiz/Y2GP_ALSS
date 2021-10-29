@@ -27,6 +27,7 @@ class laundryController extends controller{
     public function profile(){
         $this->loadModel('profileModel');
         $this->view->users = $this->model->profile();
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('laundry/profileView');
         // $this->model->editProfile();
     }
@@ -47,7 +48,9 @@ class laundryController extends controller{
         $this->profile();
     }
     public function requests(){
-        $this->view->laundyRequests=$this->model->getRequests();
+        $this->view->laundyNewRequests=$this->model->getNewRequests();
+        $this->view->laundyCleaningRequests=$this->model->getCleaningRequests();
+        $this->view->laundyCompletedRequests=$this->model->getCompletedRequests();
         $this->view->render('laundry/requestView');
     }
     public function getNotification(){
