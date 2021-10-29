@@ -34,9 +34,7 @@
         <nav class="sidebar" id="side">
             <ul>
             <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
-            
-                <li><a href="reservations"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
-                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>ADD SCHEDULE</a></li>
+                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
             </ul>
         </nav>
 

@@ -52,7 +52,7 @@ include_once 'sidenav.php';
                                         </ul>
                                         <ul class="more-content">
                                             <li>
-                                                <span style="padding-right: 20px;">Resident Name <?php echo $row["resident_fname"] ?></span>
+                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>
@@ -148,7 +148,7 @@ include_once 'sidenav.php';
                                         </ul>
                                         <ul class="more-content">
                                             <li>
-                                                <span style="padding-right: 20px;">Resident Name <?php echo $row["resident_fname"] ?></span>
+                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"] ?></span>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>

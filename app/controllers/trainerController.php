@@ -21,11 +21,6 @@ class trainerController extends controller{
         $this->view->render('trainer/trainerView');
     }
 
-    public function reservations(){
-        $this->view->reserve = $this->model->getReservation();
-        $this->view->render('trainer/checkGymReservationsView');
-    }
-
     public function announcement(){
         $this->view->ann = $this->model->readTable();
     }
