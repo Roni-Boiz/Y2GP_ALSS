@@ -47,7 +47,7 @@ include_once 'sidenav.php';
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
-                                                        <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                                        <!-- <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li> -->
                                                         <li><?php echo $row["visitor_id"]; ?></li>
                                                         <li><?php echo $row["apartment_no"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
