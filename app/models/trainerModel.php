@@ -19,7 +19,7 @@ class trainerModel extends model {
 
     public function getReservationHistory(){
         $today = date('Y-m-d');
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE date < '$today'";
+        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date < '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ";
         $result = $this->conn->query($sql);   
         return $result;
 

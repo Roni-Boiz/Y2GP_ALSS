@@ -44,7 +44,7 @@ include_once 'sidenav.php';
                                     <article class="row mlb">
                                         <ul>
                                         <li><?php echo $row["reservation_id"]; ?></li>
-                                            <li><?php echo $row["employee_id"]; ?></li>
+                                            <li><?php echo $row["trainer_fname"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
                                             <li><?php echo $row["start_time"]; ?></li>
                                             <li><?php echo $row["end_time"]; ?></li>
@@ -52,7 +52,7 @@ include_once 'sidenav.php';
                                         </ul>
                                         <ul class="more-content">
                                             <li>
-                                                <span style="padding-right: 20px;">Resident Name <?php echo $row["resident_id"] ?></span>
+                                                <span style="padding-right: 20px;">Resident Name <?php echo $row["resident_fname"] ?></span>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>
