@@ -97,6 +97,13 @@ class homeModel extends model
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['profilePic'] = $user['profile_pic'];
 
+                        if($user['type'] == 'resident'){
+                            $Res = "SELECT resident_id FROM resident WHERE user_id = '{$user['user_id']}' limit 1";
+                            $resData = mysqli_query($this->conn, $Res);
+
+                            $Resident = mysqli_fetch_assoc($resData);
+                            $_SESSION['residentId'] = $user['resident_id'];
+                        }
                         //Gets the IP Address from the visitor
                         $PublicIP =  get_client_ip(); //get_client_ip();  //"112.135.65.171"
                         if ($PublicIP != "::1") {
