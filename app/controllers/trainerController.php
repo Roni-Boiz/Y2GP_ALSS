@@ -52,8 +52,11 @@ class trainerController extends controller{
         $this->profile();
     }
     public function addSchedule(){
-
+        $this->view->history = $this->model->getReservationHistory();
+        $this->view->today = $this->model->getReservationToday();
+        $this->view->upcoming = $this->model->getReservationUpcoming();
         $this->view->render('trainer/addScheduleView');
     }
+    
 
 }
