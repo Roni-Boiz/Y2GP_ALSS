@@ -17,8 +17,22 @@ class trainerModel extends model {
         // return $result;
     }
 
-    public function getReservation(){
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE employee_id= '3'";
+    public function getReservationHistory(){
+        $today = date('Y-m-d');
+        $sql = "SELECT * FROM fitness_centre_reservation WHERE date < '$today'";
+        $result = $this->conn->query($sql);   
+        return $result;
+
+    }
+    public function getReservationToday(){
+        $today = date('Y-m-d');
+        $sql = "SELECT * FROM fitness_centre_reservation WHERE date = '$today'";
+        $result = $this->conn->query($sql);   
+        return $result;
+    }
+    public function getReservationUpcoming(){
+        $today = date('Y-m-d');
+        $sql = "SELECT * FROM fitness_centre_reservation WHERE date > '$today'";
         $result = $this->conn->query($sql);   
         return $result;
 
@@ -60,8 +74,6 @@ class trainerModel extends model {
         }
         return $errors;
     }
-    public function addSchedule(){
-       
-    }
+    
 
 }
