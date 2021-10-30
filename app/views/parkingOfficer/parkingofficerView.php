@@ -28,7 +28,7 @@ include_once 'sidenav.php';
                                     ?>
                                     <h5><?php echo  $date ?></h5>
                                     <small><?php echo $time ?></small>
-                                </div>ime"]; ?></small>
+                                </div>
                             </div>
                         </div>
                         <h4><?php echo $row["topic"]; ?></h4>

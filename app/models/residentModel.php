@@ -68,16 +68,25 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function latesthall($id){
-        
+    public function latesthallfun($id){
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id=$id  AND date > '2021-10-31'  AND  type='function' AND cancelled_time IS NULL LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function latesthallcon($id){
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id=$id  AND date > '2021-10-31'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function treatmentReservation($id){
         $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }   
-    public function latestreatment($id){
-        
+    public function latesttreatment($id){
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id=1 AND cancelled_time IS NULL AND date > '2021-10-31' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     } 
     public function fitnessReservation($id){
         $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
@@ -85,7 +94,9 @@ class residentModel extends model {
         return $result;
     }
     public function latestfitness($id){
-        
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id=$id AND cancelled_time IS NULL AND date > '2021-10-31' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function viewSlots(){
         $sql = "SELECT * from parking_slot";
@@ -93,7 +104,9 @@ class residentModel extends model {
         return $result;
     }
     public function latestparking($id){
-        
+        $sql = "SELECT * FROM  parking_slot_reservation WHERE resident_id=1 AND cancelled_time IS NULL AND date > '2021-10-31' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function removeReservation(){
         date_default_timezone_set("Asia/Colombo");

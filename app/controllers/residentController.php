@@ -70,18 +70,23 @@ class residentController extends controller{
     }
 
     public function fitness(){
+        $this->view->latest=$this->model->latestfitness(1);
         $this->view->render('resident/fitnessCentreView');
     }
 
     public function treatment(){
+        $this->view->latest=$this->model->latesttreatment(1);
         $this->view->render('resident/treatmentRoomView');
     }
 
     public function hall(){
+        $this->view->latestfun=$this->model->latesthallfun(1);
+        $this->view->latestcon=$this->model->latesthallcon(1);
         $this->view->render('resident/hallView');
     }
 
     public function parking(){
+        $this->view->latest=$this->model->latestparking(1);
         $this->view->slots=$this->model->viewSlots();
         $this->view->render('resident/parkingSlotView');
     }

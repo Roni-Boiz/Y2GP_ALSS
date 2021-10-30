@@ -55,8 +55,7 @@ include_once 'sidenav.php';
                         </div>
                         
                         <?php
-                        if ($this->latest->num_rows > 0) { ?>
-                            <?php
+                        if ($this->latest->num_rows > 0) { 
                             while ($row = $this->latest->fetch_assoc()) {
                             ?>
                                 <div class="detail">
@@ -69,11 +68,9 @@ include_once 'sidenav.php';
                                     </div>
                                 </div>
                             <?php
-                            } ?>
-
-                        <?php
+                            } 
                         } else {
-                            echo "No bills";
+                            echo "No Upcomings...";
                         } ?>
 
                     </div>

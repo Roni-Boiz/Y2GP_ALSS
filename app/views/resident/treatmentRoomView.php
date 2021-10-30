@@ -47,22 +47,30 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Upcoming Reservations. . .</h3>
                         </div>
+                        <?php
+                        if ($this->latest->num_rows > 0) { 
+                            while ($row = $this->latest->fetch_assoc()) {
+                            ?>
                         <div class="detail">
                             <div>
                                 <div class="detail-info">
-                                    <h5>2021-10-28 - 16:00</h5>
-                                    <small>Nirupama Rajapaksha</small>
+                                <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
+                                    <small><?php echo "Type : ".$row["type"]; ?></small>
                                 </div>
                             </div>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-30 - 10:00</h5>
-                                    <small> Nirupama Rajapaksha</small>
+                        <?php
+                            }
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php
+                        } ?>
 
                     </div>
                     <br>
