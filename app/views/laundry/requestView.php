@@ -41,21 +41,23 @@ include_once 'sidenav.php';
                                 while ($row1 = $this->laundyNewRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                        <article class="row mlb" id="model-btn">
-                                            <ul>
-                                                <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
-                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                                                <li><?php echo $row1["apartment_no"]; ?></li>
-                                                <li><?php echo $row1["type"]; ?></li>
-                                                <li><?php echo $row1["request_date"]; ?></li>
-                                                <li><?php echo $row1["request_time"]; ?></li>
-                                            </ul>
-                                            <ul class="more-content">
-                                                <li>
-                                                    <span style="padding-right: 20px;">Weight: <?php echo $row1["description"] ?></span>
-                                                </li>
-                                            </ul>
-                                        </article>
+                                        <span class="newMode" onclick="openModel('editModel','newMode')">
+                                            <article class="row mlb">
+                                                <ul>
+                                                    <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
+                                                    <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                    <li><?php echo $row1["apartment_no"]; ?></li>
+                                                    <li><?php echo $row1["type"]; ?></li>
+                                                    <li><?php echo $row1["request_date"]; ?></li>
+                                                    <li><?php echo $row1["request_time"]; ?></li>
+                                                </ul>
+                                                <ul class="more-content">
+                                                    <li>
+                                                        <span style="padding-right: 20px;">Weight: <?php echo $row1["description"] ?></span>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </span>
                                     </span>
                                     <!-- <button id="model-btn" class="purplebutton">Reserve Now</button> -->
                                 <?php
@@ -93,21 +95,24 @@ include_once 'sidenav.php';
                                 while ($row2 = $this->laundyCleaningRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                        <article class="row mlb">
-                                            <ul>
-                                                <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
-                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                                                <li><?php echo $row2["apartment_no"]; ?></li>
-                                                <li><?php echo $row2["type"]; ?></li>
-                                                <li><?php echo $row2["request_date"]; ?></li>
-                                                <li><?php echo $row2["request_time"]; ?></li>
-                                            </ul>
-                                            <ul class="more-content">
-                                                <li>
-                                                    <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
-                                                </li>
-                                            </ul>
-                                        </article>
+                                        <span class="comModel" onclick="openModel('deleteModel','comModel')">
+                                        <!-- <span class="comModel" onclick="openModel('completeModel','comModel')"> -->
+                                            <article class="row mlb">
+                                                <ul>
+                                                    <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
+                                                    <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                    <li><?php echo $row2["apartment_no"]; ?></li>
+                                                    <li><?php echo $row2["type"]; ?></li>
+                                                    <li><?php echo $row2["request_date"]; ?></li>
+                                                    <li><?php echo $row2["request_time"]; ?></li>
+                                                </ul>
+                                                <ul class="more-content">
+                                                    <li>
+                                                        <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </span>
                                     </span>
                                 <?php
                                 }
@@ -141,21 +146,21 @@ include_once 'sidenav.php';
                             <?php
                             if ($this->laundyCompletedRequests->num_rows > 0) { ?>
                                 <?php
-                                while ($row2 = $this->laundyCompletedRequests->fetch_assoc()) {
+                                while ($row3 = $this->laundyCompletedRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
-                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row2["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
-                                                <li><?php echo $row2["apartment_no"]; ?></li>
-                                                <li><?php echo $row2["type"]; ?></li>
-                                                <li><?php echo $row2["request_date"]; ?></li>
-                                                <li><?php echo $row2["request_time"]; ?></li>
+                                                <li id="<?php echo $row3['request_id']; ?>"><?php echo $row3["request_id"]; ?></li>
+                                                <!-- <td><a method="get" href="putReached?parcel=<?php echo $row3["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
+                                                <li><?php echo $row3["apartment_no"]; ?></li>
+                                                <li><?php echo $row3["type"]; ?></li>
+                                                <li><?php echo $row3["request_date"]; ?></li>
+                                                <li><?php echo $row3["request_time"]; ?></li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
+                                                    <span style="padding-right: 20px;">Weight: <?php echo $row3["description"] ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -173,64 +178,103 @@ include_once 'sidenav.php';
                 </div>
             </div>
             <div class="divPopupModel">
-                <p id="answer"></p>
-
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="model">
+                <div id="editModel">
 
-
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center;">
-                        <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                        <h1>L00233434</h1>
                     </div>
 
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                         <div id="col1">
-                            <label>Treatment Type</label><br>
-                            <select name="type" class="input-field">
-                                <option value="">Select Type</option>
-                                <option value="">Herbal body wrap</option>
-                                <option value="">Full Body Massage</option>
-                                <option value="">Full-body facia</option>
-                                <option value="">Water Therapy</option>
-                            </select><br>
+                            <label for="type">Regular</label><br>
                         </div>
-                        <div id="col1">
-                            <label>Start Time</label><br>
-                            <select name="starttime" class="input-field">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select><br>
-                            <label>End Time</label><br>
-                            <select id="endtime" name="endtime" class="input-field" placeholder="End Time">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
+                        <div id="col2">
+                            <h4 style="padding:0px">2021-10-12<br>10:34</h4>
                         </div>
+                        <h2><b>Categories:</b></h2>
                         <br>
-                        <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
-                    </form>
-                    <!-- <div id="btn-grp" style="grid-column: 1;">
-<button id="yes-btn">Yes</button>
-<button id="no-btn">No</button>
-</div> -->
-                </div>
+                        <div id="col1">
+                            <label for="categories">Category 1</label>
+                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                        </div>
+                        <div id="col2">
+                            <input type="checkbox" id="category1" name="category1">
+                        </div>
+                        <div id="col1">
+                            <label for="Categories">Category 2</label><br>
+                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                        </div>
+                        <div id="col2">
+                            <input type="checkbox" id="category2" name="category2">
+                        </div>
+                        <div id="col1">
+                            <label for="Categories">Category 3</label><br>
+                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                        </div>
+                        <div id="col2">
+                            <input type="checkbox" id="category3" name="category3">
+                        </div>
+                        <div id="col1">
+                            <label for="Categories">Description</label><br>
+                            <textarea class="input-field" name="description" id="description" cols="30" rows="10" readonly>category 1 dry only</textarea>
+                        </div>
 
+                        <div id="col1">
+                            <input style="grid-column: 1/span 2; background-color:red" type="submit" name="submit" value="Decline">
+                        </div>
+                        <div id="col2">
+                            <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Accept">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="divPopupModel">
+
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="deleteModel">
+
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center;">
+                        <h1>L00233434</h1>
+                    </div>
+
+                    <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                        <div id="col1">
+                            <label for="type">Regular</label><br>
+                        </div>
+                        <div id="col2">
+                            <h4 style="padding:0px">2021-10-12<br>10:34</h4>
+                        </div>
+                        <h2><b>Add Fees:</b></h2>
+                        <br>
+                        <div id="col1">
+                            <label for="categories">Category 1</label>
+
+                        </div>
+                        <div id="col2">
+                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                        </div>
+                        <div id="col1">
+                            <label for="Categories">Category 2</label><br>
+                        </div>
+                        <div id="col2">
+                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                        </div>
+                        <div id="col1">
+                            <label for="Categories">Category 3</label><br>
+                        </div>
+                        <div id="col2">
+                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                            <br><br>
+                        </div>
+
+                        <div id="col2">
+                            <input style="grid-column:2;" type="submit" name="submit" value="Add">
+                        </div>
+                    </form>
+                </div>
             </div>
 
         </div> <!-- .hawlockbody div closed here -->
