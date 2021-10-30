@@ -104,7 +104,8 @@ include_once 'sidenav.php';
                                         <ul>
                                             <li>Vistor ID</li>
                                             <li>Visitor Name</li>
-                                            <li>Resident Id</li>
+                                            <li>Apartment No</li>
+                                            <li>Description</li>
                                         </ul>
                                     </main>
 
@@ -118,14 +119,15 @@ include_once 'sidenav.php';
                                                     <ul>
                                                         <li><?php echo $row["visitor_id"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
-                                                        <li><?php echo $row["resident_id"]; ?></li>
+                                                        <li><?php echo $row["apartment_no"]; ?></li>
+                                                        <li><?php echo $row["description"]; ?></li>
 
                                                     </ul>
-                                                    <ul class="more-content">
+                                                    <!-- <ul class="more-content">
                                                         <li>
                                                             <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
                                                         </li>
-                                                    </ul>
+                                                    </ul> -->
 
                                                 </article>
                                             </span>

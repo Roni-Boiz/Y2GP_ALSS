@@ -25,6 +25,7 @@ class receptionistController extends controller{
 
     public function register(){
         $this->view->apartments = $this->model->readApartment();
+        $this->view->count = $this->model->getStats();
         $this->view->render('receptionist/registerResidentView');
     }
 

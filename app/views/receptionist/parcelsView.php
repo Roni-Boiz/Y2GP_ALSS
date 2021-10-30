@@ -172,7 +172,7 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                 </div>
-                <div class="rightPanel" style="margin-top:30px">
+                <!-- <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Recently Delivered</h3>
@@ -192,17 +192,17 @@ include_once 'sidenav.php';
                                         </div>
                                     </div>
                                 </div> -->
-                    <?php
+                            <?php
                             } ?>
 
-                    <?php
+                        <?php
                         } else {
                             echo "No Activities";
                         } ?>
 
-            </div>
-        </div> <!-- .hawlockbody div closed here -->
-                    </div> <!-- .expand div closed here -->
+                    </div> -->
+                </div> <!-- .hawlockbody div closed here -->
+            </div> <!-- .expand div closed here -->
 </body>
 
 </html>
