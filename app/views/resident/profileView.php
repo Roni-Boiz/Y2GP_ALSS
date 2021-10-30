@@ -36,7 +36,7 @@ include_once('sidenav.php');
                         <input type="text" id="nic" name="nic" class="input-field" value=<?php echo $row["nic"] ?> pattern="[0-9]{9}V" ><br>
 
                         <label>Contact</label>
-                        <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?> pattern="[0-9]{9}"><br>
+                        <input type="text" id="phone_no" name="phone_no" class="input-field" value=<?php echo $row["phone_no"] ?> pattern="[0-9]{10}"><br>
 
                         <label>Email</label>
                         <input type="email" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
