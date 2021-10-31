@@ -199,7 +199,7 @@ class homeModel extends model
                     $change = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
                     $resultuser = mysqli_query($this->conn, $change);
                     if ($resultuser) {
-                        $receiver = "$email";
+                        $receiver = $email;
                         $subject = "Hawlock RYCN details";
                         $body = "Your new password is : " . $newPassword;
                         $sender = "From:hawlockrycn@gmail.com";
