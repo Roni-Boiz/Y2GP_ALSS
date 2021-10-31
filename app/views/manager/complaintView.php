@@ -66,7 +66,7 @@ include_once 'sidenav.php';
                         <main class="row title">
                             <ul>
                                 <li>Apartment No</li>
-                                <li>Name</li>
+                                <li>Resident Name</li>
                                 <li>Type</li>
                                 <li>Date</li>
                                 <li>Time</li>
@@ -103,9 +103,9 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li><?php echo $row["complaint_id"] ?></li>
                                                 <li><?php echo $row["apartment_no"] ?></li>
                                                 <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
+                                                <li><?php echo $row["type"] ?></li>
                                                 <?php
                                                 $datetime =  $row["date_time"];
                                                 $date = date('Y-m-d', strtotime($datetime));

@@ -13,7 +13,7 @@ include_once 'sidenav.php';
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
                     <div id="upactivities">
-                        <h3>Upcomming Activities and Events</h3>
+                        <h2>Upcomming Activities and Events</h2>
                         <!-- Upcomming Activities -->
                         <?php
                         if ($this->upcommingReq->num_rows || $this->upcommingHallRes->num_rows) {
@@ -23,7 +23,7 @@ include_once 'sidenav.php';
                             <?php
                             if ($this->upcommingHallRes->num_rows > 0) {
                             ?>
-                                <h4>Reservations</h4>
+                                <h3>Reservations</h3>
                                 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
                                     <?php
                                     while ($row = $this->upcommingHallRes->fetch_assoc()) {
@@ -38,7 +38,7 @@ include_once 'sidenav.php';
                                                                 <h4><?php echo $row["fname"] . " " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small> </h4>
                                                             </div>
                                                             <div>
-                                                                <h4>Hall Reservation <small>(<?php echo date('Y-m-d H:i', strtotime($row["reserved_time"])) ?>)</small></h4>
+                                                                <h4>Hall Reservation <small>(<?php echo date('Y-m-d h:i A', strtotime($row["reserved_time"])) ?>)</small></h4>
                                                                 <h5>On : <?php echo  date('D, F d, Y', strtotime($row["date"])) ?> </h5>
                                                                 <h5>From : <?php echo date('h:i A', strtotime($row["start_time"])) . " - " . date('h:i A', strtotime($row["end_time"])) ?> </h5>
                                                             </div>
@@ -62,7 +62,7 @@ include_once 'sidenav.php';
                             <?php
                             if ($this->upcommingReq->num_rows > 0) {
                             ?>
-                                <h4>Requests</h4>
+                                <h3>Requests</h3>
                                 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
                                     <?php
                                     while ($row = $this->upcommingReq->fetch_assoc()) {
@@ -77,7 +77,7 @@ include_once 'sidenav.php';
                                                                 <h4><?php echo $row["fname"] . " " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small> </h4>
                                                             </div>
                                                             <div>
-                                                                <h4>Technical Request <small>(<?php echo date('Y-m-d H:i', strtotime($row["request_date"])) ?>)</small></h4>
+                                                                <h4>Technical Request <small>(<?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?>)</small></h4>
                                                                 <h5>On : <?php echo  date('D, F d, Y', strtotime($row["preferred_date"])) ?> <small><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></small></h5>
                                                             </div>
                                                             <div>

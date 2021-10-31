@@ -8,7 +8,7 @@ include_once 'sidenav.php';
 
         <div id="hh" class="hawlockhead">
             <img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span> Users</h1>
+            <h1 id="title">Hawlock City Users</h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom" onload="myFunction();">
             <div class="card" id="userCard">
@@ -55,7 +55,7 @@ include_once 'sidenav.php';
                             <span style="display: inline-block;"> Resident <i class="fa fa-square" style="color: #EB7655;"></i></span>
                             <span style="display: inline-block;"> Employee <i class="fa fa-square" style="color: #52D29A;"></i></span>
                             <span style="display: inline-block;"> Admin <i class="fa fa-square" style="color: #AA9150;"></i></span>
-                            <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser"><i class="fas fa-user-plus"></i></span>
+                            <!-- <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser" title="Add User"><i class="fas fa-user-plus"></i></span> -->
                         </div>
                     </div>
                     <section class="wrapper">
@@ -81,7 +81,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                             <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -99,7 +99,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -116,7 +116,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -210,7 +210,7 @@ include_once 'sidenav.php';
                         </div>
                         <div class="detail">
                             <div>
-                                <img src="../../public/img/user.png" alt="user" />
+                                <img src="../../public/img/user3.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Ronila Sanjula</h5>
                                     <small>AD001</small>
@@ -221,7 +221,7 @@ include_once 'sidenav.php';
                         </div>
                         <div class="detail">
                             <div>
-                                <img src="../../public/img/user.png" alt="user" />
+                                <img src="../../public/img/user1.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Chatura Mano</h5>
                                     <small>RA001</small>
@@ -236,26 +236,55 @@ include_once 'sidenav.php';
                     <br>
                     <div class="activeUsers">
                         <div class="head">
-                            <h3>Active Users</h3>
+                            <h3>Current Online Users</h3>
                         </div>
                         <div class="detail">
-                            <img src="../../public/img/user.png" alt="user" />
-                            <div class="detail-info">
-                                <h5>Ronila Sanjula</h5>
-                                <small>AD001</small>
+                            <div>
+                                <img src="../../public/img/user4.jpg" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Ronila Sanjula</h5>
+                                    <small>AD001</small>
+                                </div>
+                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
-                            <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <img src="../../public/img/user1.jpg" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Nishad Yashintha</h5>
+                                    <small>AD002</small>
+                                </div>
+                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <img src="../../public/img/user3.jpg" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Chatura Manohara</h5>
+                                    <small>AD003</small>
+                                </div>
+                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <img src="../../public/img/user2.jpg" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Nipuna Dasanayaka</h5>
+                                    <small>AD004</small>
+                                </div>
+                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
-
 
 </html>

@@ -120,8 +120,6 @@ include_once 'sidenav.php';
             stroke-dashoffset: 0;
         }
     }
-
-
 </style>
 
 </head>
@@ -132,13 +130,13 @@ include_once 'sidenav.php';
 
         <div id="hh" class="hawlockhead">
             <img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span></h1>
+            <h1 id="title">Hawlock City</h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
                     <div>
-                        <h3>Total Income</h3>
+                        <h2>Total Monthly Income</h2>
                         <div class="card" id="income">
                             <div>
                                 <h4>Payment Received</h4>
@@ -158,20 +156,18 @@ include_once 'sidenav.php';
                     </div>
 
                     <div>
-                        <h3>Earning Summary</h3>
+                        <h2>Earning Summary</h2>
                         <div class="card" id="earning">
-                            <canvas id="earningChart"> 
+                            <canvas id="earningChart">
                             </canvas>
                         </div>
                     </div>
 
                     <div>
-                        <h3>Service Usage Summary</h3>
+                        <h2>Service Usage Summary</h2>
                         <div class="card" id="serviceusage">
-                            <div>
-                                <canvas id="reservationChart">
-                                </canvas>
-                            </div>
+                            <canvas id="reservationChart">
+                            </canvas>
                         </div>
                     </div>
                 </div>
@@ -225,7 +221,7 @@ include_once 'sidenav.php';
             </div>
 
             <div id="upactivities">
-                <h4>Upcomming Activities</h4>
+                <h2>Upcomming Activities</h2>
                 <div class="card">
                     <div style="font-size: small;color: #545d7a;">Currently you do not have any upcomming activities</div>
                 </div>
@@ -302,7 +298,7 @@ include_once 'sidenav.php';
             data: {
                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [{
-                    label: 'Reservations',
+                    label: 'Income',
                     data: [
                         100, 1500, 500, 500, 100, 1000, 100, 1500, 500, 500, 100, 1000
                     ],
@@ -313,7 +309,10 @@ include_once 'sidenav.php';
                     borderWidth: 1,
                     borderColor: '#777',
                     hoverBorderWidth: 1,
-                    hoverBorderColor: '#003'
+                    hoverBorderColor: '#003',
+                    lineTension: 0.4,
+                    fill: true,
+                    // radius: 6,
                 }]
             },
             options: {
@@ -344,7 +343,7 @@ include_once 'sidenav.php';
                     },
                     title: {
                         display: false,
-                        text: 'Employability Rate',
+                        text: 'Earn Chart',
                         fontSize: 25
                     },
                 },
@@ -359,7 +358,7 @@ include_once 'sidenav.php';
                 datasets: [{
                         label: 'Hall',
                         data: [
-                            10, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                            10, 15, 44, 23, 54, 65, 3, 23, 63, 23, 34, 45, 20
                         ],
                         // backgroundColor : '#423D59',
                         backgroundColor: [
@@ -373,7 +372,7 @@ include_once 'sidenav.php';
                     {
                         label: 'Fitness',
                         data: [
-                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                            97, 54, 65, 78, 54, 45, 35, 12, 32, 45, 41, 78, 36
                         ],
                         // backgroundColor : '#423D59',
                         backgroundColor: [
@@ -387,7 +386,7 @@ include_once 'sidenav.php';
                     {
                         label: 'Treatment',
                         data: [
-                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                            75, 35, 45, 12, 45, 56, 10, 30, 30, 85, 62, 33, 10
                         ],
                         // backgroundColor : '#423D59',
                         backgroundColor: [
@@ -401,7 +400,7 @@ include_once 'sidenav.php';
                     {
                         label: 'Parking',
                         data: [
-                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                            32, 63, 45, 21, 32, 45, 25, 26, 28, 73, 45, 55, 62
                         ],
                         // backgroundColor : '#423D59',
                         backgroundColor: [
@@ -429,7 +428,7 @@ include_once 'sidenav.php';
                     {
                         label: 'Maintenence',
                         data: [
-                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
+                            60, 50, 54, 70, 23, 45, 68, 78, 34, 87, 44, 53, 35
                         ],
                         // backgroundColor : '#423D59',
                         backgroundColor: [
@@ -443,6 +442,7 @@ include_once 'sidenav.php';
                 ]
             },
             options: {
+                // responsive: true,
                 plugins: {
                     legend: {
                         display: false,

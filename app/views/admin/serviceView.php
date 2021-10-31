@@ -126,7 +126,7 @@ include_once 'sidenav.php';
                     <ul>
                         <li>Service ID</li>
                         <li>Name</li>
-                        <li>Fee</li>
+                        <li>Fee/h</li>
                         <li>Cancel Fee</li>
                         <li>Update Service</li>
                     </ul>
@@ -144,7 +144,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -167,7 +167,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -189,7 +189,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -211,7 +211,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -233,7 +233,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -255,7 +255,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -277,7 +277,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -311,7 +311,7 @@ include_once 'sidenav.php';
             data: {
                 labels: ['Hall', 'Treatment', 'Fitness', 'Parking Slot', 'Technical', 'Laundry', 'Backup'],
                 datasets: [{
-                    label: 'Employee',
+                    label: 'Reservations',
                     data: [
                         8, 10, 15, 5, 6, 10, 20
                     ],
@@ -322,7 +322,7 @@ include_once 'sidenav.php';
                     borderWidth: 1,
                     borderColor: '#777',
                     hoverBorderWidth: 1,
-                    hoverBorderColor: '#003'
+                    hoverBorderColor: '#003',
                 }]
             },
             options: {
@@ -360,7 +360,7 @@ include_once 'sidenav.php';
                         borderWidth: 1,
                         borderColor: '#ae98db',
                         hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
+                        hoverBorderColor: '#003',
                     },
                     {
                         label: 'Cancle Fee',
@@ -374,7 +374,7 @@ include_once 'sidenav.php';
                         borderWidth: 1,
                         borderColor: '#a72d22d9',
                         hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
+                        hoverBorderColor: '#003',
                     }
                 ]
             },

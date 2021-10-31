@@ -6,7 +6,7 @@ include_once('sidenav.php');
 <body style="background-color: gray; background-image:none;">
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand">
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span></h1>
+            <h1 id="title">Hawlock City</h1>
         </div>
         <div class="hawlockbody animate-bottom" id="hb">
             <?php
@@ -60,7 +60,7 @@ include_once('sidenav.php');
                                 <label>Contact Number : </label>
                                 <label><?php echo $row["contact_no"] ?></label>
                             </div>
-                            <div style="font-size: small;color: #545d7a;">You currently do not have any ongoing activities</div>
+                            <!-- <div style="font-size: small;color: #545d7a;">You currently do not have any ongoing activities</div> -->
                         </div>
                     </div>
 

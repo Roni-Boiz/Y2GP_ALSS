@@ -72,7 +72,7 @@ include_once 'sidenav.php';
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
                                                 <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -112,9 +112,9 @@ include_once 'sidenav.php';
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
                                                 <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -154,9 +154,9 @@ include_once 'sidenav.php';
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
                                                 <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -296,7 +296,7 @@ include_once 'sidenav.php';
                                                     if (empty($row['cancelled_time'])) {
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
-                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span></li>
                                                         <?php
                                                         } else {
                                                         ?>
@@ -358,7 +358,7 @@ include_once 'sidenav.php';
                                                     if (empty($row['cancelled_time'])) {
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
-                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-edit"></i></span></li>
+                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span></li>
                                                         <?php
                                                         } else {
                                                         ?>

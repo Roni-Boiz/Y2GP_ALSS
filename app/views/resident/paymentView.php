@@ -25,7 +25,6 @@ include_once 'sidenav.php';
                             </div>
                             <div class="description">
                                 <form action="#" class="reservationtime" method="GET">
-                                    
                                     <div>
                                         <label>Total Payable</label><br>
                                         <input type="text" name="payable" class="input-field" value="2000.00" READONLY><br>
@@ -48,7 +47,7 @@ include_once 'sidenav.php';
                         <?php
                         if ($this->pay->num_rows > 0) { 
                             while ($row = $this->pay->fetch_assoc()) {
-                            ?>
+                        ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">

@@ -46,9 +46,9 @@ include_once 'sidenav.php';
                                                 <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
                                                 <li><?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></li>
                                                 <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-forward"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -110,9 +110,9 @@ include_once 'sidenav.php';
                                                         <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
                                                         <li><?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></li>
                                                         <li>
-                                                            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                                            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
                                                             &emsp;
-                                                            <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-forward"></i></span>
+                                                            <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
                                                         </li>
                                                     </ul>
                                                     <ul class="more-content">
@@ -177,7 +177,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
                                                 <li><?php echo $row["tfname"] . " " . $row["tlname"] ?></li>
                                                 <li>
-                                                    <span onclick="openModel('addPaymentModel','model-Btn3')" class="model-Btn3"><i class="fa fa-check-square"></i></span>
+                                                    <span onclick="openModel('addPaymentModel','model-Btn3')" class="model-Btn3" title="Complete Task"><i class="fa fa-check-square"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">

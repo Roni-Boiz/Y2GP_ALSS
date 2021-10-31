@@ -102,7 +102,7 @@ include_once 'sidenav.php';
                                     <h3>Other</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    30
+                                    15
                                 </div>
                             </div>
                         </div>
@@ -112,11 +112,11 @@ include_once 'sidenav.php';
 
                 <div class="staffPlotDetaills card">
                     <div class="chartContainer">
-                        <canvas id="employeeChart">
+                        <canvas id="employeeGrowthChart">
                         </canvas>
                     </div>
 
-                    <div class="chartContainer" style="height: 360px; width: 360px;">
+                    <div class="chartContainer">
                         <canvas id="employeePercentageChart">
                         </canvas>
                     </div>
@@ -124,7 +124,7 @@ include_once 'sidenav.php';
 
                 <div class="empsearch">
                     <input type="text" name="search" placeholder="Search.." class="mySearch">
-                    <span onclick="openModel('model','addBtn')" class="addBtn"><i class="fas fa-user-plus"></i></span>
+                    <span onclick="openModel('model','addBtn')" class="addBtn" title="Add Employee"><i class="fas fa-user-plus"></i></span>
                     <div>
                         <span style="display: inline-block;"> Manager <i class="fa fa-square" style="color: #52D29A;"></i></span>
                         <span style="display: inline-block;"> Receptionist <i class="fa fa-square" style="color: #AA9150;"></i></span>
@@ -291,7 +291,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -320,7 +320,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Receptionist"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -349,7 +349,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove P. Officer"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -379,9 +379,9 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
                                     <li>
-                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Trainer"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
@@ -411,7 +411,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Technician"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -441,9 +441,9 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
                                     <li>
-                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span>
+                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Treater"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
@@ -466,15 +466,15 @@ include_once 'sidenav.php';
     </div>
 
     <script>
-        let chart1 = document.getElementById('employeeChart').getContext('2d');
+        let chart1 = document.getElementById('employeeGrowthChart').getContext('2d');
         let massChart1 = new Chart(chart1, {
             type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
             data: {
-                labels: ['Manager', 'Reseptionist', 'Trainer', 'Parking Officers'],
+                labels: ['2018', '2019', '2020', '2021'],
                 datasets: [{
                     label: 'Employee',
                     data: [
-                        8, 3, 4, 5
+                        10, 15, 25, 30
                     ],
                     // backgroundColor : '#423D59',
                     backgroundColor: [
@@ -506,13 +506,13 @@ include_once 'sidenav.php';
 
         let chart2 = document.getElementById('employeePercentageChart').getContext('2d');
         let massChart2 = new Chart(chart2, {
-            type: 'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
             data: {
-                labels: ['Manager', 'Reseptionist', 'Trainer', 'Parking Officers'],
+                labels: ['Managers', 'Reseptionists', 'Trainers', 'Treaters', 'Parking Officers', 'Others'],
                 datasets: [{
                     label: 'Employee',
                     data: [
-                        3, 4, 5, 6
+                        8, 3, 4, 4, 5, 15
                     ],
                     // backgroundColor : '#423D59',
                     backgroundColor: [
@@ -528,14 +528,14 @@ include_once 'sidenav.php';
                 plugins: {
                     legend: {
                         display: true,
-                        // position: 'center',
+                        position: 'bottom',
                         labels: {
                             fontColor: '#000'
                         }
                     },
                     title: {
-                        display: false,
-                        text: 'Employability Rate',
+                        display: true,
+                        text: 'Employee Percentage Chart',
                         fontSize: 25
                     },
                 },
