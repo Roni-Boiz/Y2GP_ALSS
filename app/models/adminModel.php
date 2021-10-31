@@ -125,7 +125,7 @@ class adminModel extends model
 
             if ($result1 && $result2) {
                 $receiver = "chathus.m1999@gmail.com";
-                $subject = "Hawlock RYNC Employee Login Details";
+                $subject = "Hawlock City Employee Login Credentials";
                 $body = "Your Username : " . $username . " and password : " . $password;
                 $sender = "From:hawlockrycn@gmail.com";
                 mail($receiver, $subject, $body, $sender);
