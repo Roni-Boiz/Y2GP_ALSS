@@ -58,7 +58,7 @@
                 </li>
                 <li><a href="payment"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
                 <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
-                <li><a href="complaint"><i class="fas fa-address-book"></i>CONTACT US</a></li>
+                <li><a href="complaint"><i class="fas fa-question-circle"></i>HELP</a></li>
             </ul>
         </nav>
 

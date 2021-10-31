@@ -23,6 +23,15 @@ class homeModel extends model
 
     public function readLogin($username, $password)
     {
+
+        //unset cookie
+        if(isset($_COOKIE['hold'])) {
+            if($_COOKIE['hold'] == 'fogot'){
+                setcookie('hold', '' , time() -86400, '/');
+            }
+        }
+
+
         $errors = array();
         date_default_timezone_set("Asia/Colombo");
         $time = date('Y-m-d H:i:s', time());
@@ -68,12 +77,12 @@ class homeModel extends model
 
             if ($resultSet) {
                 if (mysqli_num_rows($resultSet) == 1) {
-                    $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                    $errors[] = "Your Account is on Hold for {$timeDiff} minutes";
                     return $errors;
                 } else {
                     $addHold = "UPDATE user_account SET hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
                     $resultAdd = mysqli_query($this->conn, $addHold);
-                    $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                    $errors[] = "Your Account is on Hold for {$timeDiff} minutes";
                     return $errors;
                 }
             }
@@ -97,6 +106,13 @@ class homeModel extends model
                         $_SESSION['type'] = $user['type'];
                         $_SESSION['profilePic'] = $user['profile_pic'];
 
+                        if($user['type'] == 'resident'){
+                            $Res = "SELECT resident_id FROM resident WHERE user_id = '{$user['user_id']}' limit 1";
+                            $resData = mysqli_query($this->conn, $Res);
+
+                            $Resident = mysqli_fetch_assoc($resData);
+                            $_SESSION['residentId'] = $user['resident_id'];
+                        }
                         //Gets the IP Address from the visitor
                         $PublicIP =  get_client_ip(); //get_client_ip();  //"112.135.65.171"
                         if ($PublicIP != "::1") {
@@ -121,7 +137,16 @@ class homeModel extends model
                             $attempt = $hold['hold'] + 1;
                             $addHold = "UPDATE user_account SET hold = '{$attempt}', hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
                             $resultSet = mysqli_query($this->conn, $addHold);
-                            header('Location:fogotPassword');
+
+                            //set cookie
+                            $val = 'fogot';
+                            $_COOKIE['hold'] = $val;
+                            // $cookie_name = "hold";
+                            // $cookie_value = "fogot";
+                            // setcookie($cookie_name, $cookie_value);
+
+
+                            // header('Location:fogotPassword');
                             return $errors;
                         } else if (isset($hold['hold']) && $hold['hold'] >= 0) {
                             $attempt = $hold['hold'] + 1;
@@ -174,7 +199,7 @@ class homeModel extends model
                     $change = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
                     $resultuser = mysqli_query($this->conn, $change);
                     if ($resultuser) {
-                        $receiver = "$email";
+                        $receiver = $email;
                         $subject = "Hawlock RYCN details";
                         $body = "Your new password is : " . $newPassword;
                         $sender = "From:hawlockrycn@gmail.com";

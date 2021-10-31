@@ -59,22 +59,30 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Upcoming Reservations. . .</h3>
                         </div>
+                        <?php
+                        if ($this->latest->num_rows > 0) { 
+                            while ($row = $this->latest->fetch_assoc()) {
+                            ?>
                         <div class="detail">
                             <div>
                                 <div class="detail-info">
-                                    <h5>2021-10-28 - 16:00</h5>
-                                    <small>Coach Kasun</small>
+                                    <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
+                                    <small><?php echo $row["fname"]." ".$row["lname"] ?></small>
                                 </div>
                             </div>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-30 - 10:00</h5>
-                                    <small>Coach Kasun</small>
+                        <?php
+                            }
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No Upcomings . . ."?></h5>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php
+                        } ?>
 
                     </div>
                     <br>
@@ -85,14 +93,14 @@ include_once 'sidenav.php';
                         <div class="detail">
                             <img src="../../public/img/user.png" alt="user" />
                             <div class="detail-info">
-                                <h5>Nimal Ranathunga</h5>
+                                <h5>Chamara Supun</h5>
                                 <small>TR001</small>
                             </div>
                         </div>
                         <div class="detail">
                             <img src="../../public/img/user.png" alt="user" />
                             <div class="detail-info">
-                                <h5>Kasun Silva</h5>
+                                <h5>Saman Silva</h5>
                                 <small>TR002</small>
                             </div>
                         </div>

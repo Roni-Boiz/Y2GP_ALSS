@@ -25,6 +25,7 @@ class residentController extends controller{
     public function profile(){
         $this->view->users = $this->model->readResident();
         $this->view->members = $this->model->readMembers();
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('resident/profileView');
     }
     // edit profile
@@ -55,6 +56,7 @@ class residentController extends controller{
         $this->view->hall=$this->model->hallReservation($id);
         $this->view->fitness=$this->model->fitnessReservation($id);
         $this->view->treatment=$this->model->treatmentReservation($id);
+        $this->view->parking=$this->model->parkingReservation($id);
         $this->view->render('resident/yourReservationView');
     }
     public function removeReservation(){
@@ -69,18 +71,27 @@ class residentController extends controller{
     }
 
     public function fitness(){
+        $id=$_SESSION['userId'];
+        $this->view->latest=$this->model->latestfitness($id);
         $this->view->render('resident/fitnessCentreView');
     }
 
     public function treatment(){
+        $id=$_SESSION['userId'];
+        $this->view->latest=$this->model->latesttreatment($id);
         $this->view->render('resident/treatmentRoomView');
     }
 
     public function hall(){
+        $id=$_SESSION['userId'];
+        $this->view->latestfun=$this->model->latesthallfun($id);
+        $this->view->latestcon=$this->model->latesthallcon($id);
         $this->view->render('resident/hallView');
     }
 
     public function parking(){
+        $id=$_SESSION['userId'];
+        $this->view->latest=$this->model->latestparking($id);
         $this->view->slots=$this->model->viewSlots();
         $this->view->render('resident/parkingSlotView');
     }

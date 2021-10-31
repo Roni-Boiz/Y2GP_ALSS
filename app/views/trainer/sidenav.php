@@ -19,7 +19,7 @@
             <h2>AlSS</h2>
             <div class="head">
                 <ul>
-                    <li class="dropdown"><a href="#"><img src="../../uploads/profile/resident/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
+                    <li class="dropdown"><a href="#"><img src="../../uploads/profile/employee/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
                         <ul>
                             <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a></li>
                             <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
@@ -34,33 +34,9 @@
         <nav class="sidebar" id="side">
             <ul>
             <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
-            
-                <li><a href="reservations"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
-                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>ADD SCHEDULE</a></li>
+                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
             </ul>
         </nav>
 
-    
-<script>
-    /* show sidebar */
-    $('.btn').click(function(){
-    $(this).toggleClass("click");
-    $('.sidebar').toggleClass("show");
-    });
-    /* hide the sidenav */
-    function expand(){
-        if(document.getElementById("hh").style.gridColumn=="1 / span 3"){ 
-            document.getElementById("hh").style.gridColumn="2";
-            document.getElementById("hb").style.gridColumn="2"; 
-            document.getElementById("hh").style.marginLeft="20px";
-            document.getElementById("hb").style.marginLeft="20px";
-            document.getElementById("side").style.transform="initial";
-        }else{
-            document.getElementById("hh").style.gridColumn="1 / span 3";
-            document.getElementById("hb").style.gridColumn="1 / span 3"; 
-            document.getElementById("hh").style.marginLeft="50px";
-            document.getElementById("hb").style.marginLeft="50px";
-            document.getElementById("side").style.transform="rotateY(180deg)";/* icon only */ 
-        } 
-    }
-</script>
+
+<script type="text/javascript" src="../../public/js/trainer.js"></script>

@@ -247,6 +247,34 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
+////////////////////////////////////////////////////
+function openModel(amodel, amodelBtn) {
+
+   const model = document.getElementById(amodel);
+   const modelBtn = document.getElementsByClassName(amodelBtn);
+   const ans = document.getElementById("answer");
+   const closeBtn = document.getElementsByClassName("closebtn");
+
+   for (var i = 0; i < modelBtn.length; i++) {
+       modelBtn[i].addEventListener('click', showModel, false);
+   }
+
+   function showModel() {
+       document.getElementById("myCanvasNav").style.width = "100%";
+       document.getElementById("myCanvasNav").style.opacity = "0.8";
+       model.className = "open";
+   }
+
+   for (var i = 0; i < closeBtn.length; i++) {
+       closeBtn[i].addEventListener('click', closeModel, false);
+   }
+
+   function closeModel() {
+       document.getElementById("myCanvasNav").style.width = "0%";
+       document.getElementById("myCanvasNav").style.opacity = "0";
+       model.className = "close";
+   }
+}
 // delete row and hide for value addition
 function deleteRes(id, type) {
    r = confirm("Are you sure?");

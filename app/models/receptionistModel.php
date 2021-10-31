@@ -160,7 +160,8 @@ class receptionistModel extends model {
             return $result;
         }
         public function readPreviousVisitor(){
-            $sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
+            //$sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             $result = $this->conn->query($sql);   
             return $result;
         }
@@ -240,6 +241,19 @@ class receptionistModel extends model {
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function getStats(){
+        $sql= "SELECT COUNT(apartment_no) as stat FROM apartment";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
+
     
 }
 ?>

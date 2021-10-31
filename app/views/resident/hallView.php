@@ -51,24 +51,26 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Upcoming Functions. . .</h3>
+                            <h3>Upcoming Functions . . .</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-28 - 16:00</h5>
-                                    <small>10 Members</small>
+                        <?php
+                        if ($this->latestfun->num_rows > 0) {
+                            while ($row = $this->latestfun->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>2021-10-30 - 10:00</h5>
-                                    <small>50 Members</small>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                            }
+                        } else {
+                            echo "No Upcomings...";
+                        } ?>
+
 
                     </div>
                     <br>
@@ -76,81 +78,95 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Upcoming Meetings. . .</h3>
                         </div>
-                        <div class="detail">
-                            <div class="detail-info">
-                                <h5>2021-10-30 - 10:00</h5>
-                                <small>5 Members</small>
+                        <?php
+                        if ($this->latestcon->num_rows > 0) {
+                            while ($row = $this->latestcon->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="detail">
-                            <div class="detail-info">
-                                <h5>2021-10-30 - 10:00</h5>
-                                <small>10 Members</small>
-                            </div>
-                        </div>
+                        <?php
+                        } ?>
                     </div>
+
                 </div>
             </div>
+        </div>
 
-            <div class="divPopupModel">
-                <p id="answer"></p>
+        <div class="divPopupModel">
+            <p id="answer"></p>
 
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="model">
+            <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+            <div id="model">
 
-                    <div style="text-align: center;">
-                        <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
-                    </div>
-
-                    <form action="#" class="reservationtime" method="GET">
-                        <div id="col1">
-                            <input type="radio" name="type" value="function">
-                            <label>Function </label>
-                            <input type="radio" name="type" value="conference">
-                            <label>Conference</label><br><br>
-                        </div>
-
-                        <div id="col1">
-                            <label>No of Members</label><br>
-                            <input type="text" name="members" class="input-field" placeholder="MAX 50">
-                        </div>
-                        <div id="col1">
-                            <label>Start Time</label><br>
-                            <select name="starttime" class="input-field" placeholder="Start Time">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select><br>
-                            <label>End Time</label><br>
-                            <select name="endtime" class="input-field" placeholder="End Time">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <br>
-                        <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
-                    </form>
+                <div style="text-align: center;">
+                    <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                 </div>
 
+                <form action="#" class="reservationtime" method="GET">
+                    <div id="col1">
+                        <input type="radio" name="type" value="function">
+                        <label>Function </label>
+                        <input type="radio" name="type" value="conference">
+                        <label>Conference</label><br><br>
+                    </div>
+
+                    <div id="col1">
+                        <label>No of Members</label><br>
+                        <input type="text" name="members" class="input-field" placeholder="MAX 50">
+                    </div>
+                    <div id="col1">
+                        <label>Start Time</label><br>
+                        <select name="starttime" class="input-field" placeholder="Start Time">
+                            <option value="">Select Time</option>
+                            <?php
+                            for ($hours = 6; $hours < 24; $hours++) {
+                                for ($mins = 0; $mins < 60; $mins += 30) {
+                            ?>
+                                    <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select><br>
+                        <label>End Time</label><br>
+                        <select name="endtime" class="input-field" placeholder="End Time">
+                            <option value="">Select Time</option>
+                            <?php
+                            for ($hours = 6; $hours < 24; $hours++) {
+                                for ($mins = 0; $mins < 60; $mins += 30) {
+                            ?>
+                                    <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <br>
+                    <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
+                </form>
             </div>
 
+        </div>
 
-        </div> <!-- .hawlockbody div closed here -->
+
+    </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
 <script>

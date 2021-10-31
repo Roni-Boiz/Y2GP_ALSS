@@ -52,7 +52,7 @@ include_once 'sidenav.php';
                                     <div>
                                         <div class="detail-info">
                                             <h5><?php echo $row["amount"]." LKR"; ?></h5>
-                                            <small><?php echo $row["dateaffect"]; ?></small>
+                                            <small><?php echo $row["paid_date"]; ?></small>
                                         </div>
                                     </div>
                                 </div>

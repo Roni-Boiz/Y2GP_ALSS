@@ -47,6 +47,7 @@ include_once 'sidenav.php';
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                        <!-- <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li> -->
                                                         <li><?php echo $row["visitor_id"]; ?></li>
                                                         <li><?php echo $row["apartment_no"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
@@ -71,6 +72,25 @@ include_once 'sidenav.php';
                                 </section>
 
                             </div>
+                            <div class="divPopupModel">
+                                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                                <div id="deleteModel">
+                                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                                    <div style="text-align: center; margin-bottom: 10px;">
+                                        <h2>Are You Sure ?</h2>
+                                    </div>
+                                    <form action="#" class="formDelete" method="GET">
+                                        <div>
+                                            <label> Delete User With User ID </label>
+                                            <span><?= "UID1234" ?></span>
+                                        </div>
+                                        <div>
+                                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -84,7 +104,8 @@ include_once 'sidenav.php';
                                         <ul>
                                             <li>Vistor ID</li>
                                             <li>Visitor Name</li>
-                                            <li>Resident Id</li>
+                                            <li>Apartment No</li>
+                                            <li>Description</li>
                                         </ul>
                                     </main>
 
@@ -98,14 +119,15 @@ include_once 'sidenav.php';
                                                     <ul>
                                                         <li><?php echo $row["visitor_id"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
-                                                        <li><?php echo $row["resident_id"]; ?></li>
+                                                        <li><?php echo $row["apartment_no"]; ?></li>
+                                                        <li><?php echo $row["description"]; ?></li>
 
                                                     </ul>
-                                                    <ul class="more-content">
+                                                    <!-- <ul class="more-content">
                                                         <li>
                                                             <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
                                                         </li>
-                                                    </ul>
+                                                    </ul> -->
 
                                                 </article>
                                             </span>
@@ -124,7 +146,7 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                 </div>
-                <div class="rightPanel" style="margin-top:30px">
+                <!-- <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Upcoming Activities . . .</h3>
@@ -143,11 +165,11 @@ include_once 'sidenav.php';
                                             <small><?php echo $row["description"]; ?></small>
                                         </div>
                                     </div>
-                                </div>
-                    <?php
+                                </div> -->
+            <?php
                             } ?>
 
-                    <?php
+        <?php
                         } else {
                             echo "No Activities";
                         } ?>

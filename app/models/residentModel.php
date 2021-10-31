@@ -68,32 +68,57 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function latesthall($id){
-        
+    public function latesthallfun($id){
+        $d=date('Y-m-d') ;
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date > '$d'  AND  type='function' AND cancelled_time IS NULL LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function latesthallcon($id){
+        $d=date('Y-m-d') ;
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date > '$d'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function treatmentReservation($id){
         $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }   
-    public function latestreatment($id){
-        
+    public function latesttreatment($id){
+        $d=date('Y-m-d') ;
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     } 
     public function fitnessReservation($id){
-        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f natural join trainer as t WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $d=date('Y-m-d') ;
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d'";
         $result = $this->conn->query($sql);
         return $result;
     }
     public function latestfitness($id){
-        
+        $d=date('Y-m-d') ;
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function viewSlots(){
         $sql = "SELECT * from parking_slot";
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function parkingReservation($id){
+        $d=date('Y-m-d') ;
+        $sql = "SELECT * FROM  parking_slot_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > $d";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
     public function latestparking($id){
-        
+        $d=date('Y-m-d') ;
+        $sql = "SELECT * FROM  parking_slot_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > $d LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
     }
     public function removeReservation(){
         date_default_timezone_set("Asia/Colombo");
@@ -195,7 +220,7 @@ class residentModel extends model {
         return $result;
     }
     public function pay($id){
-        $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY dateaffect DESC LIMIT 5";
+        $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY paid_date DESC LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -205,6 +230,14 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    //location
+    public function getLoginDevices($id)
+    {
+        $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
 
 
 }

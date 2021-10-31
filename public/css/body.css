@@ -596,7 +596,9 @@ select{
   text-decoration: none;
   color:white;
 }
-
+.tabs .detail h5{
+  color:black;
+}
 /* Tab section */
 .tabs .tab{
   display:none;

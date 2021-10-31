@@ -25,6 +25,7 @@ class receptionistController extends controller{
 
     public function register(){
         $this->view->apartments = $this->model->readApartment();
+        $this->view->count = $this->model->getStats();
         $this->view->render('receptionist/registerResidentView');
     }
 
@@ -42,8 +43,10 @@ class receptionistController extends controller{
     public function profile(){
         $this->loadModel('profileModel');
         $this->view->users = $this->model->profile();
+        $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('receptionist/profileView');
         $this->model->editProfile();
+
     }
     public function editProfile(){
         $fname=$_POST["fname"];
