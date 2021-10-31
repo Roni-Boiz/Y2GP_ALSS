@@ -74,7 +74,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel" style="margin-top:30px">
                     <div class="holdAccount">
                         <div class="head">
-                            <h3>Outgoing Vehicles. . .</h3>
+                            <h3>Outgoing Vehicles . . .</h3>
                         </div>
                         <div class="detail">
                             <div>
@@ -92,12 +92,20 @@ include_once 'sidenav.php';
                                 </div>
                             </div>
                         </div>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5>ZZZ-1478</h5>
+                                    <small>S. Gunasekara</small><small> 12:30</small>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <br>
                     <div class="activeUsers">
                         <div class="head">
-                            <h3>OverDue Vehicles</h3>
+                            <h3>OverDue Vehicles . . .</h3>
                         </div>
                         <div class="detail">
                             <div class="detail-info">

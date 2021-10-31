@@ -67,7 +67,7 @@ include_once 'sidenav.php';
                             <div>
                                 <div class="detail-info">
                                     <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
-                                    <small><?php echo $row["fname"]." ".$row["lname"]; ?></small>
+                                    <small><?php echo $row["fname"]." ".$row["lname"] ?></small>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ include_once 'sidenav.php';
                             <div class="detail">
                                 <div>
                                     <div class="detail-info">
-                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                        <h5><?php echo "No Upcomings . . ."?></h5>
                                     </div>
                                 </div>
                             </div>
