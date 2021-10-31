@@ -1410,16 +1410,16 @@ select{
   display: flex;
   flex-direction: column;
   margin: 10px 15px;
-  display: inline-block;
+  /* display: inline-block; */
   padding: 10px;
   justify-content: cente;
   align-items: center;
   text-align: center;
 }
 
-.staffPlotDetaills div:nth-child(2) {
-  height: 300px;
-  width: 400px;
+.staffPlotDetaills div {
+  width: 100%;
+  max-width: 400px;
 }
 
 #employeeCard .empsearch input[type=text] {
@@ -1674,7 +1674,8 @@ select{
 }
 
 .holdAccount .detail> :nth-child(1) {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50px 1fr 45px;
 }
 
 .holdAccount .detail i {
@@ -1713,20 +1714,29 @@ select{
 
 .activeUsers .detail {
   margin: 10px;
-  display: flex;
+  display: grid;
+  grid-template-rows: 1fr;
   box-shadow: 0 2px 20px rgb(0 0 0 / 20%);
   align-items: center;
   padding: 5px;
   border-radius: 10px;
 }
 
+.activeUsers .detail> :nth-child(1) {
+  display: grid;
+  grid-template-columns: 50px 1fr 45px;
+}
+
+.activeUsers .detail span{
+  margin: auto;
+}
+
 .activeUsers .detail i {
   padding: 0px;
-  padding-left: 30px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 10px;
   color: #1d6e4b;
-  float: right;
 }
 
 .row i {
@@ -1746,6 +1756,10 @@ select{
 
 .row .model-Btn2 i:hover{
   color: rgb(14, 161, 206);
+}
+
+.row .model-Btn3 i:hover{
+  color: rgb(38, 153, 73);
 }
 /* End of user view styles */
 /* End of Admin Styles */

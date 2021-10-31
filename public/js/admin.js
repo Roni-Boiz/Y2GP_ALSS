@@ -329,4 +329,4 @@ $(".mySearch").on('keyup', function () {
           $(this).hide();
        }
     });
- })
+})
