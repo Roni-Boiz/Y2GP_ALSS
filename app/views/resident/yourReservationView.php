@@ -17,7 +17,7 @@ include_once 'sidenav.php';
                     <li class="active"><a href="#tab1">Hall</a></li>
                     <li><a href="#tab2">Fitness Centre</a></li>
                     <li><a href="#tab3">Treatment Room</a></li>
-                    <li><a href="#tab3">Parking Slot</a></li>
+                    <li><a href="#tab4">Parking Slot</a></li>
                 </ul>
                 <br>
                 <!-- for search row --><br>
@@ -174,7 +174,103 @@ include_once 'sidenav.php';
                     </div>
                     </p>
                 </div>
+                <div id="tab4" class="tab">
+                    <p style="color:black">
+                    <div style="overflow-x:auto;grid-column:1/span2">
+                        <!-- treatment -->
+                        <section class="wrapper">
+                            <main class="row title">
+                                <ul>
+                                    <li>Action</li>
+                                    <li>Reservation ID</li>
+                                    <li>Reservation Date</li>
+                                    <li>Reservation Time</li>
+                                    <li>Vehicle No</li>
+                                </ul>
+                            </main>
+                            <?php
+                            if ($this->parking->num_rows > 0) { ?>
+                                <?php
+                                while ($row = $this->parking->fetch_assoc()) {
+                                ?>
+                                <span id="searchrow">
+                                    <article class="row mlb">
+                                        <ul>
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat')">
+                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                            <li><?php echo $row["reservation_id"]; ?></li>
+                                            <li><?php echo $row["date"]; ?></li>
+                                            <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
+                                            <li><?php echo $row["vehicle_no"]; ?></li>
+                                        </ul>
+                                        <ul class="more-content">
+                                            <li>
+                                                <span style="padding-right: 20px;">Reserved Date : <?php echo $row["reserved_time"] ?></span>
+                                            </li>
+                                        </ul>
+
+                                    </article>
+                                </span>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
+                        </section>
+                    </div>
+                    </p>
+                </div>
             </div>
+            <!-- show first model -->
+            <span onclick="openModel('editModel','addBtn')" class="addBtn">Btn</span>
+            <!-- show second model -->
+            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1">Btn</span>
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                <a href="javascript:void(0)" class="closebtn">&times;</a>
+                <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Are You Sure ?</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                        <label> Delete Reservation  With Reservation ID </label>
+                            <span><?= "2" ?></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                        </div>
+
+                    </form>
+                    
+                </div>
+            </div>
+            <!-- secondmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="deleteModel">
+                <a href="javascript:void(0)" class="closebtn">&times;</a>
+
+                <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Are You Sure ?</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Delete Reservation  With Reservation ID </label>
+                            <span><?= "2" ?></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
