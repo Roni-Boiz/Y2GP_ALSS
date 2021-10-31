@@ -45,7 +45,7 @@ class managerModel extends model {
     }
 
     public function getAllComplaints(){
-        $sql = "SELECT complaint.*,resident.fname,resident.lname,resident.apartment_no FROM complaint LEFT JOIN resident ON complaint.resident_id = resident.resident_id";
+        $sql = "SELECT complaint.*,resident.fname,resident.lname,resident.apartment_no FROM complaint LEFT JOIN resident ON complaint.resident_id = resident.resident_id ORDER BY date_time DESC";
         return $this->conn->query($sql);
     }
 
