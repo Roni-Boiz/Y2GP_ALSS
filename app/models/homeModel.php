@@ -77,12 +77,12 @@ class homeModel extends model
 
             if ($resultSet) {
                 if (mysqli_num_rows($resultSet) == 1) {
-                    $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                    $errors[] = "Your Account is on Hold for {$timeDiff} minutes";
                     return $errors;
                 } else {
                     $addHold = "UPDATE user_account SET hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
                     $resultAdd = mysqli_query($this->conn, $addHold);
-                    $errors[] = "Your Account is Hold for {$timeDiff} minutes";
+                    $errors[] = "Your Account is on Hold for {$timeDiff} minutes";
                     return $errors;
                 }
             }
@@ -199,7 +199,7 @@ class homeModel extends model
                     $change = "UPDATE user_account SET password = '{$hash2password}' WHERE user_id='{$userId}' limit 1";
                     $resultuser = mysqli_query($this->conn, $change);
                     if ($resultuser) {
-                        $receiver = "$email";
+                        $receiver = $email;
                         $subject = "Hawlock RYCN details";
                         $body = "Your new password is : " . $newPassword;
                         $sender = "From:hawlockrycn@gmail.com";

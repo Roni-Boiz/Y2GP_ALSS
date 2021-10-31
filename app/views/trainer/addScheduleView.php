@@ -1,6 +1,50 @@
 <?php
 include_once 'sidenav.php';
 ?>
+<style>
+    .reservation_search input[type=text]{
+        width: 200px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../../public/img/searchicon.png');
+  background-position: 7px 15px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  align-items: center;
+  justify-content: center;
+    }
+
+    .reservation_search .addBtn {
+  background: #d9d9d9;
+  color: #555;
+  float: right;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
+}
+
+.reservation_search .addBtn i {
+  padding: 11px;
+  font-size: 30px;
+  color: #110B2E;
+}
+
+.reservation_search .addBtn:hover {
+  background-color: #bbb;
+  display: block;
+}
+
+
+</style>
 </head>
 
 <body style="background-color: gray; background-image:none;">
@@ -9,7 +53,11 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">FITNESS CENTER <span id="city">RESERVATIONS</span></h1>
         </div>
+
         <div id="hb" class="hawlockbody animate-bottom">
+
+
+
             <div class="tabs" style="grid-column:1/span3">
                 <ul class="tabs-list">
                     <li class="active"><a href="#tab1">Reservation History</a></li>
@@ -18,9 +66,13 @@ include_once 'sidenav.php';
                 </ul>
                 <br>
                 <!-- for search row --><br>
-                <div class="search">
-                    <input type="text" id="mySearch"  placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
-                </div>
+                <div class="reservation_search">
+                        <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
+                        <div style="float: right;">
+                            <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser" title="Add User"><i class="fas fa-user-plus"></i></span>
+                        </div>
+                    </div>
+
 
                 <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
@@ -99,8 +151,8 @@ include_once 'sidenav.php';
 
                                         </ul>
                                         <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Resident Name <?php echo $row["resident_fname"] ?></span>
+                                        <li>
+                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>
@@ -147,8 +199,8 @@ include_once 'sidenav.php';
 
                                         </ul>
                                         <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"] ?></span>
+                                        <li>
+                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
                                                 <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
                                             </li>
                                         </ul>
@@ -166,6 +218,53 @@ include_once 'sidenav.php';
                         </section>
                     </div>
                 </div>
+
+                <div class="divPopupModel">
+
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="model">
+
+                            <a href="javascript:void(0)" class="closebtn">&times;</a>
+                            <div style="text-align: center;">
+                                <h1>Add Schedule<i class="fa fa-user"></i></i></h1>
+                            </div>
+
+                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                                <div id="col1">
+                                    <label for="type">Enter Resident ID</label><br>
+                                    <input type="text" id="eid" name="eid" class="input-field" placeholder="Employee ID" required autofocus>
+                                </div>
+
+                                <div class="profile-pic" id="col2">
+                                    <img src="../../public/img/blank-profile.png" id="photo">
+                                    <input type="file" id="file" name="file">
+                                    <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Choose Photo</label>
+                                </div>
+
+                                <div id="col1">
+                                    <label for="fname">First Name</label><br>
+                                    <input type="text" id="fname" name="fname" class="input-field" placeholder="John" readonly>
+                                </div>
+
+                                <div id="col2">
+                                    <label for="lname">Last Name</label><br>
+                                    <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" readonly>
+                                </div>
+
+                                <div id="col1">
+                                    <label for="email">Email Address</label><br>
+                                    <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" readonly>
+                                </div>
+
+                                <div id="col2">
+                                    <label for="cno">Contact Number</label><br>
+                                    <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" readonly>
+                                </div>
+
+                                <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="Create">
+                            </form>
+                        </div>
+                    </div>
 
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
