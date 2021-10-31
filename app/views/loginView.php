@@ -325,6 +325,17 @@ input[type=submit]:hover {
         <div class="description">
           <h1>Login</h1>
           <?php 
+
+          if(isset($_COOKIE['hold'])){
+            // if($_COOKIE['hold'] == 'fogot'){
+              // echo $_COOKIE['hold'];
+              echo "<script>";
+              echo "r = confirm('Do you want to change password?');";
+              echo "if (r == true) {window.location = 'http:fogotPassword';}";
+              echo "</script>";
+            // }
+          }
+
           if(isset($this->errors) && sizeof($this->errors)>0){ ?>
             <div class="red_alert">
                 <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>

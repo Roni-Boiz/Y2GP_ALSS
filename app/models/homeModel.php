@@ -23,6 +23,15 @@ class homeModel extends model
 
     public function readLogin($username, $password)
     {
+
+        //unset cookie
+        if(isset($_COOKIE['hold'])) {
+            if($_COOKIE['hold'] == 'fogot'){
+                setcookie('hold', '' , time() -86400, '/');
+            }
+        }
+
+
         $errors = array();
         date_default_timezone_set("Asia/Colombo");
         $time = date('Y-m-d H:i:s', time());
@@ -128,7 +137,16 @@ class homeModel extends model
                             $attempt = $hold['hold'] + 1;
                             $addHold = "UPDATE user_account SET hold = '{$attempt}', hold_time = '{$time}' WHERE user_name='{$sqlfreeusername}' limit 1";
                             $resultSet = mysqli_query($this->conn, $addHold);
-                            header('Location:fogotPassword');
+
+                            //set cookie
+                            $val = 'fogot';
+                            $_COOKIE['hold'] = $val;
+                            // $cookie_name = "hold";
+                            // $cookie_value = "fogot";
+                            // setcookie($cookie_name, $cookie_value);
+
+
+                            // header('Location:fogotPassword');
                             return $errors;
                         } else if (isset($hold['hold']) && $hold['hold'] >= 0) {
                             $attempt = $hold['hold'] + 1;
