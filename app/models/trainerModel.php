@@ -19,21 +19,21 @@ class trainerModel extends model {
 
     public function getReservationHistory(){
         $today = date('Y-m-d');
-        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date < '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ";
+        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date < '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ORDER BY date DESC;";
         $result = $this->conn->query($sql);   
         return $result;
 
     }
     public function getReservationToday(){
         $today = date('Y-m-d');
-        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date = '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ";
+        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date = '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ORDER BY start_time ASC;";
         $result = $this->conn->query($sql);   
         return $result;
 
     }
     public function getReservationUpcoming(){
         $today = date('Y-m-d');
-        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date > '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ";
+        $sql = "SELECT trainer.fname AS trainer_fname , resident.fname AS resident_fname , resident.lname AS resident_lname , date ,start_time , end_time ,reserved_time , reservation_id  FROM fitness_centre_reservation , resident , trainer WHERE date > '$today' AND fitness_centre_reservation.resident_id = resident.resident_id  AND fitness_centre_reservation.employee_id = trainer.employee_id ORDER BY date ASC; ";
         $result = $this->conn->query($sql);   
         return $result;
 
