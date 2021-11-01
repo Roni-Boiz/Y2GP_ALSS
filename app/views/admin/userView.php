@@ -204,7 +204,7 @@ include_once 'sidenav.php';
                 </div>
 
                 <div class="rightPanel">
-                    <div class="holdAccount">
+                    <div class="holdAccount adminHoldAccount">
                         <div class="head">
                             <h3>Hold Accounts</h3>
                         </div>
@@ -213,28 +213,36 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user3.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Ronila Sanjula</h5>
-                                    <small>AD001</small>
+                                    <small>RA0001</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fas fa-user-check"></i></span>
                             </div>
-                            <div class="moreContent">More Details About me</div>
+                            <div class="moreContent">
+                                <span><h5>Apartment No : AP001</h5></span>
+                                <span><h5>NIC : 882323343v</h5></span>
+                                <span><h5>Email : ronila@gmail.com</h5></span>
+                            </div>
                         </div>
                         <div class="detail">
                             <div>
                                 <img src="../../public/img/user1.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Chatura Mano</h5>
-                                    <small>RA001</small>
+                                    <small>RA0002</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fas fa-user-check"></i></span>
                             </div>
 
-                            <div class="moreContent">More Details About me</div>
+                            <div class="moreContent">
+                                <span><h5>Apartment No : AP002</h5></span>
+                                <span><h5>NIC : 852323343v</h5></span>
+                                <span><h5>Email : chatura@gmail.com</h5></span>
+                            </div>
                         </div>
 
                     </div>
                     <br>
-                    <div class="activeUsers">
+                    <div class="activeUsers adminActiveUsers">
                         <div class="head">
                             <h3>Current Online Users</h3>
                         </div>
@@ -243,7 +251,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user4.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Ronila Sanjula</h5>
-                                    <small>AD001</small>
+                                    <small>AD0001</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
@@ -254,7 +262,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user1.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Nishad Yashintha</h5>
-                                    <small>AD002</small>
+                                    <small>RE0002</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
@@ -264,7 +272,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user3.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Chatura Manohara</h5>
-                                    <small>AD003</small>
+                                    <small>RA0003</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
@@ -274,7 +282,7 @@ include_once 'sidenav.php';
                                 <img src="../../public/img/user2.jpg" alt="user" />
                                 <div class="detail-info">
                                     <h5>Nipuna Dasanayaka</h5>
-                                    <small>AD004</small>
+                                    <small>LA0004</small>
                                 </div>
                                 <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>

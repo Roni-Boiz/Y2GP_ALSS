@@ -1676,7 +1676,11 @@ select{
 }
 
 .holdAccount .detail> :nth-child(1) {
-  display: grid;
+  display: flex;
+}
+
+.adminHoldAccount .detail> :nth-child(1){
+  display: grid !important;
   grid-template-columns: 50px 1fr 45px;
 }
 
@@ -1696,7 +1700,7 @@ select{
 
 .holdAccount .detail:hover {
   display: block;
-  height: 100px;
+  height: 115px;
 }
 
 .activeUsers {
@@ -1716,7 +1720,6 @@ select{
 
 .activeUsers .detail {
   margin: 10px;
-  display: grid;
   grid-template-rows: 1fr;
   box-shadow: 0 2px 20px rgb(0 0 0 / 20%);
   align-items: center;
@@ -1724,8 +1727,12 @@ select{
   border-radius: 10px;
 }
 
-.activeUsers .detail> :nth-child(1) {
+.adminActiveUsers .detail{
   display: grid;
+}
+
+.adminActiveUsers .detail> :nth-child(1) {
+  display: grid !important;
   grid-template-columns: 50px 1fr 45px;
 }
 
@@ -2626,7 +2633,7 @@ ul.more-content li {
 .bio #uploadBtn {
   height: 30px;
   width: 100%;
-  bottom: 8px;
+  bottom: 6px;
   left: 50%;
   transform: translate(-50%);
   text-align: center;
