@@ -52,6 +52,7 @@ class homeModel extends model
         //hashing the password
         $hashpassword = sha1($sqlfreepassword);
         $hash2password = sha1($hashpassword);
+        
         //    echo $password;
         //    echo $hash2password;
 

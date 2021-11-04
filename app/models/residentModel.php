@@ -226,9 +226,8 @@ class residentModel extends model {
     }
     public function complaint($des){
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO complaint(date_time,description,resident_id) VALUES('$date','$des','1')";
-        $result = $this->conn->query($sql);
-        return $result;
+        $sql = "INSERT INTO complaint(date_time,description,resident_id) VALUES('$date','$des',1)";
+        $this->conn->query($sql);
     }
     //location
     public function getLoginDevices($id)
