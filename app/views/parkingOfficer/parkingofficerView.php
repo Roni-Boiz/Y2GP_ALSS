@@ -30,14 +30,14 @@ include_once 'sidenav.php';
                                     <small><?php echo $time ?></small>
                                 </div>
                             </div>
+                            <h4><?php echo $row["topic"]; ?></h4>
+                            <p><?php echo $row["content"]; ?></p>
                         </div>
-                        <h4><?php echo $row["topic"]; ?></h4>
-                        <p><?php echo $row["content"]; ?></p>
-                    </div>
-                    <div class="card-header">
-                        <?php if ($count < 5) $count++;
-                        else $count = 2 ?>
-                        <img src="../../public/img/<?php echo $count ?>.jpg">
+                        <div class="card-header">
+                            <?php if ($count < 5) $count++;
+                            else $count = 2 ?>
+                            <img src="../../public/img/<?php echo $count ?>.jpg">
+                        </div>
                     </div>
             <?php
                 }

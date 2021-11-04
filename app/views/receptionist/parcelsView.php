@@ -72,6 +72,7 @@ include_once 'sidenav.php';
                         <div id="tab2" class="tab">
                             <br>
                             <div class="search">
+
                                 <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
                             </div>
                             <div style="overflow-x:auto;grid-column:1/span2">
