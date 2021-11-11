@@ -96,7 +96,7 @@ include_once 'sidenav.php';
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["request_id"]; ?></li>
                                             <li><?php echo $row["request_date"]; ?></li>
-                                            <li><?php echo $row["request_time"]; ?></li>
+                                            <li><?php echo $row["request_date"]; ?></li>
                                             <li><?php echo $row["type"]; ?></li>
 
                                         </ul>
