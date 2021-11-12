@@ -185,7 +185,7 @@ class residentModel extends model {
         $pid=mysqli_fetch_assoc($this->conn->query($sql1));
         $sql2="UPDATE parcel SET status=2,reached_time='$time' WHERE parcel_id={$pid["view"]}";
         $this->conn->query($sql2);
-        $sql3="UPDATE notification SET view=1 WHERE notification_id='$nid'";
+        $sql3="UPDATE notification SET view=0 WHERE notification_id='$nid'";
         $this->conn->query($sql3);
     }
     public function removeNotification($nid){

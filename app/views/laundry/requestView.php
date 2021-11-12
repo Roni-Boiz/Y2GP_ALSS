@@ -8,7 +8,7 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">LAUNDRY REQUESTS</h1>
+            <h1 id="title">HANDLE LAUNDRY</h1>
         </div>
         <div id="hb" class="hawlockbody">
             <div class="tabs" style="grid-column:1/span3">
@@ -53,7 +53,7 @@ include_once 'sidenav.php';
                                                 </ul>
                                                 <ul class="more-content">
                                                     <li>
-                                                        <span style="padding-right: 20px;">Weight: <?php echo $row1["description"] ?></span>
+                                                        <span style="padding-right: 20px;">Description: <?php echo $row1["description"] ?></span>
                                                     </li>
                                                 </ul>
                                             </article>
@@ -108,7 +108,7 @@ include_once 'sidenav.php';
                                                 </ul>
                                                 <ul class="more-content">
                                                     <li>
-                                                        <span style="padding-right: 20px;">Weight: <?php echo $row2["description"] ?></span>
+                                                        <span style="padding-right: 20px;">Description: <?php echo $row2["description"] ?></span>
                                                     </li>
                                                 </ul>
                                             </article>
@@ -160,7 +160,7 @@ include_once 'sidenav.php';
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="padding-right: 20px;">Weight: <?php echo $row3["description"] ?></span>
+                                                    <span style="padding-right: 20px;">Fee: <?php echo $row3["fee"] ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -198,16 +198,19 @@ include_once 'sidenav.php';
                         <div id="col1">
                             <label for="categories">Category 1</label>
                             <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                            
                         </div>
                         <div id="col2">
                             <input type="checkbox" id="category1" name="category1">
+                            <input type="text" name="quantiy1" id="quantiy1" value="1-5Kg" readonly>
                         </div>
                         <div id="col1">
                             <label for="Categories">Category 2</label><br>
-                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                            <input type="text" name="quantiy1" id="quantiy1" value="8" readonly>
                         </div>
                         <div id="col2">
                             <input type="checkbox" id="category2" name="category2">
+                            <input type="text" name="quantiy1" id="quantiy1" value="5-10Kg" readonly>
                         </div>
                         <div id="col1">
                             <label for="Categories">Category 3</label><br>
@@ -215,12 +218,14 @@ include_once 'sidenav.php';
                         </div>
                         <div id="col2">
                             <input type="checkbox" id="category3" name="category3">
+                            <input type="text" name="quantiy1" id="quantiy1" value="1-5Kg" readonly>
                         </div>
                         <div id="col1">
                             <label for="Categories">Description</label><br>
-                            <textarea class="input-field" name="description" id="description" cols="30" rows="10" readonly>category 1 dry only</textarea>
+                            
                         </div>
-
+                        <textarea style="border-radius:5px;grid-column: 1/span 2 ; width:80%;"  name="description" id="description" cols="60" rows="3" readonly>category 1 dry only</textarea>
+                        <br><br>
                         <div id="col1">
                             <input style="grid-column: 1/span 2; background-color:red" type="submit" name="submit" value="Decline">
                         </div>
@@ -251,22 +256,27 @@ include_once 'sidenav.php';
                         <br>
                         <div id="col1">
                             <label for="categories">Category 1</label>
-
+                            <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg">
                         </div>
                         <div id="col2">
-                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                            <br>
+                            <input type="text" name="quantiy1" id="quantiy1" placeholder="LKR">
                         </div>
                         <div id="col1">
-                            <label for="Categories">Category 2</label><br>
+                            <label for="Categories">Category 2</label>
+                            <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg">
                         </div>
                         <div id="col2">
-                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                            <br>
+                            <input type="text" name="quantiy1" id="quantiy1" value="" placeholder="LKR">
                         </div>
                         <div id="col1">
-                            <label for="Categories">Category 3</label><br>
+                            <label for="Categories">Category 3</label>
+                            <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg" >
                         </div>
                         <div id="col2">
-                            <input type="text" name="quantiy1" id="quantiy1" value="0">
+                            <br>
+                            <input type="text" name="quantiy1" id="quantiy1" placeholder="LKR">
                             <br><br>
                         </div>
 

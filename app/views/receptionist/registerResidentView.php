@@ -10,7 +10,7 @@ include_once 'sidenav.php';
             <h1 id="title">REGISTER <span id="city">RESIDENT</span></h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
-            <div class="leftPanel" style="margin:30px 0; width: 600px;">
+            <!-- <div class="leftPanel" style="margin:30px 0;"> -->
                 <div class="signup_container">
                     <div class="signup">
 
@@ -86,8 +86,8 @@ include_once 'sidenav.php';
 
                 </div>
 
-            </div>
-            <div class="rightPanel" style="margin-top:30px;">
+            <!-- </div> -->
+            <!-- <div class="rightPanel" style="margin-top:30px;">
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Apartments.....</h3>
@@ -105,7 +105,7 @@ include_once 'sidenav.php';
                         </div>
 
 
-                    </div>
+                    </div> -->
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script type="text/javascript" src="../../public/js/register.js"></script>

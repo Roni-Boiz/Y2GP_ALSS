@@ -38,6 +38,7 @@
                                     $date = date('Y-m-d', strtotime($datetime));
                                     $time = date('H:i:s', strtotime($datetime));
                                     ?>
+                                    <h5>Admin</h5>
                                     <h5><?php echo  $date ?></h5>
                                     <small><?php echo $time ?></small>
                                 </div>

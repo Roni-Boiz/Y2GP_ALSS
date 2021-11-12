@@ -154,7 +154,9 @@ include_once 'sidenav.php';
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                            <span style="padding-right: 20px;">Delivered Time: <?php echo $row1["reached_time"] ?></span>
+                                                        <span style="padding-right: 20px;">Delivered Time : <?php echo $row1["reached_time"] ?></span>
+                                                        <span style="padding-right: 20px;">Description : <?php echo $row1["description"] ?>
+
                                                         </li>
                                                     </ul>
                                                 </article>
