@@ -175,4 +175,16 @@ class residentController extends controller{
         }
         $this->view->render('resident/complaintView');
     }
+
+    public function makePayment(){
+        $id = $_GET["userId"];
+        $apartmentNo = "AP001";
+        $residentId =  "RA0001";
+        $residentFname = "Amal";
+        $residentLname = "Perera";
+        $amount = "10000";
+        
+        $paymentDetails = '{"apartmentNo" : "'. $apartmentNo .'" , "residentId" : "'. $residentId .'" , "fname" : "'. $residentFname .'" , "lname" : "'. $residentLname .'" , "amount" : "'. $amount .'"}';
+        echo $paymentDetails;
+}
 }
