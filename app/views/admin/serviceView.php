@@ -42,6 +42,7 @@ include_once 'sidenav.php';
                         <span style="display: inline-block;"> Fitness <i class="fa fa-square" style="color: #EB7655;"></i></span>
                         <!-- <span style="display: inline-block;"> Technical <i class="fa fa-square" style="color: #4fc0d2;"></i></span>
                         <span style="display: inline-block;"> Laundry <i class="fa fa-square" style="color: #d91393;"></i></span> -->
+                        <span style="display: inline-block;"> Parking <i class="fa fa-square" style="color:#4fc0d2;"></i></span>
                         <span style="display: inline-block;"> Backup <i class="fa fa-square" style="color: #1ccf52;"></i></span>
                     </div>
                 </div>
@@ -64,6 +65,7 @@ include_once 'sidenav.php';
                                 <option value="fitness">Fitness</option>
                                 <!-- <option value="technnical">Technical</option>
                                 <option value="laundry">Laundry</option> -->
+                                <option value="parking">Parking</option>
                                 <option value="backup">BackUp</option>
                             </select>
                         </div>
@@ -157,7 +159,6 @@ include_once 'sidenav.php';
                                 </article>
                             </span>
                         <?php
-
                         } else if ($row["type"] == 'treatment') {
                         ?>
                             <span id="searchrow">
@@ -224,10 +225,10 @@ include_once 'sidenav.php';
                                 </article>
                             </span>
                         <?php
-                        } else if ($row["type"] == 'laundry') {
+                        } else if ($row["type"] == 'parking') {
                         ?>
                             <span id="searchrow">
-                                <article class="row mba">
+                                <article class="row nfl">
                                     <ul>
                                         <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
