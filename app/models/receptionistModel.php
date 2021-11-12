@@ -160,7 +160,7 @@ class receptionistModel extends model {
             return $result;
         }
         public function readPreviousVisitor(){
-            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id,visitor.arrive_time,visitor.requested_date FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             //$sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             $result = $this->conn->query($sql);   
             return $result;

@@ -5,7 +5,7 @@
 <body style="background-color: gray; background-image:none;">
 <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
-    <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">Notifications</span></h1></div>
+    <div id="hh" class="hawlockhead" ><img src="../../public/img/image.png" alt="" id="logo"/><h1 id="title">NOTIFICATIONS</span></h1></div>
     <div id="hb" class="hawlockbody animate-bottom"> 
 
     <?php
@@ -22,7 +22,7 @@
                     <?php
                     if($row['view']>5){ ?>
                     <p class="card__apply">
-                        <a class="card__link" style="float:right;" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as Reached</a>
+                        <a class="card__link" style="float:right;" method="get" href="markReached?notification=<?php echo $row["notification_id"];?>">Marks as delivered</a>
                     </p>
                     <?php } ?>
                     </div><br>

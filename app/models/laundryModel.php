@@ -66,7 +66,7 @@ class laundryModel extends model {
         return $result;
     }
     public function getCompletedRequests(){
-        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=2";
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type,laundry_request.fee FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=2";
         $result = $this->conn->query($sql);   
         return $result;
     }
