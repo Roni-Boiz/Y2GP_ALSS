@@ -1,6 +1,7 @@
 <?php
 include_once 'sidenav.php';
 ?>
+<script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
 </head>
 
 <body style="background-color: gray; background-image:none;">
@@ -31,6 +32,7 @@ include_once 'sidenav.php';
                                         <label>Last Payment</label><br>
                                         <input type="text" name="lastpay" class="input-field" value="5000.00" READONLY><br>
                                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
+                                        <button class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
                                     </div>
                                 </form>
                             </div>
