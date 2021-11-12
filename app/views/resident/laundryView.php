@@ -21,7 +21,7 @@ include_once 'sidenav.php';
                     </ul>
                 </div>
                 <div class="description">
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="laundry" class="reservationtime" method="POST">
                         <div id="">
                             <label for="type">Type</label><br>
                             <select name="type" class="input-field">

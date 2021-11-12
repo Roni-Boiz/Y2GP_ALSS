@@ -7,13 +7,13 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">BILL <span id="city"></span></h1>
+            <h1 id="title">BILLS <span id="city"></span></h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
 
             <div id="employeeCard" style="grid-column:1/span 3">
                 <div class="staffDetails">
-                    <h4>Your Bills - <?php echo $this->y ?></h4>
+                    <h4>Your Bill - <?php echo $this->y ?></h4>
                     <div class="card" id="employeeSummary">
                         
                         <section class="wrapper" style="margin:auto">

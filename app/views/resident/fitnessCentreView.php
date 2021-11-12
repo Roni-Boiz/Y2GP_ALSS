@@ -34,14 +34,14 @@ include_once 'sidenav.php';
                                         <label>Coach</label><br>
                                         <select name="type" class="input-field">
                                             <option value="">Select coach</option>
-                                            <option value="">coach 1</option>
-                                            <option value="">coach 1</option>
-                                            <option value="">coach 1</option>
-                                            <option value="">coach 1</option>
+                                            <option value="">Chamara Supun</option>
+                                            <option value="">Saman Silva</option>
+                                          
                                         </select><br>
                                         <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                                            <h3>Reservations of the day</h3>
+                                            <br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
                                         </div>
                                         <br>
                                         <button id="model-btn" class="purplebutton">Reserve Now</button>

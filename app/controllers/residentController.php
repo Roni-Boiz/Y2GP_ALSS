@@ -134,7 +134,7 @@ class residentController extends controller{
             $des=$_POST["description"];
             $pdate=$_POST["pdate"];
             $type=$_POST["type"];
-            $this->model->reqMaintenence($type,$pdate,$des);
+            $this->model->reqMaintenence($type,$pdate,$des,$id);
             header("Refresh:0; url=maintenence");
         }
         $this->view->latest=$this->model->latestmaintenence($id);
@@ -142,15 +142,23 @@ class residentController extends controller{
     }
 
     public function laundry(){
+        $id=$_SESSION['userId'];
+        if(isset($_POST["type"]) && isset($_POST["description"]) ){
+            $des=$_POST["description"];
+            $type=$_POST["type"];
+            $this->model->reqLaundry($type,$des,$id);
+            header("Refresh:0; url=laundry");
+        }
         $this->view->render('resident/laundryView');
     }
 
     public function visitor(){
+        $id=$_SESSION['userId'];
         if(isset($_POST["name"]) && isset($_POST["vdate"]) && isset($_POST["description"]) ){
             $des=$_POST["description"];
             $vdate=$_POST["vdate"];
             $name=$_POST["name"];
-            $this->model->requestVisitor($name,$vdate,$des);
+            $this->model->requestVisitor($name,$vdate,$des,$id);
         }
         $this->view->render('resident/visitorView');
     }

@@ -27,10 +27,12 @@ include_once 'sidenav.php';
                                     $date = date('Y-m-d', strtotime($datetime));
                                     $time = date('H:i:s', strtotime($datetime));
                                     ?>
+                                    <h5>Admin<h5>
                                     <h5><?php echo  $date ?></h5>
                                     <small><?php echo $time ?></small>
                                 </div>
                             </div>
+    
                             <h4><?php echo $row["topic"]; ?></h4>
                             <p><?php echo $row["content"]; ?></p>
                         </div>

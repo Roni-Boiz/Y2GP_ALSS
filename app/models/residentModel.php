@@ -147,8 +147,9 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function reqMaintenence($type,$pdate,$des){
+    public function reqMaintenence($type,$pdate,$des,$id){
         $date = date('Y-m-d H:i:s');
+        $sql = "select resident_id from resident where user_id='$id')";
         $sql="INSERT INTO technical_maintenence_request(request_date,preferred_date,category,description,resident_id) VALUES('$date','$pdate','$type','$des','1')";
         $this->conn->query($sql);
     }
@@ -157,15 +158,27 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function reqLaundry($type,$des,$id){
+        $date = date('Y-m-d H:i:s');
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
+        $sql = "INSERT INTO laundry_request(request_date,description,type,resident_id) VALUES('$date','$des','$type','$rid')";
+        $this->conn->query($sql);
+    }
     public function visitor($id){
         $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function requestVisitor($name,$vdate,$des){
+    public function requestVisitor($name,$vdate,$des,$id){
         $date = date('Y-m-d H:i:s');
-        // resident id
-        $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','1')";
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
+        $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
         $this->conn->query($sql);
     }
     public function removeRequest(){
@@ -226,9 +239,8 @@ class residentModel extends model {
     }
     public function complaint($des){
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO complaint(date_time,description,resident_id) VALUES('$date','$des','1')";
-        $result = $this->conn->query($sql);
-        return $result;
+        $sql = "INSERT INTO complaint(date_time,description,resident_id) VALUES('$date','$des',1)";
+        $this->conn->query($sql);
     }
     //location
     public function getLoginDevices($id)
