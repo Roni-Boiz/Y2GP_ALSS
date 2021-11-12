@@ -13,7 +13,7 @@ include_once 'sidenav.php';
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
                     <div id="upactivities">
-                        <h2>Upcomming Activities and Events</h2>
+                        <h2>Upcoming Activities and Events</h2>
                         <!-- Upcomming Activities -->
                         <?php
                         if ($this->upcommingReq->num_rows || $this->upcommingHallRes->num_rows) {

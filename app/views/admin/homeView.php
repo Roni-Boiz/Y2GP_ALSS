@@ -135,6 +135,27 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
+                    <!-- <div>
+                        <h2>Apartments</h2>
+                        <div class="card" id="income">
+                            <div>
+                                <h4>Sold Appartments</h4>
+                                <div>
+                                <img src="../../public/img/1.jpg" alt="apartment icon">
+                                    <h3>&nbsp;&nbsp;&nbsp;<?= number_format("100") ?></h3>
+                                </div>
+                                <h4 style="padding: 0px; text-align: center;"><small>Remainning : <?= number_format("55") ?></small></h4>
+                            </div>
+                            <div>
+                                <h4>Graphical View</h4>
+                                <div>
+                                    <img src="../../public/img/overdue.png" alt="overdue icon">
+                                    <h3>Rs.<?= number_format("20000", 2) ?></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
                     <div>
                         <h2>Total Monthly Income</h2>
                         <div class="card" id="income">
@@ -142,14 +163,14 @@ include_once 'sidenav.php';
                                 <h4>Payment Received</h4>
                                 <div>
                                     <img src="../../public/img/cash.png" alt="cash icon">
-                                    <h3>Rs.<?= number_format("1500000", 2) ?></h3>
+                                    <h3>Rs.<?= number_format("150000", 2) ?></h3>
                                 </div>
                             </div>
                             <div>
                                 <h4>Overdues</h4>
                                 <div>
                                     <img src="../../public/img/overdue.png" alt="overdue icon">
-                                    <h3>Rs.<?= number_format("50000", 2) ?></h3>
+                                    <h3>Rs.<?= number_format("20000", 2) ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -220,12 +241,12 @@ include_once 'sidenav.php';
                 </div>
             </div>
 
-            <div id="upactivities">
+            <!-- <div id="upactivities">
                 <h2>Upcomming Activities</h2>
                 <div class="card">
                     <div style="font-size: small;color: #545d7a;">Currently you do not have any upcomming activities</div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

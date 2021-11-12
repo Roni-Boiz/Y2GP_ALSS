@@ -183,17 +183,18 @@ include_once 'sidenav.php';
                         </section>
                     </div>
                 </div>
-                <div class="reservationsearch">
-                    <input type="text" name="search" placeholder="Search.." class="mySearch" />
-                    <div>
-                        <span style="display: inline-block;"> Hall <i class="fa fa-square" style="color: #EB7655;"></i></span>
-                        <span style="display: inline-block;"> Fitness <i class="fa fa-square" style="color: #AA9150;"></i></span>
-                        <span style="display: inline-block;"> Treatment <i class="fa fa-square" style="color: #52D29A;"></i></span>
-                        <span style="display: inline-block;"> Canceled <i class="fa fa-square" style="color: #e90909;"></i></span>
-                    </div>
-                </div>
+
                 <div class="allreservations">
                     <h2>All Reservations</h2>
+                    <div class="reservationsearch">
+                        <input type="text" name="search" placeholder="Search.." class="mySearch" />
+                        <div>
+                            <span style="display: inline-block;"> Hall <i class="fa fa-square" style="color: #EB7655;"></i></span>
+                            <span style="display: inline-block;"> Fitness <i class="fa fa-square" style="color: #AA9150;"></i></span>
+                            <span style="display: inline-block;"> Treatment <i class="fa fa-square" style="color: #52D29A;"></i></span>
+                            <span style="display: inline-block;"> Canceled <i class="fa fa-square" style="color: #e90909;"></i></span>
+                        </div>
+                    </div>
                     <div>
                         <section class="wrapper">
                             <main class="row title">
@@ -422,7 +423,7 @@ include_once 'sidenav.php';
                             <textarea name="reason" id="reason" cols="" rows="3" placeholder="Reason..."></textarea>
                         </div>
                         <div>
-                            <input class="purplebutton" type="submit" name="submit" value="Done">
+                            <input class="btnRed" type="submit" name="submit" value="Remove">
                         </div>
                     </form>
                 </div>

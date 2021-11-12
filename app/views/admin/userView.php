@@ -14,7 +14,7 @@ include_once 'sidenav.php';
             <div class="card" id="userCard">
                 <div class="leftPanel">
                     <div>
-                        <h4>User Summary</h4>
+                        <h2>User Summary</h2>
                         <div class="card" id="usersummary">
 
                             <div class="user">
@@ -206,7 +206,7 @@ include_once 'sidenav.php';
                 <div class="rightPanel">
                     <div class="holdAccount adminHoldAccount">
                         <div class="head">
-                            <h3>Hold Accounts</h3>
+                            <h3>Locked Accounts</h3>
                         </div>
                         <div class="detail">
                             <div>

@@ -1062,6 +1062,10 @@ select{
   grid-column: 1/span 2;
 }
 
+.leftPanel div>h2{
+  padding: 10px;
+}
+
 .rightPanel {
   grid-column: 3;
   padding: 10px;
@@ -1424,6 +1428,10 @@ select{
   max-width: 400px;
 }
 
+.staffDetails h2{
+  padding: 10px;
+}
+
 #employeeCard .empsearch input[type=text] {
   width: 50%;
   max-width: 100%;
@@ -1506,6 +1514,10 @@ select{
 
 .serviceSummary .chartContainer2 div {
   height: 60px;
+}
+
+#serviceCard h2{
+  padding: 10px;
 }
 
 #serviceCard .servicesearch input[type=text] {
@@ -1887,7 +1899,7 @@ select{
 }
 
 .reservationsearch input[type=text] {
-  width: 40%;
+  width: 60%;
   max-width: 100%;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -1905,7 +1917,7 @@ select{
 }
 
 .reservationsearch input[type=text]:focus {
-  width: 60%;
+  width: 100%;
 }
 
 #editModel {

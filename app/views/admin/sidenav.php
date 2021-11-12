@@ -55,8 +55,8 @@
                     <li><a href="employee#"><i class="fas fa-users-slash"></i>REMOVE EMPLOYEES</a></li>
                 </ul> -->
                 </li>
-                <li><a href="service"><i class="fas fa-chart-line"></i>UPDATE SERVICE</a></li>
-                <li><a href="announcement"><i class="fa fa-bullhorn" ></i>MAKE ANNOUNCEMENT</a></li>
+                <li><a href="service"><i class="fas fa-chart-line"></i>SERVICES</a></li>
+                <li><a href="announcement"><i class="fa fa-bullhorn" ></i>ANNOUNCEMENTS</a></li>
                 <!-- <li><a href="report"><i class="fas fa-chart-pie"  ></i>REPORTS</a></li> -->
                 
             </ul>

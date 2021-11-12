@@ -7,12 +7,12 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span> Services</h1>
+            <h1 id="title">Hawlock City Services</h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div id="serviceCard" style="grid-column:1/span 3">
+                <h2>Services Summary</h2>
                 <div class="serviceSummary card">
-                    <h2>Services Summary</h2>
                     <div class="chartContainer1">
                         <div>
                             <h3>No of Reservations</h3>
@@ -140,7 +140,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row mlb">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -163,7 +163,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row nhl">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -185,7 +185,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row pga">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -207,7 +207,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row nfl">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -229,7 +229,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row mba">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -251,7 +251,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row bfg">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
@@ -273,7 +273,7 @@ include_once 'sidenav.php';
                             <span id="searchrow">
                                 <article class="row">
                                     <ul>
-                                        <li><a href="#"><?php echo $row["service_id"] ?></a><span class="small">(update)</span></li>
+                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>

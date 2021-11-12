@@ -62,11 +62,11 @@ include_once 'sidenav.php';
                                 <div class="detail-info">
                                     <?php
                                     $datetime =  $row["date"];
-                                    $date = date('Y-m-d', strtotime($datetime));
-                                    $time = date('H:i:s', strtotime($datetime));
+                                    $date = date('F d, Y', strtotime($datetime));
+                                    $time = date('h:i A', strtotime($datetime));
                                     ?>
-                                    <h5><?php echo  $date?></h5>
-                                    <small><?php echo $time ?></small>
+                                    <h5>Admin</h5>
+                                    <small><?php echo  $date?> <?php echo $time ?></small>
                                 </div>
                             </div>
                             <h4><?php echo $row["topic"] ?></h4>

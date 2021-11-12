@@ -36,13 +36,13 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">Hawlock <span id="city">City</span> Employees</h1>
+            <h1 id="title">Hawlock City Employees</h1>
         </div>
 
         <div id="hb" class="hawlockbody animate-bottom">
             <div id="employeeCard" style="grid-column:1/span 3">
                 <div class="staffDetails">
-                    <h4>Employee Summary</h4>
+                    <h2>Employee Summary</h2>
                     <div class="card" id="employeeSummary">
                         <div>
                             <div class="employee">
@@ -496,9 +496,12 @@ include_once 'sidenav.php';
                         }
                     },
                     title: {
+                        // fullSize: true,
                         display: true,
                         text: 'Growth of Employees by Year',
-                        fontSize: 25
+                        font: {
+                            size:20,
+                        },
                     },
                 },
             },
@@ -516,7 +519,12 @@ include_once 'sidenav.php';
                     ],
                     // backgroundColor : '#423D59',
                     backgroundColor: [
-                        'rgba(153,102,255,0.6)'
+                        'rgb(158, 102, 255, 0.6)',
+                        'rgb(142, 77, 255, 0.6)',
+                        'rgb(126, 51, 255, 0.6)',
+                        'rgb(110, 26, 255, 0.6)',
+                        'rgb(93, 0, 255, 0.6)',
+                        'rgb(84, 0, 230, 0.6)'
                     ],
                     borderWidth: 1,
                     borderColor: '#777',
@@ -536,7 +544,9 @@ include_once 'sidenav.php';
                     title: {
                         display: true,
                         text: 'Employee Percentage Chart',
-                        fontSize: 25
+                        font: {
+                            size:20,
+                        },
                     },
                 },
             },
