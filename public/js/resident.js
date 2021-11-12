@@ -371,3 +371,56 @@ function deleteReq(id, type) {
       }
    }
 }
+
+// Make payment
+function payNow(userId) {
+   var response = '';
+   $.ajax({
+      type: "GET",
+      url: "makePayment",
+      data: {
+         userId: userId
+      },
+      success: function (text) {
+         var r = JSON.parse(text);
+
+         payhere.onCompleted = function onCompleted() {
+            alert("Payment completed");
+         };
+
+         payhere.onDismissed = function onDismissed() {
+            alert("Payment dismissed");
+         };
+
+         payhere.onError = function onError(error) {
+            alert("Error:" + error);
+         };
+
+         // Put the payment variables here
+         var payment = {
+            "sandbox": true,
+            "merchant_id": "1219029",    // Replace your Merchant ID
+            "return_url": undefined,     // Important
+            "cancel_url": undefined,     // Important
+            "notify_url": "http://sample.com/notify",
+            "order_id": r.apartmentNo,
+            "items": r.residentId,
+            "amount": r.amount,
+            "currency": "LKR",
+            "first_name": r.fname,
+            "last_name": r.lname,
+            "email": "",
+            "phone": "",
+            "address": r.apartmentNo,
+            "city": "Colombo",
+            "country": "Sri Lanka",
+            "delivery_address": r.apartmentNo,
+            "delivery_city": "Kalutara",
+            "delivery_country": "Sri Lanka",
+            "custom_1": "",
+            "custom_2": ""
+         };
+         payhere.startPayment(payment);
+      }
+   });
+}
