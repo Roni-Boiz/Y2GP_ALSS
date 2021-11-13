@@ -28,6 +28,10 @@ class homeController extends controller{
         $this->view->render('loginView');
     }
 
+    public function contactus(){
+        $this->view->render('contactusView');
+    }
+
     public function fogotPassword(){
         
         $this->view->render('fogotPasswordView');
