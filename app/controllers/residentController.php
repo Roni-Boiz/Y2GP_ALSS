@@ -73,12 +73,21 @@ class residentController extends controller{
     public function fitness(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latestfitness($id);
+        if(isset($_POST["date"]) && isset($_POST["coach"])){
+            $d=$_POST["date"];
+            $coach=$_POST["coach"];
+                $this->view->day=$this->model->dayparking($d,$coach);
+        }
         $this->view->render('resident/fitnessCentreView');
     }
 
     public function treatment(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latesttreatment($id);
+        if(isset($_POST["date"])){
+            $d=$_POST["date"];
+                $this->view->day=$this->model->daytreatment($d);
+        }
         $this->view->render('resident/treatmentRoomView');
     }
 
@@ -86,13 +95,29 @@ class residentController extends controller{
         $id=$_SESSION['userId'];
         $this->view->latestfun=$this->model->latesthallfun($id);
         $this->view->latestcon=$this->model->latesthallcon($id);
+        if(isset($_POST["date"]) && isset($_POST["type"])){
+                $d=$_POST["date"];
+                $type=$_POST["type"];
+                if($_POST["type"] == "conference"){
+                    echo "con";
+                    $this->view->day=$this->model->dayhall($d,$type);
+                }else{
+                    echo "fun";
+                }
+                
+        }
         $this->view->render('resident/hallView');
     }
-
+    
     public function parking(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latestparking($id);
         $this->view->slots=$this->model->viewSlots();
+        if(isset($_POST["date"]) && isset($_POST["time"])){
+            $d=$_POST["date"];
+            $time=$_POST["time"];
+                $this->view->day=$this->model->dayparking($d,$time);
+        }
         $this->view->render('resident/parkingSlotView');
     }
 
