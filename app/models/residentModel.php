@@ -80,6 +80,30 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function dayhall($d,$type){
+        echo $d,$type;
+        $sql = "SELECT * FROM hall_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function daytreatment($d){
+        echo $d;
+        $sql = "SELECT * FROM treatment_room_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function dayfitness($d,$coach){
+        echo $d,$coach;
+        $sql = "SELECT * FROM hall_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function dayparking($d,$time){
+        echo $d,$time;
+        $sql = "SELECT * FROM hall_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
     public function treatmentReservation($id){
         $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);

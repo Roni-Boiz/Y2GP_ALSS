@@ -24,9 +24,8 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="hall" class="reservationtime" method="POST">
                                     <div id="">
-
                                         <input type="radio" name="type" value="function">
                                         <label>Function</label>
                                         <input type="radio" name="type" value="conference">
@@ -35,13 +34,39 @@ include_once 'sidenav.php';
                                         <input type="date" name="date" class="input-field"><br>
                                         <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                                            <h3>Reservations of the day</h3><br>
+                                            <?php
+                                            if (isset($this->day->num_rows)) {
+                                                while ($row = $this->day->fetch_assoc()) {
+                                            ?>
+                                                    <!-- test -->
+                                                    <div class="detail">
+                                                        <div>
+                                                            <div class="detail-info">
+                                                                <h5><?php echo $row["date"] ?></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- show reservation -->
+                                                    <?php
+                                                    for ($hours = 6; $hours < 12; $hours++) {
+                                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT);
+                                                        }
+                                                        echo "<br>";
+                                                    }
+                                                    ?>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo "No Reservations...<br>";
+                                            } ?>
+
                                         </div>
                                         <br>
-                                        <button id="model-btn" class="purplebutton">Reserve Now</button>
 
                                     </div>
-                                </form>
+                                </form><button id="model-btn" class="purplebutton">Reserve Now</button>
                             </div>
                         </div>
                     </div>
@@ -109,7 +134,6 @@ include_once 'sidenav.php';
         </div>
 
         <div class="divPopupModel">
-            <p id="answer"></p>
 
             <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
             <div id="model">
@@ -169,20 +193,5 @@ include_once 'sidenav.php';
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
-<script>
-    $(document).ready(function() {
-        $(".tabs-list li a").click(function(e) {
-            e.preventDefault();
-        });
-
-        $(".tabs-list li").click(function() {
-            var tabid = $(this).find("a").attr("href");
-            $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
-            $(".tab").hide(); // hiding open tab
-            $(tabid).show(); // show tab
-            $(this).addClass("active"); //  adding active class to clicked tab
-        });
-    });
-</script>
 
 </html>
