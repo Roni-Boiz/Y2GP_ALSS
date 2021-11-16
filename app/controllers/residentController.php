@@ -93,18 +93,33 @@ class residentController extends controller{
 
     public function hall(){
         $id=$_SESSION['userId'];
+        //get latest to right panel
         $this->view->latestfun=$this->model->latesthallfun($id);
         $this->view->latestcon=$this->model->latesthallcon($id);
-        if(isset($_POST["date"]) && isset($_POST["type"])){
+        
+        //for reserve + check available
+        if(isset($_POST["date"]) && isset($_POST["type"])  && isset($_POST["starttime"])  && isset($_POST["endtime"]) && isset($_POST["members"])){
+            $d=$_POST["date"];
+            $type=$_POST["type"];
+            $stime=$_POST["starttime"].":00";
+            $etime=$_POST["endtime"].":00";
+            $members=$_POST["members"];
+            //check valid time + check member less than 50
+            if($stime<$etime && $members<50){
+                $this->view->available=$this->model->reservehall($d,$type,$stime,$etime, $members);
+            }
+            else if($stime>$etime){
+                $this->view->available="Select valid time slot!";
+            }else if($members){
+                $this->view->available="You can reserve for less than 50 members";
+            }
+
+        }
+        //show reservation(user mention date)
+        else if(isset($_POST["date"]) && isset($_POST["type"])){
                 $d=$_POST["date"];
                 $type=$_POST["type"];
-                if($_POST["type"] == "conference"){
-                    echo "con";
-                    $this->view->day=$this->model->dayhall($d,$type);
-                }else{
-                    echo "fun";
-                }
-                
+                $this->view->day=$this->model->dayhall($d,$type);
         }
         $this->view->render('resident/hallView');
     }
@@ -159,6 +174,7 @@ class residentController extends controller{
             $des=$_POST["description"];
             $pdate=$_POST["pdate"];
             $type=$_POST["type"];
+            
             $this->model->reqMaintenence($type,$pdate,$des,$id);
             header("Refresh:0; url=maintenence");
         }
@@ -171,7 +187,9 @@ class residentController extends controller{
         if(isset($_POST["type"]) && isset($_POST["description"]) ){
             $des=$_POST["description"];
             $type=$_POST["type"];
-            $this->model->reqLaundry($type,$des,$id);
+            $catw1=$_POST["catw1"];$catw2=$_POST["catw2"];$catw3=$_POST["catw3"];
+            $quantity1=$_POST["quantity1"];$quantity2=$_POST["quantity2"];$quantity3=$_POST["quantity3"];
+            $this->model->reqLaundry($type,$des,$id,$catw1,$catw2,$catw3,$quantity1,$quantity2,$quantity3);
             header("Refresh:0; url=laundry");
         }
         $this->view->render('resident/laundryView');
