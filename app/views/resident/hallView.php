@@ -39,23 +39,16 @@ include_once 'sidenav.php';
                                             if (isset($this->day->num_rows)) {
                                                 while ($row = $this->day->fetch_assoc()) {
                                             ?>
-                                                    <!-- test -->
+                                                    <!-- show reservation -->
                                                     <div class="detail">
                                                         <div>
                                                             <div class="detail-info">
-                                                                <h5><?php echo $row["date"] ?></h5>
+                                                                <h5><?php echo $row["date"]?></h5>
+                                                                <small><?php echo $row["start_time"]."-".$row["end_time"]."  Reserved" ?></small>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- show reservation -->
-                                                    <?php
-                                                    for ($hours = 6; $hours < 12; $hours++) {
-                                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT);
-                                                        }
-                                                        echo "<br>";
-                                                    }
-                                                    ?>
+ 
                                             <?php
                                                 }
                                             } else {
@@ -67,6 +60,11 @@ include_once 'sidenav.php';
 
                                     </div>
                                 </form><button id="model-btn" class="purplebutton">Reserve Now</button>
+                                <!-- reservation success message -->
+                                <?php 
+                                if(isset($this->available)){ 
+                                    echo "<br>".$this->available;
+                                };?>
                             </div>
                         </div>
                     </div>
@@ -142,7 +140,7 @@ include_once 'sidenav.php';
                     <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                 </div>
 
-                <form action="#" class="reservationtime" method="GET">
+                <form action="hall" class="reservationtime" method="POST">
                     <div id="col1">
                         <input type="radio" name="type" value="function">
                         <label>Function </label>
@@ -154,15 +152,22 @@ include_once 'sidenav.php';
                         <label>No of Members</label><br>
                         <input type="text" name="members" class="input-field" placeholder="MAX 50">
                     </div>
+
+                    <div id="col">
+                        <label>Date</label><br>
+                        <input type="date" name="date" class="input-field" placeholder="Date">
+                    </div>
+                           
                     <div id="col1">
+                         
                         <label>Start Time</label><br>
                         <select name="starttime" class="input-field" placeholder="Start Time">
-                            <option value="">Select Time</option>
+                            <option >Select Time</option>
                             <?php
                             for ($hours = 6; $hours < 24; $hours++) {
                                 for ($mins = 0; $mins < 60; $mins += 30) {
                             ?>
-                                    <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
                             <?php
                                 }
                             }
@@ -170,12 +175,12 @@ include_once 'sidenav.php';
                         </select><br>
                         <label>End Time</label><br>
                         <select name="endtime" class="input-field" placeholder="End Time">
-                            <option value="">Select Time</option>
+                            <option >Select Time</option>
                             <?php
                             for ($hours = 6; $hours < 24; $hours++) {
                                 for ($mins = 0; $mins < 60; $mins += 30) {
                             ?>
-                                    <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <option ><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
                             <?php
                                 }
                             }
