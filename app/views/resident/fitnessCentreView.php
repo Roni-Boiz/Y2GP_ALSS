@@ -137,7 +137,7 @@ include_once 'sidenav.php';
                     <div style="text-align: center;">
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="#" class="reservationtime" method="POST">
                         <div id="col1">
                             <label>Start Time</label><br>
                             <select name="starttime" class="input-field" placeholder="Start Time">
