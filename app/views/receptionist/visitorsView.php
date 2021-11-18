@@ -31,8 +31,8 @@ include_once 'sidenav.php';
                                         <ul>
                                             <li>Action</li>
                                             <li>Visitor Id</li>
-                                            <li>Apartment No</li>
                                             <li>Visitor Name</li>
+                                            <li>Apartment No</li>
                                             <!-- <li>Description</li> -->
                                         </ul>
                                     </main>
@@ -49,8 +49,9 @@ include_once 'sidenav.php';
                                                         <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
                                                         <!-- <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li> -->
                                                         <li><?php echo $row["visitor_id"]; ?></li>
-                                                        <li><?php echo $row["apartment_no"]; ?></li>
                                                         <li><?php echo $row["name"]; ?></li>
+                                                        <li><?php echo $row["apartment_no"]; ?></li>
+                                                        
 
                                                     </ul>
                                                     <ul class="more-content">
