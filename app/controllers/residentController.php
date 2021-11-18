@@ -23,6 +23,13 @@ class residentController extends controller{
     }
     // view resident profile
     public function profile(){
+        if(isset($_GET["s"])){
+            if($_GET["s"]==1){
+                $this->view->success=true;
+            }else{
+                $this->view->error=true;
+            }
+        }
         $this->view->users = $this->model->readResident();
         $this->view->members = $this->model->readMembers();
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
@@ -30,8 +37,16 @@ class residentController extends controller{
     }
     // edit profile
     public function editProfile(){
-        $this->model->editProfile();
-        header("Refresh:0; url=profile");
+        $a=0;
+        if(strlen($_POST["phone_no"]) && strlen($_POST["email"])){
+            $a=$this->model->editProfile();
+        }
+        if($a){
+            header("Refresh:0; url=profile?s=1");
+        }else{
+            header("Refresh:0; url=profile?s=0"); 
+        }
+        
     }
     public function removeMember(){
         $id=$_POST["removedmem"];
@@ -96,7 +111,6 @@ class residentController extends controller{
         //get latest to right panel
         $this->view->latestfun=$this->model->latesthallfun($id);
         $this->view->latestcon=$this->model->latesthallcon($id);
-        
         //for reserve + check available
         if(isset($_POST["date"]) && isset($_POST["type"])  && isset($_POST["starttime"])  && isset($_POST["endtime"]) && isset($_POST["members"])){
             $d=$_POST["date"];
@@ -106,21 +120,28 @@ class residentController extends controller{
             $members=$_POST["members"];
             //check valid time + check member less than 50
             if($stime<$etime && $members<50){
-                $this->view->available=$this->model->reservehall($d,$type,$stime,$etime, $members);
+                $this->view->success=true;
+                $this->model->reservehall($d,$type,$stime,$etime, $members);
             }
             else if($stime>$etime){
-                $this->view->available="Select valid time slot!";
+                $this->view->error="Select valid time slot!";
             }else if($members){
-                $this->view->available="You can reserve for less than 50 members";
+                $this->view->error="You can reserve for less than 50 members!";
             }
-
         }
         //show reservation(user mention date)
         else if(isset($_POST["date"]) && isset($_POST["type"])){
                 $d=$_POST["date"];
                 $type=$_POST["type"];
-                $this->view->day=$this->model->dayhall($d,$type);
+                $this->view->type=$type;
+                if( $d <= date('Y-m-d')){
+                    $this->view->error="Pick upcoming date";
+                }else{
+                    $this->view->day=$this->model->dayhall($d,$type);
+                    $this->view->selectdate=$d;
+                }
         }
+                
         $this->view->render('resident/hallView');
     }
     

@@ -25,12 +25,13 @@ class residentModel extends model {
     }
     public function editProfile(){
         $sql1 = "UPDATE resident  SET fname='".$_POST["firstname"]."',lname='".$_POST["lastname"]."',nic='".$_POST["nic"]."',phone_no='".$_POST["phone_no"]."',email='".$_POST["email"]."',vehicle_no='".$_POST["vehicle_no"]."' WHERE user_id={$_SESSION['userId']}";
-        $this->conn->query($sql1); 
+        $a = $this->conn->query($sql1); 
         if($_POST["fam"]){
             $sql2 = "INSERT INTO family(resident_id,name) VALUES(".$_POST["res_id"].",'".$_POST["fam"]."')";
             //$sql2 = "INSERT INTO family(resident_id,name) VALUES(1,'Sajith')";
             $this->conn->query($sql2); 
-        }  
+        } 
+        return $a; 
         //if($_POST["vehicle_no"]){
         //$sql3 = "INSERT vehicle SET vehicle_no='".$_POST["veh"]."' WHERE user_id='".$_POST["resident_id"]."'";
         //$this->conn->query($sql3); 
