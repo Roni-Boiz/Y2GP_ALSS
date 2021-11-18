@@ -1,9 +1,15 @@
 $(function () {
-
+   //form input validation
+   //profile edit
    $("#old_password_error_message").hide();
    $("#new_password_error_message").hide();
    $("#renew_password_error_message").hide();
+   //hall reservation
+   $("#member").hide();
+   $("#datetodayup").hide();
+   $("#starttime").hide();
 
+   //profile edit
    $("#opw").keyup(function () {
       check_oldpassword();
    });
@@ -13,7 +19,21 @@ $(function () {
    $("#rnpw").keyup(function () {
       check_retypepassword();
    });
+   //hall reservation
+   $("#mem50").keyup(function () {
+      check_members();
+   });
+   $("#datepicker").on("change", function () {
+      check_uptotoday();
+   });
+   $("#stime").on("change", function () {
+      check_time();
+   });
+   $("#etime").on("change", function () {
+      check_time();
+   });
 
+   //tab list
    $(".tabs-list li a").click(function (e) {
       e.preventDefault();
    });
@@ -125,10 +145,10 @@ function confirmSave() {
 function confirmDelete() {
    confirm('Are Your Sure to Delete')
 }
-function successcomplaint(){
+function successcomplaint() {
    alert("your complaint will be considered soon.. thank you for your feedback")
 }
-// add new field
+// add new field in profile
 function newVehicle() {
    if ($("#newveh").is(':hidden')) {
       $("#newveh").show(500);
@@ -190,8 +210,7 @@ function setVisibility3(id) {
       document.getElementById(id).style.display = 'none';
    }
 }
-
-
+//form validation in profile
 function check_oldpassword() {
    var password_length = $("#opw").val().length;
 
@@ -247,6 +266,66 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
+//form validation in hall
+function check_members() {
+   var count = $("#mem50").val();
+   if (count > 50) {
+      $("#member").html("Member should be less than 50");
+      $("#member").show();
+   }
+   else {
+      $("#member").hide();
+   }
+
+}
+function check_uptotoday() {
+   var mydate = $("#datepicker").val();
+   var today = new Date();
+   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+   console.log(date);
+   console.log(mydate)
+   if ($("#datepicker").val() && date >= mydate) {
+      $("#datetodayup").html("Enter upcoming date");
+      $("#datetodayup").show();
+      $("#canreserve").hide();
+      //button disabled for wrong date
+      $("#disablebutton").prop('disabled', true);
+   }else{
+      $("#disablebutton").prop('disabled', false);
+      $("#datetodayup").hide();
+   }
+   
+}
+function check_time() {
+   var stime = $("#stime").val();
+   var etime = $("#etime").val();
+   //difference of time
+   s = stime.split(':');
+   e = etime.split(':');
+
+   min = e[1] - s[1];
+   hour_carry = 0;
+   if (min < 0) {
+      min += 60;
+      hour_carry += 1;
+   }
+   hour = e[0] - s[0] - hour_carry;
+   diff = hour + ":" + min;
+   console.log(diff);
+
+   if (stime >= etime) {
+      $("#endtime").html("Select valid time slot");
+      $("#endtime").show();
+      
+   }
+   else if ((hour > 6) || (hour==6) && (min==30) ) {
+      $("#endtime").html("Maxium booking time 6 hours");
+      $("#endtime").show();
+   }
+   else {
+      $("#endtime").hide();
+   }
+}
 ////////////////////////////////////////////////////
 function openModel(amodel, amodelBtn) {
 
@@ -256,23 +335,23 @@ function openModel(amodel, amodelBtn) {
    const closeBtn = document.getElementsByClassName("closebtn");
 
    for (var i = 0; i < modelBtn.length; i++) {
-       modelBtn[i].addEventListener('click', showModel, false);
+      modelBtn[i].addEventListener('click', showModel, false);
    }
 
    function showModel() {
-       document.getElementById("myCanvasNav").style.width = "100%";
-       document.getElementById("myCanvasNav").style.opacity = "0.8";
-       model.className = "open";
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
    }
 
    for (var i = 0; i < closeBtn.length; i++) {
-       closeBtn[i].addEventListener('click', closeModel, false);
+      closeBtn[i].addEventListener('click', closeModel, false);
    }
 
    function closeModel() {
-       document.getElementById("myCanvasNav").style.width = "0%";
-       document.getElementById("myCanvasNav").style.opacity = "0";
-       model.className = "close";
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = "close";
    }
 }
 // delete row and hide for value addition

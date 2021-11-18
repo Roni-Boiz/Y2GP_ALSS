@@ -39,7 +39,7 @@ include_once('sidenav.php');
                         <input type="text" id="phone_no" name="phone_no" class="input-field" pattern="[0-9]{10}" value=<?php echo $row["phone_no"] ?> ><br>
 
                         <label>Email</label>
-                        <input type="email" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <input type="email" id="email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="input-field" value=<?php echo $row["email"] ?> ><br>
 
                         <label>Vehicle NO</label>
                         <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
@@ -53,7 +53,7 @@ include_once('sidenav.php');
                             <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
                         </span>
                         <br>
-                        <input type="submit" value="Save" onclick="confirmSave()">
+                        <input type="submit" value="Save" onclick="confirmSave">
                     </form>
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
                     <label>Family Members</label>
@@ -212,6 +212,48 @@ include_once('sidenav.php');
                     </div>
                 </div>
             </div>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+            <div class='b'></div>
+            <div class='bb'></div>
+            <div class='message'>
+                <div class='check'>
+                    &#10004;
+                </div>
+                <p>
+                    Edit Success!
+                </p>
+                <p>
+                    
+                </p>
+                <button id='ok' onclick='window.location = "profile" '>
+                    OK
+                </button>
+            </div>
+            <?php
+            }; ?>
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <div class='b'></div>
+                <div class='bb'></div>
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                    Edit Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo  "please fill required field" ?>
+                    </p>
+                    <button id='ok' onclick='window.location = "profile" ' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

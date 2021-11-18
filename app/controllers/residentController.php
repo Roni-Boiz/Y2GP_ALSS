@@ -23,6 +23,13 @@ class residentController extends controller{
     }
     // view resident profile
     public function profile(){
+        if(isset($_GET["s"])){
+            if($_GET["s"]==1){
+                $this->view->success=true;
+            }else{
+                $this->view->error=true;
+            }
+        }
         $this->view->users = $this->model->readResident();
         $this->view->members = $this->model->readMembers();
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
@@ -30,8 +37,16 @@ class residentController extends controller{
     }
     // edit profile
     public function editProfile(){
-        $this->model->editProfile();
-        header("Refresh:0; url=profile");
+        $a=0;
+        if(strlen($_POST["phone_no"]) && strlen($_POST["email"])){
+            $a=$this->model->editProfile();
+        }
+        if($a){
+            header("Refresh:0; url=profile?s=1");
+        }else{
+            header("Refresh:0; url=profile?s=0"); 
+        }
+        
     }
     public function removeMember(){
         $id=$_POST["removedmem"];
@@ -73,26 +88,72 @@ class residentController extends controller{
     public function fitness(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latestfitness($id);
+        if(isset($_POST["date"]) && isset($_POST["coach"])){
+            $d=$_POST["date"];
+            $coach=$_POST["coach"];
+                $this->view->day=$this->model->dayparking($d,$coach);
+        }
         $this->view->render('resident/fitnessCentreView');
     }
 
     public function treatment(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latesttreatment($id);
+        if(isset($_POST["date"])){
+            $d=$_POST["date"];
+                $this->view->day=$this->model->daytreatment($d);
+        }
         $this->view->render('resident/treatmentRoomView');
     }
 
     public function hall(){
         $id=$_SESSION['userId'];
+        //get latest to right panel
         $this->view->latestfun=$this->model->latesthallfun($id);
         $this->view->latestcon=$this->model->latesthallcon($id);
+        //for reserve + check available
+        if(isset($_POST["date"]) && isset($_POST["type"])  && isset($_POST["starttime"])  && isset($_POST["endtime"]) && isset($_POST["members"])){
+            $d=$_POST["date"];
+            $type=$_POST["type"];
+            $stime=$_POST["starttime"].":00";
+            $etime=$_POST["endtime"].":00";
+            $members=$_POST["members"];
+            //check valid time + check member less than 50
+            if($stime<$etime && $members<50){
+                $this->view->success=true;
+                $this->model->reservehall($d,$type,$stime,$etime, $members);
+            }
+            else if($stime>$etime){
+                $this->view->error="Select valid time slot!";
+            }else if($members){
+                $this->view->error="You can reserve for less than 50 members!";
+            }
+        }
+        //show reservation(user mention date)
+        else if(isset($_POST["date"]) && isset($_POST["type"])){
+                $d=$_POST["date"];
+                $type=$_POST["type"];
+                $this->view->type=$type;
+                if( $d <= date('Y-m-d')){
+                    $this->view->error="Pick upcoming date";
+                }else{
+                    $this->view->day=$this->model->dayhall($d,$type);
+                    $this->view->selectdate=$d;
+                }
+        }
+                
         $this->view->render('resident/hallView');
     }
-
+    
     public function parking(){
         $id=$_SESSION['userId'];
         $this->view->latest=$this->model->latestparking($id);
         $this->view->slots=$this->model->viewSlots();
+        if(isset($_POST["date"]) && isset($_POST["time"])){
+            $d=$_POST["date"];
+            $time=$_POST["time"];
+                $this->view->day=$this->model->dayparking($d,$time);
+        }
         $this->view->render('resident/parkingSlotView');
     }
 
@@ -134,6 +195,7 @@ class residentController extends controller{
             $des=$_POST["description"];
             $pdate=$_POST["pdate"];
             $type=$_POST["type"];
+            
             $this->model->reqMaintenence($type,$pdate,$des,$id);
             header("Refresh:0; url=maintenence");
         }
@@ -146,7 +208,9 @@ class residentController extends controller{
         if(isset($_POST["type"]) && isset($_POST["description"]) ){
             $des=$_POST["description"];
             $type=$_POST["type"];
-            $this->model->reqLaundry($type,$des,$id);
+            $catw1=$_POST["catw1"];$catw2=$_POST["catw2"];$catw3=$_POST["catw3"];
+            $quantity1=$_POST["quantity1"];$quantity2=$_POST["quantity2"];$quantity3=$_POST["quantity3"];
+            $this->model->reqLaundry($type,$des,$id,$catw1,$catw2,$catw3,$quantity1,$quantity2,$quantity3);
             header("Refresh:0; url=laundry");
         }
         $this->view->render('resident/laundryView');

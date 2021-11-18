@@ -4,6 +4,9 @@ include_once 'sidenav.php';
 </head>
 
 <body style="background-color: gray; background-image:none;">
+
+
+
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
@@ -24,24 +27,63 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="hall" class="reservationtime" method="POST">
                                     <div id="">
-
-                                        <input type="radio" name="type" value="function">
+                                        <input type="radio" name="type" value="function" <?php if (isset($this->type) && $this->type == 'function') { ?> checked="checked" ; <?php }; ?> required>
                                         <label>Function</label>
-                                        <input type="radio" name="type" value="conference">
-                                        <label>Conference</label><br>
+                                        <input type="radio" required name="type" value="conference" <?php if (isset($this->type) && $this->type == 'conference') { ?> checked="checked" ; <?php }; ?>>
+                                        <label>Conference</label><span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
+
                                         <label>Date</label><br>
-                                        <input type="date" name="date" class="input-field"><br>
-                                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <input type="date" name="date" id="datepicker" required class="input-field" value="<?php if (isset($this->selectdate)) {
+                                                                                                                                echo $this->selectdate;
+                                                                                                                            }; ?>"><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
+                                        <input class="purplebutton " id="disablebutton" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                                            
+                                            <h3>Reservations of the day</h3><br>
+                                            <?php if (isset($this->selectdate)) {
+                                                echo $this->selectdate;
+                                            }; ?>
+                                            <br>
+                                            <?php
+                                            if (isset($this->day->num_rows)) { ?>
+                                                <table class="avail">
+                                                    <tr>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                        <th>Other Details</th>
+                                                    </tr>
+                                                    <?php while ($row = $this->day->fetch_assoc()) {
+                                                    ?>
+                                                        <!-- show reservation -->
+
+                                                        <tr>
+                                                            <td><?php echo $row["start_time"] ?></td>
+                                                            <td><?php echo $row["end_time"] ?></td>
+                                                            <td><?php echo "" ?></td>
+                                                        </tr>
+
+                                                    <?php
+                                                    } ?>
+                                                </table>
+                                            <?php
+                                            } else {
+                                                echo "Select date first...<br>";
+                                            } ?>
+
                                         </div>
                                         <br>
-                                        <button id="model-btn" class="purplebutton">Reserve Now</button>
+                                        <?php
+                                        if (isset($this->selectdate)) {
+                                            echo "<span id='canreserve'><button type='button' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
+                                        }; ?>
+
 
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -106,83 +148,144 @@ include_once 'sidenav.php';
 
                 </div>
             </div>
-        </div>
 
-        <div class="divPopupModel">
-            <p id="answer"></p>
 
-            <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-            <div id="model">
+            <div class="divPopupModel">
 
-                <div style="text-align: center;">
-                    <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="model">
+
+                    <div style="text-align: center;">
+                        <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                    </div>
+
+                    <form action="hall" class="reservationtime" method="POST">
+                        <div id="col1">
+                            <input type="radio" name="type" value="function" <?php if (isset($this->type) && $this->type == 'function') { ?> checked="checked" ; <?php }; ?>>
+                            <label>Function </label>
+                            <input type="radio" name="type" value="conference" <?php if (isset($this->type) && $this->type == 'conference') { ?> checked="checked" ; <?php }; ?>>
+                            <label>Conference</label><br><br>
+                        </div>
+
+                        <div id="col1">
+                            <label>No of Members</label><br>
+                            <input type="text" name="members" id="mem50" class="input-field" placeholder="MAX 50" pattern="[0-9]{1,2}" required><br>
+                            <span class="error_form" id="member" style="font-size:10px;"></span><br>
+                        </div>
+
+                        <div id="col">
+                            <label>Date</label><br>
+                            <input type="date" name="date" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                    echo $this->selectdate;
+                                                                                                }; ?>">
+                        </div>
+
+                        <div id="col1">
+
+                            <label>Start Time</label><br>
+                            <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
+                                <option>Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select><br>
+
+                            <label>End Time</label><br>
+                            <select name="endtime" class="input-field" id="etime" placeholder="End Time">
+                                <option>Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select><br>
+                            <span class="error_form" id="endtime" style="font-size:10px;"></span><br>
+
+                        </div>
+                        <br>
+                        <input class="purplebutton" id="disablebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
+                    </form>
                 </div>
 
-                <form action="#" class="reservationtime" method="GET">
-                    <div id="col1">
-                        <input type="radio" name="type" value="function">
-                        <label>Function </label>
-                        <input type="radio" name="type" value="conference">
-                        <label>Conference</label><br><br>
-                    </div>
-
-                    <div id="col1">
-                        <label>No of Members</label><br>
-                        <input type="text" name="members" class="input-field" placeholder="MAX 50">
-                    </div>
-                    <div id="col1">
-                        <label>Start Time</label><br>
-                        <select name="starttime" class="input-field" placeholder="Start Time">
-                            <option value="">Select Time</option>
-                            <?php
-                            for ($hours = 6; $hours < 24; $hours++) {
-                                for ($mins = 0; $mins < 60; $mins += 30) {
-                            ?>
-                                    <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select><br>
-                        <label>End Time</label><br>
-                        <select name="endtime" class="input-field" placeholder="End Time">
-                            <option value="">Select Time</option>
-                            <?php
-                            for ($hours = 6; $hours < 24; $hours++) {
-                                for ($mins = 0; $mins < 60; $mins += 30) {
-                            ?>
-                                    <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <br>
-                    <input class="purplebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
-                </form>
             </div>
 
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Consider below</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Members should be less than 50 </label>
+                            <span><?= "" ?></span>
+                        </div>
+                        <div>
+                            <!-- <input class="btnRed" type="submit" name="submit" value="Delete"> -->
+                        </div>
+
+                    </form>
+                    
+                </div>
+            </div>
+            <!-- reservation success message -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <div class='b'></div>
+                <div class='bb'></div>
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Reservation Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' onclick='window.location = "hall" ' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+            <div class='b'></div>
+            <div class='bb'></div>
+            <div class='message'>
+                <div class='check'>
+                    &#10004;
+                </div>
+                <p>
+                    Reservation Success!
+                </p>
+                <p>
+                    Check your email for a booking confirmation. We'll see you soon!
+                </p>
+                <button id='ok' onclick='window.location = "profile" '>
+                    OK
+                </button>
+            </div>
+            <?php
+            }; ?>
         </div>
-
-
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
-<script>
-    $(document).ready(function() {
-        $(".tabs-list li a").click(function(e) {
-            e.preventDefault();
-        });
-
-        $(".tabs-list li").click(function() {
-            var tabid = $(this).find("a").attr("href");
-            $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
-            $(".tab").hide(); // hiding open tab
-            $(tabid).show(); // show tab
-            $(this).addClass("active"); //  adding active class to clicked tab
-        });
-    });
-</script>
 
 </html>

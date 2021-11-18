@@ -27,27 +27,50 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="#" class="reservationtime" method="GET">
+                                <form action="fitness" class="reservationtime" method="GET">
                                     <div id="">
                                         <label>Date</label><br>
                                         <input type="date" name="date" class="input-field"><br>
                                         <label>Coach</label><br>
-                                        <select name="type" class="input-field">
+                                        <select name="coach" class="input-field">
                                             <option value="">Select coach</option>
                                             <option value="">Chamara Supun</option>
                                             <option value="">Saman Silva</option>
-                                          
+
                                         </select><br>
                                         <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            <h3>Reservations of the day</h3>
-                                            <br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
+                                        <h3>Reservations of the day</h3><br>
+                                            <?php
+                                            if (isset($this->day->num_rows)) {
+                                                while ($row = $this->day->fetch_assoc()) {
+                                            ?>
+                                                    <div class="detail">
+                                                        <div>
+                                                            <div class="detail-info">
+                                                                <h5><?php echo $row["date"] ?></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    for ($hours = 6; $hours < 12; $hours++) {
+                                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT);
+                                                        }
+                                                        echo "<br>";
+                                                    }
+                                                    ?>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo "No Reservations...<br>";
+                                            } ?>
+
                                         </div>
                                         <br>
-                                        <button id="model-btn" class="purplebutton">Reserve Now</button>
-
                                     </div>
                                 </form>
+                                <button id="model-btn" class="purplebutton">Reserve Now</button>
                             </div>
                         </div>
                     </div>
@@ -60,24 +83,24 @@ include_once 'sidenav.php';
                             <h3>Upcoming Reservations. . .</h3>
                         </div>
                         <?php
-                        if ($this->latest->num_rows > 0) { 
+                        if ($this->latest->num_rows > 0) {
                             while ($row = $this->latest->fetch_assoc()) {
-                            ?>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
-                                    <small><?php echo $row["fname"]." ".$row["lname"] ?></small>
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo $row["fname"] . " " . $row["lname"] ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <?php
+                            <?php
                             }
                         } else { ?>
                             <div class="detail">
                                 <div>
                                     <div class="detail-info">
-                                        <h5><?php echo "No Upcomings . . ."?></h5>
+                                        <h5><?php echo "No Upcomings . . ." ?></h5>
                                     </div>
                                 </div>
                             </div>
@@ -108,15 +131,13 @@ include_once 'sidenav.php';
                 </div>
             </div>
 
-
-
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="model">
                     <div style="text-align: center;">
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="#" class="reservationtime" method="POST">
                         <div id="col1">
                             <label>Start Time</label><br>
                             <select name="starttime" class="input-field" placeholder="Start Time">

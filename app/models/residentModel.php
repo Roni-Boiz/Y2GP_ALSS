@@ -25,12 +25,13 @@ class residentModel extends model {
     }
     public function editProfile(){
         $sql1 = "UPDATE resident  SET fname='".$_POST["firstname"]."',lname='".$_POST["lastname"]."',nic='".$_POST["nic"]."',phone_no='".$_POST["phone_no"]."',email='".$_POST["email"]."',vehicle_no='".$_POST["vehicle_no"]."' WHERE user_id={$_SESSION['userId']}";
-        $this->conn->query($sql1); 
+        $a = $this->conn->query($sql1); 
         if($_POST["fam"]){
             $sql2 = "INSERT INTO family(resident_id,name) VALUES(".$_POST["res_id"].",'".$_POST["fam"]."')";
             //$sql2 = "INSERT INTO family(resident_id,name) VALUES(1,'Sajith')";
             $this->conn->query($sql2); 
-        }  
+        } 
+        return $a; 
         //if($_POST["vehicle_no"]){
         //$sql3 = "INSERT vehicle SET vehicle_no='".$_POST["veh"]."' WHERE user_id='".$_POST["resident_id"]."'";
         //$this->conn->query($sql3); 
@@ -77,6 +78,80 @@ class residentModel extends model {
     public function latesthallcon($id){
         $d=date('Y-m-d') ;
         $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date > '$d'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    //show userselected date reservations of hall
+    public function dayhall($d,$type){
+        if($type=="function"){
+            $sql = "SELECT * FROM hall_reservation WHERE date ='$d' and type='function' ";
+        }else{
+            $sql = "SELECT * FROM hall_reservation WHERE date ='$d' and type='conference' ";
+        }
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function reservehall($d,$type,$stime,$etime, $members){
+        //echo $stime."-".$etime."<br>";
+        $avail=1;
+        //function part
+        if($type=="function"){
+            $sql = "SELECT * FROM hall_reservation WHERE date ='$d' and type='function' ";
+            $result = $this->conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                //echo $row["start_time"]."-".$row["end_time"]."<br>";
+                //check avail
+                if($stime>=$row["start_time"] && $etime<=$row["end_time"]){
+                    $avail=0;
+                    //echo "Cannot Reserve<br>";
+                }else{
+                    //echo "Can reserve<br>";
+                    //reservation query
+                }
+            }
+        //conference part
+        }else{ 
+            $sql = "SELECT * FROM hall_reservation WHERE date ='$d' and type='conference' ";
+            $result = $this->conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                //echo $row["start_time"]."-".$row["end_time"]."<br>";
+                //check avail
+                if($stime>=$row["start_time"] && $etime<=$row["end_time"]){
+                    $avail=0;
+                    //echo "Cannot Reserve<br>";
+                }else{
+                    //echo "Can reserve<br>";
+                    //reservation query
+                    $sql = "";
+                    $this->conn->query($sql);
+                }
+            }
+        }
+        //return result for hall reservation
+        if($avail==0){
+            return "Select another time slot";
+        }else{
+            return "Reservation Successfull!";
+        }
+    }
+    //show userselected date reservations of treatment
+    public function daytreatment($d){
+        echo $d;
+        $sql = "SELECT * FROM treatment_room_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    //show userselected date reservations of fitness
+    public function dayfitness($d,$coach){
+        echo $d,$coach;
+        $sql = "SELECT * FROM hall_reservation WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    //show userselected date reservations of parking
+    public function dayparking($d,$time){
+        echo $d,$time;
+        $sql = "SELECT * FROM hall_reservation WHERE date ='$d'";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -158,14 +233,24 @@ class residentModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
-    public function reqLaundry($type,$des,$id){
+    public function reqLaundry($type,$des,$id,$catw1,$catw2,$catw3,$quantity1,$quantity2,$quantity3){
         $date = date('Y-m-d H:i:s');
         //get resident id from user id
         $sql = "SELECT resident_id from resident where user_id='$id'";
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
-        $sql = "INSERT INTO laundry_request(request_date,description,type,resident_id) VALUES('$date','$des','$type','$rid')";
-        $this->conn->query($sql);
+        $sql1 = "INSERT INTO laundry_request(request_date,description,type,resident_id) VALUES('$date','$des','$type','$rid')";
+        $this->conn->query($sql1);
+        //get latest req id
+        $sql2 = "SELECT max(request_id) as latest from laundry_request WHERE resident_id=$rid";
+        $latestid = mysqli_fetch_assoc($this->conn->query($sql2));
+        $latestid = $latestid["latest"];
+        //insert category
+        $sql3 = "INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw1','$quantity1');
+                    INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw2','$quantity2');
+                        INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw3','$quantity3');";        
+        $this->conn->query($sql3);
+
     }
     public function visitor($id){
         $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id')";

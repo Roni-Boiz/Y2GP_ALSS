@@ -10,34 +10,59 @@ include_once 'sidenav.php';
             <h1 id="title">TREATMENT ROOM </h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
-        <div class="card" id="userCard" style="z-index:0">
+            <div class="card" id="userCard" style="z-index:0">
                 <div class="leftPanel" style="margin-top:30px">
                     <div>
-                    <div class="card1" style="grid-column:1/span2;margin:auto">
-                <div class="data">
-                    <div class="photo" style="background-image:url(../../public/img/treatment.jpg);"></div>
-                    <ul class="details">
-                        <?php date_default_timezone_set("Asia/Colombo"); ?>
-                        <li class="author"><?php echo date("H:i"); ?> </li>
-                        <li class="date"><?php echo  date("F j, Y");  ?></li>
-                    </ul>
-                </div>
-                <div class="description">
-                    <form action="#" class="reservationtime" method="GET">
-                        <div id="">
-                            <label>Date</label><br>
-                            <input type="date" name="date" class="input-field"><br>
+                        <div class="card1" style="grid-column:1/span2;margin:auto">
+                            <div class="data">
+                                <div class="photo" style="background-image:url(../../public/img/treatment.jpg);"></div>
+                                <ul class="details">
+                                    <?php date_default_timezone_set("Asia/Colombo"); ?>
+                                    <li class="author"><?php echo date("H:i"); ?> </li>
+                                    <li class="date"><?php echo  date("F j, Y");  ?></li>
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <form action="#" class="reservationtime" method="GET">
+                                    <div id="">
+                                        <label>Date</label><br>
+                                        <input type="date" name="date" class="input-field"><br>
 
-                            <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
-                            <div id="available">
-                                <h3>Reservations of the day</h3><br>6:00 - 6:30 4/5<br>6:30 - 7:00 4/5<br>11:00 - 12:30 4/5<br>12:30 - 2:00 4/5
-                            </div><br>
-                            <button id="model-btn" class="purplebutton">Reserve Now</button>
+                                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <div id="available">
+                                            <h3>Reservations of the day</h3><br>
+                                            <?php
+                                            if (isset($this->day->num_rows)) {
+                                                while ($row = $this->day->fetch_assoc()) {
+                                            ?>
+                                                    <div class="detail">
+                                                        <div>
+                                                            <div class="detail-info">
+                                                                <h5><?php echo $row["date"] ?></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    for ($hours = 6; $hours < 24; $hours++) {
+                                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT);
+                                                        }
+                                                        echo "<br>";
+                                                    }
+                                                    ?>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo "No Reservations...<br>";
+                                            } ?>
 
+                                        </div><br>
+                                        <button id="model-btn" class="purplebutton">Reserve Now</button>
+
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
                     </div>
 
                 </div>
@@ -48,18 +73,18 @@ include_once 'sidenav.php';
                             <h3>Upcoming Reservations. . .</h3>
                         </div>
                         <?php
-                        if ($this->latest->num_rows > 0) { 
+                        if ($this->latest->num_rows > 0) {
                             while ($row = $this->latest->fetch_assoc()) {
-                            ?>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
-                                    <small><?php echo "Type : ".$row["type"]; ?></small>
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo "Type : " . $row["type"]; ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <?php
+                            <?php
                             }
                         } else { ?>
                             <div class="detail">
@@ -101,11 +126,11 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
-            
-   
+
+
             <div class="divPopupModel">
                 <p id="answer"></p>
 
