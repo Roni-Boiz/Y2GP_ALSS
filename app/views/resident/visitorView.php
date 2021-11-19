@@ -24,9 +24,10 @@ include_once 'sidenav.php';
                     <form action="visitor" class="reservationtime" method="POST">
                     <div>
                         <label>Name</label><br>
-                        <input type="text" name="name" class="input-field"><br>
+                        <input type="text" name="name" class="input-field" required><br>
                         <label>Visiting Date</label><br>
-                        <input type="date"  name="vdate" class="input-field"><br>
+                        <input type="date"  name="vdate" id="datepicker" class="input-field" required><br>
+                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                         <label>Description</label><br>
                         <input type="textarea" name="description" id="description"><br>
                         <input class="purplebutton" type="submit" name="Submit" value="Send" style="grid-column:2">

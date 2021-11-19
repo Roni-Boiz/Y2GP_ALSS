@@ -32,6 +32,12 @@ $(function () {
    $("#etime").on("change", function () {
       check_time();
    });
+   $("#quantity1,#quantity2,#quantity3").keyup(function () {
+      laundry();
+   });
+   $("#catw1,#catw2,#catw3").on("change", function () {
+      laundry();
+   });
 
    //tab list
    $(".tabs-list li a").click(function (e) {
@@ -294,6 +300,13 @@ function check_uptotoday() {
       $("#disablebutton").prop('disabled', false);
       $("#datetodayup").hide();
    }
+   //maintenence type select for easy
+   if ($("#select").val()=="Select Type") {
+      $("#maintenecetype").html("Select type first");
+      $("#maintenecetype").show();
+   }else{
+      $("#maintenecetype").hide();
+   }
    
 }
 function check_time() {
@@ -324,6 +337,22 @@ function check_time() {
    }
    else {
       $("#endtime").hide();
+   }
+}
+// laundry validation
+function laundry(){
+   console.log($("#catw1").val());
+   if ($("#select").val()=="Select Type") {
+      $("#laundrytype").html("Select type first");
+      $("#laundrytype").show();
+   }else{
+      $("#laundrytype").hide();
+   }
+   if (($("#quantity1").val() && $("#catw1").val()=="Select weight")||($("#quantity3").val() && $("#catw3").val()=="Select weight")||($("#quantity2").val() && $("#catw2").val()=="Select weight")) {
+      $("#category").html("Please select net weight of respective category");
+      $("#category").show();
+   }else{
+      $("#category").hide();
    }
 }
 ////////////////////////////////////////////////////

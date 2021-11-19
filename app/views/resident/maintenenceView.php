@@ -27,16 +27,18 @@ include_once 'sidenav.php';
                                 <form action="maintenence" class="reservationtime" method="POST">
 
                                     <label for="type">Type</label><br>
-                                    <select name="type" class="input-field">
+                                    <select name="type" class="input-field" id="select">
                                         <option>Select Type</option>
                                         <option>Electricity</option>
                                         <option>Painting</option>
                                         <option>AC</option>
                                         <option>Other</option>
                                     </select><br>
+                                    <span class="error_form" id="maintenecetype" style="font-size:10px;"></span><br>
                                     <div id="">
                                         <label>Prefered Date</label><br>
-                                        <input type="date" name="pdate" class="input-field"><br>
+                                        <input type="date" name="pdate" id="datepicker" class="input-field" required><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <label>Description</label><br>
                                         <input type="textarea" name="description" id="description"><br>
                                         <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">

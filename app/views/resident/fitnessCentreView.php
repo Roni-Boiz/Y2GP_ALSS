@@ -30,7 +30,9 @@ include_once 'sidenav.php';
                                 <form action="fitness" class="reservationtime" method="GET">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" class="input-field"><br>
+                                        <input type="date" name="date" id="datepicker" class="input-field"><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
+
                                         <label>Coach</label><br>
                                         <select name="coach" class="input-field">
                                             <option value="">Select coach</option>

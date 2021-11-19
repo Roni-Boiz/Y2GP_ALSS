@@ -26,7 +26,8 @@ include_once 'sidenav.php';
                                 <div id="col1">
                                     <div>
                                         <label>Date</label><br>
-                                        <input type="date" name="date" class="input-field">
+                                        <input type="date" name="date" id="datepicker" class="input-field"><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                     </div>
                                     </select><br>
                                     <label>Start Time</label><br>

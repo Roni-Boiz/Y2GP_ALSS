@@ -26,8 +26,8 @@ include_once 'sidenav.php';
                                 <form action="#" class="reservationtime" method="GET">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" class="input-field"><br>
-
+                                        <input type="date" name="date" id="datepicker" class="input-field"><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
                                             <h3>Reservations of the day</h3><br>

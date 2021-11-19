@@ -28,6 +28,7 @@ class residentController extends controller{
                 $this->view->success=true;
             }else{
                 $this->view->error=true;
+                $this->view->pwerror=true;
             }
         }
         $this->view->users = $this->model->readResident();
@@ -38,7 +39,7 @@ class residentController extends controller{
     // edit profile
     public function editProfile(){
         $a=0;
-        if(strlen($_POST["phone_no"]) && strlen($_POST["email"])){
+        if(strlen($_POST["phone_no"])>9 && strlen($_POST["email"])){
             $a=$this->model->editProfile();
         }
         if($a){
@@ -57,8 +58,12 @@ class residentController extends controller{
         $opw=$_POST["opw"];
         $npw=$_POST["npw"];
         $rnpw=$_POST["rnpw"];
-        $this->model->changePassword($opw,$npw,$rnpw);
-        $this->profile();
+        $a=$this->model->changePassword($opw,$npw,$rnpw);
+        if($a){
+            header("Refresh:0; url=profile?s=0");
+        }else{
+            header("Refresh:0; url=profile?s=1"); 
+        }
     }
     // view resident announcement
     // public function announcement(){
@@ -135,7 +140,7 @@ class residentController extends controller{
                 $type=$_POST["type"];
                 $this->view->type=$type;
                 if( $d <= date('Y-m-d')){
-                    $this->view->error="Pick upcoming date";
+                    $this->view->error[]="Pick upcoming date";
                 }else{
                     $this->view->day=$this->model->dayhall($d,$type);
                     $this->view->selectdate=$d;

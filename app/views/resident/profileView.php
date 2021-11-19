@@ -138,7 +138,7 @@ include_once('sidenav.php');
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
                                 <span class="error_form" id="renew_password_error_message" style="font-size:10px;"></span><br>
 
-                                <input type="submit" onclick="confirm()" value="Save">
+                                <input type="submit" onclick="confirm" value="Save">
                             </form>
 
                             <input type="submit" id="changepassword" value="Change Password" onclick="setVisibility2('passwordView');">
@@ -234,7 +234,7 @@ include_once('sidenav.php');
             <?php
             }; ?>
             <?php
-            if (isset($this->error)) { ?>
+            if (isset($this->error) || isset($this->pwerror)) { ?>
                 <!-- error popup -->
                 <div class='b'></div>
                 <div class='bb'></div>
@@ -246,7 +246,7 @@ include_once('sidenav.php');
                     Edit Unsuccess!
                     </p>
                     <p>
-                        <?php echo  "please fill required field" ?>
+                        <?php if (isset($this->error)){echo  "please fill required field or enter valid details";} ?>
                     </p>
                     <button id='ok' onclick='window.location = "profile" ' style="background:red;">
                         OK

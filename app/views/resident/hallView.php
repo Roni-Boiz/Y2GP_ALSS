@@ -277,7 +277,7 @@ include_once 'sidenav.php';
                 <p>
                     Check your email for a booking confirmation. We'll see you soon!
                 </p>
-                <button id='ok' onclick='window.location = "profile" '>
+                <button id='ok' onclick='window.location = "hall" '>
                     OK
                 </button>
             </div>
