@@ -50,6 +50,7 @@
                 <li><a href="register"><i class="fa fa-file-medical"></i>REGISTRATION</a></li>
                 <li><a href="parcels"><i class="fas fa-box-open"></i>PARCELS</a></li>
                 <li><a href="visitors"><i class="fas fa-users"></i>VISITORS</a></li>
+                <li><a href="help"><i class="fas fa-users"></i>HELP</a></li>
             </ul>
         </nav>
 
