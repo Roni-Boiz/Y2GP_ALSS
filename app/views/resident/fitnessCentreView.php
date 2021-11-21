@@ -27,52 +27,72 @@ include_once 'sidenav.php';
                                 </ul>
                             </div>
                             <div class="description">
-                                <form action="fitness" class="reservationtime" method="GET">
+                                <form action="fitness" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" class="input-field"><br>
+                                        <input type="date" name="date" id="datepicker" class="input-field" required><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
 
                                         <label>Coach</label><br>
-                                        <select name="coach" class="input-field">
+                                        <select name="coach" class="input-field" id="selectcoach" required>
                                             <option value="">Select coach</option>
-                                            <option value="">Chamara Supun</option>
-                                            <option value="">Saman Silva</option>
-
-                                        </select><br>
-                                        <input class="purplebutton" type="submit" value="View" style="grid-column:2"><br><br>
-                                        <div id="available">
-                                        <h3>Reservations of the day</h3><br>
                                             <?php
-                                            if (isset($this->day->num_rows)) {
-                                                while ($row = $this->day->fetch_assoc()) {
+                                            if (isset($this->coach->num_rows)) {
+                                                while ($row1 = $this->coach->fetch_assoc()) {
                                             ?>
-                                                    <div class="detail">
-                                                        <div>
-                                                            <div class="detail-info">
-                                                                <h5><?php echo $row["date"] ?></h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                    for ($hours = 6; $hours < 12; $hours++) {
-                                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT);
-                                                        }
-                                                        echo "<br>";
-                                                    }
-                                                    ?>
+                                                    <option><?php echo $row1["fname"] . " " . $row1["lname"] . " " . $row1["employee_id"] ?></option>
                                             <?php
                                                 }
                                             } else {
-                                                echo "No Reservations...<br>";
+                                                echo "No Coaches...<br>";
+                                            } ?>
+
+                                        </select><br>
+                                        <span class="error_form" id="coach" style="font-size:10px;"></span><br>
+
+                                        <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <div id="available">
+                                            
+                                            <h3>Reservations of the day</h3><br>
+                                            <?php if (isset($this->selectdate)) {
+                                                echo $this->selectdate;
+                                            }; ?>
+                                            <br>
+                                            <?php
+                                            if (isset($this->day->num_rows)) { ?>
+                                                <table class="avail">
+                                                    <tr>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                        <th>Availability</th>
+                                                    </tr>
+                                                    <?php while ($row = $this->day->fetch_assoc()) {
+                                                    ?>
+                                                        <!-- show reservation -->
+
+                                                        <tr>
+                                                            <td><?php echo $row["start_time"] ?></td>
+                                                            <td><?php echo $row["end_time"] ?></td>
+                                                            <td><?php echo "" ?></td>
+                                                        </tr>
+
+                                                    <?php
+                                                    } ?>
+                                                </table>
+                                            <?php
+                                            } else {
+                                                echo "Select date first...<br>";
                                             } ?>
 
                                         </div>
                                         <br>
+                                        <?php
+                                        if (isset($this->selectdate)) {
+                                            echo "<span id='canreserve'><button type='button' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
+                                        }; ?>
                                     </div>
+
                                 </form>
-                                <button id="model-btn" class="purplebutton">Reserve Now</button>
                             </div>
                         </div>
                     </div>
@@ -139,40 +159,98 @@ include_once 'sidenav.php';
                     <div style="text-align: center;">
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
-                    <form action="#" class="reservationtime" method="POST">
+                    <form action="fitness" class="reservationtime" method="POST">
                         <div id="col1">
-                            <label>Start Time</label><br>
-                            <select name="starttime" class="input-field" placeholder="Start Time">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="starttime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
+                            <label>Date</label><br>
+                            <input type="date" name="date" id="datepicker" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                                            echo $this->selectdate;
+                                                                                                                        }; ?>"><br>
+                            <label>Coach</label><br>
+                            <input type="text" name="coach" id="coach" required class="input-field" readonly value="<?php if (isset($this->selectcoach)) {
+                                                                                                                        echo $this->selectcoach;
+                                                                                                                    }; ?>"><br>
+                            <div id="col1">
+
+                                <label>Start Time</label><br>
+                                <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
+                                    <option value="">Select Time</option>
+                                    <?php
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <?php
+                                        }
                                     }
-                                }
-                                ?>
-                            </select><br>
-                            <label>End Time</label><br>
-                            <select name="endtime" class="input-field" placeholder="End Time">
-                                <option value="">Select Time</option>
-                                <?php
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
-                                ?>
-                                        <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                <?php
+                                    ?>
+                                </select><br>
+
+                                <label>End Time</label><br>
+                                <select name="endtime" class="input-field" id="etime" placeholder="End Time">
+                                    <option value="">Select Time</option>
+                                    <?php
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <?php
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
+                                    ?>
+                                </select><br>
+                                <span class="error_form" id="endtime" style="font-size:10px;"></span><br>
+
+                            </div>
+                            <br>
                         </div>
                         <br>
-                        <input class="purplebutton" type="submit" name="Submit" value="Reserve" style="grid-column:1">
+                        <input class="purplebutton" id="disablebutton2" type="submit" name="Submit" value="Reserve" style="grid-column:1">
                     </form>
 
                 </div>
+                <!-- reservation success message -->
+                <?php
+                if (isset($this->error)) { ?>
+                    <!-- error popup -->
+                    <div class='b'></div>
+                    <div class='bb'></div>
+                    <div class='message'>
+                        <div class='check' style="background:red;">
+                            &#10006;
+                        </div>
+                        <p>
+                            Reservation Unsuccess!
+                        </p>
+                        <p>
+                            <?php echo $this->error; ?>
+                        </p>
+                        <button id='ok' onclick='window.location = "fitness" ' style="background:red;">
+                            OK
+                        </button>
+                    </div>
+                <?php
+                }; ?>
+                <!-- success popup -->
+                <?php
+                if (isset($this->success)) { ?>
+                    <div class='b'></div>
+                    <div class='bb'></div>
+                    <div class='message'>
+                        <div class='check'>
+                            &#10004;
+                        </div>
+                        <p>
+                            Reservation Success!
+                        </p>
+                        <p>
+                            Check your email for a booking confirmation. We'll see you soon!
+                        </p>
+                        <button id='ok' onclick='window.location = "fitness" '>
+                            OK
+                        </button>
+                    </div>
+                <?php
+                }; ?>
             </div>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
