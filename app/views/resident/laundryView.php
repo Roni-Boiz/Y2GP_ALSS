@@ -25,7 +25,7 @@ include_once 'sidenav.php';
                         <div id="">
                             <label for="type">Type</label><br>
                             <select name="type" class="input-field" id="select">
-                                <option >Select Type</option>
+                                <option value="">Select Type</option>
                                 <option >Quick</option>
                                 <option >Regular</option>
                             </select><i class="fas fa-info-circle" id="model-btn"></i><br>
@@ -37,7 +37,7 @@ include_once 'sidenav.php';
                             <label>Category 1</label><br>
                             <input type="text" name="quantity1" id="quantity1" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
                             <select name="catw1"id="catw1" class="input-field">
-                                <option >Select weight</option>
+                                <option value="">Select weight</option>
                                 <option >1-5</option>
                                 <option >5-10</option>
                                 <option >more than 10</option>
@@ -45,7 +45,7 @@ include_once 'sidenav.php';
                             <label>Category 2</label><br>
                             <input type="text" name="quantity2" id="quantity2" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
                             <select name="catw2" id="catw2"class="input-field">
-                                <option >Select weight</option>
+                                <option value="">Select weight</option>
                                 <option >1-5</option>
                                 <option >5-10</option>
                                 <option >more than 10</option>
@@ -53,7 +53,7 @@ include_once 'sidenav.php';
                             <label>Category 3</label><br>
                             <input type="text" name="quantity3" id="quantity3" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
                             <select name="catw3" id="catw3"class="input-field">
-                                <option >Select weight</option>
+                                <option value="">Select weight</option>
                                 <option >1-5</option>
                                 <option >5-10</option>
                                 <option >more than 10</option>
@@ -61,7 +61,7 @@ include_once 'sidenav.php';
                             <span class="error_form" id="category" style="font-size:10px;"></span><br>
                             <label>Description</label><br>
                             <input type="textarea" name="description" id="description"><br>
-                            <input class="purplebutton" type="submit" name="Submit" value="Send Request" style="grid-column:2">
+                            <input class="purplebutton" id="disablebutton3" type="submit" name="Submit" value="Send Request" style="grid-column:2">
                         </div>
 
                     </form>

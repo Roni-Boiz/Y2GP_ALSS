@@ -197,14 +197,54 @@ include_once 'sidenav.php';
                 </div>
                 <form action="complaint" class="reservationtime" method="post">
                     <div>
-                        <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..."><br>
-                        your complaint will be considered soon.. thank you for your feedback<br>
+                        <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>
+                        <br>
                         <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2;padding:5px 15px">
                     </div>
                 </form>
             </div>
-
-
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <div class='b'></div>
+                <div class='bb'></div>
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                    Sent!
+                    </p>
+                    <p>
+                    your complaint will be considered soon.. thank you for your feedback
+                    </p>
+                    <button id='ok' onclick='window.location = "complaint" '>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+<?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <div class='b'></div>
+                <div class='bb'></div>
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Unsuccessfull!
+                    </p>
+                    <p>
+                       Something went wrong
+                    </p>
+                    <button id='ok' onclick='window.location = "complaint" ' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
         </div>
     </div>
     </div> <!-- .hawlockbody div closed here -->

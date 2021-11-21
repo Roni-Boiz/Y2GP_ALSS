@@ -39,7 +39,7 @@ include_once 'sidenav.php';
                                                                                                                                 echo $this->selectdate;
                                                                                                                             }; ?>"><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
-                                        <input class="purplebutton " id="disablebutton" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <input class="purplebutton " id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
                                             
                                             <h3>Reservations of the day</h3><br>
@@ -213,7 +213,8 @@ include_once 'sidenav.php';
 
                         </div>
                         <br>
-                        <input class="purplebutton" id="disablebutton" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
+                        <input class="purplebutton" id="disablebutton2" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
+
                     </form>
                 </div>
 
