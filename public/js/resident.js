@@ -25,6 +25,7 @@ $(function () {
    });
    $("#datepicker").on("change", function () {
       check_uptotoday();
+      coach();
    });
    $("#stime").on("change", function () {
       check_time();
@@ -35,8 +36,11 @@ $(function () {
    $("#quantity1,#quantity2,#quantity3").keyup(function () {
       laundry();
    });
-   $("#catw1,#catw2,#catw3").on("change", function () {
+   $("#catw1,#catw2,#catw3,#select").on("change", function () {
       laundry();
+   });
+   $("#selectcoach").on("change", function () {
+      coach();
    });
 
    //tab list
@@ -272,15 +276,19 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
-//form validation in hall
+//form validation in reservation
 function check_members() {
    var count = $("#mem50").val();
    if (count > 50) {
       $("#member").html("Member should be less than 50");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor','not-allowed');
       $("#member").show();
    }
    else {
       $("#member").hide();
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor','cursor');
    }
 
 }
@@ -295,20 +303,49 @@ function check_uptotoday() {
       $("#datetodayup").show();
       $("#canreserve").hide();
       //button disabled for wrong date
-      $("#disablebutton").prop('disabled', true);
+      $("#disablebutton1").css('cursor','not-allowed')
+      $("#disablebutton1").prop('disabled', true);
    }else{
-      $("#disablebutton").prop('disabled', false);
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor','pointer');
       $("#datetodayup").hide();
    }
    //maintenence type select for easy
-   if ($("#select").val()=="Select Type") {
+   if ($("#select").val()=="") {
       $("#maintenecetype").html("Select type first");
       $("#maintenecetype").show();
    }else{
       $("#maintenecetype").hide();
    }
-   
 }
+function coach(){
+   // fitness reservation coach
+   if ($("#selectcoach").val()=="") {
+      $("#coach").html("Select coach");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor','not-allowed');
+      $("#coach").show();
+   }else{
+      $("#coach").hide();
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor','pointer');
+      check_uptotoday();
+   }
+}
+// function treatmenttype(){
+//    // fitness reservation coach
+//    if ($("#trtype").val()=="") {
+//       $("#ttype").html("Select treatment");
+//       $("#disablebutton2").prop('disabled', true);
+//       $("#disablebutton2").css('cursor','not-allowed');
+//       $("#ttype").show();
+//    }else{
+//       $("#ttype").hide();
+//       $("#disablebutton2").prop('disabled', false);
+//       $("#disablebutton2").css('cursor','pointer');
+//       //check_time();
+//    }
+// }
 function check_time() {
    var stime = $("#stime").val();
    var etime = $("#etime").val();
@@ -328,33 +365,49 @@ function check_time() {
 
    if (stime >= etime) {
       $("#endtime").html("Select valid time slot");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor','not-allowed');
       $("#endtime").show();
       
    }
    else if ((hour > 6) || (hour==6) && (min==30) ) {
       $("#endtime").html("Maxium booking time 6 hours");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor','not-allowed');
       $("#endtime").show();
    }
    else {
       $("#endtime").hide();
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor','pointer');
    }
 }
 // laundry validation
 function laundry(){
    console.log($("#catw1").val());
-   if ($("#select").val()=="Select Type") {
-      $("#laundrytype").html("Select type first");
-      $("#laundrytype").show();
-   }else{
-      $("#laundrytype").hide();
-   }
-   if (($("#quantity1").val() && $("#catw1").val()=="Select weight")||($("#quantity3").val() && $("#catw3").val()=="Select weight")||($("#quantity2").val() && $("#catw2").val()=="Select weight")) {
+   
+   if (($("#quantity1").val() && $("#catw1").val()=="")||($("#quantity3").val() && $("#catw3").val()=="")||($("#quantity2").val() && $("#catw2").val()=="")) {
       $("#category").html("Please select net weight of respective category");
+      $("#disablebutton3").css('cursor','not-allowed');
+      $("#disablebutton3").prop('disabled', true);
       $("#category").show();
    }else{
       $("#category").hide();
+      $("#disablebutton3").css('cursor','pointer');
+      $("#disablebutton3").prop('disabled', false);
+   }
+   if ($("#select").val()=="") {
+      $("#laundrytype").html("Select type first");
+      $("#disablebutton3").css('cursor','not-allowed');
+      $("#disablebutton3").prop('disabled', true);
+      $("#laundrytype").show();
+   }else{
+      $("#laundrytype").hide();
+      $("#disablebutton3").css('cursor','pointer');
+      $("#disablebutton3").prop('disabled', false);
    }
 }
+
 ////////////////////////////////////////////////////
 function openModel(amodel, amodelBtn) {
 
