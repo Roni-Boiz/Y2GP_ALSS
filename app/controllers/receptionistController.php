@@ -106,5 +106,8 @@ class receptionistController extends controller{
         $this->model->removeNotification($nid);
         $this->getNotification();
     }
+    public function help(){
+        $this->view->render('receptionist/helpView');
+    }
     
 }
