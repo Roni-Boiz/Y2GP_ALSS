@@ -28,7 +28,7 @@ include_once 'sidenav.php';
 
                                     <label for="type">Type</label><br>
                                     <select name="type" class="input-field" id="select">
-                                        <option>Select Type</option>
+                                        <option value="">Select Type</option>
                                         <option>Electricity</option>
                                         <option>Painting</option>
                                         <option>AC</option>
