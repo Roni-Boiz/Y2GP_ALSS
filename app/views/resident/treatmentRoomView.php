@@ -30,7 +30,7 @@ include_once 'sidenav.php';
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            
+
                                             <h3>Reservations of the day</h3><br>
                                             <?php if (isset($this->selectdate)) {
                                                 echo $this->selectdate;
@@ -47,12 +47,24 @@ include_once 'sidenav.php';
                                                     <?php while ($row = $this->day->fetch_assoc()) {
                                                     ?>
                                                         <!-- show reservation -->
+                                                        
+                                                        <?php
+                                                        $count=1;
+                                                        for ($hours = 6; $hours < 24; $hours++) {
+                                                            for ($mins = 0; $mins < 60; $mins += 30) {
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                                                    <td><?php if($mins+30==60){ echo str_pad($hours+1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins-30, 2, '0', STR_PAD_LEFT);} else{ echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins+30, 2, '0', STR_PAD_LEFT);} ?></td>
+                                                                    <td><?php echo $row[$count]."/5" ?></td>
+                                                                    
+                                                                </tr>
+                                                        <?php
+                                                        $count++;
+                                                            }
+                                                        }
+                                                        ?>
 
-                                                        <tr>
-                                                            <td><?php echo $row["start_time"] ?></td>
-                                                            <td><?php echo $row["end_time"] ?></td>
-                                                            <td><?php echo "" ?></td>
-                                                        </tr>
 
                                                     <?php
                                                     } ?>
@@ -151,15 +163,15 @@ include_once 'sidenav.php';
                         <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                     </div>
 
-                    <form action="#" class="reservationtime" method="GET">
+                    <form action="treatment" class="reservationtime" method="POST">
                         <div id="col1">
                             <label>Treatment Type</label><br>
                             <select name="trtype" class="input-field" required>
                                 <option value="">Select Type</option>
-                                <option >Herbal body wrap</option>
-                                <option >Full Body Massage</option>
-                                <option >Full-body facia</option>
-                                <option >Water Therapy</option>
+                                <option>Herbal body wrap</option>
+                                <option>Full Body Massage</option>
+                                <option>Full-body facia</option>
+                                <option>Water Therapy</option>
                             </select><br>
                             <span class="error_form" id="ttype" style="font-size:10px;"></span><br>
                         </div>
@@ -171,43 +183,43 @@ include_once 'sidenav.php';
                         </div>
                         <div id="col1">
 
-                                <label>Start Time</label><br>
-                                <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
-                                    <option value="">Select Time</option>
-                                    <?php
-                                    for ($hours = 6; $hours < 24; $hours++) {
-                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                    ?>
-                                            <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                    <?php
-                                        }
+                            <label>Start Time</label><br>
+                            <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
+                                <option value="">Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
                                     }
-                                    ?>
-                                </select><br>
+                                }
+                                ?>
+                            </select><br>
 
-                                <label>End Time</label><br>
-                                <select name="endtime" class="input-field" id="etime" placeholder="End Time">
-                                    <option value="">Select Time</option>
-                                    <?php
-                                    for ($hours = 6; $hours < 24; $hours++) {
-                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                    ?>
-                                            <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                    <?php
-                                        }
+                            <label>End Time</label><br>
+                            <select name="endtime" class="input-field" id="etime" placeholder="End Time">
+                                <option value="">Select Time</option>
+                                <?php
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                <?php
                                     }
-                                    ?>
-                                </select><br>
-                                <span class="error_form" id="endtime" style="font-size:10px;"></span><br>
+                                }
+                                ?>
+                            </select><br>
+                            <span class="error_form" id="endtime" style="font-size:10px;"></span><br>
 
-                            </div>
+                        </div>
                         <br>
                         <input class="purplebutton" id="disablebutton2" type="submit" name="Submit" value="Booking Now..." style="grid-column:1">
                     </form>
 
                 </div>
-<!-- reservation success message -->
-<?php
+                <!-- reservation success message -->
+                <?php
                 if (isset($this->error)) { ?>
                     <!-- error popup -->
                     <div class='b'></div>
@@ -222,7 +234,7 @@ include_once 'sidenav.php';
                         <p>
                             <?php echo $this->error; ?>
                         </p>
-                        <button id='ok' onclick='window.location = "fitness" ' style="background:red;">
+                        <button id='ok' onclick='window.location = "treatment" ' style="background:red;">
                             OK
                         </button>
                     </div>
@@ -238,12 +250,14 @@ include_once 'sidenav.php';
                             &#10004;
                         </div>
                         <p>
+                            
                             Reservation Success!
                         </p>
                         <p>
+                            <?php echo $this->success; ?><br>
                             Check your email for a booking confirmation. We'll see you soon!
                         </p>
-                        <button id='ok' onclick='window.location = "fitness" '>
+                        <button id='ok' onclick='window.location = "treatment" '>
                             OK
                         </button>
                     </div>
