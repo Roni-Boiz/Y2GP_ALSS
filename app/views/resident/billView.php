@@ -46,7 +46,7 @@ include_once 'sidenav.php';
                                 </span>
                                 <?php
                                 }
-                            
+                            if(isset($this->billtotal) && isset($this->balanceforward)){
                             $row1 = $this->billtotal->fetch_assoc();
                             $row2 = $this->balanceforward->fetch_assoc()?>
                             <main class="row title">
@@ -75,6 +75,7 @@ include_once 'sidenav.php';
                                     <?php } ?>
                                 </ul>
                             </main>
+                        <?php } ?>
                         </section>
                         <?php
                             }else{
@@ -88,14 +89,14 @@ include_once 'sidenav.php';
                     <form action="Bill" class="reservationtime" method="POST">
                         <div id="">
                             <label>Year</label><br>
-                            <select name="year" class="input-field">
-                                <option>Select Year</option>
+                            <select required name="year" class="input-field">
+                                <option value="">Select Year</option>
                                 <option>2019</option>
                                 <option>2020</option>
                                 <option>2021</option>
                             </select><br>
                             <label for="type">Month</label><br>
-                            <select name="month" class="input-field">
+                            <select required name="month" class="input-field">
                                 <option value="">Select Month</option>
                                 <!-- to get time slots -->
                                 <?php

@@ -196,6 +196,20 @@ include_once 'sidenav.php';
                     <h3>Complaints</h3>
                 </div>
                 <form action="complaint" class="reservationtime" method="post">
+                <div id="col1">
+                            <label>Complaint Type</label><br>
+                            <select name="type" class="input-field" required>
+                                <option value="">Select Type</option>
+                                <option >Parcel</option>
+                                <option >Fitness Centre</option>
+                                <option >Treatment Room</option>
+                                <option >Function Hall</option>
+                                <option >Conference Hall</option>
+                                <option >Swim Pool</option>
+                                <option >Kids Area</option>
+                                <option >...</option>
+                            </select><br>
+                        </div>
                     <div>
                         <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>
                         <br>

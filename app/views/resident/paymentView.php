@@ -72,7 +72,7 @@ include_once 'sidenav.php';
                     </div>
                 </div>
 
-                <div style="display:none" id="gateway">
+                <!-- <div style="display:none" id="gateway">
                     <form action="#" class="reservationtime" method="GET" id="cardpayment">
                         <h3>Payment</h3>
                         <label>Accepted Cards</label>
@@ -93,7 +93,7 @@ include_once 'sidenav.php';
                         <label for="cvv">CVV</label>
                         <input type="text" id="cvv" class="input-field" name="cvv" placeholder="352">
                     </form>
-                </div>
+                </div> -->
                 <div class="divPopupModel">
                     <p id="answer"></p>
 
