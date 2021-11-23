@@ -141,18 +141,18 @@ class residentController extends controller
         $id = $_SESSION['userId'];
 
 
-        if (isset($_POST["date"]) && isset($_POST["type"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
+        if (isset($_POST["date"]) && isset($_POST["trtype"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
-            $type = $_POST["type"];
+            $type = $_POST["trtype"];
             $stime = $_POST["starttime"] . ":00";
             $etime = $_POST["endtime"] . ":00";
             //check valid time
             if ($stime < $etime) {
-                $result = $this->model->reservefitness($d, $type, $stime, $etime);
+                $result = $this->model->reservetreatment($d, $type, $stime, $etime);
                 if ($result == 0) {
-                    $this->view->error = "Already reserved.Please select another time slot!.";
+                    $this->view->error = "Already reserved.Please select another time slot!.according to the availability of the day.";
                 } else {
-                    $this->view->success = true;
+                    $this->view->success = $d." at ".$stime." - ".$etime." reserve for ".$type.".";
                 }
             } else if ($stime > $etime) {
                 $this->view->error = "Select valid time slot!";
@@ -244,8 +244,9 @@ class residentController extends controller
             $this->view->bill = $this->model->bill($id, date('Y'), date('m'));
             $this->view->y = date('Y') . " " . date('F');
             $this->view->billtotal = $this->model->billtotal($id, date('Y'), date('m'));
+            $this->view->balanceforward = $this->model->readResident();
         }
-        $this->view->balanceforward = $this->model->readResident();
+        
         $this->view->render('resident/billView');
     }
 
@@ -321,9 +322,11 @@ class residentController extends controller
     }
     public function complaint()
     {
-        if (isset($_POST["description"])) {
+        $id = $_SESSION['userId'];
+        if (isset($_POST["description"]) && isset($_POST["type"])) {
             $des = $_POST["description"];
-            $result = $this->model->complaint($des);
+            $type=$_POST["type"];
+            $result = $this->model->complaint($des,$type,$id);
             if ($result == 0) {
                 $this->view->error = true;
             } else {
@@ -341,7 +344,7 @@ class residentController extends controller
         $residentFname = "Amal";
         $residentLname = "Perera";
         $amount = "10000";
-
+//payment update wenna ona userge account eken
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
     }
