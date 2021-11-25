@@ -69,20 +69,32 @@ include_once 'sidenav.php';
                                                     <?php while ($row = $this->day->fetch_assoc()) {
                                                     ?>
                                                         <!-- show reservation -->
-                                                        
+
                                                         <?php
-                                                        $count=1;
+                                                        $count = 1;
                                                         for ($hours = 6; $hours < 24; $hours++) {
                                                             for ($mins = 0; $mins < 60; $mins += 30) {
                                                         ?>
                                                                 <tr>
                                                                     <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
-                                                                    <td><?php if($mins+30==60){ echo str_pad($hours+1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins-30, 2, '0', STR_PAD_LEFT);} else{ echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins+30, 2, '0', STR_PAD_LEFT);} ?></td>
-                                                                    <td><?php echo $row[$count]."/5" ?></td>
-                                                                    
+                                                                    <td><?php if ($mins + 30 == 60) {
+                                                                            echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                                        } else {
+                                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                                        } ?></td>
+                                                                    <td>
+                                                                        <span class="fa-stack">
+                                                                            <!-- color with available -->
+                                                                            <span <?php if($row[$count]==5){?> style="color:red" <?php }elseif($row[$count]>0 && $row[$count]<5){ ?> style="color:yellow" <?php }else{?> style="color:green" <?php }?> class="fa fa-circle fa-stack-2x"></span>
+                                                                            <strong  class="fa-stack-1x">
+                                                                                <?php echo $row[$count];?>
+                                                                            </strong>
+                                                                        </span>
+                                                                    </td>
+
                                                                 </tr>
                                                         <?php
-                                                        $count++;
+                                                                $count++;
                                                             }
                                                         }
                                                         ?>
