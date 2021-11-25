@@ -8,7 +8,7 @@ class residentModel extends model
     {
         parent::__construct();
     }
-    // Profile
+    //Get profile details
     public function readResident()
     {
         // echo $_SESSION['userId'];
@@ -16,18 +16,21 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //Get family members
     public function readMembers()
     {
         $sql = "SELECT family.name as membername FROM resident INNER JOIN family ON resident.resident_id=family.resident_id WHERE user_id={$_SESSION['userId']}";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //remove family members from profile
     public function removeMember($id)
     {
         $sql = "DELETE from family WHERE name='$id'";
         $this->conn->query($sql);
         //echo $_POST["removedmem"];
     }
+    //change basic profile detials 
     public function editProfile()
     {
         $sql1 = "UPDATE resident  SET fname='" . $_POST["firstname"] . "',lname='" . $_POST["lastname"] . "',nic='" . $_POST["nic"] . "',phone_no='" . $_POST["phone_no"] . "',email='" . $_POST["email"] . "',vehicle_no='" . $_POST["vehicle_no"] . "' WHERE user_id={$_SESSION['userId']}";
@@ -43,6 +46,7 @@ class residentModel extends model
         //$this->conn->query($sql3); 
         //}     
     }
+    //change password
     public function changePassword($opw, $npw, $rnpw)
     {
         $errors = array();
@@ -69,13 +73,14 @@ class residentModel extends model
         }
         return $errors;
     }
-    //reservations
+    //get hall reservations for display my reservations
     public function hallReservation($id)
     {
         $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 function hall reservations for display in right panel
     public function latesthallfun($id)
     {
         $d = date('Y-m-d');
@@ -83,6 +88,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 conference hall reservations for display in right panel
     public function latesthallcon($id)
     {
         $d = date('Y-m-d');
@@ -101,7 +107,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
-
+    //insert reservations of hall + check availability
     public function reservehall($d, $type, $stime, $etime, $members)
     {
         //echo $stime."-".$etime."<br>";
@@ -114,7 +120,7 @@ class residentModel extends model
             $result = $this->conn->query($sql);
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
-                //check avail
+                //check availability
                 if ($stime >= $row["start_time"] && $stime <= $row["end_time"] || $etime >= $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
@@ -137,7 +143,7 @@ class residentModel extends model
             $result = $this->conn->query($sql);
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
-                //check avail
+                //check availability
                 if ($stime >= $row["start_time"] && $stime <= $row["end_time"] || $etime >= $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
@@ -156,50 +162,8 @@ class residentModel extends model
             }
         }
     }
+    //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
-    {
-        //echo $stime."-".$etime."<br>";
-        $date = date('Y-m-d H:i:s');
-        $id = $_SESSION['userId'];
-        $avail = 1;
-        //fitness available check query gahanna
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE date ='$d' ";
-        $result = $this->conn->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            //echo $row["start_time"]."-".$row["end_time"]."<br>";
-            //check avail
-            if ($stime >= $row["start_time"] && $stime <= $row["end_time"] || $etime >= $row["start_time"] && $etime <= $row["end_time"]) {
-                $avail = 0;
-            }
-        }
-        if ($avail == 0) {
-            return 0;
-        } else {
-            //get resident id from user id
-            $sql = "SELECT resident_id from resident where user_id='$id'";
-            $rid = mysqli_fetch_assoc($this->conn->query($sql));
-            $rid = $rid["resident_id"];
-            $empid = explode(" ", $coach);
-            //echo $empid[2];
-            $empid = 3;
-            $fee = 1000;
-            $sql = "INSERT into fitness_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$fee','$rid','$empid')";
-            $result = $this->conn->query($sql);
-            return 1;
-        }
-    }
-    //show userselected date reservations of fitness
-    public function dayfitness($d, $coach)
-    {
-        $empid = explode(" ", $coach);
-        //echo $empid[2];
-        //echo $d;
-        //coach ge available check query eka--------------------4/5 3/5
-        $sql = "SELECT * FROM fitness_centre_reservation WHERE date ='$d' AND employee_id='$empid[2]'";
-        $result = $this->conn->query($sql);
-        return $result;
-    }
-    public function reservetreatment($d, $type, $stime, $etime)
     {
         //echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
@@ -222,6 +186,99 @@ class residentModel extends model
 
 
         echo "count:" . $count;
+        $sql1 = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
+        $result = $this->conn->query($sql1);
+        //check count availablility
+        $row = $result->fetch_assoc();
+        //echo "-" . $row[$count];
+        //print_r("-" . $noofslots);
+        //go through $count to $noofslots and check less than 5 all slots
+        while ($count < $noofslots) {
+            if ($row[$count] < 5) {
+                $count++;
+                //echo "can : ";
+            } else {
+                $count++;
+                //echo "can't : ";
+                $avail = 0;
+            }
+        }
+        if ($avail == 0) {
+            return $avail;
+        } else {
+            //get resident id from user id
+            $sql = "SELECT resident_id from resident where user_id='$id'";
+            $rid = mysqli_fetch_assoc($this->conn->query($sql));
+            $rid = $rid["resident_id"];
+            // echo "can reserve";
+            $fee = 1000;
+            $empid = explode(" ", $coach);
+            $empid = $empid[2];
+            //get fee query
+            $fee = 1000;
+            //res id Ai karann
+            $sql = "INSERT into fitness_centre_reservation(reservation_id,date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES(33,'$d','$stime','$etime','$date','$fee','$rid','$empid')";
+            $result = $this->conn->query($sql);
+            // DELIMITER //
+            // CREATE PROCEDURE updateSlots(
+            //     IN s INT, IN e INT, IN d VARCHAR(255)
+            // )
+            // BEGIN
+            // DECLARE countd DECIMAl(10);
+            // SELECT COUNT(date) INTO countd FROM fitness_reservation_count WHERE date LIKE d;
+
+            // IF(countd) THEN 
+            //     updaterow:LOOP
+            //     IF(s=e) THEN BREAK;
+
+            //     UPDATE fitness_reservation_count
+            //     SET `s` = `s` + 1
+            //     WHERE date LIKE d;
+
+            //     SET s = s + 1
+            //     END LOOP updaterow;
+            // ELSE 
+            //     INSERT INTO fitness_reservation_count(date) VALUES(d);
+
+            // END
+            // //
+            return $result;
+        }
+    }
+    //show userselected date reservations of fitness
+    public function dayfitness($d, $coach)
+    {
+        $empid = explode(" ", $coach);
+        //echo $empid[2];
+        //echo $d;
+        //coach ge available shift tika
+        $sql = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    //insert reservations of treatment + check availability
+    public function reservetreatment($d, $type, $stime, $etime)
+    {
+        //echo $stime."-".$etime."<br>";
+        $date = date('Y-m-d H:i:s');
+        $id = $_SESSION['userId'];
+        $avail = 1;
+        echo $stime, $etime;
+        //get starting slot no from $stime
+        $shour = explode(":", $stime);
+
+        if ($shour[1] == 30) {
+            //function to get slot no from $stime($shour[0])
+            $count = 2 * ($shour[0] + 1 - 6) + 1;
+        } else {
+            $count = 2 * ($shour[0] - 6) + 1;
+        }
+        //get time difference and count no of slots
+        $diff = date_diff(date_create($etime), date_create($stime));
+        //get total min/30 = slots
+        $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
+
+        // echo "count:" . $count;
         $sql1 = "SELECT * FROM treatment_reservation_count WHERE date ='$d'";
         $result = $this->conn->query($sql1);
         //check count availablility
@@ -246,11 +303,36 @@ class residentModel extends model
             $sql = "SELECT resident_id from resident where user_id='$id'";
             $rid = mysqli_fetch_assoc($this->conn->query($sql));
             $rid = $rid["resident_id"];
-            echo "can reserve";
+            // echo "can reserve";
             $fee = 1000;
-            //res id Ai karann
+            //res id AI karann
             $sql = "INSERT into treatment_room_reservation(reservation_id,date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES(16,'$d','$stime','$etime','$date','$type','$fee','$rid',3)";
             $result = $this->conn->query($sql);
+            // DELIMITER //
+            // CREATE PROCEDURE updateSlots(
+            //     IN s INT, IN e INT, IN d VARCHAR(255)
+            // )
+            // BEGIN
+            // DECLARE countd DECIMAl(10);
+            // SELECT COUNT(date) INTO countd FROM treatment_reservation_count WHERE date LIKE d;
+
+            // IF(countd) THEN 
+            //     updaterow:LOOP
+            //     IF(s=e) THEN BREAK;
+
+            //     UPDATE treatment_reservation_count
+            //     SET `s` = `s` + 1
+            //     WHERE date LIKE d;
+
+            //     SET s = s + 1
+            //     END LOOP updaterow;
+            // ELSE 
+            //     INSERT INTO treatment_reservation_count(date) VALUES(d);
+
+            // END
+            // //
+
+
             return $result;
         }
     }
@@ -271,13 +353,14 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
-    //for your reservation list
+    //get treatment reservations for display my reservations
     public function treatmentReservation($id)
     {
         $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 reservations for display in right panel    
     public function latesttreatment($id)
     {
         $d = date('Y-m-d');
@@ -285,6 +368,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get fitness reservations for display my reservations
     public function fitnessReservation($id)
     {
         $d = date('Y-m-d');
@@ -299,6 +383,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 reservations for display in right panel
     public function latestfitness($id)
     {
         $d = date('Y-m-d');
@@ -319,6 +404,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 reservations for display in right panel
     public function latestparking($id)
     {
         $d = date('Y-m-d');
@@ -326,6 +412,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //remove reservations
     public function removeReservation()
     {
         date_default_timezone_set("Asia/Colombo");
@@ -340,20 +427,28 @@ class residentModel extends model
             $treatid = $_GET["treatid"];
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$treatid' ";
         }
+        //complete park
+        else if (isset($_GET["park"])) {
+            $treatid = $_GET["park"];
+            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='' ";
+        }
         $this->conn->query($sql);
     }
+    //get technical services display in my requests
     public function maintenence($id)
     {
         $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get latest 5 request if maintenence
     public function latestmaintenence($id)
     {
         $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //request technical services
     public function reqMaintenence($type, $pdate, $des, $id)
     {
         $date = date('Y-m-d H:i:s');
@@ -361,12 +456,14 @@ class residentModel extends model
         $sql = "INSERT INTO technical_maintenence_request(request_date,preferred_date,category,description,resident_id) VALUES('$date','$pdate','$type','$des','1')";
         $this->conn->query($sql);
     }
+    //get technical services requests to display in my requests
     public function laundry($id)
     {
         $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') ";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //request laundry services
     public function reqLaundry($type, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3)
     {
         $date = date('Y-m-d H:i:s');
@@ -386,12 +483,14 @@ class residentModel extends model
                         INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw3','$quantity3');";
         $this->conn->query($sql3);
     }
+    //get visitor requests to display in my requests
     public function visitor($id)
     {
         $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //request visitor
     public function requestVisitor($name, $vdate, $des, $id)
     {
         $date = date('Y-m-d H:i:s');
@@ -402,6 +501,7 @@ class residentModel extends model
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
         $this->conn->query($sql);
     }
+    //remove upcomig requests
     public function removeRequest()
     {
         date_default_timezone_set("Asia/Colombo");
@@ -420,11 +520,13 @@ class residentModel extends model
             echo "do";
         }
     }
+    //read notification of resident
     public function readNotification()
     {
         $sql = "SELECT * FROM notification WHERE user_id={$_SESSION['userId']} AND (view<>1) ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
     }
+    //set parcels as reached
     public function setReached($nid)
     {
         $time = date('Y-m-d H:i:s');
@@ -435,12 +537,13 @@ class residentModel extends model
         $sql3 = "UPDATE notification SET view=0 WHERE notification_id='$nid'";
         $this->conn->query($sql3);
     }
+    //remove read  notification
     public function removeNotification($nid)
     {
         $sql = "UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
-    // bills
+    //show current monthly bills
     public function bill($id, $year, $month)
     {
         $s = date("$year-$month-d 00:00:00", strtotime("first day of this month"));
@@ -449,6 +552,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get total bill amount
     public function billtotal($id, $year, $month)
     {
         $s = date("$year-$month-d 00:00:00", strtotime("first day of this month"));
@@ -457,12 +561,14 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //update payments details
     public function pay($id)
     {
         $sql = "SELECT * from payment where resident_id IN (select resident_id from resident where user_id='$id')  ORDER BY paid_date DESC LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
+    //make complaints
     public function complaint($des, $type, $id)
     {
         //get resident id from user id
@@ -473,7 +579,7 @@ class residentModel extends model
         $sql = "INSERT INTO complaint(date_time,description,type,resident_id) VALUES('$date','$des','$type','$id')";
         return $this->conn->query($sql);
     }
-    //location
+    //get location+login details
     public function getLoginDevices($id)
     {
         $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
