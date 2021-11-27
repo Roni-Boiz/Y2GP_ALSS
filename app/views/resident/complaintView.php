@@ -12,7 +12,7 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
                 <div class="leftPanel">
-                    <h2>Privacy Policy</h2>
+                    <h2>Policies</h2>
                     <div class="tabs" style="grid-column:1/span3">
                         <ul class="tabs-list">
                             <li class="active"><a href="#tab1">User account</a></li>
