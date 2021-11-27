@@ -2,8 +2,13 @@
 include_once 'sidenav.php';
 ?>
 <style>
+
+    .reservation_search{
+        padding-left:25px;
+    }
     .reservation_search input[type=text]{
-        width: 200px;
+        
+        width: 350px;
   max-width: 100%;
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -13,7 +18,7 @@ include_once 'sidenav.php';
   background-image: url('../../public/img/searchicon.png');
   background-position: 7px 15px;
   background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
+  padding: 10px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
   align-items: center;
@@ -68,7 +73,7 @@ include_once 'sidenav.php';
                 <!-- for search row --><br>
                 <div class="reservation_search">
                         <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
-                        <div style="float: right;">
+                        <div style="float: right; padding-right:75px;">
                             <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser" title="Add User"><i class="fas fa-user-plus"></i></span>
                         </div>
                     </div>
@@ -232,7 +237,7 @@ include_once 'sidenav.php';
                             <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                                 <div id="col1">
                                     <label for="type">Enter Resident ID</label><br>
-                                    <input type="text" id="eid" name="eid" class="input-field" placeholder="Employee ID" required autofocus>
+                                    <input type="text" id="eid" name="eid" class="input-field" placeholder="Resident ID" required autofocus>
                                 </div>
 
                                 <div class="profile-pic" id="col2">
@@ -242,23 +247,23 @@ include_once 'sidenav.php';
                                 </div>
 
                                 <div id="col1">
-                                    <label for="fname">First Name</label><br>
-                                    <input type="text" id="fname" name="fname" class="input-field" placeholder="John" readonly>
+                                    <label for="fname">Date</label><br>
+                                    <input type="date" id="fname" name="fname" class="input-field"  readonly>
                                 </div>
 
                                 <div id="col2">
-                                    <label for="lname">Last Name</label><br>
-                                    <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" readonly>
+                                    <label for="lname">Start time</label><br>
+                                    <input type="text" id="lname" name="lname" class="input-field"  readonly>
                                 </div>
 
                                 <div id="col1">
-                                    <label for="email">Email Address</label><br>
-                                    <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" readonly>
+                                    <label for="email">End time</label><br>
+                                    <input type="email" id="email" name="email" class="input-field"  readonly>
                                 </div>
 
                                 <div id="col2">
-                                    <label for="cno">Contact Number</label><br>
-                                    <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" readonly>
+                                    <label for="cno">Coach</label><br>
+                                    <input type="text" id="cno" name="cno" class="input-field"  readonly>
                                 </div>
 
                                 <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="Create">
