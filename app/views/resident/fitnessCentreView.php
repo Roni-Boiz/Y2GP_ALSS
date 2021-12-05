@@ -23,7 +23,7 @@ include_once 'sidenav.php';
                                 <ul class="details">
                                     <?php date_default_timezone_set("Asia/Colombo"); ?>
                                     <li class="author"><?php echo date("H:i"); ?> </li>
-                                    <li class="date"><?php echo  date("F j, Y");  ?></li>
+                                    <li class="date"><?php echo  date("F j, Y"); ?></li>
                                 </ul>
                             </div>
                             <div class="description">

@@ -295,10 +295,15 @@ function check_members() {
 function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
-   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+   if(today.getDate()/10){
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
+   }else{
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+   }
+   
    console.log(date);
    console.log(mydate)
-   if ($("#datepicker").val() && date >= mydate) {
+   if ($("#datepicker").val() && (date >= mydate)) {
       $("#datetodayup").html("Enter upcoming date");
       $("#datetodayup").show();
       $("#canreserve").hide();
