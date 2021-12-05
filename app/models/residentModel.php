@@ -165,19 +165,19 @@ class residentModel extends model
     //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
     {
-        //echo $stime."-".$etime."<br>";
+        // echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
         $id = $_SESSION['userId'];
         $avail = 1;
-        echo $stime, $etime;
+        // echo $stime, $etime;
         //get starting slot no from $stime
         $shour = explode(":", $stime);
 
         if ($shour[1] == 30) {
             //function to get slot no from $stime($shour[0])
-            $count = 2 * ($shour[0] + 1 - 6) + 1;
+            $count = 2 * ($shour[0] - 6) + 2 ;
         } else {
-            $count = 2 * ($shour[0] - 6) + 1;
+            $count = 2 * ($shour[0] - 6) + 1 ;
         }
         //get time difference and count no of slots
         $diff = date_diff(date_create($etime), date_create($stime));
@@ -185,21 +185,22 @@ class residentModel extends model
         $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
 
 
-        echo "count:" . $count;
+        //  echo "count:" . $count;
         $sql1 = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
         $result = $this->conn->query($sql1);
         //check count availablility
         $row = $result->fetch_assoc();
-        //echo "-" . $row[$count];
-        //print_r("-" . $noofslots);
+        // print_r("-" . $noofslots."??");
         //go through $count to $noofslots and check less than 5 all slots
-        while ($count < $noofslots) {
-            if ($row[$count] < 5) {
-                $count++;
-                //echo "can : ";
+        $c=$count;
+        while ($c < $noofslots) {
+            // echo $row[$c]."+";
+            if ($row[$c] < 5) {
+                $c++;
+                // echo "can : ";
             } else {
-                $count++;
-                //echo "can't : ";
+                $c++;
+                // echo "can't : ";
                 $avail = 0;
             }
         }
@@ -216,32 +217,27 @@ class residentModel extends model
             $empid = $empid[2];
             //get fee query
             $fee = 1000;
-            //res id Ai karann
-            $sql = "INSERT into fitness_centre_reservation(reservation_id,date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES(33,'$d','$stime','$etime','$date','$fee','$rid','$empid')";
+
+            $sql = "INSERT into fitness_centre_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$fee','$rid','$empid')";
             $result = $this->conn->query($sql);
-            // DELIMITER //
-            // CREATE PROCEDURE updateSlots(
-            //     IN s INT, IN e INT, IN d VARCHAR(255)
-            // )
-            // BEGIN
-            // DECLARE countd DECIMAl(10);
-            // SELECT COUNT(date) INTO countd FROM fitness_reservation_count WHERE date LIKE d;
-
-            // IF(countd) THEN 
-            //     updaterow:LOOP
-            //     IF(s=e) THEN BREAK;
-
-            //     UPDATE fitness_reservation_count
-            //     SET `s` = `s` + 1
-            //     WHERE date LIKE d;
-
-            //     SET s = s + 1
-            //     END LOOP updaterow;
-            // ELSE 
-            //     INSERT INTO fitness_reservation_count(date) VALUES(d);
-
-            // END
-            // //
+            //check date is in reservation_count
+            $sql1= "SELECT COUNT(date) as countd FROM fitness_reservation_count WHERE date LIKE '$d'";
+            $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
+            // echo ">".$result1['countd'];
+            //make sql procedure (IN $count IN $noofslots IN $d)
+            if($result1['countd']){
+                //none
+            }else{
+                $sql4="INSERT INTO fitness_reservation_count(date) VALUES('$d')";
+                $this->conn->query($sql4);
+            }
+            while($count < $noofslots){
+                $sql3 = "UPDATE fitness_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d'";
+                $this->conn->query($sql3);
+                $count++;
+                // echo "\n".$sql3;
+            }
+            
             return $result;
         }
     }
@@ -263,15 +259,15 @@ class residentModel extends model
         $date = date('Y-m-d H:i:s');
         $id = $_SESSION['userId'];
         $avail = 1;
-        echo $stime, $etime;
+        // echo $stime, $etime;
         //get starting slot no from $stime
         $shour = explode(":", $stime);
 
         if ($shour[1] == 30) {
             //function to get slot no from $stime($shour[0])
-            $count = 2 * ($shour[0] + 1 - 6) + 1;
+            $count = 2 * ($shour[0] - 6) + 2 ;
         } else {
-            $count = 2 * ($shour[0] - 6) + 1;
+            $count = 2 * ($shour[0] - 6) + 1 ;
         }
         //get time difference and count no of slots
         $diff = date_diff(date_create($etime), date_create($stime));
@@ -286,13 +282,15 @@ class residentModel extends model
         //echo "-" . $row[$count];
         //print_r("-" . $noofslots);
         //go through $count to $noofslots and check less than 5 all slots
-        while ($count < $noofslots) {
-            if ($row[$count] < 5) {
-                $count++;
-                //echo "can : ";
+        $c=$count;
+        while ($c < $noofslots) {
+            // echo $row[$c]."+";
+            if ($row[$c] < 5) {
+                $c++;
+                // echo "can : ";
             } else {
-                $count++;
-                //echo "can't : ";
+                $c++;
+                // echo "can't : ";
                 $avail = 0;
             }
         }
@@ -306,8 +304,26 @@ class residentModel extends model
             // echo "can reserve";
             $fee = 1000;
             //res id AI karann
-            $sql = "INSERT into treatment_room_reservation(reservation_id,date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES(16,'$d','$stime','$etime','$date','$type','$fee','$rid',3)";
+            $sql = "INSERT into treatment_room_reservation(date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$type','$fee','$rid',3)";
             $result = $this->conn->query($sql);
+
+            //check date is in reservation_count
+            $sql1= "SELECT COUNT(date) as countd FROM treatment_reservation_count WHERE date LIKE '$d'";
+            $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
+            // echo ">".$result1['countd'];
+            //make sql procedure (IN $count IN $noofslots IN $d)
+            if($result1['countd']){
+                //none
+            }else{
+                $sql4="INSERT INTO treatment_reservation_count(date) VALUES('$d')";
+                $this->conn->query($sql4);
+            }
+            while($count < $noofslots){
+                $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d'";
+                $this->conn->query($sql3);
+                $count++;
+                // echo "\n".$sql3;
+            }
             // DELIMITER //
             // CREATE PROCEDURE updateSlots(
             //     IN s INT, IN e INT, IN d VARCHAR(255)
