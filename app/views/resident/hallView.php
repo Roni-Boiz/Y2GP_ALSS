@@ -41,37 +41,14 @@ include_once 'sidenav.php';
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton " id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            
+
                                             <h3>Reservations of the day</h3><br>
                                             <?php if (isset($this->selectdate)) {
-                                                echo $this->selectdate;
+                                                echo $this->selectdate . "<br> 
+                                                Please check availability and select time slot.";
                                             }; ?>
                                             <br>
-                                            <?php
-                                            if (isset($this->day->num_rows)) { ?>
-                                                <table class="avail">
-                                                    <tr>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
-                                                        <th>Other Details</th>
-                                                    </tr>
-                                                    <?php while ($row = $this->day->fetch_assoc()) {
-                                                    ?>
-                                                        <!-- show reservation -->
 
-                                                        <tr>
-                                                            <td><?php echo $row["start_time"] ?></td>
-                                                            <td><?php echo $row["end_time"] ?></td>
-                                                            <td><?php echo "" ?></td>
-                                                        </tr>
-
-                                                    <?php
-                                                    } ?>
-                                                </table>
-                                            <?php
-                                            } else {
-                                                echo "Select date first...<br>";
-                                            } ?>
 
                                         </div>
                                         <br>
@@ -91,6 +68,35 @@ include_once 'sidenav.php';
                 </div>
 
                 <div class="rightPanel" style="margin-top:30px">
+                    <?php
+                    if (isset($this->day->num_rows)) { ?>
+                        <h3>Reservations of the day</h3>
+                        <?php if (isset($this->selectdate)) {
+                            echo $this->selectdate;
+                        }; ?>
+                        <br>
+
+                        <table class="avail">
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Other Details</th>
+                            </tr>
+                            <?php while ($row = $this->day->fetch_assoc()) {
+                            ?>
+                                <!-- show reservation -->
+
+                                <tr>
+                                    <td><?php echo $row["start_time"] ?></td>
+                                    <td><?php echo $row["end_time"] ?></td>
+                                    <td><?php echo "" ?></td>
+                                </tr>
+
+                            <?php
+                            } ?>
+                        </table>
+                    <?php } ?>
+                    <hr>
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Upcoming Functions . . .</h3>
@@ -238,7 +244,7 @@ include_once 'sidenav.php';
                         </div>
 
                     </form>
-                    
+
                 </div>
             </div>
             <!-- reservation success message -->
@@ -266,22 +272,22 @@ include_once 'sidenav.php';
             <!-- success popup -->
             <?php
             if (isset($this->success)) { ?>
-            <div class='b'></div>
-            <div class='bb'></div>
-            <div class='message'>
-                <div class='check'>
-                    &#10004;
+                <div class='b'></div>
+                <div class='bb'></div>
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                        Reservation Success!
+                    </p>
+                    <p>
+                        Check your email for a booking confirmation. We'll see you soon!
+                    </p>
+                    <button id='ok' onclick='window.location = "hall" '>
+                        OK
+                    </button>
                 </div>
-                <p>
-                    Reservation Success!
-                </p>
-                <p>
-                    Check your email for a booking confirmation. We'll see you soon!
-                </p>
-                <button id='ok' onclick='window.location = "hall" '>
-                    OK
-                </button>
-            </div>
             <?php
             }; ?>
         </div>
