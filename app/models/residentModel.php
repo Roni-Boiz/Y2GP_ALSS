@@ -121,7 +121,7 @@ class residentModel extends model
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
-                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
+                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime >= $row["start_time"] && $etime < $row["end_time"]) {
                     $avail = 0;
                 }
             }

@@ -52,61 +52,14 @@ include_once 'sidenav.php';
 
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                            
+
                                             <h3>Reservations of the day</h3><br>
                                             <?php if (isset($this->selectdate)) {
-                                                echo $this->selectdate;
+                                                echo $this->selectdate."<br> Please check availability and select time slot";
                                             }; ?>
                                             <br>
-                                            <?php
-                                            if (isset($this->day->num_rows)) { ?>
-                                                <table class="avail">
-                                                    <tr>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
-                                                        <th>Availability</th>
-                                                    </tr>
-                                                    <?php while ($row = $this->day->fetch_assoc()) {
-                                                    ?>
-                                                        <!-- show reservation -->
 
-                                                        <?php
-                                                        $count = 1;
-                                                        for ($hours = 6; $hours < 24; $hours++) {
-                                                            for ($mins = 0; $mins < 60; $mins += 30) {
-                                                        ?>
-                                                                <tr>
-                                                                    <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
-                                                                    <td><?php if ($mins + 30 == 60) {
-                                                                            echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
-                                                                        } else {
-                                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
-                                                                        } ?></td>
-                                                                    <td>
-                                                                        <span class="fa-stack">
-                                                                            <!-- color with available -->
-                                                                            <span <?php if($row[$count]==5){?> style="color:red" <?php }elseif($row[$count]>0 && $row[$count]<5){ ?> style="color:yellow" <?php }else{?> style="color:green" <?php }?> class="fa fa-circle fa-stack-2x"></span>
-                                                                            <strong  class="fa-stack-1x">
-                                                                                <?php echo $row[$count];?>
-                                                                            </strong>
-                                                                        </span>
-                                                                    </td>
-
-                                                                </tr>
-                                                        <?php
-                                                                $count++;
-                                                            }
-                                                        }
-                                                        ?>
-
-
-                                                    <?php
-                                                    } ?>
-                                                </table>
-                                            <?php
-                                            } else {
-                                                echo "Select date first...<br>";
-                                            } ?>
+                                           
 
                                         </div>
                                         <br>
@@ -123,7 +76,61 @@ include_once 'sidenav.php';
 
                 </div>
 
-                <div class="rightPanel" style="margin-top:30px">
+                <div class="rightPanel" style="margin-top:30px;max-height:500px;overflow:scroll">
+                    <?php
+                    if (isset($this->day->num_rows)) { ?>
+                        <h3>Reservations of the day</h3>
+                        <?php if (isset($this->selectdate)) {
+                            echo $this->selectdate;
+                        }; ?>
+                        <br>
+                        <table class="avail">
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Availability</th>
+                            </tr>
+                            <?php while ($row = $this->day->fetch_assoc()) {
+                            ?>
+                                <!-- show reservation -->
+
+                                <?php
+                                $count = 1;
+                                for ($hours = 6; $hours < 24; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                ?>
+                                        <tr>
+                                            <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                            <td><?php if ($mins + 30 == 60) {
+                                                    echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                } else {
+                                                    echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                } ?></td>
+                                            <td>
+                                                <span class="fa-stack">
+                                                    <!-- color with available -->
+                                                    <span <?php if ($row[$count] == 5) { ?> style="color:red" <?php } elseif ($row[$count] > 0 && $row[$count] < 5) { ?> style="color:yellow" <?php } else { ?> style="color:lime" <?php } ?> class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo $row[$count]; ?>
+                                                    </strong>
+                                                </span>
+                                            </td>
+
+                                        </tr>
+                                <?php
+                                        $count++;
+                                    }
+                                }
+                                ?>
+
+
+                            <?php
+                            } ?>
+                        </table>
+                    <?php
+                    }
+                    ?>
+                    <hr>
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Upcoming Reservations. . .</h3>

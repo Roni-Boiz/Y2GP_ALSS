@@ -99,7 +99,7 @@ include_once 'sidenav.php';
                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'fit','12:00:00','13:00:00','2021-12-20')">
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'fit',`<?php echo $row['start_time']; ?>`,`<?php echo $row['end_time']; ?>`,`<?php echo $row['date']; ?>`)">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
@@ -147,7 +147,7 @@ include_once 'sidenav.php';
                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat',<?php echo $row['start_time']; ?>,<?php echo $row['end_time']; ?>,<?php echo $row['date']; ?>))">
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat',`<?php echo $row['start_time']; ?>`,`<?php echo $row['end_time']; ?>`,`<?php echo $row['date']; ?>`)">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
