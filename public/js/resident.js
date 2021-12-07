@@ -442,8 +442,9 @@ function openModel(amodel, amodelBtn) {
    }
 }
 // delete row and hide for value addition
-function deleteRes(id, type) {
-   r = confirm("Are you sure?");
+function deleteRes(id, type, s, e, d) {
+   console.log(id, type, s, e, d);
+   r = confirm("Are you sure to remove your reservation ?");
    if (r == true) {
       if (type = "hall") {
          $.ajax({
@@ -456,6 +457,7 @@ function deleteRes(id, type) {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
@@ -464,26 +466,49 @@ function deleteRes(id, type) {
             type: "GET",
             url: "removeReservation",
             data: {
-               maintenenceid: id
+               fitid: id,
+               stime:s,
+               etime:e,
+               date:d
             },
             success: function () {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
       if (type = "treat") {
          $.ajax({
             type: "GET",
-            url: "removeReservation",
+            url: "RemoveReservation",
             data: {
-               visitorid: id
+               treatid: id,
+               stime:s,
+               etime:e,
+               date:d
             },
             success: function () {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
+            }
+         });
+      }
+      if (type = "parking") {
+         $.ajax({
+            type: "GET",
+            url: "removeReservation",
+            data: {
+               parkingid: id
+            },
+            success: function () {
+               a = "#" + id;
+               console.log(a);
+               $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
@@ -491,7 +516,7 @@ function deleteRes(id, type) {
 }
 // delete row and hide for value addition
 function deleteReq(id, type) {
-   r = confirm("Are you sure?");
+   r = confirm("Are you sure to remove your request ?");
    if (r == true) {
       if (type = "laundry") {
          $.ajax({
@@ -504,10 +529,11 @@ function deleteReq(id, type) {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
-      if (type = "maintenenceid") {
+      if (type = "maintenence") {
          $.ajax({
             type: "GET",
             url: "removeRequest",
@@ -518,6 +544,7 @@ function deleteReq(id, type) {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
@@ -532,10 +559,14 @@ function deleteReq(id, type) {
                a = "#" + id;
                console.log(a);
                $(a).closest('article').fadeOut("fast");
+               $(".success").css('display','block');
             }
          });
       }
    }
+}
+function previousView(){
+   $(".success").css('display','none');
 }
 
 // Make payment

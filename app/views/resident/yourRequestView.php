@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                 <br>
                 <!-- for search row --><br>
                 <div class="search">
-                    <input type="text" id="mySearch"  placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
                 </div>
 
                 <div id="tab1" class="tab active">
@@ -40,26 +40,26 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->maintenence->fetch_assoc()) {
                                 ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
-                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
-                                            <li><?php echo $row["request_id"]; ?></li>
-                                            <li><?php echo $row["preferred_date"]; ?></li>
-                                            <li><?php echo $row["category"]; ?></li>
-                                            <li><?php echo $row["state"]; ?></li>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'maintenence')">
+                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["request_id"]; ?></li>
+                                                <li><?php echo $row["preferred_date"]; ?></li>
+                                                <li><?php echo $row["category"]; ?></li>
+                                                <li><?php echo $row["state"]; ?></li>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Requested Date : <?php echo $row["request_date"] ?></span>
-                                                <span style="padding-right: 20px;">Description : <?php echo $row["description"]  ?></span>
-                                            </li>
-                                        </ul>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Requested Date : <?php echo $row["request_date"] ?></span>
+                                                    <span style="padding-right: 20px;">Description : <?php echo $row["description"]  ?></span>
+                                                </li>
+                                            </ul>
 
-                                    </article>
-                                </span>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -89,25 +89,25 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->laundry->fetch_assoc()) {
                                 ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteRes(<?php echo $row['request_id']; ?>,'treat')">
-                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
-                                            <li><?php echo $row["request_id"]; ?></li>
-                                            <li><?php echo $row["request_date"]; ?></li>
-                                            <li><?php echo $row["request_date"]; ?></li>
-                                            <li><?php echo $row["type"]; ?></li>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'laundry')">
+                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["request_id"]; ?></li>
+                                                <li><?php echo $row["request_date"]; ?></li>
+                                                <li><?php echo $row["request_date"]; ?></li>
+                                                <li><?php echo $row["type"]; ?></li>
 
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
-                                            </li>
-                                        </ul>
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                </li>
+                                            </ul>
 
-                                    </article>
-                                </span>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -121,8 +121,8 @@ include_once 'sidenav.php';
                 </div>
                 <div id="tab3" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
-<!-- laundry -->
-<section class="wrapper">
+                        <!-- laundry -->
+                        <section class="wrapper">
                             <main class="row title">
                                 <ul>
                                     <li>Action</li>
@@ -137,19 +137,19 @@ include_once 'sidenav.php';
                                 <?php
                                 while ($row = $this->visitor->fetch_assoc()) {
                                 ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                            <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteRes(<?php echo $row['visitor_id']; ?>,'treat')">
-                                                    <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
-                                            <li><?php echo $row["visitor_id"]; ?></li>
-                                            <li><?php echo $row["name"]; ?></li>
-                                            <li><?php echo $row["arrive_date"]; ?></li>
-                                            <li><?php echo $row["arrive_date"]; ?></li>
+                                    <span id="searchrow">
+                                        <article class="row mlb">
+                                            <ul>
+                                                <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteReq(<?php echo $row['visitor_id']; ?>,'visitor')">
+                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li><?php echo $row["visitor_id"]; ?></li>
+                                                <li><?php echo $row["name"]; ?></li>
+                                                <li><?php echo $row["arrive_date"]; ?></li>
+                                                <li><?php echo $row["arrive_date"]; ?></li>
 
-                                        </ul>
-                                    </article>
-                                </span>
+                                            </ul>
+                                        </article>
+                                    </span>
                                 <?php
                                 }
                                 ?>
@@ -161,7 +161,42 @@ include_once 'sidenav.php';
                         </section>
                     </div>
                 </div>
+                <!-- reservation success message -->
+                <!-- error popup -->
+                <div class="error" style="display:none;">
+                    <div class='message'>
+                        <div class='check' style="background:red;">
+                            &#10006;
+                        </div>
+                        <p>
+                            Request Removed Failed!
+                        </p>
+                        <p>
+                            Try again later
+                        </p>
+                        <button id='ok' onclick="previousView()" style="background:red;">
+                            OK
+                        </button>
+                    </div>
+                </div>
+                <!-- success popup -->
+                <div class="success" style="display:none;">
+                    <div class='message'>
+                        <div class='check'>
+                            &#10004;
+                        </div>
+                        <p>
 
+                            Request Removed Successfully!
+                        </p>
+                        <p>
+                            Check your email for confirmation. We'll see you soon!
+                        </p>
+                        <button id='ok' onclick="previousView()">
+                            OK
+                        </button>
+                    </div>
+                </div>
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
 </body>
