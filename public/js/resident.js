@@ -482,7 +482,7 @@ function deleteRes(id, type, s, e, d) {
       if (type = "treat") {
          $.ajax({
             type: "GET",
-            url: "removeReservation",
+            url: "RemoveReservation",
             data: {
                treatid: id,
                stime:s,

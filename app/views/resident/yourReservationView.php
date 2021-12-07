@@ -99,7 +99,7 @@ include_once 'sidenav.php';
                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'fit')">
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'fit','12:00:00','13:00:00','2021-12-20')">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
@@ -147,7 +147,7 @@ include_once 'sidenav.php';
                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat')">
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat',<?php echo $row['start_time']; ?>,<?php echo $row['end_time']; ?>,<?php echo $row['date']; ?>))">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
@@ -177,7 +177,7 @@ include_once 'sidenav.php';
                 <div id="tab4" class="tab">
                     <p style="color:black">
                     <div style="overflow-x:auto;grid-column:1/span2">
-                        <!-- treatment -->
+                        <!-- parking -->
                         <section class="wrapper">
                             <main class="row title">
                                 <ul>
@@ -196,7 +196,7 @@ include_once 'sidenav.php';
                                 <span id="searchrow">
                                     <article class="row mlb">
                                         <ul>
-                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'treat')">
+                                            <li id="<?php echo $row['reservation_id']; ?>"><a onclick="deleteRes(<?php echo $row['reservation_id']; ?>,'parking','stime','etime','d')">
                                                     <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
                                             <li><?php echo $row["reservation_id"]; ?></li>
                                             <li><?php echo $row["date"]; ?></li>
@@ -270,7 +270,42 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+<!-- reservation success message -->
+                <!-- error popup -->
+                <div class="error" style="display:none;">
+                    <div class='message'>
+                        <div class='check' style="background:red;">
+                            &#10006;
+                        </div>
+                        <p>
+                            Reservation Removed is Failed!
+                        </p>
+                        <p>
+                            Try again later
+                        </p>
+                        <button id='ok' onclick="previousView()" style="background:red;">
+                            OK
+                        </button>
+                    </div>
+                </div>
+                <!-- success popup -->
+                <div class="success" style="display:none;">
+                    <div class='message'>
+                        <div class='check'>
+                            &#10004;
+                        </div>
+                        <p>
 
+                            Reservation Removed Successfully!
+                        </p>
+                        <p>
+                            Penalty fee add your account
+                        </p>
+                        <button id='ok' onclick="previousView()">
+                            OK
+                        </button>
+                    </div>
+                </div>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>

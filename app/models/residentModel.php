@@ -121,7 +121,7 @@ class residentModel extends model
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
-                if ($stime >= $row["start_time"] && $stime <= $row["end_time"] || $etime >= $row["start_time"] && $etime <= $row["end_time"]) {
+                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
             }
@@ -175,9 +175,9 @@ class residentModel extends model
 
         if ($shour[1] == 30) {
             //function to get slot no from $stime($shour[0])
-            $count = 2 * ($shour[0] - 6) + 2 ;
+            $count = 2 * ($shour[0] - 6) + 2;
         } else {
-            $count = 2 * ($shour[0] - 6) + 1 ;
+            $count = 2 * ($shour[0] - 6) + 1;
         }
         //get time difference and count no of slots
         $diff = date_diff(date_create($etime), date_create($stime));
@@ -192,7 +192,7 @@ class residentModel extends model
         $row = $result->fetch_assoc();
         // print_r("-" . $noofslots."??");
         //go through $count to $noofslots and check less than 5 all slots
-        $c=$count;
+        $c = $count;
         while ($c < $noofslots) {
             // echo $row[$c]."+";
             if ($row[$c] < 5) {
@@ -221,23 +221,23 @@ class residentModel extends model
             $sql = "INSERT into fitness_centre_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$fee','$rid','$empid')";
             $result = $this->conn->query($sql);
             //check date is in reservation_count
-            $sql1= "SELECT COUNT(date) as countd FROM fitness_reservation_count WHERE date LIKE '$d'";
+            $sql1 = "SELECT COUNT(date) as countd FROM fitness_reservation_count WHERE date LIKE '$d'";
             $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
             // echo ">".$result1['countd'];
             //make sql procedure (IN $count IN $noofslots IN $d)
-            if($result1['countd']){
+            if ($result1['countd']) {
                 //none
-            }else{
-                $sql4="INSERT INTO fitness_reservation_count(date) VALUES('$d')";
+            } else {
+                $sql4 = "INSERT INTO fitness_reservation_count(date) VALUES('$d')";
                 $this->conn->query($sql4);
             }
-            while($count < $noofslots){
+            while ($count < $noofslots) {
                 $sql3 = "UPDATE fitness_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d'";
                 $this->conn->query($sql3);
                 $count++;
                 // echo "\n".$sql3;
             }
-            
+
             return $result;
         }
     }
@@ -265,9 +265,9 @@ class residentModel extends model
 
         if ($shour[1] == 30) {
             //function to get slot no from $stime($shour[0])
-            $count = 2 * ($shour[0] - 6) + 2 ;
+            $count = 2 * ($shour[0] - 6) + 2;
         } else {
-            $count = 2 * ($shour[0] - 6) + 1 ;
+            $count = 2 * ($shour[0] - 6) + 1;
         }
         //get time difference and count no of slots
         $diff = date_diff(date_create($etime), date_create($stime));
@@ -282,7 +282,7 @@ class residentModel extends model
         //echo "-" . $row[$count];
         //print_r("-" . $noofslots);
         //go through $count to $noofslots and check less than 5 all slots
-        $c=$count;
+        $c = $count;
         while ($c < $noofslots) {
             // echo $row[$c]."+";
             if ($row[$c] < 5) {
@@ -308,18 +308,18 @@ class residentModel extends model
             $result = $this->conn->query($sql);
 
             //check date is in reservation_count
-            $sql1= "SELECT COUNT(date) as countd FROM treatment_reservation_count WHERE date LIKE '$d'";
+            $sql1 = "SELECT COUNT(date) as countd FROM treatment_reservation_count WHERE date LIKE '$d'";
             $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
             // echo ">".$result1['countd'];
             //make sql procedure (IN $count IN $noofslots IN $d)
-            if($result1['countd']){
+            if ($result1['countd']) {
                 //none
-            }else{
-                $sql4="INSERT INTO treatment_reservation_count(date) VALUES('$d')";
+            } else {
+                $sql4 = "INSERT INTO treatment_reservation_count(date) VALUES('$d')";
                 $this->conn->query($sql4);
             }
-            while($count < $noofslots){
-                $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d'";
+            while ($count < $noofslots) {
+                $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d';";
                 $this->conn->query($sql3);
                 $count++;
                 // echo "\n".$sql3;
@@ -347,8 +347,6 @@ class residentModel extends model
 
             // END
             // //
-
-
             return $result;
         }
     }
@@ -433,34 +431,95 @@ class residentModel extends model
     {
         date_default_timezone_set("Asia/Colombo");
         $date = date('Y-m-d H:i:s');
+            //remove hall
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
-            $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$hallid' ";
+            $penaltyfee = 100;
+            $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$hallid' ";
+            //remove fitness
         } else if (isset($_GET["fitid"])) {
             $fitid = $_GET["fitid"];
-            $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$fitid' ";
+            $stime = $_GET["stime"];
+            $etime = $_GET["etime"];
+            $d = $_GET["date"];
+            $penaltyfee = 100;
+            $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$fitid' ";
+            
+
+            // echo $stime, $etime;
+            //get starting slot no from $stime
+            $shour = explode(":", $stime);
+
+            if ($shour[1] == 30) {
+                //function to get slot no from $stime($shour[0])
+                $count = 2 * ($shour[0] - 6) + 2;
+            } else {
+                $count = 2 * ($shour[0] - 6) + 1;
+            }
+            //get time difference and count no of slots
+            $diff = date_diff(date_create($etime), date_create($stime));
+            //get total min/30 = slots
+            $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
+
+            while ($count < $noofslots) {
+                $sql3 = "UPDATE fitness_reservation_count SET `$count` = `$count` - 1 WHERE date LIKE '$d'";
+                $this->conn->query($sql3);
+                $count++;
+                // echo "\n".$sql3;
+            }
+
         } else if (isset($_GET["treatid"])) {
             $treatid = $_GET["treatid"];
+            $stime = $_GET["stime"];
+            $etime = $_GET["etime"];
+            $d = $_GET["date"];
+            $penaltyfee = 100;
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$treatid' ";
+            
+            
+            // echo $stime, $etime;
+            //get starting slot no from $stime
+            $shour = explode(":", $stime);
+
+            if ($shour[1] == 30) {
+                //function to get slot no from $stime($shour[0])
+                $count = 2 * ($shour[0] - 6) + 2;
+            } else {
+                $count = 2 * ($shour[0] - 6) + 1;
+            }
+            //get time difference and count no of slots
+            $diff = date_diff(date_create($etime), date_create($stime));
+            //get total min/30 = slots
+            $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
+
+            while ($count < $noofslots) {
+                $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` - 1 WHERE date LIKE '$d'";
+                $this->conn->query($sql3);
+                $count++;
+                // echo "\n".$sql3;
+            }
         }
         //complete park
         else if (isset($_GET["park"])) {
-            $treatid = $_GET["park"];
-            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='' ";
+            $parkid = $_GET["park"];
+            $penaltyfee = 100;
+            $sql = "UPDATE parking_slot_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$parkid' ";
         }
         $this->conn->query($sql);
     }
     //get technical services display in my requests
     public function maintenence($id)
     {
-        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id')";
+        $d = date('Y-m-d');
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p'";
         $result = $this->conn->query($sql);
         return $result;
     }
     //get latest 5 request if maintenence
     public function latestmaintenence($id)
     {
-        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') LIMIT 5";
+        $d = date('Y-m-d');
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p' LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -475,7 +534,8 @@ class residentModel extends model
     //get technical services requests to display in my requests
     public function laundry($id)
     {
-        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') ";
+        $d = date('Y-m-d');
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -502,7 +562,8 @@ class residentModel extends model
     //get visitor requests to display in my requests
     public function visitor($id)
     {
-        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id')";
+        $d = date('Y-m-d');
+        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -524,17 +585,15 @@ class residentModel extends model
         $date = date('Y-m-d H:i:s');
         if (isset($_GET["laundryid"])) {
             $laundryid = $_GET["laundryid"];
-            $sql = "UPDATE laundry_request SET cancelled_time='$date' WHERE reservation_id='$laundryid' ";
+            $sql = "UPDATE laundry_request SET cancelled_time='$date' WHERE request_id='$laundryid' ";
         } else if (isset($_GET["maintenenceid"])) {
             $maintenenceid = $_GET["maintenenceid"];
-            $sql = "UPDATE technical_maintenence_request SET cancelled_time='$date' WHERE reservation_id='$maintenenceid' ";
+            $sql = "UPDATE technical_maintenence_request SET cancelled_time='$date' WHERE request_id='$maintenenceid' ";
         } else if (isset($_GET["visitorid"])) {
             $visitorid = $_GET["visitorid"];
-            $sql = "UPDATE visitor SET cancelled_time='$date' WHERE reservation_id='$visitorid' ";
+            $sql = "UPDATE visitor SET cancelled_time='$date' WHERE request_id='$visitorid' ";
         }
-        if ($this->conn->query($sql)) {
-            echo "do";
-        }
+        $this->conn->query($sql);
     }
     //read notification of resident
     public function readNotification()
