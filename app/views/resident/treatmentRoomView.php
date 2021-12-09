@@ -107,7 +107,8 @@ include_once 'sidenav.php';
                             } ?>
                         </table>
                     <?php
-                    } ?><hr>
+                    } ?>
+                    <hr>
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Upcoming Reservations. . .</h3>
@@ -223,7 +224,13 @@ include_once 'sidenav.php';
                                 for ($hours = 6; $hours < 24; $hours++) {
                                     for ($mins = 0; $mins < 60; $mins += 30) {
                                 ?>
-                                        <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                        <option>
+                                            <?php if ($mins + 30 == 60) {
+                                                echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                            } else {
+                                                echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                            } ?>
+                                        </option>
                                 <?php
                                     }
                                 }

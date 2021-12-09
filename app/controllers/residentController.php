@@ -127,6 +127,7 @@ class residentController extends controller
                 $this->view->error[] = "Pick upcoming date";
             } else {
                 $this->view->day = $this->model->dayfitness($d, $coach);
+                $this->view->shiftno = $this->model->getshiftno($d, $coach);
                 $this->view->selectdate = $d;
                 $this->view->selectcoach = $coach;
             }
