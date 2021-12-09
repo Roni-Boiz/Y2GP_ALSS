@@ -168,6 +168,7 @@ class residentModel extends model
         // echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
         $id = $_SESSION['userId'];
+        
         $avail = 1;
         // echo $stime, $etime;
         //get starting slot no from $stime
@@ -215,6 +216,7 @@ class residentModel extends model
             $fee = 1000;
             $empid = explode(" ", $coach);
             $empid = $empid[2];
+            
             //get fee query
             $fee = 1000;
 
@@ -245,12 +247,21 @@ class residentModel extends model
     public function dayfitness($d, $coach)
     {
         $empid = explode(" ", $coach);
-        //echo $empid[2];
-        //echo $d;
-        //coach ge available shift tika
+        // echo $empid[2];
         $sql = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
         $result = $this->conn->query($sql);
+        
         return $result;
+    }
+    public function getshiftno($d, $coach){
+        $empid = explode(" ", $coach);
+        //coach ge available shift tika
+        $week = (int)date('W', strtotime($d))%3;
+        //get shift details
+        $shiftquery = "SELECT shift_no as n from employee_shift where employee_id=$empid[2] AND week=$week";
+        $s = mysqli_fetch_assoc($this->conn->query($shiftquery));
+        // echo "Weeknummer: " . $week . ">>".$s['n'];
+        return $s['n'];
     }
     //insert reservations of treatment + check availability
     public function reservetreatment($d, $type, $stime, $etime)
@@ -431,7 +442,7 @@ class residentModel extends model
     {
         date_default_timezone_set("Asia/Colombo");
         $date = date('Y-m-d H:i:s');
-            //remove hall
+        //remove hall
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
             $penaltyfee = 100;
@@ -444,7 +455,7 @@ class residentModel extends model
             $d = $_GET["date"];
             $penaltyfee = 100;
             $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$fitid' ";
-            
+
 
             // echo $stime, $etime;
             //get starting slot no from $stime
@@ -467,7 +478,6 @@ class residentModel extends model
                 $count++;
                 // echo "\n".$sql3;
             }
-
         } else if (isset($_GET["treatid"])) {
             $treatid = $_GET["treatid"];
             $stime = $_GET["stime"];
@@ -475,8 +485,8 @@ class residentModel extends model
             $d = $_GET["date"];
             $penaltyfee = 100;
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$treatid' ";
-            
-            
+
+
             // echo $stime, $etime;
             //get starting slot no from $stime
             $shour = explode(":", $stime);
@@ -491,7 +501,7 @@ class residentModel extends model
             $diff = date_diff(date_create($etime), date_create($stime));
             //get total min/30 = slots
             $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
-
+            $this->conn->query("Start Transaction");
             while ($count < $noofslots) {
                 $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` - 1 WHERE date LIKE '$d'";
                 $this->conn->query($sql3);
@@ -554,10 +564,11 @@ class residentModel extends model
         $latestid = mysqli_fetch_assoc($this->conn->query($sql2));
         $latestid = $latestid["latest"];
         //insert category
-        $sql3 = "INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw1','$quantity1');
-                    INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw2','$quantity2');
-                        INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw3','$quantity3');";
-        $this->conn->query($sql3);
+        $this->conn->query("START TRANSACTION");
+        $a1 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw1','$quantity1');");
+        $a2 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw2','$quantity2');");
+        $a3 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw3','$quantity3')");
+        $this->conn->query("ROLLBACK");
     }
     //get visitor requests to display in my requests
     public function visitor($id)
