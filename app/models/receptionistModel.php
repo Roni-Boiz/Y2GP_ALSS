@@ -7,6 +7,7 @@ class receptionistModel extends model {
          parent::__construct();
     }
 
+    //getting user details session's user ID
     public function profile(){
         require '../app/core/database.php';
         $sql = "SELECT * FROM receptionist WHERE user_id={$_SESSION['userId']}";
@@ -71,6 +72,7 @@ class receptionistModel extends model {
        }
 
        if($apartmentId !="#"){
+           //getting the max of apartment IDs and setup an new resident account
             $sql = "SELECT resident_id FROM resident where resident_id=(SELECT max(resident_id) FROM resident) LIMIT 1";
                 $result = $this->conn->query($sql);   
                 if($result){
@@ -206,47 +208,63 @@ class receptionistModel extends model {
     //     'notification for parcel',{$userid["user_id"]},0)";
     //     $this->conn->query($sql2);
     // }
+
+    //to load data to inlocker tab of parcels
     public function getInlocker(){
         $sql="SELECT * FROM parcel WHERE status=1 ORDER BY receive_date ASC";
         $result= $this->conn->query($sql);
         return $result;
     }
+    //to update parcel state as delivered
     public function updateInlocker($pid){
         $sql="UPDATE parcel SET status=2 WHERE parcel_id=$pid";
         $this->conn->query($sql);
     }
+    //to load details of delivered parcel data
     public function getReached(){
         $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }
+
+    //to swipe away delivered rows manually at the end of the day as a task of receptionist 
     public function putReachedAway($pid){
         $sql="UPDATE parcel SET status=3 WHERE parcel_id=$pid";
         $this->conn->query($sql);
     }
-    public function deleteParcel($pid){
-        $sql="DELETE FROM parcel WHERE parcel_id=$pid";
-        $this->conn->query($sql);
-    }
+    // public function deleteParcel($pid){
+    //     $sql="DELETE FROM parcel WHERE parcel_id=$pid";
+    //     $this->conn->query($sql);
+    // }
+
+    //to get available apartments for dropdown select 
     public function getApartment(){
         $sql = "SELECT apartment_no FROM apartment WHERE status = '1' ";
         $result = $this->conn->query($sql);   
         return $result;
     }
+
+    // to get notifications of receptionist
     public function readNotification(){
         $sql="SELECT * FROM notification WHERE user_id={$_SESSION['userId']} AND (view<>1) ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
     }
+
+    //to mark a notification as viewed
     public function removeNotification($nid){
         $sql="UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
+
+    //to load login devices in profile view
     public function getLoginDevices($id)
     {
         $sql = "SELECT * FROM ip_location WHERE user_id='{$id}'";
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    //to get the details for the right column
     public function getStats(){
         $sql= "SELECT COUNT(apartment_no) as stat FROM apartment";
         $result = $this->conn->query($sql);
