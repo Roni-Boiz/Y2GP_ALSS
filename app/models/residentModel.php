@@ -132,7 +132,11 @@ class residentModel extends model
                 $sql = "SELECT resident_id from resident where user_id='$id'";
                 $rid = mysqli_fetch_assoc($this->conn->query($sql));
                 $rid = $rid["resident_id"];
-                $fee = 1000 * $members;
+                //get fee query
+                $sql2 = "SELECT fee from service where type='hall'";
+                $fee = mysqli_fetch_assoc($this->conn->query($sql2));
+                //fee multiple by slots
+                $fee = $fee["fee"] * $members;
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
                 $result = $this->conn->query($sql);
                 return 1;
@@ -168,7 +172,7 @@ class residentModel extends model
         // echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
         $id = $_SESSION['userId'];
-        
+
         $avail = 1;
         // echo $stime, $etime;
         //get starting slot no from $stime
@@ -213,12 +217,14 @@ class residentModel extends model
             $rid = mysqli_fetch_assoc($this->conn->query($sql));
             $rid = $rid["resident_id"];
             // echo "can reserve";
-            $fee = 1000;
             $empid = explode(" ", $coach);
             $empid = $empid[2];
-            
+
             //get fee query
-            $fee = 1000;
+            $sql2 = "SELECT fee from service where type='fitness'";
+            $fee = mysqli_fetch_assoc($this->conn->query($sql2));
+            //fee multiple by slots
+            $fee = $fee["fee"] * ($noofslots - $count);
 
             $sql = "INSERT into fitness_centre_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$fee','$rid','$empid')";
             $result = $this->conn->query($sql);
@@ -250,13 +256,14 @@ class residentModel extends model
         // echo $empid[2];
         $sql = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
         $result = $this->conn->query($sql);
-        
+
         return $result;
     }
-    public function getshiftno($d, $coach){
+    public function getshiftno($d, $coach)
+    {
         $empid = explode(" ", $coach);
         //coach ge available shift tika
-        $week = (int)date('W', strtotime($d))%3;
+        $week = (int)date('W', strtotime($d)) % 3 + 1;
         //get shift details
         $shiftquery = "SELECT shift_no as n from employee_shift where employee_id=$empid[2] AND week=$week";
         $s = mysqli_fetch_assoc($this->conn->query($shiftquery));
@@ -313,10 +320,15 @@ class residentModel extends model
             $rid = mysqli_fetch_assoc($this->conn->query($sql));
             $rid = $rid["resident_id"];
             // echo "can reserve";
-            $fee = 1000;
+            //get fee query
+            $sql2 = "SELECT fee from service where type='treatment'";
+            $fee = mysqli_fetch_assoc($this->conn->query($sql2));
+            //fee multiple by slots
+            $fee = $fee["fee"] * ($noofslots - $count);
             //res id AI karann
             $sql = "INSERT into treatment_room_reservation(date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$type','$fee','$rid',3)";
             $result = $this->conn->query($sql);
+            
 
             //check date is in reservation_count
             $sql1 = "SELECT COUNT(date) as countd FROM treatment_reservation_count WHERE date LIKE '$d'";
@@ -445,7 +457,10 @@ class residentModel extends model
         //remove hall
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
-            $penaltyfee = 100;
+            //get fee query
+            $sql2 = "SELECT cancelation_fee from service where type='hall'";
+            $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
+            $penaltyfee = $penaltyfee["cancelation_fee"];
             $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$hallid' ";
             //remove fitness
         } else if (isset($_GET["fitid"])) {
@@ -453,9 +468,15 @@ class residentModel extends model
             $stime = $_GET["stime"];
             $etime = $_GET["etime"];
             $d = $_GET["date"];
-            $penaltyfee = 100;
+            //get fee query
+            $sql2 = "SELECT cancelation_fee from service where type='fitness'";
+            $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
+            $penaltyfee = $penaltyfee["cancelation_fee"];
             $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$fitid' ";
-
+            $this->conn->query($sql);
+            //update resident financial account
+            // $sql = "UPDATE resident SET `balance`=`balance`-$penaltyfee where resident_id=$rid";
+            // $this->conn->query($sql);
 
             // echo $stime, $etime;
             //get starting slot no from $stime
@@ -483,9 +504,13 @@ class residentModel extends model
             $stime = $_GET["stime"];
             $etime = $_GET["etime"];
             $d = $_GET["date"];
-            $penaltyfee = 100;
-            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$treatid' ";
-
+            //get fee query
+            $sql2 = "SELECT cancelation_fee from service where type='treatment'";
+            $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
+            $penaltyfee = $penaltyfee["cancelation_fee"];
+            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$treatid' ";
+            $this->conn->query($sql);
+            
 
             // echo $stime, $etime;
             //get starting slot no from $stime
@@ -512,7 +537,10 @@ class residentModel extends model
         //complete park
         else if (isset($_GET["park"])) {
             $parkid = $_GET["park"];
-            $penaltyfee = 100;
+            //get fee query
+            $sql2 = "SELECT cancelation_fee from service where type='park'";
+            $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
+            $penaltyfee = $penaltyfee["cancellation_fee"];
             $sql = "UPDATE parking_slot_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$parkid' ";
         }
         $this->conn->query($sql);

@@ -295,7 +295,8 @@ function check_members() {
 function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
-   if(today.getDate()/10){
+   console.log(today.getDate()%10);
+   if(!today.getDate()%10){
       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
    }else{
       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
@@ -482,7 +483,7 @@ function deleteRes(id, type, s, e, d) {
       if (type = "treat") {
          $.ajax({
             type: "GET",
-            url: "emoveReservation",
+            url: "removeReservation",
             data: {
                treatid: id,
                stime:s,
