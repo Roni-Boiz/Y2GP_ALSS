@@ -85,6 +85,22 @@ class trainerModel extends model {
             return $result;
         }
 
+        public function LoadResidents()
+        {
+            $sql = "SELECT resident_id , fname , lname FROM resident";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
+
+        public function LoadTrainers()
+        {
+            $sql = "SELECT employee_id , fname , lname FROM trainer";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
+
+
+
         //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
     {
