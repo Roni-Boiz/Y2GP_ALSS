@@ -77,15 +77,14 @@ include_once 'sidenav.php';
                 </div>
 
                 <div class="rightPanel" style="margin-top:30px;max-height:500px;overflow:scroll">
-                    <?php
-                    if (isset($this->day->num_rows)) { ?>
-                        <h3>Reservations of the day</h3>
-                        <?php if (isset($this->selectdate)) {
-                            echo $this->selectdate;
-                        }; ?>
-                        <?php
+
+                    <h3>Reservations of the day</h3>
+                    <?php if (isset($this->selectdate)) {
+                        echo $this->selectdate."\n";
+
                         $emp = explode(" ", $this->selectcoach);
                         echo $emp[0] . " " . $emp[1];
+                        // echo ":>".$this->shiftno;
                         if (isset($this->shiftno) && $this->shiftno == 1) {
                             $s = 6;
                             $e = 12;
@@ -102,9 +101,12 @@ include_once 'sidenav.php';
                             $count = 25;
                             echo "<br>available on 18.00 pm to 24.00 pm";
                         }
-
-                        ?>
+                    };
+                    ?>
+                    <?php
+                    if (isset($this->day->num_rows)) { ?>
                         <br>
+
                         <table class="avail">
                             <tr>
                                 <th>Start Time</th>
