@@ -135,6 +135,7 @@ function openModel(amodel, amodelBtn) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
+    
 
     // model.addEventListener("click", (e) => {
     //     if (e.target.id === "yes-btn") {
@@ -163,5 +164,9 @@ function expand() {
         document.getElementById("hb").style.marginLeft = "50px";
         document.getElementById("side").style.transform = "rotateY(180deg)"; /* icon only */
     }
+}
+function closePopup(){
+    $("#editModel").hide();
+
 }
 
