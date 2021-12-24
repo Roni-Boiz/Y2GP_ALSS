@@ -76,6 +76,11 @@ class laundryModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public function getReqDetails($id){
+        $sql= "SELECT category_no,weight,qty FROM category WHERE request_id='$id'";
+        $result= $this->conn->query($sql);
+        return $result;
+    }
 
 
 }
