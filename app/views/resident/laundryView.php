@@ -35,7 +35,7 @@ include_once 'sidenav.php';
                         <div id="">
                             </select>
                             <label>Category 1</label><br>
-                            <input type="text" name="quantity1" id="quantity1" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
+                            <input type="text" name="quantity1" id="quantity1" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw1"id="catw1" class="input-field">
                                 <option value="">Select weight</option>
                                 <option >1-5</option>
@@ -43,7 +43,7 @@ include_once 'sidenav.php';
                                 <option >more than 10</option>
                             </select><br>
                             <label>Category 2</label><br>
-                            <input type="text" name="quantity2" id="quantity2" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
+                            <input type="text" name="quantity2" id="quantity2" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw2" id="catw2"class="input-field">
                                 <option value="">Select weight</option>
                                 <option >1-5</option>
@@ -51,7 +51,7 @@ include_once 'sidenav.php';
                                 <option >more than 10</option>
                             </select><br>
                             <label>Category 3</label><br>
-                            <input type="text" name="quantity3" id="quantity3" class="input-field" pattern="^\d|$" placeholder="Enter quantity">
+                            <input type="text" name="quantity3" id="quantity3" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw3" id="catw3"class="input-field">
                                 <option value="">Select weight</option>
                                 <option >1-5</option>
