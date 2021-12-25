@@ -232,6 +232,7 @@ class residentModel extends model
             $sql1 = "SELECT COUNT(date) as countd FROM fitness_reservation_count WHERE date LIKE '$d'";
             $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
             // echo ">".$result1['countd'];
+            // echo $sql;
             //make sql procedure (IN $count IN $noofslots IN $d)
             if ($result1['countd']) {
                 //none
@@ -593,9 +594,9 @@ class residentModel extends model
         $latestid = $latestid["latest"];
         //insert category
         $this->conn->query("START TRANSACTION");
-        $a1 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw1','$quantity1');");
-        $a2 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw2','$quantity2');");
-        $a3 = $this->conn->query("INSERT INTO category(request_id,weight,qty) VALUES('$latestid','$catw3','$quantity3')");
+        $a1 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(1,'$latestid','$catw1','$quantity1');");
+        $a2 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(2,'$latestid','$catw2','$quantity2');");
+        $a3 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(3,'$latestid','$catw3','$quantity3')");
         $this->conn->query("ROLLBACK");
     }
     //get visitor requests to display in my requests
@@ -663,6 +664,13 @@ class residentModel extends model
         $s = date("$year-$month-d 00:00:00", strtotime("first day of this month"));
         $e = date("$year-$month-d 23:59:59", strtotime("last day of this month"));
         $sql = "SELECT * from bill where '$s'<=dateaffect and dateaffect<'$e' and resident_id IN (select resident_id from resident where user_id='$id')";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+    public function payment($id, $year, $month){
+        $s = date("$year-$month-d 00:00:00", strtotime("first day of this month"));
+        $e = date("$year-$month-d 23:59:59", strtotime("last day of this month"));
+        $sql = "SELECT * from payment where '$s'<=paid_date and paid_date<'$e' and resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
     }
