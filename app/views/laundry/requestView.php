@@ -41,7 +41,7 @@ include_once 'sidenav.php';
                                 while ($row1 = $this->laundyNewRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                        <span class="newMode" onclick="openModel('editModel','newMode')">
+                                        <a href="Requests?reqId=<?php $row1['request_id'];?>"><span class="newMode" >
                                             <article class="row mlb">
                                                 <ul>
                                                     <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
@@ -58,6 +58,7 @@ include_once 'sidenav.php';
                                                 </ul>
                                             </article>
                                         </span>
+                                        </a>
                                     </span>
                                     <!-- <button id="model-btn" class="purplebutton">Reserve Now</button> -->
                                 <?php
@@ -177,11 +178,14 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+            <?php
+            if(isset($this->reqSelected)){
+            ?>
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="editModel">
+                <div id="editModel" class="open" >
 
-                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <a onclick="closePopup()">&times;</a>
                     <div style="text-align: center;">
                         <h1>L00233434</h1>
                     </div>
@@ -235,12 +239,14 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+            <?php }
+            ?>
             <div class="divPopupModel">
 
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                 <div id="deleteModel">
 
-                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <a href="requests">&times;</a>
                     <div style="text-align: center;">
                         <h1>L00233434</h1>
                     </div>
@@ -286,6 +292,26 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+            <?php
+                if (0) { ?>
+                    <div class='b'></div>
+                    <div class='bb'></div>
+                    <div class='message'>
+                        <div class='check'>
+                            &#10004;
+                        </div>
+                        <p>
+                            Reservation Success!
+                        </p>
+                        <p>
+                            Check your email for a booking confirmation. We'll see you soon!
+                        </p>
+                        <button id='ok' onclick='window.location = "fitness" '>
+                            OK
+                        </button>
+                    </div>
+                <?php
+                }; ?>
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
