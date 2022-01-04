@@ -39,6 +39,16 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function getAllFreeSlots(){
+        $sql = "SELECT * FROM parking_slot WHERE apartment_no IS NULL";
+        return $this->conn->query($sql);
+    }
+
+    public function getLastApartmentNo(){
+        $sql = "SELECT apartment_no FROM apartment ORDER BY apartment_no DESC LIMIT 1";
+        return $this->conn->query($sql);
+    }
+
     public function getMyDoList($id)
     {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";

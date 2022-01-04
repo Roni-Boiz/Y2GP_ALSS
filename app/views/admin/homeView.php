@@ -253,6 +253,58 @@ include_once 'sidenav.php';
                         </div>
                     </div>
 
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="model">
+                            <a href="javascript:void(0)" class="closebtn">&times;</a>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h3>New Apartment<i class="fa fa-home"></i></i></h3>
+                            </div>
+                            <form action="addApartment" class="formEdit" method="GET">
+                                <div>
+                                    <label>Apartment No : </label>
+                                    <?php
+                                        $row = $this->lastApartmentNo->fetch_assoc();
+                                        $apartmentNo = (int)substr($row['apartment_no'],2);
+                                        $apartmentNo = $apartmentNo + 1;
+                                        $apartmentNo = "AP".sprintf('%03u',$apartmentNo);
+                                    ?>
+                                    <span><?= $apartmentNo?></span>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label>Floor No</label><br>
+                                        <select id="emptype" name="floor" class="input-field" required>
+                                            <option value="">Select Floor...</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Default Parking Slot</label><br>
+                                        <select id="emptype" name="parkingslot" class="input-field" required>
+                                            <?php
+                                            while ($row = $this->slots->fetch_assoc()) {
+                                            ?>
+                                                <option value="<?= $row['slot_no'] ?>"><?= $row['slot_no'] ?></option>";
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="btnPurple" type="submit" name="submit" value="Add Apartment">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                     <div>
                         <h2>Total Monthly Income</h2>
                         <div class="card" id="income">
