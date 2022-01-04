@@ -234,10 +234,10 @@ include_once 'sidenav.php';
                                 <h1>Add Schedule<i class="fa fa-user"></i></i></h1>
                             </div>
 
-                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data"> 
                                 <div id="col1">
                                     <label for="type">Select Resident</label><br>
-                                    <select name="" id="">
+                                    <select name="resident" class="input-field" id="selectresident" required>
                                         <option value="#">Select Resident</option>
                                         <?php
 
@@ -258,7 +258,7 @@ include_once 'sidenav.php';
                                 </div> -->
                                 <div id="col2">
                                     <label for="cno">Coach</label><br>
-                                    <select name="" id="">
+                                    <select name="coach" class="input-field" id="selectcoach" required>
                                         <option value="#">Select Coach</option>
                                         <?php
 

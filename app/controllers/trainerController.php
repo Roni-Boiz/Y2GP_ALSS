@@ -62,6 +62,7 @@ class trainerController extends controller{
         if (isset($_POST["date"]) && isset($_POST["coach"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
+            $resident = $_POST["resident"];
             $stime = $_POST["starttime"] . ":00";
             $etime = $_POST["endtime"] . ":00";
             //check valid time
