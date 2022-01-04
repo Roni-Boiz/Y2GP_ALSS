@@ -55,9 +55,14 @@ class laundryModel extends model {
         return $errors;
     }
     public function getNewRequests(){
-        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=0";
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=0";
         // $sql = "SELECT * FROM laundry_request WHERE status=1";
         $result = $this->conn->query($sql);   
+        return $result;
+    }
+    public function getselectedNew($id){
+        $sql="SELECT laundry_request.type,laundry_request.request_date,category.* FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id'";
+        $result= $this->conn->query($sql);
         return $result;
     }
     public function getCleaningRequests(){
