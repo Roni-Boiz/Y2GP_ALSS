@@ -33,6 +33,12 @@ class adminModel extends model
         return $result;
     }
 
+    public function getAllApartments()
+    {
+        $sql = "SELECT * FROM apartment";
+        return $this->conn->query($sql);
+    }
+
     public function getMyDoList($id)
     {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
@@ -154,4 +160,6 @@ class adminModel extends model
         $sql = "SELECT * FROM service";
         return $this->conn->query($sql);
     }
+
+    
 }

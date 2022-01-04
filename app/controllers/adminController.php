@@ -21,6 +21,7 @@ class adminController extends controller
     public function index()
     {
         $this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
+        $this->view->apartments = $this->model->getAllApartments();
         $this->view->render('admin/homeView');
     }
 
@@ -31,7 +32,8 @@ class adminController extends controller
         $this->view->render('admin/profileView');
     }
 
-    public function editProfile(){
+    public function editProfile()
+    {
         $this->model->updateProfile($_POST['name'], $_POST['email'], $_SESSION['userId']);
         header("Refresh:0; url=profile");
     }
@@ -87,7 +89,7 @@ class adminController extends controller
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {
                 foreach ($_FILES['files']['name'] as $key => $val) {
-                    $fileName = time().'_'.basename($_FILES['files']['name'][$key]);
+                    $fileName = time() . '_' . basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
 
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -131,7 +133,7 @@ class adminController extends controller
 
         // File upload path
         $targetDir = "../uploads/profile/employee/";
-        $fileName = time().'_'.basename($_FILES["file"]["name"]);
+        $fileName = time() . '_' . basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
@@ -166,5 +168,4 @@ class adminController extends controller
         echo $statusMsg;
         header("Refresh:0; url=employee");
     }
-
 }

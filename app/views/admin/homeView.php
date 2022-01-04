@@ -120,6 +120,73 @@ include_once 'sidenav.php';
             stroke-dashoffset: 0;
         }
     }
+
+    .apartment>div:nth-child(1) {
+        display: flex;
+    }
+
+    .apartment>div:nth-child(1) h2 {
+        width: 93%;
+    }
+
+    .apartment .addBtn {
+        background: #d9d9d9;
+        color: #555;
+        float: right;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
+    }
+
+    .apartment .addBtn i {
+        padding: 11px;
+        font-size: 30px;
+        color: #110B2E;
+    }
+
+    .apartment .addBtn:hover {
+        background-color: #bbb;
+        display: block;
+    }
+
+    #apartmentSummary {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #apartmentSummary>div:nth-child(1) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #apartmentSummary>div:nth-child(1) div {
+        padding: 10px;
+    }
+
+    #apartmentSummary>div:nth-child(1)>div>span {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #apartmentSummary>div:nth-last-child(1) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        padding: 0px 0px 15px 0px;
+    }
+
+    #apartmentSummary div:nth-last-child(1) h4:nth-child(1) {
+        grid-column: 1;
+    }
+
+    #apartmentSummary div:nth-last-child(1) h4:nth-child(2) {
+        grid-column: 2;
+    }
 </style>
 
 </head>
@@ -135,26 +202,56 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
-                    <!-- <div>
-                        <h2>Apartments</h2>
-                        <div class="card" id="income">
+                    <div class="apartment">
+                        <div>
+                            <h2>Apartments</h2>
+                            <span onclick="openModel('model','addBtn')" class="addBtn" title="Add More Apartments"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="card" id="apartmentSummary">
+                            <!-- <h4>Graphical View</h4> -->
                             <div>
-                                <h4>Sold Appartments</h4>
-                                <div>
-                                <img src="../../public/img/1.jpg" alt="apartment icon">
-                                    <h3>&nbsp;&nbsp;&nbsp;<?= number_format("100") ?></h3>
-                                </div>
-                                <h4 style="padding: 0px; text-align: center;"><small>Remainning : <?= number_format("55") ?></small></h4>
+                                <?php
+                                $apartments = $this->apartments->num_rows;
+                                if ($this->apartments->num_rows > 0) {
+                                    $remaining = 0; ?>
+                                    <?php
+                                    while ($row = $this->apartments->fetch_assoc()) { ?>
+                                        <div>
+                                            <?php
+                                            if ($row["status"]) { ?>
+                                                <span title="Floor No - <?= $row["floor_no"] ?>">
+                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;"></i>
+                                                </span>
+                                            <?php
+                                            } else {
+                                                $remaining++; ?>
+                                                <span title="Floor No - <?= $row["floor_no"] ?>">
+                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:green;font-size:40px;padding: 0px;"></i>
+                                                </span>
+                                            <?php
+
+                                            } ?>
+                                        </div>
+                                <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                                ?>
                             </div>
+                            <hr>
                             <div>
-                                <h4>Graphical View</h4>
-                                <div>
-                                    <img src="../../public/img/overdue.png" alt="overdue icon">
-                                    <h3>Rs.<?= number_format("20000", 2) ?></h3>
-                                </div>
+                                <h3 style="padding: 0px; text-align: center;">
+                                    <large>Total : <?= number_format("$apartments") ?></large>
+                                </h3>
+                                <h3 style="padding: 0px; text-align: center;">
+                                    <large>Remainning : <?= number_format("$remaining") ?></large>
+                                </h3>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                     <div>
                         <h2>Total Monthly Income</h2>
