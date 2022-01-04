@@ -106,7 +106,7 @@ include_once 'sidenav.php';
                     <?php
                     if (isset($this->day->num_rows)) { ?>
                         <br>
-
+                        <?php if ($this->day->num_rows > 0) { ?>
                         <table class="avail">
                             <tr>
                                 <th>Start Time</th>
@@ -149,6 +149,8 @@ include_once 'sidenav.php';
 
 
                             <?php
+                            } } else {
+                                echo "There is no reservations yet.";
                             } ?>
                         </table>
                     <?php

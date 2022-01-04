@@ -237,6 +237,7 @@ class residentController extends controller
         // particular month
         if (isset($_POST["month"]) && isset($_POST["year"])) {
             $this->view->bill = $this->model->bill($id, $_POST["year"], $_POST["month"]);
+            $this->view->payment = $this->model->payment($id, $_POST["year"], $_POST["month"]);
             // convert-number-to-month-name
             $this->view->y = $_POST["year"] . " " . date("F", mktime(0, 0, 0, $_POST["month"], 10));;
             $this->view->billtotal = $this->model->billtotal($id, $_POST["year"], $_POST["month"]);
@@ -244,6 +245,7 @@ class residentController extends controller
         } else {
             $this->view->bill = $this->model->bill($id, date('Y'), date('m'));
             $this->view->y = date('Y') . " " . date('F');
+            $this->view->payment = $this->model->payment($id,date('Y'), date('m'));
             $this->view->billtotal = $this->model->billtotal($id, date('Y'), date('m'));
             $this->view->balanceforward = $this->model->readResident();
         }

@@ -31,11 +31,11 @@ include_once 'sidenav.php';
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
 
-                                            <h3>Reservations of the day</h3><br>
+                                            <br>
                                             <?php if (isset($this->selectdate)) {
                                                 echo $this->selectdate . "<br> 
-                                                Please check availability and select time slot. <br>
-                                                There are only 5 bookings on the particular time slot.";
+                                                Please check availability from right panel and  <br>select time slot.
+                                                <br>There are only 5 bookings on the particular time slot.";
                                             }; ?>
                                             <br>
 
@@ -62,110 +62,114 @@ include_once 'sidenav.php';
                             echo $this->selectdate;
                         }; ?>
                         <br>
+                        <?php if ($this->day->num_rows > 0) { ?>
+                            <table class="avail">
+                                <tr>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Availability</th>
+                                </tr>
 
-                        <table class="avail">
-                            <tr>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Availability</th>
-                            </tr>
-                            <?php while ($row = $this->day->fetch_assoc()) {
-                            ?>
-                                <!-- show reservation -->
-
-                                <?php
-                                $count = 1;
-                                for ($hours = 6; $hours < 24; $hours++) {
-                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                                <?php while ($row = $this->day->fetch_assoc()) {
                                 ?>
-                                        <tr>
-                                            <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
-                                            <td><?php if ($mins + 30 == 60) {
-                                                    echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
-                                                } else {
-                                                    echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
-                                                } ?></td>
-                                            <td>
-                                                <span class="fa-stack">
-                                                    <!-- color with available -->
-                                                    <span <?php if ($row[$count] == 5) { ?> style="color:red" <?php } elseif ($row[$count] > 0 && $row[$count] < 5) { ?> style="color:yellow" <?php } else { ?> style="color:lime" <?php } ?> class="fa fa-circle fa-stack-2x"></span>
-                                                    <strong class="fa-stack-1x">
-                                                        <?php echo $row[$count]; ?>
-                                                    </strong>
-                                                </span>
-                                            </td>
+                                    <!-- show reservation -->
 
-                                        </tr>
-                                <?php
-                                        $count++;
+                                    <?php
+                                    $count = 1;
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <tr>
+                                                <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                                <td><?php if ($mins + 30 == 60) {
+                                                        echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                    } else {
+                                                        echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                    } ?></td>
+                                                <td>
+                                                    <span class="fa-stack">
+                                                        <!-- color with available -->
+                                                        <span <?php if ($row[$count] == 5) { ?> style="color:red" <?php } elseif ($row[$count] > 0 && $row[$count] < 5) { ?> style="color:yellow" <?php } else { ?> style="color:lime" <?php } ?> class="fa fa-circle fa-stack-2x"></span>
+                                                        <strong class="fa-stack-1x">
+                                                            <?php echo $row[$count]; ?>
+                                                        </strong>
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+                                    <?php
+                                            $count++;
+                                        }
                                     }
-                                }
-                                ?>
+                                    ?>
 
 
                             <?php
+                                }
+                            } else {
+                                echo "There is no reservations yet.";
                             } ?>
-                        </table>
-                    <?php
-                    } ?>
-                    <hr>
-                    <div class="holdAccount">
-                        <div class="head">
-                            <h3>Upcoming Reservations. . .</h3>
-                        </div>
+                            </table>
                         <?php
-                        if ($this->latest->num_rows > 0) {
-                            while ($row = $this->latest->fetch_assoc()) {
-                        ?>
+                    } ?>
+                        <hr>
+                        <div class="holdAccount">
+                            <div class="head">
+                                <h3>Upcoming Reservations. . .</h3>
+                            </div>
+                            <?php
+                            if ($this->latest->num_rows > 0) {
+                                while ($row = $this->latest->fetch_assoc()) {
+                            ?>
+                                    <div class="detail">
+                                        <div>
+                                            <div class="detail-info">
+                                                <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                                <small><?php echo "Type : " . $row["type"]; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else { ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
-                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                            <small><?php echo "Type : " . $row["type"]; ?></small>
+                                            <h5><?php echo "No Upcomings . . ."; ?></h5>
                                         </div>
                                     </div>
                                 </div>
                             <?php
-                            }
-                        } else { ?>
+                            } ?>
+
+                        </div>
+                        <br>
+                        <div class="activeUsers">
+                            <div class="head">
+                                <h3>Treatment Types</h3>
+                            </div>
                             <div class="detail">
-                                <div>
-                                    <div class="detail-info">
-                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
-                                    </div>
+                                <img src="../../public/img/user.png" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Full Body Massage</h5>
+                                    <small>Nirupama Rajapaksha</small>
                                 </div>
                             </div>
-                        <?php
-                        } ?>
-
-                    </div>
-                    <br>
-                    <div class="activeUsers">
-                        <div class="head">
-                            <h3>Treatment Types</h3>
-                        </div>
-                        <div class="detail">
-                            <img src="../../public/img/user.png" alt="user" />
-                            <div class="detail-info">
-                                <h5>Full Body Massage</h5>
-                                <small>Nirupama Rajapaksha</small>
+                            <div class="detail">
+                                <img src="../../public/img/user.png" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Full-body facia</h5>
+                                    <small>Shiranthi Rajapaksha</small>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <img src="../../public/img/user.png" alt="user" />
+                                <div class="detail-info">
+                                    <h5>Water Therapy</h5>
+                                    <small>Chandrika</small>
+                                </div>
                             </div>
                         </div>
-                        <div class="detail">
-                            <img src="../../public/img/user.png" alt="user" />
-                            <div class="detail-info">
-                                <h5>Full-body facia</h5>
-                                <small>Shiranthi Rajapaksha</small>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <img src="../../public/img/user.png" alt="user" />
-                            <div class="detail-info">
-                                <h5>Water Therapy</h5>
-                                <small>Chandrika</small>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 

@@ -48,13 +48,22 @@ class laundryController extends controller{
         $this->profile();
     }
     public function requests(){
+        if(isset($_GET["reqId"])){
+            $id=$_GET["reqId"];
+            //$this->getReqDetails($id);
+            $this->view->reqSelected=true;
+        }
         $this->view->laundyNewRequests=$this->model->getNewRequests();
         $this->view->laundyCleaningRequests=$this->model->getCleaningRequests();
         $this->view->laundyCompletedRequests=$this->model->getCompletedRequests();
         $this->view->render('laundry/requestView');
+        
     }
     public function getNotification(){
         $this->view->render('laundry/notificationView');
+    }
+    public function getNewReq(){
+        
     }
 
 }
