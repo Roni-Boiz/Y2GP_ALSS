@@ -49,6 +49,30 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function insertNewApartment($apartmentNo, $floor, $parkingSlot){
+        $apartmentNo = $this->conn->real_escape_string($apartmentNo);
+        $floor = $this->conn->real_escape_string($floor);
+        $parkingSlot = $this->conn->real_escape_string($parkingSlot);
+
+        $sql = "INSERT INTO apartment(apartment_no, floor_no, status) VALUES('{$apartmentNo}','{$floor}', 0)";
+        $result1 = $this->conn->query($sql);
+        $sql = "UPDATE parking_slot SET apartment_no = '{$apartmentNo}', status = 0 WHERE slot_no = '{$parkingSlot}'";
+        $result2 = $this->conn->query($sql);
+        return $result1 && $result2;
+    }
+
+    public function getMonthlyIncome(){
+        $start = date("Y-m-1 00:00:00");
+        $end = date("Y-m-t 23:59:59");
+        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='".$start."' AND paid_date<='".$end."'";
+        return $this->conn->query($sql);
+    }
+
+    public function getTotalOverdue(){
+        $sql = "SELECT sum(balance) AS due FROM resident";
+        return $this->conn->query($sql);
+    }
+
     public function getMyDoList($id)
     {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
