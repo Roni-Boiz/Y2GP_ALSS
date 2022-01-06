@@ -71,7 +71,8 @@ include_once('sidenav.php');
                                 <span class="error_form" id="old_password_error_message"></span><br>
 
                                 <label for="lname">New Password</label>
-                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br><!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                                                                                                                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" -->
                                 <span class="error_form" id="new_password_error_message"></span><br>
 
                                 <label for="fname">Re-New Password</label>

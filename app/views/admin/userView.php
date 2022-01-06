@@ -16,14 +16,29 @@ include_once 'sidenav.php';
                     <div>
                         <h2>User Summary</h2>
                         <div class="card" id="usersummary">
-
+                        <?php
+                            $admins = 0;
+                            $employees = 0;
+                            $residents =0;
+                            if ($this->users->num_rows > 0) {
+                                while ($row = $this->users->fetch_assoc()) {
+                                    if($row["type"] == 'resident'){
+                                        $residents++;
+                                    }elseif($row["type"] == 'admin'){
+                                        $admins++;
+                                    }else{
+                                        $employees++;
+                                    }
+                                }
+                            }
+                        ?>
                             <div class="user">
                                 <div>
                                     <span><i class="fas fa-user"></i></span>
                                     <h3>Residents</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    100
+                                    <?= $residents ?>
                                 </div>
                             </div>
 
@@ -33,22 +48,22 @@ include_once 'sidenav.php';
                                     <h3>Employees</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    200
+                                <?= $employees ?>
                                 </div>
                             </div>
 
                             <div class="user">
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
-
                                     <h3>Admin</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    3
+                                <?= $admins ?>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php $this->users->data_seek(0); ?>
                     <div class="usersearch">
                         <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
                         <div style="float: right;">
