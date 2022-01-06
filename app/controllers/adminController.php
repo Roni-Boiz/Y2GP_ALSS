@@ -20,10 +20,20 @@ class adminController extends controller
 
     public function index()
     {
+        if(isset($_POST['apartmentNo']) && isset($_POST['floor']) && isset($_POST['parkingslot'])){
+            $result = $this->model->insertNewApartment($_POST['apartmentNo'], $_POST['floor'], $_POST['parkingslot']);
+            if($result == 0){
+                $this->view->error = "Oops something went wrong. Form didn't submiited";
+            }else{
+                $this->view->success = true;
+            }
+        }
         $this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
         $this->view->apartments = $this->model->getAllApartments();
         $this->view->lastApartmentNo = $this->model->getLastApartmentNo();
         $this->view->slots = $this->model->getAllFreeSlots();
+        $this->view->payments = $this->model->getMonthlyIncome();
+        $this->view->overdues = $this->model->getTotalOverdue();
         $this->view->render('admin/homeView');
     }
 
