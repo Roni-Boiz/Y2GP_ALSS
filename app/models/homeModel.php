@@ -115,7 +115,7 @@ class homeModel extends model
                             $_SESSION['residentId'] = $user['resident_id'];
                         }
                         //Gets the IP Address from the visitor
-                        $PublicIP =  get_client_ip(); //get_client_ip();  //"112.135.65.171"
+                        $PublicIP = "112.135.100.171"; //get_client_ip();  //"112.135.65.171"
                         if ($PublicIP != "::1") {
                             //Uses ipinfo.io to get the location of the IP Address, you can use another site but it will probably have a different implementation
                             $json     = file_get_contents("http://ipinfo.io/$PublicIP/geo");
@@ -127,10 +127,19 @@ class homeModel extends model
                             $country  = $json['country'];
                             $timezone = $json['timezone'];
 
-                            $sql = "INSERT INTO ip_location(ip_address,city,region,country_code,time_zone,user_id) VALUES (?,?,?,?,?,?)";
-                            $stmt = mysqli_prepare($this->conn, $sql);
-                            mysqli_stmt_bind_param($stmt, "sssssi", $ip, $city, $region, $country, $timezone, $_SESSION['userId']);
-                            mysqli_stmt_execute($stmt);
+                            $sql = "SELECT sl_no FROM ip_location WHERE ip_address='{$PublicIP}'";
+                            $IP_sl_no = $this->conn->query($sql);
+                            if(mysqli_num_rows($IP_sl_no) == 1){
+                                $row = mysqli_fetch_assoc($IP_sl_no);
+                                $_SESSION['loginId'] = $row['sl_no'];
+                            }else{
+                                $sql = "INSERT INTO ip_location(ip_address,city,region,country_code,time_zone,last_activity,user_id) VALUES (?,?,?,?,?,?,?)";
+                                $stmt = mysqli_prepare($this->conn, $sql);
+                                mysqli_stmt_bind_param($stmt, "ssssssi", $ip, $city, $region, $country, $timezone, date("Y-m-d H:i:s", strtotime(date('h:i:sa'))), $_SESSION['userId']);
+                                mysqli_stmt_execute($stmt);
+                                $_SESSION['loginId'] = mysqli_insert_id($this->conn);
+                            }
+                            
                         }
                     } else {
                         $errors[] = 'Invalid Username or Password';
