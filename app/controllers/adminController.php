@@ -68,6 +68,10 @@ class adminController extends controller
         return $this->model->unlockThisUserAccount($_POST["user_name"]);
     }
 
+    public function deleteUserAccount(){
+        return $this->model->deleteThisUserAccount($_POST["user_id"]);
+    }
+
     public function employee()
     {
         $this->view->managers = $this->model->getAllEmployees("manager");
