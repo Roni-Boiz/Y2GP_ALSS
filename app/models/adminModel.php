@@ -113,7 +113,12 @@ class adminModel extends model
         $sql = "SELECT user_name, profile_pic, resident.apartment_no, resident.email, resident.nic, concat_ws(' ', resident.fname, resident.lname) AS name FROM `user_account` INNER JOIN resident ON user_account.user_id = resident.user_id WHERE hold=5 and hold_time > DATE_SUB(NOW(), INTERVAL 1200 SECOND)";
         return $this->conn->query($sql);
     }
-    
+
+    public function deleteThisUserAccount($user_id){
+        $sql = "DELETE FROM user_account WHERE user_id = '{$user_id}'";
+        return $this->conn->query($sql);
+    }
+
     public function getEmployeesCountByTypeDate()
     {
         $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
