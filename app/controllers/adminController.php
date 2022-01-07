@@ -59,6 +59,7 @@ class adminController extends controller
     public function user()
     {
         $this->view->users = $this->model->getAllUsers();
+        $this->view->activeUsers = $this->model->getAllOnlineUsers();
         $this->view->render('admin/userView');
     }
 

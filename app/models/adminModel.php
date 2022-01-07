@@ -87,6 +87,23 @@ class adminModel extends model
         return $result;
     }
 
+    public function getAllOnlineUsers()
+    {
+        $timeLimit = 300;
+        $sql = "SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type,concat_ws(' ' ,resident.fname,resident.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN resident ON user_account.user_id = resident.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND) 
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,manager.fname,manager.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN manager ON user_account.user_id = manager.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,receptionist.fname,receptionist.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN receptionist ON user_account.user_id = receptionist.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,trainer.fname,trainer.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN trainer ON user_account.user_id = trainer.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' , parking_officer.fname,parking_officer.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN parking_officer ON user_account.user_id = parking_officer.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)";
+        // $sql = "SELECT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat(concat_ws(' ', resident.fname, resident.lname),concat_ws(' ', manager.fname, manager.lname)) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id LEFT JOIN resident ON user_account.user_id=resident.user_id LEFT JOIN manager ON user_account.user_id=manager.user_id WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND) AND user_account.type != 'admin'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
     public function getEmployeesCountByTypeDate()
     {
         $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
