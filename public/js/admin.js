@@ -344,3 +344,25 @@ function unlockAccount(user_name) {
         });
     }
 }
+
+function deleteUser() {
+    let id = document.getElementById("answer").innerText;
+    user_id = parseInt(id.substring(3));
+    console.log(user_id);
+    $.ajax({
+        type: "POST",
+        url: "deleteUserAccount",
+        data: {
+            user_id: user_id
+        },
+        success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("slow");
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width','0%');
+            $("#myCanvasNav").css('opacity','0');
+            $("#deleteModel").toggleClass('close');
+        }
+    });
+}
