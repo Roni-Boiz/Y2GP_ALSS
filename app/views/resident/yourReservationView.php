@@ -225,9 +225,9 @@ include_once 'sidenav.php';
                 </div>
             </div>
             <!-- show first model -->
-            <span onclick="openModel('editModel','addBtn')" class="addBtn">Btn</span>
+            <!-- <span onclick="openModel('editModel','addBtn')" class="addBtn">Btn</span> -->
             <!-- show second model -->
-            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1">Btn</span>
+            <!-- <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1">Btn</span> -->
             <!-- firstmodel -->
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
