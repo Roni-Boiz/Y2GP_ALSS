@@ -60,7 +60,12 @@ class adminController extends controller
     {
         $this->view->users = $this->model->getAllUsers();
         $this->view->activeUsers = $this->model->getAllOnlineUsers();
+        $this->view->lockedAccounts = $this->model->getAllLockedUsers();
         $this->view->render('admin/userView');
+    }
+
+    public function unclockThisAccount(){
+        return $this->model->unlockThisUserAccount($_POST["user_name"]);
     }
 
     public function employee()
