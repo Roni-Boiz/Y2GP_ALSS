@@ -8,12 +8,6 @@ class homeController extends controller{
     function __construct(){
         parent::__construct();
         $this->loadModel('homeModel');
-        // session_start();
-        // if(isset($_SESSION['type']) && !empty($_SESSION['type']) && $_SESSION['type'] == "admin"){
-        //     echo "Why";
-        //     $type = $_SESSION['type'];
-        //     header("location: /Y2GP_ALSS/public/{$type}Controller/index");
-        // }
     }
 
     public function index(){
@@ -25,6 +19,34 @@ class homeController extends controller{
     }
 
     public function login(){
+        session_start();
+        if(isset($_SESSION['type'])){
+            if($_SESSION['type'] == "admin"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+            if($_SESSION['type'] == "manager"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+            if($_SESSION['type'] == "receptionist"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+            if($_SESSION['type'] == "parking_officer"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+            if($_SESSION['type'] == "trainer"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+            if($_SESSION['type'] == "resident"){
+                $type = $_SESSION['type'];
+                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+            }
+
+        }
         $this->view->render('loginView');
     }
 
