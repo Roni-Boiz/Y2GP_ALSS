@@ -295,11 +295,19 @@ function check_members() {
 function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
-   console.log(today.getDate()%10);
-   if(!today.getDate()%10){
-      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
+   console.log(Math.floor(today.getDate()/10));
+   if(!Math.floor(today.getDate()/10)){
+      if(!Math.floor(today.getMonth()%10)){
+         var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + (today.getDate());
+      }else{
+         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
+      }
    }else{
-      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+      if(!Math.floor(today.getMonth()%10)){
+         var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate());
+      }else{
+         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+      }
    }
    
    console.log(date);
