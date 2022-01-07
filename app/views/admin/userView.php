@@ -16,22 +16,22 @@ include_once 'sidenav.php';
                     <div>
                         <h2>User Summary</h2>
                         <div class="card" id="usersummary">
-                        <?php
+                            <?php
                             $admins = 0;
                             $employees = 0;
-                            $residents =0;
+                            $residents = 0;
                             if ($this->users->num_rows > 0) {
                                 while ($row = $this->users->fetch_assoc()) {
-                                    if($row["type"] == 'resident'){
+                                    if ($row["type"] == 'resident') {
                                         $residents++;
-                                    }elseif($row["type"] == 'admin'){
+                                    } elseif ($row["type"] == 'admin') {
                                         $admins++;
-                                    }else{
+                                    } else {
                                         $employees++;
                                     }
                                 }
                             }
-                        ?>
+                            ?>
                             <div class="user">
                                 <div>
                                     <span><i class="fas fa-user"></i></span>
@@ -48,7 +48,7 @@ include_once 'sidenav.php';
                                     <h3>Employees</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                <?= $employees ?>
+                                    <?= $employees ?>
                                 </div>
                             </div>
 
@@ -58,7 +58,7 @@ include_once 'sidenav.php';
                                     <h3>Admin</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                <?= $admins ?>
+                                    <?= $admins ?>
                                 </div>
                             </div>
                         </div>
@@ -233,9 +233,15 @@ include_once 'sidenav.php';
                                 <span class="acceptBtn"><i class="fas fa-user-check"></i></span>
                             </div>
                             <div class="moreContent">
-                                <span><h5>Apartment No : AP001</h5></span>
-                                <span><h5>NIC : 882323343v</h5></span>
-                                <span><h5>Email : ronila@gmail.com</h5></span>
+                                <span>
+                                    <h5>Apartment No : AP001</h5>
+                                </span>
+                                <span>
+                                    <h5>NIC : 882323343v</h5>
+                                </span>
+                                <span>
+                                    <h5>Email : ronila@gmail.com</h5>
+                                </span>
                             </div>
                         </div>
                         <div class="detail">
@@ -249,9 +255,15 @@ include_once 'sidenav.php';
                             </div>
 
                             <div class="moreContent">
-                                <span><h5>Apartment No : AP002</h5></span>
-                                <span><h5>NIC : 852323343v</h5></span>
-                                <span><h5>Email : chatura@gmail.com</h5></span>
+                                <span>
+                                    <h5>Apartment No : AP002</h5>
+                                </span>
+                                <span>
+                                    <h5>NIC : 852323343v</h5>
+                                </span>
+                                <span>
+                                    <h5>Email : chatura@gmail.com</h5>
+                                </span>
                             </div>
                         </div>
 
@@ -261,18 +273,61 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Current Online Users</h3>
                         </div>
-                        <div class="detail">
+                        <?php
+                        if ($this->activeUsers->num_rows > 0) {
+                            $count = $this->activeUsers->num_rows;
+                        ?>
                             <div>
-                                <img src="../../public/img/user4.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Ronila Sanjula</h5>
-                                    <small>AD0001</small>
+                                <div style="text-align: center; font-weight: 600;">
+                                    <?= $count ?> Users Online
                                 </div>
-                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
+                            <?php
+                            while ($row = $this->activeUsers->fetch_assoc()) {
+                            ?>
+                                <?php
+                                if ($row["type"] == 'resident') {
+                                ?>
+                                    <div class="detail">
+                                        <div>
+                                            <img src="../../uploads/profile/resident/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                            <div class="detail-info">
+                                                <h5><?= $row['name'] ?></h5>
+                                                <small><?= $row['user_name'] ?></small>
+                                            </div>
+                                            <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="detail">
+                                        <div>
+                                            <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                            <div class="detail-info">
+                                                <h5><?= $row['name'] ?></h5>
+                                                <small><?= $row['user_name'] ?></small>
+                                            </div>
+                                            <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                            <div>
+                                <div style="text-align: center; font-weight: 600;">
+                                    0 Users Online
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
 
-                        </div>
-                        <div class="detail">
+                        <!-- <div class="detail">
                             <div>
                                 <img src="../../public/img/user1.jpg" alt="user" />
                                 <div class="detail-info">
@@ -301,13 +356,34 @@ include_once 'sidenav.php';
                                 </div>
                                 <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+    </div> .expand div closed here
+
+    <script>
+        fetch_user_login_date();
+        setInterval(function() {
+            fetch_user_login_date();
+        }, 3000);
+
+        function fetch_user_login_date() {
+            var action = "fetch_data";
+            $.ajax({
+                url: "user",
+                method: "POST",
+                data: {
+                    action: action
+                },
+                success: function(data) {
+
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
