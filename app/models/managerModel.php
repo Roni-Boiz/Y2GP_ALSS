@@ -44,6 +44,11 @@ class managerModel extends model {
         return $stmt->execute();
     }
 
+    public function updateLoginDetails($date, $id){
+        $sql = "UPDATE ip_location SET last_activity ='{$date}' WHERE sl_no = '{$id}'";
+        return $this->conn->query($sql);
+    }
+
     public function getAllComplaints(){
         $sql = "SELECT complaint.*,resident.fname,resident.lname,resident.apartment_no FROM complaint LEFT JOIN resident ON complaint.resident_id = resident.resident_id ORDER BY date_time DESC";
         return $this->conn->query($sql);
