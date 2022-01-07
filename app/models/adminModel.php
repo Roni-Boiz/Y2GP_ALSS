@@ -104,6 +104,16 @@ class adminModel extends model
         return $result;
     }
 
+    public function unlockThisUserAccount($user_name){
+        $sql = "UPDATE user_account set hold=0, hold_time=NULL WHERE user_name='{$user_name}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllLockedUsers(){
+        $sql = "SELECT user_name, profile_pic, resident.apartment_no, resident.email, resident.nic, concat_ws(' ', resident.fname, resident.lname) AS name FROM `user_account` INNER JOIN resident ON user_account.user_id = resident.user_id WHERE hold=5 and hold_time > DATE_SUB(NOW(), INTERVAL 1200 SECOND)";
+        return $this->conn->query($sql);
+    }
+    
     public function getEmployeesCountByTypeDate()
     {
         $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
