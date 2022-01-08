@@ -52,6 +52,8 @@ class laundryController extends controller{
             $id=$_GET["reqId"];
             //$this->getReqDetails($id);
             $this->view->reqSelected=true;
+            $this->view->selectedNewCat=$this->model->getselectedNew($id);
+            $this->view->requestInfo=$this->model->getselectedNew($id);
         }
         $this->view->laundyNewRequests=$this->model->getNewRequests();
         $this->view->laundyCleaningRequests=$this->model->getCleaningRequests();

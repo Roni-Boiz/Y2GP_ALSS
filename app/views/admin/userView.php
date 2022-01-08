@@ -16,14 +16,29 @@ include_once 'sidenav.php';
                     <div>
                         <h2>User Summary</h2>
                         <div class="card" id="usersummary">
-
+                            <?php
+                            $admins = 0;
+                            $employees = 0;
+                            $residents = 0;
+                            if ($this->users->num_rows > 0) {
+                                while ($row = $this->users->fetch_assoc()) {
+                                    if ($row["type"] == 'resident') {
+                                        $residents++;
+                                    } elseif ($row["type"] == 'admin') {
+                                        $admins++;
+                                    } else {
+                                        $employees++;
+                                    }
+                                }
+                            }
+                            ?>
                             <div class="user">
                                 <div>
                                     <span><i class="fas fa-user"></i></span>
                                     <h3>Residents</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    100
+                                    <?= $residents ?>
                                 </div>
                             </div>
 
@@ -33,22 +48,22 @@ include_once 'sidenav.php';
                                     <h3>Employees</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    200
+                                    <?= $employees ?>
                                 </div>
                             </div>
 
                             <div class="user">
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
-
                                     <h3>Admin</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    3
+                                    <?= $admins ?>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php $this->users->data_seek(0); ?>
                     <div class="usersearch">
                         <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
                         <div style="float: right;">
@@ -72,16 +87,17 @@ include_once 'sidenav.php';
                         if ($this->users->num_rows > 0) { ?>
                             <?php
                             while ($row = $this->users->fetch_assoc()) {
-                                if ($row["type"] == 'resident') {
+                                $userId = 'UID' . sprintf("%04d", $row["user_id"]);
+                                if ($row["type"] == 'resident') {      
                             ?>
                                     <span id="searchrow">
                                         <article class="row pga">
                                             <ul>
-                                                <li><a href="#" onclick=""><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><a href="#" onclick=""><?php echo $userId ?><span class="small">(update)</span></a></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                             <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -95,11 +111,11 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row nhl">
                                             <ul>
-                                                <li><a href="#"><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li  id="<?=$userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -112,11 +128,11 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li><a href="#"><?php echo 'UID' . sprintf("%04d", $row["user_id"]) ?><span class="small">(update)</span></a></li>
+                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -189,10 +205,10 @@ include_once 'sidenav.php';
                             <div style="text-align: center; margin-bottom: 10px;">
                                 <h2>Are You Sure ?</h2>
                             </div>
-                            <form action="#" class="formDelete" method="GET">
+                            <form action="" class="formDelete" onsubmit="deleteUser();return false;">
                                 <div>
                                     <label> Delete User With User ID </label>
-                                    <span><?= "UID1234" ?></span>
+                                    <span id="answer"></span>
                                 </div>
                                 <div>
                                     <input class="btnRed" type="submit" name="submit" value="Delete">
@@ -208,91 +224,133 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Locked Accounts</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user3.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Ronila Sanjula</h5>
-                                    <small>RA0001</small>
+                        <?php
+                        if ($this->lockedAccounts->num_rows > 0) {
+                            while ($row = $this->lockedAccounts->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <img src="../../uploads/profile/resident/<?=$row["nic"]?>" alt="user"  onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                        <div class="detail-info">
+                                            <h5><?=$row["name"]?></h5>
+                                            <small><?=$row["user_name"]?></small>
+                                        </div>
+                                        <span class="acceptBtn" id="unlockId" title="Unlock Account" onclick="unlockAccount('<?=$row['user_name']?>')"><i class="fas fa-user-check"></i></span>
+                                    </div>
+                                    <div class="moreContent">
+                                        <span>
+                                            <h5>Apartment No : <?=$row["apartment_no"]?></h5>
+                                        </span>
+                                        <span>
+                                            <h5>NIC : <?=$row["nic"]?></h5>
+                                        </span>
+                                        <span>
+                                            <h5>Email : <?=$row["email"]?></h5>
+                                        </span>
+                                    </div>
                                 </div>
-                                <span class="acceptBtn"><i class="fas fa-user-check"></i></span>
-                            </div>
-                            <div class="moreContent">
-                                <span><h5>Apartment No : AP001</h5></span>
-                                <span><h5>NIC : 882323343v</h5></span>
-                                <span><h5>Email : ronila@gmail.com</h5></span>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user1.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Chatura Mano</h5>
-                                    <small>RA0002</small>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                            <div class="detail" style="height: 50px;">
+                                <div>
+                                    <img src="../../public/img/user1.jpg" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                    <div class="detail-info">
+                                        <h5>All Accounts</h5>
+                                        <small>Unlocked</small>
+                                    </div>
                                 </div>
-                                <span class="acceptBtn"><i class="fas fa-user-check"></i></span>
                             </div>
-
-                            <div class="moreContent">
-                                <span><h5>Apartment No : AP002</h5></span>
-                                <span><h5>NIC : 852323343v</h5></span>
-                                <span><h5>Email : chatura@gmail.com</h5></span>
-                            </div>
-                        </div>
-
+                        <?php
+                        }
+                        ?>
                     </div>
                     <br>
                     <div class="activeUsers adminActiveUsers">
                         <div class="head">
                             <h3>Current Online Users</h3>
                         </div>
-                        <div class="detail">
+                        <?php
+                        if ($this->activeUsers->num_rows > 0) {
+                            $count = $this->activeUsers->num_rows;
+                        ?>
                             <div>
-                                <img src="../../public/img/user4.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Ronila Sanjula</h5>
-                                    <small>AD0001</small>
+                                <div style="text-align: center; font-weight: 600;">
+                                    <?= $count ?> Users Online
                                 </div>
-                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
-
-                        </div>
-                        <div class="detail">
+                            <?php
+                            while ($row = $this->activeUsers->fetch_assoc()) {
+                            ?>
+                                <?php
+                                if ($row["type"] == 'resident') {
+                                ?>
+                                    <div class="detail">
+                                        <div>
+                                            <img src="../../uploads/profile/resident/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                            <div class="detail-info">
+                                                <h5><?= $row['name'] ?></h5>
+                                                <small><?= $row['user_name'] ?></small>
+                                            </div>
+                                            <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="detail">
+                                        <div>
+                                            <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                            <div class="detail-info">
+                                                <h5><?= $row['name'] ?></h5>
+                                                <small><?= $row['user_name'] ?></small>
+                                            </div>
+                                            <span class="acceptBtn"><i class="fa fa-circle"></i></span>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            <?php
+                            }
+                        } else {
+                            ?>
                             <div>
-                                <img src="../../public/img/user1.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Nishad Yashintha</h5>
-                                    <small>RE0002</small>
+                                <div style="text-align: center; font-weight: 600;">
+                                    0 Users Online
                                 </div>
-                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
                             </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user3.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Chatura Manohara</h5>
-                                    <small>RA0003</small>
-                                </div>
-                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user2.jpg" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Nipuna Dasanayaka</h5>
-                                    <small>LA0004</small>
-                                </div>
-                                <span class="acceptBtn"><i class="fa fa-circle"></i></span>
-                            </div>
-                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+    </div> .expand div closed here
+
+    <script>
+        fetch_user_login_date();
+        setInterval(function() {
+            fetch_user_login_date();
+        }, 3000);
+
+        function fetch_user_login_date() {
+            var action = "fetch_data";
+            $.ajax({
+                url: "user",
+                method: "POST",
+                data: {
+                    action: action
+                },
+                success: function(data) {
+
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

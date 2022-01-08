@@ -41,7 +41,7 @@ include_once 'sidenav.php';
                                 while ($row1 = $this->laundyNewRequests->fetch_assoc()) {
                                 ?>
                                     <span id="searchrow">
-                                        <a href="Requests?reqId=<?php $row1['request_id'];?>"><span class="newMode" >
+                                        <a href="requests?reqId=<?php echo $row1['request_id'];?>"><span class="newMode" >
                                             <article class="row mlb">
                                                 <ul>
                                                     <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
@@ -49,7 +49,6 @@ include_once 'sidenav.php';
                                                     <li><?php echo $row1["apartment_no"]; ?></li>
                                                     <li><?php echo $row1["type"]; ?></li>
                                                     <li><?php echo $row1["request_date"]; ?></li>
-                                                    <li><?php echo $row1["request_time"]; ?></li>
                                                 </ul>
                                                 <ul class="more-content">
                                                     <li>
@@ -187,43 +186,35 @@ include_once 'sidenav.php';
 
                     <a onclick="closePopup()">&times;</a>
                     <div style="text-align: center;">
-                        <h1>L00233434</h1>
+                        <h1><?php $row1 = $this->requestInfo->fetch_assoc(); echo $row1["request_id"]?></h1>
                     </div>
 
                     <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
-                        <div id="col1">
-                            <label for="type">Regular</label><br>
+                    <div id="col1">
+                            <label for="type"><?php echo $row1["type"]?></label><br>
                         </div>
                         <div id="col2">
-                            <h4 style="padding:0px">2021-10-12<br>10:34</h4>
+                            <h4 style="padding:0px"><?php $d= explode(" ",$row1["request_date"]);echo $d[0]."<br>".$d[1]?></h4>
                         </div>
                         <h2><b>Categories:</b></h2>
                         <br>
+                    <?php if ($this->selectedNewCat->num_rows > 0) { ?>
+                    <?php
+                        while ($row1 = $this->selectedNewCat->fetch_assoc()) {
+                        ?>
                         <div id="col1">
-                            <label for="categories">Category 1</label>
-                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
+                            <label for="categories"><?php echo "Category  ".$row1["category_no"] ?> </label>
+                            <input type="text" name="quantiy1" id="quantiy1" value="<?php echo $row1["qty"]?>" readonly>
                             
                         </div>
                         <div id="col2">
                             <input type="checkbox" id="category1" name="category1">
-                            <input type="text" name="quantiy1" id="quantiy1" value="1-5Kg" readonly>
+                            <input type="text" name="quantiy1" id="quantiy1" value="<?php echo $row1["weight"]?>" readonly>
                         </div>
-                        <div id="col1">
-                            <label for="Categories">Category 2</label><br>
-                            <input type="text" name="quantiy1" id="quantiy1" value="8" readonly>
-                        </div>
-                        <div id="col2">
-                            <input type="checkbox" id="category2" name="category2">
-                            <input type="text" name="quantiy1" id="quantiy1" value="5-10Kg" readonly>
-                        </div>
-                        <div id="col1">
-                            <label for="Categories">Category 3</label><br>
-                            <input type="text" name="quantiy1" id="quantiy1" value="5" readonly>
-                        </div>
-                        <div id="col2">
-                            <input type="checkbox" id="category3" name="category3">
-                            <input type="text" name="quantiy1" id="quantiy1" value="1-5Kg" readonly>
-                        </div>
+                        
+                        
+                        <?php } ?>
+                        <?php } ?>
                         <div id="col1">
                             <label for="Categories">Description</label><br>
                             
@@ -236,6 +227,7 @@ include_once 'sidenav.php';
                         <div id="col2">
                             <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Accept">
                         </div>
+                        
                     </form>
                 </div>
             </div>

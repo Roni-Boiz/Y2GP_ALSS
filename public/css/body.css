@@ -1228,7 +1228,7 @@ select{
 }
 
 /* Style the "Add" button */
-.myDoList .addBtn {
+.myDoList #addBtn {
   padding: 11px;
   background: #d9d9d9;
   color: #555;
@@ -1241,7 +1241,7 @@ select{
   width: 20%;
 }
 
-.myDoList .addBtn:hover {
+.myDoList #addBtn:hover {
   background-color: #bbb;
   display: block;
 }

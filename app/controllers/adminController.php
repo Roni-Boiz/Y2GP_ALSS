@@ -20,7 +20,20 @@ class adminController extends controller
 
     public function index()
     {
+        if(isset($_POST['apartmentNo']) && isset($_POST['floor']) && isset($_POST['parkingslot'])){
+            $result = $this->model->insertNewApartment($_POST['apartmentNo'], $_POST['floor'], $_POST['parkingslot']);
+            if($result == 0){
+                $this->view->error = "Oops something went wrong. Form didn't submiited";
+            }else{
+                $this->view->success = true;
+            }
+        }
         $this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
+        $this->view->apartments = $this->model->getAllApartments();
+        $this->view->lastApartmentNo = $this->model->getLastApartmentNo();
+        $this->view->slots = $this->model->getAllFreeSlots();
+        $this->view->payments = $this->model->getMonthlyIncome();
+        $this->view->overdues = $this->model->getTotalOverdue();
         $this->view->render('admin/homeView');
     }
 
@@ -31,7 +44,8 @@ class adminController extends controller
         $this->view->render('admin/profileView');
     }
 
-    public function editProfile(){
+    public function editProfile()
+    {
         $this->model->updateProfile($_POST['name'], $_POST['email'], $_SESSION['userId']);
         header("Refresh:0; url=profile");
     }
@@ -45,7 +59,17 @@ class adminController extends controller
     public function user()
     {
         $this->view->users = $this->model->getAllUsers();
+        $this->view->activeUsers = $this->model->getAllOnlineUsers();
+        $this->view->lockedAccounts = $this->model->getAllLockedUsers();
         $this->view->render('admin/userView');
+    }
+
+    public function unclockThisAccount(){
+        return $this->model->unlockThisUserAccount($_POST["user_name"]);
+    }
+
+    public function deleteUserAccount(){
+        return $this->model->deleteThisUserAccount($_POST["user_id"]);
     }
 
     public function employee()
@@ -87,7 +111,7 @@ class adminController extends controller
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {
                 foreach ($_FILES['files']['name'] as $key => $val) {
-                    $fileName = time().'_'.basename($_FILES['files']['name'][$key]);
+                    $fileName = time() . '_' . basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
 
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -131,7 +155,7 @@ class adminController extends controller
 
         // File upload path
         $targetDir = "../uploads/profile/employee/";
-        $fileName = time().'_'.basename($_FILES["file"]["name"]);
+        $fileName = time() . '_' . basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
@@ -166,5 +190,4 @@ class adminController extends controller
         echo $statusMsg;
         header("Refresh:0; url=employee");
     }
-
 }

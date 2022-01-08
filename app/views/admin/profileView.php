@@ -25,10 +25,10 @@ include_once('sidenav.php');
 
                     <form action="editProfile" id="profileView" method="post">
                         <label for="fname">Name</label><br>
-                        <input type="text" id="name" name="name" class="input-field" value=<?php echo $row["name"] ?> required><br>
+                        <input type="text" id="name" name="name" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$|^[A-z]{1}[a-z]{0,19}\s[A-z]{1}[a-z]{0,29}$" title="Letters only" value=<?php echo "\"" . $row["name"] ."\""?> required><br>
 
                         <label for="email">Email</label><br>
-                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <input type="text" id="email" name="email" class="input-field" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" title="Valid emails only" value=<?php echo  $row["email"] ?>  required><br>
 
                         <input type="submit" value="Save">
                     </form>
@@ -36,7 +36,6 @@ include_once('sidenav.php');
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');">
                 </div>
                 <div class="data">
-
                     <div>
                         <h4>Overview</h4>
                         <div class="card" id="overview">
@@ -72,7 +71,8 @@ include_once('sidenav.php');
                                 <span class="error_form" id="old_password_error_message"></span><br>
 
                                 <label for="lname">New Password</label>
-                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br>
+                                <input type="password" id="npw" name="npw" class="input-field" placeholder="new password"><br><!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                                                                                                                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" -->
                                 <span class="error_form" id="new_password_error_message"></span><br>
 
                                 <label for="fname">Re-New Password</label>

@@ -75,12 +75,12 @@ function closeOffcanvas() {
 /////////////////////////////////////////////////////
 
 //  Function to Collide the do list
-function collide(){
+function collide() {
     var coll = document.getElementsByClassName("collapsible");
     var i;
-    
+
     for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
+        coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
             if (content.style.maxHeight) {
@@ -93,7 +93,7 @@ function collide(){
 }
 //////////////////////////////////////////////
 var profile = document.querySelector('.profile-pic');
-if(profile){
+if (profile) {
     profile.addEventListener('mouseenter', function () {
         uploadBtn.style.display = "block";
     });
@@ -118,37 +118,37 @@ function uploadPhoto(phpto, newfile) {
     });
 }
 
-$(function(){
+$(function () {
     //call a function to handle file upload on select file
     $('.profilePto').on('change', fileUpload);
 });
 
-function fileUpload(event){
+function fileUpload(event) {
     //notify user about the file upload status
     $("#uploadBtn").html("Uploading...");
-    
+
     //get selected file
     files = event.target.files;
-    
+
     //form data check the above bullet for what it is  
-    var data = new FormData();                                   
+    var data = new FormData();
 
     //file data is presented as an array
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
-        if(!file.type.match('image.*')) {              
+        if (!file.type.match('image.*')) {
             //check file type
             $("#uploadBtn").html("Images Only");
-        }else if(file.size > 10485760){
+        } else if (file.size > 10485760) {
             //check file size (in bytes)
             $("#uploadBtn").html("Select Size (< 10 MB)");
-        }else{
+        } else {
             //append the uploadable file to FormData object
             data.append('file', file, file.name);
-            
+
             //create a new XMLHttpRequest
             var xhr = new XMLHttpRequest();
-            
+
             //post file data for upload
             xhr.open('POST', 'editProfilePhoto', true);
             console.log(xhr);
@@ -156,11 +156,11 @@ function fileUpload(event){
             xhr.onload = function () {
                 //get response and show the uploading status
                 var response = JSON.parse(xhr.responseText);
-                if(xhr.status === 200 && response.status == 'ok'){
+                if (xhr.status === 200 && response.status == 'ok') {
                     $("#uploadBtn").html("Change Photo");
-                }else if(response.status == 'type_err'){
+                } else if (response.status == 'type_err') {
                     $("#uploadBtn").html("Images Only");
-                }else{
+                } else {
                     $("#uploadBtn").html("Error try again");
                 }
             };
@@ -199,10 +199,6 @@ function setVisibility3(id) {
         document.getElementById('showmore').text = 'Show More';
         document.getElementById(id).style.display = 'none';
     }
-}
-
-function confirm() {
-    alert("Are your sure?")
 }
 /////////////////////////////////////////////////////////
 
@@ -280,8 +276,7 @@ function check_retypepassword() {
     }
 }
 ////////////////////////////////////////////////////
-function openModel(amodel, amodelBtn) {
-
+function openModel(amodel, amodelBtn, userId) {
     const model = document.getElementById(amodel);
     const modelBtn = document.getElementsByClassName(amodelBtn);
     const ans = document.getElementById("answer");
@@ -306,7 +301,7 @@ function openModel(amodel, amodelBtn) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
-
+    ans.innerHTML = userId;
     // model.addEventListener("click", (e) => {
     //     if (e.target.id === "yes-btn") {
     //         ans.innerText = "Hello Guys";
@@ -323,10 +318,51 @@ function openModel(amodel, amodelBtn) {
 $(".mySearch").on('keyup', function () {
     var value = $(this).val().toLowerCase();
     $("#searchrow article").each(function () {
-       if ($(this).text().toLowerCase().search(value) > -1) {
-          $(this).show();
-       } else {
-          $(this).hide();
-       }
+        if ($(this).text().toLowerCase().search(value) > -1) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
     });
 })
+
+function unlockAccount(user_name) {
+    var msg = "Are you sure to Unlock this Account (user_name =" + user_name + ")?";
+    r = confirm(msg);
+    if (r == true) {
+        $.ajax({
+            type: "POST",
+            url: "unclockThisAccount",
+            data: {
+                user_name: user_name
+            },
+            success: function () {
+                console.log($("#unlockID").closest('detail').text);
+                $("#unlockId").closest('.detail').fadeOut("slow");
+                $(".success").css('display', 'block');
+            }
+        });
+    }
+}
+
+function deleteUser() {
+    let id = document.getElementById("answer").innerText;
+    user_id = parseInt(id.substring(3));
+    console.log(user_id);
+    $.ajax({
+        type: "POST",
+        url: "deleteUserAccount",
+        data: {
+            user_id: user_id
+        },
+        success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("slow");
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width','0%');
+            $("#myCanvasNav").css('opacity','0');
+            $("#deleteModel").toggleClass('close');
+        }
+    });
+}

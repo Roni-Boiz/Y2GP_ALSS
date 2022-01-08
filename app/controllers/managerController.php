@@ -44,6 +44,14 @@ class managerController extends controller
         header("Refresh:0; url=profile");
     }
 
+    public function updateLastActivity(){
+        if(isset($_POST["action"])){
+            if($_POST["action"] == "update_time"){
+                $this->model->updateLoginDetails(date("Y-m-d H:i:s", strtotime(date('h:i:sa'))), $_SESSION['loginId']);
+            }
+        }
+    }
+
     public function request()
     {
         $this->view->TodayPendingReq = $this->model->getTodayPendingTechnicalReq();

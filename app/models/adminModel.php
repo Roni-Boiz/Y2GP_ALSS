@@ -33,6 +33,46 @@ class adminModel extends model
         return $result;
     }
 
+    public function getAllApartments()
+    {
+        $sql = "SELECT * FROM apartment";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllFreeSlots(){
+        $sql = "SELECT * FROM parking_slot WHERE apartment_no IS NULL";
+        return $this->conn->query($sql);
+    }
+
+    public function getLastApartmentNo(){
+        $sql = "SELECT apartment_no FROM apartment ORDER BY apartment_no DESC LIMIT 1";
+        return $this->conn->query($sql);
+    }
+
+    public function insertNewApartment($apartmentNo, $floor, $parkingSlot){
+        $apartmentNo = $this->conn->real_escape_string($apartmentNo);
+        $floor = $this->conn->real_escape_string($floor);
+        $parkingSlot = $this->conn->real_escape_string($parkingSlot);
+
+        $sql = "INSERT INTO apartment(apartment_no, floor_no, status) VALUES('{$apartmentNo}','{$floor}', 0)";
+        $result1 = $this->conn->query($sql);
+        $sql = "UPDATE parking_slot SET apartment_no = '{$apartmentNo}', status = 0 WHERE slot_no = '{$parkingSlot}'";
+        $result2 = $this->conn->query($sql);
+        return $result1 && $result2;
+    }
+
+    public function getMonthlyIncome(){
+        $start = date("Y-m-1 00:00:00");
+        $end = date("Y-m-t 23:59:59");
+        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='".$start."' AND paid_date<='".$end."'";
+        return $this->conn->query($sql);
+    }
+
+    public function getTotalOverdue(){
+        $sql = "SELECT sum(balance) AS due FROM resident";
+        return $this->conn->query($sql);
+    }
+
     public function getMyDoList($id)
     {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
@@ -45,6 +85,38 @@ class adminModel extends model
         $sql = "SELECT * FROM user_account ORDER BY type ASC";
         $result = $this->conn->query($sql);
         return $result;
+    }
+
+    public function getAllOnlineUsers()
+    {
+        $timeLimit = 300;
+        $sql = "SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type,concat_ws(' ' ,resident.fname,resident.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN resident ON user_account.user_id = resident.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND) 
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,manager.fname,manager.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN manager ON user_account.user_id = manager.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,receptionist.fname,receptionist.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN receptionist ON user_account.user_id = receptionist.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' ,trainer.fname,trainer.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN trainer ON user_account.user_id = trainer.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)
+        UNION 
+        SELECT DISTINCT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat_ws(' ' , parking_officer.fname,parking_officer.lname) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id INNER JOIN parking_officer ON user_account.user_id = parking_officer.user_id  WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND)";
+        // $sql = "SELECT ip_location.user_id, user_account.user_name, user_account.profile_pic, user_account.type, concat(concat_ws(' ', resident.fname, resident.lname),concat_ws(' ', manager.fname, manager.lname)) as name FROM ip_location INNER JOIN user_account ON ip_location.user_id = user_account.user_id LEFT JOIN resident ON user_account.user_id=resident.user_id LEFT JOIN manager ON user_account.user_id=manager.user_id WHERE last_activity > DATE_SUB(NOW(), INTERVAL '{$timeLimit}' SECOND) AND user_account.type != 'admin'";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
+    public function unlockThisUserAccount($user_name){
+        $sql = "UPDATE user_account set hold=0, hold_time=NULL WHERE user_name='{$user_name}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllLockedUsers(){
+        $sql = "SELECT user_name, profile_pic, resident.apartment_no, resident.email, resident.nic, concat_ws(' ', resident.fname, resident.lname) AS name FROM `user_account` INNER JOIN resident ON user_account.user_id = resident.user_id WHERE hold=5 and hold_time > DATE_SUB(NOW(), INTERVAL 1200 SECOND)";
+        return $this->conn->query($sql);
+    }
+
+    public function deleteThisUserAccount($user_id){
+        $sql = "DELETE FROM user_account WHERE user_id = '{$user_id}'";
+        return $this->conn->query($sql);
     }
 
     public function getEmployeesCountByTypeDate()
@@ -154,4 +226,6 @@ class adminModel extends model
         $sql = "SELECT * FROM service";
         return $this->conn->query($sql);
     }
+
+    
 }

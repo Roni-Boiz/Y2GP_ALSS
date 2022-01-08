@@ -181,18 +181,13 @@ class residentController extends controller
             $etime = $_POST["endtime"] . ":00";
             $members = $_POST["members"];
             //check valid time + check member less than 50
-            if ($stime < $etime && $members < 50) {
+            
                 $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
                 if ($result == 0) {
                     $this->view->error = "Already reserved.Please select another time slot!.";
                 } else {
                     $this->view->success = true;
                 }
-            } else if ($stime > $etime) {
-                $this->view->error = "Select valid time slot!";
-            } else if ($members) {
-                $this->view->error = "You can reserve for less than 50 members!";
-            }
         }
         //show reservation(user mention date)
         else if (isset($_POST["date"]) && isset($_POST["type"])) {

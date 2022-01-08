@@ -49,7 +49,7 @@
                 <li><a href="reservation"><i class="fa fa-handshake"></i>MANAGE RESERVATIONS</a></li>
                 <li><a href="announcement"><i class="fa fa-bullhorn"></i>ANNOUNCEMENTS</a></li>
                 <li><a href="complaint"><i class="fa fa-sticky-note"></i>COMPLAINTS</a></li>
-                <!-- <li><a href="report"><i class="fas fa-chart-pie"></i>VIEW REPORTS</a></li> -->
+                <li><a href="report"><i class="fas fa-chart-pie"></i>VIEW REPORTS</a></li>
                 <!-- <li><a href="#"><i class="fa fa-sticky-note" ></i>VIEW RESIDENT</a></li> -->
 
 

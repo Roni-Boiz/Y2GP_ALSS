@@ -120,6 +120,73 @@ include_once 'sidenav.php';
             stroke-dashoffset: 0;
         }
     }
+
+    .apartment>div:nth-child(1) {
+        display: flex;
+    }
+
+    .apartment>div:nth-child(1) h2 {
+        width: 93%;
+    }
+
+    .apartment .addBtn {
+        background: #d9d9d9;
+        color: #555;
+        float: right;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
+    }
+
+    .apartment .addBtn i {
+        padding: 11px;
+        font-size: 30px;
+        color: #110B2E;
+    }
+
+    .apartment .addBtn:hover {
+        background-color: #bbb;
+        display: block;
+    }
+
+    #apartmentSummary {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #apartmentSummary>div:nth-child(1) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #apartmentSummary>div:nth-child(1) div {
+        padding: 10px;
+    }
+
+    #apartmentSummary>div:nth-child(1)>div>span {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #apartmentSummary>div:nth-last-child(1) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        padding: 0px 0px 15px 0px;
+    }
+
+    #apartmentSummary div:nth-last-child(1) h4:nth-child(1) {
+        grid-column: 1;
+    }
+
+    #apartmentSummary div:nth-last-child(1) h4:nth-child(2) {
+        grid-column: 2;
+    }
 </style>
 
 </head>
@@ -135,42 +202,129 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="homeCard" style="grid-column:1/span 3">
                 <div class="leftPanel">
-                    <!-- <div>
-                        <h2>Apartments</h2>
-                        <div class="card" id="income">
+                    <div class="apartment">
+                        <div>
+                            <h2>Apartments</h2>
+                            <span onclick="openModel('model','addBtn')" class="addBtn" title="Add More Apartments"><i class="fas fa-plus"></i></span>
+                        </div>
+                        <div class="card" id="apartmentSummary">
+                            <!-- <h4>Graphical View</h4> -->
                             <div>
-                                <h4>Sold Appartments</h4>
-                                <div>
-                                <img src="../../public/img/1.jpg" alt="apartment icon">
-                                    <h3>&nbsp;&nbsp;&nbsp;<?= number_format("100") ?></h3>
-                                </div>
-                                <h4 style="padding: 0px; text-align: center;"><small>Remainning : <?= number_format("55") ?></small></h4>
+                                <?php
+                                $apartments = $this->apartments->num_rows;
+                                if ($this->apartments->num_rows > 0) {
+                                    $remaining = 0; ?>
+                                    <?php
+                                    while ($row = $this->apartments->fetch_assoc()) { ?>
+                                        <div>
+                                            <?php
+                                            if ($row["status"]) { ?>
+                                                <span title="Floor No - <?= $row["floor_no"] ?>">
+                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;"></i>
+                                                </span>
+                                            <?php
+                                            } else {
+                                                $remaining++; ?>
+                                                <span title="Floor No - <?= $row["floor_no"] ?>">
+                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:green;font-size:40px;padding: 0px;"></i>
+                                                </span>
+                                            <?php
+
+                                            } ?>
+                                        </div>
+                                <?php
+                                    }
+                                } else {
+                                    echo "0 results";
+                                }
+                                ?>
                             </div>
+                            <hr>
                             <div>
-                                <h4>Graphical View</h4>
-                                <div>
-                                    <img src="../../public/img/overdue.png" alt="overdue icon">
-                                    <h3>Rs.<?= number_format("20000", 2) ?></h3>
-                                </div>
+                                <h3 style="padding: 0px; text-align: center;">
+                                    <large>Total : <?= number_format("$apartments") ?></large>
+                                </h3>
+                                <h3 style="padding: 0px; text-align: center;">
+                                    <large>Remainning : <?= number_format("$remaining") ?></large>
+                                </h3>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="model">
+                            <a href="javascript:void(0)" class="closebtn">&times;</a>
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h3>New Apartment<i class="fa fa-home"></i></i></h3>
+                            </div>
+                            <form action="index" class="formEdit" method="POST">
+                                <div>
+                                    <label>Apartment No : </label>
+                                    <?php
+                                    $row = $this->lastApartmentNo->fetch_assoc();
+                                    $apartmentNo = (int)substr($row['apartment_no'], 2);
+                                    $apartmentNo = $apartmentNo + 1;
+                                    $apartmentNo = "AP" . sprintf('%03u', $apartmentNo);
+                                    ?>
+                                    <span><?= $apartmentNo ?></span>
+                                    <input type="hidden" name="apartmentNo" value="<?= $apartmentNo ?>">
+                                </div>
+                                <div>
+                                    <div>
+                                        <label>Floor No</label><br>
+                                        <select id="emptype" name="floor" class="input-field" required>
+                                            <option value="">Select Floor...</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Default Parking Slot</label><br>
+                                        <select id="emptype" name="parkingslot" class="input-field" required>
+                                            <?php
+                                            while ($row = $this->slots->fetch_assoc()) {
+                                            ?>
+                                                <option value="<?= $row['slot_no'] ?>"><?= $row['slot_no'] ?></option>";
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input class="btnPurple" type="submit" name="submit" value="Add Apartment">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
                     <div>
                         <h2>Total Monthly Income</h2>
                         <div class="card" id="income">
+                            <?php
+                            $row1 = $this->payments->fetch_assoc();
+                            $row2 = $this->overdues->fetch_assoc();
+                            ?>
                             <div>
                                 <h4>Payment Received</h4>
                                 <div>
                                     <img src="../../public/img/cash.png" alt="cash icon">
-                                    <h3>Rs.<?= number_format("150000", 2) ?></h3>
+                                    <h3>Rs.<?= number_format($row1['income'], 2) ?></h3>
                                 </div>
                             </div>
                             <div>
                                 <h4>Overdues</h4>
                                 <div>
                                     <img src="../../public/img/overdue.png" alt="overdue icon">
-                                    <h3>Rs.<?= number_format("20000", 2) ?></h3>
+                                    <h3>Rs.<?= number_format($row2['due'], 2) ?></h3>
                                 </div>
                             </div>
                         </div>
@@ -201,13 +355,13 @@ include_once 'sidenav.php';
                             </div>
                             <div class="doListAdd">
                                 <input type="text" id="myInput" placeholder="Title...">
-                                <span onclick="newElement()" class="addBtn"><i class="fas fa-plus"></i></span>
+                                <span id="addBtn"><i class="fas fa-plus"></i></span>
                             </div>
                         </div>
                         <div>
-                            <ul id="myUL" onload="myDoList()">
-                                <li>Update Services</li>
-                                <li class="checked">Make Announcement</li>
+                            <ul id="myUL">
+                                <!-- <li>Update Services</li> -->
+                                <!-- <li class="checked">Make Announcement</li> -->
                             </ul>
                         </div>
                     </div>
@@ -238,8 +392,52 @@ include_once 'sidenav.php';
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
+
+            <!-- reservation success message -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Insert Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                        New Apartment Added!
+                    </p>
+                    <button id='ok'>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+
 
             <!-- <div id="upactivities">
                 <h2>Upcomming Activities</h2>
@@ -250,32 +448,96 @@ include_once 'sidenav.php';
         </div>
     </div>
 
-
-    </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
     <script>
+        $(document).ready(function() {
+            $("#ok").click(function() {
+                $(".message").fadeOut(600, "linear");
+            });
+        });
+    </script>
+
+    <script>
+        
+        var input = document.getElementById("myInput");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("addBtn").click();
+            }
+        });
+
+        $(document).ready(function() {
+            let newListItem = $("#myInput");
+            for (i = 0; i < localStorage.length; i++) {
+                let newLi1 = $("<li></li>");
+                x = localStorage.key(i);
+                console.log(x);
+                var span = document.createElement("SPAN"); 
+                var txt = document.createTextNode("\u00D7");
+                span.className = "close";
+                span.appendChild(txt);
+                newLi1.append(localStorage.getItem(x)).append(span);
+                $("#myUL").append(newLi1);
+            }
+
+            $("#addBtn").on("click", function() {
+                if (myInput.value === '') {
+                    alert("You must write something!");
+                } else {
+                    let valueToBeAdded = createNewLi(myInput.value);
+                    $("#myUL").append(valueToBeAdded);
+                }
+                $("#myInput").val("");
+            })
+
+            let createNewLi = function(newListItem) {
+
+                let newLi = $("<li></li>");
+                var span = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                span.className = "close";
+                span.appendChild(txt);
+                newLi.append(newListItem).append(span);
+        
+                key = "toDo" + localStorage.length; // Math.floor(Math.random() * 100) + 1
+                localStorage.setItem(key, newListItem);
+                console.log(localStorage);
+                return newLi;
+            }
+
+            $("#myUL").on("click", ".close", function() {
+                console.log(localStorage.length);
+                $(this).parent().remove();
+                var testi = localStorage.key($(this).parent().value);
+                console.log(testi);
+                localStorage.removeItem(testi);
+            })
+
+        });
+
         //  My do list Function
         // Create a "close" button and append it to each list item
-        var myDoList = document.getElementById("myUL");
-        var myNodelist = myDoList.getElementsByTagName("LI");
-        var i;
-        for (i = 0; i < myNodelist.length; i++) {
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            myNodelist[i].appendChild(span);
-        }
+        // var myDoList = document.getElementById("myUL");
+        // var myNodelist = myDoList.getElementsByTagName("LI");
+        // var i;
+        // for (i = 0; i < myNodelist.length; i++) {
+        //     var span = document.createElement("SPAN");
+        //     var txt = document.createTextNode("\u00D7");
+        //     span.className = "close";
+        //     span.appendChild(txt);
+        //     myNodelist[i].appendChild(span);
+        // }
 
         // Click on a close button to hide the current list item
-        var close = document.getElementsByClassName("close");
-        var i;
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function() {
-                var div = this.parentElement;
-                div.style.display = "none";
-            }
-        }
+        // var close = document.getElementsByClassName("close");
+        // for (i = 0; i < close.length; i++) {
+        //     close[i].onclick = function() {
+        //         console.log("this");
+        //         $(this).parent().remove();
+        //         var testi = localStorage.key(this);
+        //         localStorage.removeItem(testi);
+        //     }
+        // }
 
         // Add a "checked" symbol when clicking on a list item
         var list = document.getElementById('myUL');
@@ -285,32 +547,36 @@ include_once 'sidenav.php';
             }
         }, false);
 
+
         // Create a new list item when clicking on the "Add" button
-        function newElement() {
-            var li = document.createElement("li");
-            var inputValue = document.getElementById("myInput").value;
-            var t = document.createTextNode(inputValue);
-            li.appendChild(t);
-            if (inputValue === '') {
-                alert("You must write something!");
-            } else {
-                document.getElementById("myUL").appendChild(li);
-            }
-            document.getElementById("myInput").value = "";
+        // $("#addBtn").on("click", function() {
+        //     var li = document.createElement("li");
+        //     var inputValue = document.getElementById("myInput").value;
+        //     var t = document.createTextNode(inputValue);
+        //     li.appendChild(t);
+        //     if (inputValue === '') {
+        //         alert("You must write something!");
+        //     } else {
+        //         document.getElementById("myUL").appendChild(li);
+        //     }
+        //     document.getElementById("myInput").value = "";
 
-            var span = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            span.className = "close";
-            span.appendChild(txt);
-            li.appendChild(span);
+        //     var span = document.createElement("SPAN");
+        //     var txt = document.createTextNode("\u00D7");
+        //     span.className = "close";
+        //     span.appendChild(txt);
+        //     li.appendChild(span);
 
-            for (i = 0; i < close.length; i++) {
-                close[i].onclick = function() {
-                    var div = this.parentElement;
-                    div.style.display = "none";
-                }
-            }
-        }
+        //     randomId = "toDO" + Math.floor(Math.random() * 100) + 1;
+        //     localStorage.setItem(randomId, myUL);
+
+        //     for (i = 0; i < close.length; i++) {
+        //         close[i].onclick = function() {
+        //             var div = this.parentElement;
+        //             div.style.display = "none";
+        //         }
+        //     }
+        // });
 
         //Charts
         let chart1 = document.getElementById('earningChart').getContext('2d');
