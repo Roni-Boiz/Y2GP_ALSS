@@ -22,7 +22,7 @@ include_once 'sidenav.php';
                             </ul>
                         </div>
                         <div class="description">
-                            <form action="#" class="reservationtime" method="GET">
+                            <div class="reservationtime">
                                 <div id="col1">
                                     <div>
                                         <label>Date</label><br>
@@ -30,8 +30,8 @@ include_once 'sidenav.php';
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                     </div>
                                     </select><br>
-                                    <label>Start Time</label><br>
-                                    <select name="time" class="input-field" placeholder="Start Time">
+                                    <label>Reserve For</label><br>
+                                    <!-- <select name="time" class="input-field" placeholder="Start Time">
                                         <option value="">Select Time</option>
                                         <?php
                                         for ($hours = 6; $hours < 24; $hours++) {
@@ -42,10 +42,21 @@ include_once 'sidenav.php';
                                             }
                                         }
                                         ?>
-                                    </select><br>
-                                    <input class="purplebutton" type="submit" name="Submit" value="View" style="grid-column:2">
+                                    </select><br> -->
+
+                                    <select name="duration" class="input-field" id="duration" placeholder="Duration">
+                                        <option value="#">Select Duration</option>
+                                        <option value="1">1 Day</option>
+                                        <option value="2">2 Days</option>
+                                        <option value="3">3 Days</option>
+                                        <option value="4">4 Days</option>
+                                        <option value="5">5 Days</option>
+                                    </select> <br>
+
+
+                                    <button class="purplebutton" onclick="CheckParking()" style="grid-column:2">View</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
 
@@ -57,18 +68,18 @@ include_once 'sidenav.php';
                             <h3>Upcoming Reservations . . . </h3>
                         </div>
                         <?php
-                        if ($this->latest->num_rows > 0) { 
+                        if ($this->latest->num_rows > 0) {
                             while ($row = $this->latest->fetch_assoc()) {
-                            ?>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5><?php echo $row["date"]." ".$row["start_time"]; ?></h5>
-                                    <small><?php echo $row["vehicle_no"];?></small>
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo $row["vehicle_no"]; ?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <?php
+                            <?php
                             }
                         } else { ?>
                             <div class="detail">
@@ -178,6 +189,28 @@ include_once 'sidenav.php';
                 </div>
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
+        <script>
+
+            function CheckParking() {
+                let Date = document.getElementById('datepicker').value;
+                let Duration = document.getElementById('duration').value;
+
+                let obj = {
+                    Date : Date, Duration: Duration
+                }
+
+                fetch('http://localhost/Y2GP_ALSS/public/residentController/CheckPark', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify(obj)
+                })
+                .then(Response=>Response.json())
+                .then(data=>{console.log(data)})
+            }
+        </script>
 </body>
 
 </html>

@@ -153,7 +153,7 @@ class residentController extends controller
                 if ($result == 0) {
                     $this->view->error = "Already reserved.Please select another time slot!.according to the availability of the day.";
                 } else {
-                    $this->view->success = $d." at ".$stime." - ".$etime." reserve for ".$type.".";
+                    $this->view->success = $d . " at " . $stime . " - " . $etime . " reserve for " . $type . ".";
                 }
             } else if ($stime > $etime) {
                 $this->view->error = "Select valid time slot!";
@@ -162,7 +162,6 @@ class residentController extends controller
             $d = $_POST["date"];
             $this->view->selectdate = $d;
             $this->view->day = $this->model->daytreatment($d);
-            
         }
         $this->view->latest = $this->model->latesttreatment($id);
         $this->view->render('resident/treatmentRoomView');
@@ -224,6 +223,19 @@ class residentController extends controller
         $this->view->render('resident/parkingSlotView');
     }
 
+    public function CheckPark()
+    {
+        $data = file_get_contents('php://input');
+        $data = json_decode($data,true);
+
+        $this->view->Availability = $this->model->checkParking($data);
+
+        echo json_encode($data);
+        exit;
+
+    }
+
+
     public function payment()
     {
         $id = $_SESSION['userId'];
@@ -245,11 +257,11 @@ class residentController extends controller
         } else {
             $this->view->bill = $this->model->bill($id, date('Y'), date('m'));
             $this->view->y = date('Y') . " " . date('F');
-            $this->view->payment = $this->model->payment($id,date('Y'), date('m'));
+            $this->view->payment = $this->model->payment($id, date('Y'), date('m'));
             $this->view->billtotal = $this->model->billtotal($id, date('Y'), date('m'));
             $this->view->balanceforward = $this->model->readResident();
         }
-        
+
         $this->view->render('resident/billView');
     }
 
@@ -328,8 +340,8 @@ class residentController extends controller
         $id = $_SESSION['userId'];
         if (isset($_POST["description"]) && isset($_POST["type"])) {
             $des = $_POST["description"];
-            $type=$_POST["type"];
-            $result = $this->model->complaint($des,$type,$id);
+            $type = $_POST["type"];
+            $result = $this->model->complaint($des, $type, $id);
             if ($result == 0) {
                 $this->view->error = true;
             } else {
@@ -347,7 +359,7 @@ class residentController extends controller
         $residentFname = "Amal";
         $residentLname = "Perera";
         $amount = "10000";
-//payment update wenna ona userge account eken
+        //payment update wenna ona userge account eken
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
     }

@@ -708,4 +708,14 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    public function checkParking($data)
+    {
+        $date = $data['Date'];
+        $duration = $data['Duration'];
+
+        
+
+    }
 }
+
