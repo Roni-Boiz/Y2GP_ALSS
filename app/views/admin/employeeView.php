@@ -48,40 +48,20 @@ include_once 'sidenav.php';
                             <div class="employee">
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
-                                    <h3>Manager</h3>
+                                    <h3>Managers</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    8
+                                    <?= $this->managers->num_rows ?>
                                 </div>
                             </div>
 
                             <div class="employee">
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
-                                    <h3>Reseptionist</h3>
+                                    <h3>Reseptionists</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    3
-                                </div>
-                            </div>
-
-                            <div class="employee">
-                                <div>
-                                    <span><i class="fas fa-user-tie"></i></span>
-
-                                    <h3>Trainer</h3>
-                                </div>
-                                <div style="font-size: 40px;">
-                                    4
-                                </div>
-                            </div>
-                            <div class="employee">
-                                <div>
-                                    <span><i class="fas fa-user-tie"></i></span>
-                                    <h3>Treaters</h3>
-                                </div>
-                                <div style="font-size: 40px;">
-                                    4
+                                    <?= $this->receptionists->num_rows ?>
                                 </div>
                             </div>
 
@@ -91,7 +71,7 @@ include_once 'sidenav.php';
                                     <h3>P. Officers</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    5
+                                    <?= $this->parkingOfficers->num_rows ?>
                                 </div>
                             </div>
 
@@ -99,10 +79,31 @@ include_once 'sidenav.php';
                                 <div>
                                     <span><i class="fas fa-user-tie"></i></span>
 
-                                    <h3>Other</h3>
+                                    <h3>Trainers</h3>
                                 </div>
                                 <div style="font-size: 40px;">
-                                    15
+                                    <?= $this->trainers->num_rows ?>
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user-tie"></i></span>
+                                    <h3>Treaters</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    <?= $this->treaters->num_rows ?>
+                                </div>
+                            </div>
+
+                            <div class="employee">
+                                <div>
+                                    <span><i class="fas fa-user-tie"></i></span>
+
+                                    <h3>Techinicians</h3>
+                                </div>
+                                <div style="font-size: 40px;">
+                                    <?= $this->technicians->num_rows ?>
                                 </div>
                             </div>
                         </div>
@@ -150,18 +151,17 @@ include_once 'sidenav.php';
                         <h1>New Employee<i class="fa fa-user"></i></i></h1>
                     </div>
 
-                    <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                    <form action="employee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                         <div id="col1">
                             <label for="type">Type</label><br>
-                            <select id="emptype" name="emptype" class="input-field" required>
-                                <option value="">Select Employee Type...</option>
+                            <select id="emptype" name="emptype" class="input-field" title="Job Title" required>
+                                <option value="">Select Job Title...</option>
                                 <option value="manager">Manager</option>
                                 <option value="receptionist">Receptionist</option>
                                 <option value="parking_officer">Parking Officer</option>
                                 <option value="trainer">Trainer</option>
                                 <option value="treater">Treater</option>
                                 <option value="technician">Technician</option>
-                                <option value="other">Other</option>
                             </select>
                         </div>
 
@@ -173,22 +173,22 @@ include_once 'sidenav.php';
 
                         <div id="col1">
                             <label for="fname">First Name</label><br>
-                            <input type="text" id="fname" name="fname" class="input-field" placeholder="John" required>
+                            <input type="text" id="fname" name="fname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No special characters allowed" placeholder="John" required>
                         </div>
 
                         <div id="col2">
                             <label for="lname">Last Name</label><br>
-                            <input type="text" id="lname" name="lname" class="input-field" placeholder="Smith" required>
+                            <input type="text" id="lname" name="lname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No special characters allowed" placeholder="Smith" required>
                         </div>
 
                         <div id="col1">
                             <label for="email">Email Address</label><br>
-                            <input type="email" id="email" name="email" class="input-field" placeholder="example@email.com" required>
+                            <input type="email" id="email" name="email" class="input-field" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" title="valid emails only" placeholder="example@email.com" required>
                         </div>
 
                         <div id="col2">
                             <label for="cno">Contact Number</label><br>
-                            <input type="text" id="cno" name="cno" class="input-field" placeholder="071-1234567" required>
+                            <input type="text" id="cno" name="cno" class="input-field" pattern="^07[0-9]{8}$|^\+[0-9]{2}[0-9]?[0-9]{9}$" title="valid contact numbers only (do not allow special characters, letters)" placeholder="071-1234567" required>
                         </div>
 
                         <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
@@ -253,7 +253,7 @@ include_once 'sidenav.php';
                 <div id="deleteModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center; margin-bottom: 10px;">
-                        <h3>Are You Sure ?</h3>
+                        <h2>Are You Sure ?</h2>
                     </div>
                     <form action="#" class="formDelete" method="GET">
                         <div>
@@ -466,139 +466,125 @@ include_once 'sidenav.php';
     </div>
 
     <script>
-        let chart1 = document.getElementById('employeeGrowthChart').getContext('2d');
-        let massChart1 = new Chart(chart1, {
-            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['2018', '2019', '2020', '2021'],
-                datasets: [{
-                    label: 'Employee',
-                    data: [
-                        10, 15, 25, 30
-                    ],
-                    // backgroundColor : '#423D59',
-                    backgroundColor: [
-                        'rgba(153,102,255,0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 1,
-                    hoverBorderColor: '#003'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false,
-                        // position: 'center',
-                        labels: {
-                            fontColor: '#000'
-                        }
-                    },
-                    title: {
-                        // fullSize: true,
-                        display: true,
-                        text: 'Growth of Employees by Year',
-                        font: {
-                            size:20,
+
+        $(document).ready(function() {
+            $.ajax({
+                url: "getEmployees",
+                method: "GET",
+                success: function(data) {
+                    var year = [];
+                    var emps = [];
+                    data = JSON.parse(data);
+                    var preSum = 0;
+                    for (var i in data) {
+                        year.push(data[i].year);
+                        emps.push(preSum + parseInt(data[i].no_emps));
+                        preSum = parseInt(data[i].no_emps);
+                    }
+                    var chartdata = {
+                        labels: year,
+                        datasets: [{
+                            label: 'Employees',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            data: emps
+                        }]
+                    };
+
+                    var ctx = $("#employeeGrowthChart");
+
+                    var barGraph = new Chart(ctx, {
+                        type: 'bar',
+                        data: chartdata,
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    // position: 'center',
+                                    labels: {
+                                        fontColor: '#000'
+                                    }
+                                },
+                                title: {
+                                    // fullSize: true,
+                                    display: true,
+                                    text: 'Growth of Employees by Year',
+                                    font: {
+                                        size: 20,
+                                    },
+                                },
+                            },
                         },
-                    },
+                    });
                 },
-            },
-        });
+                error: function(data) {
+                    console.log(data);
+                }
+            });
 
-        let chart2 = document.getElementById('employeePercentageChart').getContext('2d');
-        let massChart2 = new Chart(chart2, {
-            type: 'doughnut', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['Managers', 'Reseptionists', 'Trainers', 'Treaters', 'Parking Officers', 'Others'],
-                datasets: [{
-                    label: 'Employee',
-                    data: [
-                        8, 3, 4, 4, 5, 15
-                    ],
-                    // backgroundColor : '#423D59',
-                    backgroundColor: [
-                        'rgb(158, 102, 255, 0.6)',
-                        'rgb(142, 77, 255, 0.6)',
-                        'rgb(126, 51, 255, 0.6)',
-                        'rgb(110, 26, 255, 0.6)',
-                        'rgb(93, 0, 255, 0.6)',
-                        'rgb(84, 0, 230, 0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 1,
-                    hoverBorderColor: '#003'
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            fontColor: '#000'
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Employee Percentage Chart',
-                        font: {
-                            size:20,
+            $.ajax({
+                url: "getEmployeesType",
+                method: "GET",
+                success: function(data) {
+                    var type = [];
+                    var count = [];
+                    console.log(data);
+                    data = JSON.parse(data);
+                    for (var i in data) {
+                        type.push(data[i].type);
+                        count.push(data[i].no_emps);
+                    }
+                    var chartdata = {
+                        labels: type,
+                        datasets: [{
+                            label: 'Employees',
+                            backgroundColor: [
+                                'rgb(158, 102, 255, 0.6)',
+                                'rgb(142, 77, 255, 0.6)',
+                                'rgb(126, 51, 255, 0.6)',
+                                'rgb(110, 26, 255, 0.6)',
+                                'rgb(93, 0, 255, 0.6)',
+                                'rgb(84, 0, 230, 0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003',
+                            data: count
+                        }]
+                    };
+
+                    var ctx = $("#employeePercentageChart");
+
+                    var barGraph = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: chartdata,
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'bottom',
+                                    labels: {
+                                        fontColor: '#000'
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Employee Percentage Chart',
+                                    font: {
+                                        size: 20,
+                                    },
+                                },
+                            },
                         },
-                    },
+                    });
                 },
-            },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
         });
-
-        // $(document).ready(function() {
-        //     $.ajax({
-        //         url: "employeeView",
-        //         type: "GET",
-        //         success: function(data) {
-        //             var type = [];
-        //             var count = [];
-        //             var date = [];
-
-        //             for (var i in data) {
-        //                 type.push("Type " + data[i].type);
-        //                 count.push(data[i].count);
-        //                 date.push(data[i].start_date);
-        //             }
-
-        //             var chartdata = {
-        //                 labels: type,
-        //                 datasets: [
-        //                     {
-        //                         lable: "Employee",
-        //                         fill: false,
-        //                         backgroundColor: '#423D59',
-        //                         pointHoverBackgroundColor: "rgba(32,343,545,23)",
-        //                         pointHoverBorderColor: "rgba(232,21,21,434)",
-        //                         data: count
-        //                     },
-        //                     {
-        //                         lable: "Employee",
-        //                         fill: false,
-        //                         backgroundColor: '#423D59',
-        //                         pointHoverBackgroundColor: "rgba(32,343,545,23)",
-        //                         pointHoverBorderColor: "rgba(232,21,21,434)",
-        //                         data: date
-        //                     }
-        //                 ]
-        //             };
-        //             var ctx = $("#employeeChart");
-        //             var LineGraph = new Chart(ctx, {
-        //                 type:'line',
-        //                 data: chartdata
-        //             });
-        //         },
-        //         error: function(data) {
-
-        //         }
-        //     });
-        // });
     </script>
 </body>
 
