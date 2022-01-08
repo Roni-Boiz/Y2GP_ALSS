@@ -462,10 +462,58 @@ include_once 'sidenav.php';
                 ?>
             </section>
 
+            <!-- error popup -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Insert Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                    Insert Success!
+                    </p>
+                    <p>
+                        New Employee Added!
+                    </p>
+                    <button id='ok'>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
         </div> <!-- .hawlockbody div closed here -->
     </div>
 
     <script>
+        $(document).ready(function() {
+            $("#ok").click(function() {
+                $(".message").fadeOut(600, "linear");
+            });
+        });
 
         $(document).ready(function() {
             $.ajax({
