@@ -397,7 +397,7 @@ include_once 'sidenav.php';
                 </div>
             </div>
 
-            <!-- reservation success message -->
+            <!-- error success message -->
             <?php
             if (isset($this->error)) { ?>
                 <!-- error popup -->
@@ -429,7 +429,10 @@ include_once 'sidenav.php';
                         &#10004;
                     </div>
                     <p>
-                        New Apartment Added!
+                        Insert Success!
+                    </p>
+                    <p>
+                        New Apartment Added
                     </p>
                     <button id='ok'>
                         OK
