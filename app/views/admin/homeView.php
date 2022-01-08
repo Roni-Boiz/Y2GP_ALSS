@@ -457,9 +457,6 @@ include_once 'sidenav.php';
                 $(".message").fadeOut(600, "linear");
             });
         });
-    </script>
-
-    <script>
         
         var input = document.getElementById("myInput");
         input.addEventListener("keyup", function(event) {
