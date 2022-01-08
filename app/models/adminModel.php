@@ -16,7 +16,8 @@ class adminModel extends model
         return $result;
     }
 
-    public function updateProfile($name,$email,$id){
+    public function updateProfile($name, $email, $id)
+    {
         $name = $this->conn->real_escape_string($name);
         $email = $this->conn->real_escape_string($email);
 
@@ -39,17 +40,20 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getAllFreeSlots(){
+    public function getAllFreeSlots()
+    {
         $sql = "SELECT * FROM parking_slot WHERE apartment_no IS NULL";
         return $this->conn->query($sql);
     }
 
-    public function getLastApartmentNo(){
+    public function getLastApartmentNo()
+    {
         $sql = "SELECT apartment_no FROM apartment ORDER BY apartment_no DESC LIMIT 1";
         return $this->conn->query($sql);
     }
 
-    public function insertNewApartment($apartmentNo, $floor, $parkingSlot){
+    public function insertNewApartment($apartmentNo, $floor, $parkingSlot)
+    {
         $apartmentNo = $this->conn->real_escape_string($apartmentNo);
         $floor = $this->conn->real_escape_string($floor);
         $parkingSlot = $this->conn->real_escape_string($parkingSlot);
@@ -61,14 +65,16 @@ class adminModel extends model
         return $result1 && $result2;
     }
 
-    public function getMonthlyIncome(){
+    public function getMonthlyIncome()
+    {
         $start = date("Y-m-1 00:00:00");
         $end = date("Y-m-t 23:59:59");
-        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='".$start."' AND paid_date<='".$end."'";
+        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='" . $start . "' AND paid_date<='" . $end . "'";
         return $this->conn->query($sql);
     }
 
-    public function getTotalOverdue(){
+    public function getTotalOverdue()
+    {
         $sql = "SELECT sum(balance) AS due FROM resident";
         return $this->conn->query($sql);
     }
@@ -104,17 +110,20 @@ class adminModel extends model
         return $result;
     }
 
-    public function unlockThisUserAccount($user_name){
+    public function unlockThisUserAccount($user_name)
+    {
         $sql = "UPDATE user_account set hold=0, hold_time=NULL WHERE user_name='{$user_name}'";
         return $this->conn->query($sql);
     }
 
-    public function getAllLockedUsers(){
+    public function getAllLockedUsers()
+    {
         $sql = "SELECT user_name, profile_pic, resident.apartment_no, resident.email, resident.nic, concat_ws(' ', resident.fname, resident.lname) AS name FROM `user_account` INNER JOIN resident ON user_account.user_id = resident.user_id WHERE hold=5 and hold_time > DATE_SUB(NOW(), INTERVAL 1200 SECOND)";
         return $this->conn->query($sql);
     }
 
-    public function deleteThisUserAccount($user_id){
+    public function deleteThisUserAccount($user_id)
+    {
         $sql = "DELETE FROM user_account WHERE user_id = '{$user_id}'";
         return $this->conn->query($sql);
     }
@@ -149,9 +158,26 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function getEmployees()
+    {
+        $sql = "SELECT LEFT(start_date,4) AS year, COUNT(employee_id) as no_emps FROM employee WHERE user_id IS NOT NULL GROUP BY left(start_date,4) ORDER BY year ASC";
+        return $this->conn->query($sql);
+    }
+
     public function getAllEmployees($empType)
     {
-        $sql = "SELECT * FROM {$empType}";
+        if ($empType == "manager" || $empType == "receptionist" || $empType == "parking_officer" || $empType == "trainer") {
+            $sql = "SELECT * FROM {$empType} WHERE user_id IS NOT NULL";
+            return $this->conn->query($sql);
+        } else {
+            $sql = "SELECT * FROM {$empType}";
+            return $this->conn->query($sql);
+        }
+    }
+
+    public function getALLEmployeeBYType()
+    {
+        $sql = "SELECT type, COUNT(employee_id) as no_emps FROM employee WHERE user_id IS NOT NULL GROUP BY type";
         return $this->conn->query($sql);
     }
 
@@ -165,9 +191,9 @@ class adminModel extends model
         // Turn autocommit off
         $this->conn->autocommit(FALSE);
 
-        $sql = "INSERT INTO employee(type, start_date) VALUES ('{$empType}', CURDATE())";
-        $result1 = $this->conn->query($sql);
-        $empId = mysqli_insert_id($this->conn);
+        $lastId = $this->conn->query("SELECT employee_id FROM `employee` ORDER BY employee_id DESC LIMIT 1");
+        $row = mysqli_fetch_assoc($lastId);
+        $empId = (int)$row['employee_id']+1; 
         $username = '';
         $password = '';
         $userId = '';
@@ -186,26 +212,34 @@ class adminModel extends model
                 $username = $userType . $empId;
                 $password = 'Hawlock@' . $empId;
             } else {
-                $errors[] = 'User capacity is full';
+                $errors[] = 'Employee capacity is full';
             }
             $hashPassword = sha1($password);
             $hash2Password = sha1($hashPassword);
 
             $sql = "INSERT INTO user_account(user_name, password, type, profile_pic, hold) VALUES ('{$username}', '{$hash2Password}', '{$empType}', '{$fileName}', '0')";
-            $result2 = $this->conn->query($sql);
+            $result1 = $this->conn->query($sql);
             $userId = mysqli_insert_id($this->conn);
 
-            if ($result1 && $result2) {
+            $sql = "INSERT INTO employee(type, start_date, user_id) VALUES ('{$empType}', CURDATE(), '{$userId}')";
+            $result2 = $this->conn->query($sql);
+            $empId = mysqli_insert_id($this->conn);
+
+            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
+            $result3 = $this->conn->query($sql);
+
+            if ($result1 && $result2 && $result3) {
                 $receiver = "chathus.m1999@gmail.com";
                 $subject = "Hawlock City Employee Login Credentials";
                 $body = "Your Username : " . $username . " and password : " . $password;
                 $sender = "From:hawlockrycn@gmail.com";
                 mail($receiver, $subject, $body, $sender);
             }
-
-            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
-            $result3 = $this->conn->query($sql);
         } else {
+            $sql = "INSERT INTO employee(type, start_date, user_id) VALUES ('{$empType}', CURDATE(), 0)";
+            $result2 = $this->conn->query($sql);
+            $empId = mysqli_insert_id($this->conn);
+            
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
             $result3 = $this->conn->query($sql);
         }
@@ -218,7 +252,7 @@ class adminModel extends model
         // Rollback transaction
         $this->conn->rollback();
         $this->conn->autocommit(TRUE);
-        return $result3;
+        return $result1 || $result2 && $result3;
     }
 
     public function getAllServices()
@@ -226,6 +260,4 @@ class adminModel extends model
         $sql = "SELECT * FROM service";
         return $this->conn->query($sql);
     }
-
-    
 }

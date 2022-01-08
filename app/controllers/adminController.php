@@ -20,11 +20,11 @@ class adminController extends controller
 
     public function index()
     {
-        if(isset($_POST['apartmentNo']) && isset($_POST['floor']) && isset($_POST['parkingslot'])){
+        if (isset($_POST['apartmentNo']) && isset($_POST['floor']) && isset($_POST['parkingslot'])) {
             $result = $this->model->insertNewApartment($_POST['apartmentNo'], $_POST['floor'], $_POST['parkingslot']);
-            if($result == 0){
+            if ($result == 0) {
                 $this->view->error = "Oops something went wrong. Form didn't submiited";
-            }else{
+            } else {
                 $this->view->success = true;
             }
         }
@@ -64,25 +64,57 @@ class adminController extends controller
         $this->view->render('admin/userView');
     }
 
-    public function unclockThisAccount(){
+    public function unclockThisAccount()
+    {
         return $this->model->unlockThisUserAccount($_POST["user_name"]);
     }
 
-    public function deleteUserAccount(){
+    public function deleteUserAccount()
+    {
         return $this->model->deleteThisUserAccount($_POST["user_id"]);
+        return true;
     }
 
     public function employee()
     {
+        if (isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno'])) {
+            $result = $this->addEmployee();
+            if ($result == 0) {
+                $this->view->error = "Oops something went wrong. Form didn't submiited";
+            } else {
+                $this->view->success = true;
+            }
+        }
         $this->view->managers = $this->model->getAllEmployees("manager");
         $this->view->receptionists = $this->model->getAllEmployees("receptionist");
-        $this->view->parkingOfficers = $this->model->getAllEmployees("parking_officer");
         $this->view->trainers = $this->model->getAllEmployees("trainer");
-        $this->view->technicians = $this->model->getAllEmployees("technician");
         $this->view->treaters = $this->model->getAllEmployees("treater");
+        $this->view->parkingOfficers = $this->model->getAllEmployees("parking_officer");
+        $this->view->technicians = $this->model->getAllEmployees("technician");
         $this->view->laundrys = $this->model->getAllEmployees("treater");
-        $this->view->employeeCount = $this->model->getEmployeesCountByTypeDate();
         $this->view->render('admin/employeeView');
+    }
+
+    public function getEmployees()
+    {
+        $result = $this->model->getEmployees();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
+    public function getEmployeesType()
+    {
+        $result = $this->model->getALLEmployeeBYType();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
     }
 
     public function service()
@@ -187,7 +219,7 @@ class adminController extends controller
             }
         }
         // Display status message
-        echo $statusMsg;
-        header("Refresh:0; url=employee");
+        // echo $statusMsg;
+        return $insert;
     }
 }
