@@ -374,8 +374,14 @@ include_once 'sidenav.php';
             }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
-    
+
     <script>
+        $(document).ready(function() {
+            $("#ok").click(function() {
+                $(".message").fadeOut(600, "linear");
+            });
+        });
+
         fetch_user_login_date();
         setInterval(function() {
             fetch_user_login_date();
