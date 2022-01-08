@@ -88,7 +88,7 @@ include_once 'sidenav.php';
                             <?php
                             while ($row = $this->users->fetch_assoc()) {
                                 $userId = 'UID' . sprintf("%04d", $row["user_id"]);
-                                if ($row["type"] == 'resident') {      
+                                if ($row["type"] == 'resident') {
                             ?>
                                     <span id="searchrow">
                                         <article class="row pga">
@@ -97,7 +97,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li id="<?php echo $userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                             <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -115,7 +115,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li  id="<?=$userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?= $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -132,7 +132,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -230,22 +230,22 @@ include_once 'sidenav.php';
                         ?>
                                 <div class="detail">
                                     <div>
-                                        <img src="../../uploads/profile/resident/<?=$row["nic"]?>" alt="user"  onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                        <img src="../../uploads/profile/resident/<?= $row["nic"] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
                                         <div class="detail-info">
-                                            <h5><?=$row["name"]?></h5>
-                                            <small><?=$row["user_name"]?></small>
+                                            <h5><?= $row["name"] ?></h5>
+                                            <small><?= $row["user_name"] ?></small>
                                         </div>
-                                        <span class="acceptBtn" id="unlockId" title="Unlock Account" onclick="unlockAccount('<?=$row['user_name']?>')"><i class="fas fa-user-check"></i></span>
+                                        <span class="acceptBtn" id="unlockId" title="Unlock Account" onclick="unlockAccount('<?= $row['user_name'] ?>')"><i class="fas fa-user-check"></i></span>
                                     </div>
                                     <div class="moreContent">
                                         <span>
-                                            <h5>Apartment No : <?=$row["apartment_no"]?></h5>
+                                            <h5>Apartment No : <?= $row["apartment_no"] ?></h5>
                                         </span>
                                         <span>
-                                            <h5>NIC : <?=$row["nic"]?></h5>
+                                            <h5>NIC : <?= $row["nic"] ?></h5>
                                         </span>
                                         <span>
-                                            <h5>Email : <?=$row["email"]?></h5>
+                                            <h5>Email : <?= $row["email"] ?></h5>
                                         </span>
                                     </div>
                                 </div>
@@ -327,10 +327,54 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+
+            <!-- error success message -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Insert Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                        Insert Success!
+                    </p>
+                    <p>
+                        New Apartment Added!
+                    </p>
+                    <button id='ok'>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
-    </div> .expand div closed here
-
+    
     <script>
         fetch_user_login_date();
         setInterval(function() {
