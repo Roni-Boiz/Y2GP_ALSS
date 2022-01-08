@@ -1037,7 +1037,7 @@ select{
 .formAddEmployee #uploadBtn{
   height: 30px;
   width: 100%;
-  bottom: 0px;
+  bottom: -2px;
   left: 50%;
   transform: translate(-50%);
   text-align: center;
@@ -1486,6 +1486,13 @@ select{
 
 .empsearch i{
   padding: 15px 15px 0px 5px;
+}
+
+@media only screen and (max-width: 880px) {
+  #employeeCard{
+    display: flex;
+    flex-direction: column;
+  }
 }
 /* End of Admin Employee Styles */
 
