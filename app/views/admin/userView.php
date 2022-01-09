@@ -203,12 +203,12 @@ include_once 'sidenav.php';
                         <div id="deleteModel">
                             <a href="javascript:void(0)" class="closebtn">&times;</a>
                             <div style="text-align: center; margin-bottom: 10px;">
-                                <h2>Are You Sure ?</h2>
+                                <h2 style="padding: 0px;">Are You Sure ?</h2>
                             </div>
                             <form action="" class="formDelete" onsubmit="deleteUser();return false;">
                                 <div>
                                     <label> Delete User With User ID </label>
-                                    <span id="answer"></span>
+                                    <span id="answer1"></span>
                                 </div>
                                 <div>
                                     <input class="btnRed" type="submit" name="submit" value="Delete">

@@ -165,7 +165,8 @@ include_once 'sidenav.php';
     }
 
     #apartmentSummary>div:nth-child(1) div {
-        padding: 10px;
+        padding: 5px;
+        margin: 3px;
     }
 
     #apartmentSummary>div:nth-child(1)>div>span {
@@ -220,15 +221,15 @@ include_once 'sidenav.php';
                                             <?php
                                             if ($row["status"]) { ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
-                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;"></i>
+                                                    <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
                                                 </span>
                                             <?php
                                             } else {
                                                 $remaining++; ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
-                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:green;font-size:40px;padding: 0px;"></i>
+                                                    <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:gray;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
                                                 </span>
                                             <?php
 
