@@ -127,6 +127,14 @@ class adminController extends controller
 
     public function service()
     {
+        if (isset($_POST['servicetype']) && isset($_POST['servicename']) && isset($_POST['fee']) && isset($_POST['canclefee'])) {
+            $result = $this->model->addService($_POST['servicetype'], $_POST['servicename'], $_POST['fee'], $_POST['canclefee']);
+            if ($result == 0) {
+                $this->view->error = "Oops something went wrong. Form didn't submiited";
+            } else {
+                $this->view->success = true;
+            }
+        }
         $this->view->services = $this->model->getAllServices();
         $this->view->render('admin/serviceView');
     }

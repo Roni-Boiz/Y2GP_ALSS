@@ -253,6 +253,22 @@ class adminModel extends model
     //     return $this->conn->query($sql);
     // }
 
+    public function addService($type, $name, $fee, $cancleFee){
+        $type = $this->conn->real_escape_string($type);
+        $name = $this->conn->real_escape_string($name);
+        $fee = $this->conn->real_escape_string($fee);
+        $cancleFee = $this->conn->real_escape_string($cancleFee);
+
+        $sql = "INSERT INTO service(type,name,fee,cancelation_fee,effect_date) VALUES('{$type}', '{$name}', '{$fee}', '{$cancleFee}', CURDATE());";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllServices()
+    {
+        $sql = "SELECT * FROM service";
+        return $this->conn->query($sql);
+    }
+
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
         $topic = $this->conn->real_escape_string($topic);
@@ -270,9 +286,4 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getAllServices()
-    {
-        $sql = "SELECT * FROM service";
-        return $this->conn->query($sql);
-    }
 }

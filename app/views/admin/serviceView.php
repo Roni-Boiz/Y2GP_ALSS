@@ -55,7 +55,7 @@ include_once 'sidenav.php';
                     <div style="text-align: center;">
                         <h1>New Service<i class="fa fa-user"></i></i></h1>
                     </div>
-                    <form action="#" class="formAddEmployee" method="POST">
+                    <form action="service" class="formAddEmployee formAddService" method="POST">
                         <div id="col1">
                             <label for="type">Type</label><br>
                             <select id="emptype" name="servicetype" class="input-field" required>
@@ -72,17 +72,17 @@ include_once 'sidenav.php';
 
                         <div id="col2">
                             <label for="servicename">Service Name</label><br>
-                            <input type="text" id="servicename" name="servicename" class="input-field" placeholder="Function Hall" required>
+                            <input type="text" id="servicename" name="servicename" class="input-field" pattern="^[A-z\s]{0,100}$" title="Service name only with letters. No special characters or numbers allowed" placeholder="Function Hall" required>
                         </div>
 
                         <div id="col1">
                             <label for="fee">Fee (Rs.)</label><br>
-                            <input type="text" id="fee" name="fee" class="input-field" placeholder="1000.00" required>
+                            <input type="text" id="fee" name="fee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-1500, 1500.00" placeholder="1000.00" required>
                         </div>
 
                         <div id="col2">
                             <label for="canclefee">Cancellation Fee (Rs.)</label><br>
-                            <input type="text" id="canclefee" name="canclefee" class="input-field" placeholder="500.00" required>
+                            <input type="text" id="canclefee" name="canclefee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-200, 200.00" placeholder="500.00" required>
                         </div>
 
                         <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
@@ -300,12 +300,61 @@ include_once 'sidenav.php';
                 }
                 ?>
             </section>
-        </div>
 
-    </div> <!-- .hawlockbody div closed here -->
-    </div> <!-- .expand div closed here -->
+            <!-- error popup -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Insert Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                        Insert Success!
+                    </p>
+                    <p>
+                        New Service Added
+                    </p>
+                    <button id='ok'>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+        </div> <!-- .hawlockbody div closed here -->
+    </div>
 
     <script>
+        $(document).ready(function() {
+            $("#ok").click(function() {
+                $(".message").fadeOut(600, "linear");
+            });
+        });
+
         let chart1 = document.getElementById('employeeChart').getContext('2d');
         let massChart1 = new Chart(chart1, {
             type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
