@@ -288,7 +288,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row mlb">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -318,7 +318,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row nhl">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -348,7 +348,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row pga">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -378,7 +378,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row nfl">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -412,7 +412,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row bfg">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -442,7 +442,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row mba">
                                 <ul>
-                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
+                                    <li><?php echo $employeeId ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
