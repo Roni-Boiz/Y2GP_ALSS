@@ -177,7 +177,7 @@ include_once 'sidenav.php';
                 </div>
                 <div id="tab3" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
-<!-- laundry -->
+
 <section class="wrapper">
                             <main class="row title">
                                 <ul>
@@ -234,39 +234,62 @@ include_once 'sidenav.php';
                                 <h1>Add Schedule<i class="fa fa-user"></i></i></h1>
                             </div>
 
-                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data"> 
                                 <div id="col1">
-                                    <label for="type">Enter Resident ID</label><br>
-                                    <input type="text" id="eid" name="eid" class="input-field" placeholder="Resident ID" required autofocus>
+                                    <label for="type">Select Resident</label><br>
+                                    <select name="resident" class="input-field" id="selectresident" required>
+                                        <option value="#">Select Resident</option>
+                                        <?php
+
+                                    while ($rowR = $this->Residents->fetch_assoc()) {
+                                        $Residents = $rowR['fname'].' '.$rowR['lname'];
+                                        $ResId = $rowR['resident_id'];
+                                        echo "<option value=$ResId>$Residents</option>";
+                                    }
+                                    ?>
+                                    </select>
+                                    <!-- <input type="text" id="eid" name="eid" class="input-field" placeholder="Resident ID" required autofocus> -->
                                 </div>
 
-                                <div class="profile-pic" id="col2">
+                                <!-- <div class="profile-pic" id="col2">
                                     <img src="../../public/img/blank-profile.png" id="photo">
                                     <input type="file" id="file" name="file">
                                     <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Choose Photo</label>
+                                </div> -->
+                                <div id="col2">
+                                    <label for="cno">Coach</label><br>
+                                    <select name="coach" class="input-field" id="selectcoach" required>
+                                        <option value="#">Select Coach</option>
+                                        <?php
+
+                                    while ($rowT = $this->Trainers->fetch_assoc()) {
+                                        $Trainers = $rowT['fname'].' '.$rowT['lname'];
+                                        $TraId = $rowR['trainer_id'];
+                                        echo "<option value='$TraId'>$Trainers</option>";
+                                    }
+                                    ?>
+                                    </select>
+                                    <!-- <input type="text" id="cno" name="cno" class="input-field"  readonly> -->
                                 </div>
 
                                 <div id="col1">
                                     <label for="fname">Date</label><br>
-                                    <input type="date" id="fname" name="fname" class="input-field"  readonly>
-                                </div>
-
-                                <div id="col2">
-                                    <label for="lname">Start time</label><br>
-                                    <input type="text" id="lname" name="lname" class="input-field"  readonly>
+                                    <input type="date" id="fname" name="fname" class="input-field" >
                                 </div>
 
                                 <div id="col1">
-                                    <label for="email">End time</label><br>
-                                    <input type="email" id="email" name="email" class="input-field"  readonly>
+                                    <label for="stime">Start time</label><br>
+                                    <input type="time" id="stime" name="stime" class="input-field"  >
                                 </div>
 
                                 <div id="col2">
-                                    <label for="cno">Coach</label><br>
-                                    <input type="text" id="cno" name="cno" class="input-field"  readonly>
+                                    <label for="etime">End time</label><br>
+                                    <input type="time" id="etime" name="etime" class="input-field"  >
                                 </div>
 
-                                <input style="grid-column: 1/span 2;" type="submit" name="Submit" value="Create">
+                                
+
+                                <input style="grid-column: 1/span 2;" type="submit" name="AddSchedule" value="Add">
                             </form>
                         </div>
                     </div>

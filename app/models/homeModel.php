@@ -115,7 +115,7 @@ class homeModel extends model
                             $_SESSION['residentId'] = $user['resident_id'];
                         }
                         //Gets the IP Address from the visitor
-                        $PublicIP = "112.135.100.171"; //get_client_ip();  //"112.135.65.171"
+                         $PublicIP = get_client_ip(); //"112.135.100.171"; //get_client_ip();  //"112.135.65.171"
                         if ($PublicIP != "::1") {
                             //Uses ipinfo.io to get the location of the IP Address, you can use another site but it will probably have a different implementation
                             $json     = file_get_contents("http://ipinfo.io/$PublicIP/geo");
