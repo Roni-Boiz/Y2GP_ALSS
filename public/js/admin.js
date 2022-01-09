@@ -307,6 +307,7 @@ function openModel(amodel, amodelBtn, id) {
     }
     if(ans2 !== null){
         ans2.innerHTML = id;
+        $("#serviceId").val(id);
     }
 
     // model.addEventListener("click", (e) => {
