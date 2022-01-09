@@ -302,8 +302,13 @@ function openModel(amodel, amodelBtn, id) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
-    ans1.innerHTML = id;
-    ans2.innerHTML = id;
+    if(ans1 !== null){
+        ans1.innerHTML = id;
+    }
+    if(ans2 !== null){
+        ans2.innerHTML = id;
+    }
+
     // model.addEventListener("click", (e) => {
     //     if (e.target.id === "yes-btn") {
     //         ans.innerText = "Hello Guys";

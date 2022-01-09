@@ -1394,7 +1394,6 @@ select{
   box-shadow: 0 8px 16px rgb(61 38 193);
 }
 
-
 #employeeSummary i{
   padding: 0px;
   color: #110B2E;
@@ -1492,6 +1491,19 @@ select{
   #employeeCard{
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media(max-width: 680px){
+  .formAddEmployee{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width: 800px){
+  .formAddEmployee{
+    grid-template-columns: none;
   }
 }
 /* End of Admin Employee Styles */
@@ -1605,6 +1617,23 @@ select{
 
 .formEdit>div {
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 880px) {
+  #employeeCard{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width:680px){
+  .formAddService{
+    display: flex;
+    flex-direction: column;
+  }
+  .formAddService .input-field{
+    width: 100%;
+  }  
 }
 /* End of Admin service view  */
 
