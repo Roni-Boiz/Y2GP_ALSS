@@ -188,7 +188,7 @@ include_once 'sidenav.php';
 
                         <div id="col2">
                             <label for="cno">Contact Number</label><br>
-                            <input type="text" id="cno" name="cno" class="input-field" pattern="^07[0-9]{8}$|^\+[0-9]{2}[0-9]?[0-9]{9}$" title="valid contact numbers only (do not allow special characters, letters)" placeholder="071-1234567" required>
+                            <input type="text" id="cno" name="cno" class="input-field" pattern="^07[0-9]{8}$|^\+[0-9]{2}[0-9]?[0-9]{9}$" title="valid contact numbers only (do not allow special characters, letters)" placeholder="0711234567" required>
                         </div>
 
                         <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
@@ -288,7 +288,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row mlb">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -318,7 +318,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row nhl">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -348,7 +348,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row pga">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -378,7 +378,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row nfl">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -412,7 +412,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row bfg">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -442,7 +442,7 @@ include_once 'sidenav.php';
                         <span id="searchrow">
                             <article class="row mba">
                                 <ul>
-                                    <li><a href="#"><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></a></li>
+                                    <li><?php echo "EMP" . sprintf("%04d", $row["employee_id"]) ?><span class="small">(update)</span></li>
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
@@ -503,7 +503,7 @@ include_once 'sidenav.php';
                     Insert Success!
                     </p>
                     <p>
-                        New Employee Added!
+                        New Employee Added
                     </p>
                     <button id='ok'>
                         OK

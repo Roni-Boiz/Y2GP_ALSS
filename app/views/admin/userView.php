@@ -93,7 +93,7 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row pga">
                                             <ul>
-                                                <li><a href="#" onclick=""><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
@@ -111,7 +111,7 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row nhl">
                                             <ul>
-                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
@@ -128,7 +128,7 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
@@ -364,7 +364,7 @@ include_once 'sidenav.php';
                         Insert Success!
                     </p>
                     <p>
-                        New Apartment Added!
+                        New Apartment Added
                     </p>
                     <button id='ok'>
                         OK
