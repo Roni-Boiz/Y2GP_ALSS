@@ -72,7 +72,6 @@ class adminController extends controller
     public function deleteUserAccount()
     {
         return $this->model->deleteThisUserAccount($_POST["user_id"]);
-        return true;
     }
 
     public function employee()
@@ -116,6 +115,15 @@ class adminController extends controller
         }
         print json_encode($data);
     }
+
+    public function deleteEmployee()
+    {
+        return $this->model->deleteThisEmployee($_POST["employee_id"]);
+    }
+
+    // public function updateEmployeeShift(){
+    //     return $this->model->updateThisEmployeeShift($_POST["employee_id"]);
+    // }
 
     public function service()
     {

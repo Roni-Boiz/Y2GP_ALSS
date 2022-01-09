@@ -135,22 +135,7 @@ class adminModel extends model
         return $result;
     }
 
-    public function insertAnnouncement($topic, $content, $category, $fileName, $id)
-    {
-        $topic = $this->conn->real_escape_string($topic);
-        $content = $this->conn->real_escape_string($content);
-        $category = $this->conn->real_escape_string($category);
-        $fileName = $this->conn->real_escape_string($fileName);
-        $id = $this->conn->real_escape_string($id);
 
-        $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");
-        if ($admin) {
-            $id = mysqli_fetch_assoc($admin);
-            $adminId = $id['admin_id'];
-        }
-        $sql = "INSERT INTO announcement(topic,content,category,date,file_name,admin_id) VALUES ('{$topic}','{$content}','{$category}',NOW(),'{$fileName}','{$adminId}')";
-        return $this->conn->query($sql);
-    }
 
     public function getEmployee($empType, $empId)
     {
@@ -189,11 +174,12 @@ class adminModel extends model
         $con = $this->conn->real_escape_string($con);
         $result1 = $result2 = $result3 = '';
         // Turn autocommit off
+        // $this->conn->query("START TRANSACTION");
         $this->conn->autocommit(FALSE);
 
         $lastId = $this->conn->query("SELECT employee_id FROM `employee` ORDER BY employee_id DESC LIMIT 1");
         $row = mysqli_fetch_assoc($lastId);
-        $empId = (int)$row['employee_id']+1; 
+        $empId = (int)$row['employee_id'] + 1;
         $username = '';
         $password = '';
         $userId = '';
@@ -239,20 +225,49 @@ class adminModel extends model
             $sql = "INSERT INTO employee(type, start_date, user_id) VALUES ('{$empType}', CURDATE(), 0)";
             $result2 = $this->conn->query($sql);
             $empId = mysqli_insert_id($this->conn);
-            
+
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
             $result3 = $this->conn->query($sql);
         }
         // Commit transaction
-        if (!$this->conn->commit()) {
-            echo "Commit transaction failed";
+        if (($result1 && $result2 && $result3) || ($result2 && $result3)) {
+            $this->conn->commit();
             $this->conn->autocommit(TRUE);
-            return false;
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
         }
-        // Rollback transaction
-        $this->conn->rollback();
-        $this->conn->autocommit(TRUE);
-        return $result1 || $result2 && $result3;
+        return $result1 && $result2 && $result3 || $result2 && $result3;
+    }
+
+    public function deleteThisEmployee($employee_id)
+    {
+        $sql = "DELETE FROM employee WHERE employee_id = '{$employee_id}'";
+        return $this->conn->query($sql);
+    }
+
+    // public function updateThisEmployeeShift($employee_id){
+    //     $sql = "";
+    //     return $this->conn->query($sql);
+    // }
+
+    public function insertAnnouncement($topic, $content, $category, $fileName, $id)
+    {
+        $topic = $this->conn->real_escape_string($topic);
+        $content = $this->conn->real_escape_string($content);
+        $category = $this->conn->real_escape_string($category);
+        $fileName = $this->conn->real_escape_string($fileName);
+        $id = $this->conn->real_escape_string($id);
+
+        $admin = $this->conn->query("SELECT admin_id FROM admin WHERE user_id='{$id}'");
+        if ($admin) {
+            $id = mysqli_fetch_assoc($admin);
+            $adminId = $id['admin_id'];
+        }
+        $sql = "INSERT INTO announcement(topic,content,category,date,file_name,admin_id) VALUES ('{$topic}','{$content}','{$category}',NOW(),'{$fileName}','{$adminId}')";
+        return $this->conn->query($sql);
     }
 
     public function getAllServices()

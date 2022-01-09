@@ -3207,6 +3207,7 @@ input:checked + .slider:before {
   font-size: 1.2rem;
   outline: none;
   cursor:pointer;
+  padding: 0px !important;
 }
 .message #ok:hover {
   background: #6bc039;

@@ -205,12 +205,12 @@ include_once 'sidenav.php';
                 <div id="editModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center; margin-bottom: 10px;">
-                        <h3>Update Shift</h3>
+                        <h2>Update Shift</h2>
                     </div>
-                    <form action="#" class="formEdit" method="GET">
+                    <form action="#" class="formEdit" onsubmit="updateShift();return fales;">
                         <div>
                             <label>Employee ID : </label>
-                            <span><?= "EMP1234" ?></span>
+                            <span id="answer2"></span>
                         </div>
                         <div>
                             <div>
@@ -255,10 +255,10 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Are You Sure ?</h2>
                     </div>
-                    <form action="#" class="formDelete" method="GET">
+                    <form action="#" class="formDelete" onsubmit="deleteEmployee();return false;">
                         <div>
                             <label> Delete Employee With EMP ID </label>
-                            <span><?= "EMP1234" ?></span>
+                            <span id="answer1"></span>
                         </div>
                         <div>
                             <input class="btnRed" type="submit" name="submit" value="Delete">
@@ -283,6 +283,7 @@ include_once 'sidenav.php';
                 if ($this->managers->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->managers->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row mlb">
@@ -291,7 +292,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -312,6 +313,7 @@ include_once 'sidenav.php';
                 if ($this->receptionists->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->receptionists->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row nhl">
@@ -320,7 +322,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Receptionist"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Receptionist"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -341,6 +343,7 @@ include_once 'sidenav.php';
                 if ($this->parkingOfficers->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->parkingOfficers->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row pga">
@@ -349,7 +352,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove P. Officer"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove P. Officer"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -370,6 +373,7 @@ include_once 'sidenav.php';
                 if ($this->trainers->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->trainers->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row nfl">
@@ -378,10 +382,10 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li>
-                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Trainer"><i class="fas fa-trash-alt"></i></span>
+                                    <li id="<?= $employeeId ?>">
+                                        <span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Trainer"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
@@ -403,6 +407,7 @@ include_once 'sidenav.php';
                 if ($this->technicians->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->technicians->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row bfg">
@@ -411,7 +416,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Technician"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li id="<?= $employeeId ?>"id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Technician"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -432,6 +437,7 @@ include_once 'sidenav.php';
                 if ($this->treaters->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->treaters->fetch_assoc()) {
+                        $employeeId = 'EMP' . sprintf("%04d", $row["employee_id"]);
                     ?>
                         <span id="searchrow">
                             <article class="row mba">
@@ -440,10 +446,10 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li>
-                                        <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Remove Treater"><i class="fas fa-trash-alt"></i></span>
+                                    <li id="<?= $employeeId ?>">
+                                        <span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Treater"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
