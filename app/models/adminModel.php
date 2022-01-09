@@ -269,6 +269,12 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function updateThisService($serviceId, $newFee, $newCancleFee, $effectDate)
+    {
+        $sql = "UPDATE service SET new_fee='{$newFee}', next_cancelation_fee='{$newCancleFee}', effect_date='{$effectDate}' WHERE service_id='{$serviceId}'";
+        return $this->conn->query($sql);
+    }
+
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
     {
         $topic = $this->conn->real_escape_string($topic);

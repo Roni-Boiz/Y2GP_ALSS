@@ -132,7 +132,15 @@ class adminController extends controller
             if ($result == 0) {
                 $this->view->error = "Oops something went wrong. Form didn't submiited";
             } else {
-                $this->view->success = true;
+                $this->view->success = "New Service Added";
+            }
+        }
+        if (isset($_POST['serviceId']) && isset($_POST['newfee']) && isset($_POST['newcancelfee']) && isset($_POST['effectdate'])) {
+            $result = $this->model->updateThisService($_POST['serviceId'], $_POST['newfee'], $_POST['newcancelfee'], $_POST['effectdate']);
+            if ($result == 0) {
+                $this->view->error = "Oops something went wrong. Record didn't updated";
+            } else {
+                $this->view->success = "Service Rate Updated";
             }
         }
         $this->view->services = $this->model->getAllServices();

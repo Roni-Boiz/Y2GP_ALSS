@@ -97,19 +97,20 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h3>Update Service Rate</h3>
                     </div>
-                    <form action="#" class="formEdit" method="GET">
+                    <form action="#" class="formEdit" method="POST">
                         <div>
                             <label>Service ID : </label>
-                            <span><?= "BA1234" ?></span>
+                            <span id="answer2"></span>
+                            <input type="hidden" id="serviceId" name="serviceId">
                         </div>
                         <div>
                             <div>
                                 <label>Upcoming Fee</label><br>
-                                <input type="text" name="newfee" class="input-field" placeholder="1500.00" required>
+                                <input type="text" name="newfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-1500, 1500.00" placeholder="1500.00" required>
                             </div>
                             <div>
                                 <label>Upcoming Cancellation Fee</label><br>
-                                <input type="text" name="newcancelfee" class="input-field" placeholder="500.00" required>
+                                <input type="text" name="newcancelfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-200, 200.00" placeholder="500.00" required>
                             </div>
                             <div>
                                 <label>Effect Date</label><br>
@@ -137,16 +138,17 @@ include_once 'sidenav.php';
                 if ($this->services->num_rows > 0) { ?>
                     <?php
                     while ($row = $this->services->fetch_assoc()) {
+                        $serviceId = $row["service_id"];
                         if ($row["type"] == 'hall') {
                     ?>
                             <span id="searchrow">
                                 <article class="row mlb">
                                     <ul>
-                                        <li><?php echo $row["service_id"] ?><span class="small">(update)</span></li>
+                                        <li><?php echo $serviceId ?><span class="small">(update)</span></li>
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -168,7 +170,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -190,7 +192,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -212,7 +214,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -234,7 +236,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -256,7 +258,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -278,7 +280,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -337,7 +339,7 @@ include_once 'sidenav.php';
                         Insert Success!
                     </p>
                     <p>
-                        New Service Added
+                        <?php echo $this->success; ?>
                     </p>
                     <button id='ok'>
                         OK
