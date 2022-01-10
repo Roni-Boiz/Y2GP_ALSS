@@ -69,7 +69,7 @@ include_once 'sidenav.php';
                                     <small>by <b><?= $row["name"]?></b> - <?php echo  $date?> <?php echo $time ?></small>
                                 </div>
                             </div>
-                            <p id="announcementContent"><?php echo $row["content"] ?></p>
+                            <div class="announcementContent"><?php echo $row["content"] ?></div>
                         </div>
                         <?php
                         if ($row["file_name"]) {
@@ -92,5 +92,9 @@ include_once 'sidenav.php';
         </div> <!-- .hawlockbody div closed here -->
     </div>
 </body>
+
+<script>
+    CKEDITOR.replace('content');
+</script>
 
 </html>
