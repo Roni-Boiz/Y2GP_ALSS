@@ -147,6 +147,17 @@ class adminController extends controller
         $this->view->render('admin/serviceView');
     }
 
+    public function getRequestReservations(){
+        $result = $this->model->getAllReservationsByDate($_POST['startDate'],$_POST['endDate']);
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        // create a JSON object
+        print json_encode($data);
+    }
+
     public function announcement()
     {
         $this->view->ann = $this->model->getAnnouncement();
