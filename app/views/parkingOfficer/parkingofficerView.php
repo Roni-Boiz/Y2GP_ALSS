@@ -11,33 +11,37 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <h2>Announcements</h2>
+            <!-- Loading Announcements -->
             <?php
             if ($this->ann->num_rows > 0) {
                 $count = 4;
-                while ($row = $this->ann->fetch_assoc()) { ?>
+                while ($row = $this->ann->fetch_assoc()) {
+            ?>
                     <div class="card">
-
                         <div class="card-body">
                             <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
+                                <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'"/>
                                 <div class="detail-info">
                                     <?php
                                     $datetime =  $row["date"];
-                                    $date = date('Y-m-d', strtotime($datetime));
-                                    $time = date('H:i:s', strtotime($datetime));
+                                    $date = date('F j, Y', strtotime($datetime));
+                                    $time = date('h:i A', strtotime($datetime));
                                     ?>
-                                    <h5><?php echo  $date ?></h5>
-                                    <small><?php echo $time ?></small>
+                                    <h3><?= $row["topic"] ?></h3>
+                                    <small>by <b><?= $row["name"] ?></b> - <?php echo  $date ?> <?php echo $time ?></small>
                                 </div>
                             </div>
-                            <h4><?php echo $row["topic"]; ?></h4>
-                            <p><?php echo $row["content"]; ?></p>
+                            <p id="announcementContent"><?php echo $row["content"] ?></p>
                         </div>
-                        <div class="card-header">
-                            <?php if ($count < 5) $count++;
-                            else $count = 2 ?>
-                            <img src="../../public/img/<?php echo $count ?>.jpg">
-                        </div>
+                        <?php
+                        if ($row["file_name"]) {
+                        ?>
+                            <div class="card-header">
+                                <img src="../../uploads/announcement/<?php echo $row["file_name"] ?>">
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
             <?php
                 }
@@ -46,8 +50,6 @@ include_once 'sidenav.php';
             }
             ?>
             <br>
-
-
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
