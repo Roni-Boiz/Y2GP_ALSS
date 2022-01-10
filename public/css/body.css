@@ -1527,12 +1527,12 @@ select{
   text-align: center;
 }
 
-.serviceSummary .chartContainer1 div {
+/* .serviceSummary .chartContainer1 div {
   height: 60px;
-}
+} */
 
 .serviceSummary .chartContainer2 div {
-  height: 60px;
+  height: 62px;
 }
 
 #serviceCard h2{
