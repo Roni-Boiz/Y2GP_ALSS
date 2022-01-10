@@ -241,7 +241,7 @@ nav i{
 }
 .detail{
   display: flex;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .detail img {
   border-radius: 50%;
@@ -255,6 +255,11 @@ nav i{
 }
 .detail-info small {
   color: #545d7a;
+  font-size: .9375rem;
+}
+#announcementContent{
+  margin: 20px 0px !important;
+  font-size: medium;
 }
 
 /* icon with title part */
@@ -1499,11 +1504,25 @@ select{
     display: flex;
     flex-direction: column;
   }
+  .formAddEmployee .profile-pic{
+    height: 90px;
+    width: 90px;
+  }
+  .formAddEmployee #emptype{
+    width: 55%;
+  }
+  .formAddEmployee .input-field{
+    width: 98%;
+  }
 }
 
 @media(max-width: 800px){
   .formAddEmployee{
     grid-template-columns: none;
+  }
+  .formAddEmployee .profile-pic{
+    height: 90px;
+    width: 90px;
   }
 }
 /* End of Admin Employee Styles */
