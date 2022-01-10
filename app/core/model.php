@@ -18,9 +18,13 @@ class model{
 
     public function getAnnouncement(){
         if($_SESSION['type']=="resident"){
-            $sql = "SELECT * FROM announcement WHERE category='resident' OR category='both' ORDER BY date DESC";
+            $sql = "SELECT announcement.*,admin.name AS name,user_account.profile_pic AS profile_pic FROM announcement INNER JOIN admin ON announcement.admin_id=admin.admin_id LEFT JOIN user_account ON admin.user_id=user_account.user_id WHERE category='resident' OR category='both' 
+            UNION 
+            SELECT announcement.*,concat_ws(' ',manager.fname,manager.lname) AS name,user_account.profile_pic AS profile_pic FROM announcement INNER JOIN manager ON announcement.employee_id=manager.employee_id LEFT JOIN user_account ON manager.user_id=user_account.user_id WHERE category='administration' OR category='both' ORDER BY date DESC";
         }else{
-            $sql = "SELECT * FROM announcement WHERE category='administration'  OR category='both' ORDER BY date DESC";
+            $sql = "SELECT announcement.*,admin.name AS name,user_account.profile_pic AS profile_pic FROM announcement INNER JOIN admin ON announcement.admin_id=admin.admin_id LEFT JOIN user_account ON admin.user_id=user_account.user_id WHERE category='administration' OR category='both' 
+            UNION 
+            SELECT announcement.*,concat_ws(' ',manager.fname,manager.lname) AS name,user_account.profile_pic AS profile_pic FROM announcement INNER JOIN manager ON announcement.employee_id=manager.employee_id LEFT JOIN user_account ON manager.user_id=user_account.user_id WHERE category='administration' OR category='both' ORDER BY date DESC";
         }
         $ann = $this->conn->query($sql);   
         return $ann;
