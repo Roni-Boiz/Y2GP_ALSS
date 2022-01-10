@@ -158,6 +158,16 @@ class adminController extends controller
         print json_encode($data);
     }
 
+    public function getServices(){
+        $result = $this->model->getAllServices();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
     public function announcement()
     {
         $this->view->ann = $this->model->getAnnouncement();
