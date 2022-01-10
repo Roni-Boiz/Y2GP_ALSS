@@ -16,10 +16,12 @@ include_once 'sidenav.php';
                     <div class="chartContainer1">
                         <div>
                             <h3>No of Reservations</h3>
-                            <input type="date" name="date" id="" style="padding: 5px;">
+                            <input type="date" name="date" id="searchStartDate" min="<?= date("Y-m-01", strtotime("2021-01-01")) ?>" max="<?= date("Y-m-d") ?>" style="padding: 5px;" onchange="loadRequestReservations()">
+                            -
+                            <input type="date" name="date" id="searchEndDate" min="<?= date("Y-m-01", strtotime("2021-01-01")) ?>" max="<?= date("Y-m-d") ?>" style="padding: 5px;" onchange="loadRequestReservations()">
                         </div>
 
-                        <canvas id="employeeChart">
+                        <canvas id="serviceChart">
                         </canvas>
                     </div>
 
@@ -28,7 +30,7 @@ include_once 'sidenav.php';
                             <h3>Service Rate</h3>
                             <h6>Fee / Cancle Fee</h6>
                         </div>
-                        <canvas id="employeePercentageChart">
+                        <canvas id="serviceRateChart">
                         </canvas>
                     </div>
                 </div>
@@ -357,100 +359,175 @@ include_once 'sidenav.php';
             });
         });
 
-        let chart1 = document.getElementById('employeeChart').getContext('2d');
-        let massChart1 = new Chart(chart1, {
-            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['Hall', 'Treatment', 'Fitness', 'Parking Slot', 'Technical', 'Laundry', 'Backup'],
-                datasets: [{
-                    label: 'Reservations',
-                    data: [
-                        8, 10, 15, 5, 6, 10, 20
-                    ],
-                    // backgroundColor : '#423D59',
-                    backgroundColor: [
-                        'rgba(153,102,255,0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 1,
-                    hoverBorderColor: '#003',
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        display: false,
-                        position: 'center',
-                        labels: {
-                            fontColor: '#000'
-                        }
-                    },
-                    title: {
-                        display: false,
-                        text: 'Employability Rate',
-                        fontSize: 25
-                    },
+        function loadRequestReservations() {
+            var startDate = "2021-01-01";
+            var endDate = new Date().toISOString().slice(0, 10);
+            const ans1 = $("#searchStartDate").val();
+            const ans2 = $("#searchEndDate").val();
+            if (ans1 !== '') {
+                startDate = $("#searchStartDate").val();
+            }
+            if (ans2 !== '') {
+                endDate = $("#searchEndDate").val();
+            }
+            console.log(startDate);
+            console.log(endDate);
+            $.ajax({
+                url: "getRequestReservations",
+                method: "POST",
+                data: {
+                    startDate: startDate,
+                    endDate: endDate
                 },
-            },
-        });
+                success: function(data) {
+                    var resType = [];
+                    var res = [];
+                    var calRes = [];
+                    // convert JSON object into array
+                    console.log(data);
+                    data = JSON.parse(data);
 
-        let chart2 = document.getElementById('employeePercentageChart').getContext('2d');
-        let massChart2 = new Chart(chart2, {
-            type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['Hall', 'Treatment', 'Fitness', 'Parking Slot', 'Technical', 'Laundry', 'Backup'],
-                datasets: [{
-                        label: 'Fee/h',
-                        data: [
-                            1000, 1500, 500, 500, 800, 1000, 750
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#ae98db',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003',
-                    },
-                    {
-                        label: 'Cancle Fee',
-                        data: [
-                            100, 250, 100, 150, 100, 50, 0
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgb(187,35,22,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#a72d22d9',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003',
+                    for (var i in data) {
+                        resType.push(data[i].type);
+                        res.push(parseInt(data[i].totalRes) - parseInt(data[i].cancelRes));
+                        calRes.push(data[i].cancelRes);
                     }
-                ]
-            },
-            options: {
-                scales: {
-                    y: {
-                        suggestedMin: 0,
+                    var chartdata = {
+                        labels: resType,
+                        datasets: [{
+                                label: 'Reservations',
+                                data: res,
+                                // backgroundColor : '#423D59',
+                                backgroundColor: [
+                                    'rgba(153,102,255,0.6)'
+                                ],
+                                borderWidth: 1,
+                                borderColor: '#777',
+                                hoverBorderWidth: 1,
+                                hoverBorderColor: '#003',
+                            },
+                            {
+                                label: 'Cancels',
+                                data: calRes,
+                                // backgroundColor : '#423D59',
+                                backgroundColor: [
+                                    'rgb(187,35,22,0.6)'
+                                ],
+                                borderWidth: 1,
+                                borderColor: '#777',
+                                hoverBorderWidth: 1,
+                                hoverBorderColor: '#003',
+                            }
+                        ]
+                    };
+                    if (window.barGraph instanceof Chart) {
+                        window.barGraph.destroy();
                     }
+                    var ctx = $("#serviceChart");
+                    // window barGraph;
+                    window.barGraph = new Chart(ctx, {
+                        type: 'bar',
+                        data: chartdata,
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    position: 'center',
+                                    labels: {
+                                        fontColor: '#000'
+                                    }
+                                },
+                                title: {
+                                    display: false,
+                                    text: 'No of Services',
+                                    fontSize: 25
+                                },
+                            },
+                        },
+                    });
                 },
-                plugins: {
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-                        labels: {
-                            fontColor: '#000'
-                        }
-                    },
-                    title: {
-                        display: false,
-                        text: 'Service Rate',
-                        fontSize: 25
-                    },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            loadRequestReservations();
+            $.ajax({
+                url: "getServices",
+                method: "GET",
+                success: function(data) {
+                    var serviceName = [];
+                    var fee = [];
+                    var cancleFee = [];
+                    data = JSON.parse(data);
+                    for (var i in data) {
+                        serviceName.push(data[i].name);
+                        fee.push(data[i].fee);
+                        cancleFee.push(data[i].cancelation_fee);
+                    }
+                    var chartdata = {
+                        labels: serviceName,
+                        datasets: [{
+                                label: 'Fee/h',
+                                data: fee,
+                                // backgroundColor : '#423D59',
+                                backgroundColor: [
+                                    'rgba(153,102,255,0.6)'
+                                ],
+                                borderWidth: 1,
+                                borderColor: '#ae98db',
+                                hoverBorderWidth: 1,
+                                hoverBorderColor: '#003',
+                            },
+                            {
+                                label: 'Cancle Fee',
+                                data: cancleFee,
+                                // backgroundColor : '#423D59',
+                                backgroundColor: [
+                                    'rgb(187,35,22,0.6)'
+                                ],
+                                borderWidth: 1,
+                                borderColor: '#a72d22d9',
+                                hoverBorderWidth: 1,
+                                hoverBorderColor: '#003',
+                            }
+                        ]
+                    };
+
+                    var ctx = $("#serviceRateChart");
+
+                    var barGraph = new Chart(ctx, {
+                        type: 'line',
+                        data: chartdata,
+                        options: {
+                            scales: {
+                                y: {
+                                    suggestedMin: 0,
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                    position: 'bottom',
+                                    labels: {
+                                        fontColor: '#000'
+                                    }
+                                },
+                                title: {
+                                    display: false,
+                                    text: 'Service Rate',
+                                    fontSize: 25
+                                },
+                            },
+                        },
+                    });
                 },
-            },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
         });
     </script>
 </body>
