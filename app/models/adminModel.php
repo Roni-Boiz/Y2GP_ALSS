@@ -135,8 +135,6 @@ class adminModel extends model
         return $result;
     }
 
-
-
     public function getEmployee($empType, $empId)
     {
         $sql = "SELECT * FROM {$empType} WHERE employee_id='{$empId}'";
@@ -272,6 +270,21 @@ class adminModel extends model
     public function updateThisService($serviceId, $newFee, $newCancleFee, $effectDate)
     {
         $sql = "UPDATE service SET new_fee='{$newFee}', next_cancelation_fee='{$newCancleFee}', effect_date='{$effectDate}' WHERE service_id='{$serviceId}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllReservationsByDate($startDate, $endDate){
+        $sql = "SELECT 'fitness' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM fitness_centre_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'Hall' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM hall_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'parking' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM parking_slot_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'treatment' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM treatment_room_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'laundry' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM laundry_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'technical' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM technical_maintenence_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'";
         return $this->conn->query($sql);
     }
 
