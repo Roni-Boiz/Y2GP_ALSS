@@ -257,8 +257,12 @@ nav i{
   color: #545d7a;
   font-size: .9375rem;
 }
-#announcementContent{
-  margin: 20px 0px !important;
+.announcementContent{
+  margin: 20px 0px 0px 0px !important;
+  font-size: medium;
+}
+.announcementContent>p{
+  font-family: 'Poppins', sans-serif;
   font-size: medium;
 }
 
