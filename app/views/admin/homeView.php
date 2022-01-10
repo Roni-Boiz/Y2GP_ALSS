@@ -580,6 +580,84 @@ include_once 'sidenav.php';
         // });
 
         //Charts
+
+        // $(document).ready(function() {
+        //     $.ajax({
+        //         url: "getServices",
+        //         method: "GET",
+        //         success: function(data) {
+        //             var serviceName = [];
+        //             var fee = [];
+        //             var cancleFee = [];
+        //             data = JSON.parse(data);
+        //             for (var i in data) {
+        //                 serviceName.push(data[i].name);
+        //                 fee.push(data[i].fee);
+        //                 cancleFee.push(data[i].cancelation_fee);
+        //             }
+        //             var chartdata = {
+        //                 labels: serviceName,
+        //                 datasets: [{
+        //                         label: 'Fee/h',
+        //                         data: fee,
+        //                         // backgroundColor : '#423D59',
+        //                         backgroundColor: [
+        //                             'rgba(153,102,255,0.6)'
+        //                         ],
+        //                         borderWidth: 1,
+        //                         borderColor: '#ae98db',
+        //                         hoverBorderWidth: 1,
+        //                         hoverBorderColor: '#003',
+        //                     },
+        //                     {
+        //                         label: 'Cancle Fee',
+        //                         data: cancleFee,
+        //                         // backgroundColor : '#423D59',
+        //                         backgroundColor: [
+        //                             'rgb(187,35,22,0.6)'
+        //                         ],
+        //                         borderWidth: 1,
+        //                         borderColor: '#a72d22d9',
+        //                         hoverBorderWidth: 1,
+        //                         hoverBorderColor: '#003',
+        //                     }
+        //                 ]
+        //             };
+
+        //             var ctx = $("#serviceRateChart");
+
+        //             var barGraph = new Chart(ctx, {
+        //                 type: 'line',
+        //                 data: chartdata,
+        //                 options: {
+        //                     scales: {
+        //                         y: {
+        //                             suggestedMin: 0,
+        //                         }
+        //                     },
+        //                     plugins: {
+        //                         legend: {
+        //                             display: false,
+        //                             position: 'bottom',
+        //                             labels: {
+        //                                 fontColor: '#000'
+        //                             }
+        //                         },
+        //                         title: {
+        //                             display: false,
+        //                             text: 'Service Rate',
+        //                             fontSize: 25
+        //                         },
+        //                     },
+        //                 },
+        //             });
+        //         },
+        //         error: function(data) {
+        //             console.log(data);
+        //         }
+        //     });
+        // });
+
         let chart1 = document.getElementById('earningChart').getContext('2d');
         let massChart1 = new Chart(chart1, {
             type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea

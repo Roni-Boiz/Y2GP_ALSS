@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script src="../../public/js/admin.js" defer></script>
     <script src="https://cdn.ckeditor.com/4.17.1/basic/ckeditor.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script> 
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
