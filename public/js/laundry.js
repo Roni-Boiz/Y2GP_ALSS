@@ -3,6 +3,8 @@ $(function () {
     $("#old_password_error_message").hide();
     $("#new_password_error_message").hide();
     $("#renew_password_error_message").hide();
+    $("#acceptBtn").prop('disabled', true);
+    $("#acceptBtn").css('cursor','not-allowed');
 
     $("#opw").keyup(function () {
         check_oldpassword();
@@ -13,6 +15,13 @@ $(function () {
     $("#rnpw").keyup(function () {
         check_retypepassword();
     });
+    $("#opw").keyup(function () {
+        check_oldpassword();
+     });
+     $("#category1,#category2,#category3").on("change", function () {
+        disableDecline();
+     });
+  
     
         $(".tabs-list li a").click(function(e) {
             e.preventDefault();
@@ -23,6 +32,12 @@ $(function () {
             $(".tabs-list li,.tabs div.tab").removeClass("active"); // removing active class from tab and tab content
             $(".tab").hide(); // hiding open tab
             $(tabid).show(); // show tab
+            if(tabid=="#tab2"){
+                $("#tab1").hide();
+            }
+            if(tabid=="#tab3"){
+                $("#tab1").hide();
+            }
             $(this).addClass("active"); //  adding active class to clicked tab
         });
         /* show sidebar */
@@ -167,6 +182,38 @@ function expand() {
 }
 function closePopup(){
     $("#editModel").hide();
+    $(location).attr('href','http://localhost/Y2GP_ALSS/public/laundryController/requests');
+}
+function closePopup2(){
+    console.log(2323);
+    // $(location).attr('href','http://localhost/Y2GP_ALSS/public/laundryController/requests');
+    $("#deleteModel").hide();
+    $("#tab1").css('display','none');
+    $("#tab2").css('display','block');
+    $("#tab1").addClass("tab").removeClass("tab active");
+    $("#2").addClass("active");
+    $("#1").removeClass("active");
 
 }
 
+
+function disableDecline(){
+    // fitness reservation coach
+    $("#acceptBtn").prop('disabled', false);
+    $("#acceptBtn").css('cursor','pointer');
+    if($("#category1").is(":checked") || $("#category2").is(":checked") || $("#category3").is(":checked")){
+        $("#declineBtn").prop('disabled', true);
+        $("#declineBtn").css('cursor','not-allowed');
+        // console.log("ddd");
+    }
+    console.log($("#category1").is(":checked"));
+    console.log($("#category2").is(":checked"));
+    console.log($("#category3").is(":checked"));
+    if(!($("#category1").is(":checked")) && !($("#category2").is(":checked")) && !($("#category3").is(":checked"))){
+        $("#acceptBtn").prop('disabled', true);
+        $("#acceptBtn").css('cursor','not-allowed');
+        $("#declineBtn").prop('disabled', false);
+        $("#declineBtn").css('cursor','pointer');
+        
+    }
+ }
