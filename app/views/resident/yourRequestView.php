@@ -43,8 +43,9 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'maintenence')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['request_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li><?php echo $row["category"]; ?></li>
@@ -92,8 +93,10 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'laundry')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['request_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','laundry')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+
+                                                </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
                                                 <li><?php echo $row["request_date"]; ?></li>
                                                 <li><?php echo $row["state"]; ?></li>
@@ -140,8 +143,9 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteReq(<?php echo $row['visitor_id']; ?>,'visitor')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['visitor_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                </li>
                                                 <li><?php echo $row["visitor_id"]; ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
@@ -159,6 +163,26 @@ include_once 'sidenav.php';
                             }
                             ?>
                         </section>
+                    </div>
+                </div>
+                <!-- delete confirmation -->
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                    <div id="deleteModel">
+                        <a href="javascript:void(0)" class="closebtn">&times;</a>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Are You Sure ?</h2>
+                        </div>
+                        <form action="#" class="formDelete" onsubmit="deleterequest() ;return false;">
+                            <div>
+                                <label> Delete <span id="answer2"></span> request with request ID </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="Delete">
+                            </div>
+
+                        </form>
                     </div>
                 </div>
                 <!-- reservation success message -->
