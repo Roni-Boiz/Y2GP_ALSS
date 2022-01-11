@@ -282,67 +282,67 @@ function check_members() {
    if (count > 50) {
       $("#member").html("Member should be less than 50");
       $("#disablebutton2").prop('disabled', true);
-      $("#disablebutton2").css('cursor','not-allowed');
+      $("#disablebutton2").css('cursor', 'not-allowed');
       $("#member").show();
    }
    else {
       $("#member").hide();
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor','cursor');
+      $("#disablebutton2").css('cursor', 'cursor');
    }
 
 }
 function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
-   console.log(Math.floor(today.getDate()/10));
-   if(!Math.floor(today.getDate()/10)){
-      if(!Math.floor(today.getMonth()%10)){
+   console.log(Math.floor(today.getDate() / 10));
+   if (!Math.floor(today.getDate() / 10)) {
+      if (!Math.floor(today.getMonth() % 10)) {
          var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + (today.getDate());
-      }else{
+      } else {
          var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
       }
-   }else{
-      if(!Math.floor(today.getMonth()%10)){
+   } else {
+      if (!Math.floor(today.getMonth() % 10)) {
          var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate());
-      }else{
+      } else {
          var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
       }
    }
-   
+
    console.log(date);
    console.log(mydate)
-   if ($("#datepicker").val() && (date >= mydate)) {
+   if ($("#datepicker").val() && (date > mydate)) {
       $("#datetodayup").html("Enter upcoming date");
       $("#datetodayup").show();
       $("#canreserve").hide();
       //button disabled for wrong date
-      $("#disablebutton1").css('cursor','not-allowed')
+      $("#disablebutton1").css('cursor', 'not-allowed')
       $("#disablebutton1").prop('disabled', true);
-   }else{
+   } else {
       $("#disablebutton1").prop('disabled', false);
-      $("#disablebutton1").css('cursor','pointer');
+      $("#disablebutton1").css('cursor', 'pointer');
       $("#datetodayup").hide();
    }
    //maintenence type select for easy
-   if ($("#select").val()=="") {
+   if ($("#select").val() == "") {
       $("#maintenecetype").html("Select type first");
       $("#maintenecetype").show();
-   }else{
+   } else {
       $("#maintenecetype").hide();
    }
 }
-function coach(){
+function coach() {
    // fitness reservation coach
-   if ($("#selectcoach").val()=="") {
+   if ($("#selectcoach").val() == "") {
       $("#coach").html("Select coach");
       $("#disablebutton1").prop('disabled', true);
-      $("#disablebutton1").css('cursor','not-allowed');
+      $("#disablebutton1").css('cursor', 'not-allowed');
       $("#coach").show();
-   }else{
+   } else {
       $("#coach").hide();
       $("#disablebutton1").prop('disabled', false);
-      $("#disablebutton1").css('cursor','pointer');
+      $("#disablebutton1").css('cursor', 'pointer');
       check_uptotoday();
    }
 }
@@ -380,56 +380,58 @@ function check_time() {
    if (stime >= etime) {
       $("#endtime").html("Select valid time slot");
       $("#disablebutton2").prop('disabled', true);
-      $("#disablebutton2").css('cursor','not-allowed');
+      $("#disablebutton2").css('cursor', 'not-allowed');
       $("#endtime").show();
-      
+
    }
-   else if ((hour > 6) || (hour==6) && (min==30) ) {
+   else if ((hour > 6) || (hour == 6) && (min == 30)) {
       $("#endtime").html("Maxium booking time 6 hours");
       $("#disablebutton2").prop('disabled', true);
-      $("#disablebutton2").css('cursor','not-allowed');
+      $("#disablebutton2").css('cursor', 'not-allowed');
       $("#endtime").show();
    }
    else {
       $("#endtime").hide();
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor','pointer');
+      $("#disablebutton2").css('cursor', 'pointer');
    }
 }
 // laundry validation
-function laundry(){
+function laundry() {
    console.log($("#catw1").val());
-   
-   if (($("#quantity1").val() && $("#catw1").val()=="")||($("#quantity3").val() && $("#catw3").val()=="")||($("#quantity2").val() && $("#catw2").val()=="")) {
+
+   if (($("#quantity1").val() && $("#catw1").val() == "") || ($("#quantity3").val() && $("#catw3").val() == "") || ($("#quantity2").val() && $("#catw2").val() == "")) {
       $("#category").html("Please select net weight of respective category");
-      $("#disablebutton3").css('cursor','not-allowed');
+      $("#disablebutton3").css('cursor', 'not-allowed');
       $("#disablebutton3").prop('disabled', true);
       $("#category").show();
-   }else{
+   } else {
       $("#category").hide();
-      $("#disablebutton3").css('cursor','pointer');
+      $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
-   if ($("#select").val()=="") {
+   if ($("#select").val() == "") {
       $("#laundrytype").html("Select type first");
-      $("#disablebutton3").css('cursor','not-allowed');
+      $("#disablebutton3").css('cursor', 'not-allowed');
       $("#disablebutton3").prop('disabled', true);
       $("#laundrytype").show();
-   }else{
+   } else {
       $("#laundrytype").hide();
-      $("#disablebutton3").css('cursor','pointer');
+      $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
 }
 
 ////////////////////////////////////////////////////
-function openModel(amodel, amodelBtn) {
-
+////////////////////////////////////////////////////
+function openModel(amodel, amodelBtn, id, type) {
    const model = document.getElementById(amodel);
    const modelBtn = document.getElementsByClassName(amodelBtn);
-   const ans = document.getElementById("answer");
+   const ans1 = document.getElementById("answer1");
+   const ans2 = document.getElementById("answer2");
    const closeBtn = document.getElementsByClassName("closebtn");
-
+   console.log(id);
+   console.log(type);
    for (var i = 0; i < modelBtn.length; i++) {
       modelBtn[i].addEventListener('click', showModel, false);
    }
@@ -449,133 +451,35 @@ function openModel(amodel, amodelBtn) {
       document.getElementById("myCanvasNav").style.opacity = "0";
       model.className = "close";
    }
-}
-// delete row and hide for value addition
-function deleteRes(id, type, s, e, d) {
-   console.log(id, type, s, e, d);
-   r = confirm("Are you sure to remove your reservation ?");
-   if (r == true) {
-      if (type = "hall") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               hallid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "fit") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               fitid: id,
-               stime:s,
-               etime:e,
-               date:d
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "treat") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               treatid: id,
-               stime:s,
-               etime:e,
-               date:d
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "parking") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               parkingid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
+   if (ans1 !== null) {
+      ans1.innerHTML = id;
    }
+   if (ans2 !== null) {
+      ans2.innerHTML = type;
+   }
+
+   // model.addEventListener("click", (e) => {
+   //     if (e.target.id === "yes-btn") {
+   //         ans.innerText = "Hello Guys";
+
+   //     } else if (e.target.id === "no-btn") {
+   //         ans.innerText = "Oh no! ";
+   //     } else {
+   //         return;
+   //     }
+   //     model.className = 'close';
+   // });
 }
+
 // delete row and hide for value addition
 function deleteReq(id, type) {
    r = confirm("Are you sure to remove your request ?");
    if (r == true) {
-      if (type = "laundry") {
-         $.ajax({
-            type: "GET",
-            url: "removeRequest",
-            data: {
-               laundryid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "maintenence") {
-         $.ajax({
-            type: "GET",
-            url: "removeRequest",
-            data: {
-               maintenenceid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "visitor") {
-         $.ajax({
-            type: "GET",
-            url: "removeRequest",
-            data: {
-               visitorid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
+
    }
 }
-function previousView(){
-   $(".success").css('display','none');
+function previousView() {
+   $(".success").css('display', 'none');
 }
 
 // Make payment
@@ -629,4 +533,154 @@ function payNow(userId) {
          payhere.startPayment(payment);
       }
    });
+}
+// delete row and hide for value addition
+
+function deletereservation() {
+   let id = document.getElementById("answer1").innerText;
+   console.log(id);
+   let type = document.getElementById("answer2").innerText;
+   console.log(type);
+
+   if (type = "hall") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            hallid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+   if (type = "fit") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            fitid: id,
+
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+   if (type = "treat") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            treatid: id,
+
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+   if (type = "parking") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            parkingid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+
+}
+
+// delete row and hide for value addition
+
+function deleterequest() {
+   let id = document.getElementById("answer1").innerText;
+   console.log(id);
+   let type = document.getElementById("answer2").innerText;
+   console.log(type);
+   if (type = "laundry") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            laundryid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+   if (type = "maintenence") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            maintenenceid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+   if (type = "visitor") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            visitorid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+         }
+      });
+   }
+
+
 }
