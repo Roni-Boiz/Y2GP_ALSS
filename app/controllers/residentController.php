@@ -355,7 +355,10 @@ class residentController extends controller
         $residentLname = "Perera";
         $amount = "10000";
         //payment update wenna ona userge account eken
+ //payment update wenna ona userge account eken
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
+        $this->model->doPayment();
+        $this->view->render('resident/paymentView');
     }
 }
