@@ -181,25 +181,22 @@ class residentController extends controller
             $etime = $_POST["endtime"] . ":00";
             $members = $_POST["members"];
             //check valid time + check member less than 50
-            
-                $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
-                if ($result == 0) {
-                    $this->view->error = "Already reserved.Please select another time slot!.";
-                } else {
-                    $this->view->success = true;
-                }
+
+            $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
+            if ($result == 0) {
+                $this->view->error = "Already reserved.Please select another time slot!.";
+            } else {
+                $this->view->success = true;
+            }
         }
         //show reservation(user mention date)
         else if (isset($_POST["date"]) && isset($_POST["type"])) {
             $d = $_POST["date"];
             $type = $_POST["type"];
             $this->view->type = $type;
-            if ($d <= date('Y-m-d')) {
-                $this->view->error[] = "Pick upcoming date";
-            } else {
-                $this->view->day = $this->model->dayhall($d, $type);
-                $this->view->selectdate = $d;
-            }
+
+            $this->view->day = $this->model->dayhall($d, $type);
+            $this->view->selectdate = $d;
         }
 
         $this->view->render('resident/hallView');
@@ -221,13 +218,12 @@ class residentController extends controller
     public function CheckPark()
     {
         $data = file_get_contents('php://input');
-        $data = json_decode($data,true);
+        $data = json_decode($data, true);
 
         $this->view->Availability = $this->model->checkParking($data);
 
         echo json_encode($data);
         exit;
-
     }
 
 
@@ -355,7 +351,7 @@ class residentController extends controller
         $residentLname = "Perera";
         $amount = "10000";
         //payment update wenna ona userge account eken
- //payment update wenna ona userge account eken
+        //payment update wenna ona userge account eken
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
         $this->model->doPayment();

@@ -503,12 +503,13 @@ class residentModel extends model
             //remove fitness
         } else if (isset($_GET["fitid"])) {
             $fitid = $_GET["fitid"];
-            $stime = $_GET["stime"];
-            $etime = $_GET["etime"];
-            $d = $_GET["date"];
+            
             //get fee query
-            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee from fitness_centre_reservation where reservation_id='$fitid'"));
+            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from fitness_centre_reservation where reservation_id='$fitid'"));
             $fee=$res['fee'];
+            $stime = $res['start_time'];
+            $etime = $res['end_time'];
+            $d = $res['date'];
             //get cancel fee query
             $sql2 = "SELECT cancelation_fee from service where type='fitness'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
@@ -540,12 +541,13 @@ class residentModel extends model
             }
         } else if (isset($_GET["treatid"])) {
             $treatid = $_GET["treatid"];
-            $stime = $_GET["stime"];
-            $etime = $_GET["etime"];
-            $d = $_GET["date"];
+
             //get fee query
-            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee from treatment_room_reservation where reservation_id='$treatid'"));
+            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from treatment_room_reservation where reservation_id='$treatid'"));
             $fee=$res['fee'];
+            $stime = $res['start_time'];
+            $etime = $res['end_time'];
+            $d = $res['date'];
             //get cancel fee query
             $sql2 = "SELECT cancelation_fee from service where type='treatment'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
@@ -618,13 +620,14 @@ class residentModel extends model
     public function laundry($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state=0";
         $result = $this->conn->query($sql);
         return $result;
     }
     //request laundry services
     public function reqLaundry($type, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3)
     {
+        $this->conn->autocommit(FALSE);
         $date = date('Y-m-d H:i:s');
         //get resident id from user id
         $sql = "SELECT resident_id from resident where user_id='$id'";
@@ -641,7 +644,17 @@ class residentModel extends model
         $a1 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(1,'$latestid','$catw1','$quantity1');");
         $a2 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(2,'$latestid','$catw2','$quantity2');");
         $a3 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(3,'$latestid','$catw3','$quantity3')");
-        // $this->conn->query("ROLLBACK");
+        
+
+        if (($a1 && $a2 && $a3)) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
     }
     //get visitor requests to display in my requests
     public function visitor($id)
@@ -675,9 +688,9 @@ class residentModel extends model
             $sql = "UPDATE technical_maintenence_request SET cancelled_time='$date' WHERE request_id='$maintenenceid' ";
         } else if (isset($_GET["visitorid"])) {
             $visitorid = $_GET["visitorid"];
-            $sql = "UPDATE visitor SET cancelled_time='$date' WHERE request_id='$visitorid' ";
+            $sql = "UPDATE visitor SET cancelled_time='$date' WHERE visitor_id='$visitorid' ";
         }
-        $this->conn->query($sql);
+        return $this->conn->query($sql);
     }
     //read notification of resident
     public function readNotification()
