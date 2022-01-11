@@ -118,7 +118,7 @@ class residentModel extends model
         $to_time = strtotime($stime);
         $from_time = strtotime($etime);
         $minutes = round(abs($to_time - $from_time) / 60, 2);
-        $noofslots = $minutes/30;
+        $noofslots = $minutes / 30;
         // echo $noofslots;
         //function part
         if ($type == "function") {
@@ -139,13 +139,15 @@ class residentModel extends model
                 $rid = mysqli_fetch_assoc($this->conn->query($sql));
                 $rid = $rid["resident_id"];
                 //get fee query
-                $sql2 = "SELECT fee from service where type='hall'";
+                $sql2 = "SELECT fee from service where type='fhall'";
                 $fee = mysqli_fetch_assoc($this->conn->query($sql2));
                 //fee multiple by members and no of slots
 
                 $fee = $fee["fee"] * $members * $noofslots;
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
                 $result = $this->conn->query($sql);
+                $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+                $result2 = $this->conn->query($sql1);
                 return 1;
             }
             //conference part
@@ -166,9 +168,16 @@ class residentModel extends model
                 $sql = "SELECT resident_id from resident where user_id='$id'";
                 $rid = mysqli_fetch_assoc($this->conn->query($sql));
                 $rid = $rid["resident_id"];
-                $fee = 1000 * $members;
+                //get fee query
+                $sql2 = "SELECT fee from service where type='chall'";
+                $fee = mysqli_fetch_assoc($this->conn->query($sql2));
+                //fee multiple by members and no of slots
+
+                $fee = $fee["fee"] * $members * $noofslots;
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
                 $result = $this->conn->query($sql);
+                $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+                $result2 = $this->conn->query($sql1);
                 return 1;
             }
         }
@@ -234,7 +243,7 @@ class residentModel extends model
             //fee multiple by slots
             $fee = $fee["fee"] * ($noofslots - $count);
 
-            $sql = "INSERT into fitness_centre_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$date','$stime','$etime','$date','$fee','$rid','$empid')";
+            $sql = "INSERT into fitness_centre_reservation(date,start_time,end_time,reserved_time,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$fee','$rid','$empid')";
             $result1 = $this->conn->query($sql);
             //check date is in reservation_count
             $sql1 = "SELECT COUNT(date) as countd FROM fitness_reservation_count WHERE date LIKE '$d'";
@@ -254,9 +263,11 @@ class residentModel extends model
                 $count++;
                 // echo "\n".$sql3;
             }
+            $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+            $result4 = $this->conn->query($sql1);
 
 
-            return $result1 && $result2 && $result3;
+            return $result1 && $result2 && $result3 && $result4;
         }
     }
     //show userselected date reservations of fitness
@@ -337,7 +348,7 @@ class residentModel extends model
             $fee = $fee["fee"] * ($noofslots - $count);
             //res id AI karann
             $sql = "INSERT into treatment_room_reservation(date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$type','$fee','$rid',3)";
-            $result = $this->conn->query($sql);
+            $result2 = $this->conn->query($sql);
 
 
             //check date is in reservation_count
@@ -349,7 +360,7 @@ class residentModel extends model
                 //none
             } else {
                 $sql4 = "INSERT INTO treatment_reservation_count(date) VALUES('$d')";
-                $this->conn->query($sql4);
+                $result3=$this->conn->query($sql4);
             }
             while ($count < $noofslots) {
                 $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d';";
@@ -380,7 +391,9 @@ class residentModel extends model
 
             // END
             // //
-            return $result;
+            $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+            $result4 = $this->conn->query($sql1);
+            return  $result1 && $result2 && $result3 && $result4;
         }
     }
     //show userselected date reservations of treatment
@@ -419,7 +432,7 @@ class residentModel extends model
     public function fitnessReservation($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d'";
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' ";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -462,16 +475,31 @@ class residentModel extends model
     //remove reservations
     public function removeReservation()
     {
+        $id = $_SESSION['userId'];
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
         date_default_timezone_set("Asia/Colombo");
         $date = date('Y-m-d H:i:s');
         //remove hall
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
             //get fee query
-            $sql2 = "SELECT cancelation_fee from service where type='hall'";
+            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,type from hall_reservation where reservation_id='$hallid'"));
+            $fee=$res['fee'];
+            $t=$res['type'];
+            //get cancel fee query
+            if($t=='fhall'){
+                $sql2 = "SELECT cancelation_fee from service where type='fhall'";
+            }else{
+                $sql2 = "SELECT cancelation_fee from service where type='chall'";
+            }
+            
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
             $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$hallid' ";
+            $this->conn->query($sql);
             //remove fitness
         } else if (isset($_GET["fitid"])) {
             $fitid = $_GET["fitid"];
@@ -479,14 +507,15 @@ class residentModel extends model
             $etime = $_GET["etime"];
             $d = $_GET["date"];
             //get fee query
+            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee from fitness_centre_reservation where reservation_id='$fitid'"));
+            $fee=$res['fee'];
+            //get cancel fee query
             $sql2 = "SELECT cancelation_fee from service where type='fitness'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
             $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$fitid' ";
             $this->conn->query($sql);
-            //update resident financial account
-            // $sql = "UPDATE resident SET `balance`=`balance`-$penaltyfee where resident_id=$rid";
-            // $this->conn->query($sql);
+            
 
             // echo $stime, $etime;
             //get starting slot no from $stime
@@ -515,13 +544,16 @@ class residentModel extends model
             $etime = $_GET["etime"];
             $d = $_GET["date"];
             //get fee query
+            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee from treatment_room_reservation where reservation_id='$treatid'"));
+            $fee=$res['fee'];
+            //get cancel fee query
             $sql2 = "SELECT cancelation_fee from service where type='treatment'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$treatid' ";
             $this->conn->query($sql);
 
-
+            
             // echo $stime, $etime;
             //get starting slot no from $stime
             $shour = explode(":", $stime);
@@ -536,7 +568,7 @@ class residentModel extends model
             $diff = date_diff(date_create($etime), date_create($stime));
             //get total min/30 = slots
             $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
-            $this->conn->query("Start Transaction");
+            // $this->conn->query("Start Transaction");
             while ($count < $noofslots) {
                 $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` - 1 WHERE date LIKE '$d'";
                 $this->conn->query($sql3);
@@ -553,7 +585,10 @@ class residentModel extends model
             $penaltyfee = $penaltyfee["cancellation_fee"];
             $sql = "UPDATE parking_slot_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$parkid' ";
         }
-        $this->conn->query($sql);
+        $sql1 ="Update resident set balance=balance - ($penaltyfee-$fee) where resident_id=$rid";
+        $result4 = $this->conn->query($sql1);
+        //add wela thiyena fee eka adau karnnna
+
     }
     //get technical services display in my requests
     public function maintenence($id)
@@ -602,11 +637,11 @@ class residentModel extends model
         $latestid = mysqli_fetch_assoc($this->conn->query($sql2));
         $latestid = $latestid["latest"];
         //insert category
-        $this->conn->query("START TRANSACTION");
+        // $this->conn->query("START TRANSACTION");
         $a1 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(1,'$latestid','$catw1','$quantity1');");
         $a2 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(2,'$latestid','$catw2','$quantity2');");
         $a3 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(3,'$latestid','$catw3','$quantity3')");
-        $this->conn->query("ROLLBACK");
+        // $this->conn->query("ROLLBACK");
     }
     //get visitor requests to display in my requests
     public function visitor($id)
@@ -683,6 +718,19 @@ class residentModel extends model
         $sql = "SELECT * from payment where '$s'<=paid_date and paid_date<'$e' and resident_id IN (select resident_id from resident where user_id='$id')";
         $result = $this->conn->query($sql);
         return $result;
+    }
+    public function doPayment(){
+        $id = $_SESSION['userId'];
+        $date = date('Y-m-d H:i:s');
+        $value=5000;
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
+        $sql1 = "INSERT INTO payment(amount,paid_date,resident_id) VALUES('$value','$date','$rid')";
+        $result1 = $this->conn->query($sql1);
+        $sql1 ="Update resident set balance=balance +$value) where resident_id=$rid";
+        $result2 = $this->conn->query($sql1);
     }
     //get total bill amount
     public function billtotal($id, $year, $month)
