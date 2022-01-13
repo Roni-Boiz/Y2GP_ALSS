@@ -26,7 +26,7 @@ include_once 'sidenav.php';
                         <label>Name</label><br>
                         <input type="text" name="name" class="input-field" required><br>
                         <label>Visiting Date</label><br>
-                        <input type="date"  name="vdate" id="datepicker" class="input-field" required><br>
+                        <input type="date" min="<?= date("Y-m-d") ?>" name="vdate" id="datepicker" class="input-field" required><br>
                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                         <label>Description</label><br>
                         <input type="textarea" name="description" id="description"><br>
