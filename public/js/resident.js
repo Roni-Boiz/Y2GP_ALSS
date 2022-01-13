@@ -101,22 +101,22 @@ $(function () {
    //  });
 
    // popup
-   const model = document.getElementById("model");
-   const modelBtn = document.getElementById("model-btn");
-   const ans = document.getElementById("answer");
-   const closeBtn = document.getElementById("closebtn");
+   // const model = document.getElementById("model");
+   // const modelBtn = document.getElementById("model-btn");
+   // const ans = document.getElementById("answer");
+   // const closeBtn = document.getElementById("closebtn");
 
-   modelBtn.addEventListener("click", () => {
-      document.getElementById("myCanvasNav").style.width = "100%";
-      document.getElementById("myCanvasNav").style.opacity = "0.8";
-      model.className = "open";
-   })
+   // modelBtn.addEventListener("click", () => {
+   //    document.getElementById("myCanvasNav").style.width = "100%";
+   //    document.getElementById("myCanvasNav").style.opacity = "0.8";
+   //    model.className = "open";
+   // })
 
-   closeBtn.addEventListener("click", () => {
-      model.className = 'close';
-      document.getElementById("myCanvasNav").style.width = "0%";
-      document.getElementById("myCanvasNav").style.opacity = "0";
-   })
+   // closeBtn.addEventListener("click", () => {
+   //    model.className = 'close';
+   //    document.getElementById("myCanvasNav").style.width = "0%";
+   //    document.getElementById("myCanvasNav").style.opacity = "0";
+   // })
 
 });
 function uploadPhoto(photo, newfile) {
@@ -539,10 +539,10 @@ function payNow(userId) {
 function deletereservation() {
    let id = document.getElementById("answer1").innerText;
    console.log(id);
-   let type = document.getElementById("answer2").innerText;
-   console.log(type);
+   let t = document.getElementById("answer2").innerText;
+   console.log(t);
 
-   if (type = "hall") {
+   if (t == "hall") {
       $.ajax({
          type: "GET",
          url: "removeReservation",
@@ -552,16 +552,15 @@ function deletereservation() {
          success: function () {
             a = "#" + id;
             console.log(a);
-
+            $(a).closest('article').fadeOut("fast");       
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
          }
       });
    }
-   if (type = "fit") {
+   if (t == "fit") {
       $.ajax({
          type: "GET",
          url: "removeReservation",
@@ -572,15 +571,16 @@ function deletereservation() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
-   if (type = "treat") {
+   if (t == "treat") {
       $.ajax({
          type: "GET",
          url: "removeReservation",
@@ -591,15 +591,16 @@ function deletereservation() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
-   if (type = "parking") {
+   if (t == "parking") {
       $.ajax({
          type: "GET",
          url: "removeReservation",
@@ -609,11 +610,12 @@ function deletereservation() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
@@ -627,7 +629,7 @@ function deleterequest() {
    console.log(id);
    let type = document.getElementById("answer2").innerText;
    console.log(type);
-   if (type = "laundry") {
+   if (type == "laundry") {
       $.ajax({
          type: "GET",
          url: "removeRequest",
@@ -637,15 +639,16 @@ function deleterequest() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
-   if (type = "maintenence") {
+   if (type == "maintenence") {
       $.ajax({
          type: "GET",
          url: "removeRequest",
@@ -655,15 +658,16 @@ function deleterequest() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
-   if (type = "visitor") {
+   if (type == "visitor") {
       $.ajax({
          type: "GET",
          url: "removeRequest",
@@ -673,11 +677,12 @@ function deleterequest() {
          success: function () {
             a = "#" + id;
             console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $(a).closest('article').fadeOut("fast");
             $(".success").css('display', 'block');
             $("#deleteModel").toggleClass('close');
-            $(a).closest('article').fadeOut("fast");
-            $(".success").css('display', 'block');
+
          }
       });
    }
