@@ -198,7 +198,7 @@ include_once 'sidenav.php';
                 <form action="complaint" class="reservationtime" method="post">
                 <div id="col1">
                             <label>Complaint Type</label><br>
-                            <select name="type" class="input-field" required>
+                            <select name="type" class="input-field" id="select" required>
                                 <option value="">Select Type</option>
                                 <option >Parcel</option>
                                 <option >Fitness Centre</option>
@@ -209,6 +209,8 @@ include_once 'sidenav.php';
                                 <option >Kids Area</option>
                                 <option >...</option>
                             </select><br>
+
+                            
                         </div>
                     <div>
                         <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>

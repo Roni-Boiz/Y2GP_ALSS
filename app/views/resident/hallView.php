@@ -35,7 +35,7 @@ include_once 'sidenav.php';
                                         <label>Conference</label><span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
 
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" required class="input-field" value="<?php if (isset($this->selectdate)) {
+                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" required class="input-field" value="<?php if (isset($this->selectdate)) {
                                                                                                                                 echo $this->selectdate;
                                                                                                                             }; ?>"><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
@@ -184,7 +184,7 @@ include_once 'sidenav.php';
 
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" name="date" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                     echo $this->selectdate;
                                                                                                 }; ?>">
                         </div>

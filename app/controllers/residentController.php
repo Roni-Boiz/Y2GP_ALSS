@@ -87,7 +87,7 @@ class residentController extends controller
     }
     public function removeReservation()
     {
-        $this->model->removeReservation();
+        return $this->model->removeReservation();
         header("Refresh:0; url=yourReservation");
         // $this->yourReservation();
     }
@@ -123,14 +123,11 @@ class residentController extends controller
             $coach = $_POST["coach"];
 
             $this->view->coach = $coach;
-            if ($d <= date('Y-m-d')) {
-                $this->view->error[] = "Pick upcoming date";
-            } else {
-                $this->view->day = $this->model->dayfitness($d, $coach);
-                $this->view->shiftno = $this->model->getshiftno($d, $coach);
-                $this->view->selectdate = $d;
-                $this->view->selectcoach = $coach;
-            }
+
+            $this->view->day = $this->model->dayfitness($d, $coach);
+            $this->view->shiftno = $this->model->getshiftno($d, $coach);
+            $this->view->selectdate = $d;
+            $this->view->selectcoach = $coach;
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
@@ -163,6 +160,7 @@ class residentController extends controller
             $this->view->selectdate = $d;
             $this->view->day = $this->model->daytreatment($d);
         }
+        $this->view->treater = $this->model->readtreater();
         $this->view->latest = $this->model->latesttreatment($id);
         $this->view->render('resident/treatmentRoomView');
     }
@@ -181,25 +179,22 @@ class residentController extends controller
             $etime = $_POST["endtime"] . ":00";
             $members = $_POST["members"];
             //check valid time + check member less than 50
-            
-                $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
-                if ($result == 0) {
-                    $this->view->error = "Already reserved.Please select another time slot!.";
-                } else {
-                    $this->view->success = true;
-                }
+
+            $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
+            if ($result == 0) {
+                $this->view->error = "Already reserved.Please select another time slot!.";
+            } else {
+                $this->view->success = true;
+            }
         }
         //show reservation(user mention date)
         else if (isset($_POST["date"]) && isset($_POST["type"])) {
             $d = $_POST["date"];
             $type = $_POST["type"];
             $this->view->type = $type;
-            if ($d <= date('Y-m-d')) {
-                $this->view->error[] = "Pick upcoming date";
-            } else {
-                $this->view->day = $this->model->dayhall($d, $type);
-                $this->view->selectdate = $d;
-            }
+
+            $this->view->day = $this->model->dayhall($d, $type);
+            $this->view->selectdate = $d;
         }
 
         $this->view->render('resident/hallView');
@@ -221,13 +216,12 @@ class residentController extends controller
     public function CheckPark()
     {
         $data = file_get_contents('php://input');
-        $data = json_decode($data,true);
+        $data = json_decode($data, true);
 
         $this->view->Availability = $this->model->checkParking($data);
 
         echo json_encode($data);
         exit;
-
     }
 
 
@@ -296,8 +290,9 @@ class residentController extends controller
             $quantity1 = $_POST["quantity1"];
             $quantity2 = $_POST["quantity2"];
             $quantity3 = $_POST["quantity3"];
-            $this->model->reqLaundry($type, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
-            header("Refresh:0; url=laundry");
+            $pdate = $_POST["pdate"];
+            $this->model->reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
+            // header("Refresh:0; url=laundry");
         }
         $this->view->render('resident/laundryView');
     }
@@ -355,7 +350,7 @@ class residentController extends controller
         $residentLname = "Perera";
         $amount = "10000";
         //payment update wenna ona userge account eken
- //payment update wenna ona userge account eken
+        //payment update wenna ona userge account eken
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
         $this->model->doPayment();

@@ -26,7 +26,7 @@ include_once 'sidenav.php';
                                 <form action="treatment" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" class="input-field" required><br>
+                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" id="datepicker" class="input-field" required><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
@@ -146,29 +146,36 @@ include_once 'sidenav.php';
                         <br>
                         <div class="activeUsers">
                             <div class="head">
-                                <h3>Treatment Types</h3>
+                                <h3>Treaters </h3>
                             </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Full Body Massage</h5>
-                                    <small>Nirupama Rajapaksha</small>
+                            
+
+                            <?php
+                            if ($this->treater->num_rows > 0) {
+                                while ($row = $this->treater->fetch_assoc()) {
+                            ?>
+                                    <div class="detail">
+                                        <div>
+                                        <img src="../../public/img/user.png" alt="user" />
+                                            <div class="detail-info">
+                                                <h5><?php echo "Water Theropy"  ?></h5>
+                                                <h5><?php echo $row["fname"]." ".$row["lname"]  ?></h5>
+                                                <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else { ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo "No available treaters . . ."; ?></h5>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Full-body facia</h5>
-                                    <small>Shiranthi Rajapaksha</small>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Water Therapy</h5>
-                                    <small>Chandrika</small>
-                                </div>
-                            </div>
+                            <?php
+                            } ?>
                         </div>
                 </div>
 
