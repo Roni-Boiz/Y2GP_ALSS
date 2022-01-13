@@ -50,7 +50,7 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['reservation_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','hall')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','hall')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["reservation_id"]; ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
@@ -102,7 +102,7 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['reservation_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','fit')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','fit')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["reservation_id"]; ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
@@ -151,7 +151,7 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['reservation_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','treat')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','treat')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["reservation_id"]; ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
@@ -201,7 +201,7 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['reservation_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id']; ?>','parking')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id']; ?>','parking')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["reservation_id"]; ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
@@ -244,7 +244,7 @@ include_once 'sidenav.php';
                     <form action="#" class="formDelete" method="GET">
                         <div>
                             <label> Delete Reservation With Reservation ID </label>
-                            <span><?= "2" ?></span>
+                            <span></span>
                         </div>
                         <div>
                             <input class="btnRed" type="submit" name="submit" value="Delete">
@@ -263,7 +263,7 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Are You Sure ?</h2>
                     </div>
-                    <form action="#" class="formDelete" onsubmit="deletereservation() ;return false;">
+                    <form class="formDelete" onsubmit="deletereservation() ;return false;">
                         <div>
                             <label> Delete <span id="answer2"></span> reservation with reservation ID </label>
                             <span id="answer1"></span>
@@ -278,7 +278,7 @@ include_once 'sidenav.php';
 
             <!-- reservation success message -->
             <!-- error popup -->
-            <div class="error" style="display:none;">
+            <div class="error" style="display:none;z-index:5">
                 <div class='message'>
                     <div class='check' style="background:red;">
                         &#10006;

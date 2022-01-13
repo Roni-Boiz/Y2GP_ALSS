@@ -152,6 +152,11 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row["arrive_date"]; ?></li>
 
                                             </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                </li>
+                                            </ul>
                                         </article>
                                     </span>
                                 <?php
@@ -173,7 +178,7 @@ include_once 'sidenav.php';
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Are You Sure ?</h2>
                         </div>
-                        <form action="#" class="formDelete" onsubmit="deleterequest() ;return false;">
+                        <form class="formDelete" onsubmit="deleterequest() ;return false;">
                             <div>
                                 <label> Delete <span id="answer2"></span> request with request ID </label>
                                 <span id="answer1"></span>
