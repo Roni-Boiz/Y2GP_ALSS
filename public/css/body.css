@@ -3189,7 +3189,7 @@ input:checked + .slider:before {
   max-height: 150px;
 }
 /* error pop up */
-.b, .bb {
+/* .b, .bb {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -3206,7 +3206,7 @@ input:checked + .slider:before {
   background-position: center;
   background-color: #cccfcf;
   opacity: 50%;
-}
+} */
 
 .message {
   position: absolute;
