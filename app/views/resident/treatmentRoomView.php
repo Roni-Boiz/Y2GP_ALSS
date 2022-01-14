@@ -208,7 +208,7 @@ include_once 'sidenav.php';
                         </div>
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" name="date" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date" name="date" id="datepicker1" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                     echo $this->selectdate;
                                                                                                 }; ?>">
                         </div>

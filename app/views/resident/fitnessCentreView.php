@@ -219,7 +219,7 @@ include_once 'sidenav.php';
                     <form action="fitness" class="reservationtime" method="POST">
                         <div id="col1">
                             <label>Date</label><br>
-                            <input type="date" name="date" id="datepicker" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date" name="date" id="datepicker1" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                                             echo $this->selectdate;
                                                                                                                         }; ?>"><br>
                             <label>Coach</label><br>
@@ -307,7 +307,7 @@ include_once 'sidenav.php';
                             Reservation Success!
                         </p>
                         <p>
-                            Check your email for a booking confirmation. We'll see you soon!
+                            Reservation charges added your bill successfully. We'll see you soon!
                         </p>
                         <button id='ok' onclick='window.location = "fitness" '>
                             OK
