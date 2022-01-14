@@ -31,7 +31,7 @@ include_once 'sidenav.php';
                                     <li>Request Id</li>
                                     <li>Apartment No</li>
                                     <li>Type</li>
-                                    <li>Requested Date & Time</li>
+                                    <li>Preferred Date</li>
                                     <!-- <li>Requested Time</li> -->
                                 </ul>
                             </main>
@@ -45,15 +45,14 @@ include_once 'sidenav.php';
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
-                                                        <!-- <td><a method="get" href="putReached?parcel=<?php echo $row1["request_id"]; ?>"><i class="fas fa-microchip" style="color:black;padding:1px 10px"></i></a></td> -->
                                                         <li><?php echo $row1["apartment_no"]; ?></li>
                                                         <li><?php echo $row1["type"]; ?></li>
-                                                        <li><?php echo $row1["request_date"]; ?></li>
+                                                        <li><?php echo $row1["preferred_date"]; ?></li>
                                                     </ul>
                                                     <ul class="more-content">
-                                                        <!-- <li>
-                                                            <span style="padding-right: 20px;">Description: <?php echo $row1["description"] ?></span>
-                                                        </li> -->
+                                                        <li>
+                                                            <span style="padding-right: 20px;">Requested Date & Time: <?php echo $row1["request_date"] ?></span>
+                                                        </li>
                                                     </ul>
                                                 </article>
                                             </span>
@@ -160,6 +159,7 @@ include_once 'sidenav.php';
                                                 <li><?php echo $row3["apartment_no"]; ?></li>
                                                 <li><?php echo $row3["type"]; ?></li>
                                                 <li><?php echo $row3["request_date"]; ?></li>
+                                                <li><?php echo $row3["fee"]; ?></li>
 
                                             </ul>
                                             <ul class="more-content">
@@ -200,10 +200,7 @@ include_once 'sidenav.php';
                             <div id="col1">
                                 <label for="type"><?php echo $row4["type"] ?></label><br>
                             </div>
-                            <div id="col2">
-                                <h4 style="padding:0px"><?php $d = explode(" ", $row4["request_date"]);
-                                                        echo $d[0] . "<br>" . $d[1] ?></h4>
-                            </div>
+                            
                             <h2><b>Categories:</b></h2>
                             <br>
                             <?php if ($this->selectedNewCat->num_rows > 0) { ?>
@@ -231,7 +228,7 @@ include_once 'sidenav.php';
 
 
                                 <?php } ?>
-                                <input type="hidden" name="requestId" id="requestId" value="<?php echo $id; ?>" readonly>
+                                <input type="hidden" name="requestId1" id="requestId" value="<?php echo $id; ?>" readonly>
                             <?php } ?>
                             <div id="col1">
                                 <label for="Categories">Description</label><br>
@@ -265,11 +262,13 @@ include_once 'sidenav.php';
                         ?>
                         <div style="text-align: center;">
                             <h1><?php echo $row5["request_id"]?></h1>
+                            
                         </div>
 
-                        <form action="addEmployee" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                        <form action="addFees" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                             <div id="col1">
                                 <label for="type"><?php echo $row5["type"]?></label><br>
+                                <input type="hidden" name="requestId2" id="requestId" value="<?php echo $row5["request_id"]; ?>" readonly>
                             </div>
                             <div id="col2">
                             <h4 style="padding:0px"><?php $d = explode(" ", $row5["request_date"]);
@@ -279,32 +278,32 @@ include_once 'sidenav.php';
                             <br>
                             <div id="col1">
                                 <label for="categories">Category 1</label>
-                                <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg">
+                                <input type="text" name="qty1" id="qty1" placeholder="Kg">
                             </div>
                             <div id="col2">
                                 <br>
-                                <input type="text" name="quantiy1" id="quantiy1" placeholder="LKR">
+                                <input type="text" name="amt1" id="amt1" placeholder="LKR">
                             </div>
                             <div id="col1">
                                 <label for="Categories">Category 2</label>
-                                <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg">
+                                <input type="text" name="qty2" id="qty2" placeholder="Kg">
                             </div>
                             <div id="col2">
                                 <br>
-                                <input type="text" name="quantiy1" id="quantiy1" value="" placeholder="LKR">
+                                <input type="text" name="amt2" id="amt2" value="" placeholder="LKR">
                             </div>
                             <div id="col1">
                                 <label for="Categories">Category 3</label>
-                                <input type="text" name="quantiy1" id="quantiy1" placeholder="Kg">
+                                <input type="text" name="qty3" id="qty3" placeholder="Kg">
                             </div>
                             <div id="col2">
                                 <br>
-                                <input type="text" name="quantiy1" id="quantiy1" placeholder="LKR">
+                                <input type="text" name="amt3" id="amt3" placeholder="LKR">
                                 <br><br>
                             </div>
 
                             <div id="col2">
-                                <input style="grid-column:2;" type="submit" name="submit" value="Add">
+                                <input style="grid-column:2;" id="addBtn" type="submit" name="action2" value="Add">
                             </div>
                         </form>
                     </div>

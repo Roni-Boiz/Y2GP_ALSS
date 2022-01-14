@@ -78,7 +78,7 @@ class laundryController extends controller
     }
     public function laundryresponse(){
         $cat1=0;$cat2=0;$cat3=0;
-        $id=$_POST['requestId'];
+        $id=$_POST['requestId1'];
         if ($_POST['action'] == 'Accept') {
             if(isset($_POST['category1'])){
                 $cat1=1;
@@ -98,7 +98,30 @@ class laundryController extends controller
 
         }
 
-        // header("Refresh:0; url=requests");
+        header("Refresh:0; url=requests");
+
+    }
+    public function addFees(){
+        $fee1=0;$fee2=0;$fee3=0;$Total=0;
+        $id=$_POST['requestId2'];
+        if ($_POST['action2'] == 'Add') {
+            if(isset($_POST['qty1']) && isset($_POST['amt1'])){
+                $fee1=$_POST['qty1']*$_POST['amt1'];
+                
+            }
+            if(isset($_POST['qty2']) && isset($_POST['amt2'])){
+                $fee1=$_POST['qty2']*$_POST['amt2'];
+            }
+            if(isset($_POST['qty3']) && isset($_POST['amt3'])){
+                $fee1=$_POST['qty3']*$_POST['amt3'];
+            }
+            $Total=$fee1+$fee2+$fee3;
+            $this->model->addTotalFee($id,$Total);
+    
+  
+        }    
+
+        header("Refresh:0; url=requests");
 
     }
     public function getNotification()

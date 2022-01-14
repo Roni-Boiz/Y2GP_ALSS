@@ -217,3 +217,28 @@ function disableDecline(){
         
     }
  }
+//  function laundry(){
+//     console.log($("#catw1").val());
+    
+//     if (($("#quantity1").val() && $("#catw1").val()=="")||($("#quantity3").val() && $("#catw3").val()=="")||($("#quantity2").val() && $("#catw2").val()=="")) {
+//        $("#category").html("Please select net weight of respective category");
+//        $("#disablebutton3").css('cursor','not-allowed');
+//        $("#disablebutton3").prop('disabled', true);
+//        $("#category").show();
+//     }else{
+//        $("#category").hide();
+//        $("#disablebutton3").css('cursor','pointer');
+//        $("#disablebutton3").prop('disabled', false);
+//     }
+//     if ($("#select").val()=="") {
+//        $("#laundrytype").html("Select type first");
+//        $("#disablebutton3").css('cursor','not-allowed');
+//        $("#disablebutton3").prop('disabled', true);
+//        $("#laundrytype").show();
+//     }else{
+//        $("#laundrytype").hide();
+//        $("#disablebutton3").css('cursor','pointer');
+//        $("#disablebutton3").prop('disabled', false);
+//     }
+//  }
+ 
