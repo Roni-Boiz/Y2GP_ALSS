@@ -1,9 +1,11 @@
 $(function () {
    //form input validation
+
    //profile edit
    $("#old_password_error_message").hide();
    $("#new_password_error_message").hide();
    $("#renew_password_error_message").hide();
+
    //hall reservation
    $("#member").hide();
    $("#datetodayup").hide();
@@ -19,6 +21,7 @@ $(function () {
    $("#rnpw").keyup(function () {
       check_retypepassword();
    });
+
    //hall reservation
    $("#mem50").keyup(function () {
       check_members();
@@ -33,6 +36,8 @@ $(function () {
    $("#etime").on("change", function () {
       check_time();
    });
+
+   //laundry form input check
    $("#quantity1,#quantity2,#quantity3").keyup(function () {
       laundry();
    });
@@ -55,11 +60,13 @@ $(function () {
       $(tabid).show(); // show tab
       $(this).addClass("active"); //  adding active class to clicked tab
    });
+
    // side nav
    $('.btn').click(function () {
       $(this).toggleClass("click");
       $('.sidebar').toggleClass("show");
    });
+
    // search row
    $("#mySearch").on('keyup', function () {
       var value = $(this).val().toLowerCase();
@@ -100,25 +107,26 @@ $(function () {
    //     uploadBtn.style.display = "none";
    //  });
 
-   // popup
-   // const model = document.getElementById("model");
-   // const modelBtn = document.getElementById("model-btn");
-   // const ans = document.getElementById("answer");
-   // const closeBtn = document.getElementById("closebtn");
+   //popup
+   const model = document.getElementById("model");
+   const modelBtn = document.getElementById("model-btn");
+   const ans = document.getElementById("answer");
+   const closeBtn = document.getElementById("closebtn");
 
-   // modelBtn.addEventListener("click", () => {
-   //    document.getElementById("myCanvasNav").style.width = "100%";
-   //    document.getElementById("myCanvasNav").style.opacity = "0.8";
-   //    model.className = "open";
-   // })
+   modelBtn.addEventListener("click", () => {
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
+   })
 
-   // closeBtn.addEventListener("click", () => {
-   //    model.className = 'close';
-   //    document.getElementById("myCanvasNav").style.width = "0%";
-   //    document.getElementById("myCanvasNav").style.opacity = "0";
-   // })
+   closeBtn.addEventListener("click", () => {
+      model.className = 'close';
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+   })
 
 });
+
 function uploadPhoto(photo, newfile) {
    const img = document.getElementById(photo);
    const file = document.getElementById(newfile);
@@ -134,6 +142,7 @@ function uploadPhoto(photo, newfile) {
       }
    });
 }
+
 function expand() {
    if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
       document.getElementById("hh").style.gridColumn = "2";
@@ -149,15 +158,19 @@ function expand() {
       document.getElementById("side").style.transform = "rotateY(180deg)";
    }
 }
+
 function confirmSave() {
    alert("Are Your Sure to Save Details?")
 }
+
 function confirmDelete() {
    confirm('Are Your Sure to Delete')
 }
+
 function successcomplaint() {
    alert("your complaint will be considered soon.. thank you for your feedback")
 }
+
 // add new field in profile
 function newVehicle() {
    if ($("#newveh").is(':hidden')) {
@@ -166,6 +179,7 @@ function newVehicle() {
       $("#newveh").hide();
    }
 }
+
 function newMember() {
    if ($("#newmem").is(':hidden')) {
       $("#newmem").show(500);
@@ -173,6 +187,7 @@ function newMember() {
       $("#newmem").hide();
    }
 }
+
 function showmembers() {
    if ($("#showmem").is(':hidden')) {
       $("#showmem").show(500);
@@ -180,6 +195,7 @@ function showmembers() {
       $("#showmem").hide();
    }
 }
+
 //payment
 function showcardpayment() {
    if ($("#cardpayment").is(':hidden')) {
@@ -188,6 +204,7 @@ function showcardpayment() {
       $("#cardpayment").hide();
    }
 }
+
 // edit profile
 function setVisibility1(id) {
    if (document.getElementById('editprofile').value == 'Edit Profile') {
@@ -200,6 +217,7 @@ function setVisibility1(id) {
       document.getElementById(id).style.display = 'none';
    }
 }
+
 // Change Password show/hide
 function setVisibility2(id) {
    if (document.getElementById('changepassword').value == 'Change Password') {
@@ -211,6 +229,7 @@ function setVisibility2(id) {
    }
 }
 
+
 function setVisibility3(id) {
    if (document.getElementById(id).style.display == 'none') {
       document.getElementById('showmore').text = 'Show Less';
@@ -220,6 +239,7 @@ function setVisibility3(id) {
       document.getElementById(id).style.display = 'none';
    }
 }
+
 //form validation in profile
 function check_oldpassword() {
    var password_length = $("#opw").val().length;
@@ -241,6 +261,8 @@ function check_oldpassword() {
    }
 
 }
+
+
 function check_newpassword() {
    var password_length = $("#npw").val().length;
 
@@ -262,6 +284,7 @@ function check_newpassword() {
    }
 }
 
+
 function check_retypepassword() {
    var rpassword = $("#npw").val();
    var retype_password = $("#rnpw").val();
@@ -276,6 +299,7 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
+
 //form validation in reservation
 function check_members() {
    var count = $("#mem50").val();
@@ -292,6 +316,8 @@ function check_members() {
    }
 
 }
+
+
 function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
@@ -332,6 +358,8 @@ function check_uptotoday() {
       $("#maintenecetype").hide();
    }
 }
+
+
 function coach() {
    // fitness reservation coach
    if ($("#selectcoach").val() == "") {
@@ -360,9 +388,30 @@ function coach() {
 //       //check_time();
 //    }
 // }
+
+
 function check_time() {
    var stime = $("#stime").val();
    var etime = $("#etime").val();
+
+   var dt = new Date();
+   if (!Math.floor(dt.getDate() / 10)) {
+      if (!Math.floor(dt.getMonth() % 10)) {
+         var date = dt.getFullYear() + '-0' + (dt.getMonth() + 1) + '-0' + (dt.getDate());
+      } else {
+         var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-0' + (dt.getDate());
+      }
+   } else {
+      if (!Math.floor(dt.getMonth() % 10)) {
+         var date = dt.getFullYear() + '-0' + (dt.getMonth() + 1) + '-' + (dt.getDate());
+      } else {
+         var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + (dt.getDate());
+      }
+   }
+
+   var h = dt.getHours();
+   var m = dt.getMinutes();
+   console.log(h, m);
    //difference of time
    s = stime.split(':');
    e = etime.split(':');
@@ -376,7 +425,9 @@ function check_time() {
    hour = e[0] - s[0] - hour_carry;
    diff = hour + ":" + min;
    console.log(diff);
-
+   console.log(h);
+   console.log(s[0]);
+   
    if (stime >= etime) {
       $("#endtime").html("Select valid time slot");
       $("#disablebutton2").prop('disabled', true);
@@ -395,7 +446,19 @@ function check_time() {
       $("#disablebutton2").prop('disabled', false);
       $("#disablebutton2").css('cursor', 'pointer');
    }
+   if ($("#datepicker1").val() == date) {
+
+      if (s[0] > h) {
+         console.log("can");
+      } else {
+         $("#endtime").html("Can't reserve this time for today");
+         $("#disablebutton2").prop('disabled', true);
+         $("#disablebutton2").css('cursor', 'not-allowed');
+         $("#endtime").show();
+      }
+   }
 }
+
 // laundry validation
 function laundry() {
    console.log($("#catw1").val());
@@ -422,8 +485,7 @@ function laundry() {
    }
 }
 
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
+//confirm pop up
 function openModel(amodel, amodelBtn, id, type) {
    const model = document.getElementById(amodel);
    const modelBtn = document.getElementsByClassName(amodelBtn);
@@ -478,6 +540,8 @@ function deleteReq(id, type) {
 
    }
 }
+
+//close success pop up
 function previousView() {
    $(".success").css('display', 'none');
 }
@@ -534,8 +598,8 @@ function payNow(userId) {
       }
    });
 }
-// delete row and hide for value addition
 
+// delete row and hide for value addition
 function deletereservation() {
    let id = document.getElementById("answer1").innerText;
    console.log(id);
@@ -552,7 +616,7 @@ function deletereservation() {
          success: function () {
             a = "#" + id;
             console.log(a);
-            $(a).closest('article').fadeOut("fast");       
+            $(a).closest('article').fadeOut("fast");
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
@@ -560,6 +624,7 @@ function deletereservation() {
          }
       });
    }
+
    if (t == "fit") {
       $.ajax({
          type: "GET",
@@ -580,6 +645,7 @@ function deletereservation() {
          }
       });
    }
+
    if (t == "treat") {
       $.ajax({
          type: "GET",
@@ -600,6 +666,7 @@ function deletereservation() {
          }
       });
    }
+
    if (t == "parking") {
       $.ajax({
          type: "GET",
@@ -629,6 +696,7 @@ function deleterequest() {
    console.log(id);
    let type = document.getElementById("answer2").innerText;
    console.log(type);
+
    if (type == "laundry") {
       $.ajax({
          type: "GET",
@@ -648,6 +716,7 @@ function deleterequest() {
          }
       });
    }
+
    if (type == "maintenence") {
       $.ajax({
          type: "GET",
@@ -666,7 +735,9 @@ function deleterequest() {
 
          }
       });
+
    }
+
    if (type == "visitor") {
       $.ajax({
          type: "GET",
