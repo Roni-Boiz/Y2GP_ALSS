@@ -599,6 +599,13 @@ function payNow(userId) {
    });
 }
 
+//close pop up
+function closePopup(){
+   model.className = 'close';
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+}
+
 // delete row and hide for value addition
 function deletereservation() {
    let id = document.getElementById("answer1").innerText;

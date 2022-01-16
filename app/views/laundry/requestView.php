@@ -228,7 +228,7 @@ include_once 'sidenav.php';
 
 
                                 <?php } ?>
-                                <input type="hidden" name="requestId1" id="requestId" value="<?php echo $id; ?>" readonly>
+                                <input type="hidden" name="requestId1" id="requestId1" value="<?php echo $id; ?>" readonly>
                             <?php } ?>
                             <div id="col1">
                                 <label for="Categories">Description</label><br>
