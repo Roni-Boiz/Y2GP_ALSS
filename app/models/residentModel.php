@@ -660,7 +660,7 @@ class residentModel extends model
         $sql = "SELECT resident_id from resident where user_id='$id'";
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
-        $sql1 = "INSERT INTO laundry_request(request_date,preffered_date,description,type,resident_id) VALUES('$date','$pdate','$des','$type','$rid')";
+        $sql1 = "INSERT INTO laundry_request(request_date,preferred_date,description,type,resident_id) VALUES('$date','$pdate','$des','$type','$rid')";
         // echo($sql1);
         $a0=$this->conn->query($sql1);
         //get latest req id

@@ -121,7 +121,7 @@ class laundryController extends controller
   
         }    
 
-        header("Refresh:0; url=requests");
+        // header("Refresh:0; url=requests");
 
     }
     public function getNotification()

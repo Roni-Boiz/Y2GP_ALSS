@@ -18,50 +18,67 @@ include_once 'sidenav.php';
                         <div class="card" id="employeeSummary">
                             <div>
                                 <div>
-                                    <label>Vehicle No</label><br>
-                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  echo "AAA123" ?>>
-                                    <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
+                                    <form method="POST" action="searchVehicle">
+                                        <label>Vehicle No</label><br>
+                                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field">
+                                        <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
+                                    </form>
                                 </div>
 
                             </div>
-                            <div>
-                                <div class="employee">
-                                    <div>
-                                        <span><i class="fas fa-car"></i></span>
-                                    </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
+                            <?php if ($this->parkingStatus->num_rows > 0) { ?>
+                                <div>
+                                    <?php if ($row1 = $this->parkingStatus->fetch_assoc()) { ?>
+                                        <div class="employee">
+                                            <div>
+                                                <span><i class="fas fa-car"></i></span>
+                                            </div>
+                                            <form action="#" class="reservationtime" method="GET">
+                                                <?php echo $row1["date"] ?>
+                                                <br><br>FROM :<br><?php echo $row1["start_time"] ?><br> TO :<br> <?php echo $row1["end_time"] ?><br><br>
+                                                <label class="switch">
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </form>
+                                        </div>
+
+
+                                    <?php } ?>
+                                    <?php if ($row2 = $this->parkingStatus->fetch_assoc()) { ?>
+                                        <div class="employee">
+                                            <div>
+                                                <span><i class="fas fa-car"></i></span>
+                                            </div>
+                                            <form action="#" class="reservationtime" method="GET">
+                                                <?php echo $row2["date"] ?>
+                                                <br><br>FROM :<br><?php echo $row2["start_time"] ?><br> TO :<br> <?php echo $row2["end_time"] ?><br><br>
+                                                <br>
+                                                <div>
+                                                    <?php if (!(isset($row2["checkout_time"]))) {
+                                                        if (!(isset($row2["checkin_time"]))) { ?>
+                                                            <input class="purplebutton" type="submit" name="submit" value="Check-in">
+                                                        <?php
+                                                        } else { ?>
+                                                            CHECKED-IN :<br> <?php echo $row2["checkin_time"] ?>
+                                                            <input class="purplebutton" type="submit" name="submit" value="Check-out">
+                                                    <?php
+                                                        }
+                                                    } ?>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+
+                                    <?php } ?>
                                 </div>
-                                <div class="employee">
-                                    <div>
-                                        <span><i class="fas fa-car"></i></span>
-                                    </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                                <div class="employee">
-                                    <div>
-                                        <span><i class="fas fa-car"></i></span>
-                                    </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                            </div>
+
+                            <?php
+                            } else {
+                                echo "0 results";
+                            }
+                            ?>
                             <div>
 
 

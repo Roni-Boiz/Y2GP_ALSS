@@ -95,7 +95,7 @@ include_once 'sidenav.php';
                                 ?>
                                     <span id="searchrow">
                                         <!-- <span class="comModel" onclick="openModel('deleteModel','comModel')"> -->
-                                        <a style="color:white"href="requests?reqId=<?php echo $row2['request_id']; ?>&tab=1"><span class="newMode">
+                                        <a onclick="addPopup" style="color:white" href="requests?reqId=<?php echo $row2['request_id']; ?>&tab=1"><span class="newMode">
 
                                                 <!-- <span class="comModel" onclick="openModel('completeModel','comModel')"> -->
                                                 <article class="row mlb">
@@ -181,14 +181,34 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+            <!-- delete confirmation -->
+            <div class="divPopupModel" >
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel"   >
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h2>Are You Sure ?</h2>
+                    </div>
+                    <form class="formDelete" onsubmit="deleterequest() ;return false;">
+                        <div>
+                            <label> Delete <span id="answer2"></span> reservation with reservation ID </label>
+                            <span id="answer1"></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
             <?php
             if (isset($this->reqSelected)) {
             ?>
-                <div class="divPopupModel">
+                <div class="divPopupModel" id="close">
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                    <div id="editModel" class="open">
-
-                        <a onclick="closePopup()">&times;</a>
+                    <div id="editModel"  class="open">
+                    <a onclick="closePopup()" class="closebtn">&times;</a>
+                        <!-- <a onclick="closePopup()">&times;</a> -->
                         <div style="text-align: center;">
                             <h1><?php $row4 = $this->requestInfo->fetch_assoc();
                                 echo $row4["request_id"] ;
@@ -228,7 +248,7 @@ include_once 'sidenav.php';
 
 
                                 <?php } ?>
-                                <input type="hidden" name="requestId1" id="requestId" value="<?php echo $id; ?>" readonly>
+                                <input type="hidden" name="requestId1" id="requestId1" value="<?php echo $id; ?>" readonly>
                             <?php } ?>
                             <div id="col1">
                                 <label for="Categories">Description</label><br>
@@ -238,7 +258,9 @@ include_once 'sidenav.php';
                             <br><br>
                             
                             <div id="col1">
-                                <input style="grid-column: 1/span 2; background-color:red" id="declineBtn" type="submit" name="action" value="Decline">
+                            <span onclick="openModel('editModel','model-Btn1', '<?= $id; ?>')" class="model-Btn1" title="Decline Request"><input type="button" style="grid-column: 1/span 2; background-color:red" id="declineBtn" name="action" title="Decline all categories" value="Decline"></span>
+
+                                
                             </div>
                             <div id="col2">
                                 <input style="grid-column: 1/span 2;" id="acceptBtn" type="submit" name="action" value="Accept">
@@ -251,12 +273,14 @@ include_once 'sidenav.php';
 
             if (isset($this->reqSelectedClean)) {
             ?>
-                <div class="divPopupModel">
+                <div class="divPopupModel" id="close">
 
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                     <div id="deleteModel" class="open">
+                    <a onclick="closePopup()" class="closebtn">&times;</a>
 
-                        <a onclick="closePopup2()">&times;</a>
+                        <!-- <a onclick="closePopup2()">&times;</a> -->
+                        
                         <?php
                         $row5 = $this->selectedCleaningCat->fetch_assoc();
                         ?>
@@ -265,7 +289,7 @@ include_once 'sidenav.php';
                             
                         </div>
 
-                        <form action="addFees" class="formAddEmployee" method="POST" enctype="multipart/form-data">
+                        <form action="addFees" class="formAddEmployee" id="addTotal" method="POST" enctype="multipart/form-data">
                             <div id="col1">
                                 <label for="type"><?php echo $row5["type"]?></label><br>
                                 <input type="hidden" name="requestId2" id="requestId" value="<?php echo $row5["request_id"]; ?>" readonly>
@@ -301,13 +325,19 @@ include_once 'sidenav.php';
                                 <input type="text" name="amt3" id="amt3" placeholder="LKR">
                                 <br><br>
                             </div>
-
+                            <div class="col1">
+                            <span class="error_form" id="error_msg" style="font-size:10px;"></span><br>
+                            </div>
                             <div id="col2">
-                                <input style="grid-column:2;" id="addBtn" type="submit" name="action2" value="Add">
+                                
+                                <input style="grid-column:2;" id="add" type="submit" name="action2" value="Add">
+                                
                             </div>
                         </form>
                     </div>
                 </div>
+
+               
 
             <?php }
             if (0) { ?>
@@ -329,6 +359,7 @@ include_once 'sidenav.php';
                 </div>
             <?php
             }; ?>
+             
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

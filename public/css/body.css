@@ -3344,3 +3344,14 @@ input:checked + .slider:before {
     text-align: center;
   }
 }
+#declineBtn{
+  background-color: #2a225a;
+  color: white;
+  padding: 5px 10px;
+  margin: auto;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  grid-column: 3;
+  width: 70px;
+}

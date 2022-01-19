@@ -49,6 +49,12 @@ class parkingController extends controller{
         $this->model->changePassword($opw,$npw,$rnpw);
         $this->profile();
     }
+    public function searchVehicle(){
+        $vid=$_POST["vehicle_no"];
+        $this->view->parkingStatus=$this->model->getParkingStatus($vid);
+        $this->view->render('parkingOfficer/parkingslotView');
+        
+    }
 
 
 }

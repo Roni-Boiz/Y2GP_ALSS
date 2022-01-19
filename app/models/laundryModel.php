@@ -61,7 +61,7 @@ class laundryModel extends model {
         return $result;
     }
     public function getselectedNew($id){
-        $sql="SELECT laundry_request.type,laundry_request.preferred_date,laundry_request.request_date,laundry_request.description,category.category_no,category.weight,category.qty FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id'";
+        $sql="SELECT laundry_request.request_id,laundry_request.type,laundry_request.preferred_date,laundry_request.request_date,laundry_request.description,category.category_no,category.weight,category.qty FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id'";
         $result= $this->conn->query($sql);
         return $result;
     }
