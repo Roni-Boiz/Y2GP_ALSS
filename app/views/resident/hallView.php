@@ -118,8 +118,15 @@ include_once 'sidenav.php';
                                 </div>
                         <?php
                             }
-                        } else {
-                            echo "No Upcomings...";
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
                         } ?>
 
 
@@ -184,7 +191,7 @@ include_once 'sidenav.php';
 
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date"id="datepicker1" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                     echo $this->selectdate;
                                                                                                 }; ?>">
                         </div>

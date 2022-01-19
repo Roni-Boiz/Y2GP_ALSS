@@ -55,11 +55,11 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Upcoming Activities . . .</h3>
                         </div>
-                        
+
                         <?php
-                        if ($this->latest->num_rows > 0) { 
+                        if ($this->latest->num_rows > 0) {
                             while ($row = $this->latest->fetch_assoc()) {
-                            ?>
+                        ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
@@ -70,9 +70,17 @@ include_once 'sidenav.php';
                                     </div>
                                 </div>
                             <?php
-                            } 
+                            }
                         } else {
-                            echo "No Upcomings...";
+                            ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
                         } ?>
 
                     </div>

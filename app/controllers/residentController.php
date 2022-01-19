@@ -23,6 +23,7 @@ class residentController extends controller
         $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('resident/residentView');
     }
+
     // view resident profile
     public function profile()
     {
@@ -39,6 +40,7 @@ class residentController extends controller
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('resident/profileView');
     }
+
     // edit profile
     public function editProfile()
     {
@@ -58,6 +60,8 @@ class residentController extends controller
         $this->model->removeMember($id);
         $this->profile();
     }
+
+    //change resident password
     public function changePassword()
     {
         $opw = $_POST["opw"];
@@ -70,12 +74,8 @@ class residentController extends controller
             header("Refresh:0; url=profile?s=1");
         }
     }
-    // view resident announcement
-    // public function announcement(){
-    //     $this->view->ann = $this->model->getAnnouncement();
-    //     $this->view->render('resident/residentView');
-    // }
-
+   
+    //get all reservation for view to resident
     public function yourReservation()
     {
         $id = $_SESSION['userId'];
@@ -85,12 +85,15 @@ class residentController extends controller
         $this->view->parking = $this->model->parkingReservation($id);
         $this->view->render('resident/yourReservationView');
     }
+
+    //remove reservation with ajax call
     public function removeReservation()
     {
         return $this->model->removeReservation();
         header("Refresh:0; url=yourReservation");
         // $this->yourReservation();
     }
+    //remove reservation with ajax call
     public function removeRequest()
     {
         $this->model->removeRequest();
@@ -98,6 +101,7 @@ class residentController extends controller
         // $this->yourRequest();
     }
 
+    //make fitness centre reservation
     public function fitness()
     {
         $id = $_SESSION['userId'];
@@ -134,6 +138,7 @@ class residentController extends controller
         $this->view->render('resident/fitnessCentreView');
     }
 
+    //make treatment room reservation
     public function treatment()
     {
         $id = $_SESSION['userId'];
@@ -165,6 +170,7 @@ class residentController extends controller
         $this->view->render('resident/treatmentRoomView');
     }
 
+    //make function and conference hall reservation
     public function hall()
     {
         $id = $_SESSION['userId'];
@@ -187,6 +193,7 @@ class residentController extends controller
                 $this->view->success = true;
             }
         }
+
         //show reservation(user mention date)
         else if (isset($_POST["date"]) && isset($_POST["type"])) {
             $d = $_POST["date"];
@@ -232,6 +239,7 @@ class residentController extends controller
         $this->view->render('resident/paymentView');
     }
 
+    //get bill details and print like pdf
     public function bill()
     {
         $id = $_SESSION['userId'];
@@ -254,15 +262,21 @@ class residentController extends controller
         $this->view->render('resident/billView');
     }
 
+    //get all requests of each resident
     public function yourRequest()
     {
         $id = $_SESSION['userId'];
         $this->view->maintenence = $this->model->maintenence($id);
         $this->view->laundry = $this->model->laundry($id);
+        if (isset($_GET["reqid"])) {
+            $id=$_GET["reqid"];
+            $this->view->reqSelected=$this->model->categorydetail($id);
+        }
         $this->view->visitor = $this->model->visitor($id);
         $this->view->render('resident/yourRequestView');
     }
 
+    //make maintenence request
     public function maintenence()
     {
         $id = $_SESSION['userId'];
@@ -278,6 +292,7 @@ class residentController extends controller
         $this->view->render('resident/maintenenceView');
     }
 
+    //make laundry request
     public function laundry()
     {
         $id = $_SESSION['userId'];
@@ -297,6 +312,7 @@ class residentController extends controller
         $this->view->render('resident/laundryView');
     }
 
+    //make visitor request
     public function visitor()
     {
         $id = $_SESSION['userId'];
@@ -308,23 +324,31 @@ class residentController extends controller
         }
         $this->view->render('resident/visitorView');
     }
+
+    //view all notifications
     public function getNotification()
     {
         $this->view->notification = $this->model->readNotification();
         $this->view->render('resident/notificationView');
     }
+
+    //mark as parcel reached
     public function markReached()
     {
         $nid = $_GET['notification'];
         $this->model->setReached($nid);
         $this->getNotification();
     }
+
+    //mark as notification read
     public function markRead()
     {
         $nid = $_GET['notification'];
         $this->model->removeNotification($nid);
         $this->getNotification();
     }
+
+    //make complaints 
     public function complaint()
     {
         $id = $_SESSION['userId'];
@@ -341,6 +365,7 @@ class residentController extends controller
         $this->view->render('resident/complaintView');
     }
 
+    //make payemnts with payhere
     public function makePayment()
     {
         $id = $_GET["userId"];

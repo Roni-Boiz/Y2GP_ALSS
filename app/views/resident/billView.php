@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                                     </td>
 
                                     <td>
-                                        Resident ID :<?php echo " RA001" ?> <br />
+                                        Resident ID :<?php echo "RA".(rand(100,300)); ?> <br />
                                         Created : <?php echo $this->y ?><br />
                                     </td>
                                 </tr>

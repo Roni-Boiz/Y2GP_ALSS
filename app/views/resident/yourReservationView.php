@@ -72,7 +72,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "No reservations yet...<br><a href= 'hall'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -122,7 +122,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "No reservations yet...<br><a href= 'hall'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -171,7 +171,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "<br>No reservations yet...<br><a href= 'hall'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -221,7 +221,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "No reservations yet...<br><a href= 'hall'> Reserve Now...</a>";
                             }
                             ?>
                         </section>

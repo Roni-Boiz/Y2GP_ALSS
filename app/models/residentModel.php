@@ -8,6 +8,7 @@ class residentModel extends model
     {
         parent::__construct();
     }
+
     //Get profile details
     public function readResident()
     {
@@ -16,6 +17,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //Get family members
     public function readMembers()
     {
@@ -23,6 +25,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //remove family members from profile
     public function removeMember($id)
     {
@@ -30,6 +33,7 @@ class residentModel extends model
         $this->conn->query($sql);
         //echo $_POST["removedmem"];
     }
+
     //change basic profile detials 
     public function editProfile()
     {
@@ -46,6 +50,7 @@ class residentModel extends model
         //$this->conn->query($sql3); 
         //}     
     }
+
     //change password
     public function changePassword($opw, $npw, $rnpw)
     {
@@ -73,6 +78,7 @@ class residentModel extends model
         }
         return $errors;
     }
+
     //get hall reservations for display my reservations
     public function hallReservation($id)
     {
@@ -80,6 +86,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 function hall reservations for display in right panel
     public function latesthallfun($id)
     {
@@ -88,6 +95,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 conference hall reservations for display in right panel
     public function latesthallcon($id)
     {
@@ -96,6 +104,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //show userselected date reservations of hall
     public function dayhall($d, $type)
     {
@@ -107,6 +116,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //insert reservations of hall + check availability
     public function reservehall($d, $type, $stime, $etime, $members)
     {
@@ -194,6 +204,7 @@ class residentModel extends model
         }
         return $result1 && $result2;
     }
+
     //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
     {
@@ -291,7 +302,9 @@ class residentModel extends model
             }
             return  $result1 && $result2 && $result3 && $result4;
         }
+
     }
+
     //show userselected date reservations of fitness
     public function dayfitness($d, $coach)
     {
@@ -302,6 +315,7 @@ class residentModel extends model
 
         return $result;
     }
+    //get shift times of trainers
     public function getshiftno($d, $coach)
     {
         $empid = explode(" ", $coach);
@@ -313,6 +327,7 @@ class residentModel extends model
         // echo "Weeknummer: " . $week . ">>".$s['n'];
         return $s['n'];
     }
+
     //insert reservations of treatment + check availability
     public function reservetreatment($d, $type, $stime, $etime)
     {
@@ -332,8 +347,10 @@ class residentModel extends model
         } else {
             $count = 2 * ($shour[0] - 6) + 1;
         }
+
         //get time difference and count no of slots
         $diff = date_diff(date_create($etime), date_create($stime));
+
         //get total min/30 = slots
         $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
 
@@ -346,6 +363,7 @@ class residentModel extends model
         //print_r("-" . $noofslots);
         //go through $count to $noofslots and check less than 5 all slots
         $c = $count;
+
         while ($c < $noofslots) {
             // echo $row[$c]."+";
             if ($row[$c] < 5) {
@@ -357,6 +375,7 @@ class residentModel extends model
                 $avail = 0;
             }
         }
+
         if ($avail == 0) {
             return $avail;
         } else {
@@ -379,7 +398,7 @@ class residentModel extends model
             $sql1 = "SELECT COUNT(date) as countd FROM treatment_reservation_count WHERE date LIKE '$d'";
             $result1 = mysqli_fetch_assoc($this->conn->query($sql1));
             // echo ">".$result1['countd'];
-            //make sql procedure (IN $count IN $noofslots IN $d)
+
             if ($result1['countd']) {
                 //none
             } else {
@@ -408,6 +427,7 @@ class residentModel extends model
             return  $result1 && $result2 && $result3 && $result4;
         }
     }
+
     //show userselected date reservations of treatment
     public function daytreatment($d)
     {
@@ -425,6 +445,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get treatment reservations for display my reservations
     public function treatmentReservation($id)
     {
@@ -432,6 +453,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 reservations for display in right panel    
     public function latesttreatment($id)
     {
@@ -440,6 +462,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get fitness reservations for display my reservations
     public function fitnessReservation($id)
     {
@@ -448,6 +471,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //coach list for reservations
     public function getcoaches()
     {
@@ -455,6 +479,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 reservations for display in right panel
     public function latestfitness($id)
     {
@@ -463,12 +488,16 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    //view parking slots for reservation
     public function viewSlots()
     {
         $sql = "SELECT * from parking_slot";
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    //get parking reservations of resident
     public function parkingReservation($id)
     {
         $d = date('Y-m-d');
@@ -476,6 +505,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 reservations for display in right panel
     public function latestparking($id)
     {
@@ -484,6 +514,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //remove reservations
     public function removeReservation()
     {
@@ -495,6 +526,7 @@ class residentModel extends model
         $rid = $rid["resident_id"];
         date_default_timezone_set("Asia/Colombo");
         $date = date('Y-m-d H:i:s');
+
         //remove hall
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
@@ -542,6 +574,7 @@ class residentModel extends model
             } else {
                 $count = 2 * ($shour[0] - 6) + 1;
             }
+
             //get time difference and count no of slots
             $diff = date_diff(date_create($etime), date_create($stime));
             //get total min/30 = slots
@@ -580,11 +613,12 @@ class residentModel extends model
             } else {
                 $count = 2 * ($shour[0] - 6) + 1;
             }
+
             //get time difference and count no of slots
             $diff = date_diff(date_create($etime), date_create($stime));
             //get total min/30 = slots
             $noofslots = $count + (($diff->days * 24 * 60) + ($diff->h * 60) + $diff->i) / 30;
-            // $this->conn->query("Start Transaction");
+
             while ($count < $noofslots) {
                 $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` - 1 WHERE date LIKE '$d'";
                 $this->conn->query($sql3);
@@ -592,6 +626,7 @@ class residentModel extends model
                 // echo "\n".$sql3;
             }
         }
+
         //complete park
         else if (isset($_GET["park"])) {
             $parkid = $_GET["park"];
@@ -617,6 +652,7 @@ class residentModel extends model
         }
 
     }
+
     //get technical services display in my requests
     public function maintenence($id)
     {
@@ -625,6 +661,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //get latest 5 request if maintenence
     public function latestmaintenence($id)
     {
@@ -633,6 +670,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //request technical services
     public function reqMaintenence($type, $pdate, $des, $id)
     {
@@ -643,14 +681,16 @@ class residentModel extends model
         $sql = "INSERT INTO technical_maintenence_request(request_date,preferred_date,category,description,resident_id) VALUES('$date','$pdate','$type','$des','$rid')";
         return $this->conn->query($sql);
     }
+
     //get technical services requests to display in my requests
     public function laundry($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state=0";
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preffered_date>=$d";
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //request laundry services
     public function reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3)
     {
@@ -684,6 +724,14 @@ class residentModel extends model
             $this->conn->autocommit(TRUE);
         }
     }
+
+    //get category details
+    public function categorydetail($id){
+        $sql = "SELECT * from category WHERE request_id=$id";
+        $result = $this->conn->query($sql);
+        return $result;
+    }
+
     //get visitor requests to display in my requests
     public function visitor($id)
     {
@@ -692,6 +740,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //request visitor
     public function requestVisitor($name, $vdate, $des, $id)
     {
@@ -703,6 +752,7 @@ class residentModel extends model
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
         $this->conn->query($sql);
     }
+
     //remove upcomig requests
     public function removeRequest()
     {
@@ -731,17 +781,20 @@ class residentModel extends model
         }
         return $result;
     }
+
     //read treater
     public function readtreater(){
         $sql = "SELECT fname,lname,contact_no FROM treater";
         return ($this->conn->query($sql));
     }
+
     //read notification of resident
     public function readNotification()
     {
         $sql = "SELECT * FROM notification WHERE user_id={$_SESSION['userId']} AND (view<>1) ORDER BY notification_id DESC LIMIT 10 ";
         return ($this->conn->query($sql));
     }
+
     //set parcels as reached
     public function setReached($nid)
     {
@@ -763,12 +816,14 @@ class residentModel extends model
             $this->conn->autocommit(TRUE);
         }
     }
+
     //remove read  notification
     public function removeNotification($nid)
     {
         $sql = "UPDATE notification SET view=1 WHERE notification_id='$nid'";
         $this->conn->query($sql);
     }
+
     //show current monthly bills
     public function bill($id, $year, $month)
     {
@@ -778,6 +833,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+    //get payments for bill
     public function payment($id, $year, $month)
     {
         $s = date("$year-$month-d 00:00:00", strtotime("first day of this month"));
@@ -786,6 +842,8 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
+    //update payments and bill
     public function doPayment(){
         $this->conn->autocommit(FALSE);
         $id = $_SESSION['userId'];
@@ -809,6 +867,7 @@ class residentModel extends model
             $this->conn->autocommit(TRUE);
         }
     }
+
     //get total bill amount
     public function billtotal($id, $year, $month)
     {
@@ -818,6 +877,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //update payments details
     public function pay($id)
     {
@@ -825,6 +885,7 @@ class residentModel extends model
         $result = $this->conn->query($sql);
         return $result;
     }
+
     //make complaints
     public function complaint($des, $type, $id)
     {
@@ -836,6 +897,7 @@ class residentModel extends model
         $sql = "INSERT INTO complaint(date_time,description,type,resident_id) VALUES('$date','$des','$type','$id')";
         return $this->conn->query($sql);
     }
+    
     //get location+login details
     public function getLoginDevices($id)
     {
