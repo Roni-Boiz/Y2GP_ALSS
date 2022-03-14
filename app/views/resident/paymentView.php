@@ -28,9 +28,8 @@ include_once 'sidenav.php';
                                 <form action="#" class="reservationtime" method="GET">
                                     <div>
                                         <label>Total Payable</label><br>
-                                        <input type="text" name="payable" class="input-field" value="2000.00" READONLY><br>
-                                        <label>Last Payment</label><br>
-                                        <input type="text" name="lastpay" class="input-field" value="5000.00" READONLY><br>
+                                        <input type="text" name="payable" class="input-field" value=<?php echo 2500 ?> READONLY><br>
+                                        
                                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
                                         <button class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
                                     </div>
