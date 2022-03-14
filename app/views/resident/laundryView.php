@@ -59,7 +59,7 @@ include_once 'sidenav.php';
                                 <option>more than 10</option>
                             </select><br>
                             <label>Prefered Date</label><br>
-                            <input type="date" name="pdate" class="input-field" min="<?= date("Y-m-d") ?>" >
+                            <input type="date" name="pdate" class="input-field" required min="<?= date("Y-m-d")  ?>" >
                             <span class="error_form" id="category" style="font-size:10px;"></span><br>
                             <label>Description</label><br>
                             <input type="textarea" name="description" id="description"><br>
@@ -92,6 +92,7 @@ include_once 'sidenav.php';
                             <ul>Category 3</ul>
                             <li>Shirts</li>
                             <li>Troushers</li>
+                            
 
                         </div>
                     </div>

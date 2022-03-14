@@ -22,7 +22,7 @@ include_once 'sidenav.php';
                     <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
                 </div>
 
-                <div id="tab2" class="tab active">
+                <div id="tab2" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- maintenence -->
                         <section class="wrapper">
@@ -44,12 +44,20 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['request_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li><?php echo $row["category"]; ?></li>
-                                                <li><?php echo $row["state"]; ?></li>
+                                                <li>
+                                                    <?php
+                                                    if ($row["state"] == "p") echo "Pending";
+                                                    if ($row["state"] == "d") echo "Rejected";
+                                                    if ($row["state"] == "") echo "In-Progress";
+                                                    if ($row["state"] == "") echo "Completed";
+
+                                                    ?>
+                                                </li>
 
                                             </ul>
                                             <ul class="more-content">
@@ -72,7 +80,7 @@ include_once 'sidenav.php';
                         </section>
                     </div>
                 </div>
-                <div id="tab1" class="tab">
+                <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- laundry -->
                         <section class="wrapper">
@@ -115,7 +123,7 @@ include_once 'sidenav.php';
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
-                                                    <a href="yourRequest?reqid=?php echo $row['request_id']; ?>" style="color:white">View more...</a>
+                                                    <a href="yourRequest?reqid=<?php echo $row['request_id']; ?>" style="color:white"><i class="fas fa-angle-double-right" title="See more..."></i></a>
                                                 </li>
                                             </ul>
 
@@ -155,7 +163,7 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['visitor_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Manager"><i class="fas fa-trash-alt"></i></span>
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["visitor_id"]; ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
@@ -209,25 +217,36 @@ include_once 'sidenav.php';
                 ?>
                     <div class="divPopupModel">
                         <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                        <div id="editModel" class="open">
+                        <div id="model" class="open">
 
                             <a onclick="closePopup()">&times;</a>
                             <div style="text-align: center;">
                                 <?php
                                 if ($this->reqSelected->num_rows > 0) {
+                                    $count = 0;
                                 ?>
                                     <?php
                                     while ($row = $this->reqSelected->fetch_assoc()) {
                                     ?>
-                                        <li><?php echo $row['category_no']; ?></li>
-                                        <li><?php echo $row['qty']; ?></li>
-                                        <li><?php echo $row['weight']; ?></li>
+                                        <?php if ($count == 0) echo "<h2>Categories</h2>" . $row["request_id"];
+                                        $count++;
+                                        ?>
+                                        <div id="col1">
+                                            <label for="categories"><?php echo "Category  " . $row["category_no"] ?> </label>
+                                            <input type="text" name="quantiy1" id="quantiy1" value="Qty :<?php echo $row["qty"] ?>" readonly>
+
+                                        </div>
+
+                                        <div id="col2">
+
+                                            <input type="text" name="quantiy1" id="quantiy1" value="Net weight :<?php echo $row["weight"] ?>" readonly>
+                                        </div>
 
                                     <?php
                                     }
                                     ?>
                             </div>
-                            <h2><b>Categories:</b></h2>
+
 
                         </div>
                     </div>

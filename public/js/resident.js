@@ -322,34 +322,36 @@ function check_uptotoday() {
    var mydate = $("#datepicker").val();
    var today = new Date();
    console.log(Math.floor(today.getDate() / 10));
-   if (!Math.floor(today.getDate() / 10)) {
-      if (!Math.floor(today.getMonth() % 10)) {
-         var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + (today.getDate());
-      } else {
-         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
-      }
-   } else {
-      if (!Math.floor(today.getMonth() % 10)) {
-         var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate());
-      } else {
-         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
-      }
-   }
+   console.log(Math.floor(today.getMonth() / 10));
+
+   // if (!Math.floor(today.getDate() / 10)) {
+   //    if (!Math.floor(today.getMonth() % 10)) {
+   //       var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + (today.getDate());
+   //    } else {
+   //       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-0' + (today.getDate());
+   //    }
+   // } else{
+   //    if (!Math.floor(today.getMonth() % 10)) {
+   //       var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate());
+   //    } else {
+   //       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate());
+   //    }
+   // }
 
    console.log(date);
    console.log(mydate)
-   if ($("#datepicker").val() && (date > mydate)) {
-      $("#datetodayup").html("Enter upcoming date");
-      $("#datetodayup").show();
-      $("#canreserve").hide();
-      //button disabled for wrong date
-      $("#disablebutton1").css('cursor', 'not-allowed')
-      $("#disablebutton1").prop('disabled', true);
-   } else {
-      $("#disablebutton1").prop('disabled', false);
-      $("#disablebutton1").css('cursor', 'pointer');
-      $("#datetodayup").hide();
-   }
+   // if ($("#datepicker").val() && (date > mydate)) {
+   //    $("#datetodayup").html("Enter upcoming date");
+   //    $("#datetodayup").show();
+   //    $("#canreserve").hide();
+   //    //button disabled for wrong date
+   //    $("#disablebutton1").css('cursor', 'not-allowed')
+   //    $("#disablebutton1").prop('disabled', true);
+   // } else {
+   //    $("#disablebutton1").prop('disabled', false);
+   //    $("#disablebutton1").css('cursor', 'pointer');
+   //    $("#datetodayup").hide();
+   // }
    //maintenence type select for easy
    if ($("#select").val() == "") {
       $("#maintenecetype").html("Select type first");
@@ -393,21 +395,13 @@ function coach() {
 function check_time() {
    var stime = $("#stime").val();
    var etime = $("#etime").val();
-
+   var mydate = $("#datepicker").val();
+   //current date in yyyy-mm-dd format
+   var todayDate = new Date().toISOString().slice(0, 10);
+   console.log(todayDate);
+   console.log(mydate);
    var dt = new Date();
-   if (!Math.floor(dt.getDate() / 10)) {
-      if (!Math.floor(dt.getMonth() % 10)) {
-         var date = dt.getFullYear() + '-0' + (dt.getMonth() + 1) + '-0' + (dt.getDate());
-      } else {
-         var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-0' + (dt.getDate());
-      }
-   } else {
-      if (!Math.floor(dt.getMonth() % 10)) {
-         var date = dt.getFullYear() + '-0' + (dt.getMonth() + 1) + '-' + (dt.getDate());
-      } else {
-         var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + (dt.getDate());
-      }
-   }
+   
 
    var h = dt.getHours();
    var m = dt.getMinutes();
@@ -427,8 +421,14 @@ function check_time() {
    console.log(diff);
    console.log(h);
    console.log(s[0]);
-   
-   if (stime >= etime) {
+   if(todayDate==mydate && s[0]<=h){
+      console.log("start err");
+      $("#endtime").html("Start time should be next hour");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+      $("#endtime").show();
+   }
+   else if (stime >= etime) {
       $("#endtime").html("Select valid time slot");
       $("#disablebutton2").prop('disabled', true);
       $("#disablebutton2").css('cursor', 'not-allowed');
@@ -551,7 +551,7 @@ function payNow(userId) {
    var response = '';
    $.ajax({
       type: "GET",
-      url: "makePayment",
+      url: "doPayment",
       data: {
          userId: userId
       },
@@ -597,6 +597,13 @@ function payNow(userId) {
          payhere.startPayment(payment);
       }
    });
+}
+
+//close pop up
+function closePopup(){
+   model.className = 'close';
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
 }
 
 // delete row and hide for value addition

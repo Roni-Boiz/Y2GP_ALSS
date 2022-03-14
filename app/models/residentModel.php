@@ -91,7 +91,8 @@ class residentModel extends model
     public function latesthallfun($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date > '$d'  AND  type='function' AND cancelled_time IS NULL LIMIT 5";
+
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='function' AND cancelled_time IS NULL LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -100,7 +101,7 @@ class residentModel extends model
     public function latesthallcon($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date > '$d'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -139,7 +140,7 @@ class residentModel extends model
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
-                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime >= $row["start_time"] && $etime < $row["end_time"]) {
+                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
             }
@@ -157,10 +158,11 @@ class residentModel extends model
 
                 $fee = $fee["fee"] * $members * $noofslots;
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
+                //echo $sql;
                 $result1 = $this->conn->query($sql);
                 $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
                 $result2 = $this->conn->query($sql1);
-                return 1;
+                
             }
             //conference part
         } else {
@@ -169,7 +171,7 @@ class residentModel extends model
             while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
-                if ($stime >= $row["start_time"] && $stime <= $row["end_time"] || $etime >= $row["start_time"] && $etime <= $row["end_time"]) {
+                if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
             }
@@ -180,6 +182,7 @@ class residentModel extends model
                 $sql = "SELECT resident_id from resident where user_id='$id'";
                 $rid = mysqli_fetch_assoc($this->conn->query($sql));
                 $rid = $rid["resident_id"];
+                //echo $rid;
                 //get fee query
                 $sql2 = "SELECT fee from service where type='chall'";
                 $fee = mysqli_fetch_assoc($this->conn->query($sql2));
@@ -191,16 +194,17 @@ class residentModel extends model
                 $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
                 $result2 = $this->conn->query($sql1);
                 
-                if ($result1 && $result2) {
-                    $this->conn->commit();
-                    $this->conn->autocommit(TRUE);
-                } else {
-                    // Rollback transaction
-                    // echo "Commit transaction failed";
-                    $this->conn->rollback();
-                    $this->conn->autocommit(TRUE);
-                }
+                
             }
+        }
+        if ($result1 && $result2) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
         }
         return $result1 && $result2;
     }
@@ -385,7 +389,7 @@ class residentModel extends model
             $rid = $rid["resident_id"];
             // echo "can reserve";
             //get fee query
-            $sql2 = "SELECT fee from service where type='treatment'";
+            $sql2 = "SELECT fee from service where type='treatment' and name='$type'";
             $fee = mysqli_fetch_assoc($this->conn->query($sql2));
             //fee multiple by slots
             $fee = $fee["fee"] * ($noofslots - $count);
@@ -543,7 +547,8 @@ class residentModel extends model
             
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$hallid' ";
+            $val=$penaltyfee-$fee;
+            $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$hallid' ";
             $result3=$this->conn->query($sql);
 
             //remove fitness
@@ -560,7 +565,8 @@ class residentModel extends model
             $sql2 = "SELECT cancelation_fee from service where type='fitness'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$fitid' ";
+            $val=$penaltyfee-$fee;
+            $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$fitid' ";
             $result3=$this->conn->query($sql);
             
 
@@ -599,7 +605,8 @@ class residentModel extends model
             $sql2 = "SELECT cancelation_fee from service where type='treatment'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee='$penaltyfee' WHERE reservation_id='$treatid' ";
+            $val=$penaltyfee-$fee;
+            $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$treatid' ";
             $result3=$this->conn->query($sql);
 
             
@@ -686,7 +693,7 @@ class residentModel extends model
     public function laundry($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preffered_date>=$d";
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preferred_date>=$d";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -762,6 +769,8 @@ class residentModel extends model
         if (isset($_GET["laundryid"])) {
             $laundryid = $_GET["laundryid"];
             $sql = "UPDATE laundry_request SET cancelled_time='$date' WHERE request_id='$laundryid' ";
+            $sql1= "DELETE from category where request_id='$laundryid'";
+            $this->conn->query($sql1);
         } else if (isset($_GET["maintenenceid"])) {
             $maintenenceid = $_GET["maintenenceid"];
             $sql = "UPDATE technical_maintenence_request SET cancelled_time='$date' WHERE request_id='$maintenenceid' ";
