@@ -26,7 +26,8 @@ include_once 'sidenav.php';
                                 <form action="treatment" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" id="datepicker" class="input-field" required><br>
+                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" id="datepicker" class="input-field" required>
+                                        <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
@@ -34,8 +35,7 @@ include_once 'sidenav.php';
                                             <br>
                                             <?php if (isset($this->selectdate)) {
                                                 echo $this->selectdate . "<br> 
-                                                Please check availability from right panel and  <br>select time slot.
-                                                <br>There are only 5 bookings on the particular time slot.";
+                                                Please check availability from right panel and  <br>select time slot.";
                                             }; ?>
                                             <br>
 
@@ -300,6 +300,27 @@ include_once 'sidenav.php';
                     </div>
                 <?php
                 }; ?>
+            </div>
+                        <!-- firstmodel -->
+                        <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Consider below</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Only 5 reservations for each time slot! </label>
+                            <span><?= "" ?></span>
+                        </div>
+                        <div>
+                            <!-- <input class="btnRed" type="submit" name="submit" value="Delete"> -->
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
