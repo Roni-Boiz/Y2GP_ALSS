@@ -69,6 +69,13 @@ class residentModel extends model
                 $hash2Password = sha1($hashPassword);
                 $sql = "UPDATE user_account SET password='{$hash2Password}' WHERE user_id={$_SESSION['userId']}";
                 if ($this->conn->query($sql)) {
+                    date_default_timezone_set("Asia/Colombo");
+                    $date = date('Y-m-d');
+                    $time = date('H:i:s');
+                    $notification = "Your password changed at" . " " . $date . " " . $time;
+                    $sql2 = "INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+        '$notification',{$_SESSION['userId']},0)";
+                    $this->conn->query($sql2);
                 }
             } else {
                 $errors[] = "doesn't match new passwords";
@@ -160,9 +167,8 @@ class residentModel extends model
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
                 //echo $sql;
                 $result1 = $this->conn->query($sql);
-                $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+                $sql1 = "Update resident set balance=balance - $fee where resident_id=$rid";
                 $result2 = $this->conn->query($sql1);
-                
             }
             //conference part
         } else {
@@ -191,15 +197,20 @@ class residentModel extends model
                 $fee = $fee["fee"] * $members * $noofslots;
                 $sql = "INSERT into hall_reservation(date,start_time,end_time,reserved_time,type,no_of_members,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$members','$fee','$rid')";
                 $result1 = $this->conn->query($sql);
-                $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+                $sql1 = "Update resident set balance=balance - $fee where resident_id=$rid";
                 $result2 = $this->conn->query($sql1);
-                
-                
             }
         }
         if ($result1 && $result2) {
             $this->conn->commit();
             $this->conn->autocommit(TRUE);
+            date_default_timezone_set("Asia/Colombo");
+            $date = date('Y-m-d');
+            $time = date('H:i:s');
+            $notification = "Your " . $type . " reservation successfull!\n Add " . $fee . "Rs to current monthly bill";
+            $sql2 = "INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+'$notification',{$_SESSION['userId']},0)";
+            $this->conn->query($sql2);
         } else {
             // Rollback transaction
             // echo "Commit transaction failed";
@@ -237,7 +248,7 @@ class residentModel extends model
 
         //  echo "count:" . $count;
         $sql1 = "SELECT * FROM fitness_reservation_count WHERE date ='$d'";
-        $r1= $this->conn->query($sql1);
+        $r1 = $this->conn->query($sql1);
         //check count availablility
         $row = $r1->fetch_assoc();
         // print_r("-" . $noofslots."??");
@@ -291,13 +302,20 @@ class residentModel extends model
                 $count++;
                 // echo "\n".$sql3;
             }
-            $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+            $sql1 = "Update resident set balance=balance - $fee where resident_id=$rid";
             $result4 = $this->conn->query($sql1);
 
 
             if ($result1 && $result2 && $result3 && $result4) {
                 $this->conn->commit();
                 $this->conn->autocommit(TRUE);
+                date_default_timezone_set("Asia/Colombo");
+                $date = date('Y-m-d');
+                $time = date('H:i:s');
+                $notification = "Your fitness centre reservation successfull!\n Add " . $fee . "Rs to current monthly bill";
+                $sql2 = "INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+'$notification',{$_SESSION['userId']},0)";
+                $this->conn->query($sql2);
             } else {
                 // Rollback transaction
                 // echo "Commit transaction failed";
@@ -306,7 +324,6 @@ class residentModel extends model
             }
             return  $result1 && $result2 && $result3 && $result4;
         }
-
     }
 
     //show userselected date reservations of fitness
@@ -407,21 +424,29 @@ class residentModel extends model
                 //none
             } else {
                 $sql4 = "INSERT INTO treatment_reservation_count(date) VALUES('$d')";
-                $result3=$this->conn->query($sql4);
+                $result3 = $this->conn->query($sql4);
             }
             while ($count < $noofslots) {
                 $sql3 = "UPDATE treatment_reservation_count SET `$count` = `$count` + 1 WHERE date LIKE '$d';";
-                $result4=$this->conn->query($sql3);
+                $result4 = $this->conn->query($sql3);
                 $count++;
                 // echo "\n".$sql3;
             }
-            
-            $sql1 ="Update resident set balance=balance - $fee where resident_id=$rid";
+
+            $sql1 = "Update resident set balance=balance - $fee where resident_id=$rid";
             $result3 = $this->conn->query($sql1);
 
             if ($result1 && $result2 && $result3 && $result4) {
                 $this->conn->commit();
                 $this->conn->autocommit(TRUE);
+                date_default_timezone_set("Asia/Colombo");
+                $date = date('Y-m-d');
+                $time = date('H:i:s');
+                $notification = "Your treatment room reservation for ".$type." successfull!\n" . "Add " . $fee . "Rs to current monthly bill";
+                $sql2 = "INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
+'$notification',{$_SESSION['userId']},0)";
+                $this->conn->query($sql2);
+
             } else {
                 // Rollback transaction
                 // echo "Commit transaction failed";
@@ -535,29 +560,29 @@ class residentModel extends model
         if (isset($_GET["hallid"])) {
             $hallid = $_GET["hallid"];
             //get fee query
-            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,type from hall_reservation where reservation_id='$hallid'"));
-            $fee=$res['fee'];
-            $t=$res['type'];
+            $res = mysqli_fetch_assoc($this->conn->query("SELECT fee,type from hall_reservation where reservation_id='$hallid'"));
+            $fee = $res['fee'];
+            $t = $res['type'];
             //get cancel fee query
-            if($t=='fhall'){
+            if ($t == 'fhall') {
                 $sql2 = "SELECT cancelation_fee from service where type='fhall'";
-            }else{
+            } else {
                 $sql2 = "SELECT cancelation_fee from service where type='chall'";
             }
-            
+
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $val=$penaltyfee-$fee;
+            $val = $penaltyfee - $fee;
             $sql = "UPDATE hall_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$hallid' ";
-            $result3=$this->conn->query($sql);
+            $result3 = $this->conn->query($sql);
 
             //remove fitness
         } else if (isset($_GET["fitid"])) {
             $fitid = $_GET["fitid"];
-            
+
             //get fee query
-            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from fitness_centre_reservation where reservation_id='$fitid'"));
-            $fee=$res['fee'];
+            $res = mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from fitness_centre_reservation where reservation_id='$fitid'"));
+            $fee = $res['fee'];
             $stime = $res['start_time'];
             $etime = $res['end_time'];
             $d = $res['date'];
@@ -565,10 +590,10 @@ class residentModel extends model
             $sql2 = "SELECT cancelation_fee from service where type='fitness'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $val=$penaltyfee-$fee;
+            $val = $penaltyfee - $fee;
             $sql = "UPDATE fitness_centre_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$fitid' ";
-            $result3=$this->conn->query($sql);
-            
+            $result3 = $this->conn->query($sql);
+
 
             // echo $stime, $etime;
             //get starting slot no from $stime
@@ -596,8 +621,8 @@ class residentModel extends model
             $treatid = $_GET["treatid"];
 
             //get fee query
-            $res=mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from treatment_room_reservation where reservation_id='$treatid'"));
-            $fee=$res['fee'];
+            $res = mysqli_fetch_assoc($this->conn->query("SELECT fee,start_time,end_time,date from treatment_room_reservation where reservation_id='$treatid'"));
+            $fee = $res['fee'];
             $stime = $res['start_time'];
             $etime = $res['end_time'];
             $d = $res['date'];
@@ -605,11 +630,11 @@ class residentModel extends model
             $sql2 = "SELECT cancelation_fee from service where type='treatment'";
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancelation_fee"];
-            $val=$penaltyfee-$fee;
+            $val = $penaltyfee - $fee;
             $sql = "UPDATE treatment_room_reservation SET cancelled_time='$date',fee='$val' WHERE reservation_id='$treatid' ";
-            $result3=$this->conn->query($sql);
+            $result3 = $this->conn->query($sql);
 
-            
+
             // echo $stime, $etime;
             //get starting slot no from $stime
             $shour = explode(":", $stime);
@@ -642,10 +667,10 @@ class residentModel extends model
             $penaltyfee = mysqli_fetch_assoc($this->conn->query($sql2));
             $penaltyfee = $penaltyfee["cancellation_fee"];
             $sql = "UPDATE parking_slot_reservation SET cancelled_time='$date',fee=100 WHERE reservation_id='$parkid' ";
-            $result3=$this->conn->query($sql);
+            $result3 = $this->conn->query($sql);
         }
 
-        $sql1 ="Update resident set balance=balance - ($penaltyfee-$fee) where resident_id=$rid";
+        $sql1 = "Update resident set balance=balance - ($penaltyfee-$fee) where resident_id=$rid";
         $result4 = $this->conn->query($sql1);
 
         if ($result3 && $result4) {
@@ -657,7 +682,6 @@ class residentModel extends model
             $this->conn->rollback();
             $this->conn->autocommit(TRUE);
         }
-
     }
 
     //get technical services display in my requests
@@ -699,7 +723,7 @@ class residentModel extends model
     }
 
     //request laundry services
-    public function reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3)
+    public function reqLaundry($type, $pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3)
     {
         $this->conn->autocommit(FALSE);
         $date = date('Y-m-d H:i:s');
@@ -709,7 +733,7 @@ class residentModel extends model
         $rid = $rid["resident_id"];
         $sql1 = "INSERT INTO laundry_request(request_date,preferred_date,description,type,resident_id) VALUES('$date','$pdate','$des','$type','$rid')";
         // echo($sql1);
-        $a0=$this->conn->query($sql1);
+        $a0 = $this->conn->query($sql1);
         //get latest req id
         $sql2 = "SELECT max(request_id) as latest from laundry_request WHERE resident_id=$rid";
         $latestid = mysqli_fetch_assoc($this->conn->query($sql2));
@@ -719,7 +743,7 @@ class residentModel extends model
         $a1 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(1,'$latestid','$catw1','$quantity1');");
         $a2 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(2,'$latestid','$catw2','$quantity2');");
         $a3 = $this->conn->query("INSERT INTO category(category_no,request_id,weight,qty) VALUES(3,'$latestid','$catw3','$quantity3');");
-        
+
         //transaction
         if ($a0 && ($a1 || $a2 || $a3)) {
             $this->conn->commit();
@@ -733,7 +757,8 @@ class residentModel extends model
     }
 
     //get category details
-    public function categorydetail($id){
+    public function categorydetail($id)
+    {
         $sql = "SELECT * from category WHERE request_id=$id";
         $result = $this->conn->query($sql);
         return $result;
@@ -769,7 +794,7 @@ class residentModel extends model
         if (isset($_GET["laundryid"])) {
             $laundryid = $_GET["laundryid"];
             $sql = "UPDATE laundry_request SET cancelled_time='$date' WHERE request_id='$laundryid' ";
-            $sql1= "DELETE from category where request_id='$laundryid'";
+            $sql1 = "DELETE from category where request_id='$laundryid'";
             $this->conn->query($sql1);
         } else if (isset($_GET["maintenenceid"])) {
             $maintenenceid = $_GET["maintenenceid"];
@@ -778,7 +803,7 @@ class residentModel extends model
             $visitorid = $_GET["visitorid"];
             $sql = "UPDATE visitor SET cancelled_time='$date' WHERE visitor_id='$visitorid' ";
         }
-        $result=$this->conn->query($sql);
+        $result = $this->conn->query($sql);
         if (($result)) {
             $this->conn->commit();
             $this->conn->autocommit(TRUE);
@@ -792,7 +817,8 @@ class residentModel extends model
     }
 
     //read treater
-    public function readtreater(){
+    public function readtreater()
+    {
         $sql = "SELECT fname,lname,contact_no FROM treater";
         return ($this->conn->query($sql));
     }
@@ -812,9 +838,9 @@ class residentModel extends model
         $sql1 = "SELECT view FROM notification WHERE notification_id='$nid'";
         $pid = mysqli_fetch_assoc($this->conn->query($sql1));
         $sql2 = "UPDATE parcel SET status=2,reached_time='$time' WHERE parcel_id={$pid["view"]}";
-        $result1=$this->conn->query($sql2);
+        $result1 = $this->conn->query($sql2);
         $sql3 = "UPDATE notification SET view=0 WHERE notification_id='$nid'";
-        $result2=$this->conn->query($sql3);
+        $result2 = $this->conn->query($sql3);
         if (($result1 && $result2)) {
             $this->conn->commit();
             $this->conn->autocommit(TRUE);
@@ -853,18 +879,19 @@ class residentModel extends model
     }
 
     //update payments and bill
-    public function doPayment(){
+    public function paymentSave($amount)
+    {
         $this->conn->autocommit(FALSE);
         $id = $_SESSION['userId'];
         $date = date('Y-m-d H:i:s');
-        $value=5000;
+        $value = $amount;
         //get resident id from user id
         $sql = "SELECT resident_id from resident where user_id='$id'";
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
         $sql1 = "INSERT INTO payment(amount,paid_date,resident_id) VALUES('$value','$date','$rid')";
         $result1 = $this->conn->query($sql1);
-        $sql1 ="Update resident set balance=balance +$value) where resident_id=$rid";
+        $sql1 = "Update resident set balance=balance +$value where resident_id=$rid";
         $result2 = $this->conn->query($sql1);
         if (($result1 && $result2)) {
             $this->conn->commit();
@@ -906,7 +933,7 @@ class residentModel extends model
         $sql = "INSERT INTO complaint(date_time,description,type,resident_id) VALUES('$date','$des','$type','$id')";
         return $this->conn->query($sql);
     }
-    
+
     //get location+login details
     public function getLoginDevices($id)
     {
@@ -919,9 +946,5 @@ class residentModel extends model
     {
         $date = $data['Date'];
         $duration = $data['Duration'];
-
-        
-
     }
-
 }
