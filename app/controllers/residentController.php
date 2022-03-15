@@ -236,6 +236,7 @@ class residentController extends controller
     {
         $id = $_SESSION['userId'];
         $this->view->pay = $this->model->pay($id);
+        $this->view->balance = $this->model->readResident();
         $this->view->render('resident/paymentView');
     }
 
@@ -368,17 +369,20 @@ class residentController extends controller
     //make payemnts with payhere
     public function makePayment()
     {
-        $id = $_GET["userId"];
-        $apartmentNo = "AP001";
-        $residentId =  "RA0001";
-        $residentFname = "Amal";
-        $residentLname = "Perera";
-        $amount = "10000";
-        //payment update wenna ona userge account eken
-        //payment update wenna ona userge account eken
+        $user =$this->model->readResident();
+        $row = $user->fetch_assoc();
+        $apartmentNo = $row["apartment_no"];
+        $residentId =  $row["resident_id"];
+        $residentFname = $row["fname"];
+        $residentLname = $row["lname"];
+        $amount = $_GET["amt"];
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
-        $this->model->doPayment();
-        $this->view->render('resident/paymentView');
+        
+        //$this->view->render('resident/paymentView');
+    }
+    public function payafter(){
+        $amount = $_GET["amt"];
+        $this->model->paymentSave($amount);
     }
 }
