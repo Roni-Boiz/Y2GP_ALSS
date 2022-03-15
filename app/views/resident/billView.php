@@ -124,6 +124,7 @@ include_once 'sidenav.php';
                                 <option>2019</option>
                                 <option>2020</option>
                                 <option>2021</option>
+                                <option>2022</option>
                             </select><br>
                             <label for="type">Month</label><br>
                             <select required name="month" class="input-field">

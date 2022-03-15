@@ -292,8 +292,8 @@ include_once 'sidenav.php';
                         </p>
                         <p>
                             <?php echo $this->success; ?><br>
-                            Check your email for a booking confirmation. We'll see you soon!
-                        </p>
+                            Reservation charges added your bill successfully.
+                            Check your notification for booking confirmation. We'll see you soon!                        </p>
                         <button id='ok' onclick='window.location = "treatment" '>
                             OK
                         </button>

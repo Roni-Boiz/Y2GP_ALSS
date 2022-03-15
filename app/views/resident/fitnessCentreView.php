@@ -148,67 +148,69 @@ include_once 'sidenav.php';
                                     }
                                     ?>
 
-
-                            <?php
+                            </table>
+                    <?php
                                 }
                             } else {
                                 echo "There is no reservations yet.";
-                            } ?>
-                            </table>
-                        <?php
-                    }
-                        ?>
-                        <hr>
-                        <div class="holdAccount">
-                            <div class="head">
-                                <h3>Upcoming Reservations. . .</h3>
-                            </div>
-                            <?php
-                            if ($this->latest->num_rows > 0) {
-                                while ($row = $this->latest->fetch_assoc()) {
-                            ?>
-                                    <div class="detail">
-                                        <div>
-                                            <div class="detail-info">
-                                                <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                                <small><?php echo $row["fname"] . " " . $row["lname"] ?></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
-                            } else { ?>
-                                <div class="detail">
-                                    <div>
-                                        <div class="detail-info">
-                                            <h5><?php echo "No Upcomings . . ." ?></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
+
+                                
                             } ?>
 
-                        </div>
-                        <br>
-                        <div class="activeUsers">
-                            <div class="head">
-                                <h3>Coach List</h3>
-                            </div>
+                <?php
+                    }
+                ?>
+                <hr>
+                <div class="holdAccount">
+                    <div class="head">
+                        <h3>Upcoming Reservations. . .</h3>
+                    </div>
+                    <?php
+                    if ($this->latest->num_rows > 0) {
+                        while ($row = $this->latest->fetch_assoc()) {
+                    ?>
                             <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Chamara Supun</h5>
-                                    <small>TR001</small>
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                        <small><?php echo $row["fname"] . " " . $row["lname"] ?></small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="detail">
+                            <div>
                                 <div class="detail-info">
-                                    <h5>Saman Silva</h5>
-                                    <small>TR002</small>
+                                    <h5><?php echo "No Upcomings . . ." ?></h5>
                                 </div>
                             </div>
                         </div>
+                    <?php
+                    } ?>
+
+                </div>
+                <br>
+                <div class="activeUsers">
+                    <div class="head">
+                        <h3>Coach List</h3>
+                    </div>
+                    <div class="detail">
+                        <img src="../../public/img/user.png" alt="user" />
+                        <div class="detail-info">
+                            <h5>Chamara Supun</h5>
+                            <small>TR001</small>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <img src="../../public/img/user.png" alt="user" />
+                        <div class="detail-info">
+                            <h5>Saman Silva</h5>
+                            <small>TR002</small>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
 
@@ -309,7 +311,8 @@ include_once 'sidenav.php';
                             Reservation Success!
                         </p>
                         <p>
-                            Reservation charges added your bill successfully. We'll see you soon!
+                            Reservation charges added your bill successfully.
+                            Check your notification for booking confirmation. We'll see you soon!
                         </p>
                         <button id='ok' onclick='window.location = "fitness" '>
                             OK

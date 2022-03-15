@@ -36,8 +36,8 @@ include_once 'sidenav.php';
 
                                         <label>Date</label><br>
                                         <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" required class="input-field" value="<?php if (isset($this->selectdate)) {
-                                                                                                                                echo $this->selectdate;
-                                                                                                                            }; ?>"><br>
+                                                                                                                                                            echo $this->selectdate;
+                                                                                                                                                        }; ?>"><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton " id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
@@ -76,91 +76,91 @@ include_once 'sidenav.php';
                         }; ?>
                         <br>
                         <?php if ($this->day->num_rows > 0) { ?>
-                        <table class="avail">
-                            <tr>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Other Details</th>
-                            </tr>
-                            <?php while ($row = $this->day->fetch_assoc()) {
-                            ?>
-                                <!-- show reservation -->
-
+                            <table class="avail">
                                 <tr>
-                                    <td><?php echo $row["start_time"] ?></td>
-                                    <td><?php echo $row["end_time"] ?></td>
-                                    <td><?php echo "" ?></td>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Other Details</th>
                                 </tr>
+                                <?php while ($row = $this->day->fetch_assoc()) {
+                                ?>
+                                    <!-- show reservation -->
+
+                                    <tr>
+                                        <td><?php echo $row["start_time"] ?></td>
+                                        <td><?php echo $row["end_time"] ?></td>
+                                        <td><?php echo "" ?></td>
+                                    </tr>
 
                             <?php
-                            } 
-                        } else {
-                            echo "There is no reservations yet.";
-                        } ?>
-                        </table>
-                    <?php } ?>
-                    <hr>
-                    <div class="holdAccount">
-                        <div class="head">
-                            <h3>Upcoming Functions . . .</h3>
-                        </div>
-                        <?php
-                        if ($this->latestfun->num_rows > 0) {
-                            while ($row = $this->latestfun->fetch_assoc()) {
-                        ?>
-                                <div class="detail">
-                                    <div>
-                                        <div class="detail-info">
-                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php
-                            }
-                        } else { ?>
-                            <div class="detail">
-                                <div>
-                                    <div class="detail-info">
-                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
-                                    </div>
-                                </div>
+                                }
+                            } else {
+                                echo "There is no reservations yet.";
+                            } ?>
+                            </table>
+                        <?php } ?>
+                        <hr>
+                        <div class="holdAccount">
+                            <div class="head">
+                                <h3>Upcoming Functions . . .</h3>
                             </div>
                             <?php
-                        } ?>
-
-
-                    </div>
-                    <br>
-                    <div class="activeUsers">
-                        <div class="head">
-                            <h3>Upcoming Meetings. . .</h3>
-                        </div>
-                        <?php
-                        if ($this->latestcon->num_rows > 0) {
-                            while ($row = $this->latestcon->fetch_assoc()) {
-                        ?>
+                            if ($this->latestfun->num_rows > 0) {
+                                while ($row = $this->latestfun->fetch_assoc()) {
+                            ?>
+                                    <div class="detail">
+                                        <div>
+                                            <div class="detail-info">
+                                                <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                                <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else { ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
-                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                            <h5><?php echo "No Upcomings . . ."; ?></h5>
                                         </div>
                                     </div>
                                 </div>
                             <?php
-                            }
-                        } else { ?>
-                            <div class="detail">
-                                <div>
-                                    <div class="detail-info">
-                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
+                            } ?>
+
+
+                        </div>
+                        <br>
+                        <div class="activeUsers">
+                            <div class="head">
+                                <h3>Upcoming Meetings. . .</h3>
+                            </div>
+                            <?php
+                            if ($this->latestcon->num_rows > 0) {
+                                while ($row = $this->latestcon->fetch_assoc()) {
+                            ?>
+                                    <div class="detail">
+                                        <div>
+                                            <div class="detail-info">
+                                                <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                                <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else { ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo "No Upcomings . . ."; ?></h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php
-                        } ?>
-                    </div>
+                            <?php
+                            } ?>
+                        </div>
 
                 </div>
             </div>
@@ -191,9 +191,9 @@ include_once 'sidenav.php';
 
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date"id="datepicker1" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
-                                                                                                    echo $this->selectdate;
-                                                                                                }; ?>">
+                            <input type="date" id="datepicker1" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                                                                echo $this->selectdate;
+                                                                                                                                            }; ?>">
                         </div>
 
                         <div id="col1">
@@ -298,8 +298,8 @@ include_once 'sidenav.php';
                         Reservation Success!
                     </p>
                     <p>
-                        Check your email for a booking confirmation. We'll see you soon!
-                    </p>
+                        Reservation charges added your bill successfully.
+                        Check your notification for booking confirmation. We'll see you soon! </p>
                     <button id='ok' onclick='window.location = "hall" '>
                         OK
                     </button>
