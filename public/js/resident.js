@@ -545,21 +545,37 @@ function deleteReq(id, type) {
 function previousView() {
    $(".success").css('display', 'none');
 }
+//save payment ti database
+function payafter(amount){
+   console.log("payment save to database");
+   $.ajax({
+      type: "GET",
+      url: "payafter",
+      data: {
+         amt:amount
+      },
+      success: function () {
 
+      }
+   });
+}
 // Make payment
 function payNow(userId) {
+   var amount=$("#amount").val();
+   console.log(amount);
    var response = '';
    $.ajax({
       type: "GET",
-      url: "doPayment",
+      url: "makePayment",
       data: {
-         userId: userId
+         amt:amount
       },
       success: function (text) {
          var r = JSON.parse(text);
-
          payhere.onCompleted = function onCompleted() {
             alert("Payment completed");
+            //call to payafter() for save payment details to database
+            //payafter(amount);
          };
 
          payhere.onDismissed = function onDismissed() {
@@ -597,6 +613,7 @@ function payNow(userId) {
          payhere.startPayment(payment);
       }
    });
+   payafter(amount);
 }
 
 //close pop up

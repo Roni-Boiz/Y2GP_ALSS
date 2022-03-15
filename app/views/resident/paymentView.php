@@ -27,13 +27,17 @@ include_once 'sidenav.php';
                             <div class="description">
                                 <form action="#" class="reservationtime" method="GET">
                                     <div>
-                                        <label>Total Payable</label><br>
-                                        <input type="text" name="payable" class="input-field" value=<?php echo 2500 ?> READONLY><br>
-                                        
+                                        <label>Total Payable</label>
+                                        <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
+                                        <?php
+                                        $row2 = $this->balance->fetch_assoc();
+                                        ?>
+                                        <input type="text" name="payable" class="input-field" value=<?php echo -1*$row2['balance']."LKR" ?> READONLY><br>
+                                        <br>
                                         <input class="purplebutton" type="submit" value="Pay Now" id="model-btn" style="grid-column:2">
-                                        <button class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -46,13 +50,13 @@ include_once 'sidenav.php';
                             <h3>Last Payments . . . . .</h3>
                         </div>
                         <?php
-                        if ($this->pay->num_rows > 0) { 
+                        if ($this->pay->num_rows > 0) {
                             while ($row = $this->pay->fetch_assoc()) {
                         ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
-                                            <h5><?php echo $row["amount"]." LKR"; ?></h5>
+                                            <h5><?php echo $row["amount"] . " LKR"; ?></h5>
                                             <small><?php echo $row["paid_date"]; ?></small>
                                         </div>
                                     </div>
@@ -62,7 +66,7 @@ include_once 'sidenav.php';
                             ?>
                         <?php
                         } else {
-                            echo "0 results";
+                            echo "No Payments!";
                         }
                         ?>
 
@@ -112,14 +116,37 @@ include_once 'sidenav.php';
                             <br>
                             <div id="col2">
                                 <label for="lname">Amount(LKR)</label><br>
-                                <input type="text" name="amt" class="input-field" placeholder="" value="">
+                                <input type="text" name="amt" id ="amount" class="input-field" placeholder="" >
                             </div>
 
-                            <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next">
+                            <!-- <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next"> -->
                         </form>
+                        <button class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
+
 
 
                     </div>
+                </div>
+            </div>
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Consider below</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> If total payable is negative,<br> you do not have to pay much! </label>
+                            <span><?= "" ?></span>
+                        </div>
+                        <div>
+                            <!-- <input class="btnRed" type="submit" name="submit" value="Delete"> -->
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div> <!-- .hawlockbody div closed here -->
