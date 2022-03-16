@@ -30,7 +30,7 @@ include_once 'sidenav.php';
                                 <form action="fitness" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" class="input-field" required>
+                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" class="input-field" required>
                                         <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
 
@@ -54,9 +54,31 @@ include_once 'sidenav.php';
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
 
-                                            <h3>Reservations of the day</h3><br>
+                                            <h3>Description</h3><br>
                                             <?php if (isset($this->selectdate)) {
-                                                echo $this->selectdate . "<br> Please check availability and select time slot";
+                                                echo $this->selectdate . "<br> Please check availability and select time slot<br>"; ?>
+                                                <span class="fa-stack">
+                                                    <span style="color:red" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Not avail
+
+                                                <span class="fa-stack">
+                                                    <span style="color:yellow" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail some
+
+                                                <span class="fa-stack">
+                                                    <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail all
+
+                                            <?php
                                             }; ?>
                                             <br>
 
@@ -108,6 +130,7 @@ include_once 'sidenav.php';
                     if (isset($this->day->num_rows)) { ?>
                         <br>
                         <?php if ($this->day->num_rows > 0) { ?>
+
                             <table class="avail">
                                 <tr>
                                     <th>Start Time</th>
@@ -149,16 +172,52 @@ include_once 'sidenav.php';
                                     ?>
 
                             </table>
-                    <?php
+                        <?php
                                 }
                             } else {
-                                echo "There is no reservations yet.";
+                                echo "There are no reservations yet.";
+                        ?>
+                        <table class="avail">
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Availability</th>
+                            </tr>
+                            <?php
 
-                                
-                            } ?>
+                                for ($hours = $s; $hours < $e; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                        <td><?php if ($mins + 30 == 60) {
+                                                echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                            } else {
+                                                echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <span class="fa-stack">
+                                                <!-- color with available -->
+                                                <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                <strong class="fa-stack-1x">
+                                                    <?php echo 0 ?>
+                                                </strong>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                            <?php
+                                    }
+                                }
+                            ?>
+
+                        </table>
+
 
                 <?php
-                    }
+                            }
+                        }
                 ?>
                 <hr>
                 <div class="holdAccount">
@@ -332,6 +391,7 @@ include_once 'sidenav.php';
                     <form action="#" class="formDelete" method="GET">
                         <div>
                             <label> Only 5 reservations for each time slot! </label>
+                            <label> Can reserve only before 14 days. </label>
                             <span><?= "" ?></span>
                         </div>
                         <div>
