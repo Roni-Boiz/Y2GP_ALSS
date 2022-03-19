@@ -146,7 +146,8 @@ include_once 'sidenav.php';
 
                 <div class="rightPanel">
                     <span onclick="openModel('editModel','addBtn')" class="addBtn"> Make your complaints<i class="fa fa-plus"></i></span>
-
+<br>
+<a onclick="complaintlist()">Click here...</a> for previous complaints
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Contact Details . . .</h3>
@@ -186,84 +187,99 @@ include_once 'sidenav.php';
 
                 </div>
             </div>
-        </div>
-        <!-- firstmodel -->
-        <div class="divPopupModel">
-            <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-            <div id="editModel">
-                <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <div style="text-align: center; margin-bottom: 10px;">
-                    <h3>Complaints</h3>
-                </div>
-                <form action="complaint" class="reservationtime" method="post">
-                <div id="col1">
+
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Complaints</h3>
+                    </div>
+                    <form action="complaint" class="reservationtime" method="post">
+                        <div id="">
                             <label>Complaint Type</label><br>
-                            <select name="type" class="input-field" id="select" required>
+                            <select name="type" class="input-field" required>
                                 <option value="">Select Type</option>
-                                <option >Parcel</option>
-                                <option >Fitness Centre</option>
-                                <option >Treatment Room</option>
-                                <option >Function Hall</option>
-                                <option >Conference Hall</option>
-                                <option >Swim Pool</option>
-                                <option >Kids Area</option>
-                                <option >...</option>
+                                <option>Parcel</option>
+                                <option>Fitness Centre</option>
+                                <option>Treatment Room</option>
+                                <option>Function Hall</option>
+                                <option>Conference Hall</option>
+                                <option>Swim Pool</option>
+                                <option>Kids Area</option>
+                                <option>...</option>
                             </select><br>
 
-                            
+
                         </div>
-                    <div>
-                        <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>
-                        <br>
-                        <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2;padding:5px 15px">
-                    </div>
-                </form>
+                        <div>
+                            <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>
+                            <br>
+                            <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2;padding:5px 15px">
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <!-- request success message -->
+            <?php
+            if (isset($this->error)) { ?>
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Unsuccessfull!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="hall ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>please try again</label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            <?php
+            }; ?>
             <!-- success popup -->
             <?php
             if (isset($this->success)) { ?>
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check'>
-                        &#10004;
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Sent!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="hall ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>your complaint will be considered soon.. thank you for your feedback
+                                </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
                     </div>
-                    <p>
-                    Sent!
-                    </p>
-                    <p>
-                    your complaint will be considered soon.. thank you for your feedback
-                    </p>
-                    <button id='ok' onclick='window.location = "complaint" '>
-                        OK
-                    </button>
                 </div>
             <?php
             }; ?>
-<?php
-            if (isset($this->error)) { ?>
-                <!-- error popup -->
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
-                    </div>
-                    <p>
-                        Unsuccessfull!
-                    </p>
-                    <p>
-                       Something went wrong
-                    </p>
-                    <button id='ok' onclick='window.location = "complaint" ' style="background:red;">
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
-        </div>
+            <div>
+                <h3>Your complaints</h3>
+            </div>
+        </div><!-- .hawlockbody div closed here -->
     </div>
-    </div> <!-- .hawlockbody div closed here -->
+    </div>
     </div> <!-- .expand div closed here -->
 </body>
 
