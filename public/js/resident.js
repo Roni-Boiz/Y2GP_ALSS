@@ -479,9 +479,9 @@ function laundry() {
       $("#disablebutton3").prop('disabled', true);
       $("#laundrytype").show();
    } else {
-      $("#laundrytype").hide();
-      $("#disablebutton3").css('cursor', 'pointer');
-      $("#disablebutton3").prop('disabled', false);
+      // $("#laundrytype").hide();
+      // $("#disablebutton3").css('cursor', 'pointer');
+      // $("#disablebutton3").prop('disabled', false);
    }
 }
 
@@ -618,9 +618,9 @@ function payNow(userId) {
 
 //close pop up
 function closePopup(){
-   model.className = 'close';
       document.getElementById("myCanvasNav").style.width = "0%";
       document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = 'close';
 }
 
 // delete row and hide for value addition
@@ -781,6 +781,10 @@ function deleterequest() {
          }
       });
    }
-
+   
+//view complaints
+function complaintlist(){
+   console.log("Done");
+}
 
 }
