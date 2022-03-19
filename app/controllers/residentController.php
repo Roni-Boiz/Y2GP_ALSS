@@ -286,8 +286,12 @@ class residentController extends controller
             $pdate = $_POST["pdate"];
             $type = $_POST["type"];
 
-            $this->model->reqMaintenence($type, $pdate, $des, $id);
-            header("Refresh:0; url=maintenence");
+            $result =$this->model->reqMaintenence($type, $pdate, $des, $id);
+            if ($result == 0) {
+                $this->view->error = true;
+            } else {
+                $this->view->success = true;
+            }
         }
         $this->view->latest = $this->model->latestmaintenence($id);
         $this->view->render('resident/maintenenceView');
@@ -307,8 +311,13 @@ class residentController extends controller
             $quantity2 = $_POST["quantity2"];
             $quantity3 = $_POST["quantity3"];
             $pdate = $_POST["pdate"];
-            $this->model->reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
-            // header("Refresh:0; url=laundry");
+            $result=$this->model->reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
+            if ($result == 0) {
+                $this->view->error = "Something went wrong! please try again.";
+            } else {
+                $this->view->success = true;
+            }
+            
         }
         $this->view->render('resident/laundryView');
     }
@@ -321,7 +330,12 @@ class residentController extends controller
             $des = $_POST["description"];
             $vdate = $_POST["vdate"];
             $name = $_POST["name"];
-            $this->model->requestVisitor($name, $vdate, $des, $id);
+            $result=$this->model->requestVisitor($name, $vdate, $des, $id);
+            if ($result == 0) {
+                $this->view->error = "Already reserved.Please select another time slot!.";
+            } else {
+                $this->view->success = true;
+            }
         }
         $this->view->render('resident/visitorView');
     }
@@ -353,6 +367,7 @@ class residentController extends controller
     public function complaint()
     {
         $id = $_SESSION['userId'];
+        //echo $id;
         if (isset($_POST["description"]) && isset($_POST["type"])) {
             $des = $_POST["description"];
             $type = $_POST["type"];
