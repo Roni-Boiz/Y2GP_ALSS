@@ -86,7 +86,58 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+            <!-- request success message -->
+            <?php
+            if (isset($this->error)) { ?>
 
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Request Failed!</h2>
+                        </div>
+                        <form class="formDelete" >
+                            <div>
+                                <label> <span id="answer2"></span>please try again</label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successfull!</h2>
+                        </div>
+                        <form class="formDelete">
+                            <div>
+                                <label> <span id="answer2"></span>your request will be considered soon.
+                                </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

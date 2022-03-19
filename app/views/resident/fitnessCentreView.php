@@ -338,44 +338,53 @@ include_once 'sidenav.php';
                 <!-- reservation success message -->
                 <?php
                 if (isset($this->error)) { ?>
-                    <!-- error popup -->
-                    <div class='b'></div>
-                    <div class='bb'></div>
-                    <div class='message'>
-                        <div class='check' style="background:red;">
-                            &#10006;
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Reservation Failed!</h2>
+                            </div>
+                            <form class="formDelete">
+                                <div>
+                                    <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
                         </div>
-                        <p>
-                            Reservation Unsuccess!
-                        </p>
-                        <p>
-                            <?php echo $this->error; ?>
-                        </p>
-                        <button id='ok' onclick='window.location = "fitness" ' style="background:red;">
-                            OK
-                        </button>
                     </div>
+
+
                 <?php
                 }; ?>
                 <!-- success popup -->
                 <?php
                 if (isset($this->success)) { ?>
-                    <div class='b'></div>
-                    <div class='bb'></div>
-                    <div class='message'>
-                        <div class='check'>
-                            &#10004;
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successfull!</h2>
+                            </div>
+                            <form class="formDelete" >
+                                <div>
+                                    <label> <span id="answer2"></span>Reservation charges added.
+                                        Check notification for more details. </label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
                         </div>
-                        <p>
-                            Reservation Success!
-                        </p>
-                        <p>
-                            Reservation charges added your bill successfully.
-                            Check your notification for booking confirmation. We'll see you soon!
-                        </p>
-                        <button id='ok' onclick='window.location = "fitness" '>
-                            OK
-                        </button>
                     </div>
                 <?php
                 }; ?>

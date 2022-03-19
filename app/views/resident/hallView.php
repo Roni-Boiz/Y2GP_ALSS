@@ -91,88 +91,89 @@ include_once 'sidenav.php';
                                         <td><?php echo $row["end_time"] ?></td>
                                         <td><?php echo "" ?></td>
                                     </tr>
+
+                                <?php
+                                } ?>
                             </table>
-                        <?php
-                                }
-                            } else {
-                                echo "There is no reservations yet."; ?>
-                        <table class="avail">
-                            <tr>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Other Details</th>
-                            </tr>
-                            <tr>
-                                        <td><?php echo " " ?></td>
-                                        <td><?php echo " " ?></td>
-                                        <td><?php echo " " ?></td>
-                                    </tr>
-                        </table>
-                    <?php  } ?>
+                        <?php   } else {
+                            echo "There is no reservations yet."; ?>
+                            <table class="avail">
+                                <tr>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Other Details</th>
+                                </tr>
+                                <tr>
+                                    <td><?php echo " " ?></td>
+                                    <td><?php echo " " ?></td>
+                                    <td><?php echo " " ?></td>
+                                </tr>
+                            </table>
+                        <?php  } ?>
 
-                <?php } ?>
-                <hr>
-                <div class="holdAccount">
-                    <div class="head">
-                        <h3>Upcoming Functions . . .</h3>
-                    </div>
-                    <?php
-                    if ($this->latestfun->num_rows > 0) {
-                        while ($row = $this->latestfun->fetch_assoc()) {
-                    ?>
+                    <?php } ?>
+                    <hr>
+                    <div class="holdAccount">
+                        <div class="head">
+                            <h3>Upcoming Functions . . .</h3>
+                        </div>
+                        <?php
+                        if ($this->latestfun->num_rows > 0) {
+                            while ($row = $this->latestfun->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else { ?>
                             <div class="detail">
                                 <div>
                                     <div class="detail-info">
-                                        <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                        <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
                                     </div>
                                 </div>
                             </div>
                         <?php
-                        }
-                    } else { ?>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5><?php echo "No Upcomings . . ."; ?></h5>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    } ?>
+                        } ?>
 
 
-                </div>
-                <br>
-                <div class="activeUsers">
-                    <div class="head">
-                        <h3>Upcoming Meetings. . .</h3>
                     </div>
-                    <?php
-                    if ($this->latestcon->num_rows > 0) {
-                        while ($row = $this->latestcon->fetch_assoc()) {
-                    ?>
+                    <br>
+                    <div class="activeUsers">
+                        <div class="head">
+                            <h3>Upcoming Meetings. . .</h3>
+                        </div>
+                        <?php
+                        if ($this->latestcon->num_rows > 0) {
+                            while ($row = $this->latestcon->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                            <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else { ?>
                             <div class="detail">
                                 <div>
                                     <div class="detail-info">
-                                        <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
-                                        <small><?php echo "Members : " . $row["no_of_members"]; ?></small>
+                                        <h5><?php echo "No Upcomings . . ."; ?></h5>
                                     </div>
                                 </div>
                             </div>
                         <?php
-                        }
-                    } else { ?>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5><?php echo "No Upcomings . . ."; ?></h5>
-                                </div>
-                            </div>
-                        </div>
-                    <?php
-                    } ?>
-                </div>
+                        } ?>
+                    </div>
 
                 </div>
             </div>
@@ -266,6 +267,7 @@ include_once 'sidenav.php';
                         <div>
                             <label> Members should be less than 50! </label>
                             <label>Can reserve only before 30 days.</label>
+                            <label>Keep 1 hour gap between reservations.</label>
                             <span><?= "" ?></span>
                         </div>
                         <div>
@@ -276,49 +278,58 @@ include_once 'sidenav.php';
 
                 </div>
             </div>
-            <!-- reservation success message -->
-            <?php
-            if (isset($this->error)) { ?>
-                <!-- error popup -->
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
+                <!-- reservation success message -->
+                <?php
+                if (isset($this->error)) { ?>
+
+                    <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Reservation Failed!</h2>
+                            </div>
+                            <form class="formDelete" >
+                                <div>
+                                    <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
-                    <p>
-                        Reservation Unsuccess!
-                    </p>
-                    <p>
-                        <?php echo $this->error; ?>
-                    </p>
-                    <button id='ok' onclick='window.location = "hall" ' style="background:red;">
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
-            <!-- success popup -->
-            <?php
-            if (isset($this->success)) { ?>
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check'>
-                        &#10004;
+                    
+                <?php
+                }; ?>
+                <!-- success popup -->
+                <?php
+                if (isset($this->success)) { ?>
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successfull!</h2>
+                            </div>
+                            <form class="formDelete" >
+                                <div>
+                                    <label> <span id="answer2"></span>Reservation charges added.
+                                        Check notification for more details. </label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
-                    <p>
-                        Reservation Success!
-                    </p>
-                    <p>
-                        Reservation charges added your bill successfully.
-                        Check your notification for booking confirmation. We'll see you soon! </p>
-                    <button id='ok' onclick='window.location = "hall" '>
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
+                <?php
+                }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

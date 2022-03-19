@@ -252,40 +252,51 @@ include_once 'sidenav.php';
                     </div>
             <?php }
                             } ?>
-            <!-- reservation success message -->
-            <!-- error popup -->
-            <div class="error" style="display:none;">
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
+
+          
+                        <!-- request success message -->
+                        <div class="error" style="display:none;z-index:5">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView() ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>Try again later</label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
                     </div>
-                    <p>
-                        Request Removed Failed!
-                    </p>
-                    <p>
-                        Try again later
-                    </p>
-                    <button id='ok' onclick="previousView()" style="background:red;">
-                        OK
-                    </button>
                 </div>
             </div>
+
             <!-- success popup -->
             <div class="success" style="display:none;">
-                <div class='message'>
-                    <div class='check'>
-                        &#10004;
-                    </div>
-                    <p>
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
 
-                        Request Removed Successfully!
-                    </p>
-                    <p>
-                        Check your email for confirmation. We'll see you soon!
-                    </p>
-                    <button id='ok' onclick="previousView()">
-                        OK
-                    </button>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Request Removed!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView() ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>Penalty fee add your account </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
 
