@@ -89,7 +89,8 @@ class residentModel extends model
     //get hall reservations for display my reservations
     public function hallReservation($id)
     {
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $d = date('Y-m-d');
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d'";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -142,11 +143,12 @@ class residentModel extends model
         // echo $noofslots;
         //function part
         if ($type == "function") {
-            $sql = "SELECT * FROM hall_reservation WHERE date ='$d' and type='function' ";
+            $sql = "SELECT date_add(end_time,interval 1 hour) as end_time,date_add(start_time,interval -1 hour) as start_time FROM hall_reservation WHERE date ='$d' and type='function' and cancelled_time is NULL";
             $result = $this->conn->query($sql);
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()){
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
+                
                 if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
@@ -478,7 +480,8 @@ class residentModel extends model
     //get treatment reservations for display my reservations
     public function treatmentReservation($id)
     {
-        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $d = date('Y-m-d');
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND date > '$d' AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -697,7 +700,8 @@ class residentModel extends model
     public function latestmaintenence($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p' LIMIT 5";
+        //echo $d;
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p' AND preferred_date>'$d' LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -748,11 +752,13 @@ class residentModel extends model
         if ($a0 && ($a1 || $a2 || $a3)) {
             $this->conn->commit();
             $this->conn->autocommit(TRUE);
+            return true;
         } else {
             // Rollback transaction
             // echo "Commit transaction failed";
             $this->conn->rollback();
             $this->conn->autocommit(TRUE);
+            return false;
         }
     }
 
@@ -782,7 +788,7 @@ class residentModel extends model
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
-        $this->conn->query($sql);
+        return $this->conn->query($sql);
     }
 
     //remove upcomig requests
@@ -930,7 +936,8 @@ class residentModel extends model
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
         $date = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO complaint(date_time,description,type,resident_id) VALUES('$date','$des','$type','$id')";
+        $sql = "INSERT INTO complaint(date_time,description,type,resident_id) VALUES('$date','$des','$type','$rid')";
+        //echo $sql;
         return $this->conn->query($sql);
     }
 
