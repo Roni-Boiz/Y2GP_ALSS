@@ -782,9 +782,17 @@ function deleterequest() {
       });
    }
    
+
+
+}
 //view complaints
 function complaintlist(){
-   console.log("Done");
-}
+   if($("#com").css('display')=='block'){
+      $("#com").css('display', 'none');
+   }
+   else{
+      $("#com").css('display', 'block');
+   }
+   
 
 }
