@@ -145,10 +145,10 @@ class residentModel extends model
         if ($type == "function") {
             $sql = "SELECT date_add(end_time,interval 1 hour) as end_time,date_add(start_time,interval -1 hour) as start_time FROM hall_reservation WHERE date ='$d' and type='function' and cancelled_time is NULL";
             $result = $this->conn->query($sql);
-            while ($row = $result->fetch_assoc()){
+            while ($row = $result->fetch_assoc()) {
                 //echo $row["start_time"]."-".$row["end_time"]."<br>";
                 //check availability
-                
+
                 if ($stime >= $row["start_time"] && $stime < $row["end_time"] || $etime > $row["start_time"] && $etime <= $row["end_time"]) {
                     $avail = 0;
                 }
@@ -444,11 +444,10 @@ class residentModel extends model
                 date_default_timezone_set("Asia/Colombo");
                 $date = date('Y-m-d');
                 $time = date('H:i:s');
-                $notification = "Your treatment room reservation for ".$type." successfull!\n" . "Add " . $fee . "Rs to current monthly bill";
+                $notification = "Your treatment room reservation for " . $type . " successfull!\n" . "Add " . $fee . "Rs to current monthly bill";
                 $sql2 = "INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
 '$notification',{$_SESSION['userId']},0)";
                 $this->conn->query($sql2);
-
             } else {
                 // Rollback transaction
                 // echo "Commit transaction failed";
@@ -789,6 +788,17 @@ class residentModel extends model
         $rid = $rid["resident_id"];
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
         return $this->conn->query($sql);
+    }
+    public function mycomplaint($id)
+    {
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
+        $sql = "Select * from complaint where resident_id='$rid'";
+        // echo $sql;
+        $result =$this->conn->query($sql);
+        return $result;
     }
 
     //remove upcomig requests
