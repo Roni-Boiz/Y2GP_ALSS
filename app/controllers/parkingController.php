@@ -24,7 +24,19 @@ class parkingController extends controller{
 
     public function parkingslot(){
         // $this->view->ann = $this->model->readTable();
+        
+        $this->view->outgoingVehicles=$this->model->getOutgoingVehicles();
+        $this->view->overdueVehicles=$this->model->getOverdueVehicles();
+        if(isset($_POST["vehicle_no"])){
+            $vid=$_POST["vehicle_no"];
+            $this->view->parkingStatus=$this->model->getParkingStatus($vid);
+        }
         $this->view->render('parkingOfficer/parkingslotView');
+    }
+    public function parkingspace(){
+        $this->view->parkingSpace=$this->model->getParkingState();
+        $this->view->overdueVehicles=$this->model->getOverdueVehicles();
+        $this->view->render('parkingOfficer/parkingspaceView');
     }
     public function profile(){
         $this->loadModel('profileModel');
@@ -53,7 +65,20 @@ class parkingController extends controller{
         $vid=$_POST["vehicle_no"];
         $this->view->parkingStatus=$this->model->getParkingStatus($vid);
         $this->view->render('parkingOfficer/parkingslotView');
+        ;
+    }
+    public function markTime(){
+        $id=$_POST["reservation_id"];
         
+        if(isset($_POST["Check-in"])){
+            $this->model->checkinVehicle($id);
+        }
+        if(isset($_POST["Check-out"])){
+            $this->model->checkoutVehicle($id);
+        }
+        
+        $this->parkingslot();
+
     }
 
 
