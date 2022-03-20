@@ -153,15 +153,17 @@ include_once 'sidenav.php';
 
 
                             <?php
-                        if ($this->com->num_rows > 0) {
-                            while ($row = $this->com->fetch_assoc()) {
+                        if ($this->com1->num_rows > 0) {
+                            while ($row = $this->com1->fetch_assoc()) {
                         ?>
                                 <div class="detail">
                                     <div>
                                         <div class="detail-info">
                                             <h5><?php echo "Date : ". $row["date_time"] ?></h5>
-                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Pending"; else echo "Done" ; ?></small><br>
+                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Considered"; else echo "Completed" ; ?></small><br>
+                                            <small><?php echo "Considered by : ";if($row["fname"]) echo $row["fname"]." ".$row['lname']; else echo "Not yet"; ?></small><br>
                                             <small><?php echo "Description : ". $row["description"]; ?></small>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -172,6 +174,32 @@ include_once 'sidenav.php';
                                 <div>
                                     <div class="detail-info">
                                         <h5><?php echo "No complaints . . ."; ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        } ?>
+                            <?php
+                        if ($this->com2->num_rows > 0) {
+                            while ($row = $this->com2->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo "Date : ". $row["date_time"] ?></h5>
+                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Considered"; else echo "Completed" ; ?></small><br>
+                                            <small><?php echo "Description : ". $row["description"]; ?></small>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo ""; ?></h5>
                                     </div>
                                 </div>
                             </div>

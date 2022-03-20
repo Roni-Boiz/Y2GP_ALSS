@@ -378,7 +378,8 @@ class residentController extends controller
                 $this->view->success = true;
             }
         }
-        $this->view->com = $this->model->mycomplaint($id);
+        $this->view->com1 = $this->model->considercomplaint($id);
+        $this->view->com2 = $this->model->othercomplaint($id);
         $this->view->render('resident/complaintView');
     }
 

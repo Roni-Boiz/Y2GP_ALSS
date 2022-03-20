@@ -789,17 +789,30 @@ class residentModel extends model
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
         return $this->conn->query($sql);
     }
-    public function mycomplaint($id)
+    //get considered complaints
+    public function considercomplaint($id)
     {
         //get resident id from user id
         $sql = "SELECT resident_id from resident where user_id='$id'";
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
-        $sql = "Select * from complaint where resident_id='$rid'";
+        $sql = "Select complaint.*,manager.fname as fname ,manager.lname as lname from complaint,manager where resident_id='$rid' and complaint.employee_id=manager.employee_id";
         // echo $sql;
         $result =$this->conn->query($sql);
         return $result;
     }
+    //get other complaints
+    public function othercomplaint($id)
+    {
+        //get resident id from user id
+        $sql = "SELECT resident_id from resident where user_id='$id'";
+        $rid = mysqli_fetch_assoc($this->conn->query($sql));
+        $rid = $rid["resident_id"];
+        $sql = "Select * from complaint where resident_id='$rid' and employee_id IS NULL";
+        $result =$this->conn->query($sql);
+        return $result;
+    }
+    
 
     //remove upcomig requests
     public function removeRequest()
