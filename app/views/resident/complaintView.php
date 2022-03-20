@@ -11,6 +11,7 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
+                
                 <div class="leftPanel">
                     <h2>Policies</h2>
                     <div class="tabs" style="grid-column:1/span3">
@@ -20,11 +21,8 @@ include_once 'sidenav.php';
                             <li><a href="#tab3">Requests</a></li>
                             <li><a href="#tab4">Payment</a></li>
                         </ul>
-                        <br>
-                        <!-- for search row --><br>
-                        <!-- <div class="search">
-                            <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
-                        </div> -->
+                        <br><br>
+
 
                         <div id="tab1" class="tab active">
 
@@ -140,14 +138,58 @@ include_once 'sidenav.php';
                             </p>
                         </div>
                     </div>
+                    <hr>
+                    <h3>Complaints</h3><br>
+                    <span onclick="openModel('editModel','addBtn')" class="addBtn"> Make your complaints<i class="fa fa-plus"></i></span>
+                    <br>
+                    Your complaints <a onclick="complaintlist()"><i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i></a>  
+                    <div id="com" style="display:none;margin:20px;padding-right:40px" >
 
+
+                    
+                        <p style="color:black">
+                        <div style="overflow-x:auto;grid-column:1/span2">
+                            <div class="activeUsers">
+
+
+                            <?php
+                        if ($this->com->num_rows > 0) {
+                            while ($row = $this->com->fetch_assoc()) {
+                        ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo "Date : ". $row["date_time"] ?></h5>
+                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Pending"; else echo "Done" ; ?></small><br>
+                                            <small><?php echo "Description : ". $row["description"]; ?></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else { ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo "No complaints . . ."; ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        } ?>
+          
+                                
+                            </div>
+
+                        </div>
+                        </p>
+                    </div>
 
                 </div>
 
                 <div class="rightPanel">
-                    <span onclick="openModel('editModel','addBtn')" class="addBtn"> Make your complaints<i class="fa fa-plus"></i></span>
-<br>
-<a onclick="complaintlist()">Click here...</a> for previous complaints
+                    <!-- <span onclick="openModel('editModel','addBtn')" class="addBtn"> Make your complaints<i class="fa fa-plus"></i></span> -->
+                    <br>
                     <div class="holdAccount">
                         <div class="head">
                             <h3>Contact Details . . .</h3>
@@ -194,7 +236,7 @@ include_once 'sidenav.php';
                 <div id="editModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center; margin-bottom: 10px;">
-                        <h3>Complaints</h3>
+                        <h2>Complaints</h2>
                     </div>
                     <form action="complaint" class="reservationtime" method="post">
                         <div id="">
@@ -274,9 +316,7 @@ include_once 'sidenav.php';
                 </div>
             <?php
             }; ?>
-            <div>
-                <h3>Your complaints</h3>
-            </div>
+
         </div><!-- .hawlockbody div closed here -->
     </div>
     </div>
