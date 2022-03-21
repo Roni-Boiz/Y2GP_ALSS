@@ -55,23 +55,28 @@ class laundryModel extends model {
         return $errors;
     }
     public function getNewRequests(){
-        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=0";
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.preferred_date,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=0";
         // $sql = "SELECT * FROM laundry_request WHERE status=1";
         $result = $this->conn->query($sql);   
         return $result;
     }
     public function getselectedNew($id){
-        $sql="SELECT laundry_request.type,laundry_request.request_date,category.* FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id'";
+        $sql="SELECT laundry_request.request_id,laundry_request.type,laundry_request.preferred_date,laundry_request.request_date,laundry_request.description,category.category_no,category.weight,category.qty FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id'";
         $result= $this->conn->query($sql);
         return $result;
     }
     public function getCleaningRequests(){
-        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=1";
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.description,laundry_request.type FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=1";
         $result = $this->conn->query($sql);   
         return $result;
     }
+    public function getselectedCleaning($id){
+        $sql="SELECT request_id,type,request_date FROM laundry_request WHERE request_id='$id'";
+        $result= $this->conn->query($sql);
+        return $result;
+    }
     public function getCompletedRequests(){
-        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.request_time,laundry_request.description,laundry_request.type,laundry_request.fee FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=2";
+        $sql = "SELECT resident.apartment_no,laundry_request.request_id,laundry_request.request_date,laundry_request.description,laundry_request.type,laundry_request.fee FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE laundry_request.state=2";
         $result = $this->conn->query($sql);   
         return $result;
     }
@@ -85,6 +90,53 @@ class laundryModel extends model {
         $sql= "SELECT category_no,weight,qty FROM category WHERE request_id='$id'";
         $result= $this->conn->query($sql);
         return $result;
+    }
+    public function acceptRequest($id,$cat1,$cat2,$cat3){
+        $sql1="UPDATE laundry_request SET state=1 WHERE request_id='$id'";
+        // echo $id;
+        $this->conn->query($sql1);
+        $sql2="SELECT resident.user_id as id FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE request_id='$id'";
+        $userId=mysqli_fetch_assoc($this->conn->query($sql2));
+        $userId=$userId["id"];
+        date_default_timezone_set("Asia/Colombo");
+        $date=date('Y-m-d');
+        $time=date('H:i:s');
+        echo $cat1."".$cat2;
+        $msg="";
+        if($cat1==1){
+            $msg=$msg."category 1 ";
+        }else{
+            $sql3="UPDATE category SET state=0 WHERE request_id='$id' AND category_no=1 ";
+            $this->conn->query($sql3);
+        }    
+        if($cat2==1){
+            $msg=$msg."category 2 ";
+        }else{
+            $sql4="UPDATE category SET state=0 WHERE request_id='$id' AND category_no=2 ";
+            $this->conn->query($sql4);
+        }        
+        if($cat3){
+            $msg=$msg."category 3 ";   
+        }else{
+            $sql5="UPDATE category SET state=0 WHERE request_id='$id' AND category_no=1 ";
+            $this->conn->query($sql5);
+        }    
+        
+        
+        $description="Following Categories of your laundry request have accepted: .{$msg} at .{$date} .{$time}";
+        $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time','$description','$userId',0)";
+        $this->conn->query($sql6);
+        echo $sql6;
+    }
+    public function declineRequest($id){
+        $sql="UPDATE laundry_request SET status=-1 WHERE request_id='$id'";
+        $result= $this->conn->query($sql);
+        
+    }
+    public function addTotalFee($id,$Total){
+        $sql="UPDATE laundry_request SET fee='$Total',state=2 WHERE request_id='$id'";
+        $result= $this->conn->query($sql);
+
     }
 
 

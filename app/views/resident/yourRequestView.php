@@ -12,8 +12,8 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="tabs" style="grid-column:1/span3">
                 <ul class="tabs-list">
-                    <li class="active"><a href="#tab1">Maintenece</a></li>
-                    <li><a href="#tab2">Laundry</a></li>
+                    <li class="active"><a href="#tab1">Laundry</a></li>
+                    <li><a href="#tab2">Maintenece</a></li>
                     <li><a href="#tab3">Visitors</a></li>
                 </ul>
                 <br>
@@ -22,7 +22,7 @@ include_once 'sidenav.php';
                     <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
                 </div>
 
-                <div id="tab1" class="tab active">
+                <div id="tab2" class="tab">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- maintenence -->
                         <section class="wrapper">
@@ -43,12 +43,21 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'maintenence')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['request_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+                                                </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li><?php echo $row["category"]; ?></li>
-                                                <li><?php echo $row["state"]; ?></li>
+                                                <li>
+                                                    <?php
+                                                    if ($row["state"] == "p") echo "Pending";
+                                                    if ($row["state"] == "d") echo "Rejected";
+                                                    if ($row["state"] == "") echo "In-Progress";
+                                                    if ($row["state"] == "") echo "Completed";
+
+                                                    ?>
+                                                </li>
 
                                             </ul>
                                             <ul class="more-content">
@@ -65,13 +74,13 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "<br>No requests yet...<br><a href= 'maintenence'> Make Now...</a>";
                             }
                             ?>
                         </section>
                     </div>
                 </div>
-                <div id="tab2" class="tab">
+                <div id="tab1" class="tab active">
                     <div style="overflow-x:auto;grid-column:1/span2">
                         <!-- laundry -->
                         <section class="wrapper">
@@ -79,8 +88,9 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Action</li>
                                     <li>Request ID</li>
-                                    <li>State</li>
+
                                     <li>Requested Time</li>
+                                    <li>State</li>
                                     <li>Type</li>
                                 </ul>
                             </main>
@@ -92,28 +102,40 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['request_id']; ?>"><a onclick="deleteReq(<?php echo $row['request_id']; ?>,'laundry')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['request_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','laundry')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+
+                                                </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
                                                 <li><?php echo $row["request_date"]; ?></li>
-                                                <li><?php echo $row["state"]; ?></li>
+                                                <li>
+                                                    <?php
+                                                    if ($row["state"] == "0") echo "Pending";
+                                                    if ($row["state"] == "-1") echo "Rejected";
+                                                    if ($row["state"] == "1") echo "In-Progress";
+                                                    if ($row["state"] == "2") echo "Completed";
+
+                                                    ?>
+                                                </li>
                                                 <li><?php echo $row["type"]; ?></li>
 
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                    <a href="yourRequest?reqid=<?php echo $row['request_id']; ?>" style="color:white"><i class="fas fa-angle-double-right" title="See more..."></i></a>
                                                 </li>
                                             </ul>
 
                                         </article>
+
                                     </span>
                                 <?php
                                 }
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "<br>No requests yet...<br><a href= 'laundry'> Make Now...</a>";
                             }
                             ?>
                         </section>
@@ -140,13 +162,19 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li id="<?php echo $row['visitor_id']; ?>"><a onclick="deleteReq(<?php echo $row['visitor_id']; ?>,'visitor')">
-                                                        <i class="fas fa-trash-alt" style="color:white;padding:1px 10px"></i></a></li>
+                                                <li id="<?php echo $row['visitor_id']; ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+                                                </li>
                                                 <li><?php echo $row["visitor_id"]; ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
 
+                                            </ul>
+                                            <ul class="more-content">
+                                                <li>
+                                                    <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                </li>
                                             </ul>
                                         </article>
                                     </span>
@@ -155,48 +183,125 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "0 results";
+                                echo "<br>No requests yet...<br><a href= 'visitor'> Make Now...</a>";
                             }
                             ?>
                         </section>
                     </div>
                 </div>
-                <!-- reservation success message -->
-                <!-- error popup -->
-                <div class="error" style="display:none;">
-                    <div class='message'>
-                        <div class='check' style="background:red;">
-                            &#10006;
+                <!-- delete confirmation -->
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                    <div id="deleteModel">
+                        <a href="javascript:void(0)" class="closebtn">&times;</a>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Are You Sure ?</h2>
                         </div>
-                        <p>
-                            Request Removed Failed!
-                        </p>
-                        <p>
-                            Try again later
-                        </p>
-                        <button id='ok' onclick="previousView()" style="background:red;">
-                            OK
-                        </button>
-                    </div>
-                </div>
-                <!-- success popup -->
-                <div class="success" style="display:none;">
-                    <div class='message'>
-                        <div class='check'>
-                            &#10004;
-                        </div>
-                        <p>
+                        <form class="formDelete" onsubmit="deleterequest() ;return false;">
+                            <div>
+                                <label> Delete <span id="answer2"></span> request with request ID </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="Delete">
+                            </div>
 
-                            Request Removed Successfully!
-                        </p>
-                        <p>
-                            Check your email for confirmation. We'll see you soon!
-                        </p>
-                        <button id='ok' onclick="previousView()">
-                            OK
-                        </button>
+                        </form>
                     </div>
                 </div>
+
+
+
+                <?php
+                if (isset($this->reqSelected)) {
+                ?>
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                        <div id="model" class="open">
+
+                            <a onclick="closePopup()">&times;</a>
+                            <div style="text-align: center;">
+                                <?php
+                                if ($this->reqSelected->num_rows > 0) {
+                                    $count = 0;
+                                ?>
+                                    <?php
+                                    while ($row = $this->reqSelected->fetch_assoc()) {
+                                    ?>
+                                        <?php if ($count == 0) echo "<h2>Categories</h2>" . $row["request_id"];
+                                        $count++;
+                                        ?>
+                                        <div id="col1">
+                                            <label for="categories"><?php echo "Category  " . $row["category_no"] ?> </label>
+                                            <input type="text" name="quantiy1" id="quantiy1" value="Qty :<?php echo $row["qty"] ?>" readonly>
+
+                                        </div>
+
+                                        <div id="col2">
+
+                                            <input type="text" name="quantiy1" id="quantiy1" value="Net weight :<?php echo $row["weight"] ?>" readonly>
+                                        </div>
+
+                                    <?php
+                                    }
+                                    ?>
+                            </div>
+
+
+                        </div>
+                    </div>
+            <?php }
+                            } ?>
+
+          
+                        <!-- request success message -->
+                        <div class="error" style="display:none;z-index:5">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView() ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>Try again later</label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- success popup -->
+            <div class="success" style="display:none;">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Request Removed!</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView() ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>Penalty fee add your account </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
 </body>

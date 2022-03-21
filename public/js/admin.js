@@ -276,10 +276,11 @@ function check_retypepassword() {
     }
 }
 ////////////////////////////////////////////////////
-function openModel(amodel, amodelBtn, userId) {
+function openModel(amodel, amodelBtn, id) {
     const model = document.getElementById(amodel);
     const modelBtn = document.getElementsByClassName(amodelBtn);
-    const ans = document.getElementById("answer");
+    const ans1 = document.getElementById("answer1");
+    const ans2 = document.getElementById("answer2");
     const closeBtn = document.getElementsByClassName("closebtn");
 
     for (var i = 0; i < modelBtn.length; i++) {
@@ -301,7 +302,14 @@ function openModel(amodel, amodelBtn, userId) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
-    ans.innerHTML = userId;
+    if(ans1 !== null){
+        ans1.innerHTML = id;
+    }
+    if(ans2 !== null){
+        ans2.innerHTML = id;
+        $("#serviceId").val(id);
+    }
+
     // model.addEventListener("click", (e) => {
     //     if (e.target.id === "yes-btn") {
     //         ans.innerText = "Hello Guys";
@@ -346,7 +354,7 @@ function unlockAccount(user_name) {
 }
 
 function deleteUser() {
-    let id = document.getElementById("answer").innerText;
+    let id = document.getElementById("answer1").innerText;
     user_id = parseInt(id.substring(3));
     console.log(user_id);
     $.ajax({
@@ -363,6 +371,50 @@ function deleteUser() {
             $("#myCanvasNav").css('width','0%');
             $("#myCanvasNav").css('opacity','0');
             $("#deleteModel").toggleClass('close');
+        }
+    });
+}
+
+function deleteEmployee() {
+    let id = document.getElementById("answer1").innerText;
+    employee_id = parseInt(id.substring(3));
+    console.log(employee_id);
+    $.ajax({
+        type: "POST",
+        url: "deleteEmployee",
+        data: {
+            employee_id: employee_id
+        },
+        success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("slow");
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width','0%');
+            $("#myCanvasNav").css('opacity','0');
+            $("#deleteModel").toggleClass('close');
+        }
+    });
+}
+
+function updateShift() {
+    let id = document.getElementById("answer2").innerText;
+    employee_id = parseInt(id.substring(3));
+    console.log(employee_id);
+    $.ajax({
+        type: "POST",
+        url: "updateEmployeeShift",
+        data: {
+            employee_id: employee_id
+        },
+        success: function () {
+            a = "#" + id;
+            console.log(a);
+            // $(a).closest('article').fadeOut("slow");
+            // $(".success").css('display', 'block');
+            // $("#myCanvasNav").css('width','0%');
+            // $("#myCanvasNav").css('opacity','0');
+            // $("#deleteModel").toggleClass('close');
         }
     });
 }

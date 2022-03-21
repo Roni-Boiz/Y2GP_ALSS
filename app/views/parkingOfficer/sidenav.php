@@ -42,8 +42,9 @@
 
             <ul id="myMenu">
                 <li><a href="index"><i class="fa fa-home"></i>HOME</a></li>
-
+                <li class="dropdown"><a href="parkingspace"><i class="fa fa-calendar-plus"></i>PARKING SPACE</a></li>
                 <li class="dropdown"><a href="parkingslot"><i class="fa fa-calendar-plus"></i>PARKING SLOT</a></li>
+                
             </ul>
         </nav>
         <script>

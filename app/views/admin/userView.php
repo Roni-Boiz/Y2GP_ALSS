@@ -88,16 +88,16 @@ include_once 'sidenav.php';
                             <?php
                             while ($row = $this->users->fetch_assoc()) {
                                 $userId = 'UID' . sprintf("%04d", $row["user_id"]);
-                                if ($row["type"] == 'resident') {      
+                                if ($row["type"] == 'resident') {
                             ?>
                                     <span id="searchrow">
                                         <article class="row pga">
                                             <ul>
-                                                <li><a href="#" onclick=""><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li id="<?php echo $userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                             <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -111,11 +111,11 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row nhl">
                                             <ul>
-                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li  id="<?=$userId?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?= $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -128,11 +128,11 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <article class="row mlb">
                                             <ul>
-                                                <li><a href="#"><?php echo $userId ?><span class="small">(update)</span></a></li>
+                                                <li><?php echo $userId ?><span class="small">(update)</span></li>
                                                 <li><?php echo $row["user_name"] ?></li>
                                                 <li><?php echo $row["type"] ?></li>
                                                 <li><?php echo $row["hold"] ?></li>
-                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?=$userId?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
+                                                <li id="<?php echo $userId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $userId ?>')" class="model-Btn1" title="Remove User"><i class="fas fa-trash-alt"></i></span></li>
                                             </ul>
                                             <!-- <ul class="more-content">
                                                 <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
@@ -203,12 +203,12 @@ include_once 'sidenav.php';
                         <div id="deleteModel">
                             <a href="javascript:void(0)" class="closebtn">&times;</a>
                             <div style="text-align: center; margin-bottom: 10px;">
-                                <h2>Are You Sure ?</h2>
+                                <h2 style="padding: 0px;">Are You Sure ?</h2>
                             </div>
                             <form action="" class="formDelete" onsubmit="deleteUser();return false;">
                                 <div>
                                     <label> Delete User With User ID </label>
-                                    <span id="answer"></span>
+                                    <span id="answer1"></span>
                                 </div>
                                 <div>
                                     <input class="btnRed" type="submit" name="submit" value="Delete">
@@ -230,22 +230,22 @@ include_once 'sidenav.php';
                         ?>
                                 <div class="detail">
                                     <div>
-                                        <img src="../../uploads/profile/resident/<?=$row["nic"]?>" alt="user"  onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
+                                        <img src="../../uploads/profile/resident/<?= $row["nic"] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
                                         <div class="detail-info">
-                                            <h5><?=$row["name"]?></h5>
-                                            <small><?=$row["user_name"]?></small>
+                                            <h5><?= $row["name"] ?></h5>
+                                            <small><?= $row["user_name"] ?></small>
                                         </div>
-                                        <span class="acceptBtn" id="unlockId" title="Unlock Account" onclick="unlockAccount('<?=$row['user_name']?>')"><i class="fas fa-user-check"></i></span>
+                                        <span class="acceptBtn" id="unlockId" title="Unlock Account" onclick="unlockAccount('<?= $row['user_name'] ?>')"><i class="fas fa-user-check"></i></span>
                                     </div>
                                     <div class="moreContent">
                                         <span>
-                                            <h5>Apartment No : <?=$row["apartment_no"]?></h5>
+                                            <h5>Apartment No : <?= $row["apartment_no"] ?></h5>
                                         </span>
                                         <span>
-                                            <h5>NIC : <?=$row["nic"]?></h5>
+                                            <h5>NIC : <?= $row["nic"] ?></h5>
                                         </span>
                                         <span>
-                                            <h5>Email : <?=$row["email"]?></h5>
+                                            <h5>Email : <?= $row["email"] ?></h5>
                                         </span>
                                     </div>
                                 </div>
@@ -327,11 +327,61 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+
+            <!-- error success message -->
+            <?php
+            if (isset($this->error)) { ?>
+                <!-- error popup -->
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check' style="background:red;">
+                        &#10006;
+                    </div>
+                    <p>
+                        Insert Unsuccess!
+                    </p>
+                    <p>
+                        <?php echo $this->error; ?>
+                    </p>
+                    <button id='ok' style="background:red;">
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
+
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <!-- <div class='b'></div>
+                <div class='bb'></div> -->
+                <div class='message'>
+                    <div class='check'>
+                        &#10004;
+                    </div>
+                    <p>
+                        Insert Success!
+                    </p>
+                    <p>
+                        New Apartment Added
+                    </p>
+                    <button id='ok'>
+                        OK
+                    </button>
+                </div>
+            <?php
+            }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
-    </div> .expand div closed here
 
     <script>
+        $(document).ready(function() {
+            $("#ok").click(function() {
+                $(".message").fadeOut(600, "linear");
+            });
+        });
+
         fetch_user_login_date();
         setInterval(function() {
             fetch_user_login_date();

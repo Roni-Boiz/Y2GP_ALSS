@@ -212,49 +212,59 @@ include_once('sidenav.php');
                     </div>
                 </div>
             </div>
+
+            <!--success message -->
+            <?php
+            if (isset($this->error) || isset($this->pwerror)) { ?>
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Unsuccessfull!</h2>
+                        </div>
+                        <form class="formDelete" >
+                            <div>
+                                <label> <span id="answer2"></span> <?php if (isset($this->error)){echo  "please fill required field or enter valid details";} ?></label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            <?php
+            }; ?>
             <!-- success popup -->
             <?php
             if (isset($this->success)) { ?>
-            <div class='b'></div>
-            <div class='bb'></div>
-            <div class='message'>
-                <div class='check'>
-                    &#10004;
-                </div>
-                <p>
-                    Edit Success!
-                </p>
-                <p>
-                    
-                </p>
-                <button id='ok' onclick='window.location = "profile" '>
-                    OK
-                </button>
-            </div>
-            <?php
-            }; ?>
-            <?php
-            if (isset($this->error) || isset($this->pwerror)) { ?>
-                <!-- error popup -->
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
-                    </div>
-                    <p>
-                    Edit Unsuccess!
-                    </p>
-                    <p>
-                        <?php if (isset($this->error)){echo  "please fill required field or enter valid details";} ?>
-                    </p>
-                    <button id='ok' onclick='window.location = "profile" ' style="background:red;">
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
 
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Edit Success!</h2>
+                        </div>
+                        <form class="formDelete" >
+                            <div>
+                                <label> <span id="answer2"></span>Profile updated
+                                </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }; ?>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>

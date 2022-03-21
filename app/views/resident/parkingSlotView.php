@@ -167,6 +167,32 @@ include_once 'sidenav.php';
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
 
+            </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .expand div closed here -->
+        <script>
+            function CheckParking() {
+                let Date = document.getElementById('datepicker').value;
+                let Duration = document.getElementById('duration').value;
+
+                let obj = {
+                    Date: Date,
+                    Duration: Duration
+                }
+
+                fetch('http://localhost/Y2GP_ALSS/public/residentController/CheckPark', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: JSON.stringify(obj)
+                    })
+                    .then(Response => Response.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+            }
+        </script>
 </body>
 
 </html>

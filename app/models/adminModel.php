@@ -16,7 +16,8 @@ class adminModel extends model
         return $result;
     }
 
-    public function updateProfile($name,$email,$id){
+    public function updateProfile($name, $email, $id)
+    {
         $name = $this->conn->real_escape_string($name);
         $email = $this->conn->real_escape_string($email);
 
@@ -39,17 +40,20 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getAllFreeSlots(){
+    public function getAllFreeSlots()
+    {
         $sql = "SELECT * FROM parking_slot WHERE apartment_no IS NULL";
         return $this->conn->query($sql);
     }
 
-    public function getLastApartmentNo(){
+    public function getLastApartmentNo()
+    {
         $sql = "SELECT apartment_no FROM apartment ORDER BY apartment_no DESC LIMIT 1";
         return $this->conn->query($sql);
     }
 
-    public function insertNewApartment($apartmentNo, $floor, $parkingSlot){
+    public function insertNewApartment($apartmentNo, $floor, $parkingSlot)
+    {
         $apartmentNo = $this->conn->real_escape_string($apartmentNo);
         $floor = $this->conn->real_escape_string($floor);
         $parkingSlot = $this->conn->real_escape_string($parkingSlot);
@@ -61,14 +65,16 @@ class adminModel extends model
         return $result1 && $result2;
     }
 
-    public function getMonthlyIncome(){
+    public function getMonthlyIncome()
+    {
         $start = date("Y-m-1 00:00:00");
         $end = date("Y-m-t 23:59:59");
-        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='".$start."' AND paid_date<='".$end."'";
+        $sql = "SELECT sum(amount) AS income FROM payment WHERE paid_date>='" . $start . "' AND paid_date<='" . $end . "'";
         return $this->conn->query($sql);
     }
 
-    public function getTotalOverdue(){
+    public function getTotalOverdue()
+    {
         $sql = "SELECT sum(balance) AS due FROM resident";
         return $this->conn->query($sql);
     }
@@ -104,17 +110,20 @@ class adminModel extends model
         return $result;
     }
 
-    public function unlockThisUserAccount($user_name){
+    public function unlockThisUserAccount($user_name)
+    {
         $sql = "UPDATE user_account set hold=0, hold_time=NULL WHERE user_name='{$user_name}'";
         return $this->conn->query($sql);
     }
 
-    public function getAllLockedUsers(){
+    public function getAllLockedUsers()
+    {
         $sql = "SELECT user_name, profile_pic, resident.apartment_no, resident.email, resident.nic, concat_ws(' ', resident.fname, resident.lname) AS name FROM `user_account` INNER JOIN resident ON user_account.user_id = resident.user_id WHERE hold=5 and hold_time > DATE_SUB(NOW(), INTERVAL 1200 SECOND)";
         return $this->conn->query($sql);
     }
 
-    public function deleteThisUserAccount($user_id){
+    public function deleteThisUserAccount($user_id)
+    {
         $sql = "DELETE FROM user_account WHERE user_id = '{$user_id}'";
         return $this->conn->query($sql);
     }
@@ -124,6 +133,159 @@ class adminModel extends model
         $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
         $result = $this->conn->query($sql);
         return $result;
+    }
+
+    public function getEmployee($empType, $empId)
+    {
+        $sql = "SELECT * FROM {$empType} WHERE employee_id='{$empId}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getEmployees()
+    {
+        $sql = "SELECT LEFT(start_date,4) AS year, COUNT(employee_id) as no_emps FROM employee WHERE user_id IS NOT NULL GROUP BY left(start_date,4) ORDER BY year ASC";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllEmployees($empType)
+    {
+        if ($empType == "manager" || $empType == "receptionist" || $empType == "parking_officer" || $empType == "trainer") {
+            $sql = "SELECT * FROM {$empType} WHERE user_id IS NOT NULL";
+            return $this->conn->query($sql);
+        } else {
+            $sql = "SELECT * FROM {$empType}";
+            return $this->conn->query($sql);
+        }
+    }
+
+    public function getALLEmployeeBYType()
+    {
+        $sql = "SELECT type, COUNT(employee_id) as no_emps FROM employee WHERE user_id IS NOT NULL GROUP BY type";
+        return $this->conn->query($sql);
+    }
+
+    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName)
+    {
+        $fname = $this->conn->real_escape_string($fname);
+        $lname = $this->conn->real_escape_string($lname);
+        $email = $this->conn->real_escape_string($email);
+        $con = $this->conn->real_escape_string($con);
+        $result1 = $result2 = $result3 = '';
+        // Turn autocommit off
+        // $this->conn->query("START TRANSACTION");
+        $this->conn->autocommit(FALSE);
+
+        $lastId = $this->conn->query("SELECT employee_id FROM `employee` ORDER BY employee_id DESC LIMIT 1");
+        $row = mysqli_fetch_assoc($lastId);
+        $empId = (int)$row['employee_id'] + 1;
+        $username = '';
+        $password = '';
+        $userId = '';
+        if ($empType == 'manager' || $empType == 'receptionist' || $empType == 'parking_officer' || $empType == 'trainer') {
+            $userType = ($empType == 'manager' ? "MA" : ($empType == 'receptionist' ? "RE" : ($empType == 'parking_officer' ? "PO" : "TR")));
+            if ($empId < 10) {
+                $username = $userType . '000' . $empId;
+                $password = 'Hawlock@000' . $empId;
+            } else if ($empId < 100) {
+                $username = $userType . '00' . $empId;
+                $password = 'Hawlock@00' . $empId;
+            } else if ($empId < 1000) {
+                $username = $userType . '0' . $empId;
+                $password = 'Hawlock@0' . $empId;
+            } else if ($empId < 10000) {
+                $username = $userType . $empId;
+                $password = 'Hawlock@' . $empId;
+            } else {
+                $errors[] = 'Employee capacity is full';
+            }
+            $hashPassword = sha1($password);
+            $hash2Password = sha1($hashPassword);
+
+            $sql = "INSERT INTO user_account(user_name, password, type, profile_pic, hold) VALUES ('{$username}', '{$hash2Password}', '{$empType}', '{$fileName}', '0')";
+            $result1 = $this->conn->query($sql);
+            $userId = mysqli_insert_id($this->conn);
+
+            $sql = "INSERT INTO employee(type, start_date, user_id) VALUES ('{$empType}', CURDATE(), '{$userId}')";
+            $result2 = $this->conn->query($sql);
+            $empId = mysqli_insert_id($this->conn);
+
+            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
+            $result3 = $this->conn->query($sql);
+
+            if ($result1 && $result2 && $result3) {
+                $receiver = "chathus.m1999@gmail.com";
+                $subject = "Hawlock City Employee Login Credentials";
+                $body = "Your Username : " . $username . " and password : " . $password;
+                $sender = "From:hawlockrycn@gmail.com";
+                mail($receiver, $subject, $body, $sender);
+            }
+        } else {
+            $sql = "INSERT INTO employee(type, start_date, user_id) VALUES ('{$empType}', CURDATE(), 0)";
+            $result2 = $this->conn->query($sql);
+            $empId = mysqli_insert_id($this->conn);
+
+            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
+            $result3 = $this->conn->query($sql);
+        }
+        // Commit transaction
+        if (($result1 && $result2 && $result3) || ($result2 && $result3)) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 || $result2 && $result3;
+    }
+
+    public function deleteThisEmployee($employee_id)
+    {
+        $sql = "DELETE FROM employee WHERE employee_id = '{$employee_id}'";
+        return $this->conn->query($sql);
+    }
+
+    // public function updateThisEmployeeShift($employee_id){
+    //     $sql = "";
+    //     return $this->conn->query($sql);
+    // }
+
+    public function addService($type, $name, $fee, $cancleFee){
+        $type = $this->conn->real_escape_string($type);
+        $name = $this->conn->real_escape_string($name);
+        $fee = $this->conn->real_escape_string($fee);
+        $cancleFee = $this->conn->real_escape_string($cancleFee);
+
+        $sql = "INSERT INTO service(type,name,fee,cancelation_fee,effect_date) VALUES('{$type}', '{$name}', '{$fee}', '{$cancleFee}', CURDATE());";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllServices()
+    {
+        $sql = "SELECT * FROM service";
+        return $this->conn->query($sql);
+    }
+
+    public function updateThisService($serviceId, $newFee, $newCancleFee, $effectDate)
+    {
+        $sql = "UPDATE service SET new_fee='{$newFee}', next_cancelation_fee='{$newCancleFee}', effect_date='{$effectDate}' WHERE service_id='{$serviceId}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllReservationsByDate($startDate, $endDate){
+        $sql = "SELECT 'fitness' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM fitness_centre_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'Hall' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM hall_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'parking' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM parking_slot_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'treatment' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM treatment_room_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'laundry' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM laundry_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'
+        UNION
+        SELECT 'technical' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM technical_maintenence_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'";
+        return $this->conn->query($sql);
     }
 
     public function insertAnnouncement($topic, $content, $category, $fileName, $id)
@@ -143,89 +305,4 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function getEmployee($empType, $empId)
-    {
-        $sql = "SELECT * FROM {$empType} WHERE employee_id='{$empId}'";
-        return $this->conn->query($sql);
-    }
-
-    public function getAllEmployees($empType)
-    {
-        $sql = "SELECT * FROM {$empType}";
-        return $this->conn->query($sql);
-    }
-
-    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName)
-    {
-        $fname = $this->conn->real_escape_string($fname);
-        $lname = $this->conn->real_escape_string($lname);
-        $email = $this->conn->real_escape_string($email);
-        $con = $this->conn->real_escape_string($con);
-        $result1 = $result2 = $result3 = '';
-        // Turn autocommit off
-        $this->conn->autocommit(FALSE);
-
-        $sql = "INSERT INTO employee(type, start_date) VALUES ('{$empType}', CURDATE())";
-        $result1 = $this->conn->query($sql);
-        $empId = mysqli_insert_id($this->conn);
-        $username = '';
-        $password = '';
-        $userId = '';
-        if ($empType == 'manager' || $empType == 'receptionist' || $empType == 'parking_officer' || $empType == 'trainer') {
-            $userType = ($empType == 'manager' ? "MA" : ($empType == 'receptionist' ? "RE" : ($empType == 'parking_officer' ? "PO" : "TR")));
-            if ($empId < 10) {
-                $username = $userType . '000' . $empId;
-                $password = 'Hawlock@000' . $empId;
-            } else if ($empId < 100) {
-                $username = $userType . '00' . $empId;
-                $password = 'Hawlock@00' . $empId;
-            } else if ($empId < 1000) {
-                $username = $userType . '0' . $empId;
-                $password = 'Hawlock@0' . $empId;
-            } else if ($empId < 10000) {
-                $username = $userType . $empId;
-                $password = 'Hawlock@' . $empId;
-            } else {
-                $errors[] = 'User capacity is full';
-            }
-            $hashPassword = sha1($password);
-            $hash2Password = sha1($hashPassword);
-
-            $sql = "INSERT INTO user_account(user_name, password, type, profile_pic, hold) VALUES ('{$username}', '{$hash2Password}', '{$empType}', '{$fileName}', '0')";
-            $result2 = $this->conn->query($sql);
-            $userId = mysqli_insert_id($this->conn);
-
-            if ($result1 && $result2) {
-                $receiver = "chathus.m1999@gmail.com";
-                $subject = "Hawlock City Employee Login Credentials";
-                $body = "Your Username : " . $username . " and password : " . $password;
-                $sender = "From:hawlockrycn@gmail.com";
-                mail($receiver, $subject, $body, $sender);
-            }
-
-            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date, user_id) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE(),'{$userId}')";
-            $result3 = $this->conn->query($sql);
-        } else {
-            $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
-            $result3 = $this->conn->query($sql);
-        }
-        // Commit transaction
-        if (!$this->conn->commit()) {
-            echo "Commit transaction failed";
-            $this->conn->autocommit(TRUE);
-            return false;
-        }
-        // Rollback transaction
-        $this->conn->rollback();
-        $this->conn->autocommit(TRUE);
-        return $result3;
-    }
-
-    public function getAllServices()
-    {
-        $sql = "SELECT * FROM service";
-        return $this->conn->query($sql);
-    }
-
-    
 }

@@ -15,7 +15,8 @@ include_once 'sidenav.php';
 
         <div id="hb" class="hawlockbody animate-bottom">
             <h2>Announcements</h2>
-            <div class="btnAddAnnouncement" onclick="openNav(); openOffcanvas()" title="Add Anouncement"><img src="../../public/img/announcement.png"></div><!--<i class="fa fa-plus-square"></i>-->
+            <div class="btnAddAnnouncement" onclick="openNav(); openOffcanvas()" title="Add Anouncement"><img src="../../public/img/announcement.png"></div>
+            <!--<i class="fa fa-plus-square"></i>-->
             <!-- Add Anouncement -->
             <div id="myCanvasNav" class="overlay" onclick="closeOffcanvas()" style="width: 0%; opacity: 0;"></div>
 
@@ -29,7 +30,7 @@ include_once 'sidenav.php';
                     <input type="text" id="topic" name="topic" class="input-field" placeholder="New Announcement" required><br>
 
                     <label for="content">Content</label><br>
-                    <textarea id="content" name="content" cols="30" rows="5" placeholder="Your content" required></textarea><br>
+                    <textarea id="editor" name="content" cols="30" rows="5" placeholder="Your content" required></textarea><br>
 
                     <label for="visibility">Visibility</label><br>
                     <div class="visibility">
@@ -48,7 +49,7 @@ include_once 'sidenav.php';
                     <input type="submit" name="broadcast" value="Broadcast">
                 </form>
             </div>
-            
+
             <!-- Loading Announcements -->
             <?php
             if ($this->ann->num_rows > 0) {
@@ -58,19 +59,18 @@ include_once 'sidenav.php';
                     <div class="card">
                         <div class="card-body">
                             <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
+                                <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
                                 <div class="detail-info">
                                     <?php
                                     $datetime =  $row["date"];
                                     $date = date('F j, Y', strtotime($datetime));
                                     $time = date('h:i A', strtotime($datetime));
                                     ?>
-                                    <h5>Admin</h5>
-                                    <small><?php echo  $date?> <?php echo $time ?></small>
+                                    <h3><?= $row["topic"] ?></h3>
+                                    <small>by <b><?= $row["name"] ?></b> - <?php echo  $date ?> <?php echo $time ?></small>
                                 </div>
                             </div>
-                            <h4><?php echo $row["topic"] ?></h4>
-                            <p><?php echo $row["content"] ?></p>
+                            <div class="announcementContent"><?php echo $row["content"] ?></div>
                         </div>
                         <?php
                         if ($row["file_name"]) {
@@ -90,9 +90,12 @@ include_once 'sidenav.php';
             ?>
             <br>
 
-
-
         </div> <!-- .hawlockbody div closed here -->
+    </div>
 </body>
+
+<script>
+    CKEDITOR.replace('content');
+</script>
 
 </html>

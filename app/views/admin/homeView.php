@@ -165,7 +165,8 @@ include_once 'sidenav.php';
     }
 
     #apartmentSummary>div:nth-child(1) div {
-        padding: 10px;
+        padding: 5px;
+        margin: 3px;
     }
 
     #apartmentSummary>div:nth-child(1)>div>span {
@@ -220,15 +221,15 @@ include_once 'sidenav.php';
                                             <?php
                                             if ($row["status"]) { ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
-                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;"></i>
+                                                    <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
                                                 </span>
                                             <?php
                                             } else {
                                                 $remaining++; ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
-                                                    <strong class="text-primary"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:green;font-size:40px;padding: 0px;"></i>
+                                                    <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
+                                                    <i class="fa fa-home" style="color:gray;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
                                                 </span>
                                             <?php
 
@@ -397,7 +398,7 @@ include_once 'sidenav.php';
                 </div>
             </div>
 
-            <!-- reservation success message -->
+            <!-- error success message -->
             <?php
             if (isset($this->error)) { ?>
                 <!-- error popup -->
@@ -429,7 +430,10 @@ include_once 'sidenav.php';
                         &#10004;
                     </div>
                     <p>
-                        New Apartment Added!
+                        Insert Success!
+                    </p>
+                    <p>
+                        New Apartment Added
                     </p>
                     <button id='ok'>
                         OK
@@ -454,9 +458,6 @@ include_once 'sidenav.php';
                 $(".message").fadeOut(600, "linear");
             });
         });
-    </script>
-
-    <script>
         
         var input = document.getElementById("myInput");
         input.addEventListener("keyup", function(event) {
@@ -579,6 +580,84 @@ include_once 'sidenav.php';
         // });
 
         //Charts
+
+        // $(document).ready(function() {
+        //     $.ajax({
+        //         url: "getServices",
+        //         method: "GET",
+        //         success: function(data) {
+        //             var serviceName = [];
+        //             var fee = [];
+        //             var cancleFee = [];
+        //             data = JSON.parse(data);
+        //             for (var i in data) {
+        //                 serviceName.push(data[i].name);
+        //                 fee.push(data[i].fee);
+        //                 cancleFee.push(data[i].cancelation_fee);
+        //             }
+        //             var chartdata = {
+        //                 labels: serviceName,
+        //                 datasets: [{
+        //                         label: 'Fee/h',
+        //                         data: fee,
+        //                         // backgroundColor : '#423D59',
+        //                         backgroundColor: [
+        //                             'rgba(153,102,255,0.6)'
+        //                         ],
+        //                         borderWidth: 1,
+        //                         borderColor: '#ae98db',
+        //                         hoverBorderWidth: 1,
+        //                         hoverBorderColor: '#003',
+        //                     },
+        //                     {
+        //                         label: 'Cancle Fee',
+        //                         data: cancleFee,
+        //                         // backgroundColor : '#423D59',
+        //                         backgroundColor: [
+        //                             'rgb(187,35,22,0.6)'
+        //                         ],
+        //                         borderWidth: 1,
+        //                         borderColor: '#a72d22d9',
+        //                         hoverBorderWidth: 1,
+        //                         hoverBorderColor: '#003',
+        //                     }
+        //                 ]
+        //             };
+
+        //             var ctx = $("#serviceRateChart");
+
+        //             var barGraph = new Chart(ctx, {
+        //                 type: 'line',
+        //                 data: chartdata,
+        //                 options: {
+        //                     scales: {
+        //                         y: {
+        //                             suggestedMin: 0,
+        //                         }
+        //                     },
+        //                     plugins: {
+        //                         legend: {
+        //                             display: false,
+        //                             position: 'bottom',
+        //                             labels: {
+        //                                 fontColor: '#000'
+        //                             }
+        //                         },
+        //                         title: {
+        //                             display: false,
+        //                             text: 'Service Rate',
+        //                             fontSize: 25
+        //                         },
+        //                     },
+        //                 },
+        //             });
+        //         },
+        //         error: function(data) {
+        //             console.log(data);
+        //         }
+        //     });
+        // });
+
         let chart1 = document.getElementById('earningChart').getContext('2d');
         let massChart1 = new Chart(chart1, {
             type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea

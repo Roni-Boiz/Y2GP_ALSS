@@ -241,7 +241,7 @@ nav i{
 }
 .detail{
   display: flex;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 .detail img {
   border-radius: 50%;
@@ -255,6 +255,15 @@ nav i{
 }
 .detail-info small {
   color: #545d7a;
+  font-size: .9375rem;
+}
+.announcementContent{
+  margin: 20px 0px 0px 0px !important;
+  font-size: medium;
+}
+.announcementContent>p{
+  font-family: 'Poppins', sans-serif;
+  font-size: medium;
 }
 
 /* icon with title part */
@@ -1037,7 +1046,7 @@ select{
 .formAddEmployee #uploadBtn{
   height: 30px;
   width: 100%;
-  bottom: 0px;
+  bottom: -2px;
   left: 50%;
   transform: translate(-50%);
   text-align: center;
@@ -1351,6 +1360,14 @@ select{
   background-color: #db2323 !important;
   cursor: pointer;
 }
+.btnBlue{
+  background-color: #2a225a !important;
+}
+
+.btnBlue:hover{
+  background-color: #241c52 !important;
+  cursor: pointer;
+}
 
 .formDelete label{
   font-weight: 600;   
@@ -1393,7 +1410,6 @@ select{
 #employeeSummary .employee:hover{
   box-shadow: 0 8px 16px rgb(61 38 193);
 }
-
 
 #employeeSummary i{
   padding: 0px;
@@ -1487,6 +1503,40 @@ select{
 .empsearch i{
   padding: 15px 15px 0px 5px;
 }
+
+@media only screen and (max-width: 880px) {
+  #employeeCard{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width: 680px){
+  .formAddEmployee{
+    display: flex;
+    flex-direction: column;
+  }
+  .formAddEmployee .profile-pic{
+    height: 90px;
+    width: 90px;
+  }
+  .formAddEmployee #emptype{
+    width: 55%;
+  }
+  .formAddEmployee .input-field{
+    width: 98%;
+  }
+}
+
+@media(max-width: 800px){
+  .formAddEmployee{
+    grid-template-columns: none;
+  }
+  .formAddEmployee .profile-pic{
+    height: 90px;
+    width: 90px;
+  }
+}
 /* End of Admin Employee Styles */
 
 /* Admin service view */
@@ -1508,12 +1558,12 @@ select{
   text-align: center;
 }
 
-.serviceSummary .chartContainer1 div {
+/* .serviceSummary .chartContainer1 div {
   height: 60px;
-}
+} */
 
 .serviceSummary .chartContainer2 div {
-  height: 60px;
+  height: 62px;
 }
 
 #serviceCard h2{
@@ -1598,6 +1648,23 @@ select{
 
 .formEdit>div {
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 880px) {
+  #employeeCard{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width:680px){
+  .formAddService{
+    display: flex;
+    flex-direction: column;
+  }
+  .formAddService .input-field{
+    width: 100%;
+  }  
 }
 /* End of Admin service view  */
 
@@ -3130,7 +3197,7 @@ input:checked + .slider:before {
   max-height: 150px;
 }
 /* error pop up */
-.b, .bb {
+/* .b, .bb {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -3147,7 +3214,7 @@ input:checked + .slider:before {
   background-position: center;
   background-color: #cccfcf;
   opacity: 50%;
-}
+} */
 
 .message {
   position: absolute;
@@ -3200,6 +3267,7 @@ input:checked + .slider:before {
   font-size: 1.2rem;
   outline: none;
   cursor:pointer;
+  padding: 0px !important;
 }
 .message #ok:hover {
   background: #6bc039;
@@ -3283,4 +3351,15 @@ input:checked + .slider:before {
     display: block;
     text-align: center;
   }
+}
+#declineBtn{
+  background-color: #2a225a;
+  color: white;
+  padding: 5px 10px;
+  margin: auto;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  grid-column: 3;
+  width: 70px;
 }

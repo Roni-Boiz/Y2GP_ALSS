@@ -23,9 +23,11 @@ class residentController extends controller
         $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('resident/residentView');
     }
+
     // view resident profile
     public function profile()
     {
+        //check edit profile success or not
         if (isset($_GET["s"])) {
             if ($_GET["s"] == 1) {
                 $this->view->success = true;
@@ -39,43 +41,49 @@ class residentController extends controller
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('resident/profileView');
     }
+
     // edit profile
     public function editProfile()
     {
-        $a = 0;
+        $editsuccess = 0;
         if (strlen($_POST["phone_no"]) > 9 && strlen($_POST["email"])) {
-            $a = $this->model->editProfile();
+            $editsuccess = $this->model->editProfile();
         }
-        if ($a) {
+        //after edit, call to view profile again
+        //pass error or not
+        if ($editsuccess) {
             header("Refresh:0; url=profile?s=1");
         } else {
             header("Refresh:0; url=profile?s=0");
         }
     }
+
+    //remove family member
     public function removeMember()
     {
         $id = $_POST["removedmem"];
         $this->model->removeMember($id);
         $this->profile();
     }
+
+    //change resident password
     public function changePassword()
     {
         $opw = $_POST["opw"];
         $npw = $_POST["npw"];
         $rnpw = $_POST["rnpw"];
-        $a = $this->model->changePassword($opw, $npw, $rnpw);
-        if ($a) {
+        $editsuccess = $this->model->changePassword($opw, $npw, $rnpw);
+
+        //after edit, call to view profile again
+        //pass error or not
+        if ($editsuccess) {
             header("Refresh:0; url=profile?s=0");
         } else {
             header("Refresh:0; url=profile?s=1");
         }
     }
-    // view resident announcement
-    // public function announcement(){
-    //     $this->view->ann = $this->model->getAnnouncement();
-    //     $this->view->render('resident/residentView');
-    // }
 
+    //get all reservation for view to resident
     public function yourReservation()
     {
         $id = $_SESSION['userId'];
@@ -85,19 +93,23 @@ class residentController extends controller
         $this->view->parking = $this->model->parkingReservation($id);
         $this->view->render('resident/yourReservationView');
     }
+
+    //remove reservation with ajax call
     public function removeReservation()
     {
-        $this->model->removeReservation();
-        header("Refresh:0; url=yourReservation");
-        // $this->yourReservation();
+        return $this->model->removeReservation();
+        // header("Refresh:0; url=yourReservation");
     }
+
+    //remove reservation with ajax call
     public function removeRequest()
     {
         $this->model->removeRequest();
-        header("Refresh:0; url=yourRequest");
+        // header("Refresh:0; url=yourRequest");
         // $this->yourRequest();
     }
 
+    //make fitness centre reservation
     public function fitness()
     {
         $id = $_SESSION['userId'];
@@ -121,32 +133,31 @@ class residentController extends controller
         } else if (isset($_POST["date"]) && isset($_POST["coach"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
-
+            //to display availability in new view 
             $this->view->coach = $coach;
-            if ($d <= date('Y-m-d')) {
-                $this->view->error[] = "Pick upcoming date";
-            } else {
-                $this->view->day = $this->model->dayfitness($d, $coach);
-                $this->view->shiftno = $this->model->getshiftno($d, $coach);
-                $this->view->selectdate = $d;
-                $this->view->selectcoach = $coach;
-            }
+
+            $this->view->day = $this->model->dayfitness($d, $coach);
+            $this->view->shiftno = $this->model->getshiftno($d, $coach);
+            //to display availability in new view 
+            $this->view->selectdate = $d;
+            $this->view->selectcoach = $coach;
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
         $this->view->render('resident/fitnessCentreView');
     }
 
+    //make treatment room reservation
     public function treatment()
     {
         $id = $_SESSION['userId'];
-
 
         if (isset($_POST["date"]) && isset($_POST["trtype"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
             $type = $_POST["trtype"];
             $stime = $_POST["starttime"] . ":00";
             $etime = $_POST["endtime"] . ":00";
+
             //check valid time
             if ($stime < $etime) {
                 $result = $this->model->reservetreatment($d, $type, $stime, $etime);
@@ -163,10 +174,12 @@ class residentController extends controller
             $this->view->selectdate = $d;
             $this->view->day = $this->model->daytreatment($d);
         }
+        $this->view->treater = $this->model->readtreater();
         $this->view->latest = $this->model->latesttreatment($id);
         $this->view->render('resident/treatmentRoomView');
     }
 
+    //make function and conference hall reservation
     public function hall()
     {
         $id = $_SESSION['userId'];
@@ -181,25 +194,23 @@ class residentController extends controller
             $etime = $_POST["endtime"] . ":00";
             $members = $_POST["members"];
             //check valid time + check member less than 50
-            
-                $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
-                if ($result == 0) {
-                    $this->view->error = "Already reserved.Please select another time slot!.";
-                } else {
-                    $this->view->success = true;
-                }
+
+            $result = $this->model->reservehall($d, $type, $stime, $etime, $members);
+            if ($result == 0) {
+                $this->view->error = "Already reserved.Please select another time slot!.";
+            } else {
+                $this->view->success = true;
+            }
         }
+
         //show reservation(user mention date)
         else if (isset($_POST["date"]) && isset($_POST["type"])) {
             $d = $_POST["date"];
             $type = $_POST["type"];
             $this->view->type = $type;
-            if ($d <= date('Y-m-d')) {
-                $this->view->error[] = "Pick upcoming date";
-            } else {
-                $this->view->day = $this->model->dayhall($d, $type);
-                $this->view->selectdate = $d;
-            }
+
+            $this->view->day = $this->model->dayhall($d, $type);
+            $this->view->selectdate = $d;
         }
 
         $this->view->render('resident/hallView');
@@ -224,10 +235,10 @@ class residentController extends controller
         $data = json_decode($data,true);
         
         $Availability = $this->model->checkParking($data);
+        $data = json_decode($data, true);
 
         echo json_encode($Availability);
         exit;
-
     }
 
 
@@ -235,21 +246,28 @@ class residentController extends controller
     {
         $id = $_SESSION['userId'];
         $this->view->pay = $this->model->pay($id);
+        $this->view->balance = $this->model->readResident();
         $this->view->render('resident/paymentView');
     }
 
+    //get bill details and print like pdf
     public function bill()
     {
         $id = $_SESSION['userId'];
-        // particular month
+
+        // //call bill model with particular year and month
         if (isset($_POST["month"]) && isset($_POST["year"])) {
-            $this->view->bill = $this->model->bill($id, $_POST["year"], $_POST["month"]);
-            $this->view->payment = $this->model->payment($id, $_POST["year"], $_POST["month"]);
+
+            $m = $_POST["month"];
+            $y = $_POST["year"];
+            $this->view->bill = $this->model->bill($id, $y, $m);
+            $this->view->payment = $this->model->payment($id, $y, $m);
             // convert-number-to-month-name
-            $this->view->y = $_POST["year"] . " " . date("F", mktime(0, 0, 0, $_POST["month"], 10));;
-            $this->view->billtotal = $this->model->billtotal($id, $_POST["year"], $_POST["month"]);
-            //else this month
+            $this->view->y = $y . " " . date("F", mktime(0, 0, 0, $m, 10));
+            $this->view->billtotal = $this->model->billtotal($id, $y, $m);
+            //call bill model with current year and month
         } else {
+
             $this->view->bill = $this->model->bill($id, date('Y'), date('m'));
             $this->view->y = date('Y') . " " . date('F');
             $this->view->payment = $this->model->payment($id, date('Y'), date('m'));
@@ -260,15 +278,21 @@ class residentController extends controller
         $this->view->render('resident/billView');
     }
 
+    //get all requests of each resident
     public function yourRequest()
     {
         $id = $_SESSION['userId'];
         $this->view->maintenence = $this->model->maintenence($id);
         $this->view->laundry = $this->model->laundry($id);
+        if (isset($_GET["reqid"])) {
+            $id = $_GET["reqid"];
+            $this->view->reqSelected = $this->model->categorydetail($id);
+        }
         $this->view->visitor = $this->model->visitor($id);
         $this->view->render('resident/yourRequestView');
     }
 
+    //make maintenence request
     public function maintenence()
     {
         $id = $_SESSION['userId'];
@@ -277,13 +301,18 @@ class residentController extends controller
             $pdate = $_POST["pdate"];
             $type = $_POST["type"];
 
-            $this->model->reqMaintenence($type, $pdate, $des, $id);
-            header("Refresh:0; url=maintenence");
+            $result = $this->model->reqMaintenence($type, $pdate, $des, $id);
+            if ($result == 0) {
+                $this->view->error = true;
+            } else {
+                $this->view->success = true;
+            }
         }
         $this->view->latest = $this->model->latestmaintenence($id);
         $this->view->render('resident/maintenenceView');
     }
 
+    //make laundry request
     public function laundry()
     {
         $id = $_SESSION['userId'];
@@ -296,12 +325,18 @@ class residentController extends controller
             $quantity1 = $_POST["quantity1"];
             $quantity2 = $_POST["quantity2"];
             $quantity3 = $_POST["quantity3"];
-            $this->model->reqLaundry($type, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
-            header("Refresh:0; url=laundry");
+            $pdate = $_POST["pdate"];
+            $result = $this->model->reqLaundry($type, $pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
+            if ($result == 0) {
+                $this->view->error = "Something went wrong! please try again.";
+            } else {
+                $this->view->success = true;
+            }
         }
         $this->view->render('resident/laundryView');
     }
 
+    //make visitor request
     public function visitor()
     {
         $id = $_SESSION['userId'];
@@ -309,30 +344,44 @@ class residentController extends controller
             $des = $_POST["description"];
             $vdate = $_POST["vdate"];
             $name = $_POST["name"];
-            $this->model->requestVisitor($name, $vdate, $des, $id);
+            $result = $this->model->requestVisitor($name, $vdate, $des, $id);
+            if ($result == 0) {
+                $this->view->error = "Already reserved.Please select another time slot!.";
+            } else {
+                $this->view->success = true;
+            }
         }
         $this->view->render('resident/visitorView');
     }
+
+    //view all notifications
     public function getNotification()
     {
         $this->view->notification = $this->model->readNotification();
         $this->view->render('resident/notificationView');
     }
+
+    //mark as parcel reached
     public function markReached()
     {
         $nid = $_GET['notification'];
         $this->model->setReached($nid);
         $this->getNotification();
     }
+
+    //mark as notification read
     public function markRead()
     {
         $nid = $_GET['notification'];
         $this->model->removeNotification($nid);
         $this->getNotification();
     }
+
+    //make complaints 
     public function complaint()
     {
         $id = $_SESSION['userId'];
+        //echo $id;
         if (isset($_POST["description"]) && isset($_POST["type"])) {
             $des = $_POST["description"];
             $type = $_POST["type"];
@@ -343,19 +392,31 @@ class residentController extends controller
                 $this->view->success = true;
             }
         }
+        $this->view->com1 = $this->model->considercomplaint($id);
+        $this->view->com2 = $this->model->othercomplaint($id);
         $this->view->render('resident/complaintView');
     }
 
+    //make payemnts with payhere
     public function makePayment()
     {
-        $id = $_GET["userId"];
-        $apartmentNo = "AP001";
-        $residentId =  "RA0001";
-        $residentFname = "Amal";
-        $residentLname = "Perera";
-        $amount = "10000";
-        //payment update wenna ona userge account eken
+        $user = $this->model->readResident();
+        $row = $user->fetch_assoc();
+        $apartmentNo = $row["apartment_no"];
+        $residentId =  $row["resident_id"];
+        $residentFname = $row["fname"];
+        $residentLname = $row["lname"];
+        $amount = $_GET["amt"];
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
+
+        //$this->view->render('resident/paymentView');
+    }
+
+    //payhere payment details save in to the db
+    public function payafter()
+    {
+        $amount = $_GET["amt"];
+        $this->model->paymentSave($amount);
     }
 }
