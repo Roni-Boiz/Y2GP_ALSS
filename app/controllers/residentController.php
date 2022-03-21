@@ -27,6 +27,7 @@ class residentController extends controller
     // view resident profile
     public function profile()
     {
+        //check edit profile success or not
         if (isset($_GET["s"])) {
             if ($_GET["s"] == 1) {
                 $this->view->success = true;
@@ -44,16 +45,20 @@ class residentController extends controller
     // edit profile
     public function editProfile()
     {
-        $a = 0;
+        $editsuccess = 0;
         if (strlen($_POST["phone_no"]) > 9 && strlen($_POST["email"])) {
-            $a = $this->model->editProfile();
+            $editsuccess = $this->model->editProfile();
         }
-        if ($a) {
+        //after edit, call to view profile again
+        //pass error or not
+        if ($editsuccess) {
             header("Refresh:0; url=profile?s=1");
         } else {
             header("Refresh:0; url=profile?s=0");
         }
     }
+
+    //remove family member
     public function removeMember()
     {
         $id = $_POST["removedmem"];
@@ -67,14 +72,17 @@ class residentController extends controller
         $opw = $_POST["opw"];
         $npw = $_POST["npw"];
         $rnpw = $_POST["rnpw"];
-        $a = $this->model->changePassword($opw, $npw, $rnpw);
-        if ($a) {
+        $editsuccess = $this->model->changePassword($opw, $npw, $rnpw);
+
+        //after edit, call to view profile again
+        //pass error or not
+        if ($editsuccess) {
             header("Refresh:0; url=profile?s=0");
         } else {
             header("Refresh:0; url=profile?s=1");
         }
     }
-   
+
     //get all reservation for view to resident
     public function yourReservation()
     {
@@ -90,14 +98,14 @@ class residentController extends controller
     public function removeReservation()
     {
         return $this->model->removeReservation();
-        header("Refresh:0; url=yourReservation");
-        // $this->yourReservation();
+        // header("Refresh:0; url=yourReservation");
     }
+
     //remove reservation with ajax call
     public function removeRequest()
     {
         $this->model->removeRequest();
-        header("Refresh:0; url=yourRequest");
+        // header("Refresh:0; url=yourRequest");
         // $this->yourRequest();
     }
 
@@ -125,11 +133,12 @@ class residentController extends controller
         } else if (isset($_POST["date"]) && isset($_POST["coach"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
-
+            //to display availability in new view 
             $this->view->coach = $coach;
 
             $this->view->day = $this->model->dayfitness($d, $coach);
             $this->view->shiftno = $this->model->getshiftno($d, $coach);
+            //to display availability in new view 
             $this->view->selectdate = $d;
             $this->view->selectcoach = $coach;
         }
@@ -143,12 +152,12 @@ class residentController extends controller
     {
         $id = $_SESSION['userId'];
 
-
         if (isset($_POST["date"]) && isset($_POST["trtype"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
             $type = $_POST["trtype"];
             $stime = $_POST["starttime"] . ":00";
             $etime = $_POST["endtime"] . ":00";
+
             //check valid time
             if ($stime < $etime) {
                 $result = $this->model->reservetreatment($d, $type, $stime, $etime);
@@ -244,15 +253,20 @@ class residentController extends controller
     public function bill()
     {
         $id = $_SESSION['userId'];
-        // particular month
+
+        // //call bill model with particular year and month
         if (isset($_POST["month"]) && isset($_POST["year"])) {
-            $this->view->bill = $this->model->bill($id, $_POST["year"], $_POST["month"]);
-            $this->view->payment = $this->model->payment($id, $_POST["year"], $_POST["month"]);
+
+            $m = $_POST["month"];
+            $y = $_POST["year"];
+            $this->view->bill = $this->model->bill($id, $y, $m);
+            $this->view->payment = $this->model->payment($id, $y, $m);
             // convert-number-to-month-name
-            $this->view->y = $_POST["year"] . " " . date("F", mktime(0, 0, 0, $_POST["month"], 10));;
-            $this->view->billtotal = $this->model->billtotal($id, $_POST["year"], $_POST["month"]);
-            //else this month
+            $this->view->y = $y . " " . date("F", mktime(0, 0, 0, $m, 10));
+            $this->view->billtotal = $this->model->billtotal($id, $y, $m);
+            //call bill model with current year and month
         } else {
+
             $this->view->bill = $this->model->bill($id, date('Y'), date('m'));
             $this->view->y = date('Y') . " " . date('F');
             $this->view->payment = $this->model->payment($id, date('Y'), date('m'));
@@ -270,8 +284,8 @@ class residentController extends controller
         $this->view->maintenence = $this->model->maintenence($id);
         $this->view->laundry = $this->model->laundry($id);
         if (isset($_GET["reqid"])) {
-            $id=$_GET["reqid"];
-            $this->view->reqSelected=$this->model->categorydetail($id);
+            $id = $_GET["reqid"];
+            $this->view->reqSelected = $this->model->categorydetail($id);
         }
         $this->view->visitor = $this->model->visitor($id);
         $this->view->render('resident/yourRequestView');
@@ -286,7 +300,7 @@ class residentController extends controller
             $pdate = $_POST["pdate"];
             $type = $_POST["type"];
 
-            $result =$this->model->reqMaintenence($type, $pdate, $des, $id);
+            $result = $this->model->reqMaintenence($type, $pdate, $des, $id);
             if ($result == 0) {
                 $this->view->error = true;
             } else {
@@ -311,13 +325,12 @@ class residentController extends controller
             $quantity2 = $_POST["quantity2"];
             $quantity3 = $_POST["quantity3"];
             $pdate = $_POST["pdate"];
-            $result=$this->model->reqLaundry($type,$pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
+            $result = $this->model->reqLaundry($type, $pdate, $des, $id, $catw1, $catw2, $catw3, $quantity1, $quantity2, $quantity3);
             if ($result == 0) {
                 $this->view->error = "Something went wrong! please try again.";
             } else {
                 $this->view->success = true;
             }
-            
         }
         $this->view->render('resident/laundryView');
     }
@@ -330,7 +343,7 @@ class residentController extends controller
             $des = $_POST["description"];
             $vdate = $_POST["vdate"];
             $name = $_POST["name"];
-            $result=$this->model->requestVisitor($name, $vdate, $des, $id);
+            $result = $this->model->requestVisitor($name, $vdate, $des, $id);
             if ($result == 0) {
                 $this->view->error = "Already reserved.Please select another time slot!.";
             } else {
@@ -386,7 +399,7 @@ class residentController extends controller
     //make payemnts with payhere
     public function makePayment()
     {
-        $user =$this->model->readResident();
+        $user = $this->model->readResident();
         $row = $user->fetch_assoc();
         $apartmentNo = $row["apartment_no"];
         $residentId =  $row["resident_id"];
@@ -395,10 +408,13 @@ class residentController extends controller
         $amount = $_GET["amt"];
         $paymentDetails = '{"apartmentNo" : "' . $apartmentNo . '" , "residentId" : "' . $residentId . '" , "fname" : "' . $residentFname . '" , "lname" : "' . $residentLname . '" , "amount" : "' . $amount . '"}';
         echo $paymentDetails;
-        
+
         //$this->view->render('resident/paymentView');
     }
-    public function payafter(){
+
+    //payhere payment details save in to the db
+    public function payafter()
+    {
         $amount = $_GET["amt"];
         $this->model->paymentSave($amount);
     }

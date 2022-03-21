@@ -329,7 +329,7 @@ include_once 'sidenav.php';
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Sent!</h2>
                         </div>
-                        <form class="formDelete" onsubmit="hall ;return false;">
+                        <form class="formDelete" onsubmit="">
                             <div>
                                 <label> <span id="answer2"></span>your complaint will be considered soon.. thank you for your feedback
                                 </label>
