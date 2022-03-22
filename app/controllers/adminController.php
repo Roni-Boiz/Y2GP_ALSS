@@ -162,7 +162,24 @@ class adminController extends controller
         print json_encode($data);
     }
 
+    public function deleteEmployee()
+    {
+        return $this->model->deleteThisEmployee($_POST['employee_id']);
+    }
 
+    public function updateEmployeeShift(){
+        return $this->model->updateThisEmployeeShift($_POST['employee_id'],$_POST['week1'],$_POST['week2'],$_POST['week3']);
+    }
+
+    public function getEmployeeShift(){
+        $result = $this->model->getThisEmployeeShift($_POST['employee_id']);
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
 
     public function service()
     {
