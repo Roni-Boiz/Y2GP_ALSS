@@ -27,27 +27,27 @@ include_once('sidenav.php');
                         <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
 
                         <label>First Name</label>
-                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
+                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>>
                         <span class="error_form" id="fnameerr" style="font-size:10px"></span><br>
 
                         <label>Last Name</label>
-                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
+                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>>
                         <span class="error_form" id="lnameerr" style="font-size:10px"></span><br>
 
                         <label>NIC</label>
-                        <input type="text" id="nic" name="nic" class="input-field" pattern="[0-9]{9}V" value=<?php echo $row["nic"] ?>><br>
+                        <input type="text" id="nic" name="nic" class="input-field"  value=<?php echo $row["nic"] ?>>
                         <span class="error_form" id="nicnoerr" style="font-size:10px"></span><br>
 
                         <label>Contact</label>
-                        <input type="text" id="phone_no" name="phone_no" class="input-field" pattern="[0-9]{10}" value=<?php echo $row["phone_no"] ?>><br>
+                        <input type="text" id="phone_no" name="phone_no" class="input-field"  value=<?php echo $row["phone_no"] ?>>
                         <span class="error_form" id="pnoerr" style="font-size:10px"></span><br>
 
                         <label>Email</label>
-                        <input type="email" id="email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <input type="email" id="email" name="email"  class="input-field" value=<?php echo $row["email"] ?>>
                         <span class="error_form" id="emailerr" style="font-size:10px"></span><br>
 
                         <label>Vehicle NO</label>
-                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
+                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>>
                         <span class="error_form" id="vnoerr" style="font-size:10px"></span><br>
 
                         <label>New Member</label>
@@ -56,12 +56,12 @@ include_once('sidenav.php');
                         <span id="newmem" style="display:none">
 
                             <label>new member</label>
-                            <input type="text" id="" name="fam" class="input-field" placeholder="add new member">
+                            <input type="text" id="newmem" name="fam" class="input-field" placeholder="add new member">
                             <span class="error_form" id="newmembererr" style="font-size:10px"></span><br>
 
                         </span>
                         <br>
-                        <input type="submit" value="Save" onclick="confirmSave">
+                        <input type="submit" value="Save" onclick="confirmSave" id="disablebutton2">
                     </form>
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
                     <label>Family Members</label>

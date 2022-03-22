@@ -171,7 +171,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "<br>No reservations yet...<br><a href= 'treat'> Reserve Now...</a>";
+                                echo "<br>No reservations yet...<br><a href= 'treatment'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
