@@ -173,12 +173,12 @@ include_once 'sidenav.php';
 
                         <div id="col1">
                             <label for="fname">First Name</label><br>
-                            <input type="text" id="fname" name="fname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No special characters allowed" placeholder="John" required>
+                            <input type="text" id="fname" name="fname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No space or special characters allowed" placeholder="John" required>
                         </div>
 
                         <div id="col2">
                             <label for="lname">Last Name</label><br>
-                            <input type="text" id="lname" name="lname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No special characters allowed" placeholder="Smith" required>
+                            <input type="text" id="lname" name="lname" class="input-field" pattern="^[A-z]{1}[a-z]{0,29}$" title="Single name only with letters. No space or special characters allowed" placeholder="Smith" required>
                         </div>
 
                         <div id="col1">
@@ -191,28 +191,8 @@ include_once 'sidenav.php';
                             <input type="text" id="cno" name="cno" class="input-field" pattern="^07[0-9]{8}$|^\+[0-9]{2}[0-9]?[0-9]{9}$" title="valid contact numbers only (do not allow special characters, letters)" placeholder="0711234567" required>
                         </div>
 
-                        <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
-                    </form>
-                    <!-- <div id="btn-grp" style="grid-column: 1;">
-                        <button id="yes-btn">Yes</button>
-                        <button id="no-btn">No</button>
-                    </div> -->
-                </div>
-            </div>
-
-            <div class="divPopupModel">
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="editModel">
-                    <a href="javascript:void(0)" class="closebtn">&times;</a>
-                    <div style="text-align: center; margin-bottom: 10px;">
-                        <h2>Update Shift</h2>
-                    </div>
-                    <form action="#" class="formEdit" onsubmit="updateShift();return fales;">
-                        <div>
-                            <label>Employee ID : </label>
-                            <span id="answer2"></span>
-                        </div>
-                        <div>
+                        <div class="formEmpShift">
+                            <h4>Employee Shift</h4>
                             <div>
                                 <label>Week 01</label><br>
                                 <select id="week1" name="week1" class="input-field" required>
@@ -234,6 +214,57 @@ include_once 'sidenav.php';
                             <div>
                                 <label>Week 03</label><br>
                                 <select id="week3" name="week3" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input style="grid-column: 1/span 2;" type="submit" name="submit" value="Submit">
+                    </form>
+                    <!-- <div id="btn-grp" style="grid-column: 1;">
+                        <button id="yes-btn">Yes</button>
+                        <button id="no-btn">No</button>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h2>Update Shift</h2>
+                    </div>
+                    <form action="#" id="formUpdateShift" class="formEdit" onsubmit="updateShift();return false;">
+                        <div>
+                            <label>Employee ID : </label>
+                            <span id="answer2"></span>
+                        </div>
+                        <div>
+                            <div>
+                                <label>Week 01</label><br>
+                                <select id="newWeek1" name="newWeek1" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Week 02</label><br>
+                                <select id="newWeek2" name="newWeek2" class="input-field" required>
+                                    <option value="">Select Working Hour...</option>
+                                    <option value="0">6AM - 12PM</option>
+                                    <option value="1">12PM - 6PM</option>
+                                    <option value="2">6PM - 12AM</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Week 03</label><br>
+                                <select id="newWeek3" name="newWeek3" class="input-field" required>
                                     <option value="">Select Working Hour...</option>
                                     <option value="0">6AM - 12PM</option>
                                     <option value="1">12PM - 6PM</option>
@@ -385,7 +416,7 @@ include_once 'sidenav.php';
                                     <li id="<?= $employeeId ?>">
                                         <span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Trainer"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>'); setCurrentShiftData('<?= $employeeId ?>');" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
@@ -416,7 +447,7 @@ include_once 'sidenav.php';
                                     <li><?php echo $row["fname"] . " " . $row["lname"] ?></li>
                                     <li><?php echo $row["contact_no"] ?></li>
                                     <li><?php echo $row["email"] ?></li>
-                                    <li id="<?= $employeeId ?>"id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Technician"><i class="fas fa-trash-alt"></i></span></li>
+                                    <li id="<?= $employeeId ?>" id="<?= $employeeId ?>"><span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Technician"><i class="fas fa-trash-alt"></i></span></li>
                                 </ul>
                                 <ul class="more-content">
                                     <li>
@@ -449,7 +480,7 @@ include_once 'sidenav.php';
                                     <li id="<?= $employeeId ?>">
                                         <span onclick="openModel('deleteModel','model-Btn1', '<?= $employeeId ?>')" class="model-Btn1" title="Remove Treater"><i class="fas fa-trash-alt"></i></span>
                                         &emsp;
-                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>')" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
+                                        <span onclick="openModel('editModel','model-Btn2', '<?= $employeeId ?>'); setCurrentShiftData('<?= $employeeId ?>');" class="model-Btn2" title="Update Shift"><i class="fa fa-calendar-check"></i></span>
                                     </li>
                                 </ul>
                                 <ul class="more-content">
@@ -500,7 +531,7 @@ include_once 'sidenav.php';
                         &#10004;
                     </div>
                     <p>
-                    Insert Success!
+                        Insert Success!
                     </p>
                     <p>
                         New Employee Added
@@ -519,6 +550,25 @@ include_once 'sidenav.php';
             $("#ok").click(function() {
                 $(".message").fadeOut(600, "linear");
             });
+        });
+
+        $(document).ready(function() {
+            $("#emptype").change(function() {
+                $(this).find("option:selected").each(function() {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue == 'trainer' || optionValue == 'treater') {
+                        $("#week1").attr("required", true);
+                        $("#week2").attr("required", true);
+                        $("#week3").attr("required", true);
+                        $(".formEmpShift").show(200);
+                    } else {
+                        $('#week1').removeAttr('required');
+                        $('#week2').removeAttr('required');
+                        $('#week3').removeAttr('required');
+                        $(".formEmpShift").hide(200);
+                    }
+                });
+            }).change();
         });
 
         $(document).ready(function() {
@@ -583,7 +633,7 @@ include_once 'sidenav.php';
                 success: function(data) {
                     var type = [];
                     var count = [];
-                    console.log(data);
+                    // console.log(data);
                     data = JSON.parse(data);
                     for (var i in data) {
                         type.push(data[i].type);
