@@ -99,7 +99,7 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h3>Update Service Rate</h3>
                     </div>
-                    <form action="#" class="formEdit" method="POST">
+                    <form action="#" id="formUpdateRate" class="formEdit" method="POST">
                         <div>
                             <label>Service ID : </label>
                             <span id="answer2"></span>
@@ -108,15 +108,15 @@ include_once 'sidenav.php';
                         <div>
                             <div>
                                 <label>Upcoming Fee</label><br>
-                                <input type="text" name="newfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-1500, 1500.00" placeholder="1500.00" required>
+                                <input type="text" id="newfee" name="newfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-1500, 1500.00" placeholder="1500.00" required>
                             </div>
                             <div>
                                 <label>Upcoming Cancellation Fee</label><br>
-                                <input type="text" name="newcancelfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-200, 200.00" placeholder="500.00" required>
+                                <input type="text" id="newcancelfee" name="newcancelfee" class="input-field" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" title="Enter valid amount Eg-200, 200.00" placeholder="500.00" required>
                             </div>
                             <div>
                                 <label>Effect Date</label><br>
-                                <input type="date" name="effectdate" class="input-field" min="<?= date("Y-m-d", strtotime("+2 week")) ?>" required>
+                                <input type="date" name="effectdate" class="input-field" min="<?= date("Y-m-d", strtotime("first day of next month")) ?>" max="<?= date("Y-m-d", strtotime("first day of next month")) ?>" required>
                             </div>
                         </div>
                         <div>
@@ -150,7 +150,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -172,7 +172,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -194,7 +194,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -216,7 +216,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -238,7 +238,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -260,7 +260,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -282,7 +282,7 @@ include_once 'sidenav.php';
                                         <li><?php echo $row["name"] ?></li>
                                         <li><?php echo number_format($row["fee"], 2) ?></li>
                                         <li><?php echo number_format($row["cancelation_fee"], 2) ?></li>
-                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>')" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
+                                        <li id="<?= $serviceId ?>"><span onclick="openModel('editModel','model-Btn2','<?= $serviceId ?>'); setCurrentServiceRate('<?= $serviceId ?>');" class="model-Btn2" title="Update Rate"><i class="fa fa-edit"></i></span></li>
                                     </ul>
                                     <ul class="more-content">
                                         <li>
@@ -366,12 +366,18 @@ include_once 'sidenav.php';
             const ans2 = $("#searchEndDate").val();
             if (ans1 !== '') {
                 startDate = $("#searchStartDate").val();
+                // $("#searchStartDate" ).datepicker({
+                //     maxDate: new Date(ans2)
+                // });
             }
             if (ans2 !== '') {
                 endDate = $("#searchEndDate").val();
+                // $("#searchEndDate" ).datepicker({
+                //     minDate: new Date(ans1)
+                // });
             }
-            console.log(startDate);
-            console.log(endDate);
+            //console.log(startDate);
+            //console.log(endDate);
             $.ajax({
                 url: "getRequestReservations",
                 method: "POST",
@@ -384,7 +390,7 @@ include_once 'sidenav.php';
                     var res = [];
                     var calRes = [];
                     // convert JSON object into array
-                    console.log(data);
+                    //console.log(data);
                     data = JSON.parse(data);
 
                     for (var i in data) {
@@ -443,6 +449,14 @@ include_once 'sidenav.php';
                                     fontSize: 25
                                 },
                             },
+                            // scales: {
+                            //     x: {
+                            //         stacked: true,
+                            //     },
+                            //     y: {
+                            //         stacked: true
+                            //     }
+                            // }
                         },
                     });
                 },
