@@ -222,14 +222,14 @@ include_once 'sidenav.php';
                                             if ($row["status"]) { ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
                                                     <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
+                                                    <i class="fa fa-home" style="color:red;font-size:40px;padding: 0px;text-align: center;width: 80px;" title="Not Available"></i>
                                                 </span>
                                             <?php
                                             } else {
                                                 $remaining++; ?>
                                                 <span title="Floor No - <?= $row["floor_no"] ?>">
                                                     <strong class="text-primary" style="font-size: 14px;"><?php echo $row["apartment_no"]; ?></strong>
-                                                    <i class="fa fa-home" style="color:gray;font-size:40px;padding: 0px;text-align: center;width: 80px;"></i>
+                                                    <i class="fa fa-home" style="color:gray;font-size:40px;padding: 0px;text-align: center;width: 80px;" title="Available"></i>
                                                 </span>
                                             <?php
 
@@ -285,6 +285,9 @@ include_once 'sidenav.php';
                                             <option value="5">5</option>
                                             <option value="6">6</option>
                                             <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
                                         </select>
                                     </div>
                                     <div>
@@ -458,7 +461,7 @@ include_once 'sidenav.php';
                 $(".message").fadeOut(600, "linear");
             });
         });
-        
+
         var input = document.getElementById("myInput");
         input.addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {
@@ -473,7 +476,7 @@ include_once 'sidenav.php';
                 let newLi1 = $("<li></li>");
                 x = localStorage.key(i);
                 console.log(x);
-                var span = document.createElement("SPAN"); 
+                var span = document.createElement("SPAN");
                 var txt = document.createTextNode("\u00D7");
                 span.className = "close";
                 span.appendChild(txt);
@@ -499,7 +502,7 @@ include_once 'sidenav.php';
                 span.className = "close";
                 span.appendChild(txt);
                 newLi.append(newListItem).append(span);
-        
+
                 key = "toDo" + localStorage.length; // Math.floor(Math.random() * 100) + 1
                 localStorage.setItem(key, newListItem);
                 console.log(localStorage);
@@ -579,251 +582,218 @@ include_once 'sidenav.php';
         //     }
         // });
 
-        //Charts
+        $.ajax({
+            url: "getEarningSummary",
+            method: "POST",
+            success: function(data) {
+                var date = [];
+                var amount = [];
+                // convert JSON object into array
+                data = JSON.parse(data);
 
-        // $(document).ready(function() {
-        //     $.ajax({
-        //         url: "getServices",
-        //         method: "GET",
-        //         success: function(data) {
-        //             var serviceName = [];
-        //             var fee = [];
-        //             var cancleFee = [];
-        //             data = JSON.parse(data);
-        //             for (var i in data) {
-        //                 serviceName.push(data[i].name);
-        //                 fee.push(data[i].fee);
-        //                 cancleFee.push(data[i].cancelation_fee);
-        //             }
-        //             var chartdata = {
-        //                 labels: serviceName,
-        //                 datasets: [{
-        //                         label: 'Fee/h',
-        //                         data: fee,
-        //                         // backgroundColor : '#423D59',
-        //                         backgroundColor: [
-        //                             'rgba(153,102,255,0.6)'
-        //                         ],
-        //                         borderWidth: 1,
-        //                         borderColor: '#ae98db',
-        //                         hoverBorderWidth: 1,
-        //                         hoverBorderColor: '#003',
-        //                     },
-        //                     {
-        //                         label: 'Cancle Fee',
-        //                         data: cancleFee,
-        //                         // backgroundColor : '#423D59',
-        //                         backgroundColor: [
-        //                             'rgb(187,35,22,0.6)'
-        //                         ],
-        //                         borderWidth: 1,
-        //                         borderColor: '#a72d22d9',
-        //                         hoverBorderWidth: 1,
-        //                         hoverBorderColor: '#003',
-        //                     }
-        //                 ]
-        //             };
+                for (var i in data) {
+                    date.unshift(data[i].monthYear);
+                    amount.unshift(data[i].total);
+                }
 
-        //             var ctx = $("#serviceRateChart");
-
-        //             var barGraph = new Chart(ctx, {
-        //                 type: 'line',
-        //                 data: chartdata,
-        //                 options: {
-        //                     scales: {
-        //                         y: {
-        //                             suggestedMin: 0,
-        //                         }
-        //                     },
-        //                     plugins: {
-        //                         legend: {
-        //                             display: false,
-        //                             position: 'bottom',
-        //                             labels: {
-        //                                 fontColor: '#000'
-        //                             }
-        //                         },
-        //                         title: {
-        //                             display: false,
-        //                             text: 'Service Rate',
-        //                             fontSize: 25
-        //                         },
-        //                     },
-        //                 },
-        //             });
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //         }
-        //     });
-        // });
-
-        let chart1 = document.getElementById('earningChart').getContext('2d');
-        let massChart1 = new Chart(chart1, {
-            type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                datasets: [{
-                    label: 'Income',
-                    data: [
-                        100, 1500, 500, 500, 100, 1000, 100, 1500, 500, 500, 100, 1000
-                    ],
-                    // backgroundColor : '#423D59',
-                    backgroundColor: [
-                        'rgba(153,102,255,0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 1,
-                    hoverBorderColor: '#003',
-                    lineTension: 0.4,
-                    fill: true,
-                    // radius: 6,
-                }]
-            },
-            options: {
-                // scales: {
-                //     x: {
-                //         ticks: {
-                //             maxTicksLimit: 10
-                //         }
-                //     }
-                // },
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            display: false,
-                            autoSkip: false,
-                            maxRotation: 90,
-                            minRotation: 90
-                        }
+                var chartdata = {
+                    labels: date,
+                    datasets: [{
+                        label: 'Income',
+                        data: amount,
+                        backgroundColor: [
+                            'rgba(153,102,255,0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 1,
+                        hoverBorderColor: '#003',
+                        lineTension: 0.4,
+                        fill: true,
+                        // radius: 6,
                     }]
-                },
-                plugins: {
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-                        labels: {
-                            fontColor: '#000'
-                        }
+                };
+                var ctx = $("#earningChart");
+                // window barGraph;
+                window.barGraph = new Chart(ctx, {
+                    type: 'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                    data: chartdata,
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    display: false,
+                                    autoSkip: false,
+                                    maxRotation: 90,
+                                    minRotation: 90
+                                }
+                            }]
+                        },
+                        plugins: {
+                            legend: {
+                                display: false,
+                                position: 'bottom',
+                                labels: {
+                                    fontColor: '#000'
+                                }
+                            },
+                            title: {
+                                display: false,
+                                text: 'Earn Chart',
+                                fontSize: 25
+                            },
+                        },
                     },
-                    title: {
-                        display: false,
-                        text: 'Earn Chart',
-                        fontSize: 25
-                    },
-                },
+                });
             },
+            error: function(data) {
+                console.log(data);
+            }
         });
 
-        let chart2 = document.getElementById('reservationChart').getContext('2d');
-        let massChart2 = new Chart(chart2, {
-            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                datasets: [{
-                        label: 'Hall',
-                        data: [
-                            10, 15, 44, 23, 54, 65, 3, 23, 63, 23, 34, 45, 20
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    },
-                    {
-                        label: 'Fitness',
-                        data: [
-                            97, 54, 65, 78, 54, 45, 35, 12, 32, 45, 41, 78, 36
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    },
-                    {
-                        label: 'Treatment',
-                        data: [
-                            75, 35, 45, 12, 45, 56, 10, 30, 30, 85, 62, 33, 10
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    },
-                    {
-                        label: 'Parking',
-                        data: [
-                            32, 63, 45, 21, 32, 45, 25, 26, 28, 73, 45, 55, 62
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    },
-                    {
-                        label: 'Laundry',
-                        data: [
-                            20, 30, 25, 40, 30, 35, 20, 30, 25, 40, 30, 35, 20
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    },
-                    {
-                        label: 'Maintenence',
-                        data: [
-                            60, 50, 54, 70, 23, 45, 68, 78, 34, 87, 44, 53, 35
-                        ],
-                        // backgroundColor : '#423D59',
-                        backgroundColor: [
-                            'rgba(153,102,255,0.6)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: '#777',
-                        hoverBorderWidth: 1,
-                        hoverBorderColor: '#003'
-                    }
-                ]
-            },
-            options: {
-                // responsive: true,
-                plugins: {
-                    legend: {
-                        display: false,
-                        // position: 'center',
-                        labels: {
-                            fontColor: '#000'
+        $.ajax({
+            url: "getServiceSummary",
+            method: "POST",
+            success: function(data) {
+                var date = [];
+                var hall = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var fitness = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var treatment = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var parking = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var maintenence = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var laundry = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // convert JSON object into array
+                data = JSON.parse(data);
+
+                var monthName = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+                var d = new Date();
+                d.setDate(1);
+                for (i = 0; i <= 11; i++) {
+                    date.unshift(monthName[d.getMonth()] + ' ' + d.getFullYear());
+                    d.setMonth(d.getMonth() - 1);
+                }
+                for (var i in data) {
+                    console.log(i);
+                    for (var j in data[i]) {
+                        if (i == 'hall') {
+                            hall[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
+                        } else if (i == 'fitness') {
+                            fitness[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
+                        } else if (i == 'treatment') {
+                            treatment[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
+                        } else if (i == 'parking') {
+                            parking[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
+                        } else if (i == 'maintenence') {
+                            maintenence[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
+                        } else if (i == 'laundry') {
+                            laundry[date.indexOf(data[i][j].monthYear)] = parseInt(data[i][j].total);
                         }
+                    }
+                }
+
+                var chartdata = {
+                    labels: date,
+                    datasets: [{
+                            label: 'Hall',
+                            data: hall,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        },
+                        {
+                            label: 'Fitness',
+                            data: fitness,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        },
+                        {
+                            label: 'Treatment',
+                            data: treatment,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        },
+                        {
+                            label: 'Parking',
+                            data: parking,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        },
+                        {
+                            label: 'Laundry',
+                            data: laundry,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        },
+                        {
+                            label: 'Maintenence',
+                            data: maintenence,
+                            // backgroundColor : '#423D59',
+                            backgroundColor: [
+                                'rgba(153,102,255,0.6)'
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#777',
+                            hoverBorderWidth: 1,
+                            hoverBorderColor: '#003'
+                        }
+                    ]
+                };
+                var ctx = $("#reservationChart");
+                // window barGraph;
+                window.barGraph = new Chart(ctx, {
+                    type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+                    data: chartdata,
+                    options: {
+                        // responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                // position: 'center',
+                                labels: {
+                                    fontColor: '#000'
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Total Reservations and Requests',
+                                fontSize: 25
+                            },
+                        },
                     },
-                    title: {
-                        display: true,
-                        text: 'Total Reservations and Requests',
-                        fontSize: 25
-                    },
-                },
+                });
             },
+            error: function(data) {
+                console.log(data);
+            }
         });
     </script>
 </body>
