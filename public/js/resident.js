@@ -31,25 +31,25 @@ $(function () {
    });
 
    //profile edit other
-   $("#fnameerr").keyup(function () {
+   $("#fname").keyup(function () {
       check_fname();
    });
-   $("#lnameerr").keyup(function () {
+   $("#lname").keyup(function () {
       check_lname();
    });
-   $("#nicnoerr").keyup(function () {
+   $("#nic").keyup(function () {
       check_nic();
    });
-   $("#pnoerr").keyup(function () {
+   $("#phone_no").keyup(function () {
       check_phone();
    });
-   $("#emailerr").keyup(function () {
+   $("#email").keyup(function () {
       check_email();
    });
-   $("#vnoerr").keyup(function () {
+   $("#vehicle_no").keyup(function () {
       check_vehicleno();
    });
-   $("#newmembererr").keyup(function () {
+   $("#newmem").keyup(function () {
       check_newmember();
    });
 
@@ -330,44 +330,136 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
+
 //profile edit
 function check_fname() {
    var fn = $("fname").val();
-   if (1) {
+   var firstname= new RegExp(/^[a-zA-Z]+$/);
+
+   if (firstname.test(fn)) {
       $("#fnameerr").hide();
       $("#fname").css("border-bottom", "2px solid #34F458");
-console.log(455);
-      error_retype_password = true;
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
    } else {
       $("#fnameerr").html("Name not valid");
       $("#fnameerr").show();
       $("#fname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
    }
 
 }
 
 function check_lname() {
    var ln = $("#lname").val();
+   var lastname = new RegExp(/^[a-zA-Z]+$/);
+
+   if (lastname.test(ln)) {
+      $("#lnameerr").hide();
+      $("#lname").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#lnameerr").html("Name not valid");
+      $("#lnameerr").show();
+      $("#lname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
 }
 
 function check_nic() {
    var ni = $("#nic").val();
+   var nicno = new RegExp(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/);
+
+   if (nicno.test(ni)) {
+      $("#nicnoerr").hide();
+      $("#nic").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#nicnoerr").html("NIC not valid");
+      $("#nicnoerr").show();
+      $("#nic").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
 }
 
 function check_phone() {
    var pn = $("#phone_no").val();
+   var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
+
+   if (phone.test(pn)) {
+      $("#pnoerr").hide();
+      $("#phone_no").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#pnoerr").html("Phone number not valid");
+      $("#pnoerr").show();
+      $("#phone_no").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
 }
 
 function check_email() {
    var em = $("#email").val();
+   var email = new RegExp(/^[\w.]+@[\w.]+\.\w{2,3}$/);
+
+   if (email.test(em)) {
+      $("#emailerr").hide();
+      $("#email").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#emailerr").html("Email not valid");
+      $("#emailerr").show();
+      $("#email").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
 }
 
 function check_vehicleno() {
-   var vn = $("vehicle_no").val();
+   var vn = $("#vehicle_no").val();
+   console.log(vn);
+   var vehicle = new RegExp(/^([A-Z]{1,3})-[0-9]{4}$/);
+
+   if (vehicle.test(vn)) {
+      $("#vnoerr").hide();
+      $("#vehicle_no").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#vnoerr").html("Vehicle no not valid");
+      $("#vnoerr").show();
+      $("#vehicle_no").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
 }
 
 function check_newmember() {
-   var nm = $("#fam").val();
+   var nm = $("#newmem").val();
+   var memname = new RegExp('/^[a-zA-Z]+$/');
+
+   if (memname.test(nm)) {
+      // $("#newmembererr").hide();
+      // $("#newmem").css("border-bottom", "2px solid #34F458");
+
+   } else {
+      // $("#newmembererr").html("Name not valid");
+      // $("#newmembererr").show();
+      // $("#newmem").css("border-bottom", "2px solid #F90A0A");
+   }
 }
 
 
