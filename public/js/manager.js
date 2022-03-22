@@ -292,3 +292,18 @@ $(".mySearch").on('keyup', function () {
        }
     });
  })
+
+setInterval(function(){
+    update_user_activity();
+}, 3000);
+
+function update_user_activity(){
+    var action = 'update_time';
+    $.ajax({
+        url:"updateLastActivity",
+        method:"POST",
+        data:{action:action},
+        success:function(data){
+        }
+    });
+}
