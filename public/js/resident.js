@@ -592,6 +592,7 @@ function openModel(amodel, amodelBtn, id, type) {
    }
 }
 
+
 // delete row and hide for value addition
 function deleteReq(id, type) {
    r = confirm("Are you sure to remove your request ?");
