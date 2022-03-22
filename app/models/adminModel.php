@@ -171,6 +171,16 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function updateThisEmployeeShift($employee_id,$week1,$week2,$week3){
+        $sql = "UPDATE employee_shift SET week1='{$week1}', week2='{$week2}', week3='{$week3}' WHERE employee_id = '{$employee_id}'";
+        return $this->conn->query($sql);
+    }
+
+    public function getThisEmployeeShift($employee_id){
+        $sql = "SELECT week1,week2,week3 from employee_shift WHERE employee_id = '{$employee_id}'";
+        return $this->conn->query($sql);
+    }
+
     public function getEmployeesCountByTypeDate()
     {
         $sql = "SELECT type,count(type) AS count,start_date FROM employee GROUP BY start_date,type";
