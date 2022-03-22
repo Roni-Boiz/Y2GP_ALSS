@@ -58,10 +58,23 @@ class adminModel extends model
         $floor = $this->conn->real_escape_string($floor);
         $parkingSlot = $this->conn->real_escape_string($parkingSlot);
 
+        $this->conn->autocommit(FALSE);
         $sql = "INSERT INTO apartment(apartment_no, floor_no, status) VALUES('{$apartmentNo}','{$floor}', 0)";
         $result1 = $this->conn->query($sql);
         $sql = "UPDATE parking_slot SET apartment_no = '{$apartmentNo}', status = 0 WHERE slot_no = '{$parkingSlot}'";
         $result2 = $this->conn->query($sql);
+
+        // Commit transaction
+        if ($result1 && $result2) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+
         return $result1 && $result2;
     }
 
@@ -130,7 +143,7 @@ class adminModel extends model
 
     public function getEmployeesCountByTypeDate()
     {
-        $sql = "SELECT type,count(type) AS count,start_date FROM `employee` GROUP BY start_date,type";
+        $sql = "SELECT type,count(type) AS count,start_date FROM employee GROUP BY start_date,type";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -164,7 +177,7 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName)
+    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName, $week1, $week2, $week3)
     {
         $fname = $this->conn->real_escape_string($fname);
         $lname = $this->conn->real_escape_string($lname);
@@ -227,8 +240,13 @@ class adminModel extends model
             $sql = "INSERT INTO {$empType}(employee_id, fname, lname, contact_no, email, start_date) VALUES ('{$empId}','{$fname}','{$lname}','{$con}','{$email}', CURDATE())";
             $result3 = $this->conn->query($sql);
         }
+
+        if ($empType == 'trainer' || $empType == 'treater'){
+            $sql = "INSERT INTO employee_shift(employee_id, week1, week2, week3) VALUES ('{$empId}','{$week1}','{$week2}','{$week3}')";
+            $result4 = $this->conn->query($sql);
+        }
         // Commit transaction
-        if (($result1 && $result2 && $result3) || ($result2 && $result3)) {
+        if (($result1 && $result2 && $result3) || ($result2 && $result3) || ($result2 && $result3 && $result4) || ($result1 && $result2 && $result3 && $result4)) {
             $this->conn->commit();
             $this->conn->autocommit(TRUE);
         } else {
@@ -237,7 +255,7 @@ class adminModel extends model
             $this->conn->rollback();
             $this->conn->autocommit(TRUE);
         }
-        return $result1 && $result2 && $result3 || $result2 && $result3;
+        return $result1 && $result2 && $result3 || $result2 && $result3 || $result2 && $result3 && $result4 || $result1 && $result2 && $result3 && $result4;
     }
 
     public function deleteThisEmployee($employee_id)
@@ -274,17 +292,17 @@ class adminModel extends model
     }
 
     public function getAllReservationsByDate($startDate, $endDate){
-        $sql = "SELECT 'fitness' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM fitness_centre_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        $sql = "SELECT 'Hall' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM hall_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
         UNION
-        SELECT 'Hall' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM hall_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        SELECT 'fitness' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM fitness_centre_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
         UNION
-        SELECT 'parking' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM parking_slot_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        SELECT 'treatment' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM treatment_room_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
         UNION
-        SELECT 'treatment' AS type,count(reservation_id) AS numRes,count(cancelled_time) AS cancelRes FROM treatment_room_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
+        SELECT 'parking' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM parking_slot_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
         UNION
-        SELECT 'laundry' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM laundry_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'
+        SELECT 'laundry' AS type,count(request_id) AS totalRes,count(cancelled_time) AS cancelRes FROM laundry_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}' AND state!=3
         UNION
-        SELECT 'technical' AS type,count(request_id) AS numRes,count(cancelled_time) AS cancelRes FROM technical_maintenence_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}'";
+        SELECT 'technical' AS type,count(request_id) AS totalRes,count(cancelled_time) AS cancelRes FROM technical_maintenence_request WHERE request_date BETWEEN '{$startDate}' AND '{$endDate}' AND state!='d'";
         return $this->conn->query($sql);
     }
 
