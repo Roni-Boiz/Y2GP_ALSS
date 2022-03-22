@@ -92,6 +92,36 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function getAllEarnings(){
+        $sql = "SELECT date_format(paid_date, '%M %Y') AS monthYear, sum(amount) AS total from payment WHERE paid_date> CURDATE() - INTERVAL 11 month - day(CURDATE())  GROUP BY year(paid_date), month(paid_date) ORDER BY year(paid_date) DESC, month(paid_date) DESC";
+        return $this->conn->query($sql);
+    }
+
+    public function getLast12HallRes(){
+        $sql = "SELECT date_format(date, '%M %Y') AS monthYear, count(reservation_id) AS total from hall_reservation WHERE cancelled_time IS NULL AND date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(date), month(date) ORDER BY year(date) DESC, month(date) DESC";
+        return $this->conn->query($sql);
+    }
+    public function getLast12FitnessRes(){
+        $sql = "SELECT date_format(date, '%M %Y') AS monthYear, count(reservation_id) AS total from fitness_centre_reservation WHERE cancelled_time IS NULL AND date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(date), month(date) ORDER BY year(date) DESC, month(date) DESC";
+        return $this->conn->query($sql);
+    }
+    public function getLast12TreatmentRes(){
+        $sql = "SELECT date_format(date, '%M %Y') AS monthYear, count(reservation_id) AS total from treatment_room_reservation WHERE cancelled_time IS NULL AND date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(date), month(date) ORDER BY year(date) DESC, month(date) DESC";
+        return $this->conn->query($sql);
+    }
+    public function getLast12ParkingRes(){
+        $sql = "SELECT date_format(date, '%M %Y') AS monthYear, count(reservation_id) AS total from parking_slot_reservation WHERE cancelled_time IS NULL AND date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(date), month(date) ORDER BY year(date) DESC, month(date) DESC";
+        return $this->conn->query($sql);
+    }
+    public function getLast12MaintenenceReq(){
+        $sql = "SELECT date_format(preferred_date, '%M %Y') AS monthYear, count(request_id) AS total from technical_maintenence_request WHERE cancelled_time IS NULL AND state!='d' AND preferred_date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(preferred_date), month(preferred_date) ORDER BY year(preferred_date) DESC, month(preferred_date) DESC";
+        return $this->conn->query($sql);
+    }
+    public function getLast12LaundryReq(){
+        $sql = "SELECT date_format(request_date, '%M %Y') AS monthYear, count(request_id) AS total from laundry_request WHERE cancelled_time IS NULL AND state!=3 AND request_date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(request_date), month(request_date) ORDER BY year(request_date) DESC, month(request_date) DESC";
+        return $this->conn->query($sql);
+    }
+
     public function getMyDoList($id)
     {
         $sql = "SELECT * FROM task_list WHERE user_id='{$id}' ORDER BY task_list_id DESC";
