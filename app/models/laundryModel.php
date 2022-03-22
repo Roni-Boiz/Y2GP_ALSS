@@ -133,9 +133,10 @@ class laundryModel extends model {
         $result= $this->conn->query($sql);
         
     }
-    public function addTotalFee($id,$Total){
+    public function addTotalFee($id,$fee1,$fee2,$fee3){
+        $Total=$fee1+$fee2+$fee3;
         $sql="UPDATE laundry_request SET fee='$Total',state=2 WHERE request_id='$id'";
-        $result= $this->conn->query($sql);
+        $this->conn->query($sql);
 
     }
 

@@ -14,7 +14,11 @@ include_once 'sidenav.php';
                 <div class="leftPanel" style="margin-top:30px">
                     <div class="card" style="padding:auto;">
                         <h3 style="margin:10px">Current Allocation</h3>
-
+                        <?php
+                        while ($row1 = $this->overdueVehicles->fetch_assoc()) {
+                            echo $row1['slot_no'];
+                            echo 'gg';
+                        } ?>
 
                         <?php
                         if ($this->parkingSpace->num_rows > 0) { ?>
@@ -23,17 +27,26 @@ include_once 'sidenav.php';
                             while ($row = $this->parkingSpace->fetch_assoc()) { ?>
                                 <a class="pslots" href="#">
                                     <?php
-                                    if ($row["status"]==2) { ?>
-                                    
+                                    if ($row["status"] == 2) { ?>
+                                        <?php
+
+                                        while ($row1 = $this->overdueVehicles->fetch_assoc()) {
+                                            $s = $row1['slot_no'];
+                                            echo 'A';
+                                            if ($row['slot_no'] == $row1['slot_no']) {
+                                                break;
+                                            }
+                                        } ?>
+
                                         <button id="model-btn" class="slotbutton">
                                             <span class="fa-stack">
-                                                <i class="fa fa-car fa-stack-1x" style="color:red;font-size:40px"></i>
+                                                <i class="fa fa-car fa-stack-1x" style="color:red;font-size:40px" title="Vehicle no: <?php echo $row1['vehicle_no'] ?>"></i>
                                                 <strong class="fa-stack text-primary"><?php echo $row["slot_no"]; ?></strong>
                                             </span>
                                             <!-- <i class="fas fa-car" style="color:red;font-size:40px"></i> -->
                                         </button>
                                     <?php
-                                    } else if($row["status"]==0) { ?>
+                                    } else if ($row["status"] == 0) { ?>
                                         <button id="model-btn" class="slotbutton">
                                             <span class="fa-stack">
                                                 <i class="fa fa-car fa-stack-1x" style="color:green;font-size:40px;"></i>
@@ -52,7 +65,7 @@ include_once 'sidenav.php';
                                             <!-- <i class="fas fa-car" style="color:green;font-size:40px"></i> -->
                                         </button>
 
-                                    <?php } ?>    
+                                    <?php } ?>
                                 </a>
                         <?php
                             }
@@ -70,7 +83,7 @@ include_once 'sidenav.php';
                                 <div style="text-align: center;">
                                     <h3>Slot NO 01<i class="fa fa-car"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                                 </div>
-                                
+
                             </div>
 
                         </div>

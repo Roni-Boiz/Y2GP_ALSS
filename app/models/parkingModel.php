@@ -95,19 +95,23 @@ class parkingModel extends model
         $this->conn->query($sql2);
         $sql3="UPDATE parking_slot SET status=0 WHERE slot_no=(SELECT slot_no FROM parking_slot_reservation WHERE reservation_id='$rid' ";
         $this->conn->query($sql3);
-
+        $time=strtotime($time);
         //to get end time(as e_time) check overdue charges if any,get overdue charge rate from service table
         //set reminders for upcoming overdue
         $sql4="SELECT end_time FROM parking_slot_reservation WHERE reservation_id='$rid' ";
         $e_time = mysqli_fetch_assoc($this->conn->query($sql4));
-        $e_time=$e_time['apartment_no'];
-
+        $e_time=strtotime($e_time['end_time']);
+        echo ($time - $e_time);
         //methana frontend walin ada ho iye ewata witharak button eka enable karanna one
         if($e_time<$time){
             $sql5="SELECT fee FROM service WHERE name='overdue'";
-            $overduefee= $this->conn->query($sql5);
-            $minutes = ceil(abs($time - $e_time) / 60, 2);
-            $noofslots = $minutes / 30;
+            $overduefee = mysqli_fetch_assoc($this->conn->query($sql5));
+            $overduefee=$overduefee['fee'];
+            $minutes = abs(($time - $e_time) / 60);
+            // echo ($time - $e_time);
+            $noofslots = ceil($minutes / 30);
+            $sql6="UPDATE parking_slot_reservation SET fee=fee+$noofslots*$overduefee WHERE reservation_id='$rid'";
+            $this->conn->query($sql6);
 
         }
 
