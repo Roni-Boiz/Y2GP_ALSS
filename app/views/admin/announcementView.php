@@ -76,7 +76,20 @@ include_once 'sidenav.php';
                         if ($row["file_name"]) {
                         ?>
                             <div class="card-header">
-                                <img src="../../uploads/announcement/<?php echo $row["file_name"] ?>">
+                                <?php
+                                if (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "pdf") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/pdf-icon.png" alt="pdf">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <img src="../../uploads/announcement/<?php echo $row['file_name'] ?>">
+                                <?php
+                                }
+                                ?>
                             </div>
                         <?php
                         }
@@ -96,6 +109,9 @@ include_once 'sidenav.php';
 
 <script>
     CKEDITOR.replace('content');
+//     CKEDITOR.editorConfig = function( config ) {
+//         config.enterMode = CKEDITOR.ENTER_BR;
+// };
 </script>
 
 </html>
