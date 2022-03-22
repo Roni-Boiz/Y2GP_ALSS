@@ -336,7 +336,7 @@ function check_fname() {
    if (1) {
       $("#fnameerr").hide();
       $("#fname").css("border-bottom", "2px solid #34F458");
-      console.log(455);
+console.log(455);
       error_retype_password = true;
    } else {
       $("#fnameerr").html("Name not valid");
@@ -556,17 +556,6 @@ function laundry() {
    }
 }
 
-////////////////////////////////////////////////////
-// function openModel(amodel, amodelBtn) {
-
-//    const model = document.getElementById(amodel);
-//    const modelBtn = document.getElementsByClassName(amodelBtn);
-//    const ans = document.getElementById("answer");
-//    const closeBtn = document.getElementsByClassName("closebtn");
-
-//    for (var i = 0; i < modelBtn.length; i++) {
-//       modelBtn[i].addEventListener('click', showModel, false);
-//    }
 //confirm pop up
 function openModel(amodel, amodelBtn, id, type) {
    const model = document.getElementById(amodel);
@@ -580,424 +569,288 @@ function openModel(amodel, amodelBtn, id, type) {
       modelBtn[i].addEventListener('click', showModel, false);
    }
 
-   //    function showModel() {
-   //       document.getElementById("myCanvasNav").style.width = "100%";
-   //       document.getElementById("myCanvasNav").style.opacity = "0.8";
-   //       model.className = "open";
-   //    }
-
-   //    for (var i = 0; i < closeBtn.length; i++) {
-   //       closeBtn[i].addEventListener('click', closeModel, false);
-   //    }
-
-   //    function closeModel() {
-   //       document.getElementById("myCanvasNav").style.width = "0%";
-   //       document.getElementById("myCanvasNav").style.opacity = "0";
-   //       model.className = "close";
-   //    }
+   function showModel() {
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
    }
-   // delete row and hide for value addition
-   function deleteRes(id, type, s, e, d) {
-      console.log(id, type, s, e, d);
-      r = confirm("Are you sure to remove your reservation ?");
-      if (r == true) {
-         if (type = "hall") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  hallid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-               }
-            });
-         }
-         if (type = "fit") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  fitid: id,
-                  stime: s,
-                  etime: e,
-                  date: d
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-               }
-            });
-         }
-         if (type = "treat") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  treatid: id,
-                  stime: s,
-                  etime: e,
-                  date: d
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-               }
-            });
-         }
-         if (type = "parking") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  parkingid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-               }
-            });
-         }
-      }
-         function closeModel() {
-            document.getElementById("myCanvasNav").style.width = "0%";
-            document.getElementById("myCanvasNav").style.opacity = "0";
-            model.className = "close";
-         }
-         if (ans1 !== null) {
-            ans1.innerHTML = id;
-         }
-         if (ans2 !== null) {
-            ans2.innerHTML = type;
-         }
-      }
 
-      // delete row and hide for value addition
-      function deleteReq(id, type) {
-         r = confirm("Are you sure to remove your request ?");
-         if (r == true) {
+   for (var i = 0; i < closeBtn.length; i++) {
+      closeBtn[i].addEventListener('click', closeModel, false);
+   }
 
-         }
-      }
+   function closeModel() {
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = "close";
+   }
+   if (ans1 !== null) {
+      ans1.innerHTML = id;
+   }
+   if (ans2 !== null) {
+      ans2.innerHTML = type;
+   }
+}
 
-      //close success pop up
-      function previousView() {
-         $(".success").css('display', 'none');
-      }
-      //save payment ti database
-      function payafter(amount) {
-         console.log("payment save to database");
-         $.ajax({
-            type: "GET",
-            url: "payafter",
-            data: {
-               amt: amount
-            },
-            success: function () {
 
-            }
-         });
-      }
-      // Make payment
-      function payNow(userId) {
-         var amount = $("#amount").val();
-         console.log(amount);
-         var response = '';
-         $.ajax({
-            type: "GET",
-            url: "makePayment",
-            data: {
-               amt: amount
-            },
-            success: function (text) {
-               var r = JSON.parse(text);
-               payhere.onCompleted = function onCompleted() {
-                  alert("Payment completed");
-                  //call to payafter() for save payment details to database
-                  //payafter(amount);
-               };
+// delete row and hide for value addition
+function deleteReq(id, type) {
+   r = confirm("Are you sure to remove your request ?");
+   if (r == true) {
 
-               payhere.onDismissed = function onDismissed() {
-                  alert("Payment dismissed");
-               };
+   }
+}
 
-               payhere.onError = function onError(error) {
-                  alert("Error:" + error);
-               };
-
-               // Put the payment variables here
-               var payment = {
-                  "sandbox": true,
-                  "merchant_id": "1219029",    // Replace your Merchant ID
-                  "return_url": undefined,     // Important
-                  "cancel_url": undefined,     // Important
-                  "notify_url": "http://sample.com/notify",
-                  "order_id": r.apartmentNo,
-                  "items": r.residentId,
-                  "amount": r.amount,
-                  "currency": "LKR",
-                  "first_name": r.fname,
-                  "last_name": r.lname,
-                  "email": "",
-                  "phone": "",
-                  "address": r.apartmentNo,
-                  "city": "Colombo",
-                  "country": "Sri Lanka",
-                  "delivery_address": r.apartmentNo,
-                  "delivery_city": "Kalutara",
-                  "delivery_country": "Sri Lanka",
-                  "custom_1": "",
-                  "custom_2": ""
-               };
-               payhere.startPayment(payment);
-            }
-         });
-         payafter(amount);
-      }
-
-      function CheckParking(amodel, amodelBtn) {
-         let Date = document.getElementById('datepicker').value;
-         let Duration = document.getElementById('duration').value;
-
-         let obj = {
-            Date: Date,
-            Duration: Duration
-         }
-
-         fetch('http://localhost/Y2GP_ALSS/public/residentController/CheckPark', {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json'
-               // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(obj)
-         })
-            .then(Response => Response.json())
-            .then(data => {
-               console.log(data)
-            })
-
-         openModel(amodel, amodelBtn)
+//close success pop up
+function previousView() {
+   $(".success").css('display', 'none');
+}
+//save payment ti database
+function payafter(amount) {
+   console.log("payment save to database");
+   $.ajax({
+      type: "GET",
+      url: "payafter",
+      data: {
+         amt: amount
+      },
+      success: function () {
 
       }
+   });
+}
+// Make payment
+function payNow(userId) {
+   var amount = $("#amount").val();
+   console.log(amount);
+   var response = '';
+   $.ajax({
+      type: "GET",
+      url: "makePayment",
+      data: {
+         amt: amount
+      },
+      success: function (text) {
+         var r = JSON.parse(text);
+         payhere.onCompleted = function onCompleted() {
+            alert("Payment completed");
+            //call to payafter() for save payment details to database
+            //payafter(amount);
+         };
 
-      function openModel(amodel, amodelBtn) {
-         const model = document.getElementById(amodel);
-         const modelBtn = document.getElementsByClassName(amodelBtn);
-         const ans = document.getElementById("answer");
-         const closeBtn = document.getElementsByClassName("closebtn");
+         payhere.onDismissed = function onDismissed() {
+            alert("Payment dismissed");
+         };
 
-         for (var i = 0; i < modelBtn.length; i++) {
-            modelBtn[i].addEventListener('click', showModel, false);
-         }
+         payhere.onError = function onError(error) {
+            alert("Error:" + error);
+         };
 
-         function showModel() {
-            document.getElementById("myCanvasNav").style.width = "100%";
-            document.getElementById("myCanvasNav").style.opacity = "0.8";
-            model.className = "open";
-         }
-
-         for (var i = 0; i < closeBtn.length; i++) {
-            closeBtn[i].addEventListener('click', closeModel, false);
-         }
-
-         function closeModel() {
-            document.getElementById("myCanvasNav").style.width = "0%";
-            document.getElementById("myCanvasNav").style.opacity = "0";
-            model.className = "close";
-         }
-
+         // Put the payment variables here
+         var payment = {
+            "sandbox": true,
+            "merchant_id": "1219029",    // Replace your Merchant ID
+            "return_url": undefined,     // Important
+            "cancel_url": undefined,     // Important
+            "notify_url": "http://sample.com/notify",
+            "order_id": r.apartmentNo,
+            "items": r.residentId,
+            "amount": r.amount,
+            "currency": "LKR",
+            "first_name": r.fname,
+            "last_name": r.lname,
+            "email": "",
+            "phone": "",
+            "address": r.apartmentNo,
+            "city": "Colombo",
+            "country": "Sri Lanka",
+            "delivery_address": r.apartmentNo,
+            "delivery_city": "Kalutara",
+            "delivery_country": "Sri Lanka",
+            "custom_1": "",
+            "custom_2": ""
+         };
+         payhere.startPayment(payment);
       }
+   });
+   payafter(amount);
+}
 
-      //close pop up
-      function closePopup() {
-         document.getElementById("myCanvasNav").style.width = "0%";
-         document.getElementById("myCanvasNav").style.opacity = "0";
-         model.className = 'close';
-      }
+//close pop up
+function closePopup() {
+   document.getElementById("myCanvasNav").style.width = "0%";
+   document.getElementById("myCanvasNav").style.opacity = "0";
+   model.className = 'close';
+}
 
-      // delete row and hide for value addition
-      function deletereservation() {
-         let id = document.getElementById("answer1").innerText;
-         console.log(id);
-         let t = document.getElementById("answer2").innerText;
-         console.log(t);
+// delete row and hide for value addition
+function deletereservation() {
+   let id = document.getElementById("answer1").innerText;
+   console.log(id);
+   let t = document.getElementById("answer2").innerText;
+   console.log(t);
 
-         if (t == "hall") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  hallid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $(a).closest('article').fadeOut("fast");
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $("#deleteModel").toggleClass('close');
-                  $(".success").css('display', 'block');
-               }
-            });
+   if (t == "hall") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            hallid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $(a).closest('article').fadeOut("fast");
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $("#deleteModel").toggleClass('close');
+            $(".success").css('display', 'block');
          }
+      });
+   }
 
-         if (t == "fit") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  fitid: id,
+   if (t == "fit") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            fitid: id,
 
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
-
-               }
-            });
-         }
-
-         if (t == "treat") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  treatid: id,
-
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
-
-               }
-            });
-         }
-
-         if (t == "parking") {
-            $.ajax({
-               type: "GET",
-               url: "removeReservation",
-               data: {
-                  parkingid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
-
-               }
-            });
-         }
-
-      }
-
-      // delete row and hide for value addition
-
-      function deleterequest() {
-         let id = document.getElementById("answer1").innerText;
-         console.log(id);
-         let type = document.getElementById("answer2").innerText;
-         console.log(type);
-
-         if (type == "laundry") {
-            $.ajax({
-               type: "GET",
-               url: "removeRequest",
-               data: {
-                  laundryid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
-
-               }
-            });
-         }
-
-         if (type == "maintenence") {
-            $.ajax({
-               type: "GET",
-               url: "removeRequest",
-               data: {
-                  maintenenceid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
-
-               }
-            });
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
 
          }
+      });
+   }
 
-         if (type == "visitor") {
-            $.ajax({
-               type: "GET",
-               url: "removeRequest",
-               data: {
-                  visitorid: id
-               },
-               success: function () {
-                  a = "#" + id;
-                  console.log(a);
-                  $("#myCanvasNav").css('width', '0%');
-                  $("#myCanvasNav").css('opacity', '0');
-                  $(a).closest('article').fadeOut("fast");
-                  $(".success").css('display', 'block');
-                  $("#deleteModel").toggleClass('close');
+   if (t == "treat") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            treatid: id,
 
-               }
-            });
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+
          }
+      });
+   }
 
+   if (t == "parking") {
+      $.ajax({
+         type: "GET",
+         url: "removeReservation",
+         data: {
+            parkingid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
 
-
-      }
-
-      //view complaints
-      function complaintlist() {
-         if ($("#com").css('display') == 'block') {
-            $("#com").css('display', 'none');
          }
-         else {
-            $("#com").css('display', 'block');
+      });
+   }
+
+}
+
+// delete row and hide for value addition
+
+function deleterequest() {
+   let id = document.getElementById("answer1").innerText;
+   console.log(id);
+   let type = document.getElementById("answer2").innerText;
+   console.log(type);
+
+   if (type == "laundry") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            laundryid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+
          }
+      });
+   }
+
+   if (type == "maintenence") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            maintenenceid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+
+         }
+      });
+
+   }
+
+   if (type == "visitor") {
+      $.ajax({
+         type: "GET",
+         url: "removeRequest",
+         data: {
+            visitorid: id
+         },
+         success: function () {
+            a = "#" + id;
+            console.log(a);
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $(a).closest('article').fadeOut("fast");
+            $(".success").css('display', 'block');
+            $("#deleteModel").toggleClass('close');
+
+         }
+      });
+   }
+
+}
+//view complaints
+function complaintlist() {
+   if ($("#com").css('display') == 'block') {
+      $("#com").css('display', 'none');
+   }
+   else {
+      $("#com").css('display', 'block');
+   }
 
 
-      }
-   
-
+}
