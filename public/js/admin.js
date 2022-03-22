@@ -302,25 +302,13 @@ function openModel(amodel, amodelBtn, id) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
-    if(ans1 !== null){
+    if (ans1 !== null) {
         ans1.innerHTML = id;
     }
-    if(ans2 !== null){
+    if (ans2 !== null) {
         ans2.innerHTML = id;
         $("#serviceId").val(id);
     }
-
-    // model.addEventListener("click", (e) => {
-    //     if (e.target.id === "yes-btn") {
-    //         ans.innerText = "Hello Guys";
-
-    //     } else if (e.target.id === "no-btn") {
-    //         ans.innerText = "Oh no! ";
-    //     } else {
-    //         return;
-    //     }
-    //     model.className = 'close';
-    // });
 }
 
 $(".mySearch").on('keyup', function () {
@@ -345,7 +333,7 @@ function unlockAccount(user_name) {
                 user_name: user_name
             },
             success: function () {
-                console.log($("#unlockID").closest('detail').text);
+                // console.log($("#unlockID").closest('detail').text);
                 $("#unlockId").closest('.detail').fadeOut("slow");
                 $(".success").css('display', 'block');
             }
@@ -365,11 +353,11 @@ function deleteUser() {
         },
         success: function () {
             a = "#" + id;
-            console.log(a);
+            // console.log(a);
             $(a).closest('article').fadeOut("slow");
             $(".success").css('display', 'block');
-            $("#myCanvasNav").css('width','0%');
-            $("#myCanvasNav").css('opacity','0');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
         }
     });
@@ -378,7 +366,7 @@ function deleteUser() {
 function deleteEmployee() {
     let id = document.getElementById("answer1").innerText;
     employee_id = parseInt(id.substring(3));
-    console.log(employee_id);
+    // console.log(employee_id);
     $.ajax({
         type: "POST",
         url: "deleteEmployee",
@@ -387,11 +375,10 @@ function deleteEmployee() {
         },
         success: function () {
             a = "#" + id;
-            console.log(a);
             $(a).closest('article').fadeOut("slow");
             $(".success").css('display', 'block');
-            $("#myCanvasNav").css('width','0%');
-            $("#myCanvasNav").css('opacity','0');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
         }
     });
@@ -399,22 +386,59 @@ function deleteEmployee() {
 
 function updateShift() {
     let id = document.getElementById("answer2").innerText;
-    employee_id = parseInt(id.substring(3));
-    console.log(employee_id);
+    var employee_id = parseInt(id.substring(3));
+    var week1 = document.getElementById("newWeek1").value;
+    var week2 = document.getElementById("newWeek2").value;
+    var week3 = document.getElementById("newWeek3").value;
     $.ajax({
         type: "POST",
         url: "updateEmployeeShift",
         data: {
-            employee_id: employee_id
+            employee_id: employee_id,
+            week1: week1,
+            week2: week2,
+            week3: week3,
         },
-        success: function () {
-            a = "#" + id;
-            console.log(a);
-            // $(a).closest('article').fadeOut("slow");
-            // $(".success").css('display', 'block');
-            // $("#myCanvasNav").css('width','0%');
-            // $("#myCanvasNav").css('opacity','0');
-            // $("#deleteModel").toggleClass('close');
+        success: function (msg) {
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $("#editModel").toggleClass('close');
+            $("#formUpdateShift")[0].reset();
+        }
+    });
+}
+
+function setCurrentShiftData(id) {
+    var employee_id = parseInt(id.substring(3));
+    $.ajax({
+        type: "POST",
+        url: "getEmployeeShift",
+        data: {
+            employee_id: employee_id,
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            $('#newWeek1').val(data[0].week1).change();
+            $('#newWeek2').val(data[0].week2).change();
+            $('#newWeek3').val(data[0].week3).change();
+        }
+    });
+}
+
+function setCurrentServiceRate(service_id){
+    $.ajax({
+        type: "POST",
+        url: "getServiceRate",
+        data: {
+            service_id: service_id,
+        },
+        success: function (data) {
+            $("#formUpdateRate")[0].reset();
+            data = JSON.parse(data);
+            console.log(data);
+            $('#newfee').val(data[0].fee).change();
+            $('#newcancelfee').val(data[0].cancelation_fee).change();
         }
     });
 }
