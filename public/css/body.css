@@ -382,7 +382,7 @@ select{
   cursor: pointer;
 }
 
-.purplebutton{
+.purplebutton, #addRes{
   background-color: #2a225a;
   color: white;
   padding: 5px 10px;

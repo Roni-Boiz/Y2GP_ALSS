@@ -974,7 +974,26 @@ class residentModel extends model
 
     public function checkParking($data)
     {
+        $max_parkings = 50;
         $date = $data['Date'];
         $duration = $data['Duration'];
+
+        $sql = "SELECT COUNT(reservation_id) FROM `parking_slot_reservation` WHERE date ='$date' AND cancelled_time IS NULL";
+        $resCurrent = mysqli_query($this->conn, $sql);
+
+        if ($resCurrent == $max_parkings) {
+
+            return 0;
+        } else {
+            for ($x = 1; $duration > $x; $x++) {
+                $day = $date + $x;
+                    $sql1 = "SELECT COUNT(reservation_id) FROM `parking_slot_reservation` WHERE date ='$day' AND cancelled_time IS NULL";
+                $resCurrent = mysqli_query($this->conn, $sql1);
+                if ($resCurrent == $max_parkings) {
+                    return 0;
+                }
+            }
+        }
+        return 1;
     }
 }

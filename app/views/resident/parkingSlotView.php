@@ -54,7 +54,7 @@ include_once 'sidenav.php';
                                     </select> <br>
 
 
-                                    <button class="purplebutton" onclick="CheckParking()" style="grid-column:2">View</button>
+                                    <button onclick="CheckParking('model','addBtn')" class="addBtn" id="addRes" title="Add User" style="grid-column:2">View</button>
                                 </div>
                             </div>
                         </div>
@@ -142,51 +142,31 @@ include_once 'sidenav.php';
                     <div id="model">
 
 
-                        <div style="text-align: center;">
-                            <h3>Slot NO 01<i class="fa fa-car"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
-                        </div>
-                        <form action="#" class="reservationtime" method="GET">
-                            <div id="col1">
-                                <label>Available Time</label><br>8.00:9.00<br><br>
-                                <label>Vehicle No</label><br>
-                                <select name="vehicleno" class="input-field" placeholder="Start Time">
-                                    <option>Select Vehicle</option>
-                                    <option>AAA123</option>
-                                    <option>ABC123</option>
-                                </select><br>
-                                <label>Start Time</label><br>
-                                <select id="starttime" name="endtime" class="input-field" placeholder="Start Time">
-                                    <option>Select Time</option>
-                                    <?php
-                                    for ($hours = 6; $hours < 24; $hours++) {
-                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                    ?>
-                                            <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select><br>
-                                <label for="type">End Time</label><br>
-                                <select name="endtime" class="input-field" placeholder="End Time">
-                                    <option>Select Time</option>
-                                    <?php
-                                    for ($hours = 6; $hours < 24; $hours++) {
-                                        for ($mins = 0; $mins < 60; $mins += 30) {
-                                    ?>
-                                            <option value="endtime"><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
+
+                        <div id="ParkAvailable">
+                            <div style="text-align: center;">
+                                <h3>Available<i class="far fa-smile"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
                             </div>
-                            <br>
-                            <input class="purplebutton" type="submit" name="Submit" value="Reserve" style="grid-column:1">
-                        </form>
+                            <form action="#" class="reservationtime" method="GET">
+
+                                <br>
+                                <input class="purplebutton" type="submit" name="Submit" value="Reserve" style="grid-column:1">
+                            </form>
+                        </div>
+
+                        <div style="text-align: center;" id="ParkNotAvailable">
+                            <h3>Not Available<i class="far fa-frown"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                        </div>
+
                     </div>
 
                 </div>
+
+
+
+            </div> <!-- .hawlockbody div closed here -->
+        </div> <!-- .expand div closed here -->
+
             </div> <!-- .hawlockbody div closed here -->
         </div> <!-- .expand div closed here -->
         <script>

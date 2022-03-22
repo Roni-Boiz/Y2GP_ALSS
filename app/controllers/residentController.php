@@ -232,11 +232,12 @@ class residentController extends controller
     public function CheckPark()
     {
         $data = file_get_contents('php://input');
+        $data = json_decode($data,true);
+        
+        $Availability = $this->model->checkParking($data);
         $data = json_decode($data, true);
 
-        $this->view->Availability = $this->model->checkParking($data);
-
-        echo json_encode($data);
+        echo json_encode($Availability);
         exit;
     }
 
