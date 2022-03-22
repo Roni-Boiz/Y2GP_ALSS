@@ -254,16 +254,40 @@ nav i{
   margin: 0;
 }
 .detail-info small {
-  color: #545d7a;
+  color: #292d38;
   font-size: .9375rem;
 }
 .announcementContent{
-  margin: 20px 0px 0px 0px !important;
+  margin: 20px 0px 0px 5px !important;
   font-size: medium;
 }
 .announcementContent>p{
   font-family: 'Poppins', sans-serif;
   font-size: medium;
+}
+.announcementContent>p:last-child{
+  margin-bottom: 0px;
+}
+.announcementContent ol{
+  margin-left: 30px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.announcementContent ul{
+  margin-left: 30px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+.pdfFiles{
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  margin: 0px 0px 20px 20px;
+}
+.pdfFiles img{
+  float: left;
+  width: 30px;
+  margin-right: 8px;
 }
 
 /* icon with title part */
@@ -727,6 +751,13 @@ select{
   padding: 10px;
   width: 50%;
 }
+
+@media(max-width: 650px) {
+  #income{
+    display: flex;
+    flex-direction: column;
+  }
+}
 /* End of home page styles */
 
 /* Announcement Styles */
@@ -1140,7 +1171,7 @@ select{
 
 .myDoList {
   display: inline-block;
-  border: 1px solid #ad9c9c;
+  border: .5px solid #ad9c9c;
   width: 100%;
   margin-bottom: 25px;
 }
@@ -1496,7 +1527,17 @@ select{
   padding: 15px 15px 0px 5px;
 }
 
-@media only screen and (max-width: 880px) {
+.formEmpShift {
+  align-items: center;
+  grid-column: 1/span 2;
+  display: flex;
+}
+
+.formEmpShift h4{
+  padding: 0px 20px 0px 0px;
+}
+
+@media only screen and (max-width: 1000px) {
   #employeeCard{
     display: flex;
     flex-direction: column;
@@ -1507,11 +1548,12 @@ select{
   .formAddEmployee{
     display: flex;
     flex-direction: column;
+    width: 450px;
   }
-  .formAddEmployee .profile-pic{
+  /* .formAddEmployee .profile-pic{
     height: 90px;
     width: 90px;
-  }
+  } */
   .formAddEmployee #emptype{
     width: 55%;
   }
@@ -1521,13 +1563,13 @@ select{
 }
 
 @media(max-width: 800px){
-  .formAddEmployee{
+  /* .formAddEmployee{
     grid-template-columns: none;
-  }
-  .formAddEmployee .profile-pic{
+  } */
+  /* .formAddEmployee .profile-pic{
     height: 90px;
     width: 90px;
-  }
+  } */
 }
 /* End of Admin Employee Styles */
 
@@ -1869,14 +1911,15 @@ select{
 
 #newcomplaints {
   display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  justify-content: center;
+  flex-direction: row;
+  overflow-x: scroll;
+  padding: 10px;
 }
 
 #newcomplaints >div {
   padding: 0px 20px;
-  width: 300px;
+  min-width: 260px;
+  width: 260px;
   box-shadow: 0 4px 8px 0 rgb(61 38 193);
   margin: 10px 10px;
   padding: 10px;
