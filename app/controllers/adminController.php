@@ -203,6 +203,16 @@ class adminController extends controller
         $this->view->render('admin/serviceView');
     }
 
+    public function getServiceRate(){
+        $result = $this->model->getThisServiceRate($_POST['service_id']);
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
     public function getRequestReservations(){
         $result = $this->model->getAllReservationsByDate($_POST['startDate'],$_POST['endDate']);
         //loop through the returned data
