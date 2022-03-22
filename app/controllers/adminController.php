@@ -66,6 +66,42 @@ class adminController extends controller
         print json_encode($data);
     }
 
+    public function getServiceSummary(){
+        $result1 = $this->model->getLast12HallRes();
+        $result2 = $this->model->getLast12FitnessRes();
+        $result3 = $this->model->getLast12TreatmentRes();
+        $result4 = $this->model->getLast12ParkingRes();
+        $result5 = $this->model->getLast12MaintenenceReq();
+        $result6 = $this->model->getLast12LaundryReq();
+        //loop through the returned data
+        $data1 = array();
+        $data2 = array();
+        $data3 = array();
+        $data4 = array();
+        $data5 = array();
+        $data6 = array();
+        foreach ($result1 as $row) {
+            $data1[] = $row;
+        }
+        foreach ($result2 as $row) {
+            $data2[] = $row;
+        }
+        foreach ($result3 as $row) {
+            $data3[] = $row;
+        }
+        foreach ($result4 as $row) {
+            $data4[] = $row;
+        }
+        foreach ($result5 as $row) {
+            $data5[] = $row;
+        }
+        foreach ($result6 as $row) {
+            $data6[] = $row;
+        }
+        $data = '{"hall" : ' . json_encode($data1) . ' , "fitness" : ' . json_encode($data2) . ' , "treatment" : ' . json_encode($data3) . ' , "parking" : ' . json_encode($data4) . ' , "maintenence" : ' . json_encode($data5) . ' , "laundry" : ' . json_encode($data6) . '}';
+        echo $data;
+    }
+
     public function user()
     {
         $this->view->users = $this->model->getAllUsers();
