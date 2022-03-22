@@ -277,7 +277,18 @@ include_once 'sidenav.php';
                         ?>
                             <div>
                                 <div style="text-align: center; font-weight: 600;">
-                                    <?= $count ?> Users Online
+                                    <?php
+                                    if ($count == 1) {
+                                    ?>
+                                        <?= $count ?> User Online
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <?= $count ?> Users Online
+                                    <?php
+                                    }
+                                    ?>
+
                                 </div>
                             </div>
                             <?php
