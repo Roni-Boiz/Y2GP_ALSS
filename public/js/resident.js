@@ -9,9 +9,17 @@ $(function () {
    //hall reservation
    $("#member").hide();
    $("#datetodayup").hide();
-   $("#starttime").hide();
 
-   //profile edit
+   //profile details edit
+   $("#fnameerr").hide();
+   $("#lnameerr").hide();
+   $("#nicnoerr").hide();
+   $("#pnoerr").hide();
+   $("#emailerr").hide();
+   $("#vnoerr").hide();
+   $("#newmembererr").hide();
+
+   //profile edit pw
    $("#opw").keyup(function () {
       check_oldpassword();
    });
@@ -20,6 +28,29 @@ $(function () {
    });
    $("#rnpw").keyup(function () {
       check_retypepassword();
+   });
+
+   //profile edit other
+   $("#fname").keyup(function () {
+      check_fname();
+   });
+   $("#lname").keyup(function () {
+      check_lname();
+   });
+   $("#nic").keyup(function () {
+      check_nic();
+   });
+   $("#phone_no").keyup(function () {
+      check_phone();
+   });
+   $("#email").keyup(function () {
+      check_email();
+   });
+   $("#vehicle_no").keyup(function () {
+      check_vehicleno();
+   });
+   $("#newmem").keyup(function () {
+      check_newmember();
    });
 
    //hall reservation
@@ -300,6 +331,138 @@ function check_retypepassword() {
    }
 }
 
+//profile edit
+function check_fname() {
+   var fn = $("fname").val();
+   var firstname= new RegExp(/^[a-zA-Z]+$/);
+
+   if (firstname.test(fn)) {
+      $("#fnameerr").hide();
+      $("#fname").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+   } else {
+      $("#fnameerr").html("Name not valid");
+      $("#fnameerr").show();
+      $("#fname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+
+}
+
+function check_lname() {
+   var ln = $("#lname").val();
+   var lastname = new RegExp(/^[a-zA-Z]+$/);
+
+   if (lastname.test(ln)) {
+      $("#lnameerr").hide();
+      $("#lname").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#lnameerr").html("Name not valid");
+      $("#lnameerr").show();
+      $("#lname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_nic() {
+   var ni = $("#nic").val();
+   var nicno = new RegExp(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/);
+
+   if (nicno.test(ni)) {
+      $("#nicnoerr").hide();
+      $("#nic").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#nicnoerr").html("NIC not valid");
+      $("#nicnoerr").show();
+      $("#nic").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_phone() {
+   var pn = $("#phone_no").val();
+   var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
+
+   if (phone.test(pn)) {
+      $("#pnoerr").hide();
+      $("#phone_no").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#pnoerr").html("Phone number not valid");
+      $("#pnoerr").show();
+      $("#phone_no").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_email() {
+   var em = $("#email").val();
+   var email = new RegExp(/^[\w.]+@[\w.]+\.\w{2,3}$/);
+
+   if (email.test(em)) {
+      $("#emailerr").hide();
+      $("#email").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#emailerr").html("Email not valid");
+      $("#emailerr").show();
+      $("#email").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_vehicleno() {
+   var vn = $("#vehicle_no").val();
+   console.log(vn);
+   var vehicle = new RegExp(/^([A-Z]{1,3})-[0-9]{4}$/);
+
+   if (vehicle.test(vn)) {
+      $("#vnoerr").hide();
+      $("#vehicle_no").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'cursor');
+
+   } else {
+      $("#vnoerr").html("Vehicle no not valid");
+      $("#vnoerr").show();
+      $("#vehicle_no").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_newmember() {
+   var nm = $("#newmem").val();
+   var memname = new RegExp('/^[a-zA-Z]+$/');
+
+   if (memname.test(nm)) {
+      // $("#newmembererr").hide();
+      // $("#newmem").css("border-bottom", "2px solid #34F458");
+
+   } else {
+      // $("#newmembererr").html("Name not valid");
+      // $("#newmembererr").show();
+      // $("#newmem").css("border-bottom", "2px solid #F90A0A");
+   }
+}
+
+
 //form validation in reservation
 function check_members() {
    var count = $("#mem50").val();
@@ -401,7 +564,7 @@ function check_time() {
    console.log(todayDate);
    console.log(mydate);
    var dt = new Date();
-   
+
 
    var h = dt.getHours();
    var m = dt.getMinutes();
@@ -421,7 +584,7 @@ function check_time() {
    console.log(diff);
    console.log(h);
    console.log(s[0]);
-   if(todayDate==mydate && s[0]<=h){
+   if (todayDate == mydate && s[0] <= h) {
       console.log("start err");
       $("#endtime").html("Start time should be next hour");
       $("#disablebutton2").prop('disabled', true);
@@ -485,17 +648,6 @@ function laundry() {
    }
 }
 
-////////////////////////////////////////////////////
-// function openModel(amodel, amodelBtn) {
-
-//    const model = document.getElementById(amodel);
-//    const modelBtn = document.getElementsByClassName(amodelBtn);
-//    const ans = document.getElementById("answer");
-//    const closeBtn = document.getElementsByClassName("closebtn");
-
-//    for (var i = 0; i < modelBtn.length; i++) {
-//       modelBtn[i].addEventListener('click', showModel, false);
-//    }
 //confirm pop up
 function openModel(amodel, amodelBtn, id, type) {
    const model = document.getElementById(amodel);
@@ -509,93 +661,16 @@ function openModel(amodel, amodelBtn, id, type) {
       modelBtn[i].addEventListener('click', showModel, false);
    }
 
-//    function showModel() {
-//       document.getElementById("myCanvasNav").style.width = "100%";
-//       document.getElementById("myCanvasNav").style.opacity = "0.8";
-//       model.className = "open";
-//    }
+   function showModel() {
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
+   }
 
-//    for (var i = 0; i < closeBtn.length; i++) {
-//       closeBtn[i].addEventListener('click', closeModel, false);
-//    }
+   for (var i = 0; i < closeBtn.length; i++) {
+      closeBtn[i].addEventListener('click', closeModel, false);
+   }
 
-//    function closeModel() {
-//       document.getElementById("myCanvasNav").style.width = "0%";
-//       document.getElementById("myCanvasNav").style.opacity = "0";
-//       model.className = "close";
-//    }
-// }
-// delete row and hide for value addition
-function deleteRes(id, type, s, e, d) {
-   console.log(id, type, s, e, d);
-   r = confirm("Are you sure to remove your reservation ?");
-   if (r == true) {
-      if (type = "hall") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               hallid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "fit") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               fitid: id,
-               stime:s,
-               etime:e,
-               date:d
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "treat") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               treatid: id,
-               stime:s,
-               etime:e,
-               date:d
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
-      if (type = "parking") {
-         $.ajax({
-            type: "GET",
-            url: "removeReservation",
-            data: {
-               parkingid: id
-            },
-            success: function () {
-               a = "#" + id;
-               console.log(a);
-               $(a).closest('article').fadeOut("fast");
-               $(".success").css('display','block');
-            }
-         });
-      }
    function closeModel() {
       document.getElementById("myCanvasNav").style.width = "0%";
       document.getElementById("myCanvasNav").style.opacity = "0";
@@ -607,19 +682,8 @@ function deleteRes(id, type, s, e, d) {
    if (ans2 !== null) {
       ans2.innerHTML = type;
    }
-
-   // model.addEventListener("click", (e) => {
-   //     if (e.target.id === "yes-btn") {
-   //         ans.innerText = "Hello Guys";
-
-   //     } else if (e.target.id === "no-btn") {
-   //         ans.innerText = "Oh no! ";
-   //     } else {
-   //         return;
-   //     }
-   //     model.className = 'close';
-   // });
 }
+
 
 // delete row and hide for value addition
 function deleteReq(id, type) {
@@ -634,13 +698,13 @@ function previousView() {
    $(".success").css('display', 'none');
 }
 //save payment ti database
-function payafter(amount){
+function payafter(amount) {
    console.log("payment save to database");
    $.ajax({
       type: "GET",
       url: "payafter",
       data: {
-         amt:amount
+         amt: amount
       },
       success: function () {
 
@@ -649,14 +713,14 @@ function payafter(amount){
 }
 // Make payment
 function payNow(userId) {
-   var amount=$("#amount").val();
+   var amount = $("#amount").val();
    console.log(amount);
    var response = '';
    $.ajax({
       type: "GET",
       url: "makePayment",
       data: {
-         amt:amount
+         amt: amount
       },
       success: function (text) {
          var r = JSON.parse(text);
@@ -704,65 +768,11 @@ function payNow(userId) {
    payafter(amount);
 }
 
-function CheckParking(amodel, amodelBtn) {
-   let Date = document.getElementById('datepicker').value;
-   let Duration = document.getElementById('duration').value;
-
-   let obj = {
-       Date: Date,
-       Duration: Duration
-   }
-
-   fetch('http://localhost/Y2GP_ALSS/public/residentController/CheckPark', {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-               // 'Content-Type': 'application/x-www-form-urlencoded',
-           },
-           body: JSON.stringify(obj)
-       })
-       .then(Response => Response.json())
-       .then(data => {
-           console.log(data)
-       })
-
-       openModel(amodel, amodelBtn)
-       
-}
-
-function openModel(amodel, amodelBtn) {
-   const model = document.getElementById(amodel);
-   const modelBtn = document.getElementsByClassName(amodelBtn);
-   const ans = document.getElementById("answer");
-   const closeBtn = document.getElementsByClassName("closebtn");
-
-   for (var i = 0; i < modelBtn.length; i++) {
-       modelBtn[i].addEventListener('click', showModel, false);
-   }
-
-   function showModel() {
-       document.getElementById("myCanvasNav").style.width = "100%";
-       document.getElementById("myCanvasNav").style.opacity = "0.8";
-       model.className = "open";
-   }
-
-   for (var i = 0; i < closeBtn.length; i++) {
-       closeBtn[i].addEventListener('click', closeModel, false);
-   }
-
-   function closeModel() {
-       document.getElementById("myCanvasNav").style.width = "0%";
-       document.getElementById("myCanvasNav").style.opacity = "0";
-       model.className = "close";
-   }
-
-}
-
 //close pop up
-function closePopup(){
-      document.getElementById("myCanvasNav").style.width = "0%";
-      document.getElementById("myCanvasNav").style.opacity = "0";
-      model.className = 'close';
+function closePopup() {
+   document.getElementById("myCanvasNav").style.width = "0%";
+   document.getElementById("myCanvasNav").style.opacity = "0";
+   model.className = 'close';
 }
 
 // delete row and hide for value addition
@@ -923,13 +933,16 @@ function deleterequest() {
          }
       });
    }
-   
-   //view complaints
-function complaintlist(){
-   if($("#com").css('display')=='block'){
+
+}
+//view complaints
+function complaintlist() {
+   if ($("#com").css('display') == 'block') {
       $("#com").css('display', 'none');
    }
-   else{
+   else {
       $("#com").css('display', 'block');
    }
-}}
+
+
+}

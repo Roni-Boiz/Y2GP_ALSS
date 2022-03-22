@@ -138,7 +138,7 @@ class residentModel extends model
         // echo $stime, $etime;
         $to_time = strtotime($stime);
         $from_time = strtotime($etime);
-        $minutes = round(abs($to_time - $from_time) / 60, 2);
+        $minutes = abs($to_time - $from_time) / 60;
         $noofslots = $minutes / 30;
         // echo $noofslots;
         //function part
