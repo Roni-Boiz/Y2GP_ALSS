@@ -331,6 +331,11 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
+    public function getThisServiceRate($serviceId){
+        $sql = "SELECT fee, cancelation_fee FROM service WHERE service_id='{$serviceId}'";
+        return $this->conn->query($sql);
+    }
+
     public function getAllReservationsByDate($startDate, $endDate){
         $sql = "SELECT 'Hall' AS type,count(reservation_id) AS totalRes,count(cancelled_time) AS cancelRes FROM hall_reservation WHERE date BETWEEN '{$startDate}' AND '{$endDate}'
         UNION
