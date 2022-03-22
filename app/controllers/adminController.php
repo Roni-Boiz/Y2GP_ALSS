@@ -56,6 +56,16 @@ class adminController extends controller
         header("Refresh:0; url=profile");
     }
 
+    public function getEarningSummary(){
+        $result = $this->model->getAllEarnings();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
     public function user()
     {
         $this->view->users = $this->model->getAllUsers();
@@ -76,7 +86,7 @@ class adminController extends controller
 
     public function employee()
     {
-        if (isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno'])) {
+        if ((isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno'])) || (isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno']) && isset($_POST['week1']) && isset($_POST['week2']) && isset($_POST['week3']))) {
             $result = $this->addEmployee();
             if ($result == 0) {
                 $this->view->error = "Oops something went wrong. Form didn't submiited";
@@ -116,14 +126,7 @@ class adminController extends controller
         print json_encode($data);
     }
 
-    public function deleteEmployee()
-    {
-        return $this->model->deleteThisEmployee($_POST["employee_id"]);
-    }
 
-    // public function updateEmployeeShift(){
-    //     return $this->model->updateThisEmployeeShift($_POST["employee_id"]);
-    // }
 
     public function service()
     {
@@ -243,7 +246,7 @@ class adminController extends controller
                 // Upload file to server
                 if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                     // Insert image file name into database
-                    $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], $fileName);
+                    $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], $fileName, $_POST['week1'], $_POST['week2'], $_POST['week3']);
                     if ($insert) {
                         $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
                     } else {
@@ -256,7 +259,7 @@ class adminController extends controller
                 $statusMsg = 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
             }
         } else {
-            $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL);
+            $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL, $_POST['week1'], $_POST['week2'], $_POST['week3']);
             if ($insert) {
                 $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
             } else {
