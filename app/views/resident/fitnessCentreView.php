@@ -101,9 +101,9 @@ include_once 'sidenav.php';
 
                 <div class="rightPanel" style="margin-top:30px;max-height:500px;overflow:scroll">
 
-                    <h3>Reservations of the day</h3>
-                    <?php if (isset($this->selectdate)) {
-                        echo $this->selectdate . "\n";
+                    
+                    <?php if (isset($this->selectdate)) {?><h3>Reservations of the day</h3>
+                        <?php    echo $this->selectdate . "\n";
 
                         $emp = explode(" ", $this->selectcoach);
                         echo $emp[0] . " " . $emp[1];

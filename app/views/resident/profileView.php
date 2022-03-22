@@ -20,29 +20,35 @@ include_once('sidenav.php');
                         <input type="file" id="file" name="file">
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
-                    
-                    <h4> <?php echo  $_SESSION['userName'];?></h4>
+
+                    <h4> <?php echo  $_SESSION['userName']; ?></h4>
 
                     <form action="editprofile" id="profileView" method="post">
                         <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
 
                         <label>First Name</label>
                         <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
+                        <span class="error_form" id="fnameerr" style="font-size:10px"></span><br>
 
                         <label>Last Name</label>
                         <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
+                        <span class="error_form" id="lnameerr" style="font-size:10px"></span><br>
 
                         <label>NIC</label>
-                        <input type="text" id="nic" name="nic" class="input-field" pattern="[0-9]{9}V"value=<?php echo $row["nic"] ?>  ><br>
+                        <input type="text" id="nic" name="nic" class="input-field" pattern="[0-9]{9}V" value=<?php echo $row["nic"] ?>><br>
+                        <span class="error_form" id="nicnoerr" style="font-size:10px"></span><br>
 
                         <label>Contact</label>
-                        <input type="text" id="phone_no" name="phone_no" class="input-field" pattern="[0-9]{10}" value=<?php echo $row["phone_no"] ?> ><br>
+                        <input type="text" id="phone_no" name="phone_no" class="input-field" pattern="[0-9]{10}" value=<?php echo $row["phone_no"] ?>><br>
+                        <span class="error_form" id="pnoerr" style="font-size:10px"></span><br>
 
                         <label>Email</label>
-                        <input type="email" id="email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="input-field" value=<?php echo $row["email"] ?> ><br>
+                        <input type="email" id="email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <span class="error_form" id="emailerr" style="font-size:10px"></span><br>
 
                         <label>Vehicle NO</label>
                         <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
+                        <span class="error_form" id="vnoerr" style="font-size:10px"></span><br>
 
                         <label>New Member</label>
                         <!-- add new field -->
@@ -50,14 +56,16 @@ include_once('sidenav.php');
                         <span id="newmem" style="display:none">
 
                             <label>new member</label>
-                            <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
+                            <input type="text" id="" name="fam" class="input-field" placeholder="add new member">
+                            <span class="error_form" id="newmembererr" style="font-size:10px"></span><br>
+
                         </span>
                         <br>
                         <input type="submit" value="Save" onclick="confirmSave">
                     </form>
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
                     <label>Family Members</label>
-                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                    <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
                     <div id="showmem" style="display:none;">
                         <?php $m = 1;
                         while ($mem = $this->members->fetch_assoc()) { ?>
@@ -67,7 +75,7 @@ include_once('sidenav.php');
                             </form>
                         <?php } ?>
                     </div>
-                    
+
                 </div>
                 <div class="data">
                     <div>
@@ -224,9 +232,11 @@ include_once('sidenav.php');
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Unsuccessfull!</h2>
                         </div>
-                        <form class="formDelete" >
+                        <form class="formDelete">
                             <div>
-                                <label> <span id="answer2"></span> <?php if (isset($this->error)){echo  "please fill required field or enter valid details";} ?></label>
+                                <label> <span id="answer2"></span> <?php if (isset($this->error)) {
+                                                                        echo  "please fill required field or enter valid details";
+                                                                    } ?></label>
                                 <span id="answer1"></span>
                             </div>
                             <div>
@@ -250,7 +260,7 @@ include_once('sidenav.php');
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Edit Success!</h2>
                         </div>
-                        <form class="formDelete" >
+                        <form class="formDelete">
                             <div>
                                 <label> <span id="answer2"></span>Profile updated
                                 </label>

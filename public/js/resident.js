@@ -9,9 +9,17 @@ $(function () {
    //hall reservation
    $("#member").hide();
    $("#datetodayup").hide();
-   $("#starttime").hide();
 
-   //profile edit
+   //profile details edit
+   $("#fnameerr").hide();
+   $("#lnameerr").hide();
+   $("#nicnoerr").hide();
+   $("#pnoerr").hide();
+   $("#emailerr").hide();
+   $("#vnoerr").hide();
+   $("#newmembererr").hide();
+
+   //profile edit pw
    $("#opw").keyup(function () {
       check_oldpassword();
    });
@@ -20,6 +28,29 @@ $(function () {
    });
    $("#rnpw").keyup(function () {
       check_retypepassword();
+   });
+
+   //profile edit other
+   $("#fnameerr").keyup(function () {
+      check_fname();
+   });
+   $("#lnameerr").keyup(function () {
+      check_lname();
+   });
+   $("#nicnoerr").keyup(function () {
+      check_nic();
+   });
+   $("#pnoerr").keyup(function () {
+      check_phone();
+   });
+   $("#emailerr").keyup(function () {
+      check_email();
+   });
+   $("#vnoerr").keyup(function () {
+      check_vehicleno();
+   });
+   $("#newmembererr").keyup(function () {
+      check_newmember();
    });
 
    //hall reservation
@@ -299,6 +330,46 @@ function check_retypepassword() {
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
    }
 }
+//profile edit
+function check_fname() {
+   var fn = $("fname").val();
+   if (1) {
+      $("#fnameerr").hide();
+      $("#fname").css("border-bottom", "2px solid #34F458");
+console.log(455);
+      error_retype_password = true;
+   } else {
+      $("#fnameerr").html("Name not valid");
+      $("#fnameerr").show();
+      $("#fname").css("border-bottom", "2px solid #F90A0A");
+   }
+
+}
+
+function check_lname() {
+   var ln = $("#lname").val();
+}
+
+function check_nic() {
+   var ni = $("#nic").val();
+}
+
+function check_phone() {
+   var pn = $("#phone_no").val();
+}
+
+function check_email() {
+   var em = $("#email").val();
+}
+
+function check_vehicleno() {
+   var vn = $("vehicle_no").val();
+}
+
+function check_newmember() {
+   var nm = $("#fam").val();
+}
+
 
 //form validation in reservation
 function check_members() {
@@ -401,7 +472,7 @@ function check_time() {
    console.log(todayDate);
    console.log(mydate);
    var dt = new Date();
-   
+
 
    var h = dt.getHours();
    var m = dt.getMinutes();
@@ -421,7 +492,7 @@ function check_time() {
    console.log(diff);
    console.log(h);
    console.log(s[0]);
-   if(todayDate==mydate && s[0]<=h){
+   if (todayDate == mydate && s[0] <= h) {
       console.log("start err");
       $("#endtime").html("Start time should be next hour");
       $("#disablebutton2").prop('disabled', true);
@@ -519,18 +590,6 @@ function openModel(amodel, amodelBtn, id, type) {
    if (ans2 !== null) {
       ans2.innerHTML = type;
    }
-
-   // model.addEventListener("click", (e) => {
-   //     if (e.target.id === "yes-btn") {
-   //         ans.innerText = "Hello Guys";
-
-   //     } else if (e.target.id === "no-btn") {
-   //         ans.innerText = "Oh no! ";
-   //     } else {
-   //         return;
-   //     }
-   //     model.className = 'close';
-   // });
 }
 
 // delete row and hide for value addition
@@ -546,13 +605,13 @@ function previousView() {
    $(".success").css('display', 'none');
 }
 //save payment ti database
-function payafter(amount){
+function payafter(amount) {
    console.log("payment save to database");
    $.ajax({
       type: "GET",
       url: "payafter",
       data: {
-         amt:amount
+         amt: amount
       },
       success: function () {
 
@@ -561,14 +620,14 @@ function payafter(amount){
 }
 // Make payment
 function payNow(userId) {
-   var amount=$("#amount").val();
+   var amount = $("#amount").val();
    console.log(amount);
    var response = '';
    $.ajax({
       type: "GET",
       url: "makePayment",
       data: {
-         amt:amount
+         amt: amount
       },
       success: function (text) {
          var r = JSON.parse(text);
@@ -617,10 +676,10 @@ function payNow(userId) {
 }
 
 //close pop up
-function closePopup(){
-      document.getElementById("myCanvasNav").style.width = "0%";
-      document.getElementById("myCanvasNav").style.opacity = "0";
-      model.className = 'close';
+function closePopup() {
+   document.getElementById("myCanvasNav").style.width = "0%";
+   document.getElementById("myCanvasNav").style.opacity = "0";
+   model.className = 'close';
 }
 
 // delete row and hide for value addition
@@ -781,18 +840,18 @@ function deleterequest() {
          }
       });
    }
-   
+
 
 
 }
 //view complaints
-function complaintlist(){
-   if($("#com").css('display')=='block'){
+function complaintlist() {
+   if ($("#com").css('display') == 'block') {
       $("#com").css('display', 'none');
    }
-   else{
+   else {
       $("#com").css('display', 'block');
    }
-   
+
 
 }
