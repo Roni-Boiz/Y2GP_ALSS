@@ -20,29 +20,35 @@ include_once('sidenav.php');
                         <input type="file" id="file" name="file">
                         <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Change Photo</label>
                     </div>
-                    
-                    <h4> <?php echo  $_SESSION['userName'];?></h4>
+
+                    <h4> <?php echo  $_SESSION['userName']; ?></h4>
 
                     <form action="editprofile" id="profileView" method="post">
                         <input type="hidden" name="res_id" class="input-field" value=<?php echo $row["resident_id"] ?>>
 
                         <label>First Name</label>
-                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>><br>
+                        <input type="text" id="fname" name="firstname" class="input-field" value=<?php echo $row["fname"] ?>>
+                        <span class="error_form" id="fnameerr" style="font-size:10px"></span><br>
 
                         <label>Last Name</label>
-                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>><br>
+                        <input type="text" id="lname" name="lastname" class="input-field" value=<?php echo $row["lname"] ?>>
+                        <span class="error_form" id="lnameerr" style="font-size:10px"></span><br>
 
                         <label>NIC</label>
-                        <input type="text" id="nic" name="nic" class="input-field" pattern="[0-9]{9}V"value=<?php echo $row["nic"] ?>  ><br>
+                        <input type="text" id="nic" name="nic" class="input-field"  value=<?php echo $row["nic"] ?>>
+                        <span class="error_form" id="nicnoerr" style="font-size:10px"></span><br>
 
                         <label>Contact</label>
-                        <input type="text" id="phone_no" name="phone_no" class="input-field" pattern="[0-9]{10}" value=<?php echo $row["phone_no"] ?> ><br>
+                        <input type="text" id="phone_no" name="phone_no" class="input-field"  value=<?php echo $row["phone_no"] ?>>
+                        <span class="error_form" id="pnoerr" style="font-size:10px"></span><br>
 
                         <label>Email</label>
-                        <input type="email" id="email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="input-field" value=<?php echo $row["email"] ?> ><br>
+                        <input type="email" id="email" name="email"  class="input-field" value=<?php echo $row["email"] ?>>
+                        <span class="error_form" id="emailerr" style="font-size:10px"></span><br>
 
                         <label>Vehicle NO</label>
-                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>><br>
+                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php echo $row["vehicle_no"] ?>>
+                        <span class="error_form" id="vnoerr" style="font-size:10px"></span><br>
 
                         <label>New Member</label>
                         <!-- add new field -->
@@ -50,14 +56,16 @@ include_once('sidenav.php');
                         <span id="newmem" style="display:none">
 
                             <label>new member</label>
-                            <input type="text" id="fam" name="fam" class="input-field" placeholder="add new member">
+                            <input type="text" id="newmem" name="fam" class="input-field" placeholder="add new member">
+                            <span class="error_form" id="newmembererr" style="font-size:10px"></span><br>
+
                         </span>
                         <br>
-                        <input type="submit" value="Save" onclick="confirmSave">
+                        <input type="submit" value="Save" onclick="confirmSave" id="disablebutton2">
                     </form>
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');"><br><br>
                     <label>Family Members</label>
-                        <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
+                    <i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i><br>
                     <div id="showmem" style="display:none;">
                         <?php $m = 1;
                         while ($mem = $this->members->fetch_assoc()) { ?>
@@ -67,7 +75,7 @@ include_once('sidenav.php');
                             </form>
                         <?php } ?>
                     </div>
-                    
+
                 </div>
                 <div class="data">
                     <div>
@@ -212,49 +220,61 @@ include_once('sidenav.php');
                     </div>
                 </div>
             </div>
+
+            <!--success message -->
+            <?php
+            if (isset($this->error) || isset($this->pwerror)) { ?>
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Unsuccessfull!</h2>
+                        </div>
+                        <form class="formDelete">
+                            <div>
+                                <label> <span id="answer2"></span> <?php if (isset($this->error)) {
+                                                                        echo  "please fill required field or enter valid details";
+                                                                    } ?></label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            <?php
+            }; ?>
             <!-- success popup -->
             <?php
             if (isset($this->success)) { ?>
-            <div class='b'></div>
-            <div class='bb'></div>
-            <div class='message'>
-                <div class='check'>
-                    &#10004;
-                </div>
-                <p>
-                    Edit Success!
-                </p>
-                <p>
-                    
-                </p>
-                <button id='ok' onclick='window.location = "profile" '>
-                    OK
-                </button>
-            </div>
-            <?php
-            }; ?>
-            <?php
-            if (isset($this->error) || isset($this->pwerror)) { ?>
-                <!-- error popup -->
-                <div class='b'></div>
-                <div class='bb'></div>
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
-                    </div>
-                    <p>
-                    Edit Unsuccess!
-                    </p>
-                    <p>
-                        <?php if (isset($this->error)){echo  "please fill required field or enter valid details";} ?>
-                    </p>
-                    <button id='ok' onclick='window.location = "profile" ' style="background:red;">
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
 
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Edit Success!</h2>
+                        </div>
+                        <form class="formDelete">
+                            <div>
+                                <label> <span id="answer2"></span>Profile updated
+                                </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }; ?>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>

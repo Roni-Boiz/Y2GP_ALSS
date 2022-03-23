@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                                     </td>
 
                                     <td>
-                                        Resident ID :<?php echo " RA001" ?> <br />
+                                        Resident ID :<?php echo "RA001" ; ?> <br />
                                         Created : <?php echo $this->y ?><br />
                                     </td>
                                 </tr>
@@ -101,7 +101,8 @@ include_once 'sidenav.php';
                             <td>Account Balance (B/F)</td>
                             <td><?php $row2 = $this->balanceforward->fetch_assoc();
                                 echo $row2['balance']; ?></td>
-                        <?php } ?>
+                        <?php
+                    } ?>
                         </tr>
                 </table>
             </div>
@@ -114,7 +115,7 @@ include_once 'sidenav.php';
                 <div id="model" style="left: 60%;width: 300px">
 
                     <a href="javascript:void(0)" id="closebtn">&times;</a>
-                    
+
                     <h4>Previous Bills</h4>
                     <form action="Bill" class="reservationtime" method="POST">
                         <div id="">
@@ -124,6 +125,7 @@ include_once 'sidenav.php';
                                 <option>2019</option>
                                 <option>2020</option>
                                 <option>2021</option>
+                                <option>2022</option>
                             </select><br>
                             <label for="type">Month</label><br>
                             <select required name="month" class="input-field">

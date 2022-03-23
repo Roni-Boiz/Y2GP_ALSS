@@ -26,16 +26,39 @@ include_once 'sidenav.php';
                                 <form action="treatment" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" class="input-field" required><br>
+                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" id="datepicker" class="input-field" required>
+                                        <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-
-                                            <br>
+                                        <h3>Description</h3><br>
+  
                                             <?php if (isset($this->selectdate)) {
                                                 echo $this->selectdate . "<br> 
-                                                Please check availability from right panel and  <br>select time slot.
-                                                <br>There are only 5 bookings on the particular time slot.";
+                                                Please check availability and  <br>select time slot.<br>";
+                                            ?>
+
+                                                <span class="fa-stack">
+                                                    <span style="color:red" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Not avail
+
+                                                <span class="fa-stack">
+                                                    <span style="color:yellow" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail some
+
+                                                <span class="fa-stack">
+                                                    <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail all
+                                            <?php
                                             }; ?>
                                             <br>
 
@@ -104,14 +127,52 @@ include_once 'sidenav.php';
                                     ?>
 
 
-                            <?php
+                                <?php
                                 }
                             } else {
-                                echo "There is no reservations yet.";
-                            } ?>
-                            </table>
+                                echo "There are no reservations yet.";
+                                ?>
+                                <table class="avail">
+                                    <tr>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                        <th>Availability</th>
+                                    </tr>
+                                    <?php
+                                    for ($hours = 6; $hours < 24; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <tr>
+                                                <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                                <td><?php if ($mins + 30 == 60) {
+                                                        echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                    } else {
+                                                        echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                    } ?></td>
+                                                <td>
+                                                    <span class="fa-stack">
+                                                        <!-- color with available -->
+                                                        <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                        <strong class="fa-stack-1x">
+                                                            <?php echo 0 ?>
+                                                        </strong>
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+                                    <?php
+
+                                        }
+                                    }
+                                    ?>
+
+                                </table>
+
+
                         <?php
-                    } ?>
+                            }
+                        }
+                        ?>
                         <hr>
                         <div class="holdAccount">
                             <div class="head">
@@ -146,29 +207,36 @@ include_once 'sidenav.php';
                         <br>
                         <div class="activeUsers">
                             <div class="head">
-                                <h3>Treatment Types</h3>
+                                <h3>Treaters </h3>
                             </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Full Body Massage</h5>
-                                    <small>Nirupama Rajapaksha</small>
+
+
+                            <?php
+                            if ($this->treater->num_rows > 0) {
+                                while ($row = $this->treater->fetch_assoc()) {
+                            ?>
+                                    <div class="detail">
+                                        <div>
+                                            <img src="../../public/img/user.png" alt="user" />
+                                            <div class="detail-info">
+                                                <h5><?php echo "Water Theropy"  ?></h5>
+                                                <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
+                                                <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                            } else { ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <h5><?php echo "No available treaters . . ."; ?></h5>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Full-body facia</h5>
-                                    <small>Shiranthi Rajapaksha</small>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Water Therapy</h5>
-                                    <small>Chandrika</small>
-                                </div>
-                            </div>
+                            <?php
+                            } ?>
                         </div>
                 </div>
 
@@ -201,9 +269,9 @@ include_once 'sidenav.php';
                         </div>
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" name="date" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
-                                                                                                    echo $this->selectdate;
-                                                                                                }; ?>">
+                            <input type="date" name="date" id="datepicker1" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                                    echo $this->selectdate;
+                                                                                                                }; ?>">
                         </div>
                         <div id="col1">
 
@@ -248,51 +316,80 @@ include_once 'sidenav.php';
                     </form>
 
                 </div>
-                <!-- reservation success message -->
-                <?php
+                               <!-- reservation success message -->
+                               <?php
                 if (isset($this->error)) { ?>
-                    <!-- error popup -->
-                    <div class='b'></div>
-                    <div class='bb'></div>
-                    <div class='message'>
-                        <div class='check' style="background:red;">
-                            &#10006;
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Reservation Failed!</h2>
+                            </div>
+                            <form class="formDelete" >
+                                <div>
+                                    <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
                         </div>
-                        <p>
-                            Reservation Unsuccess!
-                        </p>
-                        <p>
-                            <?php echo $this->error; ?>
-                        </p>
-                        <button id='ok' onclick='window.location = "treatment" ' style="background:red;">
-                            OK
-                        </button>
                     </div>
                 <?php
                 }; ?>
                 <!-- success popup -->
                 <?php
                 if (isset($this->success)) { ?>
-                    <div class='b'></div>
-                    <div class='bb'></div>
-                    <div class='message'>
-                        <div class='check'>
-                            &#10004;
-                        </div>
-                        <p>
 
-                            Reservation Success!
-                        </p>
-                        <p>
-                            <?php echo $this->success; ?><br>
-                            Check your email for a booking confirmation. We'll see you soon!
-                        </p>
-                        <button id='ok' onclick='window.location = "treatment" '>
-                            OK
-                        </button>
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successfull!</h2>
+                            </div>
+                            <form class="formDelete" >
+                                <div>
+                                    <label> <span id="answer2"></span>Reservation charges added.
+                                        Check notification for more details. </label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
                 <?php
                 }; ?>
+            </div>
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Consider below</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Only 5 reservations for each time slot! </label>
+                            <label> Can reserve only before 14 days. </label>
+
+                            <span><?= "" ?></span>
+                        </div>
+                        <div>
+                            <!-- <input class="btnRed" type="submit" name="submit" value="Delete"> -->
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

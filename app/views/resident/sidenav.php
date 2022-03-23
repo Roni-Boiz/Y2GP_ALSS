@@ -64,3 +64,26 @@
         </nav>
 
         <script type="text/javascript" src="../../public/js/resident.js"></script>
+
+        
+        <div class="error" style="display:none;z-index:5">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView() ;return false;">
+                            <div>
+                                <label> <span id="answer2"></span>Try again later</label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>

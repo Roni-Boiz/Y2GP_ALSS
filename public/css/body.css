@@ -406,7 +406,7 @@ select{
   cursor: pointer;
 }
 
-.purplebutton{
+.purplebutton, #addRes{
   background-color: #2a225a;
   color: white;
   padding: 5px 10px;
@@ -1389,6 +1389,14 @@ select{
 
 .btnRed:hover{
   background-color: #db2323 !important;
+  cursor: pointer;
+}
+.btnBlue{
+  background-color: #2a225a !important;
+}
+
+.btnBlue:hover{
+  background-color: #241c52 !important;
   cursor: pointer;
 }
 
@@ -3232,7 +3240,7 @@ input:checked + .slider:before {
   max-height: 150px;
 }
 /* error pop up */
-.b, .bb {
+/* .b, .bb {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -3249,7 +3257,7 @@ input:checked + .slider:before {
   background-position: center;
   background-color: #cccfcf;
   opacity: 50%;
-}
+} */
 
 .message {
   position: absolute;
@@ -3386,4 +3394,15 @@ input:checked + .slider:before {
     display: block;
     text-align: center;
   }
+}
+#declineBtn{
+  background-color: #2a225a;
+  color: white;
+  padding: 5px 10px;
+  margin: auto;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  grid-column: 3;
+  width: 70px;
 }

@@ -18,50 +18,56 @@ include_once 'sidenav.php';
                         <div class="card" id="employeeSummary">
                             <div>
                                 <div>
-                                    <label>Vehicle No</label><br>
-                                    <input type="text" id="vehicle_no" name="vehicle_no" class="input-field" value=<?php  echo "AAA123" ?>>
-                                    <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
+                                    <form method="POST" action="parkingslot">
+                                        <label>Vehicle No</label><br>
+                                        <input type="text" id="vehicle_no" name="vehicle_no" class="input-field">
+                                        <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
+                                    </form>
                                 </div>
 
                             </div>
-                            <div>
-                                <div class="employee">
+                            <?php if (isset($this->parkingStatus)) {
+                                if ($this->parkingStatus->num_rows > 0) { ?>
                                     <div>
-                                        <span><i class="fas fa-car"></i></span>
+                                        <?php while ($row1 = $this->parkingStatus->fetch_assoc()) { ?>
+                                            <div class="employee">
+                                                <div>
+                                                    <span><i class="fas fa-car"></i></span>
+                                                </div>
+                                                <form action="markTime" class="reservationtime" method="POST">
+                                                    <input type="hidden" name="reservation_id" id="reservation_id" value="<?php echo $row1["reservation_id"]; ?>" readonly>
+                                                    <h3>Reservation Id:</h3> <?php echo $row1["reservation_id"] ?><br><br>
+                                                    <h3>On:</h3>
+                                                    <?php echo $row1["date"] ?>
+                                                    <br><br>
+                                                    <h3>FROM :</h3><?php echo $row1["start_time"] ?><h3> TO :</h3> <?php echo $row1["end_time"] ?><br><br>
+                                                    <br>
+                                                    <div>
+                                                        <?php if ((($row1["checkin_time"]==NULL) && ($row1["checkout_time"]==NULL)) || (($row1["checkin_time"]) && ($row1["checkout_time"])))  { ?>
+                                                                <input class="purplebutton" type="submit" name="Check-in" value="Check-in">
+                                                            <?php
+                                                            } else { ?>
+                                                                CHECKED-IN :<br> <?php echo $row1["checkin_time"] ?>
+                                                                <input class="purplebutton" type="submit" name="Check-out" value="Check-out">
+                                                        <?php
+                                                            }
+                                                         ?>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+
+
+                                        <?php } ?>
                                     </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                                <div class="employee">
-                                    <div>
-                                        <span><i class="fas fa-car"></i></span>
-                                    </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                                <div class="employee">
-                                    <div>
-                                        <span><i class="fas fa-car"></i></span>
-                                    </div>
-                                    <form action="#" class="reservationtime" method="GET">
-                                        <br>FROM :<br> 21-10-2021 12:00 <br>TO :<br> 21-10-2021 01:30<br><br>
-                                        <label class="switch">
-                                            <input type="checkbox" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </form>
-                                </div>
-                            </div>
+                                    
+
+                                <?php 
+                                } else {
+                                    echo "0 results";
+                                }
+                            }
+                            ?>
                             <div>
 
 
@@ -76,50 +82,27 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Outgoing Vehicles . . .</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>SSD-5868</h5>
-                                    <small>R. Siripala</small><small> 01:30</small>
+                        <?php if ($this->outgoingVehicles->num_rows > 0) { ?>
+                            <?php while ($row4 = $this->outgoingVehicles->fetch_assoc()) { ?>
+                                <div class="detail">
+                                    <div>
+                                        <div class="detail-info">
+                                            <b>Slot no: </b><small><?php echo $row4['slot_no'] ;?></small><br>
+                                            <b>Vehicle: </b><small><?php echo $row4['vehicle_no'] ;?></small><br>
+                                            <b>End time: </b><small> <?php echo $row4['end_time'] ;?></small><br>
+                                            <b>Apartment no: </b><small> <?php echo $row4['apartment_no'] ;?></small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>DDD-7897</h5>
-                                    <small>S. Ranathunga</small><small> 12:30</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <div class="detail-info">
-                                    <h5>ZZZ-1478</h5>
-                                    <small>S. Gunasekara</small><small> 12:30</small>
-                                </div>
-                            </div>
-                        </div>
+                            <?php } ?>
+
+                        <?php } ?>
+
+
 
                     </div>
                     <br>
-                    <div class="activeUsers">
-                        <div class="head">
-                            <h3>OverDue Vehicles . . .</h3>
-                        </div>
-                        <div class="detail">
-                            <div class="detail-info">
-                                <h5>AAA-1257</h5>
-                                <small>R.K. Rathnayake</small><small> 12:30</small>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div class="detail-info">
-                                <h5>ABC-1238</h5>
-                                <small>C.B Silva</small><small> 12:30</small>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
 
