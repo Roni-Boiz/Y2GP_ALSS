@@ -110,13 +110,13 @@ class laundryController extends controller
                 
             }
             if(isset($_POST['qty2']) && isset($_POST['amt2'])){
-                $fee1=$_POST['qty2']*$_POST['amt2'];
+                $fee2=$_POST['qty2']*$_POST['amt2'];
             }
             if(isset($_POST['qty3']) && isset($_POST['amt3'])){
-                $fee1=$_POST['qty3']*$_POST['amt3'];
+                $fee3=$_POST['qty3']*$_POST['amt3'];
             }
-            $Total=$fee1+$fee2+$fee3;
-            $this->model->addTotalFee($id,$Total);
+            $this->model->addTotalFee($id,$fee1,$fee2,$fee3);
+            $this->requests();
     
   
         }    
