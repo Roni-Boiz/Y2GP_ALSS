@@ -11,7 +11,7 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="card" id="userCard">
-                
+
                 <div class="leftPanel">
                     <h2>Policies</h2>
                     <div class="tabs" style="grid-column:1/span3">
@@ -142,71 +142,79 @@ include_once 'sidenav.php';
                     <h3>Complaints</h3><br>
                     <span onclick="openModel('editModel','addBtn')" class="addBtn"> Make your complaints<i class="fa fa-plus"></i></span>
                     <br>
-                    Your complaints <a onclick="complaintlist()"><i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i></a>  
-                    <div id="com" style="display:none;margin:20px;padding-right:40px" >
+                    Your complaints <a onclick="complaintlist()"><i class="fas fa-chevron-circle-down" style="padding:0" onclick="showmembers();"></i></a>
+                    <div id="com" style="display:none;margin:20px;padding-right:40px">
 
 
-                    
+
                         <p style="color:black">
                         <div style="overflow-x:auto;grid-column:1/span2">
                             <div class="activeUsers">
 
 
-                            <?php
-                        if ($this->com1->num_rows > 0) {
-                            while ($row = $this->com1->fetch_assoc()) {
-                        ?>
-                                <div class="detail">
-                                    <div>
-                                        <div class="detail-info">
-                                            <h5><?php echo "Date : ". $row["date_time"] ?></h5>
-                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Considered"; else echo "Completed" ; ?></small><br>
-                                            <small><?php echo "Considered by : ";if($row["fname"]) echo $row["fname"]." ".$row['lname']; else echo "Not yet"; ?></small><br>
-                                            <small><?php echo "Description : ". $row["description"]; ?></small>
-                                            
+                                <?php
+                                if ($this->com1->num_rows > 0) {
+                                    while ($row = $this->com1->fetch_assoc()) {
+                                ?>
+                                        <div class="detail">
+                                            <div>
+                                                <div class="detail-info">
+                                                    <h5><?php echo "Date : " . $row["date_time"] ?></h5>
+                                                    <small><?php echo "State : ";
+                                                            if ($row["state"] == 0) echo "Pending";
+                                                            else if ($row["state"] == 1) echo "Considered";
+                                                            else echo "Completed"; ?></small><br>
+                                                    <small><?php echo "Considered by : ";
+                                                            if ($row["fname"]) echo $row["fname"] . " " . $row['lname'];
+                                                            else echo "Not yet"; ?></small><br>
+                                                    <small><?php echo "Description : " . $row["description"]; ?></small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                } else { ?>
+                                    <div class="detail">
+                                        <div>
+                                            <div class="detail-info">
+                                                <h5><?php echo "No complaints . . ."; ?></h5>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
-                            }
-                        } else { ?>
-                            <div class="detail">
-                                <div>
-                                    <div class="detail-info">
-                                        <h5><?php echo "No complaints . . ."; ?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        } ?>
-                            <?php
-                        if ($this->com2->num_rows > 0) {
-                            while ($row = $this->com2->fetch_assoc()) {
-                        ?>
-                                <div class="detail">
-                                    <div>
-                                        <div class="detail-info">
-                                            <h5><?php echo "Date : ". $row["date_time"] ?></h5>
-                                            <small><?php echo "State : "; if($row["state"]==0) echo "Pending";else if($row["state"]==1) echo "Considered"; else echo "Completed" ; ?></small><br>
-                                            <small><?php echo "Description : ". $row["description"]; ?></small>
-                                            
+                                <?php
+                                } ?>
+                                <?php
+                                if ($this->com2->num_rows > 0) {
+                                    while ($row = $this->com2->fetch_assoc()) {
+                                ?>
+                                        <div class="detail">
+                                            <div>
+                                                <div class="detail-info">
+                                                    <h5><?php echo "Date : " . $row["date_time"] ?></h5>
+                                                    <small><?php echo "State : ";
+                                                            if ($row["state"] == 0) echo "Pending";
+                                                            else if ($row["state"] == 1) echo "Considered";
+                                                            else echo "Completed"; ?></small><br>
+                                                    <small><?php echo "Description : " . $row["description"]; ?></small>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                } else { ?>
+                                    <div class="detail">
+                                        <div>
+                                            <div class="detail-info">
+                                                <h5><?php echo ""; ?></h5>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
-                            }
-                        } else { ?>
-                            <div class="detail">
-                                <div>
-                                    <div class="detail-info">
-                                        <h5><?php echo ""; ?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        } ?>
-          
-                                
+                                <?php
+                                } ?>
+
+
                             </div>
 
                         </div>
@@ -269,7 +277,7 @@ include_once 'sidenav.php';
                     <form action="complaint" class="reservationtime" method="post">
                         <div id="">
                             <label>Complaint Type</label><br>
-                            <select name="type" class="input-field" required>
+                            <select name="type" class="input-field" required id="select" value=0 required>
                                 <option value="">Select Type</option>
                                 <option>Parcel</option>
                                 <option>Fitness Centre</option>
@@ -278,15 +286,17 @@ include_once 'sidenav.php';
                                 <option>Conference Hall</option>
                                 <option>Swim Pool</option>
                                 <option>Kids Area</option>
-                                <option>...</option>
+                                <option>Other</option>
                             </select><br>
 
 
                         </div>
                         <div>
                             <input type="textarea" name="description" id="description" style="margin:20px 10px 20px 0" placeholder="Enter here..." required><br>
+                            <span class="error_form" id="descriptionerr" style="font-size:10px;"></span>
+                            <span class="error_form" id="maintenecetypeerr" style="font-size:10px;"></span><br>
                             <br>
-                            <input class="purplebutton" type="submit" value="Send" id="model-btn" style="grid-column:2;padding:5px 15px">
+                            <input class="purplebutton" type="submit" value="Send" style="grid-column:2;padding:5px 15px" id="disablebutton3">
                         </div>
                     </form>
                 </div>

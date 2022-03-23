@@ -116,12 +116,14 @@ include_once 'sidenav.php';
                             <br>
                             <div id="col2">
                                 <label for="lname">Amount(LKR)</label><br>
-                                <input type="text" name="amt" id ="amount" class="input-field" placeholder="" >
+                                <input type="text" name="amt" id ="amount" class="input-field" placeholder="" ><br>
+                                <span class="error_form" id="currencyerr" style="font-size:10px;"></span><br>
+
                             </div>
 
                             <!-- <input onclick="" class="purplebutton" style="grid-column: 1/span 2;" type="submit" value="Next"> -->
                         </form>
-                        <button class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
+                        <button id="disablebutton2" class="purplebutton" onclick="payNow(<?php echo $_SESSION['userId'] ?>);">Payhere Pay</button>
 
 
 

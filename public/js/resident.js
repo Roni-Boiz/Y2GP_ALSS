@@ -18,7 +18,10 @@ $(function () {
    $("#emailerr").hide();
    $("#vnoerr").hide();
    $("#newmembererr").hide();
-
+   $("#maintenecetypeerr").hide();
+   $("#descriptionerr").hide();
+   $("#currencyerr").hide();
+  
    //profile edit pw
    $("#opw").keyup(function () {
       check_oldpassword();
@@ -53,12 +56,23 @@ $(function () {
       check_newmember();
    });
 
+   //maintenence request
+   $("#description").keyup(function () {
+      mainenencevalidation();
+   });
+
+   //payment
+   $("#amount").keyup(function () {
+      currencycheck();
+   });
+
    //hall reservation
    $("#mem50").keyup(function () {
       check_members();
    });
    $("#datepicker").on("change", function () {
       check_uptotoday();
+      mainenencevalidation();
       coach();
    });
    $("#stime").on("change", function () {
@@ -331,7 +345,7 @@ function check_retypepassword() {
    }
 }
 
-//profile edit
+//check name not having numbers or other symbols
 function check_fname() {
    var fn = $("fname").val();
    var firstname= new RegExp(/^[a-zA-Z]+$/);
@@ -351,6 +365,7 @@ function check_fname() {
 
 }
 
+//check name not having numbers or other symbols
 function check_lname() {
    var ln = $("#lname").val();
    var lastname = new RegExp(/^[a-zA-Z]+$/);
@@ -370,6 +385,7 @@ function check_lname() {
    }
 }
 
+//check NIC xxxxxxxxxV format
 function check_nic() {
    var ni = $("#nic").val();
    var nicno = new RegExp(/^([0-9]{9}[x|X|v|V]|[0-9]{12})$/);
@@ -389,6 +405,7 @@ function check_nic() {
    }
 }
 
+//check phone no format widely used
 function check_phone() {
    var pn = $("#phone_no").val();
    var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
@@ -645,6 +662,51 @@ function laundry() {
       // $("#laundrytype").hide();
       // $("#disablebutton3").css('cursor', 'pointer');
       // $("#disablebutton3").prop('disabled', false);
+   }
+}
+//maintenence validation
+function mainenencevalidation(){
+   if (!$("#select").val() && $("#description").val()) {
+      $("#maintenecetypeerr").html("Select type first");
+      $("#disablebutton3").css('cursor', 'not-allowed');
+      $("#disablebutton3").prop('disabled', true);
+      $("#maintenecetypeerr").show();
+   } else {
+      $("#maintenecetypeerr").hide();
+      $("#disablebutton3").css('cursor', 'pointer');
+      $("#disablebutton3").prop('disabled', false);
+   }
+   if($("#select").val() && !$("#description").val()){
+      $("#descriptionerr").html("Description is required");
+      $("#disablebutton3").css('cursor', 'not-allowed');
+      $("#disablebutton3").prop('disabled', true);
+      $("#descriptionerr").show();
+
+   }else{
+      $("#descriptionerr").hide();
+      $("#disablebutton3").css('cursor', 'pointer');
+      $("#disablebutton3").prop('disabled', false);
+   }
+   
+}
+
+//currency validation
+function currencycheck(){
+   var am = $("#amount").val();
+   var c = new RegExp(/^(?!0\.00)\d{1,6}(,\d{3})*(\.\d\d)?$/);
+
+   if (c.test(am)) {
+      $("#currencyerr").hide();
+      $("#amount").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").prop('disabled', false);
+
+   } else {
+      $("#currencyerr").html("Enter valid amount");
+      $("#currencyerr").show();
+      $("#amount").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
    }
 }
 
