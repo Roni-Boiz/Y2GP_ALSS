@@ -171,13 +171,17 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function updateThisEmployeeShift($employee_id,$week1,$week2,$week3){
-        $sql = "UPDATE employee_shift SET week1='{$week1}', week2='{$week2}', week3='{$week3}' WHERE employee_id = '{$employee_id}'";
+    public function updateThisEmployeeShift($employee_id,$shift_no1,$shift_no2,$shift_no3){
+        $sql = "DELETE FROM employee_shift WHERE employee_id = '{$employee_id}'";
+        $result1 = $this->conn->query($sql);
+        $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no1}','{$employee_id}', 1)";
+        
+        // $sql = "UPDATE employee_shift SET week1='{$week1}', week2='{$week2}', week3='{$week3}' WHERE employee_id = '{$employee_id}'";
         return $this->conn->query($sql);
     }
 
     public function getThisEmployeeShift($employee_id){
-        $sql = "SELECT week1,week2,week3 from employee_shift WHERE employee_id = '{$employee_id}'";
+        $sql = "SELECT week1,week2,week3 FROM employee_shift WHERE employee_id = '{$employee_id}'";
         return $this->conn->query($sql);
     }
 
