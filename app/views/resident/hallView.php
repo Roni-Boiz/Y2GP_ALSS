@@ -118,6 +118,7 @@ include_once 'sidenav.php';
                             <h3>Upcoming Functions . . .</h3>
                         </div>
                         <?php
+
                         if ($this->latestfun->num_rows > 0) {
                             while ($row = $this->latestfun->fetch_assoc()) {
                         ?>
@@ -204,7 +205,7 @@ include_once 'sidenav.php';
 
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" id="datepicker1" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date" id="datepicker" name="date" min="<?= date("Y-m-d") ?>" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                                                                 echo $this->selectdate;
                                                                                                                                             }; ?>">
                         </div>
@@ -278,58 +279,58 @@ include_once 'sidenav.php';
 
                 </div>
             </div>
-                <!-- reservation success message -->
-                <?php
-                if (isset($this->error)) { ?>
+            <!-- reservation success message -->
+            <?php
+            if (isset($this->error)) { ?>
 
-                    <div class="divPopupModel">
+                <div class="divPopupModel">
                     <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
-                        <div id="deleteModel" class="open">
+                    <div id="deleteModel" class="open">
 
-                            <div style="text-align: center; margin-bottom: 10px;">
-                                <h2>Reservation Failed!</h2>
-                            </div>
-                            <form class="formDelete" >
-                                <div>
-                                    <label> <span id="answer2"></span><?php echo $this->error; ?></label>
-                                    <span id="answer1"></span>
-                                </div>
-                                <div>
-                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
-                                </div>
-
-                            </form>
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Reservation Failed!</h2>
                         </div>
-                    </div>
-                    
-                <?php
-                }; ?>
-                <!-- success popup -->
-                <?php
-                if (isset($this->success)) { ?>
-
-                    <div class="divPopupModel">
-                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
-                        <div id="deleteModel" class="open">
-
-                            <div style="text-align: center; margin-bottom: 10px;">
-                                <h2>Successfull!</h2>
+                        <form class="formDelete">
+                            <div>
+                                <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                <span id="answer1"></span>
                             </div>
-                            <form class="formDelete" >
-                                <div>
-                                    <label> <span id="answer2"></span>Reservation charges added.
-                                        Check notification for more details. </label>
-                                    <span id="answer1"></span>
-                                </div>
-                                <div>
-                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
-                                </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
-                <?php
-                }; ?>
+                </div>
+
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successfull!</h2>
+                        </div>
+                        <form class="formDelete">
+                            <div>
+                                <label> <span id="answer2"></span>Reservation charges added.
+                                    Check notification for more details. </label>
+                                <span id="answer1"></span>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }; ?>
         </div>
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
