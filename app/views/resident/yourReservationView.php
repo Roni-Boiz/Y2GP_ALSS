@@ -23,7 +23,7 @@ include_once 'sidenav.php';
                 <br>
                 <!-- for search row --><br>
                 <div class="search">
-                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                    <input type="text" id="mySearch" placeholder="Search..." style="width:50%;margin: 5px 20px"><i class="fa fa-history" aria-hidden="true" title="Search previous..." onclick="previousreservation()"></i>
                 </div>
 
                 <div id="tab1" class="tab active">
@@ -254,7 +254,6 @@ include_once 'sidenav.php';
 
                 </div>
             </div> -->
-
             <!-- delete confirmation -->
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
@@ -275,6 +274,7 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+
 
             <!-- reservation success message -->
             <div class="error" style="display:none;z-index:5">
@@ -321,6 +321,8 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+
+
 
 
         </div> <!-- .hawlockbody div closed here -->
