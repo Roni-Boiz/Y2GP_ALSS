@@ -55,9 +55,11 @@ $(function () {
         $(tabid).show(); // show tab
         if (tabid == "#tab2") {
             $("#tab1").hide();
+            $("#tab3").hide();
         }
         if (tabid == "#tab3") {
             $("#tab1").hide();
+            $("#tab2").hide();
         }
         $(this).addClass("active"); //  adding active class to clicked tab
     });
@@ -88,6 +90,7 @@ $(function () {
     //    })
 
     $("#qty1,#qty2,#qty3,#amt1,#amt2,#amt3").keyup(function () {
+        
         addPopup();
     });
     $("#mySearch2").on('keyup', function () {

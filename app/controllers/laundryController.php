@@ -67,13 +67,14 @@ class laundryController extends controller
             if ($tab == 1) {
                 //$this->getReqDetails($id);
                 $this->view->reqSelectedClean = true;
-                $this->view->laundyCleaningRequests = $this->model->getCleaningRequests();
+                $this->view->requestInfo = $this->model->getselectedCleaning($id);
                 $this->view->selectedCleaningCat = $this->model->getselectedCleaning($id);
             }
         }
         $this->view->laundyNewRequests = $this->model->getNewRequests();
         $this->view->laundyCleaningRequests = $this->model->getCleaningRequests();
         $this->view->laundyCompletedRequests = $this->model->getCompletedRequests();
+        $this->availWashers=$this->model->calWashers();
         $this->view->render('laundry/requestView');
     }
     public function laundryresponse(){

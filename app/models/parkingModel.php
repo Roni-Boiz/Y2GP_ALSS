@@ -124,11 +124,12 @@ class parkingModel extends model
     }
     public function getOverdueVehicles(){
         $time=date('H:i:s');
-        $sql1="SELECT end_time,parking_slot_reservation.vehicle_no,slot_no,apartment_no,phone_no FROM parking_slot_reservation,resident WHERE (cancelled_time IS NULL AND checkout_time IS NULL AND checkin_time IS NOT NULL) AND (end_time<=SYSDATE() OR (date<CURRENT_DATE()) ) AND parking_slot_reservation.resident_id= resident.resident_id";
+        $sql1="SELECT end_time,parking_slot_reservation.vehicle_no,slot_no,apartment_no,phone_no FROM parking_slot_reservation,resident WHERE (cancelled_time IS NULL AND checkout_time IS NULL AND checkin_time IS NOT NULL) AND ((end_time<=CURRENT_TIME) OR (date<CURRENT_DATE) ) AND parking_slot_reservation.resident_id= resident.resident_id";
         $result = $this->conn->query($sql1);
         
         while($s_no=mysqli_fetch_assoc($result)){
             $sql2="UPDATE parking_slot SET status=2 WHERE slot_no= $s_no[slot_no]";
+            echo $sql2;
             $this->conn->query($sql2);
         }
         return $result;
