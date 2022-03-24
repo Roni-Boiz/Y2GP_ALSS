@@ -90,7 +90,7 @@ class residentModel extends model
     public function hallReservation($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d'";
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d' ORDER BY date";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -100,7 +100,7 @@ class residentModel extends model
     {
         $d = date('Y-m-d');
 
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='function' AND cancelled_time IS NULL LIMIT 5";
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='function' AND cancelled_time IS NULL  ORDER BY date LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -109,7 +109,7 @@ class residentModel extends model
     public function latesthallcon($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='conference' AND cancelled_time IS NULL LIMIT 5";
+        $sql = "SELECT * FROM hall_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id')  AND date >= '$d'  AND  type='conference' AND cancelled_time IS NULL ORDER BY date LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -480,7 +480,7 @@ class residentModel extends model
     public function treatmentReservation($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND date > '$d' AND cancelled_time IS NULL";
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND date > '$d' AND cancelled_time IS NULL ORDER BY date ASC";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -489,7 +489,7 @@ class residentModel extends model
     public function latesttreatment($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' LIMIT 5";
+        $sql = "SELECT * FROM  treatment_room_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d' LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -498,7 +498,7 @@ class residentModel extends model
     public function fitnessReservation($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' ";
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d' ORDER BY date";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -515,7 +515,7 @@ class residentModel extends model
     public function latestfitness($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > '$d' LIMIT 5";
+        $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= '$d' LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -532,7 +532,7 @@ class residentModel extends model
     public function parkingReservation($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * FROM  parking_slot_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date > $d";
+        $sql = "SELECT * FROM  parking_slot_reservation WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND date >= $d ORDER BY date";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -690,7 +690,7 @@ class residentModel extends model
     public function maintenence($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p'";
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preferred_date>='$d' AND state= 'p' ORDER BY preferred_date ASC";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -700,7 +700,7 @@ class residentModel extends model
     {
         $d = date('Y-m-d');
         //echo $d;
-        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p' AND preferred_date>'$d' LIMIT 5";
+        $sql = "SELECT * from technical_maintenence_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND state= 'p' AND preferred_date>='$d' LIMIT 5";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -720,7 +720,7 @@ class residentModel extends model
     public function laundry($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preferred_date>=$d";
+        $sql = "SELECT * from laundry_request WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL AND preferred_date>='$d' ORDER BY preferred_date ASC";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -773,7 +773,7 @@ class residentModel extends model
     public function visitor($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id') AND cancelled_time IS NULL";
+        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id') AND arrive_date>='$d' AND cancelled_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
