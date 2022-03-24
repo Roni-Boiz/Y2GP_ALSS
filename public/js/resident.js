@@ -21,7 +21,7 @@ $(function () {
    $("#maintenecetypeerr").hide();
    $("#descriptionerr").hide();
    $("#currencyerr").hide();
-  
+
    //profile edit pw
    $("#opw").keyup(function () {
       check_oldpassword();
@@ -250,6 +250,43 @@ function showcardpayment() {
    }
 }
 
+
+//confirm pop up
+function openModel(amodel, amodelBtn, id, type) {
+   const model = document.getElementById(amodel);
+   const modelBtn = document.getElementsByClassName(amodelBtn);
+   const ans1 = document.getElementById("answer1");
+   const ans2 = document.getElementById("answer2");
+   const closeBtn = document.getElementsByClassName("closebtn");
+   console.log(id);
+   console.log(model);
+   for (var i = 0; i < modelBtn.length; i++) {
+      modelBtn[i].addEventListener('click', showModel, false);
+   }
+
+   function showModel() {
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
+   }
+
+   for (var i = 0; i < closeBtn.length; i++) {
+      closeBtn[i].addEventListener('click', closeModel, false);
+   }
+
+   function closeModel() {
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = "close";
+   }
+   if (ans1 !== null) {
+      ans1.innerHTML = id;
+   }
+   if (ans2 !== null) {
+      ans2.innerHTML = type;
+   }
+}
+
 // edit profile
 function setVisibility1(id) {
    if (document.getElementById('editprofile').value == 'Edit Profile') {
@@ -348,7 +385,7 @@ function check_retypepassword() {
 //check name not having numbers or other symbols
 function check_fname() {
    var fn = $("fname").val();
-   var firstname= new RegExp(/^[a-zA-Z]+$/);
+   var firstname = new RegExp(/^[a-zA-Z]+$/);
 
    if (firstname.test(fn)) {
       $("#fnameerr").hide();
@@ -466,7 +503,7 @@ function check_vehicleno() {
 
 function check_newmember() {
    var nm = $("#newmem").val();
-   var memname = new RegExp('/^[a-zA-Z]+$/');
+   var memname = new RegExp(/^[a-zA-Z]+$/);
 
    if (memname.test(nm)) {
       // $("#newmembererr").hide();
@@ -483,8 +520,16 @@ function check_newmember() {
 //form validation in reservation
 function check_members() {
    var count = $("#mem50").val();
+   var c = new RegExp(/^[0-9]{1,2}$/);
    if (count > 50) {
       $("#member").html("Member should be less than 50");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+      $("#member").show();
+   }
+   //check is it number
+   else if (!c.test(count)) {
+      $("#member").html("Enter valid member");
       $("#disablebutton2").prop('disabled', true);
       $("#disablebutton2").css('cursor', 'not-allowed');
       $("#member").show();
@@ -578,7 +623,7 @@ function check_time() {
    var mydate = $("#datepicker").val();
    //current date in yyyy-mm-dd format
    var todayDate = new Date().toISOString().slice(0, 10);
-   console.log(todayDate);
+   console.log("today : ", todayDate);
    console.log(mydate);
    var dt = new Date();
 
@@ -665,7 +710,7 @@ function laundry() {
    }
 }
 //maintenence validation
-function mainenencevalidation(){
+function mainenencevalidation() {
    if (!$("#select").val() && $("#description").val()) {
       $("#maintenecetypeerr").html("Select type first");
       $("#disablebutton3").css('cursor', 'not-allowed');
@@ -676,22 +721,22 @@ function mainenencevalidation(){
       $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
-   if($("#select").val() && !$("#description").val()){
+   if ($("#select").val() && !$("#description").val()) {
       $("#descriptionerr").html("Description is required");
       $("#disablebutton3").css('cursor', 'not-allowed');
       $("#disablebutton3").prop('disabled', true);
       $("#descriptionerr").show();
 
-   }else{
+   } else {
       $("#descriptionerr").hide();
       $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
-   
+
 }
 
 //currency validation
-function currencycheck(){
+function currencycheck() {
    var am = $("#amount").val();
    var c = new RegExp(/^(?!0\.00)\d{1,6}(,\d{3})*(\.\d\d)?$/);
 
@@ -710,41 +755,6 @@ function currencycheck(){
    }
 }
 
-//confirm pop up
-function openModel(amodel, amodelBtn, id, type) {
-   const model = document.getElementById(amodel);
-   const modelBtn = document.getElementsByClassName(amodelBtn);
-   const ans1 = document.getElementById("answer1");
-   const ans2 = document.getElementById("answer2");
-   const closeBtn = document.getElementsByClassName("closebtn");
-   console.log(id);
-   console.log(type);
-   for (var i = 0; i < modelBtn.length; i++) {
-      modelBtn[i].addEventListener('click', showModel, false);
-   }
-
-   function showModel() {
-      document.getElementById("myCanvasNav").style.width = "100%";
-      document.getElementById("myCanvasNav").style.opacity = "0.8";
-      model.className = "open";
-   }
-
-   for (var i = 0; i < closeBtn.length; i++) {
-      closeBtn[i].addEventListener('click', closeModel, false);
-   }
-
-   function closeModel() {
-      document.getElementById("myCanvasNav").style.width = "0%";
-      document.getElementById("myCanvasNav").style.opacity = "0";
-      model.className = "close";
-   }
-   if (ans1 !== null) {
-      ans1.innerHTML = id;
-   }
-   if (ans2 !== null) {
-      ans2.innerHTML = type;
-   }
-}
 
 
 // delete row and hide for value addition
@@ -996,6 +1006,13 @@ function deleterequest() {
       });
    }
 
+}
+
+//get previous reservation
+function previousreservation() {
+   console.log("test");
+   var type = 1;
+   window.location = "yourReservation";
 }
 //view complaints
 function complaintlist() {
