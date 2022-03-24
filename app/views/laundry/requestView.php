@@ -14,15 +14,17 @@ include_once 'sidenav.php';
             <div class="tabs" style="grid-column:1/span3">
                 <ul class="tabs-list">
                     <li id="1" class="active"><a href="#tab1">New</a></li>
-                    <li id="2" ><a href="#tab2">Cleaning</a></li>
+                    <li id="2"><a href="#tab2">Cleaning</a></li>
                     <li id="3"><a href="#tab3">Completed</a></li>
                 </ul>
-                <div id="tab1" class="tab active">
-                    <br>
-                    <div class="search">
+                <br><br>
+                <div class="search" style="padding-left:23px">
                         <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
                     </div>
-                    <div style="overflow-x:auto;grid-column:1/span2">
+                <div id="tab1" class="tab active">
+                    <br>
+                    
+                    <div style="grid-column:1/span2">
 
                         <!-- reach -->
                         <section class="wrapper">
@@ -43,7 +45,7 @@ include_once 'sidenav.php';
                                     <span id="searchrow">
                                         <a style="color:white" href="requests?reqId=<?php echo $row1['request_id']; ?>&tab=0"><span class="newMode">
                                                 <article class="row mlb">
-                                                    <ul>
+                                                    <ul style="color:white">
                                                         <li id="<?php echo $row1['request_id']; ?>"><?php echo $row1["request_id"]; ?></li>
                                                         <li><?php echo $row1["apartment_no"]; ?></li>
                                                         <li><?php echo $row1["type"]; ?></li>
@@ -71,10 +73,8 @@ include_once 'sidenav.php';
                     </div>
                 </div>
                 <div id="tab2" class="tab">
-                    <br>
-                    <div class="search">
-                        <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
-                    </div>
+                    
+                    
                     <div style="overflow-x:auto;grid-column:1/span2">
 
                         <!-- reach -->
@@ -97,7 +97,7 @@ include_once 'sidenav.php';
                                         <!-- <span class="comModel" onclick="openModel('deleteModel','comModel')"> -->
                                         <a onclick="addPopup" style="color:white" href="requests?reqId=<?php echo $row2['request_id']; ?>&tab=1"><span class="newMode">
 
-                                                <!-- <span class="comModel" onclick="openModel('completeModel','comModel')"> -->
+                                                
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li id="<?php echo $row2['request_id']; ?>"><?php echo $row2["request_id"]; ?></li>
@@ -128,10 +128,8 @@ include_once 'sidenav.php';
                     </div>
                 </div>
                 <div id="tab3" class="tab">
-                    <br>
-                    <div class="search">
-                        <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
-                    </div>
+            
+                
                     <div style="overflow-x:auto;grid-column:1/span2">
 
                         <!-- reach -->
@@ -164,7 +162,7 @@ include_once 'sidenav.php';
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    
+
                                                 </li>
                                             </ul>
                                         </article>
@@ -182,9 +180,9 @@ include_once 'sidenav.php';
                 </div>
             </div>
             <!-- delete confirmation -->
-            <div class="divPopupModel" >
+            <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="editModel"   >
+                <div id="editModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Are You Sure ?</h2>
@@ -206,21 +204,21 @@ include_once 'sidenav.php';
             ?>
                 <div class="divPopupModel" id="close">
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                    <div id="editModel"  class="open">
-                    <a onclick="closePopup()" class="closebtn">&times;</a>
+                    <div id="editModel" class="open">
+                        <a onclick="closePopup()" class="closebtn">&times;</a>
                         <!-- <a onclick="closePopup()">&times;</a> -->
                         <div style="text-align: center;">
                             <h1><?php $row4 = $this->requestInfo->fetch_assoc();
-                                echo $row4["request_id"] ;
-                                $id=$row4["request_id"];?>
-                                
+                                echo $row4["request_id"];
+                                $id = $row4["request_id"]; ?>
+
                         </div>
 
                         <form action="laundryresponse" class="formAddEmployee" method="POST" enctype="multipart/form-data">
                             <div id="col1">
                                 <label for="type"><?php echo $row4["type"] ?></label><br>
                             </div>
-                            
+
                             <h2><b>Categories:</b></h2>
                             <br>
                             <?php if ($this->selectedNewCat->num_rows > 0) { ?>
@@ -234,15 +232,15 @@ include_once 'sidenav.php';
                                     </div>
 
                                     <div id="col2">
-                                        <?php if($row4["category_no"]==1){?> 
-                                        <input type="checkbox" id="category1" value="1" name="<?php echo "category".$row4["category_no"] ?>"><?php 
-                                        } ;?>
-                                        <?php if($row4["category_no"]==2){?> 
-                                        <input type="checkbox" id="category2" value="1" name="<?php echo "category".$row4["category_no"] ?>"><?php 
-                                        } ;?>
-                                        <?php if($row4["category_no"]==3){?> 
-                                        <input type="checkbox" id="category3" value="1" name="<?php echo "category".$row4["category_no"] ?>"><?php 
-                                        } ;?>
+                                        <?php if ($row4["category_no"] == 1) { ?>
+                                            <input type="checkbox" id="category1" value="1" name="<?php echo "category" . $row4["category_no"] ?>"><?php
+                                                                                                                                                }; ?>
+                                        <?php if ($row4["category_no"] == 2) { ?>
+                                            <input type="checkbox" id="category2" value="1" name="<?php echo "category" . $row4["category_no"] ?>"><?php
+                                                                                                                                                }; ?>
+                                        <?php if ($row4["category_no"] == 3) { ?>
+                                            <input type="checkbox" id="category3" value="1" name="<?php echo "category" . $row4["category_no"] ?>"><?php
+                                                                                                                                                }; ?>
                                         <input type="text" name="quantiy1" id="quantiy1" value="<?php echo $row4["weight"] ?>" readonly>
                                     </div>
 
@@ -256,11 +254,11 @@ include_once 'sidenav.php';
                             </div>
                             <textarea style="border-radius:5px;grid-column: 1/span 2 ; width:80%;" name="description" id="description" cols="60" rows="3" readonly><?php echo $row4["description"] ?></textarea>
                             <br><br>
-                            
-                            <div id="col1">
-                            <span onclick="openModel('editModel','model-Btn1', '<?= $id; ?>')" class="model-Btn1" title="Decline Request"><input type="button" style="grid-column: 1/span 2; background-color:red" id="declineBtn" name="action" title="Decline all categories" value="Decline"></span>
 
-                                
+                            <div id="col1">
+                                <span onclick="openModel('editModel','model-Btn1', '<?= $id; ?>')" class="model-Btn1" title="Decline Request"><input type="button" style="grid-column: 1/span 2; background-color:red" id="declineBtn" name="action" title="Decline all categories" value="Decline"></span>
+
+
                             </div>
                             <div id="col2">
                                 <input style="grid-column: 1/span 2;" id="acceptBtn" type="submit" name="action" value="Accept">
@@ -277,67 +275,78 @@ include_once 'sidenav.php';
 
                     <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                     <div id="deleteModel" class="open">
-                    <a onclick="closePopup()" class="closebtn">&times;</a>
+                        <a onclick="closePopup()" class="closebtn">&times;</a>
 
                         <!-- <a onclick="closePopup2()">&times;</a> -->
-                        
+
                         <?php
-                        $row5 = $this->selectedCleaningCat->fetch_assoc();
-                        ?>
+                        $row5 = $this->requestInfo->fetch_assoc(); ?>
                         <div style="text-align: center;">
-                            <h1><?php echo $row5["request_id"]?></h1>
-                            
+                            <h1><?php echo $row5["request_id"] ?></h1>
+
                         </div>
 
                         <form action="addFees" class="formAddEmployee" id="addTotal" method="POST" enctype="multipart/form-data">
+
                             <div id="col1">
-                                <label for="type"><?php echo $row5["type"]?></label><br>
+                                <label for="type"><?php echo $row5["type"] ?></label><br>
                                 <input type="hidden" name="requestId2" id="requestId" value="<?php echo $row5["request_id"]; ?>" readonly>
                             </div>
                             <div id="col2">
-                            <h4 style="padding:0px"><?php $d = explode(" ", $row5["request_date"]);
+                                <h4 style="padding:0px"><?php $d = explode(" ", $row5["request_date"]);
                                                         echo $d[0] . "<br>" . $d[1] ?></h4>
                             </div>
                             <h2><b>Add Fees:</b></h2>
                             <br>
-                            <div id="col1">
-                                <label for="categories">Category 1</label>
-                                <input type="text" name="qty1" id="qty1" placeholder="Kg">
-                            </div>
-                            <div id="col2">
-                                <br>
-                                <input type="text" name="amt1" id="amt1" placeholder="LKR">
-                            </div>
-                            <div id="col1">
-                                <label for="Categories">Category 2</label>
-                                <input type="text" name="qty2" id="qty2" placeholder="Kg">
-                            </div>
-                            <div id="col2">
-                                <br>
-                                <input type="text" name="amt2" id="amt2" value="" placeholder="LKR">
-                            </div>
-                            <div id="col1">
-                                <label for="Categories">Category 3</label>
-                                <input type="text" name="qty3" id="qty3" placeholder="Kg">
-                            </div>
-                            <div id="col2">
-                                <br>
-                                <input type="text" name="amt3" id="amt3" placeholder="LKR">
-                                <br><br>
-                            </div>
+
+                            <?php
+                            while ($row6 = $this->selectedCleaningCat->fetch_assoc()) { ?>
+                                <?php if ($row6["category_no"] == 1) { ?>
+                                    <div id="col1">
+                                        <label for="categories">Category 1 : <?php echo $row6["qty"] ;?><small>  pcs</small></label>
+                                    </div>
+                                    <div id="col1">
+                                        <input type="text" name="qty1" id="qty1" placeholder="Kg">
+                                    </div>
+                                    <div id="col2">
+                                        <input type="text" name="amt1" id="amt1" placeholder="LKR">
+                                    </div>
+                                <?php };
+                                if ($row6["category_no"] == 2) { ?>
+                                    <div id="col1">
+                                        <label for="Categories">Category 2 : <?php echo $row6["qty"] ;?><small>  pcs</small></label>
+                                        <input type="text" name="qty2" id="qty2" placeholder="Kg">
+                                    </div>
+                                    <div id="col2">
+                                        <br>
+                                        <input type="text" name="amt2" id="amt2" value="" placeholder="LKR">
+                                    </div>
+                                <?php };
+                                if ($row6["category_no"] == 3) { ?>
+                                    <div id="col1">
+                                        <label for="Categories">Category 3 : <?php echo $row6["qty"] ;?><small>  pcs</small></label>
+                                        <input type="text" name="qty3" id="qty3" placeholder="Kg">
+                                    </div>
+                                    <div id="col2">
+                                        <br>
+                                        <input type="text" name="amt3" id="amt3" placeholder="LKR">
+                                        <br><br>
+                                    </div>
+                            <?php };
+                            }; ?>
                             <div class="col1">
-                            <span class="error_form" id="error_msg" style="font-size:10px;"></span><br>
+                                <span class="error_form" id="error_msg" style="font-size:10px;"></span><br>
                             </div>
                             <div id="col2">
-                                
-                                <input style="grid-column:2;" id="add" type="submit" name="action2" value="Add">
-                                
+
+                                <input style="grid-column:2;cursor:not-allowed" id="add" type="submit" name="action2" value="Add" disabled>
+
                             </div>
                         </form>
                     </div>
                 </div>
 
-               
+
 
             <?php }
             if (0) { ?>
@@ -359,7 +368,7 @@ include_once 'sidenav.php';
                 </div>
             <?php
             }; ?>
-             
+
 
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->

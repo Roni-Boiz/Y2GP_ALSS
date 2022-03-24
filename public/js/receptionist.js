@@ -4,6 +4,26 @@ $(function () {
    $("#new_password_error_message").hide();
    $("#renew_password_error_message").hide();
 
+   //profile details edit
+   $("#fnameerr").hide();
+   $("#lnameerr").hide();
+   $("#pnoerr").hide();
+   $("#emailerr").hide();
+
+   //profile edit other
+   $("#fname").keyup(function () {
+      check_fname();
+   });
+   $("#lname").keyup(function () {
+      check_lname();
+   });
+   $("#phone_no").keyup(function () {
+      check_phone();
+   });
+   $("#email").keyup(function () {
+      check_email();
+   });
+
    $("#opw").keyup(function () {
       check_oldpassword();
    });
@@ -154,33 +174,33 @@ function deleteparcel(id) {
 }
 function setVisibility1(id) {
    if (document.getElementById('editprofile').value == 'Edit Profile') {
-       document.getElementById('editprofile').value = 'Cancel';
-       document.getElementById('editprofile').style.width = 'fit-content';
-       document.getElementById(id).style.display = 'inline';
+      document.getElementById('editprofile').value = 'Cancel';
+      document.getElementById('editprofile').style.width = 'fit-content';
+      document.getElementById(id).style.display = 'inline';
    } else {
-       document.getElementById('editprofile').value = 'Edit Profile';
-       document.getElementById('editprofile').style.width = '100%';
-       document.getElementById(id).style.display = 'none';
+      document.getElementById('editprofile').value = 'Edit Profile';
+      document.getElementById('editprofile').style.width = '100%';
+      document.getElementById(id).style.display = 'none';
    }
 }
 // Change Password show/hide
 function setVisibility2(id) {
    if (document.getElementById('changepassword').value == 'Change Password') {
-       document.getElementById('changepassword').value = 'Cancel';
-       document.getElementById(id).style.display = 'inline';
+      document.getElementById('changepassword').value = 'Cancel';
+      document.getElementById(id).style.display = 'inline';
    } else {
-       document.getElementById('changepassword').value = 'Change Password';
-       document.getElementById(id).style.display ='none';
+      document.getElementById('changepassword').value = 'Change Password';
+      document.getElementById(id).style.display = 'none';
    }
 }
 
 function setVisibility3(id) {
    if (document.getElementById(id).style.display == 'none') {
-       document.getElementById('showmore').text = 'Show Less';
-       document.getElementById(id).style.display = 'inline';
+      document.getElementById('showmore').text = 'Show Less';
+      document.getElementById(id).style.display = 'inline';
    } else {
-       document.getElementById('showmore').text = 'Show More';
-       document.getElementById(id).style.display = 'none';
+      document.getElementById('showmore').text = 'Show More';
+      document.getElementById(id).style.display = 'none';
    }
 }
 ////////////////////////////////////////////////////
@@ -192,23 +212,23 @@ function openModel(amodel, amodelBtn) {
    const closeBtn = document.getElementsByClassName("closebtn");
 
    for (var i = 0; i < modelBtn.length; i++) {
-       modelBtn[i].addEventListener('click', showModel, false);
+      modelBtn[i].addEventListener('click', showModel, false);
    }
 
    function showModel() {
-       document.getElementById("myCanvasNav").style.width = "100%";
-       document.getElementById("myCanvasNav").style.opacity = "0.8";
-       model.className = "open";
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
    }
 
    for (var i = 0; i < closeBtn.length; i++) {
-       closeBtn[i].addEventListener('click', closeModel, false);
+      closeBtn[i].addEventListener('click', closeModel, false);
    }
 
    function closeModel() {
-       document.getElementById("myCanvasNav").style.width = "0%";
-       document.getElementById("myCanvasNav").style.opacity = "0";
-       model.className = "close";
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = "close";
    }
 
    // model.addEventListener("click", (e) => {
@@ -223,4 +243,83 @@ function openModel(amodel, amodelBtn) {
    //     model.className = 'close';
    // });
 }
+
+
+//profile edit
+function check_fname() {
+   var fn = $("fname").val();
+   var firstname = new RegExp(/^[a-zA-Z]+$/);
+
+   if (firstname.test(fn)) {
+      $("#fnameerr").hide();
+      $("#fname").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+   } else {
+      $("#fnameerr").html("Name not valid");
+      $("#fnameerr").show();
+      $("#fname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+
+}
+
+function check_lname() {
+   var ln = $("#lname").val();
+   var lastname = new RegExp(/^[a-zA-Z]+$/);
+
+   if (lastname.test(ln)) {
+      $("#lnameerr").hide();
+      $("#lname").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+
+   } else {
+      $("#lnameerr").html("Name not valid");
+      $("#lnameerr").show();
+      $("#lname").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_phone() {
+   var pn = $("#phone_no").val();
+   var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
+
+   if (phone.test(pn)) {
+      $("#pnoerr").hide();
+      $("#phone_no").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+
+   } else {
+      $("#pnoerr").html("Phone number not valid");
+      $("#pnoerr").show();
+      $("#phone_no").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
+function check_email() {
+   var em = $("#email").val();
+   var email = new RegExp(/^[\w.]+@[\w.]+\.\w{2,3}$/);
+
+   if (email.test(em)) {
+      $("#emailerr").hide();
+      $("#email").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+
+   } else {
+      $("#emailerr").html("Email not valid");
+      $("#emailerr").show();
+      $("#email").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+   }
+}
+
 

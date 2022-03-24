@@ -71,7 +71,7 @@ class laundryModel extends model {
         return $result;
     }
     public function getselectedCleaning($id){
-        $sql="SELECT request_id,type,request_date FROM laundry_request WHERE request_id='$id'";
+        $sql="SELECT laundry_request.request_id,laundry_request.type,laundry_request.request_date,laundry_request.state,category.category_no,category.qty FROM laundry_request INNER JOIN category ON laundry_request.request_id = category.request_id WHERE laundry_request.request_id='$id' AND category.state=1 ";
         $result= $this->conn->query($sql);
         return $result;
     }

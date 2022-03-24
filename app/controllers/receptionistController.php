@@ -89,12 +89,39 @@ class receptionistController extends controller{
     }
     public function visitors(){
         $this->view->todayVisitors = $this->model->readTodayVisitor();
+        $this->view->outgoingVisitors = $this->model->readOutgoingVisitor();
         $this->view->previousVisitors = $this->model->readPreviousVisitor();
         $this->view->render('receptionist/visitorsView');
     }
-    public function markVisited(){
+    public function addVisitors(){
+        // $this->view->todayVisitors = $this->model->readTodayVisitor();
+        // $this->view->previousVisitors = $this->model->readPreviousVisitor();
+        $this->view->presentApartments = $this->model->getApartment();
+        $this->view->render('receptionist/addvisitorView');
+    }
+    public function markIn(){
+        //to check-in the visitor approval requests
+        if(isset($_GET['visitor'])){
+            $vid=$_GET['visitor'];
+            $this->model->setVisitedIn($vid);
+            $this->visitors();
+        }
+
+        //to add and check-in at the reception desk
+
+        if(isset($_POST['name'])){
+            $name=$_POST['name'];
+            $apno=$_POST['apartmentId'];
+            $description=$_POST['description'];
+            $this->model->addVisitor($name,$apno,$description);
+            $this->addVisitors();
+
+        }
+        
+    }
+    public function markOut(){
         $vid=$_GET['visitor'];
-        $this->model->setVisited($vid);
+        $this->model->setVisitedOut($vid);
         $this->visitors();
     }
     public function getNotification(){
