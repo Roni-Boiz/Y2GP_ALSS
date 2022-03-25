@@ -134,7 +134,6 @@ class residentController extends controller
             $d = $_POST["date"];
             $coach = $_POST["coach"];
             //to display availability in new view 
-            $this->view->coach = $coach;
 
             $this->view->day = $this->model->dayfitness($d, $coach);
             $this->view->shiftno = $this->model->getshiftno($d, $coach);
@@ -171,8 +170,9 @@ class residentController extends controller
             }
         } else if (isset($_POST["date"])) {
             $d = $_POST["date"];
-            $this->view->selectdate = $d;
+
             $this->view->day = $this->model->daytreatment($d);
+            $this->view->selectdate = $d;
         }
         $this->view->treater = $this->model->readtreater();
         $this->view->latest = $this->model->latesttreatment($id);
@@ -232,8 +232,8 @@ class residentController extends controller
     public function CheckPark()
     {
         $data = file_get_contents('php://input');
-        $data = json_decode($data,true);
-        
+        $data = json_decode($data, true);
+
         $Availability = $this->model->checkParking($data);
         $data = json_decode($data, true);
 
@@ -418,5 +418,43 @@ class residentController extends controller
     {
         $amount = $_GET["amt"];
         $this->model->paymentSave($amount);
+    }
+
+    //search previous reservations
+    public function preReservation()
+    {
+        $type = $_GET['type'];
+        if (isset($_POST['date'])) {
+            $date = $_POST['date'];
+            if ($type == '1') {
+                $this->view->hall = $this->model->searchReservations($type, $date);
+            } else if ($type == '2') {
+                $this->view->fitness = $this->model->searchReservations($type, $date);
+            } else if ($type == '3') {
+                $this->view->treatment = $this->model->searchReservations($type, $date);
+            } else if ($type == '4') {
+                $this->view->parking = $this->model->searchReservations($type, $date);
+            }
+        }
+        $this->view->type = $type;
+        $this->view->render('resident/preReservationView');
+    }
+
+    //search previous reservations
+    public function preRequest()
+    {
+        $type = $_GET['type'];
+        if (isset($_POST['date'])) {
+            $date = $_POST['date'];
+            if ($type == '1') {
+                $this->view->laundry = $this->model->searchRequests($type, $date);
+            } else if ($type == '2') {
+                $this->view->maintenence = $this->model->searchRequests($type, $date);
+            } else if ($type == '3') {
+                $this->view->visitor = $this->model->searchRequests($type, $date);
+            }
+        }
+        $this->view->type = $type;
+        $this->view->render('resident/preRequestView');
     }
 }
