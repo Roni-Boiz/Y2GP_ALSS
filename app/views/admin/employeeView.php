@@ -197,27 +197,27 @@ include_once 'sidenav.php';
                                 <label>Week 01</label><br>
                                 <select id="week1" name="week1" class="input-field" required>
                                     <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Week 02</label><br>
                                 <select id="week2" name="week2" class="input-field" required>
-                                    <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="" selected="true" disabled="disabled">Select Working Hour...</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Week 03</label><br>
                                 <select id="week3" name="week3" class="input-field" required>
-                                    <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="" selected="true" disabled="disabled">Select Working Hour...</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                         </div>
@@ -248,27 +248,27 @@ include_once 'sidenav.php';
                                 <label>Week 01</label><br>
                                 <select id="newWeek1" name="newWeek1" class="input-field" required>
                                     <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Week 02</label><br>
                                 <select id="newWeek2" name="newWeek2" class="input-field" required>
-                                    <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="" selected="true" disabled="disabled">Select Working Hour...</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Week 03</label><br>
                                 <select id="newWeek3" name="newWeek3" class="input-field" required>
-                                    <option value="">Select Working Hour...</option>
-                                    <option value="0">6AM - 12PM</option>
-                                    <option value="1">12PM - 6PM</option>
-                                    <option value="2">6PM - 12AM</option>
+                                    <option value="" selected="true" disabled="disabled">Select Working Hour...</option>
+                                    <option value="1">6AM - 12PM</option>
+                                    <option value="2">12PM - 6PM</option>
+                                    <option value="3">6PM - 12AM</option>
                                 </select>
                             </div>
                         </div>
@@ -329,6 +329,7 @@ include_once 'sidenav.php';
                                     <li>
                                         <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
                                         <span style="padding-right: 20px;">Job Title : <?= "Manager" ?></span>
+                                        <span style="padding-right: 20px;">User ID : <?= 'UID' . sprintf("%04d", $row["user_id"]) ?></span>
                                     </li>
                                 </ul>
                             </article>
@@ -359,6 +360,7 @@ include_once 'sidenav.php';
                                     <li>
                                         <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
                                         <span style="padding-right: 20px;">Job Title : <?= "Receptionist" ?></span>
+                                        <span style="padding-right: 20px;">User ID : <?= 'UID' . sprintf("%04d", $row["user_id"]) ?></span>
                                     </li>
                                 </ul>
                             </article>
@@ -389,6 +391,7 @@ include_once 'sidenav.php';
                                     <li>
                                         <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
                                         <span style="padding-right: 20px;">Job Title : <?= "Parking Officer" ?></span>
+                                        <span style="padding-right: 20px;">User ID : <?= 'UID' . sprintf("%04d", $row["user_id"]) ?></span>
                                     </li>
                                 </ul>
                             </article>
@@ -423,6 +426,7 @@ include_once 'sidenav.php';
                                     <li>
                                         <span style="padding-right: 20px;">Start Job : <?php echo date('F j, Y', strtotime($row["start_date"])) ?></span>
                                         <span style="padding-right: 20px;">Job Title : <?= "Trainer" ?></span>
+                                        <span style="padding-right: 20px;">User ID : <?= 'UID' . sprintf("%04d", $row["user_id"]) ?></span>
                                     </li>
                                 </ul>
                             </article>
@@ -502,46 +506,96 @@ include_once 'sidenav.php';
             <!-- error popup -->
             <?php
             if (isset($this->error)) { ?>
-                <!-- error popup -->
-                <!-- <div class='b'></div>
-                <div class='bb'></div> -->
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
+                <div class="error">
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="errorModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Failed</h2>
+                            </div>
+                            <form action="#" class="formDelete" onsubmit="previousView(); return false;">
+                                <div>
+                                    <label><?= $this->error ?></label>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
-                    <p>
-                        Insert Unsuccess!
-                    </p>
-                    <p>
-                        <?php echo $this->error; ?>
-                    </p>
-                    <button id='ok' style="background:red;">
-                        OK
-                    </button>
                 </div>
             <?php
             }; ?>
             <!-- success popup -->
             <?php
             if (isset($this->success)) { ?>
-                <!-- <div class='b'></div>
-                <div class='bb'></div> -->
-                <div class='message'>
-                    <div class='check'>
-                        &#10004;
+                <div class="success">
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8"></div>
+                        <div id="successModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successful</h2>
+                            </div>
+                            <form action="#" class="formDelete" onsubmit="previousView(); return false;">
+                                <div>
+                                    <label><?= $this->success ?></label>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <p>
-                        Insert Success!
-                    </p>
-                    <p>
-                        New Employee Added
-                    </p>
-                    <button id='ok'>
-                        OK
-                    </button>
                 </div>
             <?php
             }; ?>
+
+            <!-- success popup -->
+            <div class="success" style="display:none;">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successful</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="successmsg"></label>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- error popup -->
+            <div class="error" style="display:none">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="errormsg">Try again later</label>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div> <!-- .hawlockbody div closed here -->
     </div>
 
@@ -569,6 +623,41 @@ include_once 'sidenav.php';
                     }
                 });
             }).change();
+        });
+
+        $('#newWeek1').on('change', function() {
+            $('option').prop('disabled', false);
+            $("#newWeek2 option[value=" + '' + "]").prop('selected', true);
+            $("#newWeek3 option[value=" + '' + "]").prop('selected', true);
+            $("#newWeek2 option[value=" + '' + "]").prop('disabled', true);
+            $("#newWeek3 option[value=" + '' + "]").prop('disabled', true);
+            $("#newWeek2 option[value=" + this.value + "]").prop('disabled', true);
+            $("#newWeek3 option[value=" + this.value + "]").prop('disabled', true);
+        });
+        $('#newWeek2').on('change', function() {
+            $("#newWeek1 option[value=" + this.value + "]").prop('disabled', true);
+            $("#newWeek3 option[value=" + this.value + "]").prop('disabled', true);
+        });
+        $('#newWeek3').on('change', function() {
+            $("#newWeek1 option[value=" + this.value + "]").prop('disabled', true);
+            $("#newWeek2 option[value=" + this.value + "]").prop('disabled', true);
+        });
+        $('#week1').on('change', function() {
+            $('option').prop('disabled', false);
+            $("#week2 option[value=" + '' + "]").prop('selected', true);
+            $("#week3 option[value=" + '' + "]").prop('selected', true);
+            $("#week2 option[value=" + '' + "]").prop('disabled', true);
+            $("#week3 option[value=" + '' + "]").prop('disabled', true);
+            $("#week2 option[value=" + this.value + "]").prop('disabled', true);
+            $("#week3 option[value=" + this.value + "]").prop('disabled', true);
+        });
+        $('#week2').on('change', function() {
+            $("#week1 option[value=" + this.value + "]").prop('disabled', true);
+            $("#week3 option[value=" + this.value + "]").prop('disabled', true);
+        });
+        $('#week3').on('change', function() {
+            $("#week1 option[value=" + this.value + "]").prop('disabled', true);
+            $("#week2 option[value=" + this.value + "]").prop('disabled', true);
         });
 
         $(document).ready(function() {
