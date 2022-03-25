@@ -11,37 +11,45 @@ include_once 'sidenav.php';
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
             <h2>Reports</h2>
-            <div>
-                <h3>Export Data Tables Data To Excel CSV PDF</h3>
+            <div id="serviceCard" style="grid-column:1/span 3">
+                <div>
+                    <h3>Export Data Tables Data To Excel CSV PDF</h3>
+                </div>
+                <div>
+                    
+                        <table id="residentData" class="residentTable">
+                        <thead>
+                            <tr>
+                                <th>Resident Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>NIC</th>
+                                <th>Phone No</th>
+                                <th>Email</th>
+                                <th>Vehicle No</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        </table>
+                </div>
             </div>
-            <!-- <div>
-                <table id="residentData" class="residentTable">
-                    <thead>
-                        <tr>
-                            <th>Resident Id</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>NIC</th>
-                            <th>Phone No</th>
-                            <th>Email</th>
-                            <th>Balance</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div> -->
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>
 
 <script>
     $(document).ready(function() {
-        $('#').DataTable({
+        $('#residentData').DataTable({
             "processing": true,
             "serverside": true,
             "ajax": {
                 url: "getResidentData",
                 type: "POST",
-            }
+            },
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'csv', 'pdf', 'copy'
+            ],
         });
     });
 </script>
