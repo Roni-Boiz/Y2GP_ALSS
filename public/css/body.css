@@ -679,6 +679,167 @@ select{
 
 /* Start of Admin Styles */
 /* home page styles */
+.apartment>div:nth-child(1) {
+  display: flex;
+}
+
+.apartment>div:nth-child(1) h2 {
+  width: 93%;
+}
+
+.apartment .addBtn {
+  background: #d9d9d9;
+  color: #555;
+  float: right;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
+}
+
+.apartment .addBtn i {
+  padding: 11px;
+  font-size: 30px;
+  color: #110B2E;
+}
+
+.apartment .addBtn:hover {
+  background-color: #bbb;
+  display: block;
+}
+
+#apartmentSummary {
+  display: flex;
+  flex-direction: column;
+}
+
+#apartmentSummary>div:nth-child(1) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#apartmentSummary>div:nth-child(1) div {
+  padding: 5px;
+  margin: 3px;
+}
+
+#apartmentSummary>div:nth-child(1)>div>span {
+  display: flex;
+  flex-direction: column;
+}
+
+#apartmentSummary>div:nth-last-child(1) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  padding: 0px 0px 15px 0px;
+}
+
+#apartmentSummary div:nth-last-child(1) h4:nth-child(1) {
+  grid-column: 1;
+}
+
+#apartmentSummary div:nth-last-child(1) h4:nth-child(2) {
+  grid-column: 2;
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.chart-three {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  position: relative;
+}
+
+.chart-three.animate svg .circle-foreground {
+  -webkit-animation: offset 3s ease-in-out forwards;
+  animation: offset 3s ease-in-out forwards;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.chart-three.animate figcaption:after {
+  -webkit-animation: chart-three-label 3s steps(90) forwards;
+  animation: chart-three-label 3s steps(90) forwards;
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+}
+
+.chart-three svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-three svg .circle-background,
+.chart-three svg .circle-foreground {
+  r: 87.5px;
+  cx: 50%;
+  cy: 50%;
+  fill: none;
+  stroke: #305556;
+  stroke-width: 25px;
+}
+
+.chart-three svg .circle-foreground {
+  stroke: #389967;
+  stroke-dasharray: 494.55px 549.5px;
+  stroke-dashoffset: 494.55px;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+
+.chart-three figcaption {
+  display: inline-block;
+  width: 100%;
+  height: 2.5rem;
+  overflow: hidden;
+  text-align: center;
+  color: #c6e8d7;
+  position: absolute;
+  top: calc(50% - 1.25rem);
+  left: 0;
+  font-size: 0;
+}
+
+.chart-three figcaption:after {
+  display: inline-block;
+  content: "0%\a 1%\a 2%\a 3%\a 4%\a 5%\a 6%\a 7%\a 8%\a 9%\a 10%\a 11%\a 12%\a 13%\a 14%\a 15%\a 16%\a 17%\a 18%\a 19%\a 20%\a 21%\a 22%\a 23%\a 24%\a 25%\a 26%\a 27%\a 28%\a 29%\a 30%\a 31%\a 32%\a 33%\a 34%\a 35%\a 36%\a 37%\a 38%\a 39%\a 40%\a 41%\a 42%\a 43%\a 44%\a 45%\a 46%\a 47%\a 48%\a 49%\a 50%\a 51%\a 52%\a 53%\a 54%\a 55%\a 56%\a 57%\a 58%\a 59%\a 60%\a 61%\a 62%\a 63%\a 64%\a 65%\a 66%\a 67%\a 68%\a 69%\a 70%\a 71%\a 72%\a 73%\a 74%\a 75%\a 76%\a 77%\a 78%\a 79%\a 80%\a 81%\a 82%\a 83%\a 84%\a 85%\a 86%\a 87%\a 88%\a 89%\a 90%\a 91%\a 92%\a 93%\a 94%\a 95%\a 96%\a 97%\a 98%\a 99%\a 100%\a";
+  white-space: pre;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+}
+
+@keyframes chart-three-label {
+  100% {
+      transform: translateY(-225rem);
+  }
+}
+
+@keyframes offset {
+  100% {
+      stroke-dashoffset: 0;
+  }
+}
+
 #serverstatus {
   padding: 20px;
   display: flex;
@@ -2070,6 +2231,50 @@ select{
 }
 
 #editModel.close {
+  animation: close 0.5s forwards;
+  z-index: 2;
+}
+
+#errorModel{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 2rem 5rem 0 #00000040;
+  width: fit-content;
+  padding: 1rem;
+}
+
+#errorModel.open{
+  animation: open 0.5s forwards;
+  z-index: 2;
+}
+
+#errorModel.close{
+  animation: close 0.5s forwards;
+  z-index: 2;
+}
+
+#successModel{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  transform: translate(-50%, -50%) scale(0);
+  box-shadow: 0 2rem 5rem 0 #00000040;
+  width: fit-content;
+  padding: 1rem;
+}
+
+#successModel.open{
+  animation: open 0.5s forwards;
+  z-index: 2;
+}
+
+#successModel.close{
   animation: close 0.5s forwards;
   z-index: 2;
 }
