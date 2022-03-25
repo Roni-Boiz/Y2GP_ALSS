@@ -33,6 +33,10 @@ $(function () {
    $("#rnpw").keyup(function () {
       check_retypepassword();
    });
+   //Select apartment in receptionist views(add visitor,add parcel)
+   $("#selectapartment").on("change", function () {
+      coach();
+   });
    // search row
    $("#mySearch").on('keyup', function () {
       var value = $(this).val().toLowerCase();

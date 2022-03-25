@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                     <form action="markIn" class="reservationtime" method="POST">
                         <div>
                             <label>Name</label><br>
-                            <input type="text" name="name" class="input-field" required><br>
+                            <input type="text" name="name" id="lname" class="input-field" required><br>
                             <label>Apartment No</label><br>
                             <select name="apartmentId" id="form_apartment">
                                 <option value="#">Apartment No</option>
