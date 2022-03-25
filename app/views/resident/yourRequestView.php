@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                 <br>
                 <!-- for search row --><br>
                 <div class="search">
-                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-history" aria-hidden="true" title="Search previous..." onclick="previousrequest()"></i>
                 </div>
 
                 <div id="tab2" class="tab">
@@ -44,6 +44,14 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['request_id']; ?>">
+                                                    <?php if ($row["state"] == "p") { ?>
+
+                                                    <?php } else {
+                                                    ?>
+                                                        <span><i class='fa fa-times' aria-hidden='true' title="cant take action"></i></span>
+
+                                                    <?php
+                                                    } ?>
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
@@ -53,8 +61,8 @@ include_once 'sidenav.php';
                                                     <?php
                                                     if ($row["state"] == "p") echo "Pending";
                                                     if ($row["state"] == "d") echo "Rejected";
-                                                    if ($row["state"] == "") echo "In-Progress";
-                                                    if ($row["state"] == "") echo "Completed";
+                                                    if ($row["state"] == "i") echo "In-Progress";
+                                                    if ($row["state"] == "c") echo "Completed";
 
                                                     ?>
                                                 </li>
@@ -88,8 +96,7 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Action</li>
                                     <li>Request ID</li>
-
-                                    <li>Requested Time</li>
+                                    <li>Preferred Date</li>
                                     <li>State</li>
                                     <li>Type</li>
                                 </ul>
@@ -103,11 +110,19 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['request_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','laundry')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+                                                    <?php if ($row["state"] == "0") { ?>
+                                                        <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','laundry')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+
+                                                    <?php } else {
+                                                    ?>
+                                                        <span><i class='fa fa-times' aria-hidden='true' title="cant take action"></i></span>
+
+                                                    <?php
+                                                    } ?>
 
                                                 </li>
                                                 <li><?php echo $row["request_id"]; ?></li>
-                                                <li><?php echo $row["request_date"]; ?></li>
+                                                <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li>
                                                     <?php
                                                     if ($row["state"] == "0") echo "Pending";
@@ -122,9 +137,13 @@ include_once 'sidenav.php';
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="padding-right: 20px;">Description : <?php echo $row["description"] ?></span>
-                                                    <a href="yourRequest?reqid=<?php echo $row['request_id']; ?>" style="color:white"><i class="fas fa-angle-double-right" title="See more..."></i></a>
+                                                    <span style="padding-right: 20px;">Requested Date : <?php echo $row["request_date"] ?></span>
+                                                    <span style="padding-left: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                    <a style="padding-left: 20px;padding-top:10px" href="yourRequest?reqid=<?php echo $row['request_id']; ?>" style="color:white"><i class="fas fa-angle-double-right" title="See more..."></i></a>
+
                                                 </li>
+
+
                                             </ul>
 
                                         </article>
@@ -150,7 +169,7 @@ include_once 'sidenav.php';
                                     <li>Action</li>
                                     <li>Request ID</li>
                                     <li>Name</li>
-                                    <li>Arrived Date</li>
+                                    <li>Arrive Date</li>
                                     <li>Arrived Time</li>
                                 </ul>
                             </main>
@@ -163,12 +182,24 @@ include_once 'sidenav.php';
                                         <article class="row mlb">
                                             <ul>
                                                 <li id="<?php echo $row['visitor_id']; ?>">
-                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+                                                    <?php if ($row["arrive_time"] == NULL) { ?>
+                                                        <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['visitor_id']; ?>','visitor')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
+
+                                                    <?php } else {
+                                                    ?>
+                                                        <span><i class='fa fa-times' aria-hidden='true' title="cant take action"></i></span>
+
+                                                    <?php
+                                                    } ?>
                                                 </li>
                                                 <li><?php echo $row["visitor_id"]; ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
-                                                <li><?php echo $row["arrive_date"]; ?></li>
+                                                <?php if ($row["arrive_time"] == NULL) { ?>
+                                                    <li><?php echo $row["arrive_time"]; ?></li>
+                                                <?php } else { ?>
+                                                    <li><?php echo "Not arrive yet"; ?></li>
+                                                <?php } ?>
 
                                             </ul>
                                             <ul class="more-content">
@@ -253,9 +284,9 @@ include_once 'sidenav.php';
             <?php }
                             } ?>
 
-          
-                        <!-- request success message -->
-                        <div class="error" style="display:none;z-index:5">
+
+            <!-- request success message -->
+            <div class="error" style="display:none;z-index:5">
                 <div class="divPopupModel">
                     <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
                     <div id="deleteModel" class="open">

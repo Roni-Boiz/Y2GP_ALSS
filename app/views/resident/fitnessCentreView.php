@@ -30,13 +30,15 @@ include_once 'sidenav.php';
                                 <form action="fitness" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" class="input-field" required>
+                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" class="input-field" required value="<?php if (isset($this->selectdate)) {
+                                                                                                                                                                                                                echo $this->selectdate;
+                                                                                                                                                                                                            }; ?>">
                                         <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
 
                                         <label>Coach</label><br>
                                         <select name="coach" class="input-field" id="selectcoach" required>
-                                            <option value="">Select coach</option>
+                                            <option  value="">Select coach</option>
                                             <?php
                                             if (isset($this->coach->num_rows)) {
                                                 while ($row1 = $this->coach->fetch_assoc()) {
@@ -101,9 +103,9 @@ include_once 'sidenav.php';
 
                 <div class="rightPanel" style="margin-top:30px;max-height:500px;overflow:scroll">
 
-                    
-                    <?php if (isset($this->selectdate)) {?><h3>Reservations of the day</h3>
-                        <?php    echo $this->selectdate . "\n";
+
+                    <?php if (isset($this->selectdate)) { ?><h3>Reservations of the day</h3>
+                    <?php echo $this->selectdate . "\n";
 
                         $emp = explode(" ", $this->selectcoach);
                         echo $emp[0] . " " . $emp[1];
@@ -282,9 +284,9 @@ include_once 'sidenav.php';
                     <form action="fitness" class="reservationtime" method="POST">
                         <div id="col1">
                             <label>Date</label><br>
-                            <input type="date" name="date" id="datepicker1" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
-                                                                                                                                echo $this->selectdate;
-                                                                                                                            }; ?>"><br>
+                            <input type="date" name="date" id="datepicker" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                                            echo $this->selectdate;
+                                                                                                                        }; ?>"><br>
                             <label>Coach</label><br>
                             <input type="text" name="coach" id="coach" required class="input-field" readonly value="<?php if (isset($this->selectcoach)) {
                                                                                                                         echo $this->selectcoach;
@@ -373,7 +375,7 @@ include_once 'sidenav.php';
                             <div style="text-align: center; margin-bottom: 10px;">
                                 <h2>Successfull!</h2>
                             </div>
-                            <form class="formDelete" >
+                            <form class="formDelete">
                                 <div>
                                     <label> <span id="answer2"></span>Reservation charges added.
                                         Check notification for more details. </label>
