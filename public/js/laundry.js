@@ -61,6 +61,10 @@ $(function () {
             $("#tab1").hide();
             $("#tab2").hide();
         }
+        if (tabid == "#tab1") {
+            $("#tab2").hide();
+            $("#tab3").hide();
+        }
         $(this).addClass("active"); //  adding active class to clicked tab
     });
     /* show sidebar */
@@ -365,7 +369,7 @@ function addPopup() {
             $("#add").prop('disabled', false);
             console.log(00);
         } else {
-            $("#error_msg").html("Please enter valid values");
+            $("#error_msg").html("Please fill all fields with valid values");
             $("#add").css('cursor', 'not-allowed');
             $("#add").prop('disabled', true);
             $("#error_msg").show();
@@ -377,7 +381,7 @@ function addPopup() {
             $("#add").css('cursor', 'pointer');
             $("#add").prop('disabled', false);
         } else {
-            $("#error_msg").html("Please enter valid values");
+            $("#error_msg").html("Please fill all fields with valid values");
             $("#add").css('cursor', 'not-allowed');
             $("#add").prop('disabled', true);
             $("#error_msg").show();
@@ -388,7 +392,7 @@ function addPopup() {
             $("#add").css('cursor', 'pointer');
             $("#add").prop('disabled', false);
         } else {
-            $("#error_msg").html("Please enter valid values");
+            $("#error_msg").html("Please fill all fields with valid values");
             $("#add").css('cursor', 'not-allowed');
             $("#add").prop('disabled', true);
             $("#error_msg").show();
@@ -396,18 +400,20 @@ function addPopup() {
     }
 
 
-    // if (checkDecimal(w1) && checkDecimal(w2) && checkDecimal(w3) && checkDecimal(a1) && checkDecimal(a2) && checkDecimal(a3)) {
+    else {
+        if (checkDecimal(w1) && checkDecimal(w2) && checkDecimal(w3) && checkDecimal(a1) && checkDecimal(a2) && checkDecimal(a3)) {
 
-    //     $("#error_msg").hide();
-    //     $("#add").css('cursor', 'pointer');
-    //     $("#add").prop('disabled', false);
+        $("#error_msg").hide();
+        $("#add").css('cursor', 'pointer');
+        $("#add").prop('disabled', false);
 
-    //  } else {
-    //     $("#error_msg").html("Please enter valid values");
-    //     $("#add").css('cursor', 'not-allowed');
-    //     $("#add").prop('disabled', true);
-    //     $("#error_msg").show();
-    //  }
+     } else {
+        $("#error_msg").html("Please fill all fields with valid values");
+        $("#add").css('cursor', 'not-allowed');
+        $("#add").prop('disabled', true);
+        $("#error_msg").show();
+     }
+    }
 
 }
 function checkDecimal(inputtxt) {

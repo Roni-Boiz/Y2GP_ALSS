@@ -74,7 +74,7 @@ class laundryController extends controller
         $this->view->laundyNewRequests = $this->model->getNewRequests();
         $this->view->laundyCleaningRequests = $this->model->getCleaningRequests();
         $this->view->laundyCompletedRequests = $this->model->getCompletedRequests();
-        $this->availWashers=$this->model->calWashers();
+        $this->view->resources=$this->model->getResources();
         $this->view->render('laundry/requestView');
     }
     public function laundryresponse(){
@@ -103,20 +103,23 @@ class laundryController extends controller
 
     }
     public function addFees(){
-        $fee1=0;$fee2=0;$fee3=0;$Total=0;
+        $fee1=0;$fee2=0;$fee3=0;$Total=0;$w1=0;
         $id=$_POST['requestId2'];
         if ($_POST['action2'] == 'Add') {
             if(isset($_POST['qty1']) && isset($_POST['amt1'])){
-                $fee1=$_POST['qty1']*$_POST['amt1'];
+                $fee1=$_POST['amt1'];
+                $w1=$_POST['qty1'];
                 
             }
             if(isset($_POST['qty2']) && isset($_POST['amt2'])){
-                $fee2=$_POST['qty2']*$_POST['amt2'];
+                $fee2=$_POST['amt2'];
+                $w2=$_POST['qty2'];
             }
             if(isset($_POST['qty3']) && isset($_POST['amt3'])){
-                $fee3=$_POST['qty3']*$_POST['amt3'];
+                $fee3=$_POST['amt3'];
+                $w3=$_POST['qty3'];
             }
-            $this->model->addTotalFee($id,$fee1,$fee2,$fee3);
+            $this->model->addTotalFee($id,$fee1,$fee2,$fee3,$w1,$w2,$w3);
             $this->requests();
     
   

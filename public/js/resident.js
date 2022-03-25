@@ -81,6 +81,7 @@ $(function () {
    $("#etime").on("change", function () {
       check_time();
    });
+   
 
    //laundry form input check
    $("#quantity1,#quantity2,#quantity3").keyup(function () {
