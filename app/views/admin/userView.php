@@ -205,7 +205,7 @@ include_once 'sidenav.php';
                             <div style="text-align: center; margin-bottom: 10px;">
                                 <h2 style="padding: 0px;">Are You Sure ?</h2>
                             </div>
-                            <form action="" class="formDelete" onsubmit="deleteUser();return false;">
+                            <form action="#" class="formDelete" onsubmit="deleteUser();return false;">
                                 <div>
                                     <label> Delete User With User ID </label>
                                     <span id="answer1"></span>
@@ -339,50 +339,48 @@ include_once 'sidenav.php';
                 </div>
             </div>
 
-            <!-- error success message -->
-            <?php
-            if (isset($this->error)) { ?>
-                <!-- error popup -->
-                <!-- <div class='b'></div>
-                <div class='bb'></div> -->
-                <div class='message'>
-                    <div class='check' style="background:red;">
-                        &#10006;
-                    </div>
-                    <p>
-                        Insert Unsuccess!
-                    </p>
-                    <p>
-                        <?php echo $this->error; ?>
-                    </p>
-                    <button id='ok' style="background:red;">
-                        OK
-                    </button>
-                </div>
-            <?php
-            }; ?>
-
             <!-- success popup -->
-            <?php
-            if (isset($this->success)) { ?>
-                <!-- <div class='b'></div>
-                <div class='bb'></div> -->
-                <div class='message'>
-                    <div class='check'>
-                        &#10004;
+            <div class="success" style="display:none;">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successful</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="successmsg"></label>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
                     </div>
-                    <p>
-                        Insert Success!
-                    </p>
-                    <p>
-                        New Apartment Added
-                    </p>
-                    <button id='ok'>
-                        OK
-                    </button>
                 </div>
-            <?php
-            }; ?>
+            </div>
+            <!-- error popup -->
+            <div class="error" style="display:none">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="deleteModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Delete Failed</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="errormsg"></label>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div> <!-- .hawlockbody div closed here -->
 
