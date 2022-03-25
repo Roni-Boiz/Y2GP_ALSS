@@ -6,8 +6,7 @@ require_once '../app/core/app.php';
 class adminController extends controller
 {
 
-    function __construct()
-    {
+    function __construct(){
         parent::__construct();
         session_start();
         $this->loadModel('adminModel');
@@ -18,8 +17,7 @@ class adminController extends controller
         }
     }
 
-    public function index()
-    {
+    public function index(){
         if (isset($_POST['apartmentNo']) && isset($_POST['floor']) && isset($_POST['parkingslot'])) {
             $result = $this->model->insertNewApartment($_POST['apartmentNo'], $_POST['floor'], $_POST['parkingslot']);
             if ($result == 0) {
@@ -37,21 +35,18 @@ class adminController extends controller
         $this->view->render('admin/homeView');
     }
 
-    public function profile()
-    {
+    public function profile(){
         $this->view->profileDetails = $this->model->getProfileDetails($_SESSION['userId']);
         $this->view->loginDevices = $this->model->getLoginDevices($_SESSION['userId']);
         $this->view->render('admin/profileView');
     }
 
-    public function editProfile()
-    {
+    public function editProfile(){
         $this->model->updateProfile($_POST['name'], $_POST['email'], $_SESSION['userId']);
         header("Refresh:0; url=profile");
     }
 
-    public function changePassword()
-    {
+    public function changePassword(){
         $this->model->updatePassword($_POST["opw"], $_POST["npw"], $_POST["rnpw"], $_SESSION['userId']);
         header("Refresh:0; url=profile");
     }
@@ -102,16 +97,14 @@ class adminController extends controller
         echo $data;
     }
 
-    public function user()
-    {
+    public function user(){
         $this->view->users = $this->model->getAllUsers();
         $this->view->activeUsers = $this->model->getAllOnlineUsers();
         $this->view->lockedAccounts = $this->model->getAllLockedUsers();
         $this->view->render('admin/userView');
     }
 
-    public function unclockThisAccount()
-    {
+    public function unclockThisAccount(){
         return $this->model->unlockThisUserAccount($_POST["user_name"]);
     }
 
@@ -120,14 +113,13 @@ class adminController extends controller
         return $this->model->deleteThisUserAccount($_POST["user_id"]);
     }
 
-    public function employee()
-    {
+    public function employee(){
         if ((isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno'])) || (isset($_POST['emptype']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['cno']) && isset($_POST['week1']) && isset($_POST['week2']) && isset($_POST['week3']))) {
             $result = $this->addEmployee();
             if ($result == 0) {
-                $this->view->error = "Oops something went wrong. Form didn't submiited";
+                $this->view->error = $this->view->message;
             } else {
-                $this->view->success = true;
+                $this->view->success = $this->view->message;
             }
         }
         $this->view->managers = $this->model->getAllEmployees("manager");
@@ -140,8 +132,7 @@ class adminController extends controller
         $this->view->render('admin/employeeView');
     }
 
-    public function getEmployees()
-    {
+    public function getEmployees(){
         $result = $this->model->getEmployees();
         //loop through the returned data
         $data = array();
@@ -151,8 +142,7 @@ class adminController extends controller
         print json_encode($data);
     }
 
-    public function getEmployeesType()
-    {
+    public function getEmployeesType(){
         $result = $this->model->getALLEmployeeBYType();
         //loop through the returned data
         $data = array();
@@ -162,8 +152,7 @@ class adminController extends controller
         print json_encode($data);
     }
 
-    public function deleteEmployee()
-    {
+    public function deleteEmployee(){
         return $this->model->deleteThisEmployee($_POST['employee_id']);
     }
 
@@ -181,8 +170,7 @@ class adminController extends controller
         print json_encode($data);
     }
 
-    public function service()
-    {
+    public function service(){
         if (isset($_POST['servicetype']) && isset($_POST['servicename']) && isset($_POST['fee']) && isset($_POST['canclefee'])) {
             $result = $this->model->addService($_POST['servicetype'], $_POST['servicename'], $_POST['fee'], $_POST['canclefee']);
             if ($result == 0) {
@@ -234,23 +222,28 @@ class adminController extends controller
         print json_encode($data);
     }
 
-    public function announcement()
-    {
+    public function announcement(){
+        if (isset($_POST['topic']) && isset($_POST['content']) && isset($_POST['visibility'])) {
+            $result = $this->addAnnouncement();
+            if ($result == 0) {
+                $this->view->error = "Oops something went wrong. Form didn't submiited " . $this->view->message;
+            } else {
+                $this->view->success = "New Announcement Added";
+            }
+        }
         $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('admin/announcementView');
     }
 
-    public function report()
-    {
+    public function report(){
         $this->view->render('admin/reportView');
     }
 
-    public function addAnnouncement()
-    {
+    public function addAnnouncement(){
         if (isset($_POST['broadcast'])) {
             $targetDir = "../uploads/announcement/";
             $allowTypes = array('jpg', 'png', 'jepg', 'gif', 'pdf');
-            $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
+            $insert = $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {
                 foreach ($_FILES['files']['name'] as $key => $val) {
@@ -276,24 +269,21 @@ class adminController extends controller
 
                 if ($insertValuesSQL) {
                     $statusMsg = "Files are uploaded successfully." . $errorMsg;
-                    echo $statusMsg;
-                    header("Refresh:0; url=announcement");
                 } else {
                     $statusMsg = "Upload failed! " . $errorMsg;
                     $this->view->error_message = $statusMsg;
-                    $this->view->render('404errorView');
                 }
             } else {
-                $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
+                $insert = $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
                 $statusMsg = "Files are uploaded successfully." . $errorMsg;
-                echo $statusMsg;
-                header("Refresh:0; url=announcement");
             }
         }
+        header("Refresh:0; url=announcement");
+        $this->view->message = $statusMsg;
+        return $insert;
     }
 
-    public function addEmployee()
-    {
+    public function addEmployee(){
         $statusMsg = '';
 
         // File upload path
@@ -301,7 +291,7 @@ class adminController extends controller
         $fileName = time() . '_' . basename($_FILES["file"]["name"]);
         $targetFilePath = $targetDir . $fileName;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-
+        $insert = '';
         if (isset($_POST['submit']) && !empty($_FILES["file"]["name"])) {
             // Allow certain file formats
             $allowTypes = array('jpg', 'png', 'jpeg');
@@ -321,8 +311,15 @@ class adminController extends controller
             } else {
                 $statusMsg = 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
             }
-        } else {
+        } else if(isset($_POST['submit']) && isset($_POST['week1']) && isset($_POST['week2']) && isset($_POST['week3'])) {
             $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL, $_POST['week1'], $_POST['week2'], $_POST['week3']);
+            if ($insert) {
+                $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
+            } else {
+                $statusMsg = "Employee query failed, please try again.";
+            }
+        } else if(isset($_POST['submit'])){
+            $insert = $this->model->insertEmployee($_POST['emptype'], $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['cno'], NULL);
             if ($insert) {
                 $statusMsg = "The Employee " . $_POST['fname'] . " has been added successfully.";
             } else {
@@ -330,7 +327,23 @@ class adminController extends controller
             }
         }
         // Display status message
-        // echo $statusMsg;
+        $this->view->message = $statusMsg;
         return $insert;
     }
+
+    public function getResidentData(){
+        // $result = $this->model->getAllResidentData($_POST['search']['value'],$_POST['min'],$_POST['max']);
+        if(isset($_POST['search']['value'])){
+            $result = $this->model->getAllResidentDataBySearch($_POST['search']['value']);
+        }
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        // create a JSON object
+        print json_encode($data);
+    }
 }
+
+
