@@ -66,14 +66,18 @@ include_once('sidenav.php');
 
                     <form action="editProfile" id="profileView" method="post">
                         <label for="fname">First Name</label><br>
-                        <input type="text" id="name" name="fname" class="input-field" value=<?php echo $row["fname"]?> required><br>
+                        <input type="text" id="fname" name="fname" class="input-field" value=<?php echo $row["fname"]?> required>
+                        <span class="error_form" id="fnameerr" style="font-size:10px"></span><br>
                         <label for="fname">Last Name</label><br>
-                        <input type="text" id="name" name="lname" class="input-field" value=<?php echo $row["lname"]?> required><br>
+                        <input type="text" id="lname" name="lname" class="input-field" value=<?php echo $row["lname"]?> required>
+                        <span class="error_form" id="lnameerr" style="font-size:10px"></span><br>
                         <label for="email">Email</label><br>
-                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>><br>
+                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>>
+                        <span class="error_form" id="emailerr" style="font-size:10px"></span><br>
                         <label for="contctno">Contact No</label><br>
-                        <input type="text" id="contacno" name="contact_no" class="input-field" value=<?php echo $row["contact_no"] ?>><br>
-                        <input type="submit" value="Save">
+                        <input type="text" id="phone_no" name="contact_no" class="input-field" value=<?php echo $row["contact_no"] ?>>
+                        <span class="error_form" id="pnoerr" style="font-size:10px"></span><br>
+                        <input type="submit" value="Save" id="disablebutton2">
                     </form>
 
                     <input type="submit" id="editprofile" value="Edit Profile" onclick="setVisibility1('profileView');">

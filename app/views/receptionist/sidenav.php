@@ -49,7 +49,12 @@
                 <li><a href="../receptionistController/index"><i class="fa fa-home"></i>HOME</a></li>
                 <li><a href="register"><i class="fa fa-file-medical"></i>REGISTRATION</a></li>
                 <li><a href="parcels"><i class="fas fa-box-open"></i>PARCELS</a></li>
-                <li><a href="visitors"><i class="fas fa-users"></i>VISITORS</a></li>
+                <li class="dropdown"><a href="#"><i class="fas fa-users"></i>VISITORS</a>
+                <ul>
+                    <li><a href="visitors">VISITOR REQUESTS</a></li>
+                    <li><a href="addVisitors">ADD VISITOR</a></li>
+                </ul>
+            </li>
                 <li><a href="help"><i class="fas fa-users"></i>HELP</a></li>
             </ul>
         </nav>

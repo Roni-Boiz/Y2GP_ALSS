@@ -15,12 +15,9 @@ include_once 'sidenav.php';
                     <div class="card" style="padding:auto;">
                         <h3 style="margin:10px">Current Allocation</h3>
                         <?php
-                        while ($row1 = $this->overdueVehicles->fetch_assoc()) {
-                            echo $row1['slot_no'];
-                            echo 'gg';
-                        } ?>
+                        
 
-                        <?php
+                        
                         if ($this->parkingSpace->num_rows > 0) { ?>
 
                             <?php
@@ -98,7 +95,7 @@ include_once 'sidenav.php';
                         <h3>Overdue Vehicles . . .</h3>
                     </div>
                     <?php if ($this->overdueVehicles->num_rows > 0) { ?>
-                        <?php while ($row4 = $this->overdueVehicles->fetch_assoc()) { ?>
+                        <?php while ($row4 = $this->overdueVehicles->fetch_assoc()) { ?>55
                             <div class="detail">
                                 <div>
                                     <div class="detail-info">

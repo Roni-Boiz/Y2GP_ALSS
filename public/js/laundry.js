@@ -6,6 +6,27 @@ $(function () {
     $("#acceptBtn").prop('disabled', true);
     $("#acceptBtn").css('cursor', 'not-allowed');
 
+    //profile details edit
+    $("#fnameerr").hide();
+    $("#lnameerr").hide();
+    $("#pnoerr").hide();
+    $("#emailerr").hide();
+
+    //profile edit other
+    $("#fname").keyup(function () {
+        check_fname();
+    });
+    $("#lname").keyup(function () {
+        check_lname();
+    });
+    $("#phone_no").keyup(function () {
+        check_phone();
+    });
+    $("#email").keyup(function () {
+        check_email();
+    });
+
+
     $("#opw").keyup(function () {
         check_oldpassword();
     });
@@ -34,9 +55,11 @@ $(function () {
         $(tabid).show(); // show tab
         if (tabid == "#tab2") {
             $("#tab1").hide();
+            $("#tab3").hide();
         }
         if (tabid == "#tab3") {
             $("#tab1").hide();
+            $("#tab2").hide();
         }
         $(this).addClass("active"); //  adding active class to clicked tab
     });
@@ -45,6 +68,8 @@ $(function () {
         $(this).toggleClass("click");
         $('.sidebar').toggleClass("show");
     });
+
+
 
     // popup
     //    const model = document.getElementById("nips");
@@ -65,12 +90,101 @@ $(function () {
     //    })
 
     $("#qty1,#qty2,#qty3,#amt1,#amt2,#amt3").keyup(function () {
+        
         addPopup();
-     });
-     
+    });
+    $("#mySearch2").on('keyup', function () {
+        var value = $(this).val().toLowerCase();
+        $("#searchrow article").each(function () {
+            if ($(this).text().toLowerCase().search(value) > -1) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    })
+
 
 
 });
+
+//profile edit
+function check_fname() {
+    var fn = $("fname").val();
+    var firstname = new RegExp(/^[a-zA-Z]+$/);
+
+    if (firstname.test(fn)) {
+        $("#fnameerr").hide();
+        $("#fname").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+    } else {
+        $("#fnameerr").html("Name not valid");
+        $("#fnameerr").show();
+        $("#fname").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+
+}
+
+function check_lname() {
+    var ln = $("#lname").val();
+    var lastname = new RegExp(/^[a-zA-Z]+$/);
+
+    if (lastname.test(ln)) {
+        $("#lnameerr").hide();
+        $("#lname").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#lnameerr").html("Name not valid");
+        $("#lnameerr").show();
+        $("#lname").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+
+function check_phone() {
+    var pn = $("#phone_no").val();
+    var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
+
+    if (phone.test(pn)) {
+        $("#pnoerr").hide();
+        $("#phone_no").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#pnoerr").html("Phone number not valid");
+        $("#pnoerr").show();
+        $("#phone_no").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+
+function check_email() {
+    var em = $("#email").val();
+    var email = new RegExp(/^[\w.]+@[\w.]+\.\w{2,3}$/);
+
+    if (email.test(em)) {
+        $("#emailerr").hide();
+        $("#email").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#emailerr").html("Email not valid");
+        $("#emailerr").show();
+        $("#email").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+
 function check_oldpassword() {
     var password_length = $("#opw").val().length;
 
@@ -210,7 +324,7 @@ function closePopup2() {
 
 
 function disableDecline() {
-    
+
     $("#acceptBtn").prop('disabled', false);
     $("#acceptBtn").css('cursor', 'pointer');
     if ($("#category1").is(":checked") || $("#category2").is(":checked") || $("#category3").is(":checked")) {
@@ -230,35 +344,75 @@ function disableDecline() {
     }
 }
 function addPopup() {
-    const w1 = document.getElementById("qty1");
-    const a1 = document.getElementById("amt1");
-    const w2 = document.getElementById("qty2");
-    const a2 = document.getElementById("amt2");
-    const w3 = document.getElementById("qty3");
-    const a3 = document.getElementById("amt3");
-    console.log("awa");
-    // var decimal = /[0-9]/;
-    // if (w1.value.match(decimal) ) {
-    //     console.log("True");
-        
-    // }
-    if (checkDecimal(w1) && checkDecimal(w2) && checkDecimal(w3) && checkDecimal(a1) && checkDecimal(a2) && checkDecimal(a3)) {
-        
-        $("#error_msg").hide();
-        $("#add").css('cursor', 'pointer');
-        $("#add").prop('disabled', false);
-         
-     } else {
-        $("#error_msg").html("Please enter valid values");
-        $("#add").css('cursor', 'not-allowed');
-        $("#add").prop('disabled', true);
-        $("#error_msg").show();
-     }
-    
+    //const w1 = document.getElementById("qty1");
+    var w1 = $("#qty1").val();
+    var a1 = $("#amt1").val();
+    var w2 = $("#qty2").val();
+    var a2 = $("#amt2").val();
+    var w3 = $("#qty3").val();
+    var a3 = $("#amt3").val();
+
+    // console.log(w1,w2,w3);
+    // console.log(typeof w1 === 'undefined' );
+    // console.log(typeof w2 === 'undefined' );
+    // console.log(typeof w3 === 'undefined' );
+
+
+    if (typeof w1 === 'undefined') {
+        if (checkDecimal(w2) && checkDecimal(w3) && checkDecimal(a2) && checkDecimal(a3)) {
+            $("#error_msg").hide();
+            $("#add").css('cursor', 'pointer');
+            $("#add").prop('disabled', false);
+            console.log(00);
+        } else {
+            $("#error_msg").html("Please enter valid values");
+            $("#add").css('cursor', 'not-allowed');
+            $("#add").prop('disabled', true);
+            $("#error_msg").show();
+            console.log(11);
+        }
+    } else if (typeof w2 === 'undefined') {
+        if (checkDecimal(w1) && checkDecimal(w3) && checkDecimal(a1) && checkDecimal(a3)) {
+            $("#error_msg").hide();
+            $("#add").css('cursor', 'pointer');
+            $("#add").prop('disabled', false);
+        } else {
+            $("#error_msg").html("Please enter valid values");
+            $("#add").css('cursor', 'not-allowed');
+            $("#add").prop('disabled', true);
+            $("#error_msg").show();
+        }
+    } else if (typeof w3 === 'undefined') {
+        if (checkDecimal(w2) && checkDecimal(w1) && checkDecimal(a2) && checkDecimal(a1)) {
+            $("#error_msg").hide();
+            $("#add").css('cursor', 'pointer');
+            $("#add").prop('disabled', false);
+        } else {
+            $("#error_msg").html("Please enter valid values");
+            $("#add").css('cursor', 'not-allowed');
+            $("#add").prop('disabled', true);
+            $("#error_msg").show();
+        }
+    }
+
+
+    // if (checkDecimal(w1) && checkDecimal(w2) && checkDecimal(w3) && checkDecimal(a1) && checkDecimal(a2) && checkDecimal(a3)) {
+
+    //     $("#error_msg").hide();
+    //     $("#add").css('cursor', 'pointer');
+    //     $("#add").prop('disabled', false);
+
+    //  } else {
+    //     $("#error_msg").html("Please enter valid values");
+    //     $("#add").css('cursor', 'not-allowed');
+    //     $("#add").prop('disabled', true);
+    //     $("#error_msg").show();
+    //  }
+
 }
 function checkDecimal(inputtxt) {
-    var decimal = /^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$/;
-    if (inputtxt.value.match(decimal) ) {
+    var decimal = new RegExp(/^(?!0\.00)\d{1,3}(,\d{3})*(\.\d\d)?$/);
+    if (decimal.test(inputtxt)) {
         console.log("True");
         return true;
     }
@@ -293,7 +447,7 @@ function openModel(amodel, amodelBtn, id) {
         console.log(100);
         $("#close").hide();
         model.className = "open";
-        
+
     }
 
     for (var i = 0; i < closeBtn.length; i++) {

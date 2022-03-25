@@ -160,6 +160,26 @@ $(function () {
     $("#new_password_error_message").hide();
     $("#renew_password_error_message").hide();
 
+    //profile details edit
+    $("#fnameerr").hide();
+    $("#lnameerr").hide();
+    $("#pnoerr").hide();
+    $("#emailerr").hide();
+
+    //profile edit other
+    $("#fname").keyup(function () {
+        check_fname();
+    });
+    $("#lname").keyup(function () {
+        check_lname();
+    });
+    $("#phone_no").keyup(function () {
+        check_phone();
+    });
+    $("#email").keyup(function () {
+        check_email();
+    });
+
     $("#opw").keyup(function () {
         check_oldpassword();
     });
@@ -285,11 +305,11 @@ $(".tabs-list li").click(function () {
 $(".mySearch").on('keyup', function () {
     var value = $(this).val().toLowerCase();
     $("#searchrow article").each(function () {
-       if ($(this).text().toLowerCase().search(value) > -1) {
-          $(this).show();
-       } else {
-          $(this).hide();
-       }
+        if ($(this).text().toLowerCase().search(value) > -1) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
     });
  })
 
@@ -307,3 +327,83 @@ function update_user_activity(){
         }
     });
 }
+
+
+
+//profile edit
+function check_fname() {
+    var fn = $("fname").val();
+    var firstname = new RegExp(/^[a-zA-Z]+$/);
+
+    if (firstname.test(fn)) {
+        $("#fnameerr").hide();
+        $("#fname").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+    } else {
+        $("#fnameerr").html("Name not valid");
+        $("#fnameerr").show();
+        $("#fname").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+
+}
+
+function check_lname() {
+    var ln = $("#lname").val();
+    var lastname = new RegExp(/^[a-zA-Z]+$/);
+
+    if (lastname.test(ln)) {
+        $("#lnameerr").hide();
+        $("#lname").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#lnameerr").html("Name not valid");
+        $("#lnameerr").show();
+        $("#lname").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+
+function check_phone() {
+    var pn = $("#phone_no").val();
+    var phone = new RegExp(/^(\+)?(\d{1,2})?[( .-]*(\d{3})[) .-]*(\d{3,4})[ .-]?(\d{4})$/);
+
+    if (phone.test(pn)) {
+        $("#pnoerr").hide();
+        $("#phone_no").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#pnoerr").html("Phone number not valid");
+        $("#pnoerr").show();
+        $("#phone_no").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+
+function check_email() {
+    var em = $("#email").val();
+    var email = new RegExp(/^[\w.]+@[\w.]+\.\w{2,3}$/);
+
+    if (email.test(em)) {
+        $("#emailerr").hide();
+        $("#email").css("border-bottom", "2px solid #34F458");
+        $("#disablebutton2").prop('disabled', false);
+        $("#disablebutton2").css('cursor', 'pointer');
+
+    } else {
+        $("#emailerr").html("Email not valid");
+        $("#emailerr").show();
+        $("#email").css("border-bottom", "2px solid #F90A0A");
+        $("#disablebutton2").prop('disabled', true);
+        $("#disablebutton2").css('cursor', 'not-allowed');
+    }
+}
+

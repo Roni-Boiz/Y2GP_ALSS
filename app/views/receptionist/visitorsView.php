@@ -16,7 +16,8 @@ include_once 'sidenav.php';
                     <div class="tabs" style="grid-column:1/span3">
                         <ul class="tabs-list">
                             <li class="active"><a href="#tab1">IN-COMING</a></li>
-                            <li><a href="#tab2">PREVIOUS</a></li>
+                            <li><a href="#tab2">OUT-GOING</a></li>
+                            <li><a href="#tab3">PREVIOUS</a></li>
                             <!-- <li ><a href="#tab3">OVERDUE VISITORS</a></li> -->
                         </ul><br><br>
                         <div class="search">
@@ -40,23 +41,23 @@ include_once 'sidenav.php';
                                     <?php
                                     if ($this->todayVisitors->num_rows > 0) { ?>
                                         <?php
-                                        while ($row = $this->todayVisitors->fetch_assoc()) {
+                                        while ($row1 = $this->todayVisitors->fetch_assoc()) {
                                         ?>
                                             <span id="searchrow">
 
                                                 <article class="row mlb">
                                                     <ul>
-                                                        <li><a method="get" href="markVisited?visitor=<?php echo $row["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                        <li><a method="GET" href="markIn?visitor=<?php echo $row1["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
                                                         <!-- <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li> -->
-                                                        <li><?php echo $row["visitor_id"]; ?></li>
-                                                        <li><?php echo $row["name"]; ?></li>
-                                                        <li><?php echo $row["apartment_no"]; ?></li>
+                                                        <li><?php echo $row1["visitor_id"]; ?></li>
+                                                        <li><?php echo $row1["name"]; ?></li>
+                                                        <li><?php echo $row1["apartment_no"]; ?></li>
                                                         
 
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                            <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                            <span style="padding-right: 20px;">Description: <?php echo $row1["description"] ?></span>
                                                         </li>
                                                     </ul>
 
@@ -80,7 +81,7 @@ include_once 'sidenav.php';
                                     <div style="text-align: center; margin-bottom: 10px;">
                                         <h2>Are You Sure ?</h2>
                                     </div>
-                                    <form action="#" class="formDelete" method="GET">
+                                    <form action="#" class="formDelete" method="POST">
                                         <div>
                                             <label> Delete User With User ID </label>
                                             <span><?= "UID1234" ?></span>
@@ -94,10 +95,82 @@ include_once 'sidenav.php';
                             </div>
 
                         </div>
-
                         <div id="tab2" class="tab">
 
-                            <p>
+                            <div style="overflow-x:auto;grid-column:1/span2">
+                                <!-- today -->
+                                <section class="wrapper">
+                                    <main class="row title">
+                                        <ul>
+                                            <li>Action</li>
+                                            <li>Visitor Id</li>
+                                            <li>Visitor Name</li>
+                                            <li>Apartment No</li>
+                                            <li>Arrived Time</li>
+                                            <!-- <li>Description</li> -->
+                                        </ul>
+                                    </main>
+
+                                    <?php
+                                    if ($this->outgoingVisitors->num_rows > 0) { ?>
+                                        <?php
+                                        while ($row2 = $this->outgoingVisitors->fetch_assoc()) {
+                                        ?>
+                                            <span id="searchrow">
+
+                                                <article class="row mlb">
+                                                    <ul>
+                                                        <li><a method="GET" href="markOut?visitor=<?php echo $row2["visitor_id"]; ?>"><i class="far fa-check-circle" style="color:white;padding:1px 10px"></i></a></li>
+                                                        <!-- <li><span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><i class="fas fa-trash-alt"></i></span></li> -->
+                                                        <li><?php echo $row2["visitor_id"]; ?></li>
+                                                        <li><?php echo $row2["name"]; ?></li>
+                                                        <li><?php echo $row2["apartment_no"]; ?></li>
+                                                        <li><?php echo $row2["arrive_time"]; ?></li>
+
+                                                    </ul>
+                                                    <ul class="more-content">
+                                                        <li>
+                                                            <span style="padding-right: 20px;">Description: <?php echo $row2["description"] ?></span>
+                                                        </li>
+                                                    </ul>
+
+                                                </article>
+                                            </span>
+                                        <?php
+                                        }
+                                        ?>
+                                    <?php
+                                    } else {
+                                        echo "0 results";
+                                    }
+                                    ?>
+                                    
+                                </section>
+
+                            </div>
+                            <div class="divPopupModel">
+                                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                                <div id="deleteModel">
+                                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                                    <div style="text-align: center; margin-bottom: 10px;">
+                                        <h2>Are You Sure ?</h2>
+                                    </div>
+                                    <form action="#" class="formDelete" method="POST">
+                                        <div>
+                                            <label> Delete User With User ID </label>
+                                            <span><?= "UID1234" ?></span>
+                                        </div>
+                                        <div>
+                                            <input class="btnRed" type="submit" name="submit" value="Delete">
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab3" class="tab">
+
+                            
                             <div style="overflow-x:auto;grid-column:1/span2">
                                 <!-- pre -->
                                 <section class="wrapper">
@@ -106,7 +179,7 @@ include_once 'sidenav.php';
                                             <li>Vistor ID</li>
                                             <li>Visitor Name</li>
                                             <li>Apartment No</li>
-                                            <li>Requested Date</li>
+                                            <li>Visited Date</li>
                                             <li>Visited time</li>
                                         </ul>
                                     </main>
@@ -114,22 +187,22 @@ include_once 'sidenav.php';
                                     <?php
                                     if ($this->previousVisitors->num_rows > 0) { ?>
                                         <?php
-                                        while ($row = $this->previousVisitors->fetch_assoc()) {
+                                        while ($row3 = $this->previousVisitors->fetch_assoc()) {
                                         ?>
                                             <span id="searchrow">
                                                 <article class="row mlb">
                                                     <ul>
-                                                        <li><?php echo $row["visitor_id"]; ?></li>
-                                                        <li><?php echo $row["name"]; ?></li>
-                                                        <li><?php echo $row["apartment_no"]; ?></li>
-                                                        <li><?php echo $row["requested_date"]; ?></li>
-                                                        <li><?php echo $row["arrive_time"]; ?></li>
+                                                        <li><?php echo $row3["visitor_id"]; ?></li>
+                                                        <li><?php echo $row3["name"]; ?></li>
+                                                        <li><?php echo $row3["apartment_no"]; ?></li>
+                                                        <li><?php echo $row3["arrive_date"]; ?></li>
+                                                        <li><?php echo $row3["arrive_time"]; ?></li>
 
 
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                            <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                            <span style="padding-right: 20px;">Description: <?php echo $row3["description"] ?></span>
                                                         </li>
                                                     </ul>
 
@@ -146,7 +219,7 @@ include_once 'sidenav.php';
                                 </section>
 
                             </div>
-                            </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -200,6 +273,7 @@ include_once 'sidenav.php';
             });
         });
     </script>
+    
 </body>
 
 </html>

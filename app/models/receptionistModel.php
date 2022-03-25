@@ -153,6 +153,13 @@ class receptionistModel extends model {
             }
             return $errors;
         }
+        public function addVisitor($name,$apno,$description){
+            $sql1="SELECT resident_id FROM resident WHERE apartment_no='$apno'";
+            $resno=mysqli_fetch_assoc($this->conn->query($sql1));
+            $resno=$resno['resident_id'];
+            $sql2="INSERT INTO visitor(name,arrive_date,arrive_time,description,requested_date,resident_id) VALUES('$name',CURRENT_DATE,CURRENT_TIME,'$description',SYSDATE(),'$resno')";
+            $this->conn->query($sql2);
+        }
 
         public function readTodayVisitor(){
             date_default_timezone_set("Asia/Colombo");
@@ -161,15 +168,25 @@ class receptionistModel extends model {
             $result = $this->conn->query($sql);   
             return $result;
         }
+        public function readOutgoingVisitor(){
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id,visitor.arrive_date,visitor.arrive_time FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE ((arrive_date IS NOT NULL) AND (arrive_time IS NOT NULL) AND (departure_time IS NULL))";
+            $result = $this->conn->query($sql);   
+            return $result;
+        }
         public function readPreviousVisitor(){
-            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id,visitor.arrive_time,visitor.requested_date FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id,visitor.arrive_time,visitor.arrive_date,visitor.departure_time FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE (arrive_time IS NOT NULL) AND (arrive_date IS NOT NULL) AND (departure_time IS NOT NULL)   ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             //$sql = "SELECT * FROM visitor WHERE arrive_time IS NOT NULL ORDER BY arrive_date DESC,arrive_time DESC LIMIT 20 ";
             $result = $this->conn->query($sql);   
             return $result;
         }
-        public function setVisited($vid){
+        public function setVisitedIn($vid){
             $time=date('H:i:s');
             $sql="UPDATE visitor SET arrive_time='$time' WHERE visitor_id='$vid'";
+            $this->conn->query($sql);
+
+        }
+        public function setVisitedOut($vid){
+            $sql="UPDATE visitor SET departure_time=SYSDATE() WHERE visitor_id='$vid'";
             $this->conn->query($sql);
 
         }
