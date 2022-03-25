@@ -23,7 +23,7 @@ include_once 'sidenav.php';
             <div id="mySidenavform" class="sidenavform">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeOffcanvas()">&times;</a>
 
-                <form action="addAnnouncement" class="formAddAnnouncement" method="POST" enctype="multipart/form-data">
+                <form action="announcement" class="formAddAnnouncement" method="POST" enctype="multipart/form-data">
                     <h1>New Announcement<i class="fa fa-bullhorn"></i></h1>
 
                     <label for="topic">Topic</label><br>
@@ -103,15 +103,62 @@ include_once 'sidenav.php';
             ?>
             <br>
 
+             <!-- error popup -->
+             <?php
+            if (isset($this->error)) { ?>
+                <div class="error">
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="errorModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Failed</h2>
+                            </div>
+                            <form action="#" class="formDelete" onsubmit="previousView(); return false;">
+                                <div>
+                                    <label><?= $this->error ?></label>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }; ?>
+            <!-- success popup -->
+            <?php
+            if (isset($this->success)) { ?>
+                <div class="success">
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8"></div>
+                        <div id="successModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successful</h2>
+                            </div>
+                            <form action="#" class="formDelete" onsubmit="previousView(); return false;">
+                                <div>
+                                    <label><?= $this->success ?></label>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }; ?>
+
         </div> <!-- .hawlockbody div closed here -->
     </div>
 </body>
 
 <script>
     CKEDITOR.replace('content');
-//     CKEDITOR.editorConfig = function( config ) {
-//         config.enterMode = CKEDITOR.ENTER_BR;
-// };
 </script>
 
 </html>
