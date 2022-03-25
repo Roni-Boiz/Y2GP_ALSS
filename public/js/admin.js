@@ -335,7 +335,12 @@ function unlockAccount(user_name) {
             success: function () {
                 // console.log($("#unlockID").closest('detail').text);
                 $("#unlockId").closest('.detail').fadeOut("slow");
+                $("#successmsg").html("User account unlocked");
                 $(".success").css('display', 'block');
+            },
+            error: function () {
+                $("#errormsg").html("Oops something went wrong. Please try again");
+                $(".error").css('display', 'block');
             }
         });
     }
@@ -355,12 +360,23 @@ function deleteUser() {
             a = "#" + id;
             // console.log(a);
             $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("User account deleted");
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
+        },
+        error: function(data) {
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
         }
     });
+}
+
+function previousView(){
+    $(".success").css('display', 'none');
+    $(".error").css('display', 'none');
 }
 
 function deleteEmployee() {
@@ -376,10 +392,16 @@ function deleteEmployee() {
         success: function () {
             a = "#" + id;
             $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("Employee record deleted");
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');
             $("#deleteModel").toggleClass('close');
+        },
+        error: function(){
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            // console.log(data);
         }
     });
 }
@@ -400,11 +422,17 @@ function updateShift() {
             week3: week3,
         },
         success: function (msg) {
+            $("#successmsg").html("Employee shift updated");
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');
             $("#editModel").toggleClass('close');
             $("#formUpdateShift")[0].reset();
+        },
+        error: function(){
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
         }
     });
 }
@@ -419,9 +447,13 @@ function setCurrentShiftData(id) {
         },
         success: function (data) {
             data = JSON.parse(data);
-            $('#newWeek1').val(data[0].week1).change();
-            $('#newWeek2').val(data[0].week2).change();
-            $('#newWeek3').val(data[0].week3).change();
+            $('#newWeek1').val(data[0].shift_no).change();
+            $('#newWeek2').val(data[1].shift_no).change();
+            $('#newWeek3').val(data[2].shift_no).change();
+            $('option').prop('disabled', false);
+        },
+        error: function(data) {
+            console.log(data);
         }
     });
 }
