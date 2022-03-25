@@ -118,7 +118,7 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
     public function getLast12LaundryReq(){
-        $sql = "SELECT date_format(request_date, '%M %Y') AS monthYear, count(request_id) AS total from laundry_request WHERE cancelled_time IS NULL AND state!=3 AND request_date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(request_date), month(request_date) ORDER BY year(request_date) DESC, month(request_date) DESC";
+        $sql = "SELECT date_format(request_date, '%M %Y') AS monthYear, count(request_id) AS total from laundry_request WHERE cancelled_time IS NULL AND state!=-1 AND request_date> CURDATE() - INTERVAL 11 month - day(CURDATE()) GROUP BY year(request_date), month(request_date) ORDER BY year(request_date) DESC, month(request_date) DESC";
         return $this->conn->query($sql);
     }
 
@@ -172,16 +172,31 @@ class adminModel extends model
     }
 
     public function updateThisEmployeeShift($employee_id,$shift_no1,$shift_no2,$shift_no3){
+        $this->conn->autocommit(FALSE);
         $sql = "DELETE FROM employee_shift WHERE employee_id = '{$employee_id}'";
         $result1 = $this->conn->query($sql);
         $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no1}','{$employee_id}', 1)";
-        
+        $result2 = $this->conn->query($sql);
+        $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no2}','{$employee_id}', 2)";
+        $result3 = $this->conn->query($sql);
+        $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no3}','{$employee_id}', 3)";
+        $result4 = $this->conn->query($sql);
         // $sql = "UPDATE employee_shift SET week1='{$week1}', week2='{$week2}', week3='{$week3}' WHERE employee_id = '{$employee_id}'";
-        return $this->conn->query($sql);
+        // Commit transaction
+        if ($result1 && $result2 && $result3 && $result4) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 && $result4;
     }
 
     public function getThisEmployeeShift($employee_id){
-        $sql = "SELECT week1,week2,week3 FROM employee_shift WHERE employee_id = '{$employee_id}'";
+        $sql = "SELECT shift_no,week FROM employee_shift WHERE employee_id = '{$employee_id}' ORDER BY week";
         return $this->conn->query($sql);
     }
 
@@ -221,7 +236,7 @@ class adminModel extends model
         return $this->conn->query($sql);
     }
 
-    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName, $week1, $week2, $week3)
+    public function insertEmployee($empType, $fname, $lname, $email, $con, $fileName, $shift_no1=0, $shift_no2=0, $shift_no3=0)
     {
         $fname = $this->conn->real_escape_string($fname);
         $lname = $this->conn->real_escape_string($lname);
@@ -286,8 +301,13 @@ class adminModel extends model
         }
 
         if ($empType == 'trainer' || $empType == 'treater'){
-            $sql = "INSERT INTO employee_shift(employee_id, week1, week2, week3) VALUES ('{$empId}','{$week1}','{$week2}','{$week3}')";
-            $result4 = $this->conn->query($sql);
+            $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no1}','{$empId}', 1)";
+            $result4_1 = $this->conn->query($sql);
+            $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no2}','{$empId}', 2)";
+            $result4_2 = $this->conn->query($sql);
+            $sql = "INSERT INTO employee_shift(shift_no,employee_id, week) VALUES ('{$shift_no3}','{$empId}', 3)";
+            $result4_3 = $this->conn->query($sql);
+            $result4 = $result4_1 && $result4_2 && $result4_3;
         }
         // Commit transaction
         if (($result1 && $result2 && $result3) || ($result2 && $result3) || ($result2 && $result3 && $result4) || ($result1 && $result2 && $result3 && $result4)) {
@@ -298,6 +318,7 @@ class adminModel extends model
             // echo "Commit transaction failed";
             $this->conn->rollback();
             $this->conn->autocommit(TRUE);
+            $this->conn->query("ALTER TABLE employee AUTO_INCREMENT = 1");
         }
         return $result1 && $result2 && $result3 || $result2 && $result3 || $result2 && $result3 && $result4 || $result1 && $result2 && $result3 && $result4;
     }
@@ -369,6 +390,11 @@ class adminModel extends model
             $adminId = $id['admin_id'];
         }
         $sql = "INSERT INTO announcement(topic,content,category,date,file_name,admin_id) VALUES ('{$topic}','{$content}','{$category}',NOW(),'{$fileName}','{$adminId}')";
+        return $this->conn->query($sql);
+    }
+
+    public function getAllResidentDataBySearch($searchValue){
+        $sql = "SELECT * from resident WHERE fname LIKE '%$searchValue%' OR lname LIKE '%$searchValue%' nic LIKE '%$searchValue%' phone_no  LIKE '%$searchValue%' email  LIKE '%$searchValue%' vehicle_no  LIKE '%$searchValue%' apartment_no  LIKE '%$searchValue%'";
         return $this->conn->query($sql);
     }
 
