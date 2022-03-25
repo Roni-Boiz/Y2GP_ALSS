@@ -330,16 +330,22 @@ function check_oldpassword() {
       $("#old_password_error_message").html("Enter old password");
       $("#old_password_error_message").show();
       $("#opw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
    else if (password_length < 8) {
       $("#old_password_error_message").html("Atleast 8 Characters");
       $("#old_password_error_message").show();
       $("#opw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
 
    else {
       $("#old_password_error_message").hide();
       $("#opw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
    }
 
 }
@@ -352,17 +358,23 @@ function check_newpassword() {
       $("#new_password_error_message").html("Enter password");
       $("#new_password_error_message").show();
       $("#npw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
       error_rpassword = true;
    }
    else if (password_length < 8) {
       $("#new_password_error_message").html("Atleast 8 Characters");
       $("#new_password_error_message").show();
       $("#npw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
       error_rpassword = true;
    }
    else {
       $("#new_password_error_message").hide();
       $("#npw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
    }
 }
 
@@ -373,12 +385,16 @@ function check_retypepassword() {
    if (rpassword == retype_password && retype_password != "") {
       $("#renew_password_error_message").hide();
       $("#rnpw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
 
       error_retype_password = true;
    } else {
       $("#renew_password_error_message").html("Passwords did not Match");
       $("#renew_password_error_message").show();
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
 }
 
@@ -391,7 +407,7 @@ function check_fname() {
       $("#fnameerr").hide();
       $("#fname").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
    } else {
       $("#fnameerr").html("Name not valid");
       $("#fnameerr").show();
@@ -411,7 +427,7 @@ function check_lname() {
       $("#lnameerr").hide();
       $("#lname").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#lnameerr").html("Name not valid");
@@ -431,7 +447,7 @@ function check_nic() {
       $("#nicnoerr").hide();
       $("#nic").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#nicnoerr").html("NIC not valid");
@@ -451,7 +467,7 @@ function check_phone() {
       $("#pnoerr").hide();
       $("#phone_no").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#pnoerr").html("Phone number not valid");
@@ -470,7 +486,7 @@ function check_email() {
       $("#emailerr").hide();
       $("#email").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#emailerr").html("Email not valid");
@@ -490,7 +506,7 @@ function check_vehicleno() {
       $("#vnoerr").hide();
       $("#vehicle_no").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#vnoerr").html("Vehicle no not valid");
@@ -537,7 +553,7 @@ function check_members() {
    else {
       $("#member").hide();
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
    }
 
 }
@@ -743,7 +759,7 @@ function currencycheck() {
    if (c.test(am)) {
       $("#currencyerr").hide();
       $("#amount").css("border-bottom", "2px solid #34F458");
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
       $("#disablebutton2").prop('disabled', false);
 
    } else {
@@ -1011,9 +1027,44 @@ function deleterequest() {
 //get previous reservation
 function previousreservation() {
    console.log("test");
-   var type = 1;
-   window.location = "yourReservation";
+   console.log($("#tab1").css('display') == 'block');
+   if($("#tab1").css('display') == 'block') {
+      window.location = "preReservation?type=1";
+   }
+   else if($("#tab2").css('display') == 'block'){
+      window.location = "preReservation?type=2";
+
+   }else if($("#tab3").css('display') == 'block'){
+      window.location = "preReservation?type=3";
+
+   }else if($("#tab4").css('display') == 'block'){
+      window.location = "preReservation?type=4";
+
+   }
+
 }
+
+//get previous reservation
+function previousrequest() {
+   console.log("test");
+   // console.log($("#tab1").css('display') == 'block');
+   if ($("#tab1").css('display') == 'block') {
+      window.location = "preRequest?type=1";
+   }
+   else if($("#tab2").css('display') == 'block'){
+      window.location = "preRequest?type=2";
+
+   }else if($("#tab3").css('display') == 'block'){
+      window.location = "preRequest?type=3";
+
+   }else{
+      window.location = "preRequest?type=4";
+
+   }
+
+}
+
+
 //view complaints
 function complaintlist() {
    if ($("#com").css('display') == 'block') {

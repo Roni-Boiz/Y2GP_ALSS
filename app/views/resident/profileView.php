@@ -146,10 +146,10 @@ include_once('sidenav.php');
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
                                 <span class="error_form" id="renew_password_error_message" style="font-size:10px;"></span><br>
 
-                                <input type="submit" onclick="confirm" value="Save">
+                                <input type="submit" onclick="confirm" value="Save" id="disablebutton1">
                             </form>
 
-                            <input type="submit" id="changepassword" value="Change Password" onclick="setVisibility2('passwordView');">
+                            <input type="submit" id="changepassword" value="Change Password"  onclick="setVisibility2('passwordView');">
                         </div>
                     </div>
                     <a href="javascript:setVisibility3('alldevices')" id="showmore">Show More</a>

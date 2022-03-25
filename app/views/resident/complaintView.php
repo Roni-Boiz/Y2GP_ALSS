@@ -161,8 +161,7 @@ include_once 'sidenav.php';
                                                 <div class="detail-info">
                                                     <h5><?php echo "Date : " . $row["date_time"] ?></h5>
                                                     <small><?php echo "State : ";
-                                                            if ($row["state"] == 0) echo "Pending";
-                                                            else if ($row["state"] == 1) echo "Considered";
+                                                            if (!$row["employee_id"]) echo "Pending";
                                                             else echo "Completed"; ?></small><br>
                                                     <small><?php echo "Considered by : ";
                                                             if ($row["fname"]) echo $row["fname"] . " " . $row['lname'];
@@ -193,8 +192,7 @@ include_once 'sidenav.php';
                                                 <div class="detail-info">
                                                     <h5><?php echo "Date : " . $row["date_time"] ?></h5>
                                                     <small><?php echo "State : ";
-                                                            if ($row["state"] == 0) echo "Pending";
-                                                            else if ($row["state"] == 1) echo "Considered";
+                                                            if (!$row["employee_id"]) echo "Pending";
                                                             else echo "Completed"; ?></small><br>
                                                     <small><?php echo "Description : " . $row["description"]; ?></small>
 
