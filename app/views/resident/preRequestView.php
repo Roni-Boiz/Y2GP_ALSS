@@ -12,7 +12,8 @@ include_once 'sidenav.php';
         <div id="hb" class="hawlockbody animate-bottom">
             <div class="tabs" style="grid-column:1/span3">
                 <br>
-                <!-- <input type="submit" onclick="yourRequest" value="Back"></input> -->
+                <a href="yourRequest"><input type="submit" onclick="yourRequest" value="Back"></input></a>
+                
 
                 <?php if ($this->type == '1') {
                 ?>
