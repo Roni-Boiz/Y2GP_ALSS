@@ -97,6 +97,10 @@ class managerController extends controller
         $this->view->render('manager/manageResView');
     }
 
+    public function removeThisReservation(){
+        return $this->model->emergencyRemoveThisReservation($_POST["reservation_id"], $_POST["reason"]);
+    }
+
     public function complaint()
     {
         $this->view->complaints = $this->model->getAllComplaints();

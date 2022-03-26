@@ -453,7 +453,7 @@ function previousView(){
 
 function declineRequest() {
     let id = document.getElementById("answer1").innerText;
-    var request_id = parseInt(id.substring(3));
+    var request_id = parseInt(id.substring(2));
     var reason = document.getElementById("reason").value;
     $.ajax({
         type: "POST",
@@ -501,7 +501,7 @@ function loadEmployee() {
 
 function acceptRequest() {
     let id = document.getElementById("answer2").innerText;
-    var request_id = parseInt(id.substring(3));
+    var request_id = parseInt(id.substring(2));
     var employee = document.getElementById("employee");
     var employee_id = parseInt(employee.options[employee.selectedIndex].value);
     var employee_name = employee.options[employee.selectedIndex].text;
@@ -532,7 +532,7 @@ function acceptRequest() {
 
 function addCharge(){
     let id = document.getElementById("answer3").innerText;
-    var request_id = parseInt(id.substring(3));
+    var request_id = parseInt(id.substring(2));
     var fee = parseFloat(document.getElementById("fee").value);
     $.ajax({
         type: "POST",
@@ -551,6 +551,34 @@ function addCharge(){
             $("#myCanvasNav").css('opacity', '0');     
         },
         error: function(){
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
+        }
+    });
+}
+
+function emergencyRemove(){
+    let id = document.getElementById("answer1").innerText;
+    var reservation_id = id
+    var reason = document.getElementById("reason").value;
+    $.ajax({
+        type: "POST",
+        url: "removeThisReservation",
+        data: {
+            reservation_id: reservation_id,
+            reason: reason,
+        },
+        success: function () {
+            a = "#" + id;
+            $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("Reservation removed and reservation fee deducted.");
+            $("#deleteModel").toggleClass('close');
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0'); 
+        },
+        error: function () {
             $("#errormsg").html("Oops something went wrong. Please try again");
             $(".error").css('display', 'block');
             console.log(data);
