@@ -29,7 +29,14 @@
                     <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
                 </ul>
                 <li><a><?php echo  $_SESSION['userName']; ?></a></li>
-                <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
+                <li><a href="getNotification">
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+
+                        <!-- <span class="fa-stack">
+                            <i class="fa fa-bell fa-stack-1x" style="color:red;font-size:20px"></i>
+                            <strong class="fa-stack text-primary"><?php echo 1; ?></strong>
+                        </span> -->
+                    </a></li>
                 </li>
                 </li>
                 </ul>

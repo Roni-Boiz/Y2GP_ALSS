@@ -402,7 +402,7 @@ function check_retypepassword() {
 //check name not having numbers or other symbols
 function check_fname() {
    var fn = $("fname").val();
-   var firstname = new RegExp(/^[a-zA-Z]+$/);
+   var firstname = new RegExp(/^[a-zA-Z ]+$/);
 
    if (firstname.test(fn)) {
       $("#fnameerr").hide();
@@ -422,7 +422,7 @@ function check_fname() {
 //check name not having numbers or other symbols
 function check_lname() {
    var ln = $("#lname").val();
-   var lastname = new RegExp(/^[a-zA-Z]+$/);
+   var lastname = new RegExp(/^[a-zA-Z ]+$/);
 
    if (lastname.test(ln)) {
       $("#lnameerr").hide();

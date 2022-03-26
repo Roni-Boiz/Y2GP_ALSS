@@ -359,6 +359,7 @@ class residentController extends controller
     public function getNotification()
     {
         $this->view->notification = $this->model->readNotification();
+        $this->view->count = $this->model->countNotification();
         $this->view->render('resident/notificationView');
     }
 

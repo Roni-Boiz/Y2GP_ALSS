@@ -506,7 +506,7 @@ class residentModel extends model
     //coach list for reservations
     public function getcoaches()
     {
-        $sql = "SELECT * from trainer";
+        $sql = "SELECT * from trainer where user_id IS NOT NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
@@ -1005,22 +1005,22 @@ class residentModel extends model
     //for search previous reservations by date
     public function searchReservations($type, $date)
     {
-        $id=$_SESSION['userId'];
+        $id = $_SESSION['userId'];
         // echo $id;
         if ($type == 1) {
             $sql = "SELECT * FROM `hall_reservation` WHERE date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
-        }else if ($type == 2) {
+        } else if ($type == 2) {
             //check query
             $sql = "SELECT f.*,t.fname,t.lname FROM fitness_centre_reservation as f, trainer as t WHERE f.employee_id=t.employee_id AND resident_id IN (select resident_id from resident where user_id=$id) AND date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
-        }else if ($type == 3) {
+        } else if ($type == 3) {
             $sql = "SELECT * FROM `treatment_room_reservation` WHERE date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
-        }else if ($type == 4) {
+        } else if ($type == 4) {
             $sql = "SELECT * FROM `parking_slot_reservation` WHERE date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
@@ -1034,14 +1034,22 @@ class residentModel extends model
             $sql = "SELECT * FROM `technical_maintenence_request` WHERE preferred_date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
-        }else if ($type == 1) {
+        } else if ($type == 1) {
             $sql = "SELECT * FROM `laundry_request` WHERE preferred_date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
-        }else if ($type == 3) {
+        } else if ($type == 3) {
             $sql = "SELECT * FROM `visitor` WHERE arrive_date ='$date'";
             $result = mysqli_query($this->conn, $sql);
             return $result;
         }
+    }
+
+    //count notification to show
+    public function countNotification()
+    {
+        $sql = "SELECT count(notification_id) as count FROM notification WHERE user_id={$_SESSION['userId']} AND (view<>1)";
+        $result = mysqli_fetch_assoc($this->conn->query($sql));
+        return $result["count"];
     }
 }
