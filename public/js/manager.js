@@ -247,14 +247,14 @@ function check_retypepassword() {
     }
 }
 
-function openModel(amodel, amodelBtn) {
-
+function openModel(amodel, amodelBtn, id) {
     const model = document.getElementById(amodel);
     const modelBtn = document.getElementsByClassName(amodelBtn);
-    const ans = document.getElementById("answer");
+    const ans1 = document.getElementById("answer1");
+    const ans2 = document.getElementById("answer2");
+    const ans3 = document.getElementById("answer3");
     const closeBtn = document.getElementsByClassName("closebtn");
 
-    console.log(model, modelBtn, closeBtn);
     for (var i = 0; i < modelBtn.length; i++) {
         modelBtn[i].addEventListener('click', showModel, false);
     }
@@ -274,18 +274,15 @@ function openModel(amodel, amodelBtn) {
         document.getElementById("myCanvasNav").style.opacity = "0";
         model.className = "close";
     }
-
-    // model.addEventListener("click", (e) => {
-    //     if (e.target.id === "yes-btn") {
-    //         ans.innerText = "Hello Guys";
-
-    //     } else if (e.target.id === "no-btn") {
-    //         ans.innerText = "Oh no! ";
-    //     } else {
-    //         return;
-    //     }
-    //     model.className = 'close';
-    // });
+    if (ans1 !== null) {
+        ans1.innerHTML = id;
+    }
+    if (ans2 !== null) {
+        ans2.innerHTML = id;
+    }
+    if (ans3 !== null) {
+        ans3.innerHTML = id;
+    }
 }
 
 $(".tabs-list li a").click(function (e) {
@@ -311,24 +308,22 @@ $(".mySearch").on('keyup', function () {
             $(this).hide();
         }
     });
- })
+})
 
-setInterval(function(){
+setInterval(function () {
     update_user_activity();
 }, 3000);
 
-function update_user_activity(){
+function update_user_activity() {
     var action = 'update_time';
     $.ajax({
-        url:"updateLastActivity",
-        method:"POST",
-        data:{action:action},
-        success:function(data){
+        url: "updateLastActivity",
+        method: "POST",
+        data: { action: action },
+        success: function (data) {
         }
     });
 }
-
-
 
 //profile edit
 function check_fname() {
@@ -406,4 +401,134 @@ function check_email() {
         $("#disablebutton2").css('cursor', 'not-allowed');
     }
 }
+
+function expand() {
+    if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
+        document.getElementById("hh").style.gridColumn = "2";
+        document.getElementById("hb").style.gridColumn = "2";
+        document.getElementById("hh").style.marginLeft = "20px";
+        document.getElementById("hb").style.marginLeft = "20px";
+        document.getElementById("side").style.left = "0px";
+        document.getElementById("side").style.transform = "initial";
+    } else {
+        document.getElementById("hh").style.gridColumn = "1 / span 3";
+        document.getElementById("hb").style.gridColumn = "1 / span 3";
+        document.getElementById("hh").style.marginLeft = "50px";
+        document.getElementById("hb").style.marginLeft = "50px";
+        document.getElementById("side").style.left = "-200px";
+        document.getElementById("side").style.transform = "rotateY(180deg)";
+    }
+}
+
+$(window).resize(function (e) {
+    screen_resize();
+});
+
+function screen_resize() {
+    var h = parseInt(window.innerHeight);
+    var w = parseInt(window.innerWidth);
+
+    if (w <= 768) {
+        document.getElementById("hh").style.gridColumn = "1 / span 3";
+        document.getElementById("hb").style.gridColumn = "1 / span 3";
+        document.getElementById("hh").style.marginLeft = "50px";
+        document.getElementById("hb").style.marginLeft = "50px";
+        document.getElementById("side").style.left = "-200px";
+        document.getElementById("side").style.transform = "rotateY(180deg)";
+    } else {
+        document.getElementById("hh").style.gridColumn = "2";
+        document.getElementById("hb").style.gridColumn = "2";
+        document.getElementById("hh").style.marginLeft = "20px";
+        document.getElementById("hb").style.marginLeft = "20px";
+        document.getElementById("side").style.left = "0px";
+        document.getElementById("side").style.transform = "initial";
+    }
+}
+
+function previousView(){
+    $(".success").css('display', 'none');
+    $(".error").css('display', 'none');
+    location.reload();
+}
+
+function declineRequest() {
+    let id = document.getElementById("answer1").innerText;
+    employee_id = parseInt(id.substring(3));
+    // console.log(employee_id);
+    $.ajax({
+        type: "POST",
+        url: "deleteEmployee",
+        data: {
+            employee_id: employee_id
+        },
+        success: function () {
+            a = "#" + id;
+            $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("Employee record deleted");
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+            $("#deleteModel").toggleClass('close');
+        },
+        error: function () {
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            // console.log(data);
+        }
+    });
+}
+
+function loadEmployee() {
+    $.ajax({
+        type: "POST",
+        url: "getFreeTechnicians",
+        success: function (data) {
+            data = JSON.parse(data);
+            var optionText = '';
+            var optionValue = '';
+            $('#employee').empty();
+            $('#employee').append(new Option("Employee", ""));
+            for (var i in data) {
+                // console.log(data);
+                optionText = data[i].fname + " " + data[i].lname;
+                optionValue = data[i].employee_id;
+                $('#employee').append(new Option(optionText, optionValue));
+            }
+        }
+    });
+}
+
+function acceptRequest() {
+    let id = document.getElementById("answer2").innerText;
+    var request_id = parseInt(id.substring(3));
+    var employee = document.getElementById("employee");
+    var employee_id = parseInt(employee.options[employee.selectedIndex].value);
+    var employee_name = employee.options[employee.selectedIndex].text;
+    console.log(id);
+    $.ajax({
+        type: "POST",
+        url: "acceptThisRequest",
+        data: {
+            request_id: request_id,
+            employee_id: employee_id,
+            employee_name: employee_name,
+        },
+        success: function () {
+            a = "#" + id;
+            $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("Request updated. And inform the resident");
+            $("#editModel").toggleClass('close');
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');     
+        },
+        error: function(){
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
+        }
+    });
+}
+
+
 
