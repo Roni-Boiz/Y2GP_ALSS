@@ -115,7 +115,7 @@ class laundryModel extends model {
 
             //for resource allocation
             $sql4="SELECT weight FROM category WHERE request_id='$id' AND category_no=1 ";
-            $w1=mysqli_fetch_assoc($this->conn->query($sql2));
+            $w1=mysqli_fetch_assoc($this->conn->query($sql4));
             $w1=$w1["weight"];
 
             //amount of resources needed for 1-10 kg of category 1
@@ -150,14 +150,14 @@ class laundryModel extends model {
             $w2=mysqli_fetch_assoc($this->conn->query($sql9));
             $w2=$w2["weight"];
 
-            //amount of resources needed for 1-10 kg of category 1
+            //amount of resources needed for 1-10 kg of category 2
             if($w2=='1-10'){
                 $washer2=1;
                 $dryer2=2;
                 $iron2=3;
                 
             }
-            //amount of resources needed for 11-20 kg of category 1
+            //amount of resources needed for 11-20 kg of category 2
             else if($w2=='11-20'){
                 $washer2=2;
                 $dryer2=4;
