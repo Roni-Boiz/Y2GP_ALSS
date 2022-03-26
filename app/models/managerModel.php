@@ -40,7 +40,7 @@ class managerModel extends model {
 
         $sql = "UPDATE manager SET fname = ?, lname = ?, email = ? , contact_no = ? WHERE user_id = ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssii", $fname, $lname, $email, $cno, $id);
+        $stmt->bind_param("ssssi", $fname, $lname, $email, $cno, $id);
         return $stmt->execute();
     }
 
@@ -85,22 +85,22 @@ class managerModel extends model {
     }
 
     public function getTodayPendingTechnicalReq(){
-        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' AND technical_maintenence_request.preferred_date=CURDATE() ORDER BY preferred_date,preferred_time ASC";
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' AND technical_maintenence_request.preferred_date=CURDATE() ORDER BY preferred_date ASC";
         return $this->conn->query($sql);
     }
 
     public function getAllPendingTechnicalReq(){
-        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' ORDER BY preferred_date,preferred_time ASC";
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id WHERE state='P' ORDER BY preferred_date ASC";
         return $this->conn->query($sql);
     }
 
     public function getAllInprogressTechnicalReq(){
-        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='I' ORDER BY preferred_date,preferred_time ASC";
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='I' ORDER BY preferred_date ASC";
         return $this->conn->query($sql);
     }
 
     public function getAllCompletedTechnicalReq(){
-        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='C' ORDER BY preferred_date,preferred_time ASC";
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,technician.fname AS tfname, technician.lname AS tlname FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN technician ON technical_maintenence_request.employee_id=technician.employee_id WHERE state='C' ORDER BY preferred_date ASC";
         return $this->conn->query($sql);
     }
 
@@ -110,13 +110,50 @@ class managerModel extends model {
     }
 
     public function getUpcommingRequests($date){
-        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,user_account.profile_pic FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN user_account ON resident.user_id=user_account.user_id WHERE state='P' AND preferred_date<='{$date}' ORDER BY preferred_date,preferred_time ASC";
+        $sql = "SELECT technical_maintenence_request.*,resident.fname,resident.lname,resident.apartment_no,user_account.profile_pic FROM technical_maintenence_request LEFT JOIN resident ON technical_maintenence_request.resident_id=resident.resident_id LEFT JOIN user_account ON resident.user_id=user_account.user_id WHERE state='P' AND preferred_date<='{$date}' ORDER BY preferred_date ASC";
         return $this->conn->query($sql);
     }
 
     public function getUpcommingHallReservations($date){
         $sql = "SELECT hall_reservation.*,resident.fname,resident.lname,resident.apartment_no,user_account.profile_pic FROM hall_reservation LEFT JOIN resident ON hall_reservation.resident_id=resident.resident_id LEFT JOIN user_account ON resident.user_id=user_account.user_id WHERE cancelled_time IS NULL AND date>=CURDATE() AND date<='{$date}' ORDER BY date,start_time ASC";
         return $this->conn->query($sql);
+    }
+
+    public function getAllFreeTechnicians(){
+        $sql = "SELECT technician.* FROM technician WHERE technician.employee_id NOT IN (SELECT technical_maintenence_request.employee_id FROM technical_maintenence_request WHERE technical_maintenence_request.state = 'i')";
+        return $this->conn->query($sql);
+    }
+
+    public function updateThisRequest($requestId, $employeeId, $employeeName){
+        // Turn autocommit off
+        // $this->conn->query("START TRANSACTION");
+        $this->conn->autocommit(FALSE);
+        $sql = "UPDATE technical_maintenence_request SET employee_id='{$employeeId}', state='i' WHERE request_id='{$requestId}'";
+        $result1 = $this->conn->query($sql);
+
+        $result2 = $this->conn->query("SELECT resident_id FROM technical_maintenence_request WHERE request_id='{$requestId}'");
+        $row = mysqli_fetch_assoc($result2);
+        $residentId = (int)$row['resident_id'];
+
+        $result3 = $this->conn->query("SELECT user_id FROM resident WHERE resident_id='{$residentId}'");
+        $row = mysqli_fetch_assoc($result3);
+        $userId = (int)$row['user_id'];
+
+        $desc = "Your request (request ID - " . $requestId . ") has been accepted. Technician " . $employeeName . "will come for your rapair soon.";
+        $sql = "INSERT INTO notification(date,time,description,user_id,view) VALUES (CURDATE(),CURTIME(),'{$desc}','{$userId}',0);";
+        $result4 = $this->conn->query($sql);
+
+        // Commit transaction
+        if ($result1 && $result2 && $result3 && $result4) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 && $result4;
     }
 
 }

@@ -62,6 +62,20 @@ class managerController extends controller
         $this->view->render('manager/handleReqView');
     }
 
+    public function getFreeTechnicians() {
+        $result = $this->model->getAllFreeTechnicians();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
+    public function acceptThisRequest() {
+        return $this->model->updateThisRequest($_POST["request_id"], $_POST["employee_id"], $_POST["employee_name"]);
+    }
+
     public function reservation()
     {
         $this->view->todayHallRes = $this->model->getTodayHallRes();
