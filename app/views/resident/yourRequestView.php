@@ -54,7 +54,7 @@ include_once 'sidenav.php';
                                                     } ?>
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo $row["request_id"]; ?></li>
+                                                <li><?php echo "V" . sprintf("%04d", $row["request_id"]) ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li><?php echo $row["category"]; ?></li>
                                                 <li>
@@ -82,7 +82,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "<br>No requests yet...<br><a href= 'maintenence'> Make Now...</a>";
+                                echo "<br>No requests yet...<br><a href= 'maintenence' style='color:black'> Make Now...</a>";
                             }
                             ?>
                         </section>
@@ -121,7 +121,7 @@ include_once 'sidenav.php';
                                                     } ?>
 
                                                 </li>
-                                                <li><?php echo $row["request_id"]; ?></li>
+                                                <li><?php echo "L" . sprintf("%04d", $row["request_id"]) ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li>
                                                     <?php
@@ -154,7 +154,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "<br>No requests yet...<br><a href= 'laundry'> Make Now...</a>";
+                                echo "<br>   No requests yet...<br><a href= 'laundry' style='color:black'> Make Now...</a>";
                             }
                             ?>
                         </section>
@@ -192,7 +192,7 @@ include_once 'sidenav.php';
                                                     <?php
                                                     } ?>
                                                 </li>
-                                                <li><?php echo $row["visitor_id"]; ?></li>
+                                                <li><?php echo "V" . sprintf("%04d", $row["visitor_id"]) ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
                                                 <?php if ($row["arrive_time"] == NULL) { ?>
@@ -214,7 +214,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "<br>No requests yet...<br><a href= 'visitor'> Make Now...</a>";
+                                echo "<br>No requests yet...<br><a href= 'visitor' style='color:black'> Make Now...</a>";
                             }
                             ?>
                         </section>

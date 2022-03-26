@@ -346,7 +346,7 @@ class residentController extends controller
             $name = $_POST["name"];
             $result = $this->model->requestVisitor($name, $vdate, $des, $id);
             if ($result == 0) {
-                $this->view->error = "Already reserved.Please select another time slot!.";
+                $this->view->error = true;
             } else {
                 $this->view->success = true;
             }

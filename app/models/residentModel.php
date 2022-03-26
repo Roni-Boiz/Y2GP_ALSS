@@ -791,6 +791,7 @@ class residentModel extends model
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
         $sql = "INSERT INTO visitor(name,arrive_date,description,requested_date,resident_id) VALUES('$name','$vdate','$des','$date','$rid')";
+        // echo $sql;
         return $this->conn->query($sql);
     }
     //get considered complaints

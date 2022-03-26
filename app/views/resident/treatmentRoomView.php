@@ -211,8 +211,6 @@ include_once 'sidenav.php';
                             <div class="head">
                                 <h3>Treaters </h3>
                             </div>
-
-
                             <?php
                             if ($this->treater->num_rows > 0) {
                                 while ($row = $this->treater->fetch_assoc()) {

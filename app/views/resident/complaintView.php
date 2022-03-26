@@ -177,7 +177,7 @@ include_once 'sidenav.php';
                                     <div class="detail">
                                         <div>
                                             <div class="detail-info">
-                                                <h5><?php echo "No complaints . . ."; ?></h5>
+                                                <h5><?php echo "No considered complaints . . ."; ?></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@ include_once 'sidenav.php';
                                     <div class="detail">
                                         <div>
                                             <div class="detail-info">
-                                                <h5><?php echo ""; ?></h5>
+                                                <h5><?php echo "No pending complaints . . ."; ?></h5>
                                             </div>
                                         </div>
                                     </div>
