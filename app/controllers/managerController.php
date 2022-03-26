@@ -76,6 +76,14 @@ class managerController extends controller
         return $this->model->updateThisRequest($_POST["request_id"], $_POST["employee_id"], $_POST["employee_name"]);
     }
 
+    public function addRequestCharge(){
+        return $this->model->addChargeToRequest($_POST["request_id"], $_POST["fee"]);
+    }
+
+    public function declineThisRequest(){
+        return $this->model->addCancelTimeToRequest($_POST["request_id"], $_POST["reason"]);
+    }
+
     public function reservation()
     {
         $this->view->todayHallRes = $this->model->getTodayHallRes();

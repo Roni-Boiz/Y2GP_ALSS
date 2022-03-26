@@ -453,27 +453,28 @@ function previousView(){
 
 function declineRequest() {
     let id = document.getElementById("answer1").innerText;
-    employee_id = parseInt(id.substring(3));
-    // console.log(employee_id);
+    var request_id = parseInt(id.substring(3));
+    var reason = document.getElementById("reason").value;
     $.ajax({
         type: "POST",
-        url: "deleteEmployee",
+        url: "declineThisRequest",
         data: {
-            employee_id: employee_id
+            request_id: request_id,
+            reason: reason,
         },
         success: function () {
             a = "#" + id;
             $(a).closest('article').fadeOut("slow");
-            $("#successmsg").html("Employee record deleted");
+            $("#successmsg").html("Request Declined");
+            $("#deleteModel").toggleClass('close');
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
-            $("#myCanvasNav").css('opacity', '0');
-            $("#deleteModel").toggleClass('close');
+            $("#myCanvasNav").css('opacity', '0'); 
         },
         error: function () {
             $("#errormsg").html("Oops something went wrong. Please try again");
             $(".error").css('display', 'block');
-            // console.log(data);
+            console.log(data);
         }
     });
 }
@@ -504,7 +505,6 @@ function acceptRequest() {
     var employee = document.getElementById("employee");
     var employee_id = parseInt(employee.options[employee.selectedIndex].value);
     var employee_name = employee.options[employee.selectedIndex].text;
-    console.log(id);
     $.ajax({
         type: "POST",
         url: "acceptThisRequest",
@@ -516,8 +516,36 @@ function acceptRequest() {
         success: function () {
             a = "#" + id;
             $(a).closest('article').fadeOut("slow");
-            $("#successmsg").html("Request updated. And inform the resident");
+            $("#successmsg").html("Request updated and inform the resident");
             $("#editModel").toggleClass('close');
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');     
+        },
+        error: function(){
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
+        }
+    });
+}
+
+function addCharge(){
+    let id = document.getElementById("answer3").innerText;
+    var request_id = parseInt(id.substring(3));
+    var fee = parseFloat(document.getElementById("fee").value);
+    $.ajax({
+        type: "POST",
+        url: "addRequestCharge",
+        data: {
+            request_id: request_id,
+            fee: fee,
+        },
+        success: function () {
+            a = "#" + id;
+            $(a).closest('article').fadeOut("slow");
+            $("#successmsg").html("Charge Added and inform the resident");
+            $("#addPaymentModel").toggleClass('close');
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
             $("#myCanvasNav").css('opacity', '0');     

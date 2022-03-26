@@ -139,8 +139,68 @@ class managerModel extends model {
         $row = mysqli_fetch_assoc($result3);
         $userId = (int)$row['user_id'];
 
-        $desc = "Your request (request ID - " . $requestId . ") has been accepted. Technician " . $employeeName . "will come for your rapair soon.";
+        $desc = "Your request(request ID-" . $requestId . ") has been accepted. Technician " . $employeeName . " will come for your repair";
         $sql = "INSERT INTO notification(date,time,description,user_id,view) VALUES (CURDATE(),CURTIME(),'{$desc}','{$userId}',0);";
+        $result4 = $this->conn->query($sql);
+
+        // Commit transaction
+        if ($result1 && $result2 && $result3 && $result4) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 && $result4;
+    }
+
+    public function addChargeToRequest($requestId, $fee){
+        $this->conn->autocommit(FALSE);
+        $sql = "UPDATE technical_maintenence_request SET fee='{$fee}', state='c' WHERE request_id='{$requestId}'";
+        $result1 = $this->conn->query($sql);
+
+        $result2 = $this->conn->query("SELECT resident_id FROM technical_maintenence_request WHERE request_id='{$requestId}'");
+        $row = mysqli_fetch_assoc($result2);
+        $residentId = (int)$row['resident_id'];
+
+        $result3 = $this->conn->query("SELECT user_id FROM resident WHERE resident_id='{$residentId}'");
+        $row = mysqli_fetch_assoc($result3);
+        $userId = (int)$row['user_id'];
+
+        $desc = "Your request(request ID-" . $requestId . ") has been completed. A charge of Rs." . $fee . " will add to your current monthly bill";
+        $sql = "INSERT INTO notification(date,time,description,user_id,view) VALUES (CURDATE(),CURTIME(),'{$desc}','{$userId}',0)";
+        $result4 = $this->conn->query($sql);
+
+        // Commit transaction
+        if ($result1 && $result2 && $result3 && $result4) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 && $result4;
+    }
+
+    public function addCancelTimeToRequest($requestId, $reason){
+        $this->conn->autocommit(FALSE);
+        $sql = "UPDATE technical_maintenence_request SET cancelled_time=NOW(), state='d' WHERE request_id='{$requestId}'";
+        $result1 = $this->conn->query($sql);
+
+        $result2 = $this->conn->query("SELECT resident_id FROM technical_maintenence_request WHERE request_id='{$requestId}'");
+        $row = mysqli_fetch_assoc($result2);
+        $residentId = (int)$row['resident_id'];
+
+        $result3 = $this->conn->query("SELECT user_id FROM resident WHERE resident_id='{$residentId}'");
+        $row = mysqli_fetch_assoc($result3);
+        $userId = (int)$row['user_id'];
+
+        $desc = "Your request(request ID-" . $requestId . ") has been declined. Because " . $reason . ". Contact management for any clarification";
+        $sql = "INSERT INTO notification(date,time,description,user_id,view) VALUES (CURDATE(),CURTIME(),'{$desc}','{$userId}',0)";
         $result4 = $this->conn->query($sql);
 
         // Commit transaction

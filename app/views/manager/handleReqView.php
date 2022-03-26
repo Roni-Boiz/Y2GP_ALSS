@@ -306,6 +306,7 @@ include_once 'sidenav.php';
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                    <span style="margin-right: 20px;">Declined Time : <?php echo date('Y-m-d h:i A', strtotime($row["cancelled_time"])) ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -382,7 +383,7 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h3>Add Request Charge</h3>
                     </div>
-                    <form action="#" class="formEdit" method="POST" onsubmit="addCharge(); return false;">
+                    <form action="#" class="formEdit" onsubmit="addCharge(); return false;">
                         <div>
                             <label>Request No : </label>
                             <span id="answer3"></span>
@@ -390,7 +391,7 @@ include_once 'sidenav.php';
                         <div>
                             <div>
                                 <label>Fee (Rs.)</label><br>
-                                <input type="text" name="newfee" class="input-field" placeholder="1500.00" required>
+                                <input type="text" name="fee" id="fee" class="input-field" placeholder="1500.00" title="Enter valid amount Eg-1500, 1500.00" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" required>
                             </div>
                         </div>
                         <div>
@@ -404,7 +405,7 @@ include_once 'sidenav.php';
             <div class="success" style="display:none;">
                 <div class="divPopupModel">
                     <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
-                    <div id="deleteModel" class="open">
+                    <div id="successModel" class="open">
 
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Successful</h2>
@@ -425,7 +426,7 @@ include_once 'sidenav.php';
             <div class="error" style="display:none">
                 <div class="divPopupModel">
                     <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
-                    <div id="deleteModel" class="open">
+                    <div id="errorModel" class="open">
 
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Failed</h2>
