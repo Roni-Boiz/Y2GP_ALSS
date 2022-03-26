@@ -37,7 +37,7 @@ include_once 'sidenav.php';
     </div> <!-- .expand div closed here -->
 </body>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('#residentData').DataTable({
             "processing": true,
@@ -52,6 +52,6 @@ include_once 'sidenav.php';
             ],
         });
     });
-</script>
+</script> -->
 
 </html>
