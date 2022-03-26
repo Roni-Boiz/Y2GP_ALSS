@@ -40,29 +40,32 @@ include_once 'sidenav.php';
                                         <form action="parcels" method="post">
                                             <div>
                                                 <!-- <input type="text" class="input-field-signup" name="apartmentId" placeholder="          Apartment Id" id="apartmentId"> -->
-                                                <div class="input-field-signup" id="apartmentId">
-                                                    <i class="fa fa-address-card" aria-hidden="true"></i>
-                                                    <select name="apartmentId" id="form_apartment">
-                                                        <option value="#">Apartment No</option>
-                                                        <?php
+                                                <label>Apartment No</label><br>
+                                                <select class="input-field" name="apartmentId" id="selectapartment" required>
+                                                    <option value="">Apartment No</option>
+                                                    <?php
 
-                                                        while ($row0 = $this->presentApartments->fetch_assoc()) {
-                                                            $apartment = $row0['apartment_no'];
-                                                            echo "<option value='$apartment'>$apartment</option>";
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
+                                                    while ($row0 = $this->presentApartments->fetch_assoc()) {
+                                                        $apartment = $row0['apartment_no'];
+                                                        echo "<option value='$apartment'>$apartment</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <br>
+
+                                                <span class="error_form" id="apartmenterr" style="font-size:10px;"></span><br>
                                                 <!-- <br><br> -->
-                                                <div class="input-field-signup">
-                                                    <i class="fas fa-paper-plane"></i>
-                                                    <input type="text" name="sender" id="sender" placeholder="Sender" required>
-                                                </div>
-                                                <div class="input-field-signup">
-                                                    <i class="fas fa-pen-square"></i>
-                                                    <input type="text" name="description" placeholder="Description">
-                                                </div>
-                                                <input class="purplebutton" onclick="confirmation()" value="Save" type="submit" style="float:right">save</button>
+
+                                                <label>Sender</label><br>
+                                                <input class="input-field" type="text" name="sender" id="sender" placeholder="Sender" required>
+
+                                                <span class="error_form" id="sendererr" style="font-size:10px;"></span><br>
+
+                                                <label>Description</label><br>
+                                                <input type="textarea" name="description" id="description"><br>
+                                                <br>
+                                                <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><input class="purplebutton" type="button" name="submit" id="disablebutton2" value="Add" style="grid-column:2;cursor:not-allowed;padding:10 10; width:25%" /></span>
+
                                             </div>
                                         </form>
                                     </div>
@@ -96,7 +99,7 @@ include_once 'sidenav.php';
                                                 <article class="row mlb">
                                                     <ul>
                                                         <li><?php echo $row["parcel_id"]; ?></li>
-                                                        <li><?php echo $row["resident_id"]; ?></li>
+                                                        <li><?php echo $row["apartment_no"]; ?></li>
                                                         <li><?php echo $row["receive_date"]; ?></li>
                                                         <li><?php echo $row["receive_time"]; ?></li>
                                                         <li><?php echo $row["sender"]; ?></li>
@@ -104,6 +107,7 @@ include_once 'sidenav.php';
                                                     <ul class="more-content">
                                                         <li>
                                                             <span style="padding-right: 20px;">Description: <?php echo $row["description"] ?></span>
+                                                            <span> Phone no: <?php echo $row["phone_no"] ?></span>
                                                         </li>
                                                     </ul>
                                                 </article>
@@ -123,7 +127,9 @@ include_once 'sidenav.php';
                         <div id="tab3" class="tab">
                             <br>
                             <div class="search">
-                                <input type="text" id="mySearch2" placeholder="Search.." style="width:50%;margin: 5px 0px"><i class="fa fa-search"></i>
+
+                                <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 0px">
+                                <a href="searchOld"><i  title="click here to search old" class="fa fa-history"></i></a>
                             </div>
                             <div style="overflow-x:auto;grid-column:1/span2">
 
@@ -155,8 +161,8 @@ include_once 'sidenav.php';
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                        <span style="padding-right: 20px;">Delivered Time : <?php echo $row1["reached_time"] ?></span>
-                                                        <span style="padding-right: 20px;">Description : <?php echo $row1["description"] ?>
+                                                            <span style="padding-right: 20px;">Delivered Time : <?php echo $row1["reached_time"] ?></span>
+                                                            <span style="padding-right: 20px;">Description : <?php echo $row1["description"] ?>
 
                                                         </li>
                                                     </ul>
@@ -195,17 +201,37 @@ include_once 'sidenav.php';
                                         </div>
                                     </div>
                                 </div> -->
-                            <?php
+            <?php
                             } ?>
 
-                        <?php
+        <?php
                         } else {
                             echo "No Activities";
                         } ?>
 
-                    </div> -->
-                </div> <!-- .hawlockbody div closed here -->
-            </div> <!-- .expand div closed here -->
+            </div> -->
+            <!-- add confirmation -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="deleteModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h2>Are You Sure ?</h2>
+                    </div>
+                    <form class="formDelete">
+                        <div>
+                            <label> Parcel from <span id="answer2"></span> to </label>
+                            <span id="answer1"></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" onclick="addparcel()" name="submit" value="Add">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div> <!-- .hawlockbody div closed here -->
+    </div> <!-- .expand div closed here -->
 </body>
 
 </html>

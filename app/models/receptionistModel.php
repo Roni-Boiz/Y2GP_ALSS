@@ -228,7 +228,7 @@ class receptionistModel extends model {
 
     //to load data to inlocker tab of parcels
     public function getInlocker(){
-        $sql="SELECT * FROM parcel WHERE status=1 ORDER BY receive_date ASC";
+        $sql="SELECT parcel.*,resident.apartment_no,resident.phone_no FROM parcel INNER JOIN resident ON parcel.resident_id=resident.resident_id WHERE status=1 ORDER BY receive_date ASC";
         $result= $this->conn->query($sql);
         return $result;
     }
@@ -240,6 +240,12 @@ class receptionistModel extends model {
     //to load details of delivered parcel data
     public function getReached(){
         $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
+        $result= $this->conn->query($sql);
+        return $result;
+    }
+    //to get old parcels if need for operations
+    public function getOldParcels($id){
+        $sql="SELECT * FROM parcel WHERE status=3 AND (SELECT resident_id FROM resident WHERE apartment_no='$id') ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }

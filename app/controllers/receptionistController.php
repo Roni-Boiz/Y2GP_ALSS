@@ -82,12 +82,20 @@ class receptionistController extends controller{
         $this->view->reached=$this->model->getReached(); 
         $this->view->render('receptionist/parcelsView');
     }
+    public function searchOld(){
+        if(isset($_POST["apartment_no"])){
+            $this->view->oldParcels=$this->model->getOldParcels($_POST["apartment_no"]);
+        }
+        $this->view->render('receptionist/oldparcelsView');
+
+    }
     public function putReached(){
         $pid=$_GET["parcel"];
         $this->model->putReachedAway($pid);
         $this->parcels();
     }
     public function visitors(){
+        $this->view->presentApartments = $this->model->getApartment();
         $this->view->todayVisitors = $this->model->readTodayVisitor();
         $this->view->outgoingVisitors = $this->model->readOutgoingVisitor();
         $this->view->previousVisitors = $this->model->readPreviousVisitor();

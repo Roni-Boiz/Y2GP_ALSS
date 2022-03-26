@@ -15,15 +15,76 @@ include_once 'sidenav.php';
                 <div class="leftPanel" style="margin-top:30px">
                     <div class="tabs" style="grid-column:1/span3">
                         <ul class="tabs-list">
-                            <li class="active"><a href="#tab1">IN-COMING</a></li>
+                            <li class="active"><a href="#tab0">ADD VISITOR</a></li>
+                            <li><a href="#tab1">IN-COMING</a></li>
                             <li><a href="#tab2">OUT-GOING</a></li>
                             <li><a href="#tab3">PREVIOUS</a></li>
                             <!-- <li ><a href="#tab3">OVERDUE VISITORS</a></li> -->
                         </ul><br><br>
-                        <div class="search">
+                        <div class="search" id="visitorSearch">
                             <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
                         </div>
-                        <div id="tab1" class="tab active">
+                        <div id="tab0" class="tab active">
+                            <div class="card1" style="grid-column:1/span2;margin:auto">
+                                <div class="data">
+                                    <div class="photo" style="background-image:url(../../public/img/visitor.jpg);"></div>
+                                    <ul class="details">
+                                        <?php date_default_timezone_set("Asia/Colombo"); ?>
+                                        <li class="author"><?php echo date("H:i"); ?> </li>
+                                        <li class="date"><?php echo  date("F j, Y");  ?></li>
+                                    </ul>
+                                </div>
+                                <div class="description">
+                                    <form action="markIn" class="reservationtime" method="POST">
+                                        <div>
+                                            <label>Name</label><br>
+                                            <input type="text" name="name" id="name" class="input-field" required><br>
+                                            <span class="error_form" id="nameerr" style="font-size:10px;"></span><br>
+                                            <label>Apartment No</label><br>
+                                            <select class="input-field" name="apartmentId" id="selectapartment" required>
+                                                <option value="">Apartment No</option>
+                                                <?php
+
+                                                while ($row0 = $this->presentApartments->fetch_assoc()) {
+                                                    $apartment = $row0['apartment_no'];
+                                                    echo "<option value='$apartment'>$apartment</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                            <br>
+
+                                            <span class="error_form" id="apartmenterr" style="font-size:10px;"></span><br>
+
+                                            <label>Description</label><br>
+                                            <input type="textarea" style="width: 80%;" name="description" id="description"><br>
+                                            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><input class="purplebutton" type="button" id="disablebutton2" name="Submit" value="Add" style="grid-column:2;cursor:not-allowed;padding:10 10; width:25%"></span>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- add confirmation -->
+                        <div class="divPopupModel">
+                            <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                            <div id="deleteModel">
+                                <a href="javascript:void(0)" class="closebtn">&times;</a>
+                                <div style="text-align: center; margin-bottom: 10px;">
+                                    <h2>Are You Sure ?</h2>
+                                </div>
+                                <form class="formDelete">
+                                    <div>
+                                        <label> Add <span id="answer2"></span> Visitor of </label>
+                                        <span id="answer1"></span>
+                                    </div>
+                                    <div>
+                                        <input class="btnRed" type="submit" onclick="addvisitor()" name="submit" value="Add">
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div id="tab1" class="tab">
 
                             <div style="overflow-x:auto;grid-column:1/span2">
                                 <!-- today -->
@@ -52,7 +113,7 @@ include_once 'sidenav.php';
                                                         <li><?php echo $row1["visitor_id"]; ?></li>
                                                         <li><?php echo $row1["name"]; ?></li>
                                                         <li><?php echo $row1["apartment_no"]; ?></li>
-                                                        
+
 
                                                     </ul>
                                                     <ul class="more-content">
@@ -144,11 +205,11 @@ include_once 'sidenav.php';
                                         echo "0 results";
                                     }
                                     ?>
-                                    
+
                                 </section>
 
                             </div>
-                            <div class="divPopupModel">
+                            <!-- <div class="divPopupModel">
                                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                                 <div id="deleteModel">
                                     <a href="javascript:void(0)" class="closebtn">&times;</a>
@@ -166,11 +227,11 @@ include_once 'sidenav.php';
 
                                     </form>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div id="tab3" class="tab">
 
-                            
+
                             <div style="overflow-x:auto;grid-column:1/span2">
                                 <!-- pre -->
                                 <section class="wrapper">
@@ -219,7 +280,7 @@ include_once 'sidenav.php';
                                 </section>
 
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -255,7 +316,6 @@ include_once 'sidenav.php';
         </div> -->
     </div>
     </div>
-
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script>
@@ -273,7 +333,7 @@ include_once 'sidenav.php';
             });
         });
     </script>
-    
+
 </body>
 
 </html>

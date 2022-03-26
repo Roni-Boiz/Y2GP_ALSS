@@ -3,6 +3,7 @@ $(function () {
    $("#old_password_error_message").hide();
    $("#new_password_error_message").hide();
    $("#renew_password_error_message").hide();
+   $("#visitorSearch").css('display', 'none');
 
    //profile details edit
    $("#fnameerr").hide();
@@ -33,10 +34,21 @@ $(function () {
    $("#rnpw").keyup(function () {
       check_retypepassword();
    });
+   
+
    //Select apartment in receptionist views(add visitor,add parcel)
-   $("#selectapartment").on("change", function () {
-      coach();
+   $("#name").keyup(function () {
+      check_add_visitor();
    });
+
+   $("#selectapartment").on("change", function () {
+      check_add_visitor();
+      check_add_parcel();
+   });
+   $("#sender").keyup(function () {
+      check_add_parcel();
+   });
+
    // search row
    $("#mySearch").on('keyup', function () {
       var value = $(this).val().toLowerCase();
@@ -69,6 +81,13 @@ $(function () {
       $(".tab").hide(); // hiding open tab
       $(tabid).show(); // show tab
       $(this).addClass("active"); //  adding active class to clicked tab
+
+      if ($("#tab0").css('display') == 'block') {
+         $("#visitorSearch").css('display', 'none');
+      }
+      else {
+         $("#visitorSearch").css('display', 'block');
+      }
    });
 
    function check_oldpassword() {
@@ -212,7 +231,8 @@ function openModel(amodel, amodelBtn) {
 
    const model = document.getElementById(amodel);
    const modelBtn = document.getElementsByClassName(amodelBtn);
-   const ans = document.getElementById("answer");
+   const ans1 = document.getElementById("answer1");
+   const ans2 = document.getElementById("answer2");
    const closeBtn = document.getElementsByClassName("closebtn");
 
    for (var i = 0; i < modelBtn.length; i++) {
@@ -235,17 +255,37 @@ function openModel(amodel, amodelBtn) {
       model.className = "close";
    }
 
-   // model.addEventListener("click", (e) => {
-   //     if (e.target.id === "yes-btn") {
-   //         ans.innerText = "Hello Guys";
-
-   //     } else if (e.target.id === "no-btn") {
-   //         ans.innerText = "Oh no! ";
-   //     } else {
-   //         return;
-   //     }
-   //     model.className = 'close';
-   // });
+   if ($("#name").val() && $("#selectapartment").val() ) {
+      var n = $("#name").val();
+      var apno = $("#selectapartment").val();
+      if (ans1 !== null) {
+         ans1.innerHTML = apno;
+      }
+      if (ans2 !== null) {
+         ans2.innerHTML = n;
+      }
+   }
+   if ($("#sender").val() && $("#selectapartment").val() ) {
+      var s = $("#sender").val();
+      var apno = $("#selectapartment").val();
+      if (ans1 !== null) {
+         ans1.innerHTML = apno;
+      }
+      if (ans2 !== null) {
+         ans2.innerHTML = s;
+      }
+   }
+   //for registration
+   // if ($("#name").val() && $("#selectapartment").val() ) {
+   //    var n = $("#name").val();
+   //    var apno = $("#selectapartment").val();
+   //    if (ans1 !== null) {
+   //       ans1.innerHTML = apno;
+   //    }
+   //    if (ans2 !== null) {
+   //       ans2.innerHTML = n;
+   //    }
+   // }
 }
 
 
@@ -325,5 +365,135 @@ function check_email() {
       $("#disablebutton2").css('cursor', 'not-allowed');
    }
 }
+//vaildate add visitor
+function check_name() {
+   var n = $("#name").val();
+   var name = new RegExp(/^[a-zA-Z ]+$/);
+
+   if (name.test(n)) {
+      $("#name").css("border-bottom", "2px solid #34F458");
+      $("#nameerr").hide();
+      return true;
+
+   } else {
+      $("#name").css("border-bottom", "2px solid #F90A0A");
+      $("#nameerr").html("Name not valid");
+      $("#nameerr").show();
+      return false;
+   }
+}
+function check_apartment() {
+   if ($("#selectapartment").val() == "") {
+      $("#apartmenterr").html("Select apartment");
+      $("#apartmenterr").show();
+      return false;
+   }
+   else {
+      $("#apartmenterr").hide();
+      return true;
+   }
+}
+function check_sender() {
+   if ($("#sender").val() == "") {
+      $("#sender").css("border-bottom", "2px solid #F90A0A");
+      $("#sendererr").html("Enter a sender");
+      $("#sendererr").show();
+      return false;
+   }
+   else {
+      $("#sendererr").hide();
+      $("#sender").css("border-bottom", "2px solid #34F458");      
+      return true;
+   }
+}
+function check_add_parcel() {
+   if (!(check_apartment()) && !(check_sender())) {
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (!(check_apartment()) && check_sender()) {
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (check_apartment() && !(check_sender())) {
+
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (check_apartment() && check_sender()) {
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+   }
+
+}
+function check_add_visitor() {
+   if (!(check_apartment()) && !(check_name())) {
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (!(check_apartment()) && check_name()) {
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (check_apartment() && !(check_name())) {
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+
+   }
+   if (check_apartment() && check_name()) {
+      $("#disablebutton2").prop('disabled', false);
+      $("#disablebutton2").css('cursor', 'pointer');
+   }
+
+}
+function addvisitor() {
+   console.log(1000);
+   var n = $("#name").val();
+   var apno = $("#selectapartment").val();
+   var d = $("#description").val();
+   $.ajax({
+      type: "POST",
+      url: "markIn",
+      data: {
+         name: n,
+         apartmentId: apno,
+         description: d
+      },
+      success: function () {
+
+         console.log(200);
+
+
+      }
+   });
+}
+//add parcel confimation popup with ajax to pass values to controller function
+function addparcel() {
+   console.log(1000);
+   var s = $("#sender").val();
+   var apno = $("#selectapartment").val();
+   var d = $("#description").val();
+   $.ajax({
+      type: "POST",
+      url: "parcels",
+      data: {
+         sender: s,
+         apartmentId: apno,
+         description: d
+      },
+      success: function () {
+
+         console.log(200);
+
+
+      }
+   });
+}
+
 
 
