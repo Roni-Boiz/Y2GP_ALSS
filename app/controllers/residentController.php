@@ -143,6 +143,7 @@ class residentController extends controller
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
+        $this->view->c = $this->model->getcoaches();
         $this->view->render('resident/fitnessCentreView');
     }
 
@@ -358,6 +359,7 @@ class residentController extends controller
     public function getNotification()
     {
         $this->view->notification = $this->model->readNotification();
+        $this->view->count = $this->model->countNotification();
         $this->view->render('resident/notificationView');
     }
 

@@ -100,7 +100,6 @@ include_once 'sidenav.php';
                                     <!-- show reservation -->
 
                                     <?php
-                                    $count = 1;
                                     for ($hours = 6; $hours < 24; $hours++) {
                                         for ($mins = 0; $mins < 60; $mins += 30) {
                                     ?>

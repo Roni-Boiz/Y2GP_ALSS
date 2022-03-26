@@ -38,7 +38,7 @@ include_once 'sidenav.php';
 
                                         <label>Coach</label><br>
                                         <select name="coach" class="input-field" id="selectcoach" required>
-                                            <option  value="">Select coach</option>
+                                            <option value="">Select coach</option>
                                             <?php
                                             if (isset($this->coach->num_rows)) {
                                                 while ($row1 = $this->coach->fetch_assoc()) {
@@ -144,7 +144,6 @@ include_once 'sidenav.php';
                                     <!-- show reservation -->
 
                                     <?php
-
                                     for ($hours = $s; $hours < $e; $hours++) {
                                         for ($mins = 0; $mins < 60; $mins += 30) {
                                     ?>
@@ -203,7 +202,7 @@ include_once 'sidenav.php';
                                                 <!-- color with available -->
                                                 <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
                                                 <strong class="fa-stack-1x">
-                                                    <?php echo 0 ?>
+                                                    <?php echo 0; ?>
                                                 </strong>
                                             </span>
                                         </td>
@@ -253,57 +252,38 @@ include_once 'sidenav.php';
 
                 </div>
                 <br>
-                <!-- <div class="activeUsers">
-                    <div class="head">
-                        <h3>Coach List</h3>
-                    </div>
-                    <div class="detail">
-                        <img src="../../public/img/user.png" alt="user" />
-                        <div class="detail-info">
-                            <h5>Chamara Supun</h5>
-                            <small>TR001</small>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <img src="../../public/img/user.png" alt="user" />
-                        <div class="detail-info">
-                            <h5>Saman Silva</h5>
-                            <small>TR002</small>
-                        </div>
-                    </div>
-                </div> -->
+
 
                 <div class="activeUsers">
-                            <div class="head">
-                                <h3>Coaches </h3>
-                            </div>
-                            <?php
-                            if ($this->coach->num_rows > 0) {
-                                while ($row = $this->coach->fetch_assoc()) {
-                            ?>
-                                    <div class="detail">
-                                        <div>
-                                            <img src="../../public/img/user.png" alt="user" />
-                                            <div class="detail-info">
-                                                <h5><?php echo "Water Theropy"  ?></h5>
-                                                <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
-                                                <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php
-                                }
-                            } else { ?>
-                                <div class="detail">
-                                    <div>
-                                        <div class="detail-info">
-                                            <h5><?php echo "No available coaches . . ."; ?></h5>
-                                        </div>
+                    <div class="head">
+                        <h3>Coaches </h3>
+                    </div>
+                    <?php
+                    if ($this->c->num_rows > 0) {
+                        while ($row = $this->c->fetch_assoc()) {
+                    ?>
+                            <div class="detail">
+                                <div>
+                                    <!-- <img src="../../public/img/user.png" alt="user" /> -->
+                                    <div class="detail-info">
+                                        <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
+                                        <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
                                     </div>
                                 </div>
-                            <?php
-                            } ?>
+                            </div>
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5><?php echo "No available coaches . . ."; ?></h5>
+                                </div>
+                            </div>
                         </div>
+                    <?php
+                    } ?>
+                </div>
                 </div>
             </div>
 
