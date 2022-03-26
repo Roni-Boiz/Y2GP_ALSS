@@ -226,7 +226,7 @@ class adminController extends controller
         if (isset($_POST['topic']) && isset($_POST['content']) && isset($_POST['visibility'])) {
             $result = $this->addAnnouncement();
             if ($result == 0) {
-                $this->view->error = "Oops something went wrong. Form didn't submiited " . $this->view->message;
+                $this->view->error = "Oops something went wrong. Form didn't submiited. " . $this->view->message;
             } else {
                 $this->view->success = "New Announcement Added";
             }
@@ -242,7 +242,7 @@ class adminController extends controller
     public function addAnnouncement(){
         if (isset($_POST['broadcast'])) {
             $targetDir = "../uploads/announcement/";
-            $allowTypes = array('jpg', 'png', 'jepg', 'gif', 'pdf');
+            $allowTypes = array('jpg', 'png', 'jepg', 'gif', 'pdf', 'doc', 'docx', 'xlsx');
             $insert = $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {

@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="../../public/js/manager.js" defer></script>
-    <script src="https://cdn.ckeditor.com/4.17.1/basic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.18.0/basic/ckeditor.js"></script>
 
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
