@@ -143,6 +143,7 @@ class residentController extends controller
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
+        $this->view->c = $this->model->getcoaches();
         $this->view->render('resident/fitnessCentreView');
     }
 

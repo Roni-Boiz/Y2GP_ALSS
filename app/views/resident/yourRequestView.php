@@ -54,7 +54,7 @@ include_once 'sidenav.php';
                                                     } ?>
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['request_id']; ?>','maintenence')" class="model-Btn1" title="Remove Request"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo "V" . sprintf("%04d", $row["request_id"]) ?></li>
+                                                <li><?php echo "M" . sprintf("%04d", $row["request_id"]) ?></li>
                                                 <li><?php echo $row["preferred_date"]; ?></li>
                                                 <li><?php echo $row["category"]; ?></li>
                                                 <li>
@@ -249,8 +249,7 @@ include_once 'sidenav.php';
                     <div class="divPopupModel">
                         <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
                         <div id="model" class="open">
-
-                            <a onclick="closePopup()">&times;</a>
+                        <a href="yourRequest" class="closebtn">&times;</a>
                             <div style="text-align: center;">
                                 <?php
                                 if ($this->reqSelected->num_rows > 0) {
@@ -259,7 +258,7 @@ include_once 'sidenav.php';
                                     <?php
                                     while ($row = $this->reqSelected->fetch_assoc()) {
                                     ?>
-                                        <?php if ($count == 0) echo "<h2>Categories</h2>" . $row["request_id"];
+                                        <?php if ($count == 0) echo "<h2>Categories</h2>L" . sprintf("%04d", $row["request_id"]);
                                         $count++;
                                         ?>
                                         <div id="col1">

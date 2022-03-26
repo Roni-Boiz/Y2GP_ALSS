@@ -253,39 +253,20 @@ include_once 'sidenav.php';
 
                 </div>
                 <br>
-                <!-- <div class="activeUsers">
-                    <div class="head">
-                        <h3>Coach List</h3>
-                    </div>
-                    <div class="detail">
-                        <img src="../../public/img/user.png" alt="user" />
-                        <div class="detail-info">
-                            <h5>Chamara Supun</h5>
-                            <small>TR001</small>
-                        </div>
-                    </div>
-                    <div class="detail">
-                        <img src="../../public/img/user.png" alt="user" />
-                        <div class="detail-info">
-                            <h5>Saman Silva</h5>
-                            <small>TR002</small>
-                        </div>
-                    </div>
-                </div> -->
+            
 
                 <div class="activeUsers">
                             <div class="head">
                                 <h3>Coaches </h3>
                             </div>
                             <?php
-                            if ($this->coach->num_rows > 0) {
-                                while ($row = $this->coach->fetch_assoc()) {
+                            if ($this->c->num_rows > 0) {
+                                while ($row = $this->c->fetch_assoc()) {
                             ?>
                                     <div class="detail">
                                         <div>
-                                            <img src="../../public/img/user.png" alt="user" />
+                                            <!-- <img src="../../public/img/user.png" alt="user" /> -->
                                             <div class="detail-info">
-                                                <h5><?php echo "Water Theropy"  ?></h5>
                                                 <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
                                                 <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
                                             </div>
