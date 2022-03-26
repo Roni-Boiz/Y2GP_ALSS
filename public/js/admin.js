@@ -275,6 +275,25 @@ function check_retypepassword() {
         $("#rnpw").css("border-bottom", "2px solid #F90A0A");
     }
 }
+
+function expand() {
+    if (document.getElementById("hh").style.gridColumn == "1 / span 3") {
+       document.getElementById("hh").style.gridColumn = "2";
+       document.getElementById("hb").style.gridColumn = "2";
+       document.getElementById("hh").style.marginLeft = "20px";
+       document.getElementById("hb").style.marginLeft = "20px";
+       document.getElementById("side").style.left = "0px";
+       document.getElementById("side").style.transform = "initial";
+    } else {
+       document.getElementById("hh").style.gridColumn = "1 / span 3";
+       document.getElementById("hb").style.gridColumn = "1 / span 3";
+       document.getElementById("hh").style.marginLeft = "50px";
+       document.getElementById("hb").style.marginLeft = "50px";
+       document.getElementById("side").style.left = "-200px";
+       document.getElementById("side").style.transform = "rotateY(180deg)";
+    }
+}
+
 ////////////////////////////////////////////////////
 function openModel(amodel, amodelBtn, id) {
     const model = document.getElementById(amodel);
@@ -361,10 +380,10 @@ function deleteUser() {
             // console.log(a);
             $(a).closest('article').fadeOut("slow");
             $("#successmsg").html("User account deleted");
+            $("#deleteModel").toggleClass('close');
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
-            $("#myCanvasNav").css('opacity', '0');
-            $("#deleteModel").toggleClass('close');
+            $("#myCanvasNav").css('opacity', '0');          
         },
         error: function(data) {
             $("#errormsg").html("Oops something went wrong. Please try again");
@@ -393,10 +412,10 @@ function deleteEmployee() {
             a = "#" + id;
             $(a).closest('article').fadeOut("slow");
             $("#successmsg").html("Employee record deleted");
+            $("#deleteModel").toggleClass('close');
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
-            $("#myCanvasNav").css('opacity', '0');
-            $("#deleteModel").toggleClass('close');
+            $("#myCanvasNav").css('opacity', '0');    
         },
         error: function(){
             $("#errormsg").html("Oops something went wrong. Please try again");
@@ -423,10 +442,10 @@ function updateShift() {
         },
         success: function (msg) {
             $("#successmsg").html("Employee shift updated");
+            $("#editModel").toggleClass('close');
             $(".success").css('display', 'block');
             $("#myCanvasNav").css('width', '0%');
-            $("#myCanvasNav").css('opacity', '0');
-            $("#editModel").toggleClass('close');
+            $("#myCanvasNav").css('opacity', '0');      
             $("#formUpdateShift")[0].reset();
         },
         error: function(){
@@ -468,7 +487,7 @@ function setCurrentServiceRate(service_id){
         success: function (data) {
             $("#formUpdateRate")[0].reset();
             data = JSON.parse(data);
-            console.log(data);
+            // console.log(data);
             $('#newfee').val(data[0].fee).change();
             $('#newcancelfee').val(data[0].cancelation_fee).change();
         }
