@@ -277,7 +277,7 @@ class residentModel extends model
         // print($fee);
         
 
-        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', '$newfee');";
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '5', '$date', '$newfee');";
         $this->conn->query($sql1);
     }
 

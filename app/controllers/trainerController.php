@@ -106,6 +106,8 @@ class trainerController extends controller{
     public function addSchedule(){
         $id = $_SESSION['userId'];
 
+        
+
         if (isset($_POST["date"]) && isset($_POST["coach"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
@@ -139,7 +141,8 @@ class trainerController extends controller{
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
-        $this->view->render('resident/fitnessCentreView');
+        $this->view->c = $this->model->getcoaches();
+        $this->view->render('trainer/addScheduleView');
     }
     
 
