@@ -264,10 +264,10 @@ class residentModel extends model
     {
         // echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
-        $id = $_SESSION['residentId'];
+        $id = $_SESSION['userId'];
 
-        // $sql3 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', 200);";
-        // $this->conn->query($sql3);
+        $sql3 = "SELECT resident_id FROM resident WHERE user_id = '$id'";
+        $Id =  $this->conn->query($sql3);
 
         $sql2 = "SELECT fee FROM service WHERE type ='park'";
         $fee = $this->conn->query($sql2);
@@ -277,7 +277,7 @@ class residentModel extends model
         // print($fee);
         
 
-        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '5', '$date', '$newfee');";
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '$Id', '$date', '$newfee');";
         $this->conn->query($sql1);
     }
 
