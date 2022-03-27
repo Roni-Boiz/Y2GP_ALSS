@@ -256,7 +256,7 @@ class residentModel extends model
             }
         }
 
-         return $count;
+        return $count;
     }
 
 
@@ -271,11 +271,11 @@ class residentModel extends model
 
         $sql2 = "SELECT fee FROM service WHERE type ='park'";
         $fee = $this->conn->query($sql2);
-        $nfee= mysqli_fetch_assoc($fee);
+        $nfee = mysqli_fetch_assoc($fee);
         $newfee = $nfee['fee'];
         // echo ($nfee['fee']);
         // print($fee);
-        
+
 
         $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', '$newfee');";
         $this->conn->query($sql1);
@@ -317,15 +317,17 @@ class residentModel extends model
         // print_r("-" . $noofslots."??");
         //go through $count to $noofslots and check less than 5 all slots
         $c = $count;
-        while ($c < $noofslots) {
-            // echo $row[$c]."+";
-            if ($row[$c] < 5) {
-                $c++;
-                // echo "can : ";
-            } else {
-                $c++;
-                // echo "can't : ";
-                $avail = 0;
+        if (isset($row)) {
+            while ($c < $noofslots) {
+                // echo $row[$c]."+";
+                if ($row[$c] < 5) {
+                    $c++;
+                    // echo "can : ";
+                } else {
+                    $c++;
+                    // echo "can't : ";
+                    $avail = 0;
+                }
             }
         }
         if ($avail == 0) {
@@ -447,16 +449,17 @@ class residentModel extends model
         //print_r("-" . $noofslots);
         //go through $count to $noofslots and check less than 5 all slots
         $c = $count;
-
-        while ($c < $noofslots) {
-            // echo $row[$c]."+";
-            if ($row[$c] < 5) {
-                $c++;
-                // echo "can : ";
-            } else {
-                $c++;
-                // echo "can't : ";
-                $avail = 0;
+        if (isset($row)) {
+            while ($c < $noofslots) {
+                // echo $row[$c]."+";
+                if ($row[$c] < 5) {
+                    $c++;
+                    // echo "can : ";
+                } else {
+                    $c++;
+                    // echo "can't : ";
+                    $avail = 0;
+                }
             }
         }
 
@@ -474,7 +477,7 @@ class residentModel extends model
             //fee multiple by slots
             $fee = $fee["fee"] * ($noofslots - $count);
             //res id AI karann
-            $sql = "INSERT into treatment_room_reservation(date,start_time,end_time,reserved_time,type,fee,resident_id,employee_id) VALUES('$d','$stime','$etime','$date','$type','$fee','$rid',9)";
+            $sql = "INSERT into treatment_room_reservation(date,start_time,end_time,reserved_time,type,fee,resident_id) VALUES('$d','$stime','$etime','$date','$type','$fee','$rid')";
             $result2 = $this->conn->query($sql);
 
 
@@ -487,6 +490,7 @@ class residentModel extends model
                 //none
             } else {
                 $sql4 = "INSERT INTO treatment_reservation_count(date) VALUES('$d')";
+                // echo $sql4;
                 $result3 = $this->conn->query($sql4);
             }
             while ($count < $noofslots) {
@@ -515,7 +519,10 @@ class residentModel extends model
                 $this->conn->rollback();
                 $this->conn->autocommit(TRUE);
             }
-            return  $result1 && $result2 && $result3 && $result4;
+            if ($result2) {
+                echo 100;
+            }
+            return ($result1 && $result2 && $result3 && $result4);
         }
     }
 
