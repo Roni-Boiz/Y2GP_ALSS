@@ -218,29 +218,45 @@ class residentController extends controller
 
     public function parking()
     {
-        $id = $_SESSION['userId'];
-        $this->view->latest = $this->model->latestparking($id);
-        $this->view->slots = $this->model->viewSlots();
-        if (isset($_POST["date"]) && isset($_POST["time"])) {
-            $d = $_POST["date"];
-            $time = $_POST["time"];
-            $this->view->day = $this->model->dayparking($d, $time);
+        // echo($this->selectdate);
+        unset($this->success);
+        if (isset($_POST['date'])) {
+            $d = $_POST['date'];
+            $stime = $_POST['starttime'] . ":00";
+            $etime = $_POST['endtime'] . ":00";
+            $this->view->selectdate = $d;
+            $this->view->stime = $stime;
+            $this->view->etime = $etime;
+
+            $this->view->availability = $this->model->checkpark($d, $stime, $etime);
+            $_SESSION['date'] = $d;
+            $_SESSION['stime'] = $stime;
+            $_SESSION['etime'] = $etime;
+            $_SESSION['count'] = $this->view->availability;
         }
+
         $this->view->render('resident/parkingSlotView');
     }
 
-    public function CheckPark()
+    public function reservepark()
     {
-        $data = file_get_contents('php://input');
-        $data = json_decode($data,true);
+        if (isset($_SESSION['date'])) {
+            $result = $this->model->reservepark($_SESSION['count'], $_SESSION['date'], $_SESSION['stime'], $_SESSION['etime']);
+
+            if ($result == 50) {
+                $this->view->error = "Not available a slot!.";
+            } else {
+                $this->view->success = true;
+            }
+
+            unset($_SESSION['date']);
+            unset($_SESSION['stime']);
+            unset($_SESSION['etime']);
+            unset($_SESSION['count']);
+        }
         
-        $Availability = $this->model->checkParking($data);
-        $data = json_decode($data, true);
-
-        echo json_encode($Availability);
-        exit;
+        $this->view->render('resident/parkingSlotView');
     }
-
 
     public function payment()
     {

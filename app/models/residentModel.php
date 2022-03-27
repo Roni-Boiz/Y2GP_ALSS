@@ -222,6 +222,67 @@ class residentModel extends model
         return $result1 && $result2;
     }
 
+    //****************** */
+
+    //check available parking slot number
+    public function checkpark($d, $stime, $etime)
+    {
+        // echo $stime."-".$etime."<br>";
+        $date = date('Y-m-d H:i:s');
+        $id = $_SESSION['residentId'];
+        $count = 1;
+        $sql = "SELECT * FROM parking_slot_reservation WHERE date ='$d'  and cancelled_time is NULL";
+        $results = $this->conn->query($sql);
+        while ($row = $results->fetch_assoc()) {
+
+            if ($row["start_time"] > $stime && $row["end_time"] >= $etime && $row["start_time"] < $etime) {
+                $count++;
+            }
+            if ($row["start_time"] < $stime && $row["end_time"] > $stime && $row["end_time"] < $etime) {
+                echo ('jjjjk');
+                $count++;
+            }
+            if ($row["start_time"] > $stime && $row["end_time"] < $etime) {
+                $count++;
+            }
+            if ($row["start_time"] < $stime && $row["end_time"] > $stime && $row["start_time"] < $etime && $row["end_time"] > $etime) {
+                $count++;
+            }
+            if ($row["start_time"] == $stime && $row["end_time"] == $etime) {
+                $count++;
+            }
+            if ($count > 40) {
+                return 50;
+            }
+        }
+
+         return $count;
+    }
+
+
+    public function reservepark($count, $d, $stime, $etime)
+    {
+        // echo $stime."-".$etime."<br>";
+        $date = date('Y-m-d H:i:s');
+        $id = $_SESSION['residentId'];
+
+        // $sql3 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', 200);";
+        // $this->conn->query($sql3);
+
+        $sql2 = "SELECT fee FROM service WHERE type ='park'";
+        $fee = $this->conn->query($sql2);
+        $nfee= mysqli_fetch_assoc($fee);
+        $newfee = $nfee['fee'];
+        // echo ($nfee['fee']);
+        // print($fee);
+        
+
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', '$newfee');";
+        $this->conn->query($sql1);
+    }
+
+    //*************** */
+
     //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
     {
@@ -798,7 +859,7 @@ class residentModel extends model
         $rid = $rid["resident_id"];
         $sql = "Select complaint.*,manager.fname as fname ,manager.lname as lname from complaint,manager where resident_id='$rid' and complaint.employee_id=manager.employee_id";
         // echo $sql;
-        $result =$this->conn->query($sql);
+        $result = $this->conn->query($sql);
         return $result;
     }
     //get other complaints
@@ -809,10 +870,10 @@ class residentModel extends model
         $rid = mysqli_fetch_assoc($this->conn->query($sql));
         $rid = $rid["resident_id"];
         $sql = "Select * from complaint where resident_id='$rid' and employee_id IS NULL";
-        $result =$this->conn->query($sql);
+        $result = $this->conn->query($sql);
         return $result;
     }
-    
+
 
     //remove upcomig requests
     public function removeRequest()
@@ -987,7 +1048,7 @@ class residentModel extends model
         } else {
             for ($x = 1; $duration > $x; $x++) {
                 $day = $date + $x;
-                    $sql1 = "SELECT COUNT(reservation_id) FROM `parking_slot_reservation` WHERE date ='$day' AND cancelled_time IS NULL";
+                $sql1 = "SELECT COUNT(reservation_id) FROM `parking_slot_reservation` WHERE date ='$day' AND cancelled_time IS NULL";
                 $resCurrent = mysqli_query($this->conn, $sql1);
                 if ($resCurrent == $max_parkings) {
                     return 0;
