@@ -222,6 +222,67 @@ class residentModel extends model
         return $result1 && $result2;
     }
 
+    //****************** */
+
+    //check available parking slot number
+    public function checkpark($d, $stime, $etime)
+    {
+        // echo $stime."-".$etime."<br>";
+        $date = date('Y-m-d H:i:s');
+        $id = $_SESSION['residentId'];
+        $count = 1;
+        $sql = "SELECT * FROM parking_slot_reservation WHERE date ='$d'  and cancelled_time is NULL";
+        $results = $this->conn->query($sql);
+        while ($row = $results->fetch_assoc()) {
+
+            if ($row["start_time"] > $stime && $row["end_time"] >= $etime && $row["start_time"] < $etime) {
+                $count++;
+            }
+            if ($row["start_time"] < $stime && $row["end_time"] > $stime && $row["end_time"] < $etime) {
+                echo ('jjjjk');
+                $count++;
+            }
+            if ($row["start_time"] > $stime && $row["end_time"] < $etime) {
+                $count++;
+            }
+            if ($row["start_time"] < $stime && $row["end_time"] > $stime && $row["start_time"] < $etime && $row["end_time"] > $etime) {
+                $count++;
+            }
+            if ($row["start_time"] == $stime && $row["end_time"] == $etime) {
+                $count++;
+            }
+            if ($count > 40) {
+                return 50;
+            }
+        }
+
+         return $count;
+    }
+
+
+    public function reservepark($count, $d, $stime, $etime)
+    {
+        // echo $stime."-".$etime."<br>";
+        $date = date('Y-m-d H:i:s');
+        $id = $_SESSION['residentId'];
+
+        // $sql3 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', 200);";
+        // $this->conn->query($sql3);
+
+        $sql2 = "SELECT fee FROM service WHERE type ='park'";
+        $fee = $this->conn->query($sql2);
+        $nfee= mysqli_fetch_assoc($fee);
+        $newfee = $nfee['fee'];
+        // echo ($nfee['fee']);
+        // print($fee);
+        
+
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '1', '$date', '$newfee');";
+        $this->conn->query($sql1);
+    }
+
+    //*************** */
+
     //insert reservations of fitness + check availability
     public function reservefitness($d, $coach, $stime, $etime)
     {

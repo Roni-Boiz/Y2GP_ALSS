@@ -278,13 +278,42 @@ include_once 'sidenav.php';
                                 </div>
 
                                 <div id="col1">
-                                    <label for="stime">Start time</label><br>
-                                    <input type="time" id="stime" name="stime" class="input-field"  >
+                                <label>Start Time</label><br>
+                                        <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
+                                            <!-- <option>Select Time</option> -->
+                                            <?php
+                                            for ($hours = 6; $hours < 24; $hours++) {
+                                                for ($mins = 0; $mins < 60; $mins += 30) {
+                                            ?>
+                                                    <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select><br>
                                 </div>
 
                                 <div id="col2">
-                                    <label for="etime">End time</label><br>
-                                    <input type="time" id="etime" name="etime" class="input-field"  >
+                                <label>End Time</label><br>
+                                        <select name="endtime" class="input-field" id="etime" placeholder="End Time" required>
+                                            <!-- <option>Select Time</option> -->
+                                            <?php
+                                            for ($hours = 6; $hours < 24; $hours++) {
+                                                for ($mins = 0; $mins < 60; $mins += 30) {
+                                            ?>
+                                                    <option>
+                                                        <?php if ($mins + 30 == 60) {
+                                                            echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                        } else {
+                                                            echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                        } ?>
+                                                    </option>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
+                                        </select><br>
                                 </div>
 
                                 
