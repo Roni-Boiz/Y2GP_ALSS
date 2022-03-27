@@ -357,4 +357,40 @@ class managerModel extends model
         }
         return $result1 && $result2 && $result3 && $result4 && $result5;
     }
+
+    public function updateComplaint($complaintId, $userId)
+    {
+        $this->conn->autocommit(FALSE);
+        $manager = $this->conn->query("SELECT employee_id FROM manager WHERE user_id='{$userId}'");
+        if ($manager) {
+            $id = mysqli_fetch_assoc($manager);
+            $managerId = $id['employee_id'];
+        }
+        $sql = "UPDATE complaint SET employee_id='{$managerId}' WHERE complaint_id='{$complaintId}'";
+        $result1 = $this->conn->query($sql);
+
+        $result2 = $this->conn->query("SELECT resident_id FROM complaint WHERE complaint_id='{$complaintId}'");
+        $row = mysqli_fetch_assoc($result2);
+        $residentId = (int)$row['resident_id'];
+
+        $result3 = $this->conn->query("SELECT user_id FROM resident WHERE resident_id='{$residentId}'");
+        $row = mysqli_fetch_assoc($result3);
+        $userId = (int)$row['user_id'];
+
+        $desc = "Your complaint(complaint no-" . $complaintId . ") has been considerd and resolve. Feel free to contact us for further actions";
+        $sql = "INSERT INTO notification(date,time,description,user_id,view) VALUES (CURDATE(),CURTIME(),'{$desc}','{$userId}',0)";
+        $result4 = $this->conn->query($sql);
+
+        // Commit transaction
+        if ($result1 && $result2 && $result3 && $result4) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        } else {
+            // Rollback transaction
+            // echo "Commit transaction failed";
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }
+        return $result1 && $result2 && $result3 && $result4;
+    }
 }

@@ -174,4 +174,18 @@ class managerController extends controller
         $this->view->message = $statusMsg;
         return $insert;
     }
+
+    public function dismissThisComplaint(){
+        return $this->model->updateComplaint($_POST['complaint_id'], $_SESSION['userId']);
+    }
+
+    public function considerThisComplaint(){
+        if (isset($_POST['mailAddress']) && isset($_POST['mailbody'])) {
+            $receiver = $_POST['mailAddress'];
+            $subject = "Hawlock City Resident Complaint";
+            $body = $_POST['mailbody'];
+            $sender = "From:hawlockrycn@gmail.com";
+            mail($receiver, $subject, $body, $sender);
+        }
+    }
 }
