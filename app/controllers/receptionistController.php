@@ -73,7 +73,14 @@ class receptionistController extends controller{
     public function parcels(){
         $this->view->presentApartments = $this->model->getApartment();
         if(isset($_POST["apartmentId"]) and isset($_POST["sender"])) {
-            $this->model->recordParcel($_POST["apartmentId"],$_POST["sender"],$_POST["description"]);
+            $result=$this->model->recordParcel($_POST["apartmentId"],$_POST["sender"],$_POST["description"]);
+            if($result){
+                $this->view->success=true;
+            }
+            else{
+                $this->view->error=true;
+        
+            }
             header("Refresh:0; url=parcels");
 
             // $this->model->sendParcel($_POST["apartmentId"]);
@@ -101,9 +108,22 @@ class receptionistController extends controller{
         $this->view->previousVisitors = $this->model->readPreviousVisitor();
         $this->view->render('receptionist/visitorsView');
     }
+    //to add and check-in at the reception desk
     public function addVisitors(){
-        // $this->view->todayVisitors = $this->model->readTodayVisitor();
-        // $this->view->previousVisitors = $this->model->readPreviousVisitor();
+        if(isset($_POST['name'])){
+            $name=$_POST['name'];
+            $apno=$_POST['apartmentId'];
+            $description=$_POST['description'];
+            $result=$this->model->addVisitor($name,$apno,$description);
+            if($result){
+                $this->view->success=true;
+            }
+            else{
+                $this->view->error=true;
+        
+            }
+
+        }
         $this->view->presentApartments = $this->model->getApartment();
         $this->view->render('receptionist/addvisitorView');
     }
@@ -113,19 +133,7 @@ class receptionistController extends controller{
             $vid=$_GET['visitor'];
             $this->model->setVisitedIn($vid);
             $this->visitors();
-        }
-
-        //to add and check-in at the reception desk
-
-        if(isset($_POST['name'])){
-            $name=$_POST['name'];
-            $apno=$_POST['apartmentId'];
-            $description=$_POST['description'];
-            $this->model->addVisitor($name,$apno,$description);
-            $this->addVisitors();
-
-        }
-        
+        } 
     }
     public function markOut(){
         $vid=$_GET['visitor'];

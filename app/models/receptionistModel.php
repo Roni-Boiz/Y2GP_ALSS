@@ -154,17 +154,29 @@ class receptionistModel extends model {
             return $errors;
         }
         public function addVisitor($name,$apno,$description){
+            $this->conn->autocommit(FALSE);
             $sql1="SELECT resident_id FROM resident WHERE apartment_no='$apno'";
             $resno=mysqli_fetch_assoc($this->conn->query($sql1));
             $resno=$resno['resident_id'];
+
             $sql2="INSERT INTO visitor(name,arrive_date,arrive_time,description,requested_date,resident_id) VALUES('$name',CURRENT_DATE,CURRENT_TIME,'$description',SYSDATE(),'$resno')";
-            $this->conn->query($sql2);
+            $result1=$this->conn->query($sql2);
+
+            if($resno && $result1 ){
+                $this->conn->commit();
+                $this->conn->autocommit(TRUE);
+            }
+            else{
+                $this->conn->rollback();
+                $this->conn->autocommit(TRUE);
+            }
+
         }
 
         public function readTodayVisitor(){
             date_default_timezone_set("Asia/Colombo");
             $date= date("Y-m-d");
-            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE (arrive_date ='$date' AND arrive_time IS NULL)";
+            $sql = "SELECT resident.apartment_no,visitor.name,visitor.description,visitor.visitor_id FROM resident INNER JOIN visitor ON resident.resident_id=visitor.resident_id WHERE (arrive_date ='$date' AND arrive_time IS NULL AND cancelled_time IS NULL)";
             $result = $this->conn->query($sql);   
             return $result;
         }
@@ -201,20 +213,35 @@ class receptionistModel extends model {
         date_default_timezone_set("Asia/Colombo");
         $date=date('Y-m-d');
         $time=date('H:i:s');
+        $this->conn->autocommit(false);
         $sql="SELECT resident_id FROM resident WHERE apartment_no='$apartment'";
         $resid=mysqli_fetch_assoc($this->conn->query($sql));
+
         $sql2="SELECT employee_id FROM receptionist WHERE user_id={$_SESSION['userId']} LIMIT 1";
         $empid=mysqli_fetch_assoc($this->conn->query($sql2));
+
         $sql3="INSERT INTO parcel(receive_date,receive_time,sender,status,employee_id,resident_id,description) VALUES ('$date','$time','$sender',1,{$empid["employee_id"]},{$resid["resident_id"]},'$description')";
-        $this->conn->query($sql3);
+        $result1=$this->conn->query($sql3);
+
         $sql4="SELECT parcel_id,receive_date,receive_time,sender,description FROM parcel WHERE parcel_id IN (SELECT MAX(parcel_id) From parcel) ";
         $description=mysqli_fetch_assoc($this->conn->query($sql4));
+
         $notification="You have received a parcel from {$description["sender"]} at {$description["receive_date"]} {$description["receive_time"]}.({$description["description"]})";
         $sql5="SELECT user_id FROM resident WHERE apartment_no='$apartment'";
         $userid=mysqli_fetch_assoc($this->conn->query($sql5));
+
         $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time',
         '$notification',{$userid["user_id"]},{$description["parcel_id"]})";
-        $this->conn->query($sql6);
+        $result2=$this->conn->query($sql6);
+
+        if ($resid && $empid && $description && $userid && $result1 && $result2) {
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+        }
+        else{
+            $this->conn->rollback();
+            $this->conn->autocommit(TRUE);
+        }    
     }
     // public function sendParcel($apartment){
     //     $date=date('Y-m-d');
@@ -239,7 +266,7 @@ class receptionistModel extends model {
     }
     //to load details of delivered parcel data
     public function getReached(){
-        $sql="SELECT * FROM parcel WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
+        $sql="SELECT parcel.*,resident.apartment_no FROM parcel INNER JOIN resident ON parcel.resident_id=resident.resident_id WHERE status=2 ORDER BY receive_date DESC,receive_time DESC LIMIT 20";
         $result= $this->conn->query($sql);
         return $result;
     }
