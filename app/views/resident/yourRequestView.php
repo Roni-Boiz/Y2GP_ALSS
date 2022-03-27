@@ -170,7 +170,7 @@ include_once 'sidenav.php';
                                     <li>Request ID</li>
                                     <li>Name</li>
                                     <li>Arrive Date</li>
-                                    <li>Arrived Time</li>
+                                    <!-- <li>Arrived Time</li> -->
                                 </ul>
                             </main>
                             <?php
@@ -195,11 +195,11 @@ include_once 'sidenav.php';
                                                 <li><?php echo "V" . sprintf("%04d", $row["visitor_id"]) ?></li>
                                                 <li><?php echo $row["name"]; ?></li>
                                                 <li><?php echo $row["arrive_date"]; ?></li>
-                                                <?php if ($row["arrive_time"] == NULL) { ?>
+                                                <!-- <?php if (!$row["arrive_time"] == NULL) { ?>
                                                     <li><?php echo $row["arrive_time"]; ?></li>
                                                 <?php } else { ?>
                                                     <li><?php echo "Not arrive yet"; ?></li>
-                                                <?php } ?>
+                                                <?php } ?> -->
 
                                             </ul>
                                             <ul class="more-content">

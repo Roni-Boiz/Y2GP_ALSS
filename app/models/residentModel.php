@@ -838,7 +838,7 @@ class residentModel extends model
     public function visitor($id)
     {
         $d = date('Y-m-d');
-        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id') AND arrive_date>='$d' AND cancelled_time IS NULL";
+        $sql = "SELECT * from visitor WHERE resident_id IN (select resident_id from resident where user_id='$id') AND arrive_date>='$d' AND cancelled_time IS NULL AND arrive_time IS NULL";
         $result = $this->conn->query($sql);
         return $result;
     }
