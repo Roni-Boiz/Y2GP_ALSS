@@ -10,7 +10,7 @@ include_once 'sidenav.php';
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
             <h1 id="title">HANDLE LAUNDRY</h1>
         </div>
-        <div id="hb" class="hawlockbody">
+        <div id="hb" class="hawlockbody" style="grid-template-columns: 1fr 2fr 250px;">
             <div class="leftPanel" style="margin:30px 60px 0 0">
 
                 <div class="tabs" style="grid-column:1/span3">

@@ -35,7 +35,7 @@ include_once 'sidenav.php';
                                     </ul>
                                 </div>
                                 <div class="description">
-                                    <form action="markIn" class="reservationtime" method="POST">
+                                    <form action="addVisitors" class="reservationtime" method="POST">
                                         <div>
                                             <label>Name</label><br>
                                             <input type="text" name="name" id="name" class="input-field" required><br>
@@ -78,10 +78,59 @@ include_once 'sidenav.php';
                                         <span id="answer1"></span>
                                     </div>
                                     <div>
-                                        <input class="btnRed" type="submit" onclick="addvisitor()" name="submit" value="Add">
+                                        <input class="btnRed" type="button" onclick="addvisitor()" name="submit" value="Add">
                                     </div>
 
                                 </form>
+                            </div>
+                        </div>
+                        <!--Failed popup -->
+
+                        <div class="error" style="display: none;">
+                            <div class="divPopupModel">
+                                <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                                <div id="deleteModel" class="open">
+
+                                    <div style="text-align: center; margin-bottom: 10px;">
+                                        <h2>Unsuccessfull!</h2>
+                                    </div>
+                                    <form class="formDelete">
+                                        <div>
+                                            <label> <span id="answer2">Unable to add.Get technical support</span> </label>
+                                            <span id="answer1"></span>
+                                        </div>
+                                        <div>
+                                            <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- success popup -->
+
+                        <div class="success" style="display: none;">
+                            <div class="divPopupModel">
+                                <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                                <div id="deleteModel" class="open">
+
+                                    <div style="text-align: center; margin-bottom: 10px;">
+                                        <h2>Edit Success!</h2>
+                                    </div>
+                                    <form class="formDelete">
+                                        <div>
+                                            <label> <span id="answer2"></span>Profile updated
+                                            </label>
+                                            <span id="answer1"></span>
+                                        </div>
+                                        <div>
+                                            <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                        </div>
+
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div id="tab1" class="tab">
@@ -263,7 +312,8 @@ include_once 'sidenav.php';
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                            <span style="padding-right: 20px;">Description: <?php echo $row3["description"] ?></span>
+                                                            <?php if ($row3["description"]) { ?><span style="padding-right: 20px;">Description: <?php echo $row3["description"] ?></span><?php } ?>
+                                                            <span style="padding-right: 20px;">Departure time: <?php echo $row3["departure_time"] ?></span>
                                                         </li>
                                                     </ul>
 
@@ -313,9 +363,10 @@ include_once 'sidenav.php';
                         } ?>
 
             </div>
-        </div> -->
+        </div>
     </div>
     </div>
+
     </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
     <script>

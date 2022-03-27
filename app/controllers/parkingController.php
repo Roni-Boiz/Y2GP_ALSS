@@ -34,8 +34,8 @@ class parkingController extends controller{
         $this->view->render('parkingOfficer/parkingslotView');
     }
     public function parkingspace(){
-        $this->view->parkingSpace=$this->model->getParkingState();
         $this->view->overdueVehicles=$this->model->getOverdueVehicles();
+        $this->view->parkingSpace=$this->model->getParkingState();
         $this->view->render('parkingOfficer/parkingspaceView');
     }
     public function profile(){

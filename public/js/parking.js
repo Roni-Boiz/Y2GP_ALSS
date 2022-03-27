@@ -34,6 +34,9 @@ $(function () {
     $("#rnpw").keyup(function () {
         check_retypepassword();
     });
+    $("#vehicle_no").keyup(function () {
+        check_vehicleno();
+     });
 });
 //profile edit
 function check_fname() {
@@ -165,6 +168,25 @@ function check_oldpassword() {
        $("#renew_password_error_message").html("Passwords did not Match");
        $("#renew_password_error_message").show();
        $("#rnpw").css("border-bottom", "2px solid #F90A0A");
+    }
+ }
+ function check_vehicleno() {
+    var vn = $("#vehicle_no").val();
+    console.log(vn);
+    var vehicle = new RegExp(/^([A-Z]{1,3})-[0-9]{4}$/);
+ 
+    if (vehicle.test(vn)) {
+       $("#vnoerr").hide();
+       $("#vehicle_no").css("border-bottom", "2px solid #34F458");
+       $("#disablebutton2").prop('disabled', false);
+       $("#disablebutton2").css('cursor', 'pointer');
+ 
+    } else {
+       $("#vnoerr").html("Enter valid vehicle no");
+       $("#vnoerr").show();
+       $("#vehicle_no").css("border-bottom", "2px solid #F90A0A");
+       $("#disablebutton2").prop('disabled', true);
+       $("#disablebutton2").css('cursor', 'not-allowed');
     }
  }
 
