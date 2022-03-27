@@ -24,7 +24,7 @@ include_once 'sidenav.php';
                                     </td>
 
                                     <td>
-                                        Resident ID :<?php echo "RA001" ; ?> <br />
+                                        Resident ID :<?php echo "RA001"; ?> <br />
                                         Created : <?php echo $this->y ?><br />
                                     </td>
                                 </tr>
@@ -50,7 +50,7 @@ include_once 'sidenav.php';
                     <tr class="heading">
                         <td>Expenses</td>
 
-                        <td>Value(Rs)</td>
+                        <td>Value(LKR)</td>
                     </tr>
                     <?php
                     $t = 0;
@@ -74,7 +74,7 @@ include_once 'sidenav.php';
                     <tr class="heading">
                         <td>Payments of the month</td>
 
-                        <td>Value(Rs)</td>
+                        <td>Value(LKR)</td>
                     </tr>
 
                     <?php
@@ -101,10 +101,20 @@ include_once 'sidenav.php';
                             <td>Account Balance (B/F)</td>
                             <td><?php $row2 = $this->balanceforward->fetch_assoc();
                                 echo $row2['balance']; ?></td>
-                        <?php
-                    } ?>
                         </tr>
-                </table>
+                        <tr class="heading">
+                        <td>Total Payable Amount</td>
+                        <td><?php if($row2['balance']<0){ echo (-1*$row2['balance']). ".00"; }else{ echo ($row2['balance']). ".00"; };?></td>
+                        </tr>
+
+                    <?php
+                    } ?>
+                    </tr>
+
+
+                </table> <br>                
+                <a href="payment"><input type="submit"  value="Pay Now"></input></a>
+
             </div>
 
 

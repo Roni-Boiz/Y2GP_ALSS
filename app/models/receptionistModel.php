@@ -293,6 +293,41 @@ class receptionistModel extends model {
         $result = $this->conn->query($sql);
         return $result;
     }
+    public  function readcontact($type, $name){
+        if($type=='Manager'){
+            $sql= "SELECT * from manager where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            return $result;
+        }else if($type=='Admin'){
+            $sql= "SELECT * from admin where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            echo "dd";
+            return $result;
+        }else if($type=='Resident'){
+            $sql= "SELECT * from resident where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            return $result;
+        }else if($type=='Parking Officer'){
+            $sql= "SELECT * from parking_officer where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            return $result;
+        }else if($type=='Laundry'){
+            $sql= "SELECT * from laundry where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            return $result;
+        }else if($type=='Trainer'){
+            $sql= "SELECT * from trainer where user_id IS NOT NULL";
+            $result = $this->conn->query($sql);
+            return $result;
+       
+        }else{
+            $sql= "SELECT * from treater";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
+       
+    }
+
 
 
     

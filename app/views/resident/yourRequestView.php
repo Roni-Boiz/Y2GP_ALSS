@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                 <br>
                 <!-- for search row --><br>
                 <div class="search">
-                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-history" aria-hidden="true" title="Search previous..." onclick="previousrequest()"></i>
+                    <input type="text" id="mySearch" placeholder="Type to filter rows.." style="width:50%;margin: 5px 20px"><i class="fa fa-history" aria-hidden="true" title="Search previous..." onclick="previousrequest()"></i>
                 </div>
 
                 <div id="tab2" class="tab">

@@ -1,4 +1,3 @@
-
 <?php
 include_once 'sidenav.php';
 ?>
@@ -183,6 +182,58 @@ include_once 'sidenav.php';
                         </div>
                     </div>
                     <br>
+                    <div class="holdAccount">
+
+                        <div>
+                            <form method="POST" action="help">
+                                <label>Type</label><br>
+                                <select name="type" class="input-field" required>
+                                    <option value="">Select Type</option>
+                                    <option>Manager</option>
+                                    <!-- <option>Admin</option> -->
+                                    <option>Resident</option>
+                                    <option>Parking Officer</option>
+                                    <option>Laundry</option>
+                                    <option>Trainer</option>
+                                    <option>Treater</option>
+                                </select><br>
+                                <!-- <label>Name</label><br> -->
+                                <input type="hidden" id="name" name="name" class="input-field" value="" ><br>
+                                <input class="purplebutton" type="submit" name="Submit" value="View"><br>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="activeUsers">
+                   
+                    <?php
+                    if (isset($this->contact)) {
+                        while ($row = $this->contact->fetch_assoc()) {
+                    ?>
+                            <div class="detail">
+                                <div>
+                                    <!-- <img src="../../public/img/user.png" alt="user" /> -->
+                                    <div class="detail-info">
+                                        <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
+                                        <small><?php echo "Contact : " ;if(isset($row["contact_no"])) echo $row["contact_no"];else echo $row["phone_no"] ?></small>
+                                        <br>
+                                        <small><?php echo "Email : ". " " . $row["email"]   ?></small>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5><?php echo "No available  . . ."; ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    } ?>
+                </div>
 
                 </div>
             </div>
