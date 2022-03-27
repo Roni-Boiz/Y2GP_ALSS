@@ -113,7 +113,7 @@ include_once 'sidenav.php';
 
 
                 </table> <br>                
-                <a href="payment"><input type="submit" onclick="yourReservation" value="Pay Now"></input></a>
+                <a href="payment"><input type="submit"  value="Pay Now"></input></a>
 
             </div>
 
