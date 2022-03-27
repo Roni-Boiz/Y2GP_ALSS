@@ -116,7 +116,7 @@ include_once 'sidenav.php';
                                                 <li id="<?= $reservationId ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1','<?= $reservationId ?>')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('fitness', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -159,7 +159,7 @@ include_once 'sidenav.php';
                                                 <li id="<?= $reservationId ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1','<?= $reservationId ?>')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('treatment', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
@@ -303,7 +303,7 @@ include_once 'sidenav.php';
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
                                                             <li id="<?= $reservationId ?>">
-                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('fitness', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                             </li>
                                                         <?php
                                                         } else {
@@ -368,7 +368,7 @@ include_once 'sidenav.php';
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
                                                             <li id="<?= $reservationId ?>">
-                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('treatment', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                             </li>
                                                         <?php
                                                         } else {

@@ -393,4 +393,24 @@ class managerModel extends model
         }
         return $result1 && $result2 && $result3 && $result4;
     }
+
+    public function getAllSubstituteStaff($type, $employeeId, $resDate){
+
+        if($type == 'treatment'){
+            $week = (int)date('W', strtotime($resDate)) % 3 + 1 ;
+            $result1 = $this->conn->query("SELECT shift_no FROM employee_shift WHERE employee_id='{$employeeId}' AND week='{$week}'");
+            $shift = mysqli_fetch_assoc($result1);
+            $shiftNo = $shift['shift_no'];
+            $sql = "SELECT treater.* FROM treater WHERE treater.employee_id IN (SELECT employee_id FROM employee_shift WHERE shift_no='{$shiftNo}' AND week='{$week}')";
+            return $this->conn->query($sql);
+        }else{
+            $week = (int)date('W', strtotime($resDate)) % 3 + 1 ;
+            $result1 = $this->conn->query("SELECT shift_no FROM employee_shift WHERE employee_id='{$employeeId}' AND week='{$week}'");
+            $shift = mysqli_fetch_assoc($result1);
+            $shiftNo = $shift['shift_no'];
+            $sql = "SELECT trainer FROM trainer WHERE trainer.employee_id IN (SELECT employee_id FROM employee_shift WHERE shift_no='{$shiftNo}' AND week='{$week}')";
+            return $this->conn->query($sql);
+        }
+
+    }
 }

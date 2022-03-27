@@ -188,4 +188,14 @@ class managerController extends controller
             mail($receiver, $subject, $body, $sender);
         }
     }
+
+    public function getSubstituteStaff(){
+        $result = $this->model->getAllSubstituteStaff($_POST['type'], $_POST['employee_id'], $_POST['res_date']);
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
 }

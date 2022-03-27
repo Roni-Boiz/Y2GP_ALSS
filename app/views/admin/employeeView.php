@@ -626,11 +626,11 @@ include_once 'sidenav.php';
         });
 
         $('#newWeek1').on('change', function() {
-            $('option').prop('disabled', false);
-            $("#newWeek2 option[value=" + '' + "]").prop('selected', true);
-            $("#newWeek3 option[value=" + '' + "]").prop('selected', true);
-            $("#newWeek2 option[value=" + '' + "]").prop('disabled', true);
-            $("#newWeek3 option[value=" + '' + "]").prop('disabled', true);
+            // $('option').prop('disabled', false);
+            // $("#newWeek2 option[value=" + '' + "]").prop('selected', true);
+            // $("#newWeek3 option[value=" + '' + "]").prop('selected', true);
+            // $("#newWeek2 option[value=" + '' + "]").prop('disabled', true);
+            // $("#newWeek3 option[value=" + '' + "]").prop('disabled', true);
             $("#newWeek2 option[value=" + this.value + "]").prop('disabled', true);
             $("#newWeek3 option[value=" + this.value + "]").prop('disabled', true);
         });
@@ -643,11 +643,11 @@ include_once 'sidenav.php';
             $("#newWeek2 option[value=" + this.value + "]").prop('disabled', true);
         });
         $('#week1').on('change', function() {
-            $('option').prop('disabled', false);
-            $("#week2 option[value=" + '' + "]").prop('selected', true);
-            $("#week3 option[value=" + '' + "]").prop('selected', true);
-            $("#week2 option[value=" + '' + "]").prop('disabled', true);
-            $("#week3 option[value=" + '' + "]").prop('disabled', true);
+            // $('option').prop('disabled', false);
+            // $("#week2 option[value=" + '' + "]").prop('selected', true);
+            // $("#week3 option[value=" + '' + "]").prop('selected', true);
+            // $("#week2 option[value=" + '' + "]").prop('disabled', true);
+            // $("#week3 option[value=" + '' + "]").prop('disabled', true);
             $("#week2 option[value=" + this.value + "]").prop('disabled', true);
             $("#week3 option[value=" + this.value + "]").prop('disabled', true);
         });

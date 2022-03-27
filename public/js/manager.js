@@ -636,5 +636,32 @@ function considerComplaint(){
     });
 }
 
+function loadAvailableStaff(type, employee_id, res_date) {
+    console.log(type,employee_id,res_date);
+    $.ajax({
+        type: "POST",
+        url: "getSubstituteStaff",
+        data:{
+            type: type,
+            employee_id: employee_id,
+            res_date: res_date,
+        },
+        success: function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            var optionText = '';
+            var optionValue = '';
+            $('#employee').empty();
+            $('#employee').append(new Option("Employee", ""));
+            for (var i in data) {
+                // console.log(data);
+                optionText = data[i].fname + " " + data[i].lname;
+                optionValue = data[i].employee_id;
+                $('#employee').append(new Option(optionText, optionValue));
+            }
+        }
+    });
+}
+
 
 
