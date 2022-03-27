@@ -147,6 +147,8 @@ include_once 'sidenav.php';
                             }
                             ?>
                         <?php
+                        } else {
+                            echo "0 results";
                         }
                         ?>
                     </section>

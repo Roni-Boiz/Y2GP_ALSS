@@ -40,7 +40,6 @@ include_once 'sidenav.php';
                                                             <div>
                                                                 <h4>Hall Reservation <small>(<?php echo date('Y-m-d h:i A', strtotime($row["reserved_time"])) ?>)</small></h4>
                                                                 <h5>On : <?php echo  date('D, F d, Y', strtotime($row["date"])) ?> </h5>
-                                                                <h5>From : <?php echo date('h:i A', strtotime($row["start_time"])) . " - " . date('h:i A', strtotime($row["end_time"])) ?> </h5>
                                                             </div>
                                                             <div>
                                                                 <h4>Type : <?php echo $row["type"] ?></h4>
@@ -78,7 +77,7 @@ include_once 'sidenav.php';
                                                             </div>
                                                             <div>
                                                                 <h4>Technical Request <small>(<?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?>)</small></h4>
-                                                                <h5>On : <?php echo  date('D, F d, Y', strtotime($row["preferred_date"])) ?> <small><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></small></h5>
+                                                                <h5>On : <?php echo  date('D, F d, Y', strtotime($row["preferred_date"])) ?></h5>
                                                             </div>
                                                             <div>
                                                                 <h4>Category : <?php echo $row["category"] ?></h4>
@@ -126,13 +125,13 @@ include_once 'sidenav.php';
                             </div>
                             <div class="doListAdd">
                                 <input type="text" id="myInput" placeholder="Title...">
-                                <span onclick="newElement()" class="addBtn"><i class="fas fa-plus"></i></span>
+                                <span id="addBtn"><i class="fas fa-plus"></i></span>
                             </div>
                         </div>
                         <div>
-                            <ul id="myUL" onload="myDoList()">
-                                <li>Update Services</li>
-                                <li class="checked">Make Announcement</li>
+                            <ul id="myUL">
+                                <!-- <li>Update Services</li> -->
+                                <!-- <li class="checked">Make Announcement</li> -->
                             </ul>
                         </div>
                     </div>

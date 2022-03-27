@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                     <div class="card">
                         <div class="card-body">
                             <div class="detail">
-                                <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'"/>
+                                <img src="../../uploads/profile/employee/<?= $row['profile_pic'] ?>" alt="user" onerror="this.onerror=null; this.src='../../public/img/profile.png'" />
                                 <div class="detail-info">
                                     <?php
                                     $datetime =  $row["date"];
@@ -36,7 +36,34 @@ include_once 'sidenav.php';
                         if ($row["file_name"]) {
                         ?>
                             <div class="card-header">
-                                <img src="../../uploads/announcement/<?php echo $row["file_name"] ?>">
+                                <?php
+                                if (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "pdf") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/pdf-icon.png" alt="pdf">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } elseif (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "doc" || pathinfo($row['file_name'], PATHINFO_EXTENSION) == "docx") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/doc-icon.jpg" alt="docx">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } elseif (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "xlsx") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/xlsx-icon.png" alt="xlsx">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <img src="../../uploads/announcement/<?php echo $row['file_name'] ?>">
+                                <?php
+                                }
+                                ?>
                             </div>
                         <?php
                         }

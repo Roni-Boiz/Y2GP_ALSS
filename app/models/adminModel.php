@@ -285,9 +285,9 @@ class adminModel extends model
             $result3 = $this->conn->query($sql);
 
             if ($result1 && $result2 && $result3) {
-                $receiver = "chathus.m1999@gmail.com";
+                $receiver = $email;
                 $subject = "Hawlock City Employee Login Credentials";
-                $body = "Your Username : " . $username . " and password : " . $password;
+                $body = "Your Username : " . $username . " and Password : " . $password;
                 $sender = "From:hawlockrycn@gmail.com";
                 mail($receiver, $subject, $body, $sender);
             }

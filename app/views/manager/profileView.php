@@ -31,10 +31,10 @@ include_once('sidenav.php');
                         <input type="text" id="lname" name="lname" class="input-field" value=<?php echo $row["lname"] ?> required>
                         <span class="error_form" id="lnameerr" style="font-size:10px"></span><br>
                         <label for="email">Email</label><br>
-                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?>>
+                        <input type="text" id="email" name="email" class="input-field" value=<?php echo $row["email"] ?> required>
                         <span class="error_form" id="emailerr" style="font-size:10px"></span><br>
                         <label for="contctno">Contact No</label><br>
-                        <input type="text" id="phone_no" name="cno" class="input-field" value=<?php echo $row["contact_no"] ?>>
+                        <input type="text" id="phone_no" name="cno" class="input-field" value=<?php echo $row["contact_no"] ?> required>
                         <span class="error_form" id="pnoerr" style="font-size:10px"></span><br>
                         <input type="submit" value="Save" id="disablebutton2">
                     </form>

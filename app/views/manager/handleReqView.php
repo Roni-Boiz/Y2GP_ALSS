@@ -28,7 +28,7 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Resident</li>
                                     <li>Preferd Date</li>
-                                    <li>Preferd Time</li>
+                                    <li>Category</li>
                                     <li>Request Date</li>
                                     <li>Action</li>
                                 </ul>
@@ -37,23 +37,23 @@ include_once 'sidenav.php';
                             if ($this->TodayPendingReq->num_rows > 0) { ?>
                                 <?php
                                 while ($row = $this->TodayPendingReq->fetch_assoc()) {
+                                    $requestId = "TM" . sprintf("%04d", $row["request_id"]);
                                 ?>
                                     <span id="searchrow">
                                         <article class="row pga">
                                             <ul>
                                                 <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small></li>
                                                 <li><?php echo date('D, M d, Y', strtotime($row["preferred_date"])) ?></li>
-                                                <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
+                                                <li><?php echo $row["category"] ?></li>
                                                 <li><?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></li>
-                                                <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
+                                                <li id="<?= $requestId ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1', '<?= $requestId ?>')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2', '<?= $requestId ?>'); loadEmployee();" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="margin-right: 20px;">Category : <?php echo $row["category"] ?></span>
                                                     <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
                                                     <span style="margin-right: 20px;">Request No : <?php echo "TM" . sprintf("%04d", $row["request_id"]) ?></span>
                                                 </li>
@@ -92,7 +92,7 @@ include_once 'sidenav.php';
                                         <ul>
                                             <li>Resident</li>
                                             <li>Preferd Date</li>
-                                            <li>Preferd Time</li>
+                                            <li>Category</li>
                                             <li>Request Date</li>
                                             <li>Action</li>
                                         </ul>
@@ -101,25 +101,25 @@ include_once 'sidenav.php';
                                     if ($this->pendingReq->num_rows > 0) { ?>
                                         <?php
                                         while ($row = $this->pendingReq->fetch_assoc()) {
+                                            $requestId = "TM" . sprintf("%04d", $row["request_id"]);
                                         ?>
                                             <span id="searchrow">
                                                 <article class="row pga">
                                                     <ul>
                                                         <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small></li>
                                                         <li><?php echo date('D, M d, Y', strtotime($row["preferred_date"])) ?></li>
-                                                        <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
+                                                        <li><?php echo $row["category"] ?></li>
                                                         <li><?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></li>
-                                                        <li>
-                                                            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
+                                                        <li id="<?= $requestId ?>">
+                                                            <span onclick="openModel('deleteModel','model-Btn1','<?= $requestId ?>')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
                                                             &emsp;
-                                                            <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
+                                                            <span onclick="openModel('editModel','model-Btn2','<?= $requestId ?>'); loadEmployee();" class="model-Btn2" title="Allocate Employee"><i class="fa fa-forward"></i></span>
                                                         </li>
                                                     </ul>
                                                     <ul class="more-content">
                                                         <li>
-                                                            <span style="margin-right: 20px;">Category : <?php echo $row["category"] ?></span>
                                                             <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
-                                                            <span style="margin-right: 20px;">Request No : <?php echo "TM" . sprintf("%04d", $row["request_id"]) ?></span>
+                                                            <span style="margin-right: 20px;">Request No : <?php echo $requestId ?></span>
                                                         </li>
                                                     </ul>
                                                 </article>
@@ -159,7 +159,7 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Resident</li>
                                     <li>Preferd Date</li>
-                                    <li>Preferd Time</li>
+                                    <li>Category</li>
                                     <li>Technician</li>
                                     <li>Action</li>
                                 </ul>
@@ -168,21 +168,23 @@ include_once 'sidenav.php';
                             if ($this->inprogressReq->num_rows > 0) { ?>
                                 <?php
                                 while ($row = $this->inprogressReq->fetch_assoc()) {
+                                    $requestId = "TM" . sprintf("%04d", $row["request_id"]);
                                 ?>
                                     <span id="searchrow">
                                         <article class="row pga">
                                             <ul>
                                                 <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small></li>
                                                 <li><?php echo date('D, M d, Y', strtotime($row["preferred_date"])) ?></li>
-                                                <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
+                                                <li><?php echo $row["category"] ?></li>
                                                 <li><?php echo $row["tfname"] . " " . $row["tlname"] ?></li>
-                                                <li>
-                                                    <span onclick="openModel('addPaymentModel','model-Btn3')" class="model-Btn3" title="Complete Task"><i class="fa fa-check-square"></i></span>
+                                                <li id="<?= $requestId ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1','<?= $requestId ?>')" class="model-Btn1" title="Decline Request"><i class="fas fa-trash-alt"></i></span>
+                                                    &emsp;
+                                                    <span onclick="openModel('addPaymentModel','model-Btn3','<?= $requestId ?>')" class="model-Btn3" title="Complete Task"><i class="fa fa-check-square"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="margin-right: 20px;">Category : <?php echo $row["category"] ?></span>
                                                     <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
                                                     <span style="margin-right: 20px;">Request Date : <?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></span>
                                                     <span style="margin-right: 20px;">Request No : <?php echo "TM" . sprintf("%04d", $row["request_id"]) ?></span>
@@ -222,7 +224,7 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Resident</li>
                                     <li>Preferd Date</li>
-                                    <li>Preferd Time</li>
+                                    <li>Category</li>
                                     <li>Technician</li>
                                     <li>Fee (Rs.)</li>
                                 </ul>
@@ -237,13 +239,12 @@ include_once 'sidenav.php';
                                             <ul>
                                                 <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small></li>
                                                 <li><?php echo date('D, M d, Y', strtotime($row["preferred_date"])) ?></li>
-                                                <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
+                                                <li><?php echo $row["category"] ?></li>
                                                 <li><?php echo $row["tfname"] . " " . $row["tlname"] ?></li>
-                                                <li><?php echo number_format($row["fee"],2) ?></li>
+                                                <li><?php echo number_format($row["fee"], 2) ?></li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="margin-right: 20px;">Category : <?php echo $row["category"] ?></span>
                                                     <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
                                                     <span style="margin-right: 20px;">Request Date : <?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></span>
                                                     <span style="margin-right: 20px;">Request No : <?php echo "TM" . sprintf("%04d", $row["request_id"]) ?></span>
@@ -283,7 +284,7 @@ include_once 'sidenav.php';
                                 <ul>
                                     <li>Resident</li>
                                     <li>Preferd Date</li>
-                                    <li>Preferd Time</li>
+                                    <li>Category</li>
                                     <li>Request Date</li>
                                     <li>Request No</li>
                                 </ul>
@@ -298,14 +299,14 @@ include_once 'sidenav.php';
                                             <ul>
                                                 <li><?php echo $row["fname"][0] . ". " . $row["lname"] ?> <small>(<?php echo $row["apartment_no"] ?>)</small></li>
                                                 <li><?php echo date('D, M d, Y', strtotime($row["preferred_date"])) ?></li>
-                                                <li><?php echo date('h:i A', strtotime($row["preferred_time"])) ?></li>
+                                                <li><?php echo $row["category"] ?></li>
                                                 <li><?php echo date('Y-m-d h:i A', strtotime($row["request_date"])) ?></li>
                                                 <li><?php echo "TM" . sprintf("%04d", $row["request_id"]) ?></li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
-                                                    <span style="margin-right: 20px;">Category : <?php echo $row["category"] ?></span>
                                                     <span style="margin-right: 20px;">Description : <?php echo $row["description"] ?></span>
+                                                    <span style="margin-right: 20px;">Declined Time : <?php echo date('Y-m-d h:i A', strtotime($row["cancelled_time"])) ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -334,10 +335,10 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Decline Request</h2>
                     </div>
-                    <form action="#" class="removeReservation" method="POST">
+                    <form action="#" class="removeReservation" method="POST" onsubmit="declineRequest(); return false;">
                         <div>
                             <label>Request No : </label>
-                            <span><?= 'TM1234' ?></span>
+                            <span id="answer1"></span>
                         </div>
                         <div>
                             <label>Enter Reason : </label>
@@ -357,20 +358,15 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Allocate Employee</h2>
                     </div>
-                    <form action="#" class="editReservation acceptRequest" method="POST">
+                    <form action="#" class="editReservation acceptRequest" onsubmit="acceptRequest(); return false;">
                         <div>
                             <label>Request No : </label>
-                            <span><?= 'TM1234' ?></span>
+                            <span id="answer2"></span>
                         </div>
                         <div>
                             <label>Select Technician : </label>
                             <select id="employee" name="employee" class="input-field" required>
-                                <option value="">Employees</option>
-                                <option value="1">Employee 1</option>
-                                <option value="2">Employee 2</option>
-                                <option value="3">Employee 3</option>
-                                <option value="4">Employee 4</option>
-                                <option value="5">Employee 5</option>
+                                <option value="">Employee</option>
                             </select>
                         </div>
                         <div>
@@ -385,23 +381,66 @@ include_once 'sidenav.php';
                 <div id="addPaymentModel">
                     <a href="javascript:void(0)" class="closebtn">&times;</a>
                     <div style="text-align: center; margin-bottom: 10px;">
-                        <h3>Add Payment</h3>
+                        <h3>Add Request Charge</h3>
                     </div>
-                    <form action="#" class="formEdit" method="POST">
+                    <form action="#" class="formEdit" onsubmit="addCharge(); return false;">
                         <div>
                             <label>Request No : </label>
-                            <span><?= "TM1234" ?></span>
+                            <span id="answer3"></span>
                         </div>
                         <div>
                             <div>
                                 <label>Fee (Rs.)</label><br>
-                                <input type="text" name="newfee" class="input-field" placeholder="1500.00" required>
+                                <input type="text" name="fee" id="fee" class="input-field" placeholder="1500.00" title="Enter valid amount Eg-1500, 1500.00" pattern="^[0-9]{0,10}(\.[0-9][0-9]?)?" required>
                             </div>
                         </div>
                         <div>
                             <input class="btnPurple" type="submit" name="submit" value="Complete">
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- success popup -->
+            <div class="success" style="display:none;">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="successModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successful</h2>
+                        </div>
+                        <form class="formDelete"  onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="successmsg"></label>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- error popup -->
+            <div class="error" style="display:none">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="errorModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="errormsg">Try again later</label>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
 

@@ -76,11 +76,25 @@ include_once 'sidenav.php';
                         if ($row["file_name"]) {
                         ?>
                             <div class="card-header">
-                                <?php
+                            <?php
                                 if (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "pdf") {
                                 ?>
                                     <div class="pdfFiles">
                                         <img src="../../public/img/pdf-icon.png" alt="pdf">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } elseif (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "doc" || pathinfo($row['file_name'], PATHINFO_EXTENSION) == "docx") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/doc-icon.jpg" alt="docx">
+                                        <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
+                                    </div>
+                                <?php
+                                } elseif (pathinfo($row['file_name'], PATHINFO_EXTENSION) == "xlsx") {
+                                ?>
+                                    <div class="pdfFiles">
+                                        <img src="../../public/img/xlsx-icon.png" alt="xlsx">
                                         <a href="../../uploads/announcement/<?php echo $row['file_name'] ?>"><?php echo substr($row['file_name'], 11) ?></a>
                                     </div>
                                 <?php
@@ -122,30 +136,6 @@ include_once 'sidenav.php';
                                     <input class="btnRed" type="submit" name="submit" value="  OK  ">
                                 </div>
 
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <?php
-            }; ?>
-            <!-- success popup -->
-            <?php
-            if (isset($this->success)) { ?>
-                <div class="success">
-                    <div class="divPopupModel">
-                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8"></div>
-                        <div id="successModel" class="open">
-
-                            <div style="text-align: center; margin-bottom: 10px;">
-                                <h2>Successful</h2>
-                            </div>
-                            <form action="#" class="formDelete" onsubmit="previousView(); return false;">
-                                <div>
-                                    <label><?= $this->success ?></label>
-                                </div>
-                                <div>
-                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
-                                </div>
                             </form>
                         </div>
                     </div>

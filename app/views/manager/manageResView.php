@@ -54,6 +54,7 @@ include_once 'sidenav.php';
                                 if ($this->todayHallRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->todayHallRes->fetch_assoc()) {
+                                        $reservationId = "H" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <article class="row pga">
                                             <ul>
@@ -71,15 +72,15 @@ include_once 'sidenav.php';
                                                 $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
-                                                <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
+                                                <li id="<?= $reservationId ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1','<?= $reservationId ?>')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
                                                     <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
-                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "H" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo  $reservationId ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -94,6 +95,7 @@ include_once 'sidenav.php';
                                 if ($this->todayFitnessRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->todayFitnessRes->fetch_assoc()) {
+                                        $reservationId = "F" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <article class="row nhl">
                                             <ul>
@@ -111,17 +113,17 @@ include_once 'sidenav.php';
                                                 $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
-                                                <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
+                                                <li id="<?= $reservationId ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1','<?= $reservationId ?>')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('fitness', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Reservation Type : Fitness</span>
                                                     <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "F" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo  $reservationId ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -136,6 +138,7 @@ include_once 'sidenav.php';
                                 if ($this->todayTreatmentRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->todayTreatmentRes->fetch_assoc()) {
+                                        $reservationId = "T" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <article class="row mlb">
                                             <ul>
@@ -153,17 +156,17 @@ include_once 'sidenav.php';
                                                 $datetime = date('Y-m-d h:i A', strtotime($row["reserved_time"]));
                                                 ?>
                                                 <li><?php echo $datetime ?></li>
-                                                <li>
-                                                    <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
+                                                <li id="<?= $reservationId ?>">
+                                                    <span onclick="openModel('deleteModel','model-Btn1','<?= $reservationId ?>')" class="model-Btn1" title="Emergency Remove"><i class="fas fa-trash-alt"></i></span>
                                                     &emsp;
-                                                    <span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                    <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('treatment', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
                                                 </li>
                                             </ul>
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
                                                     <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                                    <span style="margin-right: 20px;">Reservation No : <?php echo "T" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                    <span style="margin-right: 20px;">Reservation No : <?php echo  $reservationId ?></span>
                                                 </li>
                                             </ul>
                                         </article>
@@ -213,6 +216,7 @@ include_once 'sidenav.php';
                                 if ($this->allHallRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->allHallRes->fetch_assoc()) {
+                                        $reservationId = "H" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <span id="searchrow">
                                             <article class="row pga">
@@ -259,7 +263,7 @@ include_once 'sidenav.php';
                                                     <li>
                                                         <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
                                                         <span style="margin-right: 20px;">No of Members : <?php echo $row["no_of_members"] ?></span>
-                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "H" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo $reservationId ?></span>
                                                     </li>
                                                 </ul>
                                             </article>
@@ -275,6 +279,7 @@ include_once 'sidenav.php';
                                 if ($this->allFitnessRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->allFitnessRes->fetch_assoc()) {
+                                        $reservationId = "F" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <span id="searchrow">
                                             <article class="row nhl">
@@ -297,7 +302,9 @@ include_once 'sidenav.php';
                                                     if (empty($row['cancelled_time'])) {
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
-                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span></li>
+                                                            <li id="<?= $reservationId ?>">
+                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('fitness', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                            </li>
                                                         <?php
                                                         } else {
                                                         ?>
@@ -321,7 +328,7 @@ include_once 'sidenav.php';
                                                     <li>
                                                         <span style="margin-right: 20px;">Reservation Type : Fitness</span>
                                                         <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "F" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo $reservationId ?></span>
                                                     </li>
                                                 </ul>
                                             </article>
@@ -337,6 +344,7 @@ include_once 'sidenav.php';
                                 if ($this->allTreatmentRes->num_rows > 0) { ?>
                                     <?php
                                     while ($row = $this->allTreatmentRes->fetch_assoc()) {
+                                        $reservationId = "T" . sprintf("%04d", $row["reservation_id"]);
                                     ?>
                                         <span id="searchrow">
                                             <article class="row mlb">
@@ -359,7 +367,9 @@ include_once 'sidenav.php';
                                                     if (empty($row['cancelled_time'])) {
                                                         if (date('Y-m-d') <= $row["date"]) {
                                                     ?>
-                                                            <li><span onclick="openModel('editModel','model-Btn2')" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span></li>
+                                                            <li id="<?= $reservationId ?>">
+                                                                <span onclick="openModel('editModel','model-Btn2','<?= $reservationId ?>'); loadAvailableStaff('treatment', '<?= $row['employee_id'] ?>', '<?= $row['date'] ?>');" class="model-Btn2" title="Substitute Staff"><i class="fa fa-edit"></i></span>
+                                                            </li>
                                                         <?php
                                                         } else {
                                                         ?>
@@ -383,7 +393,7 @@ include_once 'sidenav.php';
                                                     <li>
                                                         <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
                                                         <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
-                                                        <span style="margin-right: 20px;">Reservation No : <?php echo "T" . sprintf("%04d", $row["reservation_id"]) ?></span>
+                                                        <span style="margin-right: 20px;">Reservation No : <?php echo $reservationId ?></span>
                                                     </li>
                                                 </ul>
                                             </article>
@@ -413,10 +423,10 @@ include_once 'sidenav.php';
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Remove Reservation</h2>
                     </div>
-                    <form action="#" class="removeReservation" method="GET">
+                    <form action="#" class="removeReservation" onsubmit="emergencyRemove(); return false;">
                         <div>
                             <label>Reservation No : </label>
-                            <span><?= 1234 ?></span>
+                            <span id="answer1"></span>
                         </div>
                         <div>
                             <label>Enter Reason : </label>
@@ -439,27 +449,64 @@ include_once 'sidenav.php';
                     <form action="#" class="editReservation" method="GET">
                         <div>
                             <label>Reservation No : </label>
-                            <span><?= 1234 ?></span>
+                            <span id="answer2"></span>
                         </div>
                         <div>
                             <label>Select Employee : </label>
                             <select id="employee" name="employee" class="input-field" required>
-                                <option value="">Employees</option>
-                                <option value="1">Employee 1</option>
-                                <option value="2">Employee 2</option>
-                                <option value="3">Employee 3</option>
-                                <option value="4">Employee 4</option>
-                                <option value="5">Employee 5</option>
                             </select>
                         </div>
                         <div>
                             <label>Enter Reason : </label>
-                            <textarea name="reason" id="reason" cols="" rows="3" placeholder="Reason..."></textarea>
+                            <textarea name="reason" id="reason" cols="" rows="3" placeholder="Reason..." required></textarea>
                         </div>
                         <div>
                             <input class="purplebutton" type="submit" name="submit" value="Done">
                         </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- success popup -->
+            <div class="success" style="display:none;">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
+                    <div id="successModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Successful</h2>
+                        </div>
+                        <form class="formDelete"  onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="successmsg"></label>
+                            </div>
+                            <div>
+                                <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- error popup -->
+            <div class="error" style="display:none">
+                <div class="divPopupModel">
+                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                    <div id="errorModel" class="open">
+
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <h2>Failed</h2>
+                        </div>
+                        <form class="formDelete" onsubmit="previousView(); return false;">
+                            <div>
+                                <label id="errormsg">Try again later</label>
+                            </div>
+                            <div>
+                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
 

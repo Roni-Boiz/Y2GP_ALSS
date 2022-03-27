@@ -42,8 +42,6 @@ include_once 'sidenav.php';
                         <span style="display: inline-block;"> Hall <i class="fa fa-square" style="color: #52D29A;"></i></span>
                         <span style="display: inline-block;"> Treatment <i class="fa fa-square" style="color: #AA9150;"></i></span>
                         <span style="display: inline-block;"> Fitness <i class="fa fa-square" style="color: #EB7655;"></i></span>
-                        <!-- <span style="display: inline-block;"> Technical <i class="fa fa-square" style="color: #4fc0d2;"></i></span>
-                        <span style="display: inline-block;"> Laundry <i class="fa fa-square" style="color: #d91393;"></i></span> -->
                         <span style="display: inline-block;"> Parking <i class="fa fa-square" style="color:#4fc0d2;"></i></span>
                         <span style="display: inline-block;"> Backup <i class="fa fa-square" style="color: #1ccf52;"></i></span>
                     </div>
@@ -62,12 +60,11 @@ include_once 'sidenav.php';
                             <label for="type">Type</label><br>
                             <select id="emptype" name="servicetype" class="input-field" required>
                                 <option value="">Select Service Type...</option>
-                                <option value="hall">Hall</option>
+                                <option value="fhall">Function Hall</option>
+                                <option value="chall">Conference Hall</option>
                                 <option value="treatment">Treatment</option>
                                 <option value="fitness">Fitness</option>
-                                <!-- <option value="technnical">Technical</option>
-                                <option value="laundry">Laundry</option> -->
-                                <option value="parking">Parking</option>
+                                <option value="park">Parking</option>
                                 <option value="backup">BackUp</option>
                             </select>
                         </div>
@@ -301,6 +298,8 @@ include_once 'sidenav.php';
                     }
                     ?>
                 <?php
+                } else {
+                    echo "0 results";
                 }
                 ?>
             </section>

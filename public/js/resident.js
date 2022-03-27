@@ -195,12 +195,14 @@ function expand() {
       document.getElementById("hb").style.gridColumn = "2";
       document.getElementById("hh").style.marginLeft = "20px";
       document.getElementById("hb").style.marginLeft = "20px";
+      document.getElementById("side").style.left = "0px";
       document.getElementById("side").style.transform = "initial";
    } else {
       document.getElementById("hh").style.gridColumn = "1 / span 3";
       document.getElementById("hb").style.gridColumn = "1 / span 3";
       document.getElementById("hh").style.marginLeft = "50px";
       document.getElementById("hb").style.marginLeft = "50px";
+      document.getElementById("side").style.left = "-200px";
       document.getElementById("side").style.transform = "rotateY(180deg)";
    }
 }
@@ -1076,4 +1078,29 @@ function complaintlist() {
    }
 
 
+}
+
+$(window).resize(function(e) {
+   screen_resize();
+});
+
+function screen_resize() {
+   var h = parseInt(window.innerHeight);
+   var w = parseInt(window.innerWidth);
+
+   if(w <= 768) {
+      document.getElementById("hh").style.gridColumn = "1 / span 3";
+      document.getElementById("hb").style.gridColumn = "1 / span 3";
+      document.getElementById("hh").style.marginLeft = "50px";
+      document.getElementById("hb").style.marginLeft = "50px";
+      document.getElementById("side").style.left = "-200px";
+      document.getElementById("side").style.transform = "rotateY(180deg)";
+   } else {
+      document.getElementById("hh").style.gridColumn = "2";
+      document.getElementById("hb").style.gridColumn = "2";
+      document.getElementById("hh").style.marginLeft = "20px";
+      document.getElementById("hb").style.marginLeft = "20px";
+      document.getElementById("side").style.left = "0px";
+      document.getElementById("side").style.transform = "initial";
+   }
 }

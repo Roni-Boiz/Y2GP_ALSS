@@ -2154,6 +2154,18 @@ select{
   align-items: center;
   justify-content: center;
 }
+
+.complaintHead{
+  display: grid; 
+  grid-template-columns: 1fr 250px;
+}
+
+@media(max-width:700px){
+  .complaintHead{
+    display: flex; 
+    flex-direction: column;
+  }
+}
 /* End of complaint view  */
 
 /* Manage Reservation  */
@@ -2335,6 +2347,18 @@ select{
   min-width: 100%;
   max-width: 100%;
   margin-bottom: 10px;
+}
+
+.editReservation input[type="email"] {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  height: 35px;
+  background-color: #f0f0f0;
+  margin: 5px 0px;
+  border-radius: 55px;
 }
 
 .editReservation>div>select {

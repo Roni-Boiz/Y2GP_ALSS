@@ -44,9 +44,10 @@ class managerController extends controller
         header("Refresh:0; url=profile");
     }
 
-    public function updateLastActivity(){
-        if(isset($_POST["action"])){
-            if($_POST["action"] == "update_time"){
+    public function updateLastActivity()
+    {
+        if (isset($_POST["action"])) {
+            if ($_POST["action"] == "update_time") {
                 $this->model->updateLoginDetails(date("Y-m-d H:i:s", strtotime(date('h:i:sa'))), $_SESSION['loginId']);
             }
         }
@@ -62,6 +63,32 @@ class managerController extends controller
         $this->view->render('manager/handleReqView');
     }
 
+    public function getFreeTechnicians()
+    {
+        $result = $this->model->getAllFreeTechnicians();
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
+    }
+
+    public function acceptThisRequest()
+    {
+        return $this->model->updateThisRequest($_POST["request_id"], $_POST["employee_id"], $_POST["employee_name"]);
+    }
+
+    public function addRequestCharge()
+    {
+        return $this->model->addChargeToRequest($_POST["request_id"], $_POST["fee"]);
+    }
+
+    public function declineThisRequest()
+    {
+        return $this->model->addCancelTimeToRequest($_POST["request_id"], $_POST["reason"]);
+    }
+
     public function reservation()
     {
         $this->view->todayHallRes = $this->model->getTodayHallRes();
@@ -75,6 +102,11 @@ class managerController extends controller
         $this->view->render('manager/manageResView');
     }
 
+    public function removeThisReservation()
+    {
+        return $this->model->emergencyRemoveThisReservation($_POST["reservation_id"], $_POST["reason"]);
+    }
+
     public function complaint()
     {
         $this->view->complaints = $this->model->getAllComplaints();
@@ -83,6 +115,12 @@ class managerController extends controller
 
     public function announcement()
     {
+        if (isset($_POST['topic']) && isset($_POST['content']) && isset($_POST['visibility'])) {
+            $result = $this->addAnnouncement();
+            if ($result == 0) {
+                $this->view->error = "Oops something went wrong. Form didn't submiited. " . $this->view->message;
+            }
+        }
         $this->view->ann = $this->model->getAnnouncement();
         $this->view->render('manager/announcementView');
     }
@@ -96,12 +134,12 @@ class managerController extends controller
     {
         if (isset($_POST['broadcast'])) {
             $targetDir = "../uploads/announcement/";
-            $allowTypes = array('jpg', 'png', 'jepg', 'gif', 'pdf');
-            $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
+            $allowTypes = array('jpg', 'png', 'jepg', 'gif', 'pdf', 'doc', 'docx', 'xlsx');
+            $insert = $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
             $fileNames = array_filter($_FILES['files']['name']);
             if (!empty($fileNames)) {
                 foreach ($_FILES['files']['name'] as $key => $val) {
-                    $fileName = time().'_'.basename($_FILES['files']['name'][$key]);
+                    $fileName = time() . '_' . basename($_FILES['files']['name'][$key]);
                     $targetFilePath = $targetDir . $fileName;
 
                     $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
@@ -123,19 +161,41 @@ class managerController extends controller
 
                 if ($insertValuesSQL) {
                     $statusMsg = "Files are uploaded successfully." . $errorMsg;
-                    echo $statusMsg;
-                    header("Refresh:0; url=announcement");
                 } else {
                     $statusMsg = "Upload failed! " . $errorMsg;
                     $this->view->error_message = $statusMsg;
-                    $this->view->render('404errorView');
                 }
             } else {
-                $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
+                $insert = $this->model->insertAnnouncement($_POST['topic'], $_POST['content'], $_POST['visibility'], NULL, $_SESSION['userId']);
                 $statusMsg = "Files are uploaded successfully." . $errorMsg;
-                echo $statusMsg;
-                header("Refresh:0; url=announcement");
             }
         }
+        header("Refresh:0; url=announcement");
+        $this->view->message = $statusMsg;
+        return $insert;
+    }
+
+    public function dismissThisComplaint(){
+        return $this->model->updateComplaint($_POST['complaint_id'], $_SESSION['userId']);
+    }
+
+    public function considerThisComplaint(){
+        if (isset($_POST['mailAddress']) && isset($_POST['mailbody'])) {
+            $receiver = $_POST['mailAddress'];
+            $subject = "Hawlock City Resident Complaint";
+            $body = $_POST['mailbody'];
+            $sender = "From:hawlockrycn@gmail.com";
+            mail($receiver, $subject, $body, $sender);
+        }
+    }
+
+    public function getSubstituteStaff(){
+        $result = $this->model->getAllSubstituteStaff($_POST['type'], $_POST['employee_id'], $_POST['res_date']);
+        //loop through the returned data
+        $data = array();
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+        print json_encode($data);
     }
 }
