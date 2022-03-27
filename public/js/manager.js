@@ -279,10 +279,12 @@ function openModel(amodel, amodelBtn, id) {
     }
     if (ans2 !== null) {
         ans2.innerHTML = id;
+        
     }
     if (ans3 !== null) {
         ans3.innerHTML = id;
     }
+
 }
 
 $(".tabs-list li a").click(function (e) {
@@ -579,6 +581,54 @@ function emergencyRemove(){
             $("#myCanvasNav").css('opacity', '0'); 
         },
         error: function () {
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
+        }
+    });
+}
+
+function dismissComplaint(complaint_id){
+    $.ajax({
+        type: "POST",
+        url: "dismissThisComplaint",
+        data: {
+            complaint_id: complaint_id,
+        },
+        success: function () {
+            a = "#" + complaint_id;
+            $(a).closest('div').fadeOut("slow");
+            $("#successmsg").html("Complaint resolved");
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '1000%');
+            $("#myCanvasNav").css('opacity', '0.8'); 
+        },
+        error: function () {
+            $("#errormsg").html("Oops something went wrong. Please try again");
+            $(".error").css('display', 'block');
+            console.log(data);
+        }
+    });
+}
+
+function considerComplaint(){
+    let mailAddress = document.getElementById("email").value;
+    var mailbody = document.getElementById("mailbody").value;
+    $.ajax({
+        type: "POST",
+        url: "considerThisComplaint",
+        data: {
+            mailAddress: mailAddress,
+            mailbody: mailbody,
+        },
+        success: function () {
+            $("#successmsg").html("Mail send. Please check your inbox for any reply.");
+            $("#editModel").toggleClass('close');
+            $(".success").css('display', 'block');
+            $("#myCanvasNav").css('width', '0%');
+            $("#myCanvasNav").css('opacity', '0');
+        },
+        error: function (data) {
             $("#errormsg").html("Oops something went wrong. Please try again");
             $(".error").css('display', 'block');
             console.log(data);
