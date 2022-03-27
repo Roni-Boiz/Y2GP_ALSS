@@ -38,25 +38,22 @@ include_once 'sidenav.php';
                             <input type="text" name="quantity1" id="quantity1" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw1" id="catw1" class="input-field">
                                 <option value="">Select weight</option>
-                                <option>1-5</option>
-                                <option>5-10</option>
-                                <option>more than 10</option>
+                                <option>1-10</option>
+                                <option>11-20</option>
                             </select><br>
                             <label>Category 2</label><br>
                             <input type="text" name="quantity2" id="quantity2" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw2" id="catw2" class="input-field">
                                 <option value="">Select weight</option>
-                                <option>1-5</option>
-                                <option>5-10</option>
-                                <option>more than 10</option>
+                                <option>1-10</option>
+                                <option>11-20</option>
                             </select><br>
                             <label>Category 3</label><br>
                             <input type="text" name="quantity3" id="quantity3" class="input-field" pattern="^\d{1,2}|$" placeholder="Enter quantity">
                             <select name="catw3" id="catw3" class="input-field">
                                 <option value="">Select weight</option>
-                                <option>1-5</option>
-                                <option>5-10</option>
-                                <option>more than 10</option>
+                                <option>1-10</option>
+                                <option>11-20</option>
                             </select><br>
                             <label>Prefered Date</label><br>
                             <input type="date" name="pdate" class="input-field" required min="<?= date("Y-m-d")  ?>">
@@ -80,18 +77,18 @@ include_once 'sidenav.php';
                             <div style="text-align: center;">
                                 <h3>Help<i class="fas fa-info-circle"></i></h3>
                             </div>
-                            <ul>Category 1</ul>
-                            <li>T-Shirt</li>
-                            <li>Shorts</li>
+                            <ul>Category 1(wash,dry,iron)</ul>
+                            <li>T-Shirt, Shirt</li>
+                            <li>Shorts, Troushers</li>
                             <hr>
-                            <ul>Category 2</ul>
-                            <li>Bed-sheet</li>
-                            <li>Table Cloth</li>
+                            <ul>Category 2(dry clean)</ul>
+                            <li>Coat</li>
                             <li>Certain</li>
                             <hr>
-                            <ul>Category 3</ul>
-                            <li>Shirts</li>
-                            <li>Troushers</li>
+                            <ul>Category 3()</ul>
+                            <li>A</li>
+                            <li>B</li>
+                            
 
 
                         </div>

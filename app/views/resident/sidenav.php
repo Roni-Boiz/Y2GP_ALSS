@@ -18,34 +18,43 @@
     <div id="myheader">
         <div class="header">
             <div class="btn"><span class="fas fa-bars" onclick="expand()"></span></div>
-            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px"/>
+            <img src="../../public/img/logo-04.png" alt="" id="logo" style="margin:-15px 10px" />
             <!-- <h2>AlSS</h2> -->
             <div class="head">
                 <ul>
                     <li class="dropdown"><a href="#"><img src="../../uploads/profile/resident/<?php echo $_SESSION["profilePic"] ?>" onerror="this.onerror=null; this.src='../../public/img/profile.png'"></a>
                         <ul>
-                            <li><a href="profile" ></li><i class="fa fa-user" ></i>Profile</a></li>
-                            <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
-                        </ul>    
-                            <li><a><?php echo  $_SESSION['userName'];?></a></li>
-                            <li><a href="getNotification"><i class="fa fa-bell" aria-hidden="true"></i></a></li>  
+                            <li><a href="profile"></li><i class="fa fa-user"></i>Profile</a>
                     </li>
+                    <li><a href="../homeController/logout"><i class="fas fa-sign-out-alt"></i></i>Logout</a></li>
+                </ul>
+                <li><a><?php echo  $_SESSION['userName']; ?></a></li>
+                <li><a href="getNotification">
+                        <i class="fa fa-bell" aria-hidden="true"></i>
+
+                        <!-- <span class="fa-stack">
+                            <i class="fa fa-bell fa-stack-1x" style="color:red;font-size:20px"></i>
+                            <strong class="fa-stack text-primary"><?php echo 1; ?></strong>
+                        </span> -->
+                    </a></li>
+                </li>
                 </li>
                 </ul>
             </div>
         </div>
 
         <nav class="sidebar" id="side">
-            <ul >
+            <ul>
                 <li><a href="../residentController/index"><i class="fa fa-home"></i>HOME</a></li>
                 <!-- for resident -->
                 <li class="dropdown"><a href="#"><i class="fa fa-calendar-plus"></i>RESERVATIONS </a>
                     <ul>
                         <li><a href="yourReservation">YOUR RESERVATIONS</a></li>
-                        <li><a href="parking">PARKING SLOT</a></li>
-                        <li><a href="fitness">FITNESS CENTRE</a></li>
                         <li><a href="hall">HALL</a></li>
+                        <li><a href="fitness">FITNESS CENTRE</a></li>
                         <li><a href="treatment">TREATMENT ROOM</a></li>
+                        <li><a href="parking">PARKING SLOT</a></li>
+
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#"><i class="fa fa-handshake"></i>REQUESTS</a>
@@ -56,34 +65,12 @@
                         <li><a href="visitor">VISITOR APPROVAl</a></li>
                     </ul>
                 </li>
-                <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
                 <li><a href="payment"><i class="fa fa-credit-card"></i>PAYMENTS</a></li>
-                
+                <li><a href="bill"><i class="fa fa-sticky-note"></i>BILLS</a></li>
+
+
                 <li><a href="complaint"><i class="fas fa-question-circle"></i>HELP</a></li>
             </ul>
         </nav>
 
         <script type="text/javascript" src="../../public/js/resident.js"></script>
-
-        
-        <div class="error" style="display:none;z-index:5">
-                <div class="divPopupModel">
-                    <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
-                    <div id="deleteModel" class="open">
-
-                        <div style="text-align: center; margin-bottom: 10px;">
-                            <h2>Failed</h2>
-                        </div>
-                        <form class="formDelete" onsubmit="previousView() ;return false;">
-                            <div>
-                                <label> <span id="answer2"></span>Try again later</label>
-                                <span id="answer1"></span>
-                            </div>
-                            <div>
-                                <input class="btnRed" type="submit" name="submit" value="  OK  ">
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>

@@ -27,7 +27,7 @@ include_once 'sidenav.php';
                                 <form action="maintenence" class="reservationtime" method="POST">
 
                                     <label for="type">Type</label><br>
-                                    <select name="type" class="input-field" id="select" value=0>
+                                    <select name="type" class="input-field" id="select" value=0 required>
                                         <option value="">Select Type</option>
                                         <option>Electricity</option>
                                         <option>Painting</option>

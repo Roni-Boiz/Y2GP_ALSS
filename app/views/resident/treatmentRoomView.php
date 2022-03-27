@@ -26,13 +26,15 @@ include_once 'sidenav.php';
                                 <form action="treatment" class="reservationtime" method="POST">
                                     <div id="">
                                         <label>Date</label><br>
-                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" id="datepicker" class="input-field" required>
+                                        <input type="date" name="date" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" id="datepicker" class="input-field" required value="<?php if (isset($this->selectdate)) {
+                                                                                                                                                                                                                echo $this->selectdate;
+                                                                                                                                                                                                            }; ?>">
                                         <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
                                         <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
                                         <div id="available">
-                                        <h3>Description</h3><br>
-  
+                                            <h3>Description</h3><br>
+
                                             <?php if (isset($this->selectdate)) {
                                                 echo $this->selectdate . "<br> 
                                                 Please check availability and  <br>select time slot.<br>";
@@ -98,7 +100,6 @@ include_once 'sidenav.php';
                                     <!-- show reservation -->
 
                                     <?php
-                                    $count = 1;
                                     for ($hours = 6; $hours < 24; $hours++) {
                                         for ($mins = 0; $mins < 60; $mins += 30) {
                                     ?>
@@ -209,8 +210,6 @@ include_once 'sidenav.php';
                             <div class="head">
                                 <h3>Treaters </h3>
                             </div>
-
-
                             <?php
                             if ($this->treater->num_rows > 0) {
                                 while ($row = $this->treater->fetch_assoc()) {
@@ -269,7 +268,7 @@ include_once 'sidenav.php';
                         </div>
                         <div id="col">
                             <label>Date</label><br>
-                            <input type="date" name="date" id="datepicker1" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                            <input type="date" name="date" id="datepicker" class="input-field" readonly value="<?php if (isset($this->selectdate)) {
                                                                                                                     echo $this->selectdate;
                                                                                                                 }; ?>">
                         </div>
@@ -316,8 +315,8 @@ include_once 'sidenav.php';
                     </form>
 
                 </div>
-                               <!-- reservation success message -->
-                               <?php
+                <!-- reservation success message -->
+                <?php
                 if (isset($this->error)) { ?>
 
                     <div class="divPopupModel">
@@ -327,7 +326,7 @@ include_once 'sidenav.php';
                             <div style="text-align: center; margin-bottom: 10px;">
                                 <h2>Reservation Failed!</h2>
                             </div>
-                            <form class="formDelete" >
+                            <form class="formDelete">
                                 <div>
                                     <label> <span id="answer2"></span><?php echo $this->error; ?></label>
                                     <span id="answer1"></span>
@@ -352,7 +351,7 @@ include_once 'sidenav.php';
                             <div style="text-align: center; margin-bottom: 10px;">
                                 <h2>Successfull!</h2>
                             </div>
-                            <form class="formDelete" >
+                            <form class="formDelete">
                                 <div>
                                     <label> <span id="answer2"></span>Reservation charges added.
                                         Check notification for more details. </label>

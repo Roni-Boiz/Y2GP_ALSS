@@ -36,8 +36,8 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
-            <!-- reservation success message -->
-            <?php
+           <!-- request success message -->
+           <?php
             if (isset($this->error)) { ?>
 
                 <div class="divPopupModel">
@@ -45,11 +45,11 @@ include_once 'sidenav.php';
                     <div id="deleteModel" class="open">
 
                         <div style="text-align: center; margin-bottom: 10px;">
-                            <h2>Request Failed!</h2>
+                            <h2>Unsuccessfull!</h2>
                         </div>
-                        <form class="formDelete" >
+                        <form class="formDelete" onsubmit="hall ;return false;">
                             <div>
-                                <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                <label> <span id="answer2"></span>please try again</label>
                                 <span id="answer1"></span>
                             </div>
                             <div>
@@ -71,11 +71,11 @@ include_once 'sidenav.php';
                     <div id="deleteModel" class="open">
 
                         <div style="text-align: center; margin-bottom: 10px;">
-                            <h2>Successfull!</h2>
+                            <h2>Sent!</h2>
                         </div>
-                        <form class="formDelete" >
+                        <form class="formDelete" onsubmit="">
                             <div>
-                                <label> <span id="answer2"></span>Request Done!
+                                <label> <span id="answer2"></span>Re
                                 </label>
                                 <span id="answer1"></span>
                             </div>

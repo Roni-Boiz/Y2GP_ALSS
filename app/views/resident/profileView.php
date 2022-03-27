@@ -97,24 +97,24 @@ include_once('sidenav.php');
                             </div>
                             <hr>
                             <div>
-                                <label>NIC</label>
+                                <label>NIC :</label>
                                 <label><?php echo $row["nic"] ?></label>
                             </div>
                             <hr>
                             <div>
-                                <label>Contact</label>
+                                <label>Contact :</label>
                                 <label><?php echo $row["phone_no"] ?></label>
                             </div>
                             <hr>
                             <hr>
                             <div>
                                 <div>
-                                    <label>Vehicle NO</label>
+                                    <label>Vehicle NO :</label>
                                     <label><?php echo $row["vehicle_no"] ?></label>
                                 </div>
                                 <hr>
-                                <label>Balance</label>
-                                <label><?php echo $row["balance"] ?></label>
+                                <label>Balance :</label>
+                                <label><?php echo $row["balance"]. " LKR" ?></label>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ include_once('sidenav.php');
                             <div>
                                 <div>
                                     <h2>Your account is protected</h2>
-                                    <div style="font-size: small;color: #545d7a;">The Security Check-Up examinied your account and found no recomended actions</div>
+                                    <!-- <div style="font-size: small;color: #545d7a;">The Security Check-Up examinied your account and found no recomended actions</div> -->
                                 </div>
                                 <picture>
                                     <source media="(max-width: 660px)" srcset="../../public/img/small-acount-protected.png">
@@ -146,10 +146,10 @@ include_once('sidenav.php');
                                 <input type="password" id="rnpw" name="rnpw" class="input-field" placeholder="new password again"><br>
                                 <span class="error_form" id="renew_password_error_message" style="font-size:10px;"></span><br>
 
-                                <input type="submit" onclick="confirm" value="Save">
+                                <input type="submit" onclick="confirm" value="Save" id="disablebutton1">
                             </form>
 
-                            <input type="submit" id="changepassword" value="Change Password" onclick="setVisibility2('passwordView');">
+                            <input type="submit" id="changepassword" value="Change Password"  onclick="setVisibility2('passwordView');">
                         </div>
                     </div>
                     <a href="javascript:setVisibility3('alldevices')" id="showmore">Show More</a>

@@ -21,7 +21,7 @@ $(function () {
    $("#maintenecetypeerr").hide();
    $("#descriptionerr").hide();
    $("#currencyerr").hide();
-  
+
    //profile edit pw
    $("#opw").keyup(function () {
       check_oldpassword();
@@ -81,6 +81,7 @@ $(function () {
    $("#etime").on("change", function () {
       check_time();
    });
+   
 
    //laundry form input check
    $("#quantity1,#quantity2,#quantity3").keyup(function () {
@@ -252,6 +253,43 @@ function showcardpayment() {
    }
 }
 
+
+//confirm pop up
+function openModel(amodel, amodelBtn, id, type) {
+   const model = document.getElementById(amodel);
+   const modelBtn = document.getElementsByClassName(amodelBtn);
+   const ans1 = document.getElementById("answer1");
+   const ans2 = document.getElementById("answer2");
+   const closeBtn = document.getElementsByClassName("closebtn");
+   console.log(id);
+   console.log(model);
+   for (var i = 0; i < modelBtn.length; i++) {
+      modelBtn[i].addEventListener('click', showModel, false);
+   }
+
+   function showModel() {
+      document.getElementById("myCanvasNav").style.width = "100%";
+      document.getElementById("myCanvasNav").style.opacity = "0.8";
+      model.className = "open";
+   }
+
+   for (var i = 0; i < closeBtn.length; i++) {
+      closeBtn[i].addEventListener('click', closeModel, false);
+   }
+
+   function closeModel() {
+      document.getElementById("myCanvasNav").style.width = "0%";
+      document.getElementById("myCanvasNav").style.opacity = "0";
+      model.className = "close";
+   }
+   if (ans1 !== null) {
+      ans1.innerHTML = id;
+   }
+   if (ans2 !== null) {
+      ans2.innerHTML = type;
+   }
+}
+
 // edit profile
 function setVisibility1(id) {
    if (document.getElementById('editprofile').value == 'Edit Profile') {
@@ -295,16 +333,22 @@ function check_oldpassword() {
       $("#old_password_error_message").html("Enter old password");
       $("#old_password_error_message").show();
       $("#opw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
    else if (password_length < 8) {
       $("#old_password_error_message").html("Atleast 8 Characters");
       $("#old_password_error_message").show();
       $("#opw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
 
    else {
       $("#old_password_error_message").hide();
       $("#opw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
    }
 
 }
@@ -317,17 +361,23 @@ function check_newpassword() {
       $("#new_password_error_message").html("Enter password");
       $("#new_password_error_message").show();
       $("#npw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
       error_rpassword = true;
    }
    else if (password_length < 8) {
       $("#new_password_error_message").html("Atleast 8 Characters");
       $("#new_password_error_message").show();
       $("#npw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
       error_rpassword = true;
    }
    else {
       $("#new_password_error_message").hide();
       $("#npw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
    }
 }
 
@@ -338,25 +388,29 @@ function check_retypepassword() {
    if (rpassword == retype_password && retype_password != "") {
       $("#renew_password_error_message").hide();
       $("#rnpw").css("border-bottom", "2px solid #34F458");
+      $("#disablebutton1").prop('disabled', false);
+      $("#disablebutton1").css('cursor', 'pointer');
 
       error_retype_password = true;
    } else {
       $("#renew_password_error_message").html("Passwords did not Match");
       $("#renew_password_error_message").show();
       $("#rnpw").css("border-bottom", "2px solid #F90A0A");
+      $("#disablebutton1").prop('disabled', true);
+      $("#disablebutton1").css('cursor', 'not-allowed');
    }
 }
 
 //check name not having numbers or other symbols
 function check_fname() {
    var fn = $("fname").val();
-   var firstname= new RegExp(/^[a-zA-Z]+$/);
+   var firstname = new RegExp(/^[a-zA-Z ]+$/);
 
    if (firstname.test(fn)) {
       $("#fnameerr").hide();
       $("#fname").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
    } else {
       $("#fnameerr").html("Name not valid");
       $("#fnameerr").show();
@@ -370,13 +424,13 @@ function check_fname() {
 //check name not having numbers or other symbols
 function check_lname() {
    var ln = $("#lname").val();
-   var lastname = new RegExp(/^[a-zA-Z]+$/);
+   var lastname = new RegExp(/^[a-zA-Z ]+$/);
 
    if (lastname.test(ln)) {
       $("#lnameerr").hide();
       $("#lname").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#lnameerr").html("Name not valid");
@@ -396,7 +450,7 @@ function check_nic() {
       $("#nicnoerr").hide();
       $("#nic").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#nicnoerr").html("NIC not valid");
@@ -416,7 +470,7 @@ function check_phone() {
       $("#pnoerr").hide();
       $("#phone_no").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#pnoerr").html("Phone number not valid");
@@ -435,7 +489,7 @@ function check_email() {
       $("#emailerr").hide();
       $("#email").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#emailerr").html("Email not valid");
@@ -455,7 +509,7 @@ function check_vehicleno() {
       $("#vnoerr").hide();
       $("#vehicle_no").css("border-bottom", "2px solid #34F458");
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
 
    } else {
       $("#vnoerr").html("Vehicle no not valid");
@@ -468,7 +522,7 @@ function check_vehicleno() {
 
 function check_newmember() {
    var nm = $("#newmem").val();
-   var memname = new RegExp('/^[a-zA-Z]+$/');
+   var memname = new RegExp(/^[a-zA-Z]+$/);
 
    if (memname.test(nm)) {
       // $("#newmembererr").hide();
@@ -485,8 +539,16 @@ function check_newmember() {
 //form validation in reservation
 function check_members() {
    var count = $("#mem50").val();
+   var c = new RegExp(/^[0-9]{1,2}$/);
    if (count > 50) {
       $("#member").html("Member should be less than 50");
+      $("#disablebutton2").prop('disabled', true);
+      $("#disablebutton2").css('cursor', 'not-allowed');
+      $("#member").show();
+   }
+   //check is it number
+   else if (!c.test(count)) {
+      $("#member").html("Enter valid member");
       $("#disablebutton2").prop('disabled', true);
       $("#disablebutton2").css('cursor', 'not-allowed');
       $("#member").show();
@@ -494,7 +556,7 @@ function check_members() {
    else {
       $("#member").hide();
       $("#disablebutton2").prop('disabled', false);
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
    }
 
 }
@@ -580,7 +642,7 @@ function check_time() {
    var mydate = $("#datepicker").val();
    //current date in yyyy-mm-dd format
    var todayDate = new Date().toISOString().slice(0, 10);
-   console.log(todayDate);
+   console.log("today : ", todayDate);
    console.log(mydate);
    var dt = new Date();
 
@@ -667,7 +729,7 @@ function laundry() {
    }
 }
 //maintenence validation
-function mainenencevalidation(){
+function mainenencevalidation() {
    if (!$("#select").val() && $("#description").val()) {
       $("#maintenecetypeerr").html("Select type first");
       $("#disablebutton3").css('cursor', 'not-allowed');
@@ -678,29 +740,29 @@ function mainenencevalidation(){
       $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
-   if($("#select").val() && !$("#description").val()){
+   if ($("#select").val() && !$("#description").val()) {
       $("#descriptionerr").html("Description is required");
       $("#disablebutton3").css('cursor', 'not-allowed');
       $("#disablebutton3").prop('disabled', true);
       $("#descriptionerr").show();
 
-   }else{
+   } else {
       $("#descriptionerr").hide();
       $("#disablebutton3").css('cursor', 'pointer');
       $("#disablebutton3").prop('disabled', false);
    }
-   
+
 }
 
 //currency validation
-function currencycheck(){
+function currencycheck() {
    var am = $("#amount").val();
    var c = new RegExp(/^(?!0\.00)\d{1,6}(,\d{3})*(\.\d\d)?$/);
 
    if (c.test(am)) {
       $("#currencyerr").hide();
       $("#amount").css("border-bottom", "2px solid #34F458");
-      $("#disablebutton2").css('cursor', 'cursor');
+      $("#disablebutton2").css('cursor', 'pointer');
       $("#disablebutton2").prop('disabled', false);
 
    } else {
@@ -712,41 +774,6 @@ function currencycheck(){
    }
 }
 
-//confirm pop up
-function openModel(amodel, amodelBtn, id, type) {
-   const model = document.getElementById(amodel);
-   const modelBtn = document.getElementsByClassName(amodelBtn);
-   const ans1 = document.getElementById("answer1");
-   const ans2 = document.getElementById("answer2");
-   const closeBtn = document.getElementsByClassName("closebtn");
-   console.log(id);
-   console.log(type);
-   for (var i = 0; i < modelBtn.length; i++) {
-      modelBtn[i].addEventListener('click', showModel, false);
-   }
-
-   function showModel() {
-      document.getElementById("myCanvasNav").style.width = "100%";
-      document.getElementById("myCanvasNav").style.opacity = "0.8";
-      model.className = "open";
-   }
-
-   for (var i = 0; i < closeBtn.length; i++) {
-      closeBtn[i].addEventListener('click', closeModel, false);
-   }
-
-   function closeModel() {
-      document.getElementById("myCanvasNav").style.width = "0%";
-      document.getElementById("myCanvasNav").style.opacity = "0";
-      model.className = "close";
-   }
-   if (ans1 !== null) {
-      ans1.innerHTML = id;
-   }
-   if (ans2 !== null) {
-      ans2.innerHTML = type;
-   }
-}
 
 
 // delete row and hide for value addition
@@ -999,6 +1026,48 @@ function deleterequest() {
    }
 
 }
+
+//get previous reservation
+function previousreservation() {
+   console.log("test");
+   console.log($("#tab1").css('display') == 'block');
+   if($("#tab1").css('display') == 'block') {
+      window.location = "preReservation?type=1";
+   }
+   else if($("#tab2").css('display') == 'block'){
+      window.location = "preReservation?type=2";
+
+   }else if($("#tab3").css('display') == 'block'){
+      window.location = "preReservation?type=3";
+
+   }else if($("#tab4").css('display') == 'block'){
+      window.location = "preReservation?type=4";
+
+   }
+
+}
+
+//get previous reservation
+function previousrequest() {
+   console.log("test");
+   // console.log($("#tab1").css('display') == 'block');
+   if ($("#tab1").css('display') == 'block') {
+      window.location = "preRequest?type=1";
+   }
+   else if($("#tab2").css('display') == 'block'){
+      window.location = "preRequest?type=2";
+
+   }else if($("#tab3").css('display') == 'block'){
+      window.location = "preRequest?type=3";
+
+   }else{
+      window.location = "preRequest?type=4";
+
+   }
+
+}
+
+
 //view complaints
 function complaintlist() {
    if ($("#com").css('display') == 'block') {

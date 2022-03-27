@@ -24,10 +24,11 @@ include_once 'sidenav.php';
                     <form action="markIn" class="reservationtime" method="POST">
                         <div>
                             <label>Name</label><br>
-                            <input type="text" name="name" class="input-field" required><br>
+                            <input type="text" name="name" id="name" class="input-field" required><br>
+                            <span class="error_form" id="nameerr" style="font-size:10px;"></span><br>
                             <label>Apartment No</label><br>
-                            <select name="apartmentId" id="form_apartment">
-                                <option value="#">Apartment No</option>
+                            <select class="input-field" name="apartmentId" id="selectapartment" required>
+                                <option value="">Apartment No</option>
                                 <?php
 
                                 while ($row0 = $this->presentApartments->fetch_assoc()) {
@@ -37,9 +38,12 @@ include_once 'sidenav.php';
                                 ?>
                             </select>
                             <br>
+
+                            <span class="error_form" id="apartmenterr" style="font-size:10px;"></span><br>
+
                             <label>Description</label><br>
-                            <input type="textarea" name="description" id="description"><br>
-                            <input class="purplebutton" type="submit" name="Submit" value="Add" style="grid-column:2">
+                            <input type="textarea" style="width: 80%;" name="description" id="description"><br>
+                            <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1"><input class="purplebutton" type="button" id="disablebutton2" name="Submit" value="Add" style="grid-column:2;cursor:not-allowed;padding:10 10; width:25%"></span>
                         </div>
 
                     </form>
@@ -89,6 +93,7 @@ include_once 'sidenav.php';
                                 <span id="answer1"></span>
                             </div>
                             <div>
+
                                 <input class="btnBlue" type="submit" name="submit" value="  OK  ">
                             </div>
 
@@ -97,7 +102,27 @@ include_once 'sidenav.php';
                 </div>
             <?php
             }; ?>
-            <a href="#">to proceed further</a>
+            <a href="visitors">to proceed further</a>
+            <!-- add confirmation -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="deleteModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h2>Are You Sure ?</h2>
+                    </div>
+                    <form class="formDelete">
+                        <div>
+                            <label> Add <span id="answer2"></span> Visitor of </label>
+                            <span id="answer1"></span>
+                        </div>
+                        <div>
+                            <input class="btnRed" type="submit" onclick="addvisitor()" name="submit" value="Add">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div> <!-- .hawlockbody div closed here -->
     </div> <!-- .expand div closed here -->
 </body>

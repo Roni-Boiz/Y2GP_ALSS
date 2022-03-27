@@ -134,7 +134,6 @@ class residentController extends controller
             $d = $_POST["date"];
             $coach = $_POST["coach"];
             //to display availability in new view 
-            $this->view->coach = $coach;
 
             $this->view->day = $this->model->dayfitness($d, $coach);
             $this->view->shiftno = $this->model->getshiftno($d, $coach);
@@ -144,6 +143,7 @@ class residentController extends controller
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
+        $this->view->c = $this->model->getcoaches();
         $this->view->render('resident/fitnessCentreView');
     }
 
@@ -171,8 +171,9 @@ class residentController extends controller
             }
         } else if (isset($_POST["date"])) {
             $d = $_POST["date"];
-            $this->view->selectdate = $d;
+
             $this->view->day = $this->model->daytreatment($d);
+            $this->view->selectdate = $d;
         }
         $this->view->treater = $this->model->readtreater();
         $this->view->latest = $this->model->latesttreatment($id);
@@ -218,29 +219,45 @@ class residentController extends controller
 
     public function parking()
     {
-        $id = $_SESSION['userId'];
-        $this->view->latest = $this->model->latestparking($id);
-        $this->view->slots = $this->model->viewSlots();
-        if (isset($_POST["date"]) && isset($_POST["time"])) {
-            $d = $_POST["date"];
-            $time = $_POST["time"];
-            $this->view->day = $this->model->dayparking($d, $time);
+        // echo($this->selectdate);
+        unset($this->success);
+        if (isset($_POST['date'])) {
+            $d = $_POST['date'];
+            $stime = $_POST['starttime'] . ":00";
+            $etime = $_POST['endtime'] . ":00";
+            $this->view->selectdate = $d;
+            $this->view->stime = $stime;
+            $this->view->etime = $etime;
+
+            $this->view->availability = $this->model->checkpark($d, $stime, $etime);
+            $_SESSION['date'] = $d;
+            $_SESSION['stime'] = $stime;
+            $_SESSION['etime'] = $etime;
+            $_SESSION['count'] = $this->view->availability;
         }
+
         $this->view->render('resident/parkingSlotView');
     }
 
-    public function CheckPark()
+    public function reservepark()
     {
-        $data = file_get_contents('php://input');
-        $data = json_decode($data,true);
+        if (isset($_SESSION['date'])) {
+            $result = $this->model->reservepark($_SESSION['count'], $_SESSION['date'], $_SESSION['stime'], $_SESSION['etime']);
+
+            if ($result == 50) {
+                $this->view->error = "Not available a slot!.";
+            } else {
+                $this->view->success = true;
+            }
+
+            unset($_SESSION['date']);
+            unset($_SESSION['stime']);
+            unset($_SESSION['etime']);
+            unset($_SESSION['count']);
+        }
         
-        $Availability = $this->model->checkParking($data);
-        $data = json_decode($data, true);
-
-        echo json_encode($Availability);
-        exit;
+        $this->view->render('resident/parkingSlotView');
     }
-
 
     public function payment()
     {
@@ -346,7 +363,7 @@ class residentController extends controller
             $name = $_POST["name"];
             $result = $this->model->requestVisitor($name, $vdate, $des, $id);
             if ($result == 0) {
-                $this->view->error = "Already reserved.Please select another time slot!.";
+                $this->view->error = true;
             } else {
                 $this->view->success = true;
             }
@@ -358,6 +375,7 @@ class residentController extends controller
     public function getNotification()
     {
         $this->view->notification = $this->model->readNotification();
+        $this->view->count = $this->model->countNotification();
         $this->view->render('resident/notificationView');
     }
 
@@ -418,5 +436,43 @@ class residentController extends controller
     {
         $amount = $_GET["amt"];
         $this->model->paymentSave($amount);
+    }
+
+    //search previous reservations
+    public function preReservation()
+    {
+        $type = $_GET['type'];
+        if (isset($_POST['date'])) {
+            $date = $_POST['date'];
+            if ($type == '1') {
+                $this->view->hall = $this->model->searchReservations($type, $date);
+            } else if ($type == '2') {
+                $this->view->fitness = $this->model->searchReservations($type, $date);
+            } else if ($type == '3') {
+                $this->view->treatment = $this->model->searchReservations($type, $date);
+            } else if ($type == '4') {
+                $this->view->parking = $this->model->searchReservations($type, $date);
+            }
+        }
+        $this->view->type = $type;
+        $this->view->render('resident/preReservationView');
+    }
+
+    //search previous reservations
+    public function preRequest()
+    {
+        $type = $_GET['type'];
+        if (isset($_POST['date'])) {
+            $date = $_POST['date'];
+            if ($type == '1') {
+                $this->view->laundry = $this->model->searchRequests($type, $date);
+            } else if ($type == '2') {
+                $this->view->maintenence = $this->model->searchRequests($type, $date);
+            } else if ($type == '3') {
+                $this->view->visitor = $this->model->searchRequests($type, $date);
+            }
+        }
+        $this->view->type = $type;
+        $this->view->render('resident/preRequestView');
     }
 }

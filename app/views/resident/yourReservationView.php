@@ -23,7 +23,7 @@ include_once 'sidenav.php';
                 <br>
                 <!-- for search row --><br>
                 <div class="search">
-                    <input type="text" id="mySearch" placeholder="Search.." style="width:50%;margin: 5px 20px"><i class="fa fa-search"></i>
+                    <input type="text" id="mySearch" placeholder="Type to filter rows.." style="width:50%;margin: 5px 20px"><i class="fa fa-history" aria-hidden="true" title="Search previous..." onclick="previousreservation()"></i>
                 </div>
 
                 <div id="tab1" class="tab active">
@@ -52,7 +52,7 @@ include_once 'sidenav.php';
                                                 <li id="<?php echo $row['reservation_id']; ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','hall')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo $row["reservation_id"]; ?></li>
+                                                <li><?php echo "H" . sprintf("%04d", $row["reservation_id"]) ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
                                                 <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                                 <li><?php echo $row["type"] ?></li>
@@ -72,7 +72,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "No reservations yet...<br><a href= 'hall'> Reserve Now...</a>";
+                                echo "No reservations yet...<br><a href= 'hall' style='color:black'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -104,7 +104,7 @@ include_once 'sidenav.php';
                                                 <li id="<?php echo $row['reservation_id']; ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','fit')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo $row["reservation_id"]; ?></li>
+                                                <li><?php echo "F" . sprintf("%04d", $row["reservation_id"]) ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
                                                 <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                                 <li><?php echo $row["fname"] . " " . $row["lname"]; ?></li>
@@ -122,7 +122,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "No reservations yet...<br><a href= 'fitness'> Reserve Now...</a>";
+                                echo "No reservations yet...<br><a href= 'fitness' style='color:black'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -153,7 +153,7 @@ include_once 'sidenav.php';
                                                 <li id="<?php echo $row['reservation_id']; ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id'] ?>','treat')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo $row["reservation_id"]; ?></li>
+                                                <li><?php echo "T" . sprintf("%04d", $row["reservation_id"]) ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
                                                 <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                                 <li><?php echo $row["type"]; ?></li>
@@ -171,7 +171,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "<br>No reservations yet...<br><a href= 'treatment'> Reserve Now...</a>";
+                                echo "No reservations yet...<br><a href= 'treatment' style='color:black'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -203,7 +203,7 @@ include_once 'sidenav.php';
                                                 <li id="<?php echo $row['reservation_id']; ?>">
                                                     <span onclick="openModel('deleteModel','model-Btn1', '<?= $row['reservation_id']; ?>','parking')" class="model-Btn1" title="Remove Reservation"><i class="fas fa-trash-alt"></i></span>
                                                 </li>
-                                                <li><?php echo $row["reservation_id"]; ?></li>
+                                                <li><?php echo "P" . sprintf("%04d", $row["reservation_id"]) ?></li>
                                                 <li><?php echo $row["date"]; ?></li>
                                                 <li><?php echo $row["start_time"] . " - " . $row["end_time"]; ?></li>
                                                 <li><?php echo $row["vehicle_no"]; ?></li>
@@ -221,7 +221,7 @@ include_once 'sidenav.php';
                                 ?>
                             <?php
                             } else {
-                                echo "No reservations yet...<br><a href= 'parking'> Reserve Now...</a>";
+                                echo "No reservations yet...<br><a href= 'parking' style='color:black'> Reserve Now...</a>";
                             }
                             ?>
                         </section>
@@ -229,32 +229,7 @@ include_once 'sidenav.php';
                     </p>
                 </div>
             </div>
-            <!-- show first model -->
-            <!-- <span onclick="openModel('editModel','addBtn')" class="addBtn">Btn</span> -->
-            <!-- show second model -->
-            <!-- <span onclick="openModel('deleteModel','model-Btn1')" class="model-Btn1">Btn</span> -->
-            <!-- firstmodel -->
-            <!-- <div class="divPopupModel">
-                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                <div id="editModel">
-                    <a href="javascript:void(0)" class="closebtn">&times;</a>
-                    <div style="text-align: center; margin-bottom: 10px;">
-                        <h3>Are You Sure ?</h3>
-                    </div>
-                    <form action="#" class="formDelete" method="GET">
-                        <div>
-                            <label> Delete Reservation With Reservation ID </label>
-                            <span></span>
-                        </div>
-                        <div>
-                            <input class="btnRed" type="submit" name="submit" value="Delete">
-                        </div>
-
-                    </form>
-
-                </div>
-            </div> -->
-
+          
             <!-- delete confirmation -->
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
@@ -275,6 +250,7 @@ include_once 'sidenav.php';
                     </form>
                 </div>
             </div>
+
 
             <!-- reservation success message -->
             <div class="error" style="display:none;z-index:5">
@@ -321,6 +297,8 @@ include_once 'sidenav.php';
                     </div>
                 </div>
             </div>
+
+
 
 
         </div> <!-- .hawlockbody div closed here -->

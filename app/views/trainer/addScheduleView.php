@@ -1,302 +1,432 @@
 <?php
 include_once 'sidenav.php';
 ?>
+</head>
 <style>
 
-    .reservation_search{
-        padding-left:25px;
-    }
-    .reservation_search input[type=text]{
-        
-        width: 350px;
-  max-width: 100%;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url('../../public/img/searchicon.png');
-  background-position: 7px 15px;
-  background-repeat: no-repeat;
-  padding: 10px 20px 12px 40px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
-  align-items: center;
-  justify-content: center;
-    }
-
-    .reservation_search .addBtn {
-  background: #d9d9d9;
-  color: #555;
-  float: right;
-  text-align: center;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 45%);
-}
-
-.reservation_search .addBtn i {
-  padding: 11px;
-  font-size: 30px;
-  color: #110B2E;
-}
-
-.reservation_search .addBtn:hover {
-  background-color: #bbb;
-  display: block;
-}
-
-
 </style>
-</head>
 
 <body style="background-color: gray; background-image:none;">
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">FITNESS CENTER <span id="city">RESERVATIONS</span></h1>
+            <h1 id="title">FITNESS CENTRE</h1>
         </div>
-
         <div id="hb" class="hawlockbody animate-bottom">
 
+            <div class="card" id="userCard" style="z-index:0">
+                <div class="leftPanel" style="margin-top:30px">
+                    <div>
+                        <div class="card1" style="grid-column:1/span2;margin:auto">
+                            <div class="data">
+                                <div class="photo" style="background-image:url(../../public/img/gym.jpg);"></div>
+                                <ul class="details">
+                                    <?php date_default_timezone_set("Asia/Colombo"); ?>
+                                    <li class="author"><?php echo date("H:i"); ?> </li>
+                                    <li class="date"><?php echo  date("F j, Y"); ?></li>
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <form action="fitness" class="reservationtime" method="POST">
+                                    <div id="">
+                                        <label>Date</label><br>
+                                        <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+14 days')); ?>" class="input-field" required value="<?php if (isset($this->selectdate)) {
+                                                                                                                                                                                                                echo $this->selectdate;
+                                                                                                                                                                                                            }; ?>">
+                                        <span onclick="openModel('editModel','addBtn')" class="addBtn"><i class="fas fa-info-circle"></i></span><br>
+                                        <span class="error_form" id="datetodayup" style="font-size:10px;"></span><br>
+
+                                        <label>Coach</label><br>
+                                        <select name="coach" class="input-field" id="selectcoach" required>
+                                            <option value="">Select coach</option>
+                                            <?php
+                                            if (isset($this->coach->num_rows)) {
+                                                while ($row1 = $this->coach->fetch_assoc()) {
+                                            ?>
+                                                    <option><?php echo $row1["fname"] . " " . $row1["lname"] . " " . $row1["employee_id"] ?></option>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo "No Coaches...<br>";
+                                            } ?>
+
+                                        </select><br>
+                                        <span class="error_form" id="coach" style="font-size:10px;"></span><br>
+
+                                        <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
+                                        <div id="available">
+
+                                            <h3>Description</h3><br>
+                                            <?php if (isset($this->selectdate)) {
+                                                echo $this->selectdate . "<br> Please check availability and select time slot<br>"; ?>
+                                                <span class="fa-stack">
+                                                    <span style="color:red" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Not avail
+
+                                                <span class="fa-stack">
+                                                    <span style="color:yellow" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail some
+
+                                                <span class="fa-stack">
+                                                    <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                    <strong class="fa-stack-1x">
+                                                        <?php echo "--" ?>
+                                                    </strong>
+                                                </span>Avail all
+
+                                            <?php
+                                            }; ?>
+                                            <br>
 
 
-            <div class="tabs" style="grid-column:1/span3">
-                <ul class="tabs-list">
-                    <li class="active"><a href="#tab1">Reservation History</a></li>
-                    <li><a href="#tab2">Today Reservations</a></li>
-                    <li><a href="#tab3">Upcoming Reservations</a></li>
-                </ul>
-                <br>
-                <!-- for search row --><br>
-                <div class="reservation_search">
-                        <input type="text" name="search" placeholder="Search.." id="searchUser" class="mySearch">
-                        <div style="float: right; padding-right:75px;">
-                            <span onclick="openModel('model','addBtn')" class="addBtn" id="addUser" title="Add User"><i class="fas fa-user-plus"></i></span>
+
+                                        </div>
+                                        <br>
+                                        <?php
+                                        if (isset($this->selectdate)) {
+                                            echo "<span id='canreserve'><button type='button' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
+                                        }; ?>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
 
-
-                <div id="tab1" class="tab active">
-                    <div style="overflow-x:auto;grid-column:1/span2">
-                        <!-- History -->
-                        <section class="wrapper">
-                            <main class="row title">
-                                <ul>
-                                    <li>Reservation ID</li>
-                                    <li>Coach</li>
-                                    <li>Date</li>
-                                    <li>Start Time</li>
-                                    <li>End Time</li>
-                                </ul>
-                            </main>
-                            <?php
-                            if ($this->history->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->history->fetch_assoc()) {
-                                ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                        <li><?php echo $row["reservation_id"]; ?></li>
-                                            <li><?php echo $row["trainer_fname"]; ?></li>
-                                            <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]; ?></li>
-                                            <li><?php echo $row["end_time"]; ?></li>
-
-                                        </ul>
-                                        <ul class="more-content">
-                                            <li>
-                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
-                                                <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
-                                            </li>
-                                        </ul>
-
-                                    </article>
-                                </span>
-                                <?php
-                                }
-                                ?>
-                            <?php
-                            } else {
-                                echo "0 results";
-                            }
-                            ?>
-                        </section>
-                    </div>
-                </div>
-                <div id="tab2" class="tab">
-                    <div style="overflow-x:auto;grid-column:1/span2">
-                        <!-- Today -->
-                        <section class="wrapper">
-                            <main class="row title">
-                                <ul>
-                                    <li>Reservation ID</li>
-                                    <li>Coach</li>
-                                    <li>Date</li>
-                                    <li>Start Time</li>
-                                    <li>End Time</li>
-                                </ul>
-                            </main>
-                            <?php
-                            if ($this->today->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->today->fetch_assoc()) {
-                                ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                        <li><?php echo $row["reservation_id"]; ?></li>
-                                            <li><?php echo $row["trainer_fname"]; ?></li>
-                                            <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]; ?></li>
-                                            <li><?php echo $row["end_time"]; ?></li>
-
-                                        </ul>
-                                        <ul class="more-content">
-                                        <li>
-                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
-                                                <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
-                                            </li>
-                                        </ul>
-
-                                    </article>
-                                </span>
-                                <?php
-                                }
-                                ?>
-                            <?php
-                            } else {
-                                echo "No reservations today";
-                            }
-                            ?>
-                        </section>
-                    </div>
-                </div>
-                <div id="tab3" class="tab">
-                    <div style="overflow-x:auto;grid-column:1/span2">
-
-<section class="wrapper">
-                            <main class="row title">
-                                <ul>
-                                    <li>Reservation ID</li>
-                                    <li>Coach</li>
-                                    <li>Date</li>
-                                    <li>Start Time</li>
-                                    <li>End Time</li>
-                                </ul>
-                            </main>
-                            <?php
-                            if ($this->upcoming->num_rows > 0) { ?>
-                                <?php
-                                while ($row = $this->upcoming->fetch_assoc()) {
-                                ?>
-                                <span id="searchrow">
-                                    <article class="row mlb">
-                                        <ul>
-                                        <li><?php echo $row["reservation_id"]; ?></li>
-                                            <li><?php echo $row["trainer_fname"]; ?></li>
-                                            <li><?php echo $row["date"]; ?></li>
-                                            <li><?php echo $row["start_time"]; ?></li>
-                                            <li><?php echo $row["end_time"]; ?></li>
-
-                                        </ul>
-                                        <ul class="more-content">
-                                        <li>
-                                                <span style="padding-right: 20px;">Resident Name : <?php echo $row["resident_fname"]; echo " "; echo $row["resident_lname"]; ?> ,</span>
-                                                <span style="padding-right: 20px;">Requested Date : <?php echo $row["reserved_time"] ?></span>
-                                            </li>
-                                        </ul>
-
-                                    </article>
-                                </span>
-                                <?php
-                                }
-                                ?>
-                            <?php
-                            } else {
-                                echo "No upcoming reservations";
-                            }
-                            ?>
-                        </section>
-                    </div>
                 </div>
 
-                <div class="divPopupModel">
+                <div class="rightPanel" style="margin-top:30px;max-height:500px;overflow:scroll">
 
-                        <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
-                        <div id="model">
 
-                            <a href="javascript:void(0)" class="closebtn">&times;</a>
-                            <div style="text-align: center;">
-                                <h1>Add Schedule<i class="fa fa-user"></i></i></h1>
+                    <?php if (isset($this->selectdate)) { ?><h3>Reservations of the day</h3>
+                    <?php echo $this->selectdate . "\n";
+
+                        $emp = explode(" ", $this->selectcoach);
+                        echo $emp[0] . " " . $emp[1];
+                        // echo ":>".$this->shiftno;
+                        if (isset($this->shiftno) && $this->shiftno == 1) {
+                            $s = 6;
+                            $e = 12;
+                            $count = 1;
+                            echo "<br>available on 6.00 am to 12.00 pm";
+                        } elseif (isset($this->shiftno) && $this->shiftno == 2) {
+                            $s = 12;
+                            $e = 18;
+                            $count = 13;
+                            echo "<br>available on 12.00 pm to 18.00 pm";
+                        } elseif (isset($this->shiftno) && $this->shiftno == 3) {
+                            $s = 18;
+                            $e = 24;
+                            $count = 25;
+                            echo "<br>available on 18.00 pm to 24.00 pm";
+                        }
+                    };
+                    ?>
+                    <?php
+                    if (isset($this->day->num_rows)) { ?>
+                        <br>
+                        <?php if ($this->day->num_rows > 0) { ?>
+
+                            <table class="avail">
+                                <tr>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Availability</th>
+                                </tr>
+                                <?php while ($row = $this->day->fetch_assoc()) {
+                                ?>
+                                    <!-- show reservation -->
+
+                                    <?php
+                                    for ($hours = $s; $hours < $e; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <tr>
+                                                <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                                <td><?php if ($mins + 30 == 60) {
+                                                        echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                    } else {
+                                                        echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                    } ?>
+                                                </td>
+                                                <td>
+                                                    <span class="fa-stack">
+                                                        <!-- color with available -->
+                                                        <span <?php if ($row[$count] == 5) { ?> style="color:red" <?php } elseif ($row[$count] > 0 && $row[$count] < 5) { ?> style="color:yellow" <?php } else { ?> style="color:lime" <?php } ?> class="fa fa-circle fa-stack-2x"></span>
+                                                        <strong class="fa-stack-1x">
+                                                            <?php echo $row[$count]; ?>
+                                                        </strong>
+                                                    </span>
+                                                </td>
+
+                                            </tr>
+                                    <?php
+                                            $count++;
+                                        }
+                                    }
+                                    ?>
+
+                            </table>
+                        <?php
+                                }
+                            } else {
+                                echo "There are no reservations yet.";
+                        ?>
+                        <table class="avail">
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Availability</th>
+                            </tr>
+                            <?php
+
+                                for ($hours = $s; $hours < $e; $hours++) {
+                                    for ($mins = 0; $mins < 60; $mins += 30) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></td>
+                                        <td><?php if ($mins + 30 == 60) {
+                                                echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                            } else {
+                                                echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <span class="fa-stack">
+                                                <!-- color with available -->
+                                                <span style="color:lime" class="fa fa-circle fa-stack-2x"></span>
+                                                <strong class="fa-stack-1x">
+                                                    <?php echo 0; ?>
+                                                </strong>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                            <?php
+                                    }
+                                }
+                            ?>
+
+                        </table>
+
+
+                <?php
+                            }
+                        }
+                ?>
+                <hr>
+                <div class="holdAccount">
+                    <div class="head">
+                        <h3>Upcoming Reservations. . .</h3>
+                    </div>
+                    <?php
+                    if ($this->latest->num_rows > 0) {
+                        while ($row = $this->latest->fetch_assoc()) {
+                    ?>
+                            <div class="detail">
+                                <div>
+                                    <div class="detail-info">
+                                        <h5><?php echo $row["date"] . " " . $row["start_time"]; ?></h5>
+                                        <small><?php echo $row["fname"] . " " . $row["lname"] ?></small>
+                                    </div>
+                                </div>
                             </div>
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5><?php echo "No Upcomings . . ." ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    } ?>
 
-                            <form action="#" class="formAddEmployee" method="POST" enctype="multipart/form-data"> 
-                                <div id="col1">
-                                    <label for="type">Select Resident</label><br>
-                                    <select name="resident" class="input-field" id="selectresident" required>
-                                        <option value="#">Select Resident</option>
-                                        <?php
+                </div>
+                <br>
 
-                                    while ($rowR = $this->Residents->fetch_assoc()) {
-                                        $Residents = $rowR['fname'].' '.$rowR['lname'];
-                                        $ResId = $rowR['resident_id'];
-                                        echo "<option value=$ResId>$Residents</option>";
+
+                <div class="activeUsers">
+                    <div class="head">
+                        <h3>Coaches </h3>
+                    </div>
+                    <?php
+                    if ($this->c->num_rows > 0) {
+                        while ($row = $this->c->fetch_assoc()) {
+                    ?>
+                            <div class="detail">
+                                <div>
+                                    <!-- <img src="../../public/img/user.png" alt="user" /> -->
+                                    <div class="detail-info">
+                                        <h5><?php echo $row["fname"] . " " . $row["lname"]  ?></h5>
+                                        <small><?php echo "Contact : " . $row["contact_no"]; ?></small>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="detail">
+                            <div>
+                                <div class="detail-info">
+                                    <h5><?php echo "No available coaches . . ."; ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    } ?>
+                </div>
+                </div>
+            </div>
+
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="model">
+                    <div style="text-align: center;">
+                        <h3>Reservation details<i class="fa fa-calendar-plus"></i></i></h3><a href="javascript:void(0)" id="closebtn" style="right:0">&times;</a>
+                    </div>
+                    <form action="fitness" class="reservationtime" method="POST">
+                        <div id="col1">
+                            <label>Date</label><br>
+                            <input type="date" name="date" id="datepicker" required class="input-field" readonly value="<?php if (isset($this->selectdate)) {
+                                                                                                                            echo $this->selectdate;
+                                                                                                                        }; ?>"><br>
+                            <label>Coach</label><br>
+                            <input type="text" name="coach" id="coach" required class="input-field" readonly value="<?php if (isset($this->selectcoach)) {
+                                                                                                                        echo $this->selectcoach;
+                                                                                                                    }; ?>"><br>
+                            <div id="col1">
+
+                                <label>Start Time</label><br>
+                                <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
+                                    <option value="">Select Time</option>
+
+                                    <?php
+                                    for ($hours = $s; $hours < $e; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option><?php echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins, 2, '0', STR_PAD_LEFT); ?></option>
+                                    <?php
+                                        }
                                     }
                                     ?>
-                                    </select>
-                                    <!-- <input type="text" id="eid" name="eid" class="input-field" placeholder="Resident ID" required autofocus> -->
-                                </div>
+                                </select><br>
 
-                                <!-- <div class="profile-pic" id="col2">
-                                    <img src="../../public/img/blank-profile.png" id="photo">
-                                    <input type="file" id="file" name="file">
-                                    <label for="file" id="uploadBtn" onclick="uploadPhoto('photo','file')">Choose Photo</label>
-                                </div> -->
-                                <div id="col2">
-                                    <label for="cno">Coach</label><br>
-                                    <select name="coach" class="input-field" id="selectcoach" required>
-                                        <option value="#">Select Coach</option>
-                                        <?php
-
-                                    while ($rowT = $this->Trainers->fetch_assoc()) {
-                                        $Trainers = $rowT['fname'].' '.$rowT['lname'];
-                                        $TraId = $rowR['trainer_id'];
-                                        echo "<option value='$TraId'>$Trainers</option>";
+                                <label>End Time</label><br>
+                                <select name="endtime" class="input-field" id="etime" placeholder="End Time">
+                                    <option value="">Select Time</option>
+                                    <?php
+                                    for ($hours = $s; $hours < $e; $hours++) {
+                                        for ($mins = 0; $mins < 60; $mins += 30) {
+                                    ?>
+                                            <option>
+                                                <?php if ($mins + 30 == 60) {
+                                                    echo str_pad($hours + 1, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins - 30, 2, '0', STR_PAD_LEFT);
+                                                } else {
+                                                    echo str_pad($hours, 2, '0', STR_PAD_LEFT) . ":" . str_pad($mins + 30, 2, '0', STR_PAD_LEFT);
+                                                } ?>
+                                            </option>
+                                    <?php
+                                        }
                                     }
                                     ?>
-                                    </select>
-                                    <!-- <input type="text" id="cno" name="cno" class="input-field"  readonly> -->
+                                </select><br>
+                                <span class="error_form" id="endtime" style="font-size:10px;"></span><br>
+
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                        <input class="purplebutton" id="disablebutton2" type="submit" name="Submit" value="Reserve" style="grid-column:1">
+                    </form>
+
+                </div>
+                <!-- reservation success message -->
+                <?php
+                if (isset($this->error)) { ?>
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Reservation Failed!</h2>
+                            </div>
+                            <form class="formDelete">
+                                <div>
+                                    <label> <span id="answer2"></span><?php echo $this->error; ?></label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnRed" type="submit" name="submit" value="  OK  ">
                                 </div>
 
-                                <div id="col1">
-                                    <label for="fname">Date</label><br>
-                                    <input type="date" id="fname" name="fname" class="input-field" >
-                                </div>
-
-                                <div id="col1">
-                                    <label for="stime">Start time</label><br>
-                                    <input type="time" id="stime" name="stime" class="input-field"  >
-                                </div>
-
-                                <div id="col2">
-                                    <label for="etime">End time</label><br>
-                                    <input type="time" id="etime" name="etime" class="input-field"  >
-                                </div>
-
-                                
-
-                                <input style="grid-column: 1/span 2;" type="submit" name="AddSchedule" value="Add">
                             </form>
                         </div>
                     </div>
 
-            </div> <!-- .hawlockbody div closed here -->
-        </div> <!-- .expand div closed here -->
-        
+
+                <?php
+                }; ?>
+                <!-- success popup -->
+                <?php
+                if (isset($this->success)) { ?>
+
+                    <div class="divPopupModel">
+                        <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
+                        <div id="deleteModel" class="open">
+
+                            <div style="text-align: center; margin-bottom: 10px;">
+                                <h2>Successfull!</h2>
+                            </div>
+                            <form class="formDelete">
+                                <div>
+                                    <label> <span id="answer2"></span>Reservation charges added.
+                                        Check notification for more details. </label>
+                                    <span id="answer1"></span>
+                                </div>
+                                <div>
+                                    <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                <?php
+                }; ?>
+            </div>
+            <!-- firstmodel -->
+            <div class="divPopupModel">
+                <div id="myCanvasNav" class="overlay" style="width: 0%; opacity: 0;"></div>
+                <div id="editModel">
+                    <a href="javascript:void(0)" class="closebtn">&times;</a>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <h3>Consider below</h3>
+                    </div>
+                    <form action="#" class="formDelete" method="GET">
+                        <div>
+                            <label> Only 5 reservations for each time slot! </label>
+                            <label> Can reserve only before 14 days. </label>
+                            <span><?= "" ?></span>
+                        </div>
+                        <div>
+                            <!-- <input class="btnRed" type="submit" name="submit" value="Delete"> -->
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div> <!-- .hawlockbody div closed here -->
+    </div> <!-- .expand div closed here -->
 </body>
 
 </html>
