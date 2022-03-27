@@ -10,7 +10,7 @@ include_once 'sidenav.php';
     <div style="display:grid;grid-template-columns:230px 1fr" id="expand" class="content">
 
         <div id="hh" class="hawlockhead"><img src="../../public/img/image.png" alt="" id="logo" />
-            <h1 id="title">FITNESS CENTRE</h1>
+            <h1 id="title">ADD SCHEDULE</h1>
         </div>
         <div id="hb" class="hawlockbody animate-bottom">
 
@@ -39,6 +39,21 @@ include_once 'sidenav.php';
                                         <label>Coach</label><br>
                                         <select name="coach" class="input-field" id="selectcoach" required>
                                             <option value="">Select coach</option>
+                                            <?php
+                                            if (isset($this->coach->num_rows)) {
+                                                while ($row1 = $this->coach->fetch_assoc()) {
+                                            ?>
+                                                    <option><?php echo $row1["fname"] . " " . $row1["lname"] . " " . $row1["employee_id"] ?></option>
+                                            <?php
+                                                }
+                                            } else {
+                                                echo "No Coaches...<br>";
+                                            } ?>
+
+                                        </select><br>
+                                        <label>Resident</label><br>
+                                        <select name="coach" class="input-field" id="selectcoach" required>
+                                            <option value="">Select resident</option>
                                             <?php
                                             if (isset($this->coach->num_rows)) {
                                                 while ($row1 = $this->coach->fetch_assoc()) {
@@ -88,9 +103,11 @@ include_once 'sidenav.php';
 
                                         </div>
                                         <br>
+                                        
                                         <?php
                                         if (isset($this->selectdate)) {
-                                            echo "<span id='canreserve'><button type='button' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
+                                            echo "
+                                            <span id='canreserve'><button type='button' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
                                         }; ?>
                                     </div>
 

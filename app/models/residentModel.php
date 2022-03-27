@@ -255,7 +255,7 @@ class residentModel extends model
                 return 50;
             }
         }
-
+        
          return $count;
     }
 
@@ -268,6 +268,9 @@ class residentModel extends model
 
         $sql3 = "SELECT resident_id FROM resident WHERE user_id = '$id'";
         $Id =  $this->conn->query($sql3);
+        $nId= mysqli_fetch_assoc($Id);
+        $newId= $nId['resident_id'];
+
 
         $sql2 = "SELECT fee FROM service WHERE type ='park'";
         $fee = $this->conn->query($sql2);
@@ -277,7 +280,7 @@ class residentModel extends model
         // print($fee);
         
 
-        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '$Id', '$date', '$newfee');";
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '$newId', '$date', '$newfee');";
         $this->conn->query($sql1);
     }
 
