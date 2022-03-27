@@ -155,7 +155,7 @@ class receptionistController extends controller
     }
     public function help()
     {
-        
+       
         if (isset($_POST['type'])) {
             $type = $_POST['type'];
             $name = $_POST['name'];

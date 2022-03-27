@@ -219,7 +219,7 @@ class residentController extends controller
 
     public function parking()
     {
-        // echo($this->selectdate);
+        // echo($this->selectdate);reservefitness
         unset($this->success);
         if (isset($_POST['date'])) {
             $d = $_POST['date'];
