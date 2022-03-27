@@ -458,7 +458,7 @@ include_once 'sidenav.php';
                         </div>
                         <div>
                             <label>Enter Reason : </label>
-                            <textarea name="reason" id="reason" cols="" rows="3" placeholder="Reason..."></textarea>
+                            <textarea name="reason" id="reason" cols="" rows="3" placeholder="Reason..." required></textarea>
                         </div>
                         <div>
                             <input class="purplebutton" type="submit" name="submit" value="Done">
