@@ -260,7 +260,7 @@ class residentModel extends model
     }
 
 
-    public function reservepark($count, $d, $stime, $etime)
+    public function reservepark($count, $d, $stime, $etime, $veh)
     {
         // echo $stime."-".$etime."<br>";
         $date = date('Y-m-d H:i:s');
@@ -280,7 +280,7 @@ class residentModel extends model
         // print($fee);
 
 
-        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee) VALUES ('$count','$d', '$stime' , '$etime', '$newId', '$date', '$newfee');";
+        $sql1 = "INSERT INTO parking_slot_reservation (slot_no, date, start_time, end_time, resident_id, reserved_time, fee, vehicle_no) VALUES ('$count','$d', '$stime' , '$etime', '$newId', '$date', '$newfee', '$veh');";
         $this->conn->query($sql1);
     }
 

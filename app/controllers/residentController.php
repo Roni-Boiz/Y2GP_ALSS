@@ -223,6 +223,8 @@ class residentController extends controller
         unset($this->success);
         if (isset($_POST['date'])) {
             $d = $_POST['date'];
+            $vehicle = $_POST['vehicleno'];
+
             $stime = $_POST['starttime'] . ":00";
             $etime = $_POST['endtime'] . ":00";
             $this->view->selectdate = $d;
@@ -230,6 +232,7 @@ class residentController extends controller
             $this->view->etime = $etime;
 
             $this->view->availability = $this->model->checkpark($d, $stime, $etime);
+            $_SESSION['vehicle']= $vehicle;
             $_SESSION['date'] = $d;
             $_SESSION['stime'] = $stime;
             $_SESSION['etime'] = $etime;
@@ -242,7 +245,7 @@ class residentController extends controller
     public function reservepark()
     {
         if (isset($_SESSION['date'])) {
-            $result = $this->model->reservepark($_SESSION['count'], $_SESSION['date'], $_SESSION['stime'], $_SESSION['etime']);
+            $result = $this->model->reservepark($_SESSION['count'], $_SESSION['date'], $_SESSION['stime'], $_SESSION['etime'], $_SESSION['vehicle']);
 
             if ($result == 50) {
                 $this->view->error = "Not available a slot!.";
@@ -250,6 +253,7 @@ class residentController extends controller
                 $this->view->success = true;
             }
 
+            unset($_SESSION['vehicle']);
             unset($_SESSION['date']);
             unset($_SESSION['stime']);
             unset($_SESSION['etime']);
