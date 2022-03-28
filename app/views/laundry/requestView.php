@@ -226,7 +226,7 @@ include_once 'sidenav.php';
                                 <?php if ($this->selectedNewCat->num_rows > 0) { ?>
                                     <?php
                                     while ($row4 = $this->selectedNewCat->fetch_assoc()) {
-                                        $des = $row4["description"];
+                                        $des=$row4["description"];
                                     ?>
                                         
                                         <div id="col1">
