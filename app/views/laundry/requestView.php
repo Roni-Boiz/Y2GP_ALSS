@@ -226,7 +226,9 @@ include_once 'sidenav.php';
                                 <?php if ($this->selectedNewCat->num_rows > 0) { ?>
                                     <?php
                                     while ($row4 = $this->selectedNewCat->fetch_assoc()) {
+                                        $des=$row4["description"];
                                     ?>
+                                        
                                         <div id="col1">
                                             <label for="categories"><?php echo "Category  " . $row4["category_no"] ?> </label>
                                             <input type="text" name="quantiy1" id="quantiy1" value="<?php echo $row4["qty"] ?>" readonly>

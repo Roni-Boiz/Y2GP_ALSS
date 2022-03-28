@@ -151,7 +151,10 @@ class parkingModel extends model
         while($s_no=mysqli_fetch_assoc($result)){
             $sql2="UPDATE parking_slot SET status=2 WHERE slot_no= $s_no[slot_no]";
             $result1=$this->conn->query($sql2);
+            echo 'www';
+            
             if(!$result1){
+                
                 $this->conn->rollback();
             }
         }

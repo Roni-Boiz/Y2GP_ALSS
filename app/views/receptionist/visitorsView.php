@@ -117,11 +117,11 @@ include_once 'sidenav.php';
                                 <div id="deleteModel" class="open">
 
                                     <div style="text-align: center; margin-bottom: 10px;">
-                                        <h2>Edit Success!</h2>
+                                        <h2>Success!</h2>
                                     </div>
                                     <form class="formDelete">
                                         <div>
-                                            <label> <span id="answer2"></span>Profile updated
+                                            <label> <span id="answer2"></span>Visitor added
                                             </label>
                                             <span id="answer1"></span>
                                         </div>

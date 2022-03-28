@@ -117,13 +117,7 @@ class receptionistController extends controller
         $this->view->previousVisitors = $this->model->readPreviousVisitor();
         $this->view->render('receptionist/visitorsView');
     }
-<<<<<<< HEAD
-    public function addVisitors()
-    {
-        // $this->view->todayVisitors = $this->model->readTodayVisitor();
-        // $this->view->previousVisitors = $this->model->readPreviousVisitor();
-=======
-    //to add and check-in at the reception desk
+    
     public function addVisitors(){
         if(isset($_POST['name'])){
             $name=$_POST['name'];
@@ -139,7 +133,6 @@ class receptionistController extends controller
             }
 
         }
->>>>>>> Nips
         $this->view->presentApartments = $this->model->getApartment();
         $this->view->render('receptionist/addvisitorView');
     }
@@ -150,21 +143,7 @@ class receptionistController extends controller
             $vid = $_GET['visitor'];
             $this->model->setVisitedIn($vid);
             $this->visitors();
-<<<<<<< HEAD
-        }
-
-        //to add and check-in at the reception desk
-
-        if (isset($_POST['name'])) {
-            $name = $_POST['name'];
-            $apno = $_POST['apartmentId'];
-            $description = $_POST['description'];
-            $this->model->addVisitor($name, $apno, $description);
-            $this->addVisitors();
-        }
-=======
         } 
->>>>>>> Nips
     }
     public function markOut()
     {

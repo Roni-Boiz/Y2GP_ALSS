@@ -150,36 +150,7 @@ include_once 'sidenav.php';
                         <div class="head">
                             <h3>Contact Details . . .</h3>
                         </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Admin</h5>
-                                    <small>Mr.Sadaruwan</small><br>
-                                    <small>011-1524587</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Managing Directer</h5>
-                                    <small>Mr. Tharaka</small><br>
-                                    <small>011-145872</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div>
-                                <img src="../../public/img/user.png" alt="user" />
-                                <div class="detail-info">
-                                    <h5>Receptionist Desk</h5>
-                                    <small>Hawlock City</small><br>
-                                    <small>011-145872</small>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <br>
                     <div class="holdAccount">
@@ -227,7 +198,7 @@ include_once 'sidenav.php';
                         <div class="detail">
                             <div>
                                 <div class="detail-info">
-                                    <h5><?php echo "No available  . . ."; ?></h5>
+                                    <h5><?php echo "Not available  . . ."; ?></h5>
                                 </div>
                             </div>
                         </div>
