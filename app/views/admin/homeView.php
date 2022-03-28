@@ -438,6 +438,9 @@ include_once 'sidenav.php';
                     data: chartdata,
                     options: {
                         scales: {
+                            y: {
+                                    suggestedMin: 0,
+                            },
                             xAxes: [{
                                 ticks: {
                                     display: false,

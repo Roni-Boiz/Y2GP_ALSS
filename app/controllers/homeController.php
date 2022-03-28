@@ -35,7 +35,7 @@ class homeController extends controller{
             }
             if($_SESSION['type'] == "parking_officer"){
                 $type = $_SESSION['type'];
-                header("location: /Y2GP_ALSS/public/{$type}Controller/index");
+                header("location: /Y2GP_ALSS/public/parkingController/index");
             }
             if($_SESSION['type'] == "trainer"){
                 $type = $_SESSION['type'];
@@ -84,7 +84,11 @@ class homeController extends controller{
 
         if(session_id()){
             $type = $_SESSION['type'];
-            header('Location: /Y2GP_ALSS/public/'.$type.'Controller/index');
+            if($type == "parking_officer"){
+                header('Location: /Y2GP_ALSS/public/parkingController/index');
+            } else {
+                header('Location: /Y2GP_ALSS/public/'.$type.'Controller/index');
+            }
             // $this->view->render($type.'/'.$type.'View');
         }
         else{
