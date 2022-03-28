@@ -78,7 +78,7 @@ include_once 'sidenav.php';
                                         <span id="answer1"></span>
                                     </div>
                                     <div>
-                                        <input class="btnRed" type="button" onclick="addvisitor()" name="submit" value="Add">
+                                        <input class="btnRed" type="button" style="background-color: #211a49 !important;color: white;border-radius: 10px" onclick="addvisitor()" name="submit" value="Add">
                                     </div>
 
                                 </form>

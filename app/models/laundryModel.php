@@ -242,20 +242,23 @@ class laundryModel extends model {
         $Total=$fee1+$fee2+$fee3;
         $sql="UPDATE laundry_request SET fee='$Total',state=2 WHERE request_id='$id'";
         $this->conn->query($sql);
+        
+
+        $washer1=0;$washer2=0;$washer3=0;$dryer1=0;$dryer2=0;$dryer3=0;$iron1=0;$iron2=0;$folder1=0;
         if($w1!=0){
             $sql30="SELECT weight FROM category WHERE request_id='$id' AND category_no=1 ";
             $nw1=mysqli_fetch_assoc($this->conn->query($sql30));
             $nw1=$nw1["weight"];
 
             //amount of resources needed for 1-10 kg of category 1
-            if($w1=='1-10'){
+            if($nw1=='1-10'){
                 $washer1=1;
                 $dryer1=2;
                 $iron1=3;
                 $folder1=2;
             }
             //amount of resources needed for 11-20 kg of category 1
-            else if($w1=='11-20'){
+            else if($nw1=='11-20'){
                 $washer1=2;
                 $dryer1=4;
                 $iron1=6;
@@ -266,8 +269,10 @@ class laundryModel extends model {
             $this->conn->query($sql31);
             $sql32="UPDATE laundry_resources SET available_resources=available_resources+'$dryer1' WHERE resource_no=2 ";
             $this->conn->query($sql32);
-            $sql33="UPDATE laundry_resources SET available_resources=available_resources-'$iron1' WHERE resource_no=3 ";
+            $sql33="UPDATE laundry_resources SET available_resources=available_resources+'$iron1' WHERE resource_no=3 ";
             $this->conn->query($sql33);
+            $sql43="UPDATE laundry_resources SET available_resources=available_resources+'$folder1' WHERE resource_no=3 ";
+            $this->conn->query($sql43);
 
             $sql1="UPDATE category SET weight='$w1'WHERE request_id='$id' AND category_no=1";
             $this->conn->query($sql1);
@@ -319,11 +324,9 @@ class laundryModel extends model {
                 
             }
 
-            $sql40="UPDATE laundry_resources SET available_resources=available_resources-'$washer3' WHERE resource_no=1 ";
+            $sql40="UPDATE laundry_resources SET available_resources=available_resources+'$washer3' WHERE resource_no=1 ";
             $this->conn->query($sql40);
-            // $sql6="UPDATE laundry_resources SET available_resources=available_resources-'$dryer1' WHERE resource_no=2 ";
-            // $this->conn->query($sql6);
-            $sql41="UPDATE laundry_resources SET available_resources=available_resources-'$dryer3' WHERE resource_no=3 ";
+            $sql41="UPDATE laundry_resources SET available_resources=available_resources+'$dryer3' WHERE resource_no=3 ";
             $this->conn->query($sql41);
             $sql42="UPDATE category SET weight='$w3'WHERE request_id='$id' AND category_no=3";
             $this->conn->query($sql42);
