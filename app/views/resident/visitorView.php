@@ -75,7 +75,7 @@ include_once 'sidenav.php';
                         </div>
                         <form class="formDelete" onsubmit="">
                             <div>
-                                <label> <span id="answer2"></span>Re
+                                <label> <span id="answer2"></span>
                                 </label>
                                 <span id="answer1"></span>
                             </div>
