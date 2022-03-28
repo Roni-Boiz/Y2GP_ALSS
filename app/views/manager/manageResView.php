@@ -122,7 +122,13 @@ include_once 'sidenav.php';
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Reservation Type : Fitness</span>
-                                                    <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <?php
+                                                    if (isset($row["tfname"]) && isset($row["tlname"])) {
+                                                    ?>
+                                                        <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <span style="margin-right: 20px;">Reservation No : <?php echo  $reservationId ?></span>
                                                 </li>
                                             </ul>
@@ -165,7 +171,13 @@ include_once 'sidenav.php';
                                             <ul class="more-content">
                                                 <li>
                                                     <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                    <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <?php
+                                                    if (isset($row["tfname"]) && isset($row["tlname"])) {
+                                                    ?>
+                                                        <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <span style="margin-right: 20px;">Reservation No : <?php echo  $reservationId ?></span>
                                                 </li>
                                             </ul>
@@ -327,7 +339,13 @@ include_once 'sidenav.php';
                                                 <ul class="more-content">
                                                     <li>
                                                         <span style="margin-right: 20px;">Reservation Type : Fitness</span>
-                                                        <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <?php
+                                                        if (isset($row["tfname"]) && isset($row["tlname"])) {
+                                                        ?>
+                                                            <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                         <span style="margin-right: 20px;">Reservation No : <?php echo $reservationId ?></span>
                                                     </li>
                                                 </ul>
@@ -392,7 +410,13 @@ include_once 'sidenav.php';
                                                 <ul class="more-content">
                                                     <li>
                                                         <span style="margin-right: 20px;">Reservation Type : <?php echo $row["type"] ?></span>
-                                                        <span style="margin-right: 20px;">Treater : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <?php
+                                                        if (isset($row["tfname"]) && isset($row["tlname"])) {
+                                                        ?>
+                                                            <span style="margin-right: 20px;">Trainer : <?php echo $row["tfname"][0] . ". " . $row["tlname"] ?></span>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                         <span style="margin-right: 20px;">Reservation No : <?php echo $reservationId ?></span>
                                                     </li>
                                                 </ul>
@@ -476,7 +500,7 @@ include_once 'sidenav.php';
                         <div style="text-align: center; margin-bottom: 10px;">
                             <h2>Successful</h2>
                         </div>
-                        <form class="formDelete"  onsubmit="previousView(); return false;">
+                        <form class="formDelete" onsubmit="previousView(); return false;">
                             <div>
                                 <label id="successmsg"></label>
                             </div>

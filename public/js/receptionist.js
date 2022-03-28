@@ -4,6 +4,7 @@ $(function () {
    $("#new_password_error_message").hide();
    $("#renew_password_error_message").hide();
    $("#visitorSearch").css('display', 'none');
+   $("#filterParcel").css('display', 'none');
 
    //profile details edit
    $("#fnameerr").hide();
@@ -84,9 +85,11 @@ $(function () {
 
       if ($("#tab0").css('display') == 'block') {
          $("#visitorSearch").css('display', 'none');
+         $("#filterParcel").css('display', 'none');
       }
       else {
          $("#visitorSearch").css('display', 'block');
+         $("#filterParcel").css('display', 'block');
       }
    });
 
@@ -458,17 +461,19 @@ function addvisitor() {
    var d = $("#description").val();
    $.ajax({
       type: "POST",
-      url: "markIn",
+      url: "addVisitors",
       data: {
          name: n,
          apartmentId: apno,
          description: d
       },
       success: function () {
-
+         $(".success").css('display','block')
          console.log(200);
-
-
+      },
+      error: function () {
+         $(".error").css('display','block')
+         console.log(200);
       }
    });
 }
@@ -487,10 +492,12 @@ function addparcel() {
          description: d
       },
       success: function () {
-
+         $(".success").css('display','block')
          console.log(200);
-
-
+      },
+      error: function () {
+         $(".error").css('display','block')
+         console.log(200);
       }
    });
 }

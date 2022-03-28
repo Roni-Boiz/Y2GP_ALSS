@@ -21,7 +21,8 @@ include_once 'sidenav.php';
                                     <form method="POST" action="parkingslot">
                                         <label>Vehicle No</label><br>
                                         <input type="text" id="vehicle_no" name="vehicle_no" class="input-field">
-                                        <input class="purplebutton" type="submit" name="Submit" value="View"><br><br>
+                                        <input class="purplebutton" id="disablebutton2" type="submit" name="Submit" value="View" disabled style="cursor:not-allowed;"><br>
+                                        <span class="error_form" id="vnoerr" style="font-size:10px;"></span><br><br>
                                     </form>
                                 </div>
 
