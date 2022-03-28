@@ -113,13 +113,16 @@ class trainerModel extends model
     }
 
     //insert reservations of fitness + check availability
-    public function reservefitness($d, $coach, $stime, $etime)
+    public function reservefitness($d, $coach, $stime, $etime, $resident)
     {
         $this->conn->autocommit(FALSE);
 
-        // echo $stime."-".$etime."<br>";
+
+        $resident = $_SESSION['res'];
+        unset($_SESSION['res']);
         $date = date('Y-m-d H:i:s');
-        $id = $_SESSION['userId'];
+        $id = $resident;
+        // echo($id);
 
         $avail = 1;
         // echo $stime, $etime;
@@ -146,7 +149,7 @@ class trainerModel extends model
         // print_r("-" . $noofslots."??");
         //go through $count to $noofslots and check less than 5 all slots
         $c = $count;
-        while ($c < $noofslots) {
+        if(isset($row)){while ($c < $noofslots) {
             // echo $row[$c]."+";
             if ($row[$c] < 5) {
                 $c++;
@@ -156,14 +159,14 @@ class trainerModel extends model
                 // echo "can't : ";
                 $avail = 0;
             }
-        }
+        }}
         if ($avail == 0) {
             return $avail;
         } else {
             //get resident id from user id
-            $sql = "SELECT resident_id from resident where user_id='$id'";
-            $rid = mysqli_fetch_assoc($this->conn->query($sql));
-            $rid = $rid["resident_id"];
+            // $sql = "SELECT resident_id from resident where user_id='$id'";
+            // $rid = mysqli_fetch_assoc($this->conn->query($sql));
+            $rid = $id;
             // echo "can reserve";
             $empid = explode(" ", $coach);
             $empid = $empid[2];
@@ -228,6 +231,20 @@ class trainerModel extends model
 
         return $result;
     }
+
+    //get residents
+    public function residentsavail()
+    {
+        
+        $sql = "SELECT * FROM resident";
+        $result = $this->conn->query($sql);
+
+            $res = mysqli_fetch_assoc($this->conn->query($sql));
+            $_SESSION['res']= $res['resident_id'];
+
+        return $result;
+    }
+
     //get shift times of trainers
     public function getshiftno($d, $coach)
     {

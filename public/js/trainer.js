@@ -58,7 +58,26 @@ $(function () {
             $(this).hide();
          }
       });
+      
   })
+  //popup
+  const model = document.getElementById("model");
+  const modelBtn = document.getElementById("model-btn");
+  const ans = document.getElementById("answer");
+  const closeBtn = document.getElementById("closebtn");
+
+  modelBtn.addEventListener("click", () => {
+     document.getElementById("myCanvasNav").style.width = "100%";
+     document.getElementById("myCanvasNav").style.opacity = "0.8";
+     model.className = "open";
+  })
+
+  closeBtn.addEventListener("click", () => {
+     model.className = 'close';
+     document.getElementById("myCanvasNav").style.width = "0%";
+     document.getElementById("myCanvasNav").style.opacity = "0";
+  })
+
   
 
 });

@@ -52,20 +52,21 @@ include_once 'sidenav.php';
 
                                         </select><br>
                                         <label>Resident</label><br>
-                                        <select name="coach" class="input-field" id="selectcoach" required>
+                                        <select name="resident" class="input-field" id="selectresident">
                                             <option value="">Select resident</option>
                                             <?php
-                                            if (isset($this->coach->num_rows)) {
-                                                while ($row1 = $this->coach->fetch_assoc()) {
+                                            if (isset($this->resident->num_rows)) {
+                                                while ($row1 = $this->resident->fetch_assoc()) {
                                             ?>
-                                                    <option><?php echo $row1["fname"] . " " . $row1["lname"] . " " . $row1["employee_id"] ?></option>
+                                                    <option><?php echo $row1["fname"] . " " . $row1["lname"] . " " . $row1["resident_id"] ?></option>
                                             <?php
                                                 }
                                             } else {
-                                                echo "No Coaches...<br>";
+                                                echo "No Residents...<br>";
                                             } ?>
 
-                                        </select><br>
+                                        </select>
+                                        <br>
                                         <span class="error_form" id="coach" style="font-size:10px;"></span><br>
 
                                         <input class="purplebutton" id="disablebutton1" type="submit" value="View" style="grid-column:2"><br><br>
@@ -103,7 +104,7 @@ include_once 'sidenav.php';
 
                                         </div>
                                         <br>
-                                        
+
                                         <?php
                                         if (isset($this->selectdate)) {
                                             echo "
@@ -319,6 +320,11 @@ include_once 'sidenav.php';
                             <label>Coach</label><br>
                             <input type="text" name="coach" id="coach" required class="input-field" readonly value="<?php if (isset($this->selectcoach)) {
                                                                                                                         echo $this->selectcoach;
+                                                                                                                    }; ?>"><br>
+
+                            <label>Resident</label><br>
+                            <input type="text" name="resident" id="resident" required class="input-field" readonly value="<?php if (isset($this->selectresident)) {
+                                                                                                                        echo $this->selectresident;
                                                                                                                     }; ?>"><br>
                             <div id="col1">
 

@@ -56,14 +56,7 @@ class trainerController extends controller{
         $this->view->render('trainer/reservationView');
     }
 
-    public function addscheduleview(){
-        $this->view->Residents = $this->model->LoadResidents();
-        $this->view->Trainers = $this->model->LoadTrainers();
-        $this->view->history = $this->model->getReservationHistory();
-        $this->view->today = $this->model->getReservationToday();
-        $this->view->upcoming = $this->model->getReservationUpcoming();
-        $this->view->render('trainer/addScheduleView');
-    }
+
 
     //make fitness centre reservation
     public function fitness()
@@ -73,11 +66,13 @@ class trainerController extends controller{
         if (isset($_POST["date"]) && isset($_POST["coach"])  && isset($_POST["starttime"])  && isset($_POST["endtime"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
+            $resident = $_POST["resident"];
+            // $res = $resident['3'];
             $stime = $_POST["starttime"] . ":00";
             $etime = $_POST["endtime"] . ":00";
             //check valid time
             if ($stime < $etime) {
-                $result = $this->model->reservefitness($d, $coach, $stime, $etime);
+                $result = $this->model->reservefitness($d, $coach, $stime, $etime,$resident);
                 if ($result == 0) {
                     $this->view->error = "Already reserved.Please select another time slot!.";
                 } else {
@@ -89,17 +84,25 @@ class trainerController extends controller{
         } else if (isset($_POST["date"]) && isset($_POST["coach"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
+            $resident = $_POST["resident"];
+
+
             //to display availability in new view 
 
             $this->view->day = $this->model->dayfitness($d, $coach);
             $this->view->shiftno = $this->model->getshiftno($d, $coach);
+
             //to display availability in new view 
             $this->view->selectdate = $d;
             $this->view->selectcoach = $coach;
+            $this->view->selectresident = $resident;
+
         }
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
         $this->view->c = $this->model->getcoaches();
+        $this->view->resident = $this->model->residentsavail();
+
         $this->view->render('trainer/addScheduleView');
     }
 
@@ -128,8 +131,12 @@ class trainerController extends controller{
         } else if (isset($_POST["date"]) && isset($_POST["coach"])) {
             $d = $_POST["date"];
             $coach = $_POST["coach"];
+            $resident = $_POST["resident"];
+
 
             $this->view->coach = $coach;
+            $this->view->resident = $resident;
+            
             if ($d <= date('Y-m-d')) {
                 $this->view->error[] = "Pick upcoming date";
             } else {
@@ -137,11 +144,14 @@ class trainerController extends controller{
                 $this->view->shiftno = $this->model->getshiftno($d, $coach);
                 $this->view->selectdate = $d;
                 $this->view->selectcoach = $coach;
+                $this->view->selectresident = $resident;
             }
         }
+        // $this->view->resident = $this->model->residentsavail();
         $this->view->latest = $this->model->latestfitness($id);
         $this->view->coach = $this->model->getcoaches();
         $this->view->c = $this->model->getcoaches();
+        $this->view->resident = $this->model->residentsavail();
         $this->view->render('trainer/addScheduleView');
     }
     

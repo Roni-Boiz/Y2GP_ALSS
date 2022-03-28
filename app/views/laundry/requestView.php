@@ -226,6 +226,7 @@ include_once 'sidenav.php';
                                 <?php if ($this->selectedNewCat->num_rows > 0) { ?>
                                     <?php
                                     while ($row4 = $this->selectedNewCat->fetch_assoc()) {
+                                        $des = $row4["description"];
                                     ?>
                                         <div id="col1">
                                             <label for="categories"><?php echo "Category  " . $row4["category_no"] ?> </label>
@@ -254,7 +255,7 @@ include_once 'sidenav.php';
                                     <label for="Categories">Description</label><br>
 
                                 </div>
-                                <textarea style="border-radius:5px;grid-column: 1/span 2 ; width:80%;" name="description" id="description" cols="60" rows="3" readonly><?php echo $row4["description"] ?></textarea>
+                                <textarea style="border-radius:5px;grid-column: 1/span 2 ; width:80%;" name="description" id="description" cols="60" rows="3" readonly><?php echo $des ?></textarea>
                                 <br><br>
 
                                 <div id="col1">

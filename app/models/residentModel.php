@@ -239,7 +239,7 @@ class residentModel extends model
                 $count++;
             }
             if ($row["start_time"] < $stime && $row["end_time"] > $stime && $row["end_time"] < $etime) {
-                echo ('jjjjk');
+                // echo ('jjjjk');
                 $count++;
             }
             if ($row["start_time"] > $stime && $row["end_time"] < $etime) {
@@ -522,9 +522,7 @@ class residentModel extends model
                 $this->conn->rollback();
                 $this->conn->autocommit(TRUE);
             }
-            if ($result2) {
-                echo 100;
-            }
+            
             return ($result1 && $result2 && $result3 && $result4);
         }
     }

@@ -26,7 +26,7 @@ class adminController extends controller
                 $this->view->success = true;
             }
         }
-        $this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
+        //$this->view->doList = $this->model->getMyDoList($_SESSION['userId']);
         $this->view->apartments = $this->model->getAllApartments();
         $this->view->lastApartmentNo = $this->model->getLastApartmentNo();
         $this->view->slots = $this->model->getAllFreeSlots();

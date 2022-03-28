@@ -19,7 +19,7 @@ include_once 'sidenav.php';
                     <div>
                         <div class="card1" style="grid-column:1/span2;margin:auto">
                             <div class="data">
-                                <div class="photo" style="background-image:url(../../public/img/hall.jpg);"></div>
+                                <div class="photo" style="background-image:url(../../public/img/park.jpg);"></div>
                                 <ul class="details">
                                     <?php date_default_timezone_set("Asia/Colombo"); ?>
                                     <li class="author"><?php echo date("H:i"); ?> </li>
@@ -33,6 +33,8 @@ include_once 'sidenav.php';
                                         <input type="date" name="date" id="datepicker" min="<?= date("Y-m-d") ?>" max="<?= date('Y-m-d', strtotime('+30 days')); ?>" required class="input-field" value="<?php if (isset($this->selectdate)) {
                                                                                                                                                                                                                 echo $this->selectdate;
                                                                                                                                                                                                             }; ?>"><br>
+
+
 
                                         <label>Start Time</label><br>
                                         <select name="starttime" class="input-field" id="stime" placeholder="Start Time" required>
