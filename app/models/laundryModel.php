@@ -98,15 +98,17 @@ class laundryModel extends model {
     }
     public function acceptRequest($id,$cat1,$cat2,$cat3){
         $sql1="UPDATE laundry_request SET state=1 WHERE request_id='$id'";
-        // echo $id;
-        $this->conn->query($sql1);
+        $result1=$this->conn->query($sql1);
+
         $sql2="SELECT resident.user_id as id FROM resident INNER JOIN laundry_request ON resident.resident_id=laundry_request.resident_id WHERE request_id='$id'";
         $userId=mysqli_fetch_assoc($this->conn->query($sql2));
         $userId=$userId["id"];
+
+
         date_default_timezone_set("Asia/Colombo");
         $date=date('Y-m-d');
         $time=date('H:i:s');
-        echo $cat1."".$cat2;
+        $washer1=0;$washer2=0;$washer3=0;$dryer1=0;$dryer2=0;$iron1=0;$iron2=0;$iron3=0;$folder=0;
         $msg="";
         if($cat1==1){
             $msg=$msg."category 1 ";
@@ -202,14 +204,31 @@ class laundryModel extends model {
         
         $description="Following Categories of your laundry request have accepted: .{$msg} at .{$date} .{$time}. of the request of .{$id}";
         $sql6="INSERT INTO notification(date,time,description,user_id,view) VALUES ('$date','$time','$description','$userId',0)";
-        $this->conn->query($sql6);
+        $result2=$this->conn->query($sql6);
+
+        if($result1 && $result2 && $userId){
+            $this->conn->commit();
+            
+        }else{
+            $this->conn->rollback();
+        }
+        $this->conn->autocommit(TRUE);
         echo $sql6;
     }
     public function declineRequest($id){
+
         $sql="UPDATE laundry_request SET state=-1 WHERE request_id='$id'";
-        $result= $this->conn->query($sql);
+        $result1= $this->conn->query($sql);
         $sql1="UPDATE category SET state=-1 WHERE request_id='$id'";
-        $result= $this->conn->query($sql1);
+        $result2= $this->conn->query($sql1);
+
+        if($result1 && $result2){
+            $this->conn->commit();
+            
+        }else{
+            $this->conn->rollback();
+        }
+        $this->conn->autocommit(TRUE);
         
     }
     public function addTotalFee($id,$fee1,$fee2,$fee3,$w1,$w2,$w3){

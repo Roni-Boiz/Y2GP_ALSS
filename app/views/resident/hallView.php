@@ -96,7 +96,7 @@ include_once 'sidenav.php';
                                 } ?>
                             </table>
                         <?php   } else {
-                            echo "There is no reservations yet."; ?>
+                            echo "There are no reservations yet."; ?>
                             <table class="avail">
                                 <tr>
                                     <th>Start Time</th>

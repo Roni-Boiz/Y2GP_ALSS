@@ -76,67 +76,103 @@ class parkingModel extends model
     public function checkinVehicle($rid){
         date_default_timezone_set("Asia/Colombo");
         $time=date('H:i:s');
+        $this->conn->autocommit(FALSE);
+
         $sql0="SELECT apartment_no FROM resident WHERE resident_id=(SELECT resident_id FROM parking_slot_reservation WHERE reservation_id='$rid') ";
         $ap_no = mysqli_fetch_assoc($this->conn->query($sql0));
         $ap_no=$ap_no['apartment_no'];
-        $sql1="UPDATE parking_slot_reservation SET checkin_time=SYSDATE() WHERE reservation_id='$rid' ";
-        $this->conn->query($sql1);
+        $sql1="UPDATE parking_slot_reservation SET checkin_time=SYSDATE(),checkout_time=NULL WHERE reservation_id='$rid' ";
+        $result1=$this->conn->query($sql1);
         $sql2="UPDATE parking_slot SET status=1,apartment_no='$ap_no' WHERE slot_no=(SELECT slot_no FROM parking_slot_reservation WHERE reservation_id='$rid') ";
-        $this->conn->query($sql2);
+        $result2=$this->conn->query($sql2);
+
+
+        if($ap_no && $result2 && $result1){
+            $this->conn->commit();
+        }else{
+            $this->conn->rollback();
+        }
+        $this->conn->autocommit(TRUE);
 
     }
     public function checkoutVehicle($rid){
         date_default_timezone_set("Asia/Colombo");
         $time=date('H:i:s');
-        // $sql1="SELECT apartment_no FROM resident WHERE resident_id=(SELECT resident_id FROM parking_slot_reservation WHERE reservation_id='$rid') ";
-        // $ap_no = mysqli_fetch_assoc($this->conn->query($sql1));
-        // $ap_no=$ap_no['apartment_no'];
+
+        $this->conn->autocommit(FALSE);
+        
         $sql2="UPDATE parking_slot_reservation SET checkout_time='$time' WHERE reservation_id='$rid' ";
-        $this->conn->query($sql2);
-        $sql3="UPDATE parking_slot SET status=0 WHERE slot_no=(SELECT slot_no FROM parking_slot_reservation WHERE reservation_id='$rid' ";
-        $this->conn->query($sql3);
+        $result1=$this->conn->query($sql2);
+
+        $sql3="UPDATE parking_slot SET status=0 WHERE slot_no=(SELECT slot_no FROM parking_slot_reservation WHERE reservation_id='$rid' )";
+        $result2=$this->conn->query($sql3);
+
         $time=strtotime($time);
         //to get end time(as e_time) check overdue charges if any,get overdue charge rate from service table
         //set reminders for upcoming overdue
         $sql4="SELECT end_time FROM parking_slot_reservation WHERE reservation_id='$rid' ";
         $e_time = mysqli_fetch_assoc($this->conn->query($sql4));
         $e_time=strtotime($e_time['end_time']);
-        echo ($time - $e_time);
+        // echo ($time - $e_time);
+
         //methana frontend walin ada ho iye ewata witharak button eka enable karanna one
         if($e_time<$time){
             $sql5="SELECT fee FROM service WHERE name='overdue'";
             $overduefee = mysqli_fetch_assoc($this->conn->query($sql5));
             $overduefee=$overduefee['fee'];
             $minutes = abs(($time - $e_time) / 60);
-            // echo ($time - $e_time);
-            $noofslots = ceil($minutes / 30);
-            $sql6="UPDATE parking_slot_reservation SET fee=fee+$noofslots*$overduefee WHERE reservation_id='$rid'";
-            $this->conn->query($sql6);
 
+            $sql6="UPDATE parking_slot_reservation SET fee=fee+$minutes*$overduefee WHERE reservation_id='$rid'";
+            $result3=$this->conn->query($sql6);
+            if(!($overduefee) && !($result3) ){
+                $this->conn->rollback();
+            }
         }
+        if($result2 && $result1 && $e_time){
+            $this->conn->commit();
+        }else{
+            $this->conn->rollback();
+        }
+        $this->conn->autocommit(TRUE);
 
     }
     public function getOutgoingVehicles(){
-        $time=date('H:i:s');
-        $sql1="SELECT end_time,parking_slot_reservation.vehicle_no,slot_no,apartment_no FROM parking_slot_reservation,resident WHERE (cancelled_time IS NULL AND checkout_time IS NULL AND checkin_time IS NOT NULL) AND end_time<=DATE_ADD(SYSDATE(),INTERVAL 1 HOUR) AND parking_slot_reservation.resident_id= resident.resident_id ";
+        $sql1="SELECT end_time,parking_slot_reservation.vehicle_no,slot_no,apartment_no FROM parking_slot_reservation,resident WHERE (cancelled_time IS NULL AND checkout_time IS NULL AND checkin_time IS NOT NULL) AND parking_slot_reservation.resident_id= resident.resident_id ";
         $result = $this->conn->query($sql1);
         return $result;
     }
     public function getOverdueVehicles(){
-        $time=date('H:i:s');
+
+        $this->conn->autocommit(FALSE);
+
         $sql1="SELECT end_time,parking_slot_reservation.vehicle_no,slot_no,apartment_no,phone_no FROM parking_slot_reservation,resident WHERE (cancelled_time IS NULL AND checkout_time IS NULL AND checkin_time IS NOT NULL) AND ((end_time<=CURRENT_TIME) OR (date<CURRENT_DATE) ) AND parking_slot_reservation.resident_id= resident.resident_id";
         $result = $this->conn->query($sql1);
         
         while($s_no=mysqli_fetch_assoc($result)){
             $sql2="UPDATE parking_slot SET status=2 WHERE slot_no= $s_no[slot_no]";
-            echo $sql2;
-            $this->conn->query($sql2);
+            $result1=$this->conn->query($sql2);
+            echo 'www';
+            
+            if(!$result1){
+                
+                $this->conn->rollback();
+            }
         }
-        return $result;
+        if($result){
+            $this->conn->commit();
+            $this->conn->autocommit(TRUE);
+            return $result;
+        }else{
+            $this->conn->rollback();
+        }
+            
     }
+    // current state of parking space
     public function getParkingState(){
         $sql1="SELECT * FROM parking_slot ";
         $result = $this->conn->query($sql1);
         return $result;
     }
+    
+    
 }

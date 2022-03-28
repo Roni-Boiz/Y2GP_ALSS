@@ -35,7 +35,7 @@
             <ul>
             <li><a href="index"><i class="fa fa-home" ></i>HOME</a></li>
                 <li><a href="reservationview"><i class="fa fa-credit-card"  ></i>RESERVATIONS</a></li>
-                <li><a href="addscheduleview"><i class="fa fa-credit-card"  ></i>ADD SCHEDULE</a></li>
+                <li><a href="addSchedule"><i class="fa fa-credit-card"  ></i>ADD SCHEDULE</a></li>
 
             </ul>
         </nav>
