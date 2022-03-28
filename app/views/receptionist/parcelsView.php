@@ -190,7 +190,7 @@ include_once 'sidenav.php';
                         <span id="answer1"></span>
                     </div>
                     <div>
-                        <input class="btnRed" type="button" onclick="addparcel()" name="submit" value="Add" >
+                        <input class="btnRed" style="background-color: #211a49 !important;color: white;border-radius: 10px" type="button" onclick="addparcel()" name="submit" value="Add" >
 
                     </div>
 
