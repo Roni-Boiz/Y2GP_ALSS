@@ -34,9 +34,9 @@ include_once 'sidenav.php';
                                                                                                                                                                                                                 echo $this->selectdate;
                                                                                                                                                                                                             }; ?>"><br>
                                         <label>Vehicle No</label><br>
-                                        <input type="vehicleno" name="vehicleno" id="vehicleno" required class="input-field" value="<?php if (isset($this->vehicleno)) {
-                                                                                                                                        echo $this->selectdate;
-                                                                                                                                    }; ?>"><br>
+                                        <input type="vehicleno" name="vehicleno" placeholder="ABC-2425" id="vehicleno" required class="input-field" value="<?php if (isset($this->vehicleno)) {
+                                                                                                                                                                echo $this->selectdate;
+                                                                                                                                                            }; ?>"><br>
 
 
 
@@ -107,97 +107,97 @@ include_once 'sidenav.php';
                         <!-- add the variable -->
 
                         <div class="holdAccount">
-                    <div class="head">
-                        <div style="margin: auto; justify-content: center; text-align: center; align-items: center;">
-                            <h1>Available Slot Is</h1>
-                            <h1>
-                                <?php
-                                echo $this->availability ?>
-                            </h1>
-                        </div>
-                        </div>
+                            <div class="head">
+                                <h2>Available Slot</h2>
+                            </div>
 
-                        </div>
+                            <div style="margin: auto; justify-content: center; text-align: center; align-items: center; display: flex; flex-direction: column;">
+                                <h3>Slot Is</h3>
+                                <h1>
+                                    <?php
+                                    echo $this->availability ?>
+                                </h1>
+                                <form action="reservepark">
+                                    <input class="purplebutton " id="disablebutton1" type="submit" value="reserve" style="grid-column:2"><br><br>
+
+                                </form>
+                            </div>
 
 
-                        <form action="reservepark">
-                            <input class="purplebutton " id="disablebutton1" type="submit" value="reserve" style="grid-column:2"><br><br>
-
-                        </form>
-                    <?php
+                        <?php
                     } ?>
 
-                    <!-- <?php
-                            if (isset($this->selectdate)) {
-                                echo "<span id='canreserve'><button type='button' onClick='parking()' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
-                            }; ?> -->
+                        <!-- <?php
+                                if (isset($this->selectdate)) {
+                                    echo "<span id='canreserve'><button type='button' onClick='parking()' id='model-btn' class='purplebutton '>Reserve Now</button></span>";
+                                };
+                                ?> -->
+
+                        </div>
+
+
 
 
                 </div>
 
-                
-                        <h3>Upcoming Reservations. . .</h3>
-                    </div>
-                    
 
-                </div>
             </div>
-
         </div>
 
-        <!-- reservation success message -->
-        <?php
-        if (isset($this->error)) { ?>
+    </div>
 
+    <!-- reservation success message -->
+    <?php
+    if (isset($this->error)) { ?>
+        <div class="error">
             <div class="divPopupModel">
                 <div id="myCanvasNav" class="overlay" style="width: 100%; opacity: 0.8;"></div>
-                <div id="deleteModel" class="open">
+                <div id="errorModel" class="open">
 
                     <div style="text-align: center; margin-bottom: 10px;">
                         <h2>Reservation Failed!</h2>
                     </div>
-                    <form class="formDelete">
+                    <form action="#" class="formDelete">
                         <div>
                             <label> <span id="answer2"></span><?php echo $this->error; ?></label>
-                            <span id="answer1"></span>
                         </div>
                         <div>
-                            <input class="btnRed" type="submit" name="submit" value="  OK  ">
+                            <input style="color: white; border-radius: 10px;" class="btnRed" type="submit" name="submit" value="  OK  " >
                         </div>
 
                     </form>
                 </div>
             </div>
+        </div>
 
-        <?php
-        }; ?>
-        <!-- success popup -->
-        <?php
-        if (isset($this->success)) { ?>
+    <?php
+    }; ?>
+    <!-- success popup -->
+    <?php
+    if (isset($this->success)) { ?>
 
+        <div class="success">
             <div class="divPopupModel">
-                <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8 "></div>
-                <div id="deleteModel" class="open">
+                <div id="myCanvasNav" class="overlay" style="width: 100%; opacity:0.8"></div>
+                <div id="successModel" class="open">
 
                     <div style="text-align: center; margin-bottom: 10px;">
-                        <?php unset($this->success); ?>
-                        <h2>Successfull!</h2>
+                        <h2>Successful</h2>
                     </div>
-                    <form class="formDelete">
+                    <form action="#" class="formDelete">
                         <div>
-                            <label> <span id="answer2"></span>Reservation charges added.
+                            <label>Reservation charges added.
                                 Check notification for more details. </label>
-                            <span id="answer1"></span>
                         </div>
                         <div>
-
-                            <input class="btnBlue" type="submit" name="submit" value="  OK  ">
+                            <input style="color: white; border-radius: 10px;" class="btnBlue" type="submit" name="submit" value="  OK  ">
                         </div>
                     </form>
                 </div>
             </div>
-        <?php
-        }; ?>
+        </div>
+    <?php
+    }; ?>
 
 
     </div> <!-- .hawlockbody div closed here -->
